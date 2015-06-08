@@ -34,7 +34,7 @@ config local
     # Set Browser & URL testing
     Set Suite Variable    ${cf_browser}    ff
     Set Suite Variable    ${cf_ff_profile_dir}    C:\\firefox_profile
-    Set Suite Variable    ${cf_url}    http://10.18.200.209:8005/V3
+    Set Suite Variable    ${cf_url}    http://10.18.200.209:8005/VA/
     Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
     # Set Global Variables
