@@ -313,7 +313,7 @@ TM_12_ST_Settlement Report
     # VP. check export excel
     check export excel function    Settlement.Report.*
     # VP. check export pdf
-    check export pdf function    Settlement Report*
+    check export pdf function    Settlement*.pdf
 
 TM_13_ST_OANDA Exchange Rate
     # Define test data
