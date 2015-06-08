@@ -1,0 +1,41 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../01_Main_Actions/action_main.txt
+Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+Resource          ../../Interfaces/04_Win_Loss_Report/interface_keno_win_loss_report.txt
+
+*** Keywords ***
+submit filters for keno win loss
+    [Arguments]    ${licensee}    ${date option}    ${from date}    ${to date}    ${markets}    ${bet type}
+    ...    ${draw filter}    ${exclude test data}
+    [Documentation]    This action is used to submit filters for Keno Win Loss report
+    ...
+    ...    ${licensee} = *'All'* or *'12Bet, mansion88, DELA, Macaubet'* or *'ONEWorks Licensees, Macaubet'*
+    ...
+    ...    ${date option} = *'Date Range'* or *'Today'* or *'Yesterday'* or *'Current Week'* or *'Last Week'* or *'Current Month'* or *'Last Month'* or *'Since Last Month'*
+    ...
+    ...    ${markets}= *'All'* or *'market-name'*
+    ...
+    ...    ${bet type}= *'All'* or *'bet-type-name'*
+    ...
+    ...    ${draw filter}= *'Normal'* or *'No Draw'* or *'No Draw for Tunrover only'*
+    ...
+    ...    ${exclude test data}= *'Yes'* or *'No'*
+    ...
+    ...    Example:
+    ...
+    ...    submit filters for keno win loss | All | Today | None | None | All | Big/Small | Normal | Yes
+    # select Licensee
+    select licensee in checkbox list    ${licensee}
+    # select Date
+    select date    ${date option}    ${from date}    ${to date}
+    # select Markets
+    Run Keyword If    '${markets}'!='None'    Select From List By Label    ${markets_listbox}    ${markets}
+    # select Bet Type
+    Run Keyword If    '${bet type}'!='None'    Select From List By Label    ${bettype_keno_listbox}    ${bet type}
+    # select Draw filter
+    select draw filter    ${draw filter}
+    # select Exclude Test Data
+    select exclude test data    ${exclude test data}
+    # click Submit button
+    Click Button    ${submit_button}

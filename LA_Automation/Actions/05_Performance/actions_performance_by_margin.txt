@@ -1,0 +1,50 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../01_Main_Actions/action_main.txt
+Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+
+*** Keywords ***
+submit filters for performance by margin
+    [Arguments]    ${licensee}    ${currency}    ${exclude test data}    ${date option}    ${from date}    ${to date}
+    ...    ${draw filter}    ${products}
+    [Documentation]    This action is used to submit filters for Performance >> Performance by Margin report
+    ...
+    ...    ${licensee} = *'All'* or *'12Bet, mansion88, DELA, Macaubet'* or *'ONEWorks Licensees, Macaubet'*
+    ...
+    ...    ${currency}= *'All'* or *'currency-code'*
+    ...
+    ...    ${exclude test data}= *'Yes'* or *'No'*
+    ...
+    ...    ${date option} = *'Date Range'* or *'Today'* or *'Yesterday'* or *'Current Week'* or *'Last Week'* or *'Current Month'* or *'Last Month'* or *'Since Last Month'*
+    ...
+    ...    ${draw filter}= *'Normal'* or *'No Draw'* or *'No Draw for Tunrover only'*
+    ...
+    ...    ${products}= *'Sportsbook'* or *'Racing'* or *'Number Game'* or *'BA'* or *'Live Casino'* or *'Virtual Sports'* \ or *'RNG Casino'*
+    ...
+    ...    Example:
+    ...
+    ...    submit filters for performance by margin | ONEWorks Licensees, Macaubet | All | Yes | Today | None | None | Normal | All
+    # select Licensee
+    select licensee in checkbox list    ${licensee}
+    # select Currency
+    Run Keyword If    '${currency}'!='None'    Select From List By Label    ${currency_listbox}    ${currency}
+    # select Exclude Test Data
+    select exclude test data    ${exclude test data}
+    # select Date
+    select date    ${date option}    ${from date}    ${to date}
+    # select Draw filter
+    select draw filter    ${draw filter}
+    # select Product
+    select products on performance reports    ${products}
+    # click Submit button
+    Click Button    ${submit_button}
+
+select products on performance reports
+    [Arguments]    ${products}
+    [Documentation]    select products on performance reports | ${product}
+    ...
+    ...    Example:
+    ...
+    ...    select products on performance reports | Sportsbook
+    # select Products
+    Click Element    xpath=//table/tbody/tr/td/label[contains(text(),'${products}')]

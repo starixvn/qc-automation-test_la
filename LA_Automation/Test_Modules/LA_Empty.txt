@@ -1,0 +1,34 @@
+*** Settings ***
+Suite Setup       config
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           String
+Library           OperatingSystem
+Library           Screenshot
+Library           Collections
+Library           Dialogs
+Library           Process
+Resource          ../Actions/01_Main_Actions/action_main.txt
+Resource          ../Interfaces/01_Main_Interfaces/interface_login.txt
+Resource          ../Interfaces/01_Main_Interfaces/interface_main.txt
+Resource          ../Actions/04_Win_Loss_Report/actions_currency_win_loss.txt
+Resource          ../Interfaces/04_Win_Loss_Report/interface_general_win_loss_report.txt
+Resource          ../Actions/04_Win_Loss_Report/actions_licensee_win_loss.txt
+Resource          ../Actions/04_Win_Loss_Report/actions_number_game_win_loss.txt
+Resource          ../Actions/04_Win_Loss_Report/actions_virtual_sports_win_loss.txt
+Resource          ../Interfaces/06_OANDA_Exchange_Rate/interface_oanda_exchange_rate.txt
+Resource          ../Actions/04_Win_Loss_Report/actions_live_casino_win_loss.txt
+Resource          ../Actions/04_Win_Loss_Report/actions_keno_win_loss.txt
+Resource          ../Interfaces/04_Win_Loss_Report/interface_keno_win_loss_report.txt
+Resource          ../Actions/05_Performance/actions_performance_by_margin.txt
+Resource          ../Interfaces/05_Performance/interface_general_licensee_performance.txt
+Resource          ../Actions/07_Invoice/actions_settlement_report.txt
+Resource          ../Actions/05_Performance/actions_performance_by_turnover.txt
+Resource          ../Actions/05_Performance/actions_licensee_performance_in_details.txt
+Resource          ../Actions/05_Performance/action_licensee_performance.txt
+
+*** Test Cases ***
+TM_00_ST_Login
+    # 1. Open browser with LA site
+    Open Browser    ${cf_url}    ${cf_browser}    ff_profile_dir=${cf_ff_profile_dir}
+    Maximize Browser Window

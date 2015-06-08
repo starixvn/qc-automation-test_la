@@ -1,0 +1,26 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../../Interfaces/05_Performance/interface_general_licensee_performance.txt
+
+*** Keywords ***
+select month from to
+    [Arguments]    ${year}    ${month}    ${from date}    ${to date}
+    [Documentation]    This action is used to select month, year, from date and to date in Performance >> Licensee Performance in Details
+    ...
+    ...    ${year} = *'2015'* or *'2014'* or *'2013'* or *'2012'*
+    ...
+    ...    ${month} = *'01'* or *'02'* or *'03'* or *'04'* or *'05'* or *'06'* or *'07'* or *'08'* or *'09'* or *'10'* or *'11'* or *'12'*
+    ...
+    ...    ${from date}, ${to date} = *'1'* or *'2'* or .... *'11'* or *'12'* or .... *'21'* or *'22'* or ..... *'30'* or *'31'*
+    ...
+    ...    Example:
+    ...
+    ...    select month from to | \ 2014 | \ 02 | 1 | 31
+    # Click Month drop down list
+    Click Element    ${month_listbox}
+    # Select month and year
+    Click Element    xpath=//a[@year='${year}' and @month='${month}']
+    # Select From drop down list
+    Select From List By Value    ${from_listbox}    ${from date}
+    # Select To drop down list
+    Select From List By Value    ${to_listbox}    ${to date}

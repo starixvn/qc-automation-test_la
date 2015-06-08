@@ -1,0 +1,31 @@
+*** Variables ***
+${logout_link}    xpath=//ul[@class='auth-nav']/li/a[@title='Logout']    # Logout link on LA site
+${currency_listbox}    xpath=//select[@id='ddlCurrency']    # Currency listbox on LA site
+${sports_listbox}    xpath=//select[@id='ddlSport']    # Sports listbox on LA site
+${bettype_listbox}    xpath=//select[@id='ddlBetType']    # Bet Type listbox on LA site
+${reportby_listbox}    xpath=//select[@id='DdlReportBy']    # Report By listbox on LA site
+${normal_radio_button}    xpath=//*[@id='type-normal']    # Normal radio button of the filter 'Draw filter'
+${no_draws_radio_button}    xpath=//*[@id='type-nodraw']    # No Draw radio button of the filter 'Draw filter'
+${no_draws_for_turnover_radio_button}    xpath=//*[@id='type-nodraw-for-turnover-only']    # No Draw for Turnover only radio button of the filter 'Draw filter'
+${exclude_test_data_checkbox}    xpath=//input[@id='ExcludeTest']    # 'Exclude Test Data' checkbox on LA site
+${submit_button}    xpath=//input[@value='Submit']    # Submit button on LA site
+${export_to_excel_button}    xpath=//*[@id='btnExportExcel']    # Export To Excel button on LA site
+${back_button}    xpath=//a[@class='btnBack']    # Back button on report Details
+${date_listbox}    //select[@id='Date']    # Date listbox on LA site
+${from_date_picker}    xpath=//a[@id='fd-but-FromDate']    # From date picker button on LA site
+${to_date_picker}    xpath=//a[@id='fd-but-ToDate']    # To date picker button on LA site
+${from_date_picker_today}    xpath=//span[@id='FromDate-today-but']    # Today on From date picker
+${to_date_picker_today}    xpath=//span[@id='ToDate-today-but']    # Today on To date picker
+${date_picker_month}    //span[@class='month-display drag-enabled']
+${date_picker_year}    //span[@class='year-display drag-enabled']    # Year displayed on date picker
+${date_picker_previous_month}    //span[@title='Previous month']    # Previous month button on date picker
+${date_picker_next_month}    //span[@title='Next month']    # Next month button on date picker
+${date_picker_previous_year}    //span[@title='Previous year']    # Previous year button on date picker
+${base_currency_MYR}    xpath=//input[@id='rdoMYR']    # MYR base currency radio button on LA site
+${base_currency_EUR}    xpath=//input[@id='rdoEUR']    # EUR base currency radio button on LA site
+${base_currency_USD}    xpath=//input[@id='rdoUSD']    # USD base currency radio button on LA site
+${convert_base_currency_checkbox}    xpath=//*[@id='IsConvert'][@type='checkbox']    # Convert figures to base currency checkbox on LA site
+${licensee_filter}    xpath=//div[@id='party-filter']/div/div[@class='control-header']    # Licensee filter on LA site
+${licensee_uncheck_all}    xpath=//span[@id='btn-uncheck-all']    # Uncheck All licensees button on LA site
+${licensee_check_all}    xpath=//span[@id='btn-check-all']    # Check All licensees button on LA site
+${export_pdf_button}    xpath=//*[@id='btnExportPdf']    # Export to PDF button

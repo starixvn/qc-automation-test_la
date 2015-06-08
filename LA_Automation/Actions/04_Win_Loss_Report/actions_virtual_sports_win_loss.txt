@@ -1,0 +1,26 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+Resource          ../../Interfaces/04_Win_Loss_Report/interface_general_win_loss_report.txt
+Resource          ../01_Main_Actions/action_main.txt
+
+*** Keywords ***
+submit filters for virtual sports win loss
+    [Arguments]    ${licensee}    ${date option}    ${from date}='None'    ${to date}='None'    ${sports}=None    ${bet type}=None
+    ...    ${draw filter}=Normal    ${exclude test data}=Yes
+    [Documentation]    submit filters for virtual sports win loss | 12Bet, Macaubet, IBC | Date Range | ${from date} | ${to date} | No Draw | No
+    # select Licensee
+    select licensee in checkbox list    ${licensee}
+    # select Date
+    select date    ${date option}    ${from date}    ${to date}
+    # select Sports
+    Run Keyword If    '${sports}'!='None'    Select From List By Label    ${sports_listbox}    ${sports}
+    # select Bet Type
+    Run Keyword If    '${bet type}'!='None'    Select From List By Label    ${bettype_listbox}    ${bet type}
+    # select Draw filter
+    select draw filter    ${draw filter}
+    # select Exclude Test Data
+    select exclude test data    ${exclude test data}
+    # click Submit button
+    Click Button    ${submit_button}
+    wait page loading

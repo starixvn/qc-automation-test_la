@@ -1,0 +1,112 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+Resource          ../../Interfaces/04_Win_Loss_Report/interface_general_win_loss_report.txt
+Resource          ../01_Main_Actions/action_main.txt
+
+*** Keywords ***
+submit filters for licensee win loss summary
+    [Arguments]    ${licensee}    ${date option}    ${from date}='None'    ${to date}='None'    ${currency}=All    ${base currency}=EUR
+    ...    ${products}=All    ${sports}=None    ${bet type}=None    ${draw filter}=Normal    ${exclude test data}=Yes
+    [Documentation]    This action is used to submit filters for Licensee Win Loss > Summary report.
+    ...
+    ...    ${licensee} = *'All'* or *'12Bet, mansion88, DELA, Macaubet'* or *'ONEWorks Licensees, Macaubet'*
+    ...
+    ...    ${date option} = *'Date Range'* or *'Today'* or *'Yesterday'* or *'Current Week'* or *'Last Week'* or *'Current Month'* or *'Last Month'* or *'Since Last Month'*
+    ...
+    ...    ${currency}= *'All'* or *'currency-code'*
+    ...
+    ...    ${base currency}= *'None'* or *'MYR'* or *'EUR'* or *'USD'*
+    ...
+    ...    ${products}= *'All'* or *'Sportsbook, Racing, Number Game, BA, Live Casino, Virtual Sports, RNG Casino'*
+    ...
+    ...    ${sports}= *'All'* or *'sport-name'*
+    ...
+    ...    ${bet type}= *'All'* or *'bet-type-name'*
+    ...
+    ...    ${report by}= *'All'* or *'Live'* or *'Non-Live'*
+    ...
+    ...    ${draw filter}= *'Normal'* or *'No Draw'* or *'No Draw for Tunrover only'*
+    ...
+    ...    ${exclude test data}= *'Yes'* or *'No'*
+    ...
+    ...    Example:
+    ...
+    ...    submit filters for licensee win loss summary | None | None | None | None | All | USD | All | None | None | None| Normal | Yes
+    # select Licensee
+    select licensee in checkbox list    ${licensee}
+    # select Date
+    select date    ${date option}    ${from date}    ${to date}
+    # select Currency
+    Run Keyword If    '${currency}'!='None'    Select From List By Label    ${currency_listbox}    ${currency}
+    ###############
+    # select Base Currency
+    select base currency    ${base currency}
+    ###############
+    # select Products
+    Run Keyword If    '${products}'!='All'    unselect products filter    All
+    Run Keyword If    '${products}'!='All'    select products filter    ${products}
+    # select Sports
+    Run Keyword If    '${sports}'!='None'    Select From List By Label    ${sports_listbox}    ${sports}
+    # select Bet Type
+    Run Keyword If    '${bet type}'!='None'    Select From List By Label    ${bettype_listbox}    ${bet type}
+    # select Draw filter
+    select draw filter    ${draw filter}
+    # select Exclude Test Data
+    select exclude test data    ${exclude test data}
+    # click Submit button
+    Click Button    ${submit_button}
+    wait page loading
+
+submit filters for licensee win loss details
+    [Arguments]    ${licensee}    ${date option}    ${from date}='None'    ${to date}='None'    ${currency}=All    ${base currency}=EUR
+    ...    ${products}=All    ${sports}=None    ${bet type}=None    ${draw filter}=Normal    ${exclude test data}=Yes
+    [Documentation]    This action is used to submit filters for Licensee Win Loss > Details report.
+    ...
+    ...    ${licensee} = *'All'* or *'12Bet, mansion88, DELA, Macaubet'* or *'ONEWorks Licensees, Macaubet'*
+    ...
+    ...    ${date option} = *'Date Range'* or *'Today'* or *'Yesterday'* or *'Current Week'* or *'Last Week'* or *'Current Month'* or *'Last Month'* or *'Since Last Month'*
+    ...
+    ...    ${currency}= *'All'* or *'currency-code'*
+    ...
+    ...    ${base currency}= *'None'* or *'MYR'* or *'EUR'* or *'USD'*
+    ...
+    ...    ${products}= *'All'* or *'Sportsbook, Racing, Number Game, BA, Live Casino, Virtual Sports, RNG Casino'*
+    ...
+    ...    ${sports}= *'All'* or *'sport-name'*
+    ...
+    ...    ${bet type}= *'All'* or *'bet-type-name'*
+    ...
+    ...    ${report by}= *'All'* or *'Live'* or *'Non-Live'*
+    ...
+    ...    ${draw filter}= *'Normal'* or *'No Draw'* or *'No Draw for Tunrover only'*
+    ...
+    ...    ${exclude test data}= *'Yes'* or *'No'*
+    ...
+    ...    Example:
+    ...
+    ...    submit filters for licensee win loss details | None | None | None | None | All | USD | All | None | None | None| Normal | Yes
+    # select Licensee
+    select licensee in radio list    ${licensee}
+    # select Date
+    select date    ${date option}    ${from date}    ${to date}
+    # select Currency
+    Run Keyword If    '${currency}'!='None'    Select From List By Label    ${currency_listbox}    ${currency}
+    ###############
+    # select Base Currency
+    select base currency    ${base currency}
+    ###############
+    # select Products
+    Run Keyword If    '${products}'!='All'    unselect products filter    All
+    Run Keyword If    '${products}'!='All'    select products filter    ${products}
+    # select Sports
+    Run Keyword If    '${sports}'!='None'    Select From List By Label    ${sports_listbox}    ${sports}
+    # select Bet Type
+    Run Keyword If    '${bet type}'!='None'    Select From List By Label    ${bettype_listbox}    ${bet type}
+    # select Draw filter
+    select draw filter    ${draw filter}
+    # select Exclude Test Data
+    select exclude test data    ${exclude test data}
+    # click Submit button
+    Click Button    ${submit_button}
+    wait page loading

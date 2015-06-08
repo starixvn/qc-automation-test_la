@@ -1,0 +1,119 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+Resource          ../01_Main_Actions/action_main.txt
+
+*** Keywords ***
+submit filters for licensee performance summary
+    [Arguments]    ${licensee}    ${date option}    ${from date}='None'    ${to date}='None'    ${currency}='All'    ${base currency}=EUR
+    ...    ${products}='Sportsbook'    ${draw filter}='Normal'    ${exclude test data}=Yes
+    [Documentation]    This action is used to select filters in licensee performance summary then clicking submit button
+    ...
+    ...    ${licensee} = *'All'* or *'12Bet, mansion88, DELA, Macaubet'* or *'ONEWorks Licensees, Macaubet'*
+    ...
+    ...    ${date option} = *'Date Range'* or *'Today'* or *'Yesterday'* or *'Current Week'* or *'Last Week'* or *'Current Month'* or *'Last Month'* or *'Since Last Month'*
+    ...
+    ...    ${from date} = number of start date
+    ...
+    ...    ${to date} = number of ending date
+    ...
+    ...    ${currency}= *'All'* or *'currency-code'*
+    ...
+    ...    ${base currency}= *'None'* or *'MYR'* or *'EUR'* or *'USD'*
+    ...
+    ...    ${products}= *'All'* or *'Sportsbook, Racing, Number Game, BA, Live Casino, Virtual Sports, RNG Casino'*
+    ...
+    ...    ${draw filter}= *'Normal'* or *'No Draw'* or *'No Draw for Tunrover only'*
+    ...
+    ...    ${exclude test data}= *'Yes'* or *'No'*
+    ...
+    ...    Example: submit filters for licensee performance summary | \ 12Bet | Date Range | 1 | 15 | All | EUR | All | Normal | Yes
+    # select Licensee
+    select licensee in checkbox list    ${licensee}
+    # select Date
+    select date    ${date option}    ${from date}    ${to date}
+    # select Currency
+    Run Keyword If    '${currency}'!='All'    Select From List By Label    ${currency_listbox}    ${currency}
+    # Select based currency
+    select base currency    ${base currency}
+    # Select product
+    select products in radio list    ${products}
+    # Select draw filter
+    select draw filter    ${draw filter}
+    # Select Exclude Test Data
+    Run Keyword If    '${exclude test data}'=='Yes'    Select Checkbox    ${exclude_test_data_checkbox}
+    Run Keyword If    '${exclude test data}'=='No'    Unselect Checkbox    ${exclude_test_data_checkbox}
+    # Click Submit button
+    Click Button    ${submit_button}
+    wait page loading
+
+submit filters for licensee performance details
+    [Arguments]    ${licensee}    ${year}    ${month}    ${from date}='None'    ${to date}='None'    ${currency}='All'
+    ...    ${base currency}='EUR'    ${products}='All'    ${draw filter}='Normal'    ${exclude test data}='Yes'    ${show column}=All
+    [Documentation]    This action is used to submit filters for licensee performance details
+    ...
+    ...    ${licensee} = *'All'* or *'12Bet, mansion88, DELA, Macaubet'* or *'ONEWorks Licensees, Macaubet'*
+    ...
+    ...    ${year} = year with format yyyy
+    ...
+    ...    ${month} = month with format mm
+    ...
+    ...    ${from date} = *None* or number of start date
+    ...
+    ...    ${to date} = *None* or number of ending date
+    ...
+    ...    ${currency}= *'All'* or *'currency-code'*
+    ...
+    ...    ${base currency}= *'None'* or *'MYR'* or *'EUR'* or *'USD'*
+    ...
+    ...    ${products}= *'All'* or *'Sportsbook, Racing, Number Game, BA, Live Casino, Virtual Sports, RNG Casino'*
+    ...
+    ...    ${draw filter}= *'Normal'* or *'No Draw'* or *'No Draw for Tunrover only'*
+    ...
+    ...    ${show column} = *All* or *Turnover, Margin, Win Loss, Licensing Fee, Rebate, Total Licensing Fee*
+    ...
+    ...    ${exclude test data}= *'Yes'* or *'No'*
+    ...
+    ...    Example: submit filters for licensee performance summary | \ 12Bet | Date Range | 1 | 15 | All | EUR | All | Normal | Yes | \ Turnover, Margin
+    # Select licensee
+    select licensee in checkbox list    ${licensee}
+    # Select Date
+    select date range by month    ${year}    ${month}    ${from date}    ${to date}
+    # Select Currency
+    Run Keyword If    '${currency}'!='All'    Select From List By Label    ${currency_listbox}    ${currency}
+    # Select based currency
+    select base currency    ${base currency}
+    # Select product
+    Run Keyword If    '${products}'!='All'    unselect products filter    All
+    Run Keyword If    '${products}'!='All'    select products filter    ${products}
+    # Select Draw filter
+    select draw filter    ${draw filter}
+    # Select Exclude Test Data
+    Run Keyword If    '${exclude test data}'=='Yes'    Select Checkbox    ${exclude_test_data_checkbox}
+    Run Keyword If    '${exclude test data}'=='No'    Unselect Checkbox    ${exclude_test_data_checkbox}
+    # Show/hide columns
+    show licensee report column    ${show column}
+    # Click Submit button
+    Click Element    ${submit_button}
+    Wait Until Element Is Visible    xpath=//table[@id='frozenContent_content-data']
+    wait page loading
+
+show licensee report column
+    [Arguments]    ${columns}
+    [Documentation]    This action used to show multiple items in report table
+    ...
+    ...    $columns = *All* or *'Turnover, Margin, Win Loss, Licensing Fee, Rebate, Total Licensing Fee'*
+    ...
+    ...    Example:
+    ...
+    ...    show licensee report column | Turnover
+    # Click 'All' to unselect checkboxes at the first time
+    Click Element    css=input.ui-multiselect-state-default
+    Click Element    id=showHideColumnHeaderCheckBox
+    # Select specific columns
+    Run Keyword If    '${columns}'=='All'    Click Element    id=showHideColumnHeaderCheckBox
+    # Split and select column
+    @{columns_list}=    Split String    ${columns}    ,${SPACE}
+    : FOR    ${ELEMENT}    IN    @{columns_list}
+    \    Run Keyword If    '${ELEMENT}'=='All'    Exit For Loop
+    \    Select Checkbox    xpath=//ul[starts-with(@class,'ui-multiselect-checkboxes')]//input[@value='${ELEMENT}']

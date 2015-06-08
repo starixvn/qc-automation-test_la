@@ -1,0 +1,8 @@
+*** Variables ***
+${performance_report_table}    xpath=//table[@class='report-table']    # Report table of Performance reports on LA site
+${sorting_licensee_link}    xpath=//div[@class='hand sorted-link'][contains(text(),'Licensee')]    # Licensee link use to order Licensee by ascending or descending in Performance reports
+${month_listbox}    xpath=//span[@id='lblSelectedMonth']    # Month drop down list on Licensee Performance in Details page
+${from_listbox}    xpath=//select[@id='ddlFromDay']    # From list box on Licensee Performance in Details page
+${to_listbox}     xpath=//select[@id='ddlToDay']    # To list box on Licensee Performance in Details page
+${report_performance_table}    css=table.report-table    # Report table of licensee performance
+${report_performance_detail_table}    id=content-data    # Report Detailed table of licensee performance

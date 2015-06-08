@@ -1,0 +1,11 @@
+*** Variables ***
+${showhide_listbox}    xpath=//a[@id='show-hide-column']
+${all_checkbox_showhide_listbox}    xpath=//li/label[contains(text(),'All')]/input
+${customer_comm_checkbox}    xpath=//label[contains(text(),'Customer Comm')]/input
+${licensee_win_loss_checkbox}    xpath=//label[contains(text(),'Licensee Win Loss')]/input
+${licensee_comm_checkbox}    xpath=//label[contains(text(),'Licensee Comm')]/input
+${licensee_total_checkbox}    xpath=//label[contains(text(),'Licensee Total')]/input
+${exchange_listbox}    xpath=//*[@id='BaseCurrency']
+${product_listbox}    xpath=//*[@id='Product']
+${report_table_settlement}    xpath=//div[@id='settlement']/table[@class='report-table']
+${currency_listbox_settlement}    xpath=//*[@id='Currency']

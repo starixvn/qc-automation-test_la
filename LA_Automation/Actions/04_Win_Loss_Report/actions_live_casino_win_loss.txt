@@ -1,0 +1,24 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+Resource          ../../Interfaces/04_Win_Loss_Report/interface_general_win_loss_report.txt
+Resource          ../01_Main_Actions/action_main.txt
+
+*** Keywords ***
+submit filters for live casino win loss
+    [Arguments]    ${licensee}    ${date option}    ${from date}='None'    ${to date}='None'    ${game type}='None'    ${draw filter}=Normal
+    ...    ${exclude test data}=Yes
+    [Documentation]    submit filters for live casino win loss | 12Bet, Macaubet, IBC | Date Range | ${from date} | ${to date} | All | No Draw | No
+    # select Licensee
+    select licensee in checkbox list    ${licensee}
+    # select Date
+    select date    ${date option}    ${from date}    ${to date}
+    # select Game Type
+    Run Keyword If    '${game type}'!='None'    Select From List By Label    ${game_type_listbox}    ${game type}
+    # select Draw filter
+    select draw filter    ${draw filter}
+    # select Exclude Test Data
+    select exclude test data    ${exclude test data}
+    # click Submit button
+    Click Button    ${submit_button}
+    wait page loading

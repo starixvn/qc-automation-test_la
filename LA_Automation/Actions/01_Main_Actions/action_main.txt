@@ -1,0 +1,364 @@
+*** Settings ***
+Library           Selenium2Library
+Library           String
+Library           OperatingSystem
+Library           Screenshot
+Library           Collections
+Library           Dialogs
+Library           Process
+Resource          ../../Interfaces/01_Main_Interfaces/interface_login.txt
+Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+
+*** Keywords ***
+config
+    [Documentation]    This action is used to set default configuration for entire scripts.
+    # Set Timing
+    Set Suite Variable    ${cf_speed}    0.4
+    Set Selenium Speed    ${cf_speed}
+    Set Selenium Timeout    60s
+    # Set Browser & URL testing
+    Set Suite Variable    ${cf_browser}    ff
+    Set Suite Variable    ${cf_ff_profile_dir}    C:\\firefox_profile
+    Set Suite Variable    ${cf_url}    http://58.86.55.10:8090/Auth/Login/
+    Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
+    Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
+    # Set Global Variables
+    Set Suite Variable    ${cf_username}    starix09
+    Set Suite Variable    ${cf_password}    123QWEasd
+
+config local
+    # Set Timing
+    Set Suite Variable    ${cf_speed}    0.4
+    Set Selenium Speed    ${cf_speed}
+    Set Selenium Timeout    60s
+    # Set Browser & URL testing
+    Set Suite Variable    ${cf_browser}    ff
+    Set Suite Variable    ${cf_ff_profile_dir}    C:\\firefox_profile
+    Set Suite Variable    ${cf_url}    http://10.18.200.209:8005/V3
+    Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
+    Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
+    # Set Global Variables
+    Set Suite Variable    ${cf_username}    pgmchris
+    Set Suite Variable    ${cf_password}    1234aa
+
+login
+    [Arguments]    ${username}    ${password}
+    [Documentation]    Type 'username' and 'password' into the textboxes then click Login button
+    # Input username & password
+    Input Text    ${username_textbox}    ${username}
+    Input Password    ${password_textbox}    ${password}
+    # Click Login button
+    Click Button    ${login_button}
+
+logout
+    [Documentation]    This action is used to logout.
+    # Click Logout button
+    ${ac_logout}=    Run Keyword And Return Status    Element Should Be Visible    ${logout_link}
+    Run Keyword If    '${ac_logout}'=='True'    Click Element    ${logout_link}
+
+create test directory
+    [Arguments]    ${export path}
+    [Documentation]    This action is used to create folder which will contain our exporting files.
+    ...
+    ...    Example:
+    ...
+    ...    create test directory | C:\\Test Data
+    ${result}=    Run Keyword And Return Status    Directory Should Exist    ${export path}
+    Run Keyword If    '${result}'!='true'    Create Directory    ${export path}
+
+check export excel function
+    [Arguments]    ${checked file name}
+    [Documentation]    This action is used to check Export To Excel function.
+    ...
+    ...    Example: Check file 'RunningBetList.xls' existed after exporting sucessfully. And exporting file need 5 seconds to be saved.
+    ...
+    ...    check export excel function | 5s | RunningBetList.xls
+    # Check to see Folder existed or not. If not, create folder
+    create test directory    ${cf_export_dir}
+    # Click Export
+    Click Element    ${export_to_excel_button}
+    # Check file existed
+    wait for export file    ${cf_export_dir}${checked file name}
+    File Should Exist    ${cf_export_dir}${checked file name}
+    Empty Directory    ${cf_export_dir}
+
+check export pdf function
+    [Arguments]    ${checked file name}
+    [Documentation]    This action is used to check Export To PDF function.
+    ...
+    ...    Example:
+    ...
+    ...    check export pdf function | RunningBetList.pdf
+    # Check to see Folder existed or not. If not, create folder
+    create test directory    ${cf_export_dir}
+    # Click Export
+    Click Element    ${export_pdf_button}
+    # Check file existed
+    wait for export file    ${cf_export_dir}${checked file name}
+    File Should Exist    ${cf_export_dir}${checked file name}
+    Empty Directory    ${cf_export_dir}
+
+click element on report
+    [Arguments]    ${clicked element}
+    [Documentation]    This action is used to click an element on report.
+    ...
+    ...    Example:
+    ...
+    ...    click element on report | ${element}
+    Wait Until Element Is Visible    ${clicked element}
+    Click Element    ${clicked element}
+
+navigate menu
+    [Arguments]    ${mainmenu}    ${submenu}
+    [Documentation]    Give "Main Menu" name and "Sub Menu" name that you want to navigate.
+    ...
+    ...    Example:
+    ...
+    ...    select submenu | Win Loss Report | Currency Win Loss
+    # Mouse over top menu to display submenu
+    Click Element    xpath=//span[contains(text(),'${mainmenu}')]
+    # Click submenu
+    Click Element    xpath=//a[contains(text(),'${submenu}')]
+
+select licensee in checkbox list
+    [Arguments]    ${licensee}
+    [Documentation]    This action is used to select licensees from dropdown list.
+    ...
+    ...    ${licensee} = *'All'* or *'12Bet, mansion88, DELA, Macaubet'* or *'ONEWorks Licensees, Macaubet'*
+    ...
+    ...    Example:
+    ...
+    ...    select licensee in checkbox list | All
+    ...
+    ...    select licensee in checkbox list| ONEWorks Licensees, Macaubet
+    # Click to open dropdown list
+    Wait Until Element Is Visible    ${licensee_filter}
+    Click Element    ${licensee_filter}
+    # Uncheck all licensees
+    Click Element    ${licensee_uncheck_all}
+    # Select licensees
+    Run Keyword If    '${licensee}'=='All'    Click Element    ${licensee_check_all}
+    # Split the licensee string
+    @{licensee_list}=    Split String    ${licensee}    ,${SPACE}
+    : FOR    ${ELEMENT}    IN    @{licensee_list}
+    \    Log    element = ${ELEMENT}
+    \    Run Keyword If    '${ELEMENT}'=='All'    Exit For Loop
+    \    Comment    # mouse over the checkbox then select checkbox
+    \    ${ac_element_status}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//label[contains(text(),'${ELEMENT}')]/../../td/input
+    \    Run Keyword If    '${ac_element_status}'=='True'    Mouse Over    xpath=//label[contains(text(),'${ELEMENT}')]/../../td/input
+    \    Run Keyword If    '${ac_element_status}'=='True'    Select Checkbox    xpath=//label[contains(text(),'${ELEMENT}')]/../../td/input
+
+select licensee in radio list
+    [Arguments]    ${licensee}
+    [Documentation]    This action is used to select licensees from dropdown list.
+    ...
+    ...    Example:
+    ...
+    ...    select licensee in radio list | 12Bet
+    # Click to open dropdown list
+    Wait Until Element Is Visible    ${licensee_filter}
+    Click Element    ${licensee_filter}
+    # Click licensee radio button
+    Focus    xpath=//td/input[@type='radio' and contains(@data-child-name,'${licensee}')]
+    Click Element    xpath=//td/input[@type='radio' and contains(@data-child-name,'${licensee}')]
+
+select date picker
+    [Arguments]    ${date type}    ${date}    # ${date type} = From OR To
+    [Documentation]    This action is used to select a specific date of calendar date picker.
+    ...
+    ...    Example:
+    ...
+    ...    select date picker | From | 2015-03-17
+    ...
+    ...    select date picker | To | 2015-03-18
+    # split specific date
+    ${yyyy1}=    Get Slice From List    ${date}    0    4
+    ${mm1}=    Get Slice From List    ${date}    5    7
+    ${mm11}=    Get Slice From List    ${date}    5    7
+    ${dd1}=    Get Slice From List    ${date}    8    10
+    # click date picker
+    Run Keyword If    '${date type}' == 'From'    click element on report    ${from_date_picker}
+    Run Keyword If    '${date type}' == 'To'    click element on report    ${to_date_picker}
+    # click Today
+    Run Keyword If    '${date type}' == 'From'    click element on report    ${from_date_picker_today}
+    Run Keyword If    '${date type}' == 'To'    click element on report    ${to_date_picker_today}
+    # select year in date picker
+    # get year displayed on date picker
+    ${yyyy}=    Get Text    xpath=//div[@id='fd-${date type}Date']${date_picker_year}
+    ${yyyy}=    Convert To Integer    ${yyyy}
+    @{ITEMS}    Create List    ${yyyy}    ${yyyy - 1}    ${yyyy - 2}    ${yyyy - 3}    ${yyyy - 4}
+    ...    ${yyyy - 5}
+    : FOR    ${ELEMENT}    IN    @{ITEMS}
+    \    Run Keyword If    '${ELEMENT}' != '${yyyy1}'    Click Element    xpath=//div[@id='fd-${date type}Date']${date_picker_previous_year}
+    \    Run Keyword If    '${ELEMENT}' == '${yyyy1}'    Exit For Loop
+    #get month displayed on date picker
+    ${mm}=    Get Text    xpath=//div[@id='fd-${date type}Date']${date_picker_month}
+    ${mm}=    Set Variable If    '${mm}'=='JANUARY${SPACE}'    1    '${mm}'=='FEBRUARY${SPACE}'    2    '${mm}'=='MARCH${SPACE}'
+    ...    3    '${mm}'=='APRIL${SPACE}'    4    '${mm}'=='MAY${SPACE}'    5    '${mm}'=='JUNE${SPACE}'
+    ...    6    '${mm}'=='JULY${SPACE}'    7    '${mm}'=='AUGUST${SPACE}'    8    '${mm}'=='SEPTEMBER${SPACE}'
+    ...    9    '${mm}'=='OCTOBER${SPACE}'    10    '${mm}'=='NOVEMBER${SPACE}'    11    '${mm}'=='DECEMBER${SPACE}'
+    ...    12
+    # Compare value between current month and user input month
+    ${mm1}=    Convert To Integer    ${mm1}
+    ${difference}=    Evaluate    int(${mm}) - ${mm1}
+    ${status}=    Evaluate    ${difference} > 0
+    ${steps}=    Evaluate    abs(${difference})
+    # select month in date picker
+    : FOR    ${INDEX}    IN RANGE    1    12
+    \    Run Keyword If    ${steps}==0    Exit For Loop
+    \    Run Keyword If    '${status}' == 'True'    Click Element    xpath=//div[@id='fd-${date type}Date']${date_picker_previous_month}
+    \    Run Keyword If    '${status}' != 'True'    Click Element    xpath=//div[@id='fd-${date type}Date']${date_picker_next_month}
+    \    Run Keyword If    '${INDEX}' == '${steps}'    Exit For Loop
+    # select day in date picker
+    Click Element    xpath=//div[@id='fd-${date type}Date']//td[contains(@class,'yyyymm-${yyyy1}${mm11} mmdd-${mm11}${dd1}')]
+
+select date
+    [Arguments]    ${date option}    ${from date}='None'    ${to date}='None'
+    [Documentation]    This action is used to select date option from dropdown list.
+    ...
+    ...    ${date option} = *'Date Range'* or *'Today'* or *'Yesterday'* or *'Current Week'* or *'Last Week'* or *'Current Month'* or *'Last Month'* or *'Since Last Month'*
+    ...
+    ...    Example:
+    ...
+    ...    select date | Current Month
+    ...
+    ...    select date| Date Range | ${from date} | ${to date}
+    Run Keyword If    '${date option}'!='None'    Select From List By Label    ${date_listbox}    ${date option}
+    Run Keyword If    '${from date}'!='None'    select date picker    From    ${from date}
+    Run Keyword If    '${to date}'!='None'    select date picker    To    ${to date}
+
+select draw filter
+    [Arguments]    ${draw filter}
+    [Documentation]    select draw filter | Normal
+    # select Draw filter
+    Run Keyword If    '${draw filter}'=='Normal'    Click Element    ${normal_radio_button}
+    Run Keyword If    '${draw filter}'=='No Draw'    Click Element    ${no_draws_radio_button}
+    Run Keyword If    '${draw filter}'=='No Draw for Turnover only'    Click Element    ${no_draws_for_turnover_radio_button}
+
+select exclude test data
+    [Arguments]    ${exclude test data}
+    [Documentation]    select exclude test data | Yes/No
+    Run Keyword If    '${exclude test data}'=='Yes'    Select Checkbox    ${exclude_test_data_checkbox}
+    Run Keyword If    '${exclude test data}'=='No'    Unselect Checkbox    ${exclude_test_data_checkbox}
+
+select base currency
+    [Arguments]    ${base currency}
+    [Documentation]    select base currency | MYR/EUR/USD
+    Run Keyword If    '${base currency}'=='None' and '${currency}' != 'All'    Unselect Checkbox    ${convert_base_currency_checkbox}
+    Run Keyword If    '${base currency}'=='MYR'    Click Element    ${base_currency_MYR}
+    Run Keyword If    '${base currency}'=='EUR'    Click Element    ${base_currency_EUR}
+    Run Keyword If    '${base currency}'=='USD'    Click Element    ${base_currency_USD}
+
+select products filter
+    [Arguments]    ${product}
+    [Documentation]    This action is used to select product's checkboxes.
+    ...
+    ...    ${product}= *'All'* or *'Sportsbook, Racing, Number Game, BA, Live Casino, Virtual Sports, RNG Casino'*
+    ...
+    ...    Example:
+    ...
+    ...    select products filter | All
+    ...
+    ...    select products filter | Sportsbook, Racing
+    ${SB}=    Run Keyword And Return Status    Should Contain    ${product}    Sportsbook
+    ${RB}=    Run Keyword And Return Status    Should Contain    ${product}    Racing
+    ${NG}=    Run Keyword And Return Status    Should Contain    ${product}    Number Game
+    ${LC}=    Run Keyword And Return Status    Should Contain    ${product}    Live Casino
+    ${VS}=    Run Keyword And Return Status    Should Contain    ${product}    Virtual Sports
+    ${BA}=    Run Keyword And Return Status    Should Contain    ${product}    BA
+    ${CS}=    Run Keyword And Return Status    Should Contain    ${product}    RNG Casino
+    Run Keyword If    '${product}'=='All'    Select Checkbox    id=ALLProducts
+    Run Keyword If    '${SB}'=='True'    Select Checkbox    xpath=//*[@data='SB'][@type='checkbox']
+    Run Keyword If    '${RB}'=='True'    Select Checkbox    xpath=//*[@data='RB'][@type='checkbox']
+    Run Keyword If    '${NG}'=='True'    Select Checkbox    xpath=//*[@data='NG'][@type='checkbox']
+    Run Keyword If    '${BA}'=='True'    Select Checkbox    xpath=//*[@data='BA'][@type='checkbox']
+    Run Keyword If    '${LC}'=='True'    Select Checkbox    xpath=//*[@data='LC'][@type='checkbox']
+    Run Keyword If    '${VS}'=='True'    Select Checkbox    xpath=//*[@data='VS'][@type='checkbox']
+    Run Keyword If    '${CS}'=='True'    Select Checkbox    xpath=//*[@data='CS'][@type='checkbox']
+
+select products in radio list
+    [Arguments]    ${products}
+    [Documentation]    This action used to select products in radio list
+    ...
+    ...    ${products} = Sportsbook or Racing, Number Game
+    ...
+    ...    Example: select products in radio list *Racing*
+    Run Keyword If    '${products}' != 'None'    Click Element    //div[@class='filterRow']//label[contains(text(),'${products}')]
+
+select date range by month
+    [Arguments]    ${year}    ${month}    ${from date}    ${to date}
+    [Documentation]    This action is used to select date range in Month-From-To calendar.
+    # Handle month index: add 0 before number of month if month is less than 10 and greater than 0
+    ${ac_temp_zero_month}    Catenate    SEPARATOR=    0    ${month}
+    ${ac_month}    Set Variable If    1 <= int(${month}) <= 9    ${ac_temp_zero_month}
+    # Click on Month dropdow list
+    Click Element    xpath=//div[@class='monthPicker']/span
+    # Check specified year is selected or not. If it is not selected, click on it
+    ${ac_attribute}=    Get Element Attribute    xpath=//div[@class='monthPickerDropDown']//a[@year='${year}']@class
+    ${ac_year_selected_status}    Run Keyword And Return Status    Should Contain    ${ac_attribute}    selected
+    Run Keyword If    '${ac_year_selected_status}'=='False'    Click Element    xpath=//div[@class='monthPickerDropDown']//a[@year='${year}']
+    # Click on month
+    Click Element    xpath=//li[@class='month']/a[@year='${year}' and @month='${ac_month}' ]
+    # Select from date and to date
+    Select From List By Value    id=ddlFromDay    ${from date}
+    Select From List By Value    id=ddlToDay    ${to date}
+
+unselect products filter
+    [Arguments]    ${product}
+    [Documentation]    This action is used to unselect product's checkboxes.
+    ...
+    ...    ${product}= *'All'* or *'Sportsbook, Racing, Number Game, BA, Live Casino, Virtual Sports, RNG Casino'*
+    ...
+    ...    Example:
+    ...
+    ...    unselect products filter | All
+    ...
+    ...    unselect products filter | Sportsbook, Racing
+    ${SB}=    Run Keyword And Return Status    Should Contain    ${product}    Sportsbook
+    ${RB}=    Run Keyword And Return Status    Should Contain    ${product}    Racing
+    ${NG}=    Run Keyword And Return Status    Should Contain    ${product}    Number Game
+    ${LC}=    Run Keyword And Return Status    Should Contain    ${product}    Live Casino
+    ${VS}=    Run Keyword And Return Status    Should Contain    ${product}    Virtual Sports
+    ${BA}=    Run Keyword And Return Status    Should Contain    ${product}    BA
+    ${CS}=    Run Keyword And Return Status    Should Contain    ${product}    RNG Casino
+    Run Keyword If    '${product}'=='All'    Unselect Checkbox    id=ALLProducts
+    Run Keyword If    '${SB}'=='True'    Unselect Checkbox    xpath=//*[@data='SB'][@type='checkbox']
+    Run Keyword If    '${RB}'=='True'    Unselect Checkbox    xpath=//*[@data='RB'][@type='checkbox']
+    Run Keyword If    '${NG}'=='True'    Unselect Checkbox    xpath=//*[@data='NG'][@type='checkbox']
+    Run Keyword If    '${BA}'=='True'    Unselect Checkbox    xpath=//*[@data='BA'][@type='checkbox']
+    Run Keyword If    '${LC}'=='True'    Unselect Checkbox    xpath=//*[@data='LC'][@type='checkbox']
+    Run Keyword If    '${VS}'=='True'    Unselect Checkbox    xpath=//*[@data='VS'][@type='checkbox']
+    Run Keyword If    '${CS}'=='True'    Unselect Checkbox    xpath=//*[@data='CS'][@type='checkbox']
+
+take applications screenshot
+    [Arguments]    ${site}    ${screenshot name}
+    [Documentation]    This action is used to take application screenshot.
+    ...
+    ...    ${site}= 'Product' or 'Local'
+    ${ac_today}=    Get Time    \    Now
+    # Cut year, month, date from input date
+    ${yyyy}=    Get Slice From List    ${ac_today}    0    4
+    ${mm}=    Get Slice From List    ${ac_today}    5    7
+    ${dd}=    Get Slice From List    ${ac_today}    8    10
+    # Return converted date
+    ${ac_today}=    Set Variable    ${yyyy}_${mm}_${dd}
+    ${ac_screenshot_directory}=    Set Variable    ${cf_screenshot_dir}${site}_${ac_today}\\
+    # Create directory for current date to contain screenshot
+    ${result}=    Run Keyword And Return Status    Directory Should Exist    ${ac_screenshot_directory}
+    Run Keyword If    '${result}'!='true'    Create Directory    ${ac_screenshot_directory}
+    # Take screenshot
+    Take Screenshot Without Embedding    ${ac_screenshot_directory}${screenshot name}
+
+wait for export file
+    [Arguments]    ${filepath}
+    [Documentation]    This action is used to wait for a export file.
+    : FOR    ${ac_index}    IN RANGE    0    45
+    \    ${ac_exist}    Run Keyword And Return Status    File Should Exist    ${filepath}
+    \    ${ac_saving}    Run Keyword And Return Status    File Should Exist    ${filepath}.part
+    \    Run Keyword If    '${ac_exist}'!='True' or '${ac_saving}'=='True'    sleep    2s
+    \    Exit For Loop If    '${ac_index}'==45 or ('${ac_exist}'=='True' and '${ac_saving}'!='True')
+
+wait page loading
+    [Documentation]    This action is used to wait for loading page disappear.
+    ${ac_state}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'block')]
+    Run Keyword If    '${ac_state}'=='True'    Wait Until Element Is Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'none')]    60s
