@@ -29,7 +29,7 @@ Resource          ../Actions/05_Performance/action_licensee_performance.txt
 
 *** Test Cases ***
 TM_00_ST_Login
-    # 1. Open browser with LA site
+    # 1. Open browser with LA sites
     Open Browser    ${cf_url}    ${cf_browser}    ff_profile_dir=${cf_ff_profile_dir}
     Maximize Browser Window
     # 2. Login with valid account
