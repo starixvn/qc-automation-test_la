@@ -140,7 +140,7 @@ TM_04_ST_Virtual Sports Win Loss
     ${tm_todate}=    Get Time    \    NOW - 1d
     ${tm_clicked_row}=    Set Variable    1
     # 1. Navigate to Win Loss Report > Virtual Sports Win Loss
-    navigate menu    Win Loss Report    Virtual Sports Win Loss
+    navigate menu    Win Loss Report    Virtual Sports
     # 2. Select filters then click Submit button
     submit filters for virtual sports win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    None    None
     ...    No Draw    No
@@ -165,7 +165,7 @@ TM_05_ST_Live Casino Win Loss
     # 1. Navigate to Win Loss Report > Live Casino Win Loss
     navigate menu    Win Loss Report    Live Casino Win Loss
     # 2. Select filters then click Submit button
-    submit filters for live casino win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    All    No Draw
+    submit filters for live casino win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    None    No Draw
     ...    No
     take applications screenshot    LA_Local    TM_05_WinLossReport_LiveCasinoWinLoss.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
@@ -314,19 +314,3 @@ TM_12_ST_Settlement Report
     check export excel function    Settlement.Report.*
     # VP. check export pdf
     check export pdf function    Settlement*.pdf
-
-TM_13_ST_OANDA Exchange Rate
-    # Define test data
-    ${tm_fromdate}=    Get Time    \    NOW - 2d
-    ${tm_todate}=    Get Time    \    NOW - 1d
-    # 1. Navigate to Win Loss Report > Licensee Win Loss
-    Click Element    ${oanda_menu}
-    # 2. Select From and To date picker then click Submit button
-    select date picker    From    ${tm_fromdate}
-    select date picker    To    ${tm_todate}
-    Click Element    ${submit_button}
-    # 3. Check report table
-    Element Should Be Visible    ${oanda_report_table}
-    take applications screenshot    LA_Local    TM_13_OANDAExchangRate.jpg
-    # 4. Check Export Excel
-    check export excel function    OANDAExchangeRate*
