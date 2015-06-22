@@ -37,7 +37,7 @@ TM_00_ST_Login
 
 TM_01_ST_Licensee Win Loss
     # Define test data
-    ${tm_fromdate}=    Get Time    \    NOW - 30d
+    ${tm_fromdate}=    Get Time    \    NOW - 7d
     ${tm_todate}=    Get Time    \    NOW - 1d
     ${tm_filtered_licensee}=    Set Variable    12Bet
     ${tm_clicked_row}=    Set Variable    1
@@ -81,7 +81,7 @@ TM_01_ST_Licensee Win Loss
 
 TM_02_ST_Currency Win Loss
     # Define test data
-    ${tm_fromdate}=    Get Time    \    NOW - 30d
+    ${tm_fromdate}=    Get Time    \    NOW - 7d
     ${tm_todate}=    Get Time    \    NOW - 1d
     # 1. Navigate to Win Loss Report > Currency Win Loss
     navigate menu    Win Loss Report    Currency Win Loss
@@ -119,7 +119,7 @@ TM_02_ST_Currency Win Loss
 
 TM_03_ST_Number Game Win Loss
     # Define test data
-    ${tm_fromdate}=    Get Time    \    NOW - 30d
+    ${tm_fromdate}=    Get Time    \    NOW - 7d
     ${tm_todate}=    Get Time    \    NOW - 1d
     # 1. Navigate to Win Loss Report > Number Game Win Loss
     navigate menu    Win Loss Report    Number Game Win Loss
