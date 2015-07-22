@@ -108,7 +108,8 @@ show licensee report column
     ...
     ...    show licensee report column | Turnover
     # Click 'All' to unselect checkboxes at the first time
-    Click Element    css=input.ui-multiselect-state-default
+    Click Element    xpath=//*[@id='showHideColumn']/input
+    Wait Until Element Is Visible    id=showHideColumnHeaderCheckBox    10s
     Click Element    id=showHideColumnHeaderCheckBox
     # Select specific columns
     Run Keyword If    '${columns}'=='All'    Click Element    id=showHideColumnHeaderCheckBox

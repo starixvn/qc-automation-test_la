@@ -245,9 +245,7 @@ select base currency
     [Arguments]    ${base currency}
     [Documentation]    select base currency | MYR/EUR/USD
     Run Keyword If    '${base currency}'=='None' and '${currency}' != 'All'    Unselect Checkbox    ${convert_base_currency_checkbox}
-    Run Keyword If    '${base currency}'=='MYR'    Click Element    ${base_currency_MYR}
-    Run Keyword If    '${base currency}'=='EUR'    Click Element    ${base_currency_EUR}
-    Run Keyword If    '${base currency}'=='USD'    Click Element    ${base_currency_USD}
+    Run Keyword If    '${base currency}'!='None'    Select From List By Label    ${base_currency_list}    ${base currency}
 
 select products filter
     [Arguments]    ${product}
@@ -267,14 +265,16 @@ select products filter
     ${VS}=    Run Keyword And Return Status    Should Contain    ${product}    Virtual Sports
     ${BA}=    Run Keyword And Return Status    Should Contain    ${product}    BA
     ${CS}=    Run Keyword And Return Status    Should Contain    ${product}    RNG Casino
-    Run Keyword If    '${product}'=='All'    Select Checkbox    id=ALLProducts
-    Run Keyword If    '${SB}'=='True'    Select Checkbox    xpath=//*[@data='SB'][@type='checkbox']
-    Run Keyword If    '${RB}'=='True'    Select Checkbox    xpath=//*[@data='RB'][@type='checkbox']
-    Run Keyword If    '${NG}'=='True'    Select Checkbox    xpath=//*[@data='NG'][@type='checkbox']
-    Run Keyword If    '${BA}'=='True'    Select Checkbox    xpath=//*[@data='BA'][@type='checkbox']
-    Run Keyword If    '${LC}'=='True'    Select Checkbox    xpath=//*[@data='LC'][@type='checkbox']
-    Run Keyword If    '${VS}'=='True'    Select Checkbox    xpath=//*[@data='VS'][@type='checkbox']
-    Run Keyword If    '${CS}'=='True'    Select Checkbox    xpath=//*[@data='CS'][@type='checkbox']
+    Click Element    ${products_listbox}
+    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
+    Run Keyword If    '${product}'=='All'    Select Checkbox    xpath=//*[@id='product-optionHeaderCheckBox']
+    Run Keyword If    '${SB}'=='True'    Select Checkbox    xpath=//*[@id='product-SB']
+    Run Keyword If    '${RB}'=='True'    Select Checkbox    xpath=//*[@id='product-RB']
+    Run Keyword If    '${NG}'=='True'    Select Checkbox    xpath=//*[@id='product-NG']
+    Run Keyword If    '${BA}'=='True'    Select Checkbox    xpath=//*[@id='product-BA']
+    Run Keyword If    '${LC}'=='True'    Select Checkbox    xpath=//*[@id='product-LC']
+    Run Keyword If    '${VS}'=='True'    Select Checkbox    xpath=//*[@id='product-VS']
+    Run Keyword If    '${CS}'=='True'    Select Checkbox    xpath=//*[@id='product-CS']
 
 select products in radio list
     [Arguments]    ${products}
@@ -321,14 +321,16 @@ unselect products filter
     ${VS}=    Run Keyword And Return Status    Should Contain    ${product}    Virtual Sports
     ${BA}=    Run Keyword And Return Status    Should Contain    ${product}    BA
     ${CS}=    Run Keyword And Return Status    Should Contain    ${product}    RNG Casino
-    Run Keyword If    '${product}'=='All'    Unselect Checkbox    id=ALLProducts
-    Run Keyword If    '${SB}'=='True'    Unselect Checkbox    xpath=//*[@data='SB'][@type='checkbox']
-    Run Keyword If    '${RB}'=='True'    Unselect Checkbox    xpath=//*[@data='RB'][@type='checkbox']
-    Run Keyword If    '${NG}'=='True'    Unselect Checkbox    xpath=//*[@data='NG'][@type='checkbox']
-    Run Keyword If    '${BA}'=='True'    Unselect Checkbox    xpath=//*[@data='BA'][@type='checkbox']
-    Run Keyword If    '${LC}'=='True'    Unselect Checkbox    xpath=//*[@data='LC'][@type='checkbox']
-    Run Keyword If    '${VS}'=='True'    Unselect Checkbox    xpath=//*[@data='VS'][@type='checkbox']
-    Run Keyword If    '${CS}'=='True'    Unselect Checkbox    xpath=//*[@data='CS'][@type='checkbox']
+    Click Element    ${products_listbox}
+    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
+    Run Keyword If    '${product}'=='All'    Unselect Checkbox    xpath=//*[@id='product-optionHeaderCheckBox']
+    Run Keyword If    '${SB}'=='True'    Unselect Checkbox    xpath=//*[@id='product-SB']
+    Run Keyword If    '${RB}'=='True'    Unselect Checkbox    xpath=//*[@id='product-RB']
+    Run Keyword If    '${NG}'=='True'    Unselect Checkbox    xpath=//*[@id='product-NG']
+    Run Keyword If    '${BA}'=='True'    Unselect Checkbox    xpath=//*[@id='product-BA']
+    Run Keyword If    '${LC}'=='True'    Unselect Checkbox    xpath=//*[@id='product-LC']
+    Run Keyword If    '${VS}'=='True'    Unselect Checkbox    xpath=//*[@id='product-VS']
+    Run Keyword If    '${CS}'=='True'    Unselect Checkbox    xpath=//*[@id='product-CS']
 
 take applications screenshot
     [Arguments]    ${site}    ${screenshot name}
