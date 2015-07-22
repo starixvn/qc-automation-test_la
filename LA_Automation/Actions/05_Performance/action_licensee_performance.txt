@@ -37,7 +37,7 @@ submit filters for licensee performance summary
     # Select based currency
     select base currency    ${base currency}
     # Select product
-    select products in radio list    ${products}
+    Select From List By Label    xpath=//*[@id='ddl-product']    ${products}
     # Select draw filter
     select draw filter    ${draw filter}
     # Select Exclude Test Data

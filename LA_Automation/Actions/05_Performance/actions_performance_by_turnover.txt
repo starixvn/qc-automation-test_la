@@ -40,6 +40,6 @@ submit filters for performance by turnover
     # select Draw filter
     select draw filter    ${draw filter}
     # select Product
-    select products on performance reports    ${products}
+    Select From List By Label    xpath=//*[@id='ddl-product']    ${products}
     # click Submit button
     Click Button    ${submit_button}
