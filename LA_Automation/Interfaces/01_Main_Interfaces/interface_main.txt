@@ -29,3 +29,5 @@ ${licensee_filter}    xpath=//div[@id='party-filter']/div/div[@class='control-he
 ${licensee_uncheck_all}    xpath=//span[@id='btn-uncheck-all']    # Uncheck All licensees button on LA site
 ${licensee_check_all}    xpath=//span[@id='btn-check-all']    # Check All licensees button on LA site
 ${export_pdf_button}    xpath=//*[@id='btnExportPdf']    # Export to PDF button
+${base_currency_list}    xpath=//*[@id='ddl-base-currency']    # Base Currency Listbox
+${products_listbox}    xpath=//*[@id='product-option']/input    # Product Listbox
