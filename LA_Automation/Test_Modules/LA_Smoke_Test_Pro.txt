@@ -26,6 +26,7 @@ Resource          ../Actions/07_Invoice/actions_settlement_report.txt
 Resource          ../Actions/05_Performance/actions_performance_by_turnover.txt
 Resource          ../Actions/05_Performance/actions_licensee_performance_in_details.txt
 Resource          ../Actions/05_Performance/action_licensee_performance.txt
+Resource          ../Actions/04_Win_Loss_Report/actions_gold_deluxe_win_loss.txt
 
 *** Test Cases ***
 TM_00_ST_Login
@@ -330,3 +331,19 @@ TM_13_ST_OANDA Exchange Rate
     take applications screenshot    LA_Local    TM_13_OANDAExchangRate.jpg
     # 4. Check Export Excel
     check export excel function    OANDAExchangeRate*
+
+TM_14_ST_Gold Deluxe Win Loss
+    #1. Define test data
+    ${tm_current_month}    Get Time    return month
+    ${tm_month}    Evaluate    int(${tm_current_month}) - 1
+    ${tm_current_year}    Get Time    return year
+    ${tm_year}    Evaluate    int(${tm_current_year})
+    # 1. Navigate to Win Loss Report > Gold Deluxe Win Loss
+    navigate menu    Win Loss Report    Gold Deluxe Win Loss
+    # 2. Select filters then click Submit button
+    submit filter for gold deluxe win loss    All    ${tm_year}    ${tm_month}    1    28    No Draw
+    ...    No    EUR
+    # VP. Check report table
+    Wait Until Element Is Visible    ${gold_deluxe_report_table}    60s
+    # VP. check export excel
+    check export excel function    GoldDeluxe*

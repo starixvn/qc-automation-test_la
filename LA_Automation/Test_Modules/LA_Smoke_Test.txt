@@ -26,6 +26,7 @@ Resource          ../Actions/07_Invoice/actions_settlement_report.txt
 Resource          ../Actions/05_Performance/actions_performance_by_turnover.txt
 Resource          ../Actions/05_Performance/actions_licensee_performance_in_details.txt
 Resource          ../Actions/05_Performance/action_licensee_performance.txt
+Resource          ../Actions/04_Win_Loss_Report/actions_gold_deluxe_win_loss.txt
 
 *** Test Cases ***
 TM_00_ST_Login

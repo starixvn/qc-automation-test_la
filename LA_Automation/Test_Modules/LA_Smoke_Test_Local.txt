@@ -26,6 +26,7 @@ Resource          ../Actions/07_Invoice/actions_settlement_report.txt
 Resource          ../Actions/05_Performance/actions_performance_by_turnover.txt
 Resource          ../Actions/05_Performance/actions_licensee_performance_in_details.txt
 Resource          ../Actions/05_Performance/action_licensee_performance.txt
+Resource          ../Actions/04_Win_Loss_Report/actions_gold_deluxe_win_loss.txt
 
 *** Test Cases ***
 TM_00_ST_Login
@@ -117,23 +118,6 @@ TM_02_ST_Currency Win Loss
     # VP. Check report table
     Element Should Be Visible    ${report_table_reports}
 
-TM_03_ST_Number Game Win Loss
-    # Define test data
-    ${tm_fromdate}=    Get Time    \    NOW - 7d
-    ${tm_todate}=    Get Time    \    NOW - 1d
-    # 1. Navigate to Win Loss Report > Number Game Win Loss
-    navigate menu    Win Loss Report    Number Game Win Loss
-    # 2. Select filters then click Submit button
-    submit filters for number game win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    No Draw    No
-    take applications screenshot    LA_Local    TM_03_WinLossReport_NumberGameWinLoss.jpg
-    # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
-    ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
-    Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
-    # VP. Check report table
-    Element Should Be Visible    ${report_table_reports}
-    # VP. check export excel
-    check export excel function    NumberGameWinLoss*
-
 TM_04_ST_Virtual Sports Win Loss
     # Define test data
     ${tm_fromdate}=    Get Time    \    NOW - 60d
@@ -178,7 +162,7 @@ TM_05_ST_Live Casino Win Loss
 
 TM_06_ST_Keno Win Loss
     # Define test data
-    ${tm_fromdate}=    Get Time    \    NOW - 90d
+    ${tm_fromdate}=    Get Time    \    NOW - 60d
     ${tm_todate}=    Get Time    \    NOW - 5d
     ${tm_clicked_row}=    Set Variable    1
     # 1. Navigate to Win Loss Report > Keno Win Loss
@@ -240,7 +224,7 @@ TM_08_ST_Licensee Performance Details
 
 TM_09_ST_Performance by Turnover
     # Define test data
-    ${tm_fromdate}=    Get Time    \    NOW - 93d
+    ${tm_fromdate}=    Get Time    \    NOW - 60d
     ${tm_todate}=    Get Time    \    NOW - 2d
     # 1. Navigate to Performance >> Performance by Margin
     navigate menu    Performance    Performance by Turnover
@@ -261,7 +245,7 @@ TM_09_ST_Performance by Turnover
 
 TM_10_ST_Performance by Licensing Fee
     # Define test data
-    ${tm_fromdate}=    Get Time    \    NOW - 93d
+    ${tm_fromdate}=    Get Time    \    NOW - 60d
     ${tm_todate}=    Get Time    \    NOW - 2d
     # 1. Navigate to Performance >> Performance by Margin
     navigate menu    Performance    Performance by Licensing Fee
@@ -314,3 +298,19 @@ TM_12_ST_Settlement Report
     check export excel function    Settlement.Report.*
     # VP. check export pdf
     check export pdf function    Settlement*.pdf
+
+TM_14_ST_Gold Deluxe Win Loss
+    #1. Define test data
+    ${tm_current_month}    Get Time    return month
+    ${tm_month}    Evaluate    int(${tm_current_month}) - 1
+    ${tm_current_year}    Get Time    return year
+    ${tm_year}    Evaluate    int(${tm_current_year})
+    # 1. Navigate to Win Loss Report > Gold Deluxe Win Loss
+    navigate menu    Win Loss Report    Gold Deluxe Win Loss
+    # 2. Select filters then click Submit button
+    submit filter for gold deluxe win loss    All    ${tm_year}    ${tm_month}    1    28    No Draw
+    ...    No    EUR
+    # VP. Check report table
+    Wait Until Element Is Visible    ${gold_deluxe_report_table}    60s
+    # VP. check export excel
+    check export excel function    GoldDeluxe*
