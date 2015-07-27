@@ -2,3 +2,4 @@
 ${report_table_reports}    xpath=//table[@id='mainGrid']    # Report table of Win Loss Report pages
 ${details_link}    xpath=//div[@class='content']/h1/a[@href][contains(text(),'Details')]    # Details link on LA site
 ${game_type_listbox}    xpath=//*[@id='GameType']    # Game Type listbox
+${gold_deluxe_report_table}    xpath=//table[@class='report-data-table']    # Gold Deluxe report table

@@ -31,3 +31,4 @@ ${licensee_check_all}    xpath=//span[@id='btn-check-all']    # Check All licens
 ${export_pdf_button}    xpath=//*[@id='btnExportPdf']    # Export to PDF button
 ${base_currency_list}    xpath=//*[@id='ddl-base-currency']    # Base Currency Listbox
 ${products_listbox}    xpath=//*[@id='product-option']/input    # Product Listbox
+${exchange_currency_listbox}    xpath=//*[@id='ddlCurrency']    # Exchange listbox
