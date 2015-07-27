@@ -1,0 +1,22 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+Resource          ../01_Main_Actions/action_main.txt
+
+*** Keywords ***
+submit filter for gold deluxe win loss
+    [Arguments]    ${licensee}    ${year}    ${month}    ${from date}='None'    ${to date}='None'    ${draw filter}='Normal'
+    ...    ${exclude test data}='Yes'    ${exchange}='GBP'
+    # Select licensee
+    select licensee in checkbox list    ${licensee}
+    # Select Date
+    select date range by month    ${year}    ${month}    ${from date}    ${to date}
+    # Select Draw filter
+    select draw filter    ${draw filter}
+    # Select Exclude Test Data
+    Run Keyword If    '${exclude test data}'=='Yes'    Select Checkbox    ${exclude_test_data_checkbox}
+    Run Keyword If    '${exclude test data}'=='No'    Unselect Checkbox    ${exclude_test_data_checkbox}
+    # Select Exchange currency
+    Run Keyword If    '${exchange}'!='None'    Select From List By Label    ${exchange_currency_listbox}    ${exchange}
+    # Click Submit button
+    Click Element    ${submit_button}

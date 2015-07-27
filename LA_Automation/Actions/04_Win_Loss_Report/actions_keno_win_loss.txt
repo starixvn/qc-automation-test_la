@@ -25,6 +25,11 @@ submit filters for keno win loss
     ...    Example:
     ...
     ...    submit filters for keno win loss | All | Today | None | None | All | Big/Small | Normal | Yes
+    ...
+    ...    ******************************
+    ...    Update history:
+    ...
+    ...    [Ben] 07/23/2015: Add "wait page loading" in the last line.
     # select Licensee
     select licensee in checkbox list    ${licensee}
     # select Date
@@ -39,3 +44,4 @@ submit filters for keno win loss
     select exclude test data    ${exclude test data}
     # click Submit button
     Click Button    ${submit_button}
+    wait page loading

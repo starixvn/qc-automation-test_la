@@ -38,6 +38,7 @@ submit filters for performance by margin
     Select From List By Label    xpath=//*[@id='ddl-product']    ${products}
     # click Submit button
     Click Button    ${submit_button}
+    wait page loading
 
 select products on performance reports
     [Arguments]    ${products}
