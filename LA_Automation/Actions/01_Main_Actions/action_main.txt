@@ -115,9 +115,14 @@ navigate menu
     ...    Example:
     ...
     ...    select submenu | Win Loss Report | Currency Win Loss
+    ...
+    ...    Update history:
+    ...
+    ...    [Ben] 7/23/2015: Add more timing handle to wait for control.
     # Mouse over top menu to display submenu
     Click Element    xpath=//span[contains(text(),'${mainmenu}')]
     # Click submenu
+    Wait Until Element Is Visible    xpath=//a[contains(text(),'${submenu}')]
     Click Element    xpath=//a[contains(text(),'${submenu}')]
 
 select licensee in checkbox list
@@ -363,4 +368,4 @@ wait for export file
 wait page loading
     [Documentation]    This action is used to wait for loading page disappear.
     ${ac_state}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'block')]
-    Run Keyword If    '${ac_state}'=='True'    Wait Until Element Is Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'none')]    60s
+    Run Keyword If    '${ac_state}'=='True'    Wait Until Element Is Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'none')]    120s
