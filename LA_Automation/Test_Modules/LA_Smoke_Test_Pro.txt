@@ -47,7 +47,7 @@ TM_01_ST_Licensee Win Loss
     # 2. Select filters then click Submit button
     submit filters for licensee win loss summary    All    Date Range    ${tm_fromdate}    ${tm_todate}    All    EUR
     ...    All    All    All    Normal    No
-    take applications screenshot    LA_Local    TM_01_WinLossReport_LicenseeWinLoss_Summary.jpg
+    take applications screenshot    LA_Pro    TM_01_WinLossReport_LicenseeWinLoss_Summary.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -89,7 +89,7 @@ TM_02_ST_Currency Win Loss
     # 2. Select filters then click Submit button
     submit filters for currency win loss    All    Date Range    ${tm_fromdate}    ${tm_todate}    All    EUR
     ...    All    All    All    All    Normal    No
-    take applications screenshot    LA_Local    TM_02_WinLossReport_CurrencyWinLoss_Summary.jpg
+    take applications screenshot    LA_Pro    TM_02_WinLossReport_CurrencyWinLoss_Summary.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -126,7 +126,7 @@ TM_03_ST_Number Game Win Loss
     navigate menu    Win Loss Report    Number Game Win Loss
     # 2. Select filters then click Submit button
     submit filters for number game win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    No Draw    No
-    take applications screenshot    LA_Local    TM_03_WinLossReport_NumberGameWinLoss.jpg
+    take applications screenshot    LA_Pro    TM_03_WinLossReport_NumberGameWinLoss.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -145,7 +145,7 @@ TM_04_ST_Virtual Sports Win Loss
     # 2. Select filters then click Submit button
     submit filters for virtual sports win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    None    None
     ...    No Draw    No
-    take applications screenshot    LA_Local    TM_04_WinLossReport_VirtualSportsWinLoss.jpg
+    take applications screenshot    LA_Pro    TM_04_WinLossReport_VirtualSportsWinLoss.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -168,7 +168,7 @@ TM_05_ST_Live Casino Win Loss
     # 2. Select filters then click Submit button
     submit filters for live casino win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    All    No Draw
     ...    No
-    take applications screenshot    LA_Local    TM_05_WinLossReport_LiveCasinoWinLoss.jpg
+    take applications screenshot    LA_Pro    TM_05_WinLossReport_LiveCasinoWinLoss.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -187,7 +187,7 @@ TM_06_ST_Keno Win Loss
     # 2. Select filters then click Submit button
     submit filters for keno win loss    All    Date Range    ${tm_fromdate}    ${tm_todate}    All    All
     ...    Normal    No
-    take applications screenshot    LA_Local    TM_06_WinLossReport_KenoWinLoss.jpg
+    take applications screenshot    LA_Pro    TM_06_WinLossReport_KenoWinLoss.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -210,7 +210,7 @@ TM_07_ST_Licensee Performance
     #2. Submit Licensee Performance filters then clicking submit button
     submit filters for licensee performance summary    All    Date Range    ${tm_fromdate}    ${tm_todate}    All    EUR
     ...    Sportsbook    Normal    Yes
-    take applications screenshot    LA_Local    TM_07_ST_Licensee Performance _Summary.jpg
+    take applications screenshot    LA_Pro    TM_07_ST_Licensee Performance _Summary.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -230,7 +230,7 @@ TM_08_ST_Licensee Performance Details
     #2. Submit Licensee Performance Details filters then clicking submit button
     submit filters for licensee performance details    All    ${tm_year}    ${tm_month}    1    28    All
     ...    EUR    All    Normal    Yes    TurnOver, Margin
-    take applications screenshot    LA_Local    TM_07_ST_Licensee Performance _Details.jpg
+    take applications screenshot    LA_Pro    TM_08_ST_Licensee Performance _Details.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -248,7 +248,7 @@ TM_09_ST_Performance by Turnover
     # 2. Select filters then click Submit button
     submit filters for performance by turnover    All    All    None    Yes    Date Range    ${tm_fromdate}
     ...    ${tm_todate}    No Draw    Sportsbook
-    take applications screenshot    LA_Local    TM_09_Performance_PerformaceByTurnover.jpg
+    take applications screenshot    LA_Pro    TM_09_Performance_PerformaceByTurnover.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -269,7 +269,7 @@ TM_10_ST_Performance by Licensing Fee
     # 2. Select filters then click Submit button
     submit filters for performance by turnover    All    All    MYR    Yes    Date Range    ${tm_fromdate}
     ...    ${tm_todate}    No Draw    Sportsbook
-    take applications screenshot    LA_Local    TM_10_Performance_PerformaceByLicensingFee.jpg
+    take applications screenshot    LA_Pro    TM_10_Performance_PerformaceByLicensingFee.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -290,7 +290,7 @@ TM_11_ST_Performance by Margin
     # 2. Select filters then click Submit button
     submit filters for performance by margin    12Bet1 (12Bet), Boping Licensees    THB (TB)    No    Date Range    ${tm_fromdate}    ${tm_todate}
     ...    No Draw    RNG Casino
-    take applications screenshot    LA_Local    TM_11_Performance_PerformaceByMargin.jpg
+    take applications screenshot    LA_Pro    TM_11_Performance_PerformaceByMargin.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -305,7 +305,7 @@ TM_12_ST_Settlement Report
     # 2. Select filters then click Submit button
     submit filters for settlement report    12Bet    None    None    None    Sportsbook    All
     ...    GBP    All
-    take applications screenshot    LA_Local    TM_12_Invoice_SettlementReport.jpg
+    take applications screenshot    LA_Pro    TM_12_Invoice_SettlementReport.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
@@ -328,7 +328,7 @@ TM_13_ST_OANDA Exchange Rate
     Click Element    ${submit_button}
     # 3. Check report table
     Element Should Be Visible    ${oanda_report_table}
-    take applications screenshot    LA_Local    TM_13_OANDAExchangRate.jpg
+    take applications screenshot    LA_Pro    TM_13_OANDAExchangRate.jpg
     # 4. Check Export Excel
     check export excel function    OANDAExchangeRate*
 
@@ -343,6 +343,7 @@ TM_14_ST_Gold Deluxe Win Loss
     # 2. Select filters then click Submit button
     submit filter for gold deluxe win loss    All    ${tm_year}    ${tm_month}    1    28    No Draw
     ...    No    EUR
+    take applications screenshot    LA_Pro    TM_14_WinLossReport_GoldDeluxe.jpg
     # VP. Check report table
     Wait Until Element Is Visible    ${gold_deluxe_report_table}    60s
     # VP. check export excel
