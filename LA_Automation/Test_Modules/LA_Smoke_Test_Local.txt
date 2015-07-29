@@ -339,9 +339,13 @@ TM_13_ST_OANDA Exchange Rate
     select date picker    From    ${tm_fromdate}
     select date picker    To    ${tm_todate}
     Click Element    ${submit_button}
+    wait page loading
+    take applications screenshot    LA_Local    TM_13_OANDAExchangRate.jpg
+    # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
+    ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
+    Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # 3. Check report table
     Element Should Be Visible    ${oanda_report_table}
-    take applications screenshot    LA_Local    TM_13_OANDAExchangRate.jpg
     # 4. Check Export Excel
     check export excel function    OANDAExchangeRate*
 
@@ -358,6 +362,9 @@ TM_14_ST_Gold Deluxe Win Loss
     submit filter for gold deluxe win loss    All    ${tm_year}    ${tm_month}    1    28    No Draw
     ...    No    EUR
     take applications screenshot    LA_Local    TM_14_WinLossReport_GoldDeluxe.jpg
+    # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
+    ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
+    Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
     Wait Until Element Is Visible    ${gold_deluxe_report_table}    60s
     # VP. check export excel
