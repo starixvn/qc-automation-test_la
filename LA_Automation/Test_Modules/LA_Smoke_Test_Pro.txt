@@ -222,9 +222,11 @@ TM_07_ST_Licensee Performance
 TM_08_ST_Licensee Performance Details
     #1. Define test data
     ${tm_current_month}    Get Time    return month
-    ${tm_month}    Evaluate    int(${tm_current_month}) - 1
+    ${tm_current_month}    Convert To Integer    ${tm_current_month}
+    ${tm_month}    Set Variable    ${tm_current_month - 1}
     ${tm_current_year}    Get Time    return year
-    ${tm_year}    Evaluate    int(${tm_current_year})
+    ${tm_current_year}    Convert To Integer    ${tm_current_year}
+    ${tm_year}    Set Variable    ${tm_current_year - 1}
     # Navigate to Licensee Performance
     navigate menu    Performance    Licensee Performance in Details
     #2. Submit Licensee Performance Details filters then clicking submit button
@@ -335,9 +337,11 @@ TM_13_ST_OANDA Exchange Rate
 TM_14_ST_Gold Deluxe Win Loss
     #1. Define test data
     ${tm_current_month}    Get Time    return month
-    ${tm_month}    Evaluate    int(${tm_current_month}) - 1
+    ${tm_current_month}    Convert To Integer    ${tm_current_month}
+    ${tm_month}    Set Variable    ${tm_current_month - 1}
     ${tm_current_year}    Get Time    return year
-    ${tm_year}    Evaluate    int(${tm_current_year})
+    ${tm_current_year}    Convert To Integer    ${tm_current_year}
+    ${tm_year}    Set Variable    ${tm_current_year - 1}
     # 1. Navigate to Win Loss Report > Gold Deluxe Win Loss
     navigate menu    Win Loss Report    Gold Deluxe Win Loss
     # 2. Select filters then click Submit button
