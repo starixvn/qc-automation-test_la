@@ -295,7 +295,7 @@ select date range by month
     [Documentation]    This action is used to select date range in Month-From-To calendar.
     # Handle month index: add 0 before number of month if month is less than 10 and greater than 0
     ${ac_temp_zero_month}    Catenate    SEPARATOR=    0    ${month}
-    ${ac_month}    Set Variable If    1 <= int(${month}) <= 9    ${ac_temp_zero_month}
+    ${ac_month}    Set Variable IF    1 <= int(${month}) <= 9    ${ac_temp_zero_month}
     # Click on Month dropdow list
     Click Element    xpath=//div[@class='monthPicker']/span
     # Check specified year is selected or not. If it is not selected, click on it
@@ -303,7 +303,8 @@ select date range by month
     ${ac_year_selected_status}    Run Keyword And Return Status    Should Contain    ${ac_attribute}    selected
     Run Keyword If    '${ac_year_selected_status}'=='False'    Click Element    xpath=//div[@class='monthPickerDropDown']//a[@year='${year}']
     # Click on month
-    Click Element    xpath=//li[@class='month']/a[@year='${year}' and @month='${ac_month}' ]
+    Run Keyword If    1 <= int(${month}) <= 9    Click Element    xpath=//li[@class='month']/a[@year='${year}' and @month='${ac_month}' ]
+    Run Keyword If    10 <= int(${month})    Click Element    xpath=//li[@class='month']/a[@year='${year}' and @month='${month}' ]
     # Select from date and to date
     Select From List By Value    id=ddlFromDay    ${from date}
     Select From List By Value    id=ddlToDay    ${to date}
