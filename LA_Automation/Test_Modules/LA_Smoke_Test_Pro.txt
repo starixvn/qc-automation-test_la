@@ -230,7 +230,7 @@ TM_08_ST_Licensee Performance Details
     navigate menu    Performance    Licensee Performance in Details
     #2. Submit Licensee Performance Details filters then clicking submit button
     submit filters for licensee performance details    All    ${tm_year}    ${tm_month}    1    28    All
-    ...    EUR    All    Normal    Yes    TurnOver, Margin
+    ...    EUR    All    Normal    Yes    Turnover, Margin
     take applications screenshot    LA_Pro    TM_08_ST_Licensee Performance _Details.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available

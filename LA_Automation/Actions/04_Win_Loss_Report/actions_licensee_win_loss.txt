@@ -47,9 +47,9 @@ submit filters for licensee win loss summary
     Run Keyword If    '${products}'!='All'    unselect products filter    All
     Run Keyword If    '${products}'!='All'    select products filter    ${products}
     # select Sports
-    Run Keyword If    '${sports}'!='None'    Select From List By Label    ${sports_listbox}    ${sports}
+    Comment    Run Keyword If    '${sports}'!='None'    Select From List By Label    ${sports_listbox}    ${sports}
     # select Bet Type
-    Run Keyword If    '${bet type}'!='None'    Select From List By Label    ${bettype_listbox}    ${bet type}
+    Comment    Run Keyword If    '${bet type}'!='None'    Select From List By Label    ${bettype_listbox}    ${bet type}
     # select Draw filter
     select draw filter    ${draw filter}
     # select Exclude Test Data
@@ -100,9 +100,9 @@ submit filters for licensee win loss details
     Run Keyword If    '${products}'!='All'    unselect products filter    All
     Run Keyword If    '${products}'!='All'    select products filter    ${products}
     # select Sports
-    Run Keyword If    '${sports}'!='None'    Select From List By Label    ${sports_listbox}    ${sports}
+    Comment    Run Keyword If    '${sports}'!='None'    Select From List By Label    ${sports_listbox}    ${sports}
     # select Bet Type
-    Run Keyword If    '${bet type}'!='None'    Select From List By Label    ${bettype_listbox}    ${bet type}
+    Comment    Run Keyword If    '${bet type}'!='None'    Select From List By Label    ${bettype_listbox}    ${bet type}
     # select Draw filter
     select draw filter    ${draw filter}
     # select Exclude Test Data
