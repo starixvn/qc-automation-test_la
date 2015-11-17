@@ -7,7 +7,7 @@ Resource          ../01_Main_Actions/action_main.txt
 *** Keywords ***
 submit filters for licensee win loss summary
     [Arguments]    ${licensee}    ${date option}    ${from date}='None'    ${to date}='None'    ${currency}=All    ${base currency}=EUR
-    ...    ${products}=All    ${sports}=None    ${bet type}=None    ${draw filter}=Normal    ${exclude test data}=Yes
+    ...    ${products}=All    ${draw filter}=Normal    ${exclude test data}=Yes
     [Documentation]    This action is used to submit filters for Licensee Win Loss > Summary report.
     ...
     ...    ${licensee} = *'All'* or *'12Bet, mansion88, DELA, Macaubet'* or *'ONEWorks Licensees, Macaubet'*
@@ -60,7 +60,7 @@ submit filters for licensee win loss summary
 
 submit filters for licensee win loss details
     [Arguments]    ${licensee}    ${date option}    ${from date}='None'    ${to date}='None'    ${currency}=All    ${base currency}=EUR
-    ...    ${products}=All    ${sports}=None    ${bet type}=None    ${draw filter}=Normal    ${exclude test data}=Yes
+    ...    ${products}=All    ${draw filter}=Normal    ${exclude test data}=Yes
     [Documentation]    This action is used to submit filters for Licensee Win Loss > Details report.
     ...
     ...    ${licensee} = *'All'* or *'12Bet, mansion88, DELA, Macaubet'* or *'ONEWorks Licensees, Macaubet'*
