@@ -238,10 +238,10 @@ TM_08_ST_Licensee Performance Details
     Go To    ${cf_url}Performance/LicenseePerformanceDetail
     #2. Submit Licensee Performance Details filters then clicking submit button
     submit filters for licensee performance details    All    ${tm_year}    ${tm_month}    1    28    All
-    ...    EUR    All    Normal    Yes    Turnover, Margin
+    ...    EUR    All    Normal    Yes    All
     take applications screenshot    LA_Local    TM_08_ST_Licensee Performance _Details.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
-    ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
+    ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    There is no data
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP : Check report table
     Element Should Be Visible    ${report_performance_detail_table}
