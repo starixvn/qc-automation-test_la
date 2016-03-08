@@ -71,7 +71,7 @@ TM_01_ST_Licensee Win Loss
     Click Element    ${details_link}
     # 6. Select filters then click Submit button
     submit filters for licensee win loss details    ${tm_filtered_licensee}    Date Range    ${tm_fromdate}    ${tm_todate}    All    None
-    ...    All    All    All    No Draw    No
+    ...    All    No Draw    No
     take applications screenshot    LA_Local    TM_01_WinLossReport_LicenseeWinLoss_Detail.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
