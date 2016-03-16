@@ -317,7 +317,7 @@ TM_12_ST_Settlement Report
     Go To    ${cf_url}InvoiceReport/Settlement
     # 2. Select filters then click Submit button
     submit filters for settlement report    12Bet    None    None    None    Sportsbook    All
-    ...    GBP    All
+    ...    GBP    None
     take applications screenshot    LA_Local    TM_12_Invoice_SettlementReport.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
