@@ -249,7 +249,7 @@ select exclude test data
 select base currency
     [Arguments]    ${base currency}
     [Documentation]    select base currency | MYR/EUR/USD
-    Run Keyword If    '${base currency}'=='None' and '${currency}' != 'All'    Unselect Checkbox    ${convert_base_currency_checkbox}
+    Run Keyword If    '${base currency}'=='None'    Unselect Checkbox    ${convert_base_currency_checkbox}
     Run Keyword If    '${base currency}'!='None'    Select From List By Label    ${base_currency_list}    ${base currency}
 
 select products filter
