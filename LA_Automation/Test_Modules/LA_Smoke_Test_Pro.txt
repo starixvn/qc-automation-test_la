@@ -87,7 +87,7 @@ TM_02_ST_Currency Win Loss
     # 1. Navigate to Win Loss Report > Currency Win Loss
     navigate menu    Win Loss Report    Currency Win Loss
     # 2. Select filters then click Submit button
-    submit filters for currency win loss    All    Date Range    ${tm_fromdate}    ${tm_todate}    All    EUR
+    submit filters for currency win loss summary    All    Date Range    ${tm_fromdate}    ${tm_todate}    All    EUR
     ...    All    All    All    All    Normal    No
     take applications screenshot    LA_Pro    TM_02_WinLossReport_CurrencyWinLoss_Summary.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
@@ -107,8 +107,8 @@ TM_02_ST_Currency Win Loss
     # 5. Click Details link
     Click Element    ${details_link}
     # 6. Select filters then click Submit button
-    submit filters for currency win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    All    None
-    ...    All    All    All    All    No Draw    No
+    submit filters for currency win loss details    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    All    All
+    ...    All    All    All    No Draw    No
     take applications screenshot    LA_Local    TM_02_WinLossReport_CurrencyWinLoss_Detail.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
