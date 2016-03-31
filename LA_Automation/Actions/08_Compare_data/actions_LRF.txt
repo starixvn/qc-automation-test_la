@@ -1,0 +1,374 @@
+*** Settings ***
+Library           Selenium2Library
+Library           String
+Library           OperatingSystem
+Library           Screenshot
+Library           Collections
+Library           Dialogs
+Library           Process
+Resource          ../../Interfaces/01_Main_Interfaces/interface_login.txt
+Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+Resource          ../../Interfaces/08_LRF_page/interface_lrf_login.txt
+Library           ExcelLibrary
+Resource          ../01_Main_Actions/action_main.txt
+Resource          Compare_LA_data_detailed.txt
+
+*** Keywords ***
+login_lrf
+    [Arguments]    ${username}    ${password}
+    Go To    ${cf_lrf_url}
+    # Input username & password
+    Input Text    ${lrf_username_textbox}    ${username}
+    Input Password    ${lrf_password_textbox}    ${password}
+    Input Text    ${lrf_capcha_textbox}    ${cf_lrf_static_capcha}
+    # Click Login button
+    Click Button    ${lrf_login_button}
+
+select licensee after login lrf
+    [Arguments]    ${licensee}
+    Wait Until Page Contains Element    xpath=//a[contains(text(),'${licensee}')]    10s
+    Click Element    xpath=//a[contains(text(),'${licensee}')]
+    wait page loading
+
+navigate left menu
+    [Arguments]    ${mainmenu}    ${submenu}
+    Select Window
+    Select Frame    menu
+    # Click Main Menu label
+    ${ac_submenu_status}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//*[contains(@id,'child-menu')][text()='${submenu}']
+    Run Keyword If    '${ac_submenu_status}'!='True'    Click Element    xpath=//span[contains(text(),'${mainmenu}')]
+    # Click Sub Menu label
+    # Handle special case: click duplicated labels "Handicap/Over Under/Live"
+    ${ac_status}=    Evaluate    '${mainmenu}'=='FORECAST' and '${submenu}'=='Handicap/Over Under/Live'
+    Run Keyword If    '${ac_status}'=='True'    Click Element    xpath=//td/a[contains(text(),'${submenu}') and contains(@href,'Forecast')]
+    # Handle normal case
+    Run Keyword If    '${ac_status}'!='True'    Click Element    xpath=//td/a[text()='${submenu}']
+    Unselect Frame
+    wait page loading
+
+submit filters for Win Loss By Products
+    [Documentation]    This keywork is used to submit for WL by Products:
+    ...
+    ...    - Date range: Last Month
+    ...
+    ...    - Report by: Monthly
+    ...
+    ...    - Products: ALL
+    Select Frame    xpath=//iframe[@id='main']
+    Click Element    xpath=.//img[@class='ui-daterangepicker-trigger']    #Click From Date
+    Click Element    xpath=//a[text()='Last month']    # Select Last month
+    Click Element    xpath=//input[@class='report-by-monthly']    # Select Monthly radio
+    Click Element    xpath=//span[@class='ui-multiselect-icon ui-multiselect-icon-triangle-1-s']    #Select product
+    Click Element    xpath=//*[@id='grid-products-multiselectHeaderCheckBox']    # Select All
+    Click Element    xpath=//span[@class='ui-multiselect-icon ui-multiselect-icon-triangle-1-s']    #Select product
+    Click Element    xpath=//*[@id='SubmitButton']    # Click on Submit button
+    wait lrf page loading
+
+submit filters for AG Casino GD Macau Win Loss
+    [Arguments]    ${product}
+    [Documentation]    This keywork is used to submit for AG Casino Win Loss, Gold Deluxe Win Loss, Macau Win Loss:
+    ...
+    ...    - Date range: Last Month
+    ...
+    ...    - Report by: Monthly
+    Select Frame    xpath=//iframe[@id='main']
+    #Click From Date for AGCasino WL and GD WL    OR    Click Previous Month button for Macau report
+    sleep    2s
+    Run Keyword If    '${product}'=='AG Casino' or '${product}'=='Gold Deluxe'    Click Element    xpath=.//img[@class='ui-daterangepicker-trigger']
+    ...    ELSE    Click Element    xpath=.//a[@class='prev']
+    # Select Last month
+    Run Keyword If    '${product}'=='AG Casino' or '${product}'=='Gold Deluxe'    Click Element    xpath=//a[text()='Last month']
+    # Select Monthly radio
+    Click Element    xpath=//input[@class='report-by-monthly']
+    Click Element    xpath=//*[@id='SubmitButton']    # Click on Submit button
+    wait lrf page loading
+
+wait lrf page loading
+    Select Window
+    Select Frame    main
+    ${loading_status}    Run Keyword And Return Status    Element Should Be Visible    xpath=//*[@class='loading'][@style='display: block;']
+    Run Keyword If    '${loading_status}'=='True'    Wait Until Page Contains Element    xpath=//*[@class='loading'][@style='display: none;']    150s
+    Unselect Frame
+
+select licensees from dropdown then navigate to report
+    [Arguments]    ${licensee}    ${report}
+    Unselect Frame
+    Select Frame    xpath=.//iframe[@id='header']
+    Select From List By Label    xpath=.//*[@id='ddlLicensee']    ${licensee}
+    Unselect Frame
+    navigate left menu    REPORTS    ${report}
+    Comment    Select Frame    xpath=//iframe[@id='main']
+
+submit filters for Virtual Sports on Licensee Win Loss report
+    Select Frame    xpath=//iframe[@id='main']
+    Click Element    xpath=.//img[@class='ui-daterangepicker-trigger']    #Click From Date
+    Click Element    xpath=//a[text()='Last month']    # Select Last month
+    Click Element    xpath=//input[@class='report-by-monthly']    # Select Monthly radio
+    Click Element    xpath=//span[@class='ui-multiselect-icon ui-multiselect-icon-triangle-1-s']    #Select product
+    Click Element    xpath=//*[@id='grid-products-multiselectHeaderCheckBox']    # Select All
+    Click Element    xpath=//*[@id='grid-products-multiselectHeaderCheckBox']    # Select All
+    Click Element    xpath=.//*[@id='VS']    # Select Virtual Sports
+    Click Element    xpath=//span[@class='ui-multiselect-icon ui-multiselect-icon-triangle-1-s']    #Select product
+    Click Element    xpath=//*[@id='SubmitButton']    # Click on Submit button
+    wait lrf page loading
+
+get data LRF from Licensee Win Loss
+    [Documentation]    This report is used to get data (Turnover, Total Transaction, Customer W/L) from some reports with LA:
+    ...
+    ...    - Sportsbook
+    ...
+    ...    - Racing
+    ...
+    ...    - Number Game
+    ...
+    ...    - Live Casino
+    ...
+    ...    - Virtual Sports
+    ...
+    ...    - RNG Casino
+    ...
+    ...    - Keno
+    ${exit}    does control exist    xpath=//iframe[@id='main']
+    Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
+    ${Turnover_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[7]    # Turnover SB
+    ${Turnover_LRF}    remove string    ${Turnover_LRF}    ,
+    ${TotalTransaction_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[13]    # Total Transaction
+    ${TotalTransaction_LRF}    remove string    ${TotalTransaction_LRF}    ,
+    ${CustomerWL_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[14]    # Customer W/L
+    ${CustomerWL_LRF}    remove string    ${CustomerWL_LRF}    ,
+    [Return]    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}
+
+get data LRF from Win Loss By Products
+    [Arguments]    ${product}
+    [Documentation]    This report is used to get data (Turnover, Total Transaction, Customer W/L) from some reports with LA:
+    ...
+    ...    - Sportsbook
+    ...
+    ...    - Racing
+    ...
+    ...    - Number Game
+    ...
+    ...    - Live Casino
+    ...
+    ...    - Virtual Sports
+    ...
+    ...    - RNG Casino
+    ...
+    ...    - Keno
+    ${exit}    does control exist    xpath=//iframe[@id='main']
+    Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
+    ${Turnover_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[contains(text(),'${product}')])[1]/following::td[1]    # Turnover SB
+    ${Turnover_LRF}    remove string    ${Turnover_LRF}    ,
+    ${TotalTransaction_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[contains(text(),'${product}')])[1]/following::td[2]    # Total Transaction
+    ${TotalTransaction_LRF}    remove string    ${TotalTransaction_LRF}    ,
+    ${CustomerWL_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[contains(text(),'${product}')])[1]/following::td[3]    # Customer W/L
+    ${CustomerWL_LRF}    remove string    ${CustomerWL_LRF}    ,
+    ${AmountDue_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[contains(text(),'${product}')])[1]/following::td[8]    # Amount Due
+    ${AmountDue_LRF}    remove string    ${AmountDue_LRF}    ,
+    [Return]    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    ${AmountDue_LRF}
+
+get data LRF from AGCasino GD Macau Win Loss report
+    [Documentation]    This report is used to get data (Turnover, Total Transaction, Customer W/L) from some reports:
+    ...
+    ...    - AG Casino WL
+    ...
+    ...    - Gold Deluxe WL
+    ...
+    ...    - Macau WL
+    ${exit}    does control exist    xpath=//iframe[@id='main']
+    Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
+    ${Turnover_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')])[1]/following::td[5]    # Turnover SB
+    ${Turnover_LRF}    remove string    ${Turnover_LRF}    ,
+    ${TotalTransaction_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')])[1]/following::td[6]    # Total Transaction
+    ${TotalTransaction_LRF}    remove string    ${TotalTransaction_LRF}    ,
+    ${CustomerWL_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')])[1]/following::td[7]    # Customer W/L
+    ${CustomerWL_LRF}    remove string    ${CustomerWL_LRF}    ,
+    [Return]    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}
+
+compare LRF Licensee WL by product with LA for Virtual Sports product
+    [Arguments]    ${licensee}    ${product}
+    [Documentation]    This report is used to compare data (Turnover, Total Transaction, Customer W/L) from Licensee WL reports with LA for prouduct:
+    ...
+    ...    - Virtual Sports
+    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    get data LRF from Licensee Win Loss
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    ${product}
+    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}    ${licensee}
+    check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}
+    check value equal with approximation    ${Turnover}    ${Turnover_LRF}
+    check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
+
+compare LRF WL by product with LA
+    [Arguments]    ${licensee}    ${product}
+    [Documentation]    This report is used to compare data (Turnover, Total Transaction, Customer W/L) from some reports with LA:
+    ...
+    ...    - Sportsbook
+    ...
+    ...    - Racing
+    ...
+    ...    - Number Game
+    ...
+    ...    - Live Casino
+    ...
+    ...    - RNG Casino
+    ...
+    ...    - Keno
+    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    ${AmountDue_LRF}    get data LRF from Win Loss By Products    ${product}
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    ${product}
+    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}    ${licensee}
+    check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}
+    check value equal with approximation    ${Turnover}    ${Turnover_LRF}
+    check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
+    check value equal with approximation    ${Amount}    ${AmountDue_LRF}
+
+compare LRF AG Casino GD Macau WL with LA
+    [Arguments]    ${licensee}    ${product}
+    [Documentation]    This report is used to compare data (Turnover, Total Transaction, Customer W/L) from some reports with LA:
+    ...
+    ...    - AG Casino WL
+    ...
+    ...    - Gold Deluxe WL
+    ...
+    ...    - Macau WL
+    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    get data LRF from AGCasino GD Macau Win Loss report
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    ${product}
+    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}    ${licensee}
+    check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}
+    check value equal with approximation    ${Turnover}    ${Turnover_LRF}
+    check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
+
+compare LRF licensee by product with LA for BA product
+    [Arguments]    ${licensee}
+    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    ${AmountDue_LRF}    get data LRF from Win Loss By Products    BA
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    BA
+    ${Customerwl}    ${BAComm}    ${Amount}    get data of licensee on excel file for ba    ${filename}    ${licensee}
+    check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
+    check value equal with approximation    ${Amount}    ${AmountDue_LRF}
+
+compare LRF licensee by product with LA for Racing product
+    [Arguments]    ${licensee}
+    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    ${AmountDue_LRF}    get data LRF from Win Loss By Products    Racing
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Racing
+    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file for racing    ${filename}    ${licensee}
+    check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}
+    check value equal with approximation    ${Turnover}    ${Turnover_LRF}
+    check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
+    check value equal with approximation    ${Amount}    ${AmountDue_LRF}
+
+Check data for 1st licensees
+    [Documentation]    This key work is used to verify data for 1st licenses in excel file for some products:
+    ...
+    ...    - Sportsbook
+    ...
+    ...    - Racing
+    ...
+    ...    - Number Game
+    ...
+    ...    - Live Casino
+    ...
+    ...    - Virtual Sports
+    ...
+    ...    - RNG Casino
+    ...
+    ...    - Keno
+    Open Excel    ${DeclareProductforLicensees}
+    ${licensee}    Read Cell Data By Coordinates    Data    0    ${suite_1stlicensee_row}
+    ${status_sportsbook}    Read Cell Data By Coordinates    Data    1    ${suite_1stlicensee_row}
+    ${status_racing}    Read Cell Data By Coordinates    Data    2    ${suite_1stlicensee_row}
+    ${status_numbergame}    Read Cell Data By Coordinates    Data    3    ${suite_1stlicensee_row}
+    ${status_ba}    Read Cell Data By Coordinates    Data    4    ${suite_1stlicensee_row}
+    ${status_livecasino}    Read Cell Data By Coordinates    Data    5    ${suite_1stlicensee_row}
+    ${status_virtualsports}    Read Cell Data By Coordinates    Data    6    ${suite_1stlicensee_row}
+    ${status_rngcasino}    Read Cell Data By Coordinates    Data    7    ${suite_1stlicensee_row}
+    ${status_keno}    Read Cell Data By Coordinates    Data    8    ${suite_1stlicensee_row}
+    ${status_agcasino}    Read Cell Data By Coordinates    Data    9    ${suite_1stlicensee_row}
+    ${status_golddeluxe}    Read Cell Data By Coordinates    Data    10    ${suite_1stlicensee_row}
+    ${status_macau}    Read Cell Data By Coordinates    Data    11    ${suite_1stlicensee_row}
+    ${status_microgaminglivecasino}    Read Cell Data By Coordinates    Data    12    ${suite_1stlicensee_row}
+    ${status_microgamingrngcasino}    Read Cell Data By Coordinates    Data    13    ${suite_1stlicensee_row}
+    Run Keyword If    '${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes'    navigate left menu    REPORTS    Win Loss By Products
+    Run Keyword If    '${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes'    submit filters for Win Loss By Products
+    Run Keyword If    '${status_sportsbook}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Sportsbook
+    Run Keyword If    '${status_racing}'=='Yes'    compare LRF licensee by product with LA for Racing product    ${licensee}
+    Run Keyword If    '${status_numbergame}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Number Game
+    Run Keyword If    '${status_ba}'=='Yes'    compare LRF licensee by product with LA for BA product    ${licensee}
+    Run Keyword If    '${status_livecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Live Casino
+    Run Keyword If    '${status_rngcasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    RNG Casino
+    Run Keyword If    '${status_keno}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Keno
+    Run Keyword If    '${status_microgaminglivecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-Live Casino
+    Run Keyword If    '${status_microgamingrngcasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-RNG Casino
+    # Navigate to Virtual Sports    ----------
+    Run Keyword If    '${status_virtualsports}'=='Yes'    navigate left menu    REPORTS    Licensee Win Loss
+    Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters for Virtual Sports on Licensee Win Loss report
+    Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for Virtual Sports product    ${licensee}    Virtual Sports
+    # Navigate to AG Casino WL report
+    Run Keyword If    '${status_agcasino}'=='Yes'    navigate left menu    REPORTS    AG Casino Win Loss
+    Run Keyword If    '${status_agcasino}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    AG Casino
+    Run Keyword If    '${status_agcasino}'=='Yes'    compare LRF AG Casino GD Macau WL with LA    ${licensee}    AG Casino
+    # Navigate to Gold Deluxe report
+    Run Keyword If    '${status_golddeluxe}'=='Yes'    navigate left menu    REPORTS    Gold Deluxe Win Loss
+    Run Keyword If    '${status_golddeluxe}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    Gold Deluxe
+    Run Keyword If    '${status_golddeluxe}'=='Yes'    compare LRF AG Casino GD Macau WL with LA    ${licensee}    Gold Deluxe
+    # Navigate to Macau report
+    Run Keyword If    '${status_macau}'=='Yes'    navigate left menu    REPORTS    Macau Win Loss
+    Run Keyword If    '${status_macau}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    Macau
+    Run Keyword If    '${status_macau}'=='Yes'    compare LRF AG Casino GD Macau WL with LA    ${licensee}    Macau
+
+Check data for next licensees
+    [Documentation]    This key work is used to verify data for loop of next licenses in excel file for some products:
+    ...
+    ...    - Sportsbook
+    ...
+    ...    - Racing
+    ...
+    ...    - Number Game
+    ...
+    ...    - Live Casino
+    ...
+    ...    - Virtual Sports
+    ...
+    ...    - RNG Casino
+    ...
+    ...    - Keno
+    : FOR    ${index}    IN RANGE    ${suite_1stlicensee_row}+1    ${AmoutofLic}
+    \    Open Excel    ${DeclareProductforLicensees}
+    \    ${licensee}    Read Cell Data By Coordinates    Data    0    ${index}
+    \    ${status_sportsbook}    Read Cell Data By Coordinates    Data    1    ${index}
+    \    ${status_racing}    Read Cell Data By Coordinates    Data    2    ${index}
+    \    ${status_numbergame}    Read Cell Data By Coordinates    Data    3    ${index}
+    \    ${status_ba}    Read Cell Data By Coordinates    Data    4    ${index}
+    \    ${status_livecasino}    Read Cell Data By Coordinates    Data    5    ${index}
+    \    ${status_virtualsports}    Read Cell Data By Coordinates    Data    6    ${index}
+    \    ${status_rngcasino}    Read Cell Data By Coordinates    Data    7    ${index}
+    \    ${status_keno}    Read Cell Data By Coordinates    Data    8    ${index}
+    \    ${status_agcasino}    Read Cell Data By Coordinates    Data    9    ${index}
+    \    ${status_golddeluxe}    Read Cell Data By Coordinates    Data    10    ${index}
+    \    ${status_macau}    Read Cell Data By Coordinates    Data    11    ${index}
+    \    ${status_microgaminglivecasino}    Read Cell Data By Coordinates    Data    12    ${index}
+    \    ${status_microgamingrngcasino}    Read Cell Data By Coordinates    Data    13    ${index}
+    \    Run Keyword If    ('${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_golddeluxe}'=='Yes' or '${status_macau}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes')    select licensees from dropdown then navigate to report    ${licensee}    Win Loss By Products
+    \    Run Keyword If    ('${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_golddeluxe}'=='Yes' or '${status_macau}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes')    submit filters for Win Loss By Products
+    \    Run Keyword If    '${status_sportsbook}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Sportsbook
+    \    Run Keyword If    '${status_racing}'=='Yes'    compare LRF licensee by product with LA for Racing product    ${licensee}
+    \    Run Keyword If    '${status_numbergame}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Number Game
+    \    Run Keyword If    '${status_ba}'=='Yes'    compare LRF licensee by product with LA for BA product    ${licensee}
+    \    Run Keyword If    '${status_livecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Live Casino
+    \    Run Keyword If    '${status_rngcasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    RNG Casino
+    \    Run Keyword If    '${status_keno}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Keno
+    \    Run Keyword If    '${status_microgaminglivecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-Live Casino
+    \    Run Keyword If    '${status_microgamingrngcasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-RNG Casino
+    \    Comment    Navigate to Virtual Sports
+    \    Run Keyword If    '${status_virtualsports}'=='Yes'    navigate left menu    REPORTS    Licensee Win Loss
+    \    Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters for Virtual Sports on Licensee Win Loss report
+    \    Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for Virtual Sports product    ${licensee}    Virtual Sports
+    \    Comment    Navigate to AG Casino WL report
+    \    Run Keyword If    '${status_agcasino}'=='Yes'    select licensees from dropdown then navigate to report    ${licensee}    AG Casino Win Loss
+    \    Run Keyword If    '${status_agcasino}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    AG Casino
+    \    Run Keyword If    '${status_agcasino}'=='Yes'    compare LRF AG Casino GD Macau WL with LA    ${licensee}    AG Casino
+    \    Comment    Navigate to Gold Deluxe WL report
+    \    Run Keyword If    '${status_golddeluxe}'=='Yes'    select licensees from dropdown then navigate to report    ${licensee}    Gold Deluxe Win Loss
+    \    Run Keyword If    '${status_golddeluxe}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    Gold Deluxe
+    \    Run Keyword If    '${status_golddeluxe}'=='Yes'    compare LRF AG Casino GD Macau WL with LA    ${licensee}    Gold Deluxe
+    \    Comment    Navigate to Gold Deluxe WL report
+    \    Run Keyword If    '${status_macau}'=='Yes'    select licensees from dropdown then navigate to report    ${licensee}    Macau Win Loss
+    \    Run Keyword If    '${status_macau}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    Macau
+    \    Run Keyword If    '${status_macau}'=='Yes'    compare LRF AG Casino GD Macau WL with LA    ${licensee}    Macau

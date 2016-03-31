@@ -1,0 +1,5 @@
+*** Variables ***
+${lrf_username_textbox}    xpath=//input[@id='userName']    # Username textbox in Login page
+${lrf_password_textbox}    xpath=//input[@id='passWord']    # Password textbox in Login page
+${lrf_login_button}    xpath=//input[@value='Login']    # Login button in Login page
+${lrf_capcha_textbox}    xpath=//*[@id='captcha']    # Capcha textbox in Login page

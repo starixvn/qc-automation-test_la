@@ -1,0 +1,1263 @@
+*** Settings ***
+Resource          Actions_compare_data.txt
+Resource          ../../Interfaces/07_Invoice/interface_settlement_report.txt
+
+*** Keywords ***
+get file name
+    [Documentation]    This keywork is used to create NAME for exported excel from Licensess WL on LA:
+    ...
+    ...    It's automatically create date range of Last Month and generate to file name
+    ...
+    ...    - Ex:
+    ...
+    ...    - LicenseeWinLoss.from.February-01-2016.to.February-29-2016.in.All.currencies.Base.GBP
+    Comment    LicenseeWinLoss.from.February-01-2016.to.February-29-2016.in.All.currencies.Base.GBP
+    ${yyyy}    ${mm}    Get Time    year,month
+    ${mm}    Convert To string    ${mm}
+    ${yyyy}    Convert To string    ${yyyy}
+    : FOR    ${index}    IN RANGE    0    1
+    \    ${mm1}    Run Keyword If    '${mm}'=='01'    Set Variable    December
+    \    Exit For Loop If    '${mm}'=='01'
+    \    ${mm1}    Run Keyword If    '${mm}'=='02'    Set Variable    January
+    \    Exit For Loop If    '${mm}'=='02'
+    \    ${mm1}    Run Keyword If    '${mm}'=='03'    Set Variable    February
+    \    Exit For Loop If    '${mm}'=='03'
+    \    ${mm1}    Run Keyword If    '${mm}'=='04'    Set Variable    March
+    \    Exit For Loop If    '${mm}'=='04'
+    \    ${mm1}    Run Keyword If    '${mm}'=='05'    Set Variable    April
+    \    Exit For Loop If    '${mm}'=='05'
+    \    ${mm1}    Run Keyword If    '${mm}'=='06'    Set Variable    May
+    \    Exit For Loop If    '${mm}'=='06'
+    \    ${mm1}    Run Keyword If    '${mm}'=='07'    Set Variable    June
+    \    Exit For Loop If    '${mm}'=='07'
+    \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
+    \    Exit For Loop If    '${mm}'=='08'
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    Exit For Loop If    '${mm}'=='09'
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    Exit For Loop If    '${mm}'=='10'
+    \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
+    \    Exit For Loop If    '${mm}'=='11'
+    \    ${mm1}    Run Keyword If    '${mm}'=='12'    Set Variable    November
+    \    Exit For Loop If    '${mm}'=='12'
+    # set file name for Licensee Winloss
+    : FOR    ${index}    IN RANGE    1    12
+    \    ${filename}    Run Keyword If    '${mm1}'=='December'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='December'
+    \    ${filename}    Run Keyword If    '${mm1}'=='January'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='January'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-29-${yyyy}.in.All.currencies.Base.GBP    #leap year
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-28-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
+    \    ${filename}    Run Keyword If    '${mm1}'=='March'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='March'
+    \    ${filename}    Run Keyword If    '${mm1}'=='April'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='April'
+    \    ${filename}    Run Keyword If    '${mm1}'=='May'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='May'
+    \    ${filename}    Run Keyword If    '${mm1}'=='June'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='June'
+    \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='July'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='October'
+    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    Exit For Loop If    '${mm1}'=='November'
+    [Return]    ${filename}
+
+count row of excel file
+    [Arguments]    ${filename}    ${sheet}
+    [Documentation]    This keywork is used to count amount of available row of excel file then set it as suite variable
+    Open Excel    ${filename}
+    ${total}    Get Row Count    ${sheet}
+    Set Suite Variable    ${AmoutofLic}    ${total}
+
+get data of licensee on excel file
+    [Arguments]    ${filename}    ${licenseename}
+    [Documentation]    This keywork is used to get data from exported excel file of Licensees Win Loss on LA \ based on file name (Product) and Licensee name:
+    ...    - Data return: TotalTrans, Turnover, Customerwl, Amount
+    ...    - Data exclude: BA, RACING (2 these product get different column Amount)
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${contain}    does value equal    ${licenseenameLicWL}    ${licenseename}
+    \    ${row}    Set Variable If    '${contain}'=='True'    ${i}
+    \    ${TotalTrans}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    2
+    \    ...    ${i}    #Total Trans
+    \    ${Turnover}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    3
+    \    ...    ${i}    #Turnover
+    \    ${Customerwl}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    4
+    \    ...    ${i}    #Customerwl
+    \    ${Amount}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    10
+    \    ...    ${i}    #Amount
+    \    Exit For Loop If    '${contain}'=='True'
+    [Return]    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}
+
+get data of licensee on excel file for ba
+    [Arguments]    ${filename}    ${licenseename}
+    [Documentation]    This keywork is used to get data from exported excel file of Licensees Win Loss on LA \ based on file name (Product) and Licensee name for BA:
+    ...    - Data return: Customer win loss, BA Comm, Amount
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${contain}    does value equal    ${licenseenameLicWL}    ${licenseename}
+    \    ${row}    Set Variable If    '${contain}'=='True'    ${i}
+    \    ${Customerwl}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    4
+    \    ...    ${i}    #Customerwl
+    \    ${BAComm}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    6
+    \    ...    ${i}    #BA Comm
+    \    ${Amount}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    8
+    \    ...    ${i}    #Amount
+    \    Exit For Loop If    '${contain}'=='True'
+    [Return]    ${Customerwl}    ${BAComm}    ${Amount}
+
+get data of licensee on excel file for racing
+    [Arguments]    ${filename}    ${licenseename}
+    [Documentation]    This keywork is used to get data from exported excel file of Licensees Win Loss on LA \ based on file name (Product) and Licensee name for RACING:
+    ...    - Data return:TotalTrans, Turnover, Customerwl, Amount
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${contain}    does value equal    ${licenseenameLicWL}    ${licenseename}
+    \    ${row}    Set Variable If    '${contain}'=='True'    ${i}
+    \    ${TotalTrans}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    2
+    \    ...    ${i}    #Total Trans
+    \    ${Turnover}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    3
+    \    ...    ${i}    #Turnover
+    \    ${Customerwl}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    4
+    \    ...    ${i}    #Customerwl
+    \    ${Amount}    Run Keyword If    '${contain}'=='True'    Read Cell Data By Coordinates    Data    9
+    \    ...    ${i}    #Amount
+    \    Exit For Loop If    '${contain}'=='True'
+    [Return]    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}
+
+compare winloss by product for sportsbook
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Sportsbook
+    ...
+    ...    - Open exported excel file of Licensee WL for Sportsbook
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for Sportsbook
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    #SportsBook
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[1]    #Sportbook
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[1])[2]    #Sportbook for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for racing
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Racing
+    ...
+    ...    - Open exported excel file of Licensee WL for Racing
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for Racing
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    9    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[2]    #Racing
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[2])[2]    #Racing for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    ...    #Racing for AG licensee
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for number game
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Number Game
+    ...
+    ...    - Open exported excel file of Licensee WL for \ Number Game
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ Number Game
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[3]    #Number game
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[3])[2]    #NG for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for ba
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for BA
+    ...
+    ...    - Open exported excel file of Licensee WL for BA
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ BA
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    8    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[4]    #BA
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[4])[2]    #BA for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for live casino
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for BA
+    ...
+    ...    - Open exported excel file of Licensee WL for BA
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ BA
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[5]    #LC
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[5])[2]    #LC for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for virtual sports
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Virtual Sports
+    ...
+    ...    - Open exported excel file of Licensee WL for Virtual Sports
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ Virtual Sports
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[6]    #VS
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[6])[2]    #VS for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for rng casino
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for RNG Casino
+    ...
+    ...    - Open exported excel file of Licensee WL for RNG Casino
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ RNG Casino
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[7]    #RNG Casino
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[7])[2]    #RNG Casino for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for keno
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Keno
+    ...
+    ...    - Open exported excel file of Licensee WL for Keno
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ Keno
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[8]    #Keno
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[8])[2]    #Keno for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for ag casino
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for AG Casino
+    ...
+    ...    - Open exported excel file of Licensee WL for AG Casino
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ AG Casino
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[9]    #AG Casino
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[9])[2]    #AG Casino for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for gold deluxe
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Gold Deluxe
+    ...
+    ...    - Open exported excel file of Licensee WL for Gold Deluxe
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ Gold Deluxe
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[10]    #GD
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[10])[2]    #GD for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for macau
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Macau
+    ...
+    ...    - Open exported excel file of Licensee WL for Macau
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ Macau
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[11]    #MC
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[11])[2]    #MC for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for microgaming live casino
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Microgaming-Live Casino
+    ...
+    ...    - Open exported excel file of Licensee WL for Microgaming-Live Casino
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ Microgaming-Live Casino
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[12]    #MCG LC
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[12])[2]    #MCG LC for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare winloss by product for microgaming rng casino
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Microgaming-RNG Casino
+    ...
+    ...    - Open exported excel file of Licensee WL for Microgaming-RNG Casino
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ Microgaming-RNG Casino
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[13]    #MCG RNG Casino
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[13])[2]    #MCG RNG Casino for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
+compare settlement report for SportsBook
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Sportsbook
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Sportsbook
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee dropdown
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]    # Select licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee dropdown
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    id=submit-button
+    \    Sleep    0.5s
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for Number game
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Number Game
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Number Game
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    Number Game
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    Number Game
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for BA
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for BA
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Customer wl,BA Comm, Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    BA
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    BA
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    BA
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${Customerwl}    ${BAComm}    ${Amount}    get data of licensee on excel file for ba    ${filename}    ${licensee}
+    \    ${Customerwl_settlement}    Get Text    xpath=(//td[@class='ralign col-grand-total padding-right'])[2]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${BAComm_settlement}    Get Text    xpath=(//td[@class='ralign col-grand-total padding-right'])[3]    #BA Comm
+    \    ${BAComm_settlement}    remove string    ${BAComm_settlement}    ,
+    \    ${Amount_settlement}    Get Text    xpath=(//td[@class='ralign col-grand-total padding-right'])[4]    #Amount
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${BAComm}    ${BAComm_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for Live Casino
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Live Casino
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Live Casino
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    Live Casino
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    Live Casino
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for Virtual Sports
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Virtual Sports
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Virtual Sports
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    Virtual Sports
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    Virtual Sports
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for RNG Casino
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for RNG Casino
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    RNG Casino
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    RNG Casino
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    RNG Casino
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for Keno
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Keno
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Keno
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    Keno
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    Keno
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for AG Casino
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for AG Casino
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    AG Casino
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    AG Casino
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    AG Casino
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for Gold Deluxe
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Gold Deluxe
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Gold Deluxe
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    Gold Deluxe
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    Gold Deluxe
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for Macau
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Macau
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Macau
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    Macau
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    Macau
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for Microgaming Live Casino
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Microgaming-Live Casino
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Microgaming-Live Casino
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - Live Casino
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - Live Casino
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+
+compare settlement report for Microgaming RNG Casino
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Microgaming-RNG Casino
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Microgaming-RNG Casino
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    # Click on 1st licensee available for product
+    ${licensee}    get from list    ${l}    0
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    # Select product
+    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - RNG Casino
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - RNG Casino
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}

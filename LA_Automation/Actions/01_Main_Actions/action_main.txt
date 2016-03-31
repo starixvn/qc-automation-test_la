@@ -8,6 +8,8 @@ Library           Dialogs
 Library           Process
 Resource          ../../Interfaces/01_Main_Interfaces/interface_login.txt
 Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
+Resource          ../../Interfaces/08_LRF_page/interface_lrf_login.txt
+Resource          ../../Interfaces/07_Invoice/interface_settlement_report.txt
 
 *** Keywords ***
 config
@@ -20,11 +22,18 @@ config
     Set Suite Variable    ${cf_browser}    ff
     Set Suite Variable    ${cf_ff_profile_dir}    C:\\firefox_profile
     Set Suite Variable    ${cf_url}    http://58.86.55.10:8090/Auth/Login/
+    Set Suite Variable    ${cf_lrf_url}    http://internal.amazzu.com/    #LRF
     Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
     # Set Global Variables
-    Set Suite Variable    ${cf_username}    starix09
-    Set Suite Variable    ${cf_password}    123QWEasd
+    Set Suite Variable    ${cf_username}    starix10111
+    Set Suite Variable    ${cf_password}    11111
+    # Set Global Variables    LRF
+    Set Suite Variable    ${cf_lrf_username}    pgm1111
+    Set Suite Variable    ${cf_lrf_password}    111111
+    Set Suite Variable    ${cf_lrf_static_capcha}    1710
+    # Set path data set
+    Set Suite Variable    ${DeclareProductforLicensees}    Data Set\\DeclareProductforLicensees.xls
 
 config local
     # Set Timing
@@ -107,6 +116,31 @@ click element on report
     ...    click element on report | ${element}
     Wait Until Element Is Visible    ${clicked element}
     Click Element    ${clicked element}
+
+check value equal
+    [Arguments]    ${value1}    ${value2}
+    ${result}    ${error}    Run Keyword And Ignore Error    Should Be Equal    ${value1}    ${value2}
+    ${contain}    Set Variable If    '${result}'=='PASS'    True    False
+    Run Keyword If    '${contain}'=='False'    Run Keyword And Continue On Failure    Fail    Value 1 is ${value1}, but value 2 is ${value2} . So 2 values are not Equal. Please help check again
+    Run Keyword If    '${contain}'=='False'    Capture Page Screenshot
+
+check value equal with approximation
+    [Arguments]    ${value1}    ${value2}
+    ${result}    Evaluate    ${value1}-${value2}
+    ${status}    Evaluate    -1<${result}<1
+    Run Keyword If    '${status}'=='False'    Run Keyword And Continue On Failure    Fail    Value 1 is ${value1}, but value 2 is ${value2} . So 2 values are not Equal. Please help check again
+    Run Keyword If    '${status}'=='False'    Capture Page Screenshot
+
+does control exist
+    [Arguments]    ${ag_control}
+    ${exist}    Run Keyword And Return Status    Page Should Contain Element    ${ag_control}
+    [Return]    ${exist}    # True | False
+
+does value equal
+    [Arguments]    ${value1}    ${value2}
+    ${result}    ${error}    Run Keyword And Ignore Error    Should Match    ${value1}    ${value2}
+    ${contain}    Set Variable If    '${result}'=='PASS'    True    False
+    [Return]    ${contain}    # True / False
 
 navigate menu
     [Arguments]    ${mainmenu}    ${submenu}
@@ -370,3 +404,9 @@ wait page loading
     [Documentation]    This action is used to wait for loading page disappear.
     ${ac_state}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'block')]
     Run Keyword If    '${ac_state}'=='True'    Wait Until Element Is Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'none')]    120s
+
+wait page settlement loading
+    : FOR    ${index}    IN RANGE    1    60
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    sleep    0.5s
+    \    Exit For Loop If    '${exist}'=='False'
