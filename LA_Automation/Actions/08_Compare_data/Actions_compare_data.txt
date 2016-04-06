@@ -12,16 +12,16 @@ Resource          actions_LRF.txt
 create dictionary file name for licensee winloss report
     [Arguments]    ${sportsbook}    ${racing}    ${numbergame}    ${ba}    ${livecasino}    ${virtualsports}
     ...    ${rngcasino}    ${keno}    ${agcasino}    ${golddeluxe}    ${macau}    ${microgaminglivecasino}
-    ...    ${microgamingrngcasino}
+    ...    ${microgamingrngcasino}    ${bettrade}
     [Documentation]    This keywork is used to get name of file for each of product as defination before
     ...
     ...    - Use keywork: Get From Dictionary ${dictionaryfilename} product
     ...
-    ...    - Product:Sportsbook=${filenamesportbook} Racing=${filenameracing} Number Game=${filenamenumbergame} BA=${filenameba} Live Casino=${filenamelc} Virtual Sports=${filenamevs} RNG Casino=${filenamerngcasino} Keno=${filenamekn} AG Casino=${filenameagcasino} Gold Deluxe=${filenamegd} Macau=${filenamemc} Microgaming-Live Casino=${filenamemlc} Microgaming-RNG Casino=${filenamemrngc}
+    ...    - Product:Sportsbook=${filenamesportbook} Racing=${filenameracing} Number Game=${filenamenumbergame} BA=${filenameba} Live Casino=${filenamelc} Virtual Sports=${filenamevs} RNG Casino=${filenamerngcasino} Keno=${filenamekn} AG Casino=${filenameagcasino} Gold Deluxe=${filenamegd} Macau=${filenamemc} Microgaming-Live Casino=${filenamemlc} Microgaming-RNG Casino=${filenamemrngc} Bet Trade=${filenamebettrade}
     ...
     ...    - Create file name for each of product based on defination and set them as Suite Variable
     ${fileindex}    Set Variable    0
-    ${filename}    get file name
+    ${filename}    get file name exported excel for Licensee WL
     #Sportsbook
     ${filenamesportbook}    Set Variable    ${filename}.xls
     # Racing
@@ -72,16 +72,19 @@ create dictionary file name for licensee winloss report
     ${fileindex}    Run Keyword If    '${microgamingrngcasino}'<>'None'    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamemrngc}    Set Variable    ${filename}(${fileindex}).xls
+    #Bettrade
+    ${bettradefile}    get file name exported excel for Bet Trade Win Loss
+    ${filenamebettrade}    Set Variable    ${bettradefile}.xls
     # Create dictionary for file name
     ${dictionaryfilename}    Create Dictionary    Sportsbook=${filenamesportbook}    Racing=${filenameracing}    Number Game=${filenamenumbergame}    BA=${filenameba}    Live Casino=${filenamelc}
     ...    Virtual Sports=${filenamevs}    RNG Casino=${filenamerngcasino}    Keno=${filenamekn}    AG Casino=${filenameagcasino}    Gold Deluxe=${filenamegd}    Macau=${filenamemc}
-    ...    Microgaming-Live Casino=${filenamemlc}    Microgaming-RNG Casino=${filenamemrngc}
+    ...    Microgaming-Live Casino=${filenamemlc}    Microgaming-RNG Casino=${filenamemrngc}    Bet Trade=${filenamebettrade}
     Set Suite Variable    ${dictionaryfilename}
 
 Export excel for all of seperated product
     [Arguments]    ${sportsbook}    ${racing}    ${numbergame}    ${ba}    ${livecasino}    ${virtualsports}
     ...    ${rngcasino}    ${keno}    ${agcasino}    ${golddeluxe}    ${macau}    ${microgaminglivecasino}
-    ...    ${microgamingrngcasino}
+    ...    ${microgamingrngcasino}    ${bettrade}
     [Documentation]    This keywork is used to export excel file for each particular product if set Yes (if any product is declared as None, it will be not export):
     ...
     ...    -1 Delete all files from C:/Test Data
@@ -108,7 +111,6 @@ Export excel for all of seperated product
     Run Keyword If    '${sportsbook}'<>'None'    Click Element    ${products_listbox}
     Run Keyword If    '${sportsbook}'<>'None'    Click Button    ${submit_button}
     Run Keyword If    '${sportsbook}'<>'None'    Click Element    ${export_to_excel_button}
-    Terminate All Processes
     # Get data for Racing    # Get data for Racing
     Run Keyword If    '${racing}'<>'None'    Click Element    ${products_listbox}
     Run Keyword If    '${racing}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
@@ -220,6 +222,12 @@ Export excel for all of seperated product
     Run Keyword If    '${microgamingrngcasino}'<>'None'    Click Button    ${submit_button}
     ${exit}    Run Keyword If    '${microgamingrngcasino}'<>'None'    does control exist    ${export_to_excel_button}
     Run Keyword If    '${exit}'=='True' and '${microgamingrngcasino}'<>'None'    Run Keyword If    '${exit}'=='True'    Click Element    ${export_to_excel_button}
+    # Get data for Bettrade
+    Run Keyword If    '${bettrade}'<>'None'    navigate menu    Win Loss Report    Bet Trade Win Loss
+    Run Keyword If    '${bettrade}'<>'None'    Click Button    ${submit_button}
+    sleep    0.5s
+    Run Keyword If    '${bettrade}'<>'None'    wait page settlement loading
+    Run Keyword If    '${bettrade}'<>'None'    Click Element    xpath=//*[@class='btn-export-excel']    # Click Export Excel button
 
 compare data between Licensee WinLoss and Win Loss By Product
     [Arguments]    ${sportsbook}    ${racing}    ${numbergame}    ${ba}    ${livecasino}    ${virtualsports}
@@ -355,5 +363,8 @@ select 1st licensee on lrf based on excel file
     \    ${licensee}    Read Cell Data By Coordinates    Data    0    ${index}    #Microgaming RNG Casino
     \    ${microgamingrngcasino}    Read Cell Data By Coordinates    Data    13    ${index}
     \    Exit For Loop If    '${microgamingrngcasino}'=='Yes'
+    \    ${licensee}    Read Cell Data By Coordinates    Data    0    ${index}    #Bettrade
+    \    ${bettradecol}    Read Cell Data By Coordinates    Data    14    ${index}
+    \    Exit For Loop If    '${bettradecol}'=='Yes'
     Set Suite Variable    ${suite_1stlicensee_row}    ${index}
     select licensee after login lrf    ${licensee}

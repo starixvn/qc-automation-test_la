@@ -12,7 +12,7 @@ Documentation     This suite is used to compare data from reports :
 ...               - Gold Deluxe
 ...               - Macau
 Suite Setup       config
-Suite Teardown
+Suite Teardown    Close Browser
 Library           Selenium2Library
 Library           String
 Library           OperatingSystem
@@ -108,28 +108,29 @@ TM_00_ST_Precondition_Declare Licensees for Products
     ...    Macau:12Bet,9bet,Allbetclub,Aoncash,BE7,GooBet,ITCBet,Macaubet,NBCbet,Q8bola,Unobet
     #. Define test data
     #    Configure Licensees for Settlement, LRF report    --Note: Get available name of Licensees in excel file
-    Set Suite Variable    ${suite_sportsbook_licensees}    368Cash    # Licensees available for SB    368Cash,3star88
-    Set Suite Variable    ${suite_racing_licensees}    All    # Not support for Settlement report
-    Set Suite Variable    ${suite_numbergame_licensees}    Avia,BE7    #Number Game    12Bet,368Cash,3star88,67BET,W88
-    Set Suite Variable    ${suite_ba_licensees}    Aoncash,asiabet88    #BA
-    Set Suite Variable    ${suite_livecasino_licensees}    368Cash,3star88,67BET    #Live Casino
-    Set Suite Variable    ${suite_virtualsports_licensees}    Q8bola,Senibet,SunGame    #Virtual Sports
-    Set Suite Variable    ${suite_rngcasino_licensees}    Allbetclub,Aoncash    #RNG Casino
-    Set Suite Variable    ${suite_keno_licensees}    Aoncash,BE7    #Keno
-    Set Suite Variable    ${suite_agcasino_licensees}    HonorW,ITCBet    #AG Casino
-    Set Suite Variable    ${suite_golddeluxe_licensees}    9bet,DUOLE    #Gold Deluxe
-    Set Suite Variable    ${suite_macau_licensees}    Allbetclub,Macaubet    #Macau
-    Set Suite Variable    ${suite_microgaminglivecasino_licensees}    None    #Microgaming Live Casino
-    Set Suite Variable    ${suite_microgamingrngcasino_licensees}    None    #Microgaming RNG Casino
+    Set Suite Variable    ${suite_sportsbook_licensees}    12Bet,Unobet,Zzun88    # Licensees available for SB    12Bet,Unobet,Zzun88    12Bet
+    Set Suite Variable    ${suite_racing_licensees}    All    # Not support for Settlement report    All    None
+    Set Suite Variable    ${suite_numbergame_licensees}    12Bet,Unobet,Zzun88    #Number Game    12Bet,Unobet,Zzun88    None
+    Set Suite Variable    ${suite_ba_licensees}    alog    #BA    alog    None
+    Set Suite Variable    ${suite_livecasino_licensees}    12Bet    #Live Casino    12Bet    None
+    Set Suite Variable    ${suite_virtualsports_licensees}    12Bet,Unobet,Zzun88    #Virtual Sports    12Bet,Unobet,Zzun88    None
+    Set Suite Variable    ${suite_rngcasino_licensees}    12Bet,Zzun88    #RNG Casino    12Bet,Zzun88    None
+    Set Suite Variable    ${suite_keno_licensees}    12Bet    #Keno    12Bet    None
+    Set Suite Variable    ${suite_agcasino_licensees}    12Bet    #AG Casino    12Bet    None
+    Set Suite Variable    ${suite_golddeluxe_licensees}    12Bet,Unobet    #Gold Deluxe    12Bet,Unobet    None
+    Set Suite Variable    ${suite_macau_licensees}    12Bet    #Macau    12Bet,Unobet    None
+    Set Suite Variable    ${suite_microgaminglivecasino_licensees}    None    #Microgaming Live Casino    None    None
+    Set Suite Variable    ${suite_microgamingrngcasino_licensees}    None    #Microgaming RNG Casino    None    None
+    Set Suite Variable    ${suite_bettrade_licensees}    asiabet88    #Bettrade    asiabet88    asiabet88
     # Get data for Licensee Winloss
     navigate menu    Win Loss Report    Licensee Win Loss
     #Export excel for all of seperated product
     Export excel for all of seperated product    ${suite_sportsbook_licensees}    ${suite_racing_licensees}    ${suite_numbergame_licensees}    ${suite_ba_licensees}    ${suite_livecasino_licensees}    ${suite_virtualsports_licensees}
     ...    ${suite_rngcasino_licensees}    ${suite_keno_licensees}    ${suite_agcasino_licensees}    ${suite_golddeluxe_licensees}    ${suite_macau_licensees}    ${suite_microgaminglivecasino_licensees}
-    ...    ${suite_microgamingrngcasino_licensees}
+    ...    ${suite_microgamingrngcasino_licensees}    ${suite_bettrade_licensees}
     create dictionary file name for licensee winloss report    ${suite_sportsbook_licensees}    ${suite_racing_licensees}    ${suite_numbergame_licensees}    ${suite_ba_licensees}    ${suite_livecasino_licensees}    ${suite_virtualsports_licensees}
     ...    ${suite_rngcasino_licensees}    ${suite_keno_licensees}    ${suite_agcasino_licensees}    ${suite_golddeluxe_licensees}    ${suite_macau_licensees}    ${suite_microgaminglivecasino_licensees}
-    ...    ${suite_microgamingrngcasino_licensees}
+    ...    ${suite_microgamingrngcasino_licensees}    ${suite_bettrade_licensees}
 
 TM_01_ST_Compate data LA_LicenseeWL_WLbProduct_SettlementRpt
     [Documentation]    This TM performs:

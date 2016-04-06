@@ -43,6 +43,7 @@ navigate left menu
     Run Keyword If    '${ac_status}'=='True'    Click Element    xpath=//td/a[contains(text(),'${submenu}') and contains(@href,'Forecast')]
     # Handle normal case
     Run Keyword If    '${ac_status}'!='True'    Click Element    xpath=//td/a[text()='${submenu}']
+    Capture Page Screenshot
     Unselect Frame
     wait page loading
 
@@ -112,8 +113,23 @@ submit filters for Virtual Sports on Licensee Win Loss report
     Click Element    xpath=//*[@id='SubmitButton']    # Click on Submit button
     wait lrf page loading
 
+submit filters for Bet Trade on Licensee Win Loss report
+    [Arguments]    ${firsttimes}
+    ${exit}    does control exist    xpath=//iframe[@id='main']
+    Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
+    Run Keyword If    '${firsttimes}'<>'Yes'    Click Element    xpath=.//img[@class='ui-daterangepicker-trigger']    #Click From Date
+    Run Keyword If    '${firsttimes}'<>'Yes'    Click Element    xpath=//a[text()='Last month']    # Select Last month
+    Run Keyword If    '${firsttimes}'<>'Yes'    Click Element    xpath=//input[@class='report-by-monthly']    # Select Monthly radio
+    Click Element    xpath=//span[@class='ui-multiselect-icon ui-multiselect-icon-triangle-1-s']    #Select product
+    Click Element    xpath=//*[@id='grid-products-multiselectHeaderCheckBox']    # Select All
+    Click Element    xpath=//*[@id='grid-products-multiselectHeaderCheckBox']    # Select All
+    Click Element    xpath=.//*[@id='BT']    # Select Bet Trade
+    Click Element    xpath=//span[@class='ui-multiselect-icon ui-multiselect-icon-triangle-1-s']    #Select product
+    Click Element    xpath=//*[@id='SubmitButton']    # Click on Submit button
+    wait lrf page loading
+
 get data LRF from Licensee Win Loss
-    [Documentation]    This report is used to get data (Turnover, Total Transaction, Customer W/L) from some reports with LA:
+    [Documentation]    This report is used to get data (Turnover, Total Transaction, Customer W/L) from some reports in LRF:
     ...
     ...    - Sportsbook
     ...
@@ -137,6 +153,20 @@ get data LRF from Licensee Win Loss
     ${CustomerWL_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[14]    # Customer W/L
     ${CustomerWL_LRF}    remove string    ${CustomerWL_LRF}    ,
     [Return]    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}
+
+get data LRF from Licensee Win Loss for Bet Trade product
+    [Documentation]    This report is used to get data (Actual Stake, Buy Back Amount, Total Transaction, Bet Trade Commission) from Licensee report for Bet trade
+    ${exit}    does control exist    xpath=//iframe[@id='main']
+    Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
+    ${ActualStake_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[7]    # Actual Stake
+    ${ActualStake_LRF}    remove string    ${ActualStake_LRF}    ,
+    ${BuyBackAmount_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[11]    #Buy Back Amount
+    ${BuyBackAmount_LRF}    remove string    ${BuyBackAmount_LRF}    ,
+    ${TotalTransaction}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[12]    # Total Transaction
+    ${TotalTransaction}    remove string    ${TotalTransaction}    ,
+    ${BetTradeCommission}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[19]    # Bet Trade Commission
+    ${BetTradeCommission}    remove string    ${BetTradeCommission}    ,
+    [Return]    ${ActualStake_LRF}    ${BuyBackAmount_LRF}    ${TotalTransaction}    ${BetTradeCommission}
 
 get data LRF from Win Loss By Products
     [Arguments]    ${product}
@@ -192,10 +222,35 @@ compare LRF Licensee WL by product with LA for Virtual Sports product
     ...    - Virtual Sports
     ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    get data LRF from Licensee Win Loss
     ${filename}    Get From Dictionary    ${dictionaryfilename}    ${product}
-    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}    ${licensee}
+    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}    ${licensee}
+    Log    Compare Total Trans licensee ${licensee} for Virtual Sports
     check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}
+    Log    Compare Turnover, licensee ${licensee} for Virtual Sports
     check value equal with approximation    ${Turnover}    ${Turnover_LRF}
+    Log    Compare Customer wl, licensee ${licensee} for Virtual Sports
     check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
+
+compare LRF Licensee WL by product with LA for Bet Trade product
+    [Arguments]    ${licensee}    ${product}
+    [Documentation]    This report is used to compare data (Turnover, Total Transaction, Customer W/L) from Licensee WL reports with LA for prouduct:
+    ...
+    ...    - Virtual Sports
+    ${ActualStake_LRF}    ${BuyBackAmount_LRF}    ${TotalTransaction_LRF}    ${BetTradeCommission_LRF}    get data LRF from Licensee Win Loss for Bet Trade product
+    Capture Page Screenshot
+    ${BTfilename}    Get From Dictionary    ${dictionaryfilename}    ${product}
+    ${TotalTrans}    ${ActualStake}    ${BuyBackAmt}    ${BetTradeCommission}    get data of licensee on bet trade win loss excel file    ${BTfilename}    ${licensee}
+    Capture Page Screenshot
+    Log    Compare Total Trans licensee ${licensee} for Bet Trade
+    check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}/2
+    Log    Compare Actual Stake for ${licensee}, Bet Trade
+    check value equal with approximation    ${ActualStake}    ${ActualStake_LRF}
+    Log    Compare Buy Back Amt for ${licensee} for Bet Trade
+    check value equal with approximation    ${BuyBackAmt}    ${BuyBackAmount_LRF}
+    Log    Compare Bet Trade Commission for Bet Trade, licensee ${licensee}
+    ${BetTradeCommission}    Evaluate    ${BetTradeCommission}*-3    # BT Comm: LA = 3/4 LRF
+    ${BetTradeCommission}    Evaluate    ${BetTradeCommission}/4    # BT Comm: LA = 3/4 LRF
+    check value equal with approximation    ${BetTradeCommission}    ${BetTradeCommission_LRF}    # BT Comm: LA = 3/4 LRF
+    Capture Page Screenshot
 
 compare LRF WL by product with LA
     [Arguments]    ${licensee}    ${product}
@@ -214,10 +269,14 @@ compare LRF WL by product with LA
     ...    - Keno
     ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    ${AmountDue_LRF}    get data LRF from Win Loss By Products    ${product}
     ${filename}    Get From Dictionary    ${dictionaryfilename}    ${product}
-    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}    ${licensee}
+    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}    ${licensee}
+    Log    Compare Total Trans, licensee ${licensee} for ${product}
     check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}
+    Log    Compare Turnover, licensee ${licensee} for ${product}
     check value equal with approximation    ${Turnover}    ${Turnover_LRF}
+    Log    Compare Customer wl, licensee ${licensee} for ${product}
     check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
+    Log    Compare Amount, licensee ${licensee} for ${product}
     check value equal with approximation    ${Amount}    ${AmountDue_LRF}
 
 compare LRF AG Casino GD Macau WL with LA
@@ -231,9 +290,12 @@ compare LRF AG Casino GD Macau WL with LA
     ...    - Macau WL
     ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    get data LRF from AGCasino GD Macau Win Loss report
     ${filename}    Get From Dictionary    ${dictionaryfilename}    ${product}
-    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file    ${filename}    ${licensee}
+    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}    ${licensee}
+    Log    Compare Total Trans, licensee ${licensee} for ${product}
     check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}
+    Log    Compare Turnover, licensee ${licensee} for ${product}
     check value equal with approximation    ${Turnover}    ${Turnover_LRF}
+    Log    Compare Customer wl, licensee ${licensee} for ${product}
     check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
 
 compare LRF licensee by product with LA for BA product
@@ -241,7 +303,9 @@ compare LRF licensee by product with LA for BA product
     ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    ${AmountDue_LRF}    get data LRF from Win Loss By Products    BA
     ${filename}    Get From Dictionary    ${dictionaryfilename}    BA
     ${Customerwl}    ${BAComm}    ${Amount}    get data of licensee on excel file for ba    ${filename}    ${licensee}
+    Log    Compare Customer wl, licensee ${licensee} for BA product
     check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
+    Log    Compare Amount, licensee ${licensee} for BA product
     check value equal with approximation    ${Amount}    ${AmountDue_LRF}
 
 compare LRF licensee by product with LA for Racing product
@@ -249,9 +313,13 @@ compare LRF licensee by product with LA for Racing product
     ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    ${AmountDue_LRF}    get data LRF from Win Loss By Products    Racing
     ${filename}    Get From Dictionary    ${dictionaryfilename}    Racing
     ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on excel file for racing    ${filename}    ${licensee}
+    Log    Compare Total Trans, licensee ${licensee} for Racing
     check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}
+    Log    Compare Turnover, licensee ${licensee} for Racing
     check value equal with approximation    ${Turnover}    ${Turnover_LRF}
+    Log    Compare Customer wl, licensee ${licensee} for Racing
     check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}
+    Log    Compare Amount, licensee ${licensee} for Racing
     check value equal with approximation    ${Amount}    ${AmountDue_LRF}
 
 Check data for 1st licensees
@@ -270,6 +338,8 @@ Check data for 1st licensees
     ...    - RNG Casino
     ...
     ...    - Keno
+    ...
+    ...    - Bettrade
     Open Excel    ${DeclareProductforLicensees}
     ${licensee}    Read Cell Data By Coordinates    Data    0    ${suite_1stlicensee_row}
     ${status_sportsbook}    Read Cell Data By Coordinates    Data    1    ${suite_1stlicensee_row}
@@ -285,6 +355,7 @@ Check data for 1st licensees
     ${status_macau}    Read Cell Data By Coordinates    Data    11    ${suite_1stlicensee_row}
     ${status_microgaminglivecasino}    Read Cell Data By Coordinates    Data    12    ${suite_1stlicensee_row}
     ${status_microgamingrngcasino}    Read Cell Data By Coordinates    Data    13    ${suite_1stlicensee_row}
+    ${status_bettrade}    Read Cell Data By Coordinates    Data    14    ${suite_1stlicensee_row}
     Run Keyword If    '${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes'    navigate left menu    REPORTS    Win Loss By Products
     Run Keyword If    '${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes'    submit filters for Win Loss By Products
     Run Keyword If    '${status_sportsbook}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Sportsbook
@@ -296,10 +367,13 @@ Check data for 1st licensees
     Run Keyword If    '${status_keno}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Keno
     Run Keyword If    '${status_microgaminglivecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-Live Casino
     Run Keyword If    '${status_microgamingrngcasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-RNG Casino
-    # Navigate to Virtual Sports    ----------
-    Run Keyword If    '${status_virtualsports}'=='Yes'    navigate left menu    REPORTS    Licensee Win Loss
+    # Navigate to Licensee WL to check Virtual Sports and Bettrade    ----------
+    Run Keyword If    '${status_virtualsports}'=='Yes' or '${status_bettrade}'=='Yes'    navigate left menu    REPORTS    Licensee Win Loss    # Navigate to Licensee WL if Virtual Sports or Bettrade available
     Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters for Virtual Sports on Licensee Win Loss report
     Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for Virtual Sports product    ${licensee}    Virtual Sports
+    #Bet Trade
+    Run Keyword If    '${status_bettrade}'=='Yes'    submit filters for Bet Trade on Licensee Win Loss report    ${status_virtualsports}    # Check If Virtual Sport is checked before, no need to submit date rage again
+    Run Keyword If    '${status_bettrade}'=='Yes'    compare LRF Licensee WL by product with LA for Bet Trade product    ${licensee}    Bet Trade
     # Navigate to AG Casino WL report
     Run Keyword If    '${status_agcasino}'=='Yes'    navigate left menu    REPORTS    AG Casino Win Loss
     Run Keyword If    '${status_agcasino}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    AG Casino
@@ -345,6 +419,7 @@ Check data for next licensees
     \    ${status_macau}    Read Cell Data By Coordinates    Data    11    ${index}
     \    ${status_microgaminglivecasino}    Read Cell Data By Coordinates    Data    12    ${index}
     \    ${status_microgamingrngcasino}    Read Cell Data By Coordinates    Data    13    ${index}
+    \    ${status_bettrade}    Read Cell Data By Coordinates    Data    14    ${index}
     \    Run Keyword If    ('${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_golddeluxe}'=='Yes' or '${status_macau}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes')    select licensees from dropdown then navigate to report    ${licensee}    Win Loss By Products
     \    Run Keyword If    ('${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_golddeluxe}'=='Yes' or '${status_macau}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes')    submit filters for Win Loss By Products
     \    Run Keyword If    '${status_sportsbook}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Sportsbook
@@ -356,10 +431,13 @@ Check data for next licensees
     \    Run Keyword If    '${status_keno}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Keno
     \    Run Keyword If    '${status_microgaminglivecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-Live Casino
     \    Run Keyword If    '${status_microgamingrngcasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-RNG Casino
-    \    Comment    Navigate to Virtual Sports
-    \    Run Keyword If    '${status_virtualsports}'=='Yes'    navigate left menu    REPORTS    Licensee Win Loss
+    \    Comment    # Navigate to Licensee WL to check Virtual Sports and Bettrade
+    \    Run Keyword If    '${status_virtualsports}'=='Yes' or '${status_bettrade}'=='Yes'    select licensees from dropdown then navigate to report    ${licensee}    Licensee Win Loss    # Navigate to Licensee WL if Virtual Sports or Bettrade available
     \    Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters for Virtual Sports on Licensee Win Loss report
     \    Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for Virtual Sports product    ${licensee}    Virtual Sports
+    \    Comment    Bet trade
+    \    Run Keyword If    '${status_bettrade}'=='Yes'    submit filters for Bet Trade on Licensee Win Loss report    ${status_virtualsports}    # Check If Virtual Sport is checked before, no need to submit date range again
+    \    Run Keyword If    '${status_bettrade}'=='Yes'    compare LRF Licensee WL by product with LA for Bet Trade product    ${licensee}    Bet Trade
     \    Comment    Navigate to AG Casino WL report
     \    Run Keyword If    '${status_agcasino}'=='Yes'    select licensees from dropdown then navigate to report    ${licensee}    AG Casino Win Loss
     \    Run Keyword If    '${status_agcasino}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    AG Casino
