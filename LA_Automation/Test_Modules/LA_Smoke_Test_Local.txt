@@ -334,8 +334,8 @@ TM_13_ST_OANDA Exchange Rate
     ${tm_fromdate}=    Get Time    \    NOW - 2d
     ${tm_todate}=    Get Time    \    NOW - 1d
     # 1. Navigate to Win Loss Report > Licensee Win Loss
-    Click Element    ${oanda_menu}
-    Comment    Go To    ${cf_url}ExchangeRate/Main
+    Comment    Click Element    ${oanda_menu}
+    Go To    ${cf_url}ExchangeRate/Main
     # 2. Select From and To date picker then click Submit button
     select date picker    From    ${tm_fromdate}
     select date picker    To    ${tm_todate}
