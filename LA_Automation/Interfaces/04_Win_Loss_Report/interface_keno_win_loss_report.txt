@@ -1,4 +1,4 @@
 *** Variables ***
 ${markets_listbox}    xpath=//select[@id='ddlMarket']    # Markets list box on Keno Win Loss report
 ${keno_winloss_report_table}    xpath=//table[@id='mainGrid']    # Report table of Keno Win Loss report
-${bettype_keno_listbox}    xpath=//select[@id='BetType']    # Bet Type list box on Keno Win Loss report
+${bettype_keno_listbox}    xpath=//select[@id='ddlBetType']    # Bet Type list box on Keno Win Loss report
