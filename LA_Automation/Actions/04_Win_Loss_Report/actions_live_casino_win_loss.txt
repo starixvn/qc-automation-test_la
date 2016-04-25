@@ -12,7 +12,7 @@ submit filters for live casino win loss
     # select Licensee
     select licensee in checkbox list    ${licensee}
     # select Date
-    select date    ${date option}    ${from date}    ${to date}
+    select date 2    ${date option}    ${from date}    ${to date}
     # select Game Type
     Run Keyword If    '${game type}'!='None'    Select From List By Label    ${game_type_listbox}    ${game type}
     # select Draw filter
