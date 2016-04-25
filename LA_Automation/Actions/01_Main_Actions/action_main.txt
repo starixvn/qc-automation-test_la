@@ -266,6 +266,21 @@ select date
     Run Keyword If    '${from date}'!='None'    select date picker    From    ${from date}
     Run Keyword If    '${to date}'!='None'    select date picker    To    ${to date}
 
+select date 2
+    [Arguments]    ${date option}    ${from date}='None'    ${to date}='None'
+    [Documentation]    This action is used to select date option from dropdown list.
+    ...
+    ...    ${date option} = *'Date Range'* or *'Today'* or *'Yesterday'* or *'Current Week'* or *'Last Week'* or *'Current Month'* or *'Last Month'* or *'Since Last Month'*
+    ...
+    ...    Example:
+    ...
+    ...    select date | Current Month
+    ...
+    ...    select date| Date Range | ${from date} | ${to date}
+    Run Keyword If    '${date option}'!='None'    Select From List By Label    ${date_listbox_keno}    ${date option}
+    Run Keyword If    '${from date}'!='None'    select date picker    From    ${from date}
+    Run Keyword If    '${to date}'!='None'    select date picker    To    ${to date}
+
 select draw filter
     [Arguments]    ${draw filter}
     [Documentation]    select draw filter | Normal
