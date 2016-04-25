@@ -168,8 +168,8 @@ TM_05_ST_Live Casino Win Loss
     ${tm_fromdate}=    Get Time    \    NOW - 7d
     ${tm_todate}=    Get Time    \    NOW - 1d
     # 1. Navigate to Win Loss Report > Live Casino Win Loss
-    navigate menu    Win Loss Report    Currency Win Loss
-    Comment    Go To    ${cf_url}CurrencyWinLoss/Main
+    navigate menu    Win Loss Report    Live Casino Win Loss
+    Comment    Go To    ${cf_url}LiveCasino/Main
     # 2. Select filters then click Submit button
     submit filters for live casino win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    None    No Draw
     ...    No
@@ -212,8 +212,8 @@ TM_07_ST_Licensee Performance
     ${tm_fromdate}    Get Time    \    NOW - 7d
     ${tm_todate}    Get Time    \    NOW - 1d
     # Navigate to Licensee Performance
-    navigate menu    Win Loss Report    Keno Win Loss
-    Comment    Go To    ${cf_url}Keno/Main
+    navigate menu    Performance    Licensee Performance
+    Comment    Go To    ${cf_url}Performance/LicenseePerformance
     #2. Submit Licensee Performance filters then clicking submit button
     submit filters for licensee performance summary    All    Date Range    ${tm_fromdate}    ${tm_todate}    All    EUR
     ...    Sportsbook    Normal    Yes

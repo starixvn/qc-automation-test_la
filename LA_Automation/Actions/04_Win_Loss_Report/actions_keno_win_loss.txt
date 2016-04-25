@@ -33,7 +33,7 @@ submit filters for keno win loss
     # select Licensee
     select licensee in checkbox list    ${licensee}
     # select Date
-    select date    ${date option}    ${from date}    ${to date}
+    select date 2    ${date option}    ${from date}    ${to date}
     # select Markets
     Run Keyword If    '${markets}'!='None'    Select From List By Label    ${markets_listbox}    ${markets}
     # select Bet Type
