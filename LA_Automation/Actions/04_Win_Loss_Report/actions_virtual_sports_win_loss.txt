@@ -12,7 +12,7 @@ submit filters for virtual sports win loss
     # select Licensee
     select licensee in checkbox list    ${licensee}
     # select Date
-    select date    ${date option}    ${from date}    ${to date}
+    select date 2    ${date option}    ${from date}    ${to date}
     # select Sports
     Run Keyword If    '${sports}'!='None'    Select From List By Label    ${sports_listbox}    ${sports}
     # select Bet Type
@@ -23,4 +23,11 @@ submit filters for virtual sports win loss
     select exclude test data    ${exclude test data}
     # click Submit button
     Click Button    ${submit_button}
+    wait page loading
+
+click licensee link on Virtual Sports win loss report
+    [Arguments]    ${row}
+    [Documentation]    click licensee link on win loss report | 1
+    Wait Until Element Is Visible    xpath=//*[@class='report-data-table']/tbody/tr['${row}']/td[@class='lalign party']/a    30s
+    Click Element    xpath=//*[@class='report-data-table']/tbody/tr['${row}']/td[@class='lalign party']/a
     wait page loading

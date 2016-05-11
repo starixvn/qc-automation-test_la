@@ -131,15 +131,15 @@ TM_03_ST_Number Game Win Loss
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${report_table_reports}
+    Element Should Be Visible    ${report_table_reports2}
     # VP. check export excel
-    check export excel function    NumberGameWinLoss*
+    check export excel function2    Number.Game.Win.Loss*
 
 TM_04_ST_Virtual Sports Win Loss
     # Define test data
     ${tm_fromdate}=    Get Time    \    NOW - 7d
     ${tm_todate}=    Get Time    \    NOW - 1d
-    ${tm_clicked_row}=    Set Variable    1
+    ${tm_clicked_row}=    Set Variable    2
     # 1. Navigate to Win Loss Report > Virtual Sports Win Loss
     navigate menu    Win Loss Report    Virtual Sports Win Loss
     # 2. Select filters then click Submit button
@@ -150,14 +150,14 @@ TM_04_ST_Virtual Sports Win Loss
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${report_table_reports}
+    Element Should Be Visible    ${report_table_reports2}
     # VP. check export excel
-    check export excel function    VirtualSport*
+    check export excel function2    Virtual.Sports.Win.Loss*
     # 3. Click 1st licensee link in report
-    click licensee link on win loss report    ${tm_clicked_row}
+    click licensee link on Virtual Sports win loss report    ${tm_clicked_row}
     # VP. Check licensee info show details
     ${tm_clicked_row}=    Convert To Integer    ${tm_clicked_row}
-    Element Should Be Visible    xpath=//table[@id='mainGrid']/tbody/tr[${tm_clicked_row+1}][not(contains(@style,'none'))]
+    Element Should Be Visible    xpath=//table[@class='report-data-table']/tbody/tr[${tm_clicked_row+1}][not(contains(@style,'none'))]
 
 TM_05_ST_Live Casino Win Loss
     # Define test data
@@ -173,15 +173,15 @@ TM_05_ST_Live Casino Win Loss
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${report_table_reports}
+    Element Should Be Visible    ${report_table_reports2}
     # VP. check export excel
-    check export excel function    LiveCasino*
+    check export excel function2    Live.Casino.Win.Loss*
 
 TM_06_ST_Keno Win Loss
     # Define test data
     ${tm_fromdate}=    Get Time    \    NOW - 7d
     ${tm_todate}=    Get Time    \    NOW - 1d
-    ${tm_clicked_row}=    Set Variable    1
+    ${tm_clicked_row}=    Set Variable    2
     # 1. Navigate to Win Loss Report > Keno Win Loss
     navigate menu    Win Loss Report    Keno Win Loss
     # 2. Select filters then click Submit button
@@ -192,14 +192,14 @@ TM_06_ST_Keno Win Loss
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${report_table_reports}
+    Element Should Be Visible    ${report_table_reports2}
     # VP. check export excel
-    check export excel function    Keno*
+    check export excel function2    Keno.Win.Loss*
     # 3. Click 1st licensee link in report
-    click licensee link on win loss report    ${tm_clicked_row}
+    click licensee link on win loss report2    ${tm_clicked_row}
     # VP. Check licensee info show details
     ${tm_clicked_row}=    Convert To Integer    ${tm_clicked_row}
-    Element Should Be Visible    xpath=//table[@id='mainGrid']/tbody/tr[${tm_clicked_row+1}][not(contains(@style,'none'))]
+    Element Should Be Visible    xpath=//table[@class='report-data-table']/tbody/tr[${tm_clicked_row+1}][not(contains(@style,'none'))]
 
 TM_07_ST_Licensee Performance
     #1. Define test data
@@ -350,6 +350,6 @@ TM_14_ST_Gold Deluxe Win Loss
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Wait Until Element Is Visible    ${gold_deluxe_report_table}    60s
+    Wait Until Element Is Visible    ${report_table_reports2}    60s
     # VP. check export excel
-    check export excel function    GoldDeluxe*
+    check export excel function2    Gold.Deluxe.Win.Loss*

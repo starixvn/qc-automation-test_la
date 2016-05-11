@@ -21,7 +21,7 @@ config
     # Set Browser & URL testing
     Set Suite Variable    ${cf_browser}    ff
     Set Suite Variable    ${cf_ff_profile_dir}    C:\\firefox_profile
-    Set Suite Variable    ${cf_url}    http://58.86.55.10:8090/Auth/Login/
+    Set Suite Variable    ${cf_url}    http://58.86.55.10:8090/Auth/Login/?ReturnUrl=%2f
     Set Suite Variable    ${cf_lrf_url}    http://internal.amazzu.com/    #LRF
     Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
@@ -86,6 +86,22 @@ check export excel function
     create test directory    ${cf_export_dir}
     # Click Export
     Click Element    ${export_to_excel_button}
+    # Check file existed
+    wait for export file    ${cf_export_dir}${checked file name}
+    File Should Exist    ${cf_export_dir}${checked file name}
+    Empty Directory    ${cf_export_dir}
+
+check export excel function2
+    [Arguments]    ${checked file name}
+    [Documentation]    This action is used to check Export To Excel function.
+    ...
+    ...    Example: Check file 'RunningBetList.xls' existed after exporting sucessfully. And exporting file need 5 seconds to be saved.
+    ...
+    ...    check export excel function | 5s | RunningBetList.xls
+    # Check to see Folder existed or not. If not, create folder
+    create test directory    ${cf_export_dir}
+    # Click Export
+    Click Element    ${export_to_excel_button2}
     # Check file existed
     wait for export file    ${cf_export_dir}${checked file name}
     File Should Exist    ${cf_export_dir}${checked file name}
@@ -277,7 +293,7 @@ select date 2
     ...    select date | Current Month
     ...
     ...    select date| Date Range | ${from date} | ${to date}
-    Run Keyword If    '${date option}'!='None'    Select From List By Label    ${date_listbox_keno}    ${date option}
+    Run Keyword If    '${date option}'!='None'    Select From List By Label    ${date_listbox2}    ${date option}
     Run Keyword If    '${from date}'!='None'    select date picker    From    ${from date}
     Run Keyword If    '${to date}'!='None'    select date picker    To    ${to date}
 

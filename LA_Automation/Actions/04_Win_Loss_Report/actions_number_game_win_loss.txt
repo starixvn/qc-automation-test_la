@@ -11,7 +11,7 @@ submit filters for number game win loss
     # select Licensee
     select licensee in checkbox list    ${licensee}
     # select Date
-    select date    ${date option}    ${from date}    ${to date}
+    select date 2    ${date option}    ${from date}    ${to date}
     # select Draw filter
     select draw filter    ${draw filter}
     # select Exclude Test Data

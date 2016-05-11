@@ -45,3 +45,10 @@ submit filters for keno win loss
     # click Submit button
     Click Button    ${submit_button}
     wait page loading
+
+click licensee link on win loss report2
+    [Arguments]    ${row}
+    [Documentation]    click licensee link on win loss report | 1
+    Wait Until Element Is Visible    xpath=//*[@class='report-data-table']/tbody/tr['${row}']/td[@class='lalign party']/a    30s
+    Click Element    xpath=//*[@class='report-data-table']/tbody/tr['${row}']/td[@class='lalign party']/a
+    wait page loading

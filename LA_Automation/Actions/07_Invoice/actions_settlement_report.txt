@@ -17,6 +17,7 @@ submit filters for settlement report
     Run Keyword If    '${currency}'!='None'    Select From List By Label    ${currency_listbox_settlement}    ${currency}
     Run Keyword If    '${exchange}'!='None'    Select From List By Label    ${exchange_listbox}    ${exchange}
     # select Show/Hide checkbox
+    Click Element    ${licensee_filter}
     Run Keyword If    '${showhide}'!='None'    Click Element    ${showhide_listbox}
     Run Keyword If    '${showhide}'=='All'    Select Checkbox    ${all_checkbox_showhide_listbox}
     Run Keyword If    '${showhide}'=='Customer Comm'    Select Checkbox    ${customer_comm_checkbox}
@@ -27,7 +28,7 @@ submit filters for settlement report
     Click Element    ${submit_button}
     # loading message of this report is special. Have to handle separately
     ${ac_status}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//div[contains(@class,'blockPage') and contains(text(),'Loading')]
-    :FOR    ${ac_index}    IN RANGE    1    30
+    : FOR    ${ac_index}    IN RANGE    1    30
     \    Run Keyword If    '${ac_status}'=='True'    Sleep    2s
     \    Run Keyword If    '${ac_status}'!='True'    Exit For Loop
     \    ${ac_status}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//div[contains(@class,'blockPage') and contains(text(),'Loading')]
