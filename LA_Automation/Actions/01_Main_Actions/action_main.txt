@@ -26,8 +26,8 @@ config
     Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
     # Set Global Variables
-    Set Suite Variable    ${cf_username}    starix101
-    Set Suite Variable    ${cf_password}    123QWEasd
+    Set Suite Variable    ${cf_username}    starix105
+    Set Suite Variable    ${cf_password}    32e2323
     # Set Global Variables    LRF
     Set Suite Variable    ${cf_lrf_username}    pgmwilliam
     Set Suite Variable    ${cf_lrf_password}    willhill123
