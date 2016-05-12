@@ -125,7 +125,7 @@ TM_03_ST_Number Game Win Loss
     ${tm_fromdate}=    Get Time    \    NOW - 7d
     ${tm_todate}=    Get Time    \    NOW - 1d
     # 1. Navigate to Win Loss Report > Number Game Win Loss
-    navigate menu    Win Loss Report    Currency Win Loss
+    navigate menu    Win Loss Report    Number Game Win Loss
     Comment    Go To    ${cf_url}CurrencyWinLoss/Main
     # 2. Select filters then click Submit button
     submit filters for number game win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    No Draw    No
@@ -144,7 +144,7 @@ TM_04_ST_Virtual Sports Win Loss
     ${tm_todate}=    Get Time    \    NOW - 1d
     ${tm_clicked_row}=    Set Variable    2
     # 1. Navigate to Win Loss Report > Virtual Sports Win Loss
-    navigate menu    Win Loss Report    Currency Win Loss
+    navigate menu    Win Loss Report    Virtual Sports Win Loss
     Comment    Go To    ${cf_url}CurrencyWinLoss/Main
     # 2. Select filters then click Submit button
     submit filters for virtual sports win loss    12Bet, Macaubet, IBC    Date Range    ${tm_fromdate}    ${tm_todate}    None    None
