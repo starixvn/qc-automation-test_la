@@ -146,11 +146,11 @@ get data LRF from Licensee Win Loss
     ...    - Keno
     ${exit}    does control exist    xpath=//iframe[@id='main']
     Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
-    ${Turnover_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[7]    # Turnover SB
+    ${Turnover_LRF}    Get Text    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[7]    # Turnover SB
     ${Turnover_LRF}    remove string    ${Turnover_LRF}    ,
-    ${TotalTransaction_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[13]    # Total Transaction
+    ${TotalTransaction_LRF}    Get Text    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[13]    # Total Transaction
     ${TotalTransaction_LRF}    remove string    ${TotalTransaction_LRF}    ,
-    ${CustomerWL_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[14]    # Customer W/L
+    ${CustomerWL_LRF}    Get Text    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[14]    # Customer W/L
     ${CustomerWL_LRF}    remove string    ${CustomerWL_LRF}    ,
     [Return]    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}
 
@@ -158,13 +158,13 @@ get data LRF from Licensee Win Loss for Bet Trade product
     [Documentation]    This report is used to get data (Actual Stake, Buy Back Amount, Total Transaction, Bet Trade Commission) from Licensee report for Bet trade
     ${exit}    does control exist    xpath=//iframe[@id='main']
     Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
-    ${ActualStake_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[7]    # Actual Stake
+    ${ActualStake_LRF}    Get Text    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[7]    # Actual Stake
     ${ActualStake_LRF}    remove string    ${ActualStake_LRF}    ,
-    ${BuyBackAmount_LRF}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[11]    #Buy Back Amount
+    ${BuyBackAmount_LRF}    Get Text    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[11]    #Buy Back Amount
     ${BuyBackAmount_LRF}    remove string    ${BuyBackAmount_LRF}    ,
-    ${TotalTransaction}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[12]    # Total Transaction
+    ${TotalTransaction}    Get Text    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[12]    # Total Transaction
     ${TotalTransaction}    remove string    ${TotalTransaction}    ,
-    ${BetTradeCommission}    Get Text    xpath=.//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[19]    # Bet Trade Commission
+    ${BetTradeCommission}    Get Text    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[19]    # Bet Trade Commission
     ${BetTradeCommission}    remove string    ${BetTradeCommission}    ,
     [Return]    ${ActualStake_LRF}    ${BuyBackAmount_LRF}    ${TotalTransaction}    ${BetTradeCommission}
 
@@ -187,13 +187,13 @@ get data LRF from Win Loss By Products
     ...    - Keno
     ${exit}    does control exist    xpath=//iframe[@id='main']
     Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
-    ${Turnover_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[contains(text(),'${product}')])[1]/following::td[1]    # Turnover SB
+    ${Turnover_LRF}    Get Text    xpath=(//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[contains(text(),'${product}')])[1]/following::td[1]    # Turnover SB
     ${Turnover_LRF}    remove string    ${Turnover_LRF}    ,
-    ${TotalTransaction_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[contains(text(),'${product}')])[1]/following::td[2]    # Total Transaction
+    ${TotalTransaction_LRF}    Get Text    xpath=(//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[contains(text(),'${product}')])[1]/following::td[2]    # Total Transaction
     ${TotalTransaction_LRF}    remove string    ${TotalTransaction_LRF}    ,
-    ${CustomerWL_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[contains(text(),'${product}')])[1]/following::td[3]    # Customer W/L
+    ${CustomerWL_LRF}    Get Text    xpath=(//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[contains(text(),'${product}')])[1]/following::td[3]    # Customer W/L
     ${CustomerWL_LRF}    remove string    ${CustomerWL_LRF}    ,
-    ${AmountDue_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')]/following::td[contains(text(),'${product}')])[1]/following::td[8]    # Amount Due
+    ${AmountDue_LRF}    Get Text    xpath=(//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[contains(text(),'${product}')])[1]/following::td[8]    # Amount Due
     ${AmountDue_LRF}    remove string    ${AmountDue_LRF}    ,
     [Return]    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    ${AmountDue_LRF}
 
@@ -207,11 +207,11 @@ get data LRF from AGCasino GD Macau Win Loss report
     ...    - Macau WL
     ${exit}    does control exist    xpath=//iframe[@id='main']
     Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
-    ${Turnover_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')])[1]/following::td[5]    # Turnover SB
+    ${Turnover_LRF}    Get Text    xpath=(//td[@class="group-EUR" and contains(text(),'Total in EUR')])[1]/following::td[5]    # Turnover SB
     ${Turnover_LRF}    remove string    ${Turnover_LRF}    ,
-    ${TotalTransaction_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')])[1]/following::td[6]    # Total Transaction
+    ${TotalTransaction_LRF}    Get Text    xpath=(//td[@class="group-EUR" and contains(text(),'Total in EUR')])[1]/following::td[6]    # Total Transaction
     ${TotalTransaction_LRF}    remove string    ${TotalTransaction_LRF}    ,
-    ${CustomerWL_LRF}    Get Text    xpath=(//td[@class="group-GBP" and contains(text(),'Total in GBP')])[1]/following::td[7]    # Customer W/L
+    ${CustomerWL_LRF}    Get Text    xpath=(//td[@class="group-EUR" and contains(text(),'Total in EUR')])[1]/following::td[7]    # Customer W/L
     ${CustomerWL_LRF}    remove string    ${CustomerWL_LRF}    ,
     [Return]    ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}
 
@@ -371,9 +371,9 @@ Check data for 1st licensees
     Run Keyword If    '${status_virtualsports}'=='Yes' or '${status_bettrade}'=='Yes'    navigate left menu    REPORTS    Licensee Win Loss    # Navigate to Licensee WL if Virtual Sports or Bettrade available
     Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters for Virtual Sports on Licensee Win Loss report
     Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for Virtual Sports product    ${licensee}    Virtual Sports
-    #Bet Trade
-    Run Keyword If    '${status_bettrade}'=='Yes'    submit filters for Bet Trade on Licensee Win Loss report    ${status_virtualsports}    # Check If Virtual Sport is checked before, no need to submit date rage again
-    Run Keyword If    '${status_bettrade}'=='Yes'    compare LRF Licensee WL by product with LA for Bet Trade product    ${licensee}    Bet Trade
+    Comment    #Bet Trade
+    Comment    Run Keyword If    '${status_bettrade}'=='Yes'    submit filters for Bet Trade on Licensee Win Loss report    ${status_virtualsports}    # Check If Virtual Sport is checked before, no need to submit date rage again
+    Comment    Run Keyword If    '${status_bettrade}'=='Yes'    compare LRF Licensee WL by product with LA for Bet Trade product    ${licensee}    Bet Trade
     # Navigate to AG Casino WL report
     Run Keyword If    '${status_agcasino}'=='Yes'    navigate left menu    REPORTS    AG Casino Win Loss
     Run Keyword If    '${status_agcasino}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    AG Casino
@@ -436,8 +436,8 @@ Check data for next licensees
     \    Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters for Virtual Sports on Licensee Win Loss report
     \    Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for Virtual Sports product    ${licensee}    Virtual Sports
     \    Comment    Bet trade
-    \    Run Keyword If    '${status_bettrade}'=='Yes'    submit filters for Bet Trade on Licensee Win Loss report    ${status_virtualsports}    # Check If Virtual Sport is checked before, no need to submit date range again
-    \    Run Keyword If    '${status_bettrade}'=='Yes'    compare LRF Licensee WL by product with LA for Bet Trade product    ${licensee}    Bet Trade
+    \    Comment    Run Keyword If    '${status_bettrade}'=='Yes'    submit filters for Bet Trade on Licensee Win Loss report    ${status_virtualsports}    # Check If Virtual Sport is checked before, no need to submit date range again
+    \    Comment    Run Keyword If    '${status_bettrade}'=='Yes'    compare LRF Licensee WL by product with LA for Bet Trade product    ${licensee}    Bet Trade
     \    Comment    Navigate to AG Casino WL report
     \    Run Keyword If    '${status_agcasino}'=='Yes'    select licensees from dropdown then navigate to report    ${licensee}    AG Casino Win Loss
     \    Run Keyword If    '${status_agcasino}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    AG Casino

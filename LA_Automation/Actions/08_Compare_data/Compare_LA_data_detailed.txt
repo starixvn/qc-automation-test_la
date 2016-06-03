@@ -42,31 +42,31 @@ get file name exported excel for Licensee WL
     \    Exit For Loop If    '${mm}'=='12'
     # set file name for Licensee Winloss
     : FOR    ${index}    IN RANGE    1    12
-    \    ${filename}    Run Keyword If    '${mm1}'=='December'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='December'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='December'
-    \    ${filename}    Run Keyword If    '${mm1}'=='January'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='January'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='January'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-29-${yyyy}.in.All.currencies.Base.GBP    #leap year
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-29-${yyyy}.in.All.currencies.Base.EUR    #leap year
     \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-28-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-28-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
-    \    ${filename}    Run Keyword If    '${mm1}'=='March'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='March'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='March'
-    \    ${filename}    Run Keyword If    '${mm1}'=='April'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='April'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='April'
-    \    ${filename}    Run Keyword If    '${mm1}'=='May'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='May'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='May'
-    \    ${filename}    Run Keyword If    '${mm1}'=='June'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='June'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='June'
-    \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='Agust'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='Semtemper'
-    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='October'
-    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.GBP
+    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='November'
     [Return]    ${filename}
 
@@ -127,13 +127,13 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='Agust'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    Bet.Trade.Win.Loss.from.${mm}.01.${yyyy}.to.${mm}.30.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='Semtemper'
-    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='October'
-    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    Bet.Trade.Win.Loss.from.${mm}.01.${yyyy}.to.${mm}.30.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='November'
     [Return]    ${filename}
 
@@ -709,15 +709,15 @@ compare settlement report for SportsBook
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee dropdown
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee dropdown
     Click Element    xpath=.//label[contains(text(),'${licensee}')]    # Select licensee
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee dropdown
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee dropdown
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    id=submit-button
     \    Sleep    0.5s
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -767,17 +767,17 @@ compare settlement report for Number game
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    Number Game
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Number Game
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -827,17 +827,17 @@ compare settlement report for BA
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    BA
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    BA
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -878,17 +878,17 @@ compare settlement report for Live Casino
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    Live Casino
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Live Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -938,17 +938,17 @@ compare settlement report for Virtual Sports
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    Virtual Sports
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Virtual Sports
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -998,17 +998,17 @@ compare settlement report for RNG Casino
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    RNG Casino
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    RNG Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1058,17 +1058,17 @@ compare settlement report for Keno
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    Keno
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Keno
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1118,17 +1118,17 @@ compare settlement report for AG Casino
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    AG Casino
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    AG Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1178,17 +1178,17 @@ compare settlement report for Gold Deluxe
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    Gold Deluxe
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Gold Deluxe
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1234,17 +1234,17 @@ compare settlement report for Macau
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    Macau
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Macau
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1294,17 +1294,17 @@ compare settlement report for Microgaming Live Casino
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    Microgaming - Live Casino
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - Live Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1350,17 +1350,17 @@ compare settlement report for Microgaming RNG Casino
     ${l}    Create List    @{words}
     # Click on 1st licensee available for product
     ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     # Select product
     Select From List By Label    xpath=.//select[@id='Product']    Microgaming - RNG Casino
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[@id='btn-expand-filter']    # Licensee
+    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - RNG Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
