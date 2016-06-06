@@ -12,7 +12,7 @@ Documentation     This suite is used to compare data from reports :
 ...               - Gold Deluxe
 ...               - Macau
 Suite Setup       config
-Suite Teardown
+Suite Teardown    Close Browser
 Library           Selenium2Library
 Library           String
 Library           OperatingSystem
