@@ -17,13 +17,13 @@ submit filters for settlement report
     Run Keyword If    '${currency}'!='None'    Select From List By Label    ${currency_listbox_settlement}    ${currency}
     Run Keyword If    '${exchange}'!='None'    Select From List By Label    ${exchange_listbox}    ${exchange}
     # select Show/Hide checkbox
-    Click Element    ${licensee_filter}
     Run Keyword If    '${showhide}'!='None'    Click Element    ${showhide_listbox}
-    Run Keyword If    '${showhide}'=='All'    Select Checkbox    ${all_checkbox_showhide_listbox}
-    Run Keyword If    '${showhide}'=='Customer Comm'    Select Checkbox    ${customer_comm_checkbox}
-    Run Keyword If    '${showhide}'=='Licensee Win Loss'    Select Checkbox    ${licensee_win_loss_checkbox}
-    Run Keyword If    '${showhide}'=='Licensee Comm'    Select Checkbox    ${licensee_comm_checkbox}
-    Run Keyword If    '${showhide}'=='Licensee Total'    Select Checkbox    ${licensee_total_checkbox}
+    Capture Page Screenshot
+    Run Keyword If    '${showhide}'=='All'    Click Element    ${all_checkbox_showhide_listbox}    #${all_checkbox_showhide_listbox}    xpath=//li[@class='ddcl__item expanded root level-0']/label[@class="ddci"]/input[@type='checkbox']
+    Run Keyword If    '${showhide}'=='Customer Comm'    Click Element    ${customer_comm_checkbox}
+    Run Keyword If    '${showhide}'=='Licensee Win Loss'    Click Element    ${licensee_win_loss_checkbox}
+    Run Keyword If    '${showhide}'=='Licensee Comm'    Click Element    ${licensee_comm_checkbox}
+    Run Keyword If    '${showhide}'=='Licensee Total'    Click Element    ${licensee_total_checkbox}
     # submit
     Click Element    ${submit_button}
     # loading message of this report is special. Have to handle separately

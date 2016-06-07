@@ -1,6 +1,6 @@
 *** Settings ***
 Suite Setup       config
-Suite Teardown    Close Browser
+Suite Teardown
 Library           Selenium2Library
 Library           String
 Library           OperatingSystem
@@ -62,7 +62,7 @@ TM_01_ST_Licensee Win Loss
     # VP. Check details report table
     Element Should Be Visible    ${report_table_reports}
     # VP. Clicked licensee should displayed on Licensee listbox filter
-    Element Should Be Visible    xpath=//*[@id='party-filter']/div/div[@class='control-header' and contains(text(),'${tm_licensee_drilldown}')]
+    Element Should Be Visible    xpath=.//*[@id='party-filter']/span[contains(text(),'${tm_licensee_drilldown}')]
     # 4. Click Back button
     Click Element    ${back_button}
     wait page loading

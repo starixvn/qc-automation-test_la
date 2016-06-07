@@ -3,7 +3,6 @@ Library           Selenium2Library
 Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
 Resource          ../../Interfaces/04_Win_Loss_Report/interface_general_win_loss_report.txt
 Resource          ../01_Main_Actions/action_main.txt
-Resource          ../../Interfaces/04_Win_Loss_Report/interface_livecasino_win_loss_report.txt
 
 *** Keywords ***
 submit filters for live casino win loss
@@ -15,7 +14,7 @@ submit filters for live casino win loss
     # select Date
     select date 2    ${date option}    ${from date}    ${to date}
     # select Game Type
-    Run Keyword If    '${game type}'!='None'    Select From List By Label    ${game_type_listbox2}    ${game type}
+    Run Keyword If    '${game type}'!='None'    Select From List By Label    ${game_type_listbox}    ${game type}
     # select Draw filter
     select draw filter    ${draw filter}
     # select Exclude Test Data

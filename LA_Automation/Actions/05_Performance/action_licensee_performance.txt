@@ -108,13 +108,13 @@ show licensee report column
     ...
     ...    show licensee report column | Turnover
     # Click 'All' to unselect checkboxes at the first time
-    Click Element    xpath=//*[@id='showHideColumn']/input
-    Wait Until Element Is Visible    id=showHideColumnHeaderCheckBox    10s
-    Click Element    id=showHideColumnHeaderCheckBox
+    Click Element    xpath=//*[@id='showHideColumn']/span
+    Wait Until Element Is Visible    xpath=//div[@class="ddci__text" and contains(text(),'All')]    10s
+    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'All')]
     # Select specific columns
-    Run Keyword If    '${columns}'=='All'    Click Element    id=showHideColumnHeaderCheckBox
+    Run Keyword If    '${columns}'=='All'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'All')]
     # Split and select column
     @{columns_list}=    Split String    ${columns}    ,${SPACE}
     : FOR    ${ELEMENT}    IN    @{columns_list}
     \    Run Keyword If    '${ELEMENT}'=='All'    Exit For Loop
-    \    Select Checkbox    xpath=//ul[starts-with(@class,'ui-multiselect-checkboxes')]//input[@value='${ELEMENT}']
+    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${ELEMENT}')]

@@ -26,8 +26,8 @@ config
     Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
     # Set Global Variables
-    Set Suite Variable    ${cf_username}    starix105    #    starix101    starix105
-    Set Suite Variable    ${cf_password}    32e2323    #    \    32e2323
+    Set Suite Variable    ${cf_username}    starix106    #    starix101    starix105
+    Set Suite Variable    ${cf_password}    azsxdc    #    32e2323
     # Set Global Variables    LRF
     Set Suite Variable    ${cf_lrf_username}    pgmwilliam
     Set Suite Variable    ${cf_lrf_password}    willhill123
@@ -190,7 +190,7 @@ select licensee in checkbox list
     Wait Until Element Is Visible    ${licensee_filter}
     Click Element    ${licensee_filter}
     # Uncheck all licensees
-    Click Element    ${licensee_uncheck_all}
+    Click Element    ${licensee_check_all}
     # Select licensees
     Run Keyword If    '${licensee}'=='All'    Click Element    ${licensee_check_all}
     # Split the licensee string
@@ -199,9 +199,9 @@ select licensee in checkbox list
     \    Log    element = ${ELEMENT}
     \    Run Keyword If    '${ELEMENT}'=='All'    Exit For Loop
     \    Comment    # mouse over the checkbox then select checkbox
-    \    ${ac_element_status}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//label[contains(text(),'${ELEMENT}')]/../../td/input
-    \    Run Keyword If    '${ac_element_status}'=='True'    Mouse Over    xpath=//label[contains(text(),'${ELEMENT}')]/../../td/input
-    \    Run Keyword If    '${ac_element_status}'=='True'    Select Checkbox    xpath=//label[contains(text(),'${ELEMENT}')]/../../td/input
+    \    ${ac_element_status}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//div[@class='ddci__text' and contains(text(),'${ELEMENT}')]
+    \    Run Keyword If    '${ac_element_status}'=='True'    Mouse Over    xpath=//div[@class='ddci__text' and contains(text(),'${ELEMENT}')]
+    \    Run Keyword If    '${ac_element_status}'=='True'    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'${ELEMENT}')]
 
 select licensee in radio list
     [Arguments]    ${licensee}
@@ -214,8 +214,8 @@ select licensee in radio list
     Wait Until Element Is Visible    ${licensee_filter}
     Click Element    ${licensee_filter}
     # Click licensee radio button
-    Focus    xpath=//td/input[@type='radio' and contains(@data-child-name,'${licensee}')]
-    Click Element    xpath=//td/input[@type='radio' and contains(@data-child-name,'${licensee}')]
+    Focus    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]
+    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]
 
 select date picker
     [Arguments]    ${date type}    ${date}    # ${date type} = From OR To
@@ -336,15 +336,15 @@ select products filter
     ${BA}=    Run Keyword And Return Status    Should Contain    ${product}    BA
     ${CS}=    Run Keyword And Return Status    Should Contain    ${product}    RNG Casino
     Click Element    ${products_listbox}
-    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${product}'=='All'    Select Checkbox    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${SB}'=='True'    Select Checkbox    xpath=//*[@id='product-SB']
-    Run Keyword If    '${RB}'=='True'    Select Checkbox    xpath=//*[@id='product-RB']
-    Run Keyword If    '${NG}'=='True'    Select Checkbox    xpath=//*[@id='product-NG']
-    Run Keyword If    '${BA}'=='True'    Select Checkbox    xpath=//*[@id='product-BA']
-    Run Keyword If    '${LC}'=='True'    Select Checkbox    xpath=//*[@id='product-LC']
-    Run Keyword If    '${VS}'=='True'    Select Checkbox    xpath=//*[@id='product-VS']
-    Run Keyword If    '${CS}'=='True'    Select Checkbox    xpath=//*[@id='product-CS']
+    Wait Until Element Is Visible    xpath=//div[@class='ddci__text' and contains(text(),'All')]
+    Run Keyword If    '${product}'=='All'    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'All')]
+    Run Keyword If    '${SB}'=='True'    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'Sportsbook')]
+    Run Keyword If    '${RB}'=='True'    Click Element    xpath=//*[@id='product-RB']
+    Run Keyword If    '${NG}'=='True'    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'Number Game')]
+    Run Keyword If    '${BA}'=='True'    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'BA')]
+    Run Keyword If    '${LC}'=='True'    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'Live Casino')]
+    Run Keyword If    '${VS}'=='True'    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'Virtual Sports')]
+    Run Keyword If    '${CS}'=='True'    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'')]
 
 select products in radio list
     [Arguments]    ${products}
