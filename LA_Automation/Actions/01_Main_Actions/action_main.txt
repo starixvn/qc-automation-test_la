@@ -26,14 +26,15 @@ config
     Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
     # Set Global Variables
-    Set Suite Variable    ${cf_username}    starix101    #    starix101    starix105
-    Set Suite Variable    ${cf_password}    erfereege    #    32e2323
+    Set Suite Variable    ${cf_username}    starix106    #    starix101    starix101
+    Set Suite Variable    ${cf_password}    azsxdc    #    32e2323    erfereege
     # Set Global Variables    LRF
     Set Suite Variable    ${cf_lrf_username}    pgmwilliam
     Set Suite Variable    ${cf_lrf_password}    willhill123
     Set Suite Variable    ${cf_lrf_static_capcha}    1710
     # Set path data set
     Set Suite Variable    ${DeclareProductforLicensees}    Data Set\\DeclareProductforLicensees.xls
+    Set Suite Variable    ${Reconciliationlistfile}    Data Set\\Reconciliation list.xls
 
 config local
     # Set Timing
@@ -141,10 +142,10 @@ check value equal
     Run Keyword If    '${contain}'=='False'    Capture Page Screenshot
 
 check value equal with approximation
-    [Arguments]    ${value1}    ${value2}
+    [Arguments]    ${value1}    ${value2}    ${message}=None
     ${result}    Evaluate    ${value1}-${value2}
     ${status}    Evaluate    -1<${result}<1
-    Run Keyword If    '${status}'=='False'    Run Keyword And Continue On Failure    Fail    Value 1 is ${value1}, but value 2 is ${value2} . So 2 values are not Equal. Please help check again
+    Run Keyword If    '${status}'=='False'    Run Keyword And Continue On Failure    Fail    ${message}: Value 1 is ${value1}, value 2 is ${value2} . So FAIL. Please help check again
     Run Keyword If    '${status}'=='False'    Capture Page Screenshot
 
 does control exist
@@ -190,12 +191,16 @@ select licensee in checkbox list
     Wait Until Element Is Visible    ${licensee_filter}
     Click Element    ${licensee_filter}
     # Uncheck all licensees
-    Click Element    ${licensee_check_all}
+    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'All')]/parent::label/input[@type='checkbox']    #Get status of All checkbox
+    Run Keyword If    '${Allcheckboxstatus}'=='True'    Click Element    ${licensee_check_all}
+    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    ${licensee_check_all}
+    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    ${licensee_check_all}
     # Select licensees
     Run Keyword If    '${licensee}'=='All'    Click Element    ${licensee_check_all}
     # Split the licensee string
-    @{licensee_list}=    Split String    ${licensee}    ,${SPACE}
-    : FOR    ${ELEMENT}    IN    @{licensee_list}
+    ${licensee}    Remove String Using Regexp    ${licensee}    ${SPACE}
+    @{licensee_list}=    Split String    ${licensee}    ,
+    :FOR    ${ELEMENT}    IN    @{licensee_list}
     \    Log    element = ${ELEMENT}
     \    Run Keyword If    '${ELEMENT}'=='All'    Exit For Loop
     \    Comment    # mouse over the checkbox then select checkbox
@@ -441,3 +446,43 @@ wait page settlement loading
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
     \    Run Keyword If    '${exist}'=='True'    sleep    0.5s
     \    Exit For Loop If    '${exist}'=='False'
+
+get date format
+    [Arguments]    ${format}
+    ${yyyy}    ${mm}    Get Time    year,month
+    ${mm}    Convert To string    ${mm}
+    ${mm}    Evaluate    ${mm}-1
+    ${yyyy}    Convert To string    ${yyyy}
+    :FOR    ${index}    IN RANGE    0    1
+    \    ${mm1}    Run Keyword If    '${mm}'=='1'    Set Variable    Jan
+    \    Exit For Loop If    '${mm}'=='1'
+    \    ${mm1}    Run Keyword If    '${mm}'=='2'    Set Variable    Feb
+    \    Exit For Loop If    '${mm}'=='2'
+    \    ${mm1}    Run Keyword If    '${mm}'=='3'    Set Variable    Mar
+    \    Exit For Loop If    '${mm}'=='3'
+    \    ${mm1}    Run Keyword If    '${mm}'=='4'    Set Variable    April
+    \    Exit For Loop If    '${mm}'=='4'
+    \    ${mm1}    Run Keyword If    '${mm}'=='5'    Set Variable    May
+    \    Exit For Loop If    '${mm}'=='5'
+    \    ${mm1}    Run Keyword If    '${mm}'=='6'    Set Variable    June
+    \    Exit For Loop If    '${mm}'=='6'
+    \    ${mm1}    Run Keyword If    '${mm}'=='7'    Set Variable    July
+    \    Exit For Loop If    '${mm}'=='7'
+    \    ${mm1}    Run Keyword If    '${mm}'=='8'    Set Variable    Agust
+    \    Exit For Loop If    '${mm}'=='8'
+    \    ${mm1}    Run Keyword If    '${mm}'=='9'    Set Variable    Sep
+    \    Exit For Loop If    '${mm}'=='9'
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Oct
+    \    Exit For Loop If    '${mm}'=='10'
+    \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    Nov
+    \    Exit For Loop If    '${mm}'=='11'
+    \    ${mm1}    Run Keyword If    '${mm}'=='0'    Set Variable    Dec
+    \    Exit For Loop If    '${mm}'=='0'
+    :FOR    ${index}    IN RANGE    0    1
+    \    ${date}    Set Variable if    '${format}'=='yyyyMmm'    ${yyyy} ${mm1}
+    \    Exit For Loop If    '${format}'=='yyyyMmm'
+    \    ${date}    Set Variable if    '${format}'=='MMMYYY'    ${mm1} ${yyyy}
+    \    Exit For Loop If    '${format}'=='MMMYYY'
+    \    ${date}    Set Variable if    '${format}'=='Mmm'    ${mm1}
+    \    Exit For Loop If    '${format}'=='Mmm'
+    [Return]    ${date}

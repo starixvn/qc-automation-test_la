@@ -10,9 +10,6 @@ Resource          actions_LRF.txt
 
 *** Keywords ***
 create dictionary file name for licensee winloss report
-    [Arguments]    ${sportsbook}    ${racing}    ${numbergame}    ${ba}    ${livecasino}    ${virtualsports}
-    ...    ${rngcasino}    ${keno}    ${agcasino}    ${golddeluxe}    ${macau}    ${microgaminglivecasino}
-    ...    ${microgamingrngcasino}    ${bettrade}
     [Documentation]    This keywork is used to get name of file for each of product as defination before
     ...
     ...    - Use keywork: Get From Dictionary ${dictionaryfilename} product
@@ -25,66 +22,75 @@ create dictionary file name for licensee winloss report
     #Sportsbook
     ${filenamesportbook}    Set Variable    ${filename}.xls
     # Racing
-    ${fileindex}    Run Keyword If    '${racing}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_Racing_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenameracing}    Set Variable    ${filename}(${fileindex}).xls
     #Number game
-    ${fileindex}    Run Keyword If    '${numbergame}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_numbergame_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamenumbergame}    Set Variable    ${filename}(${fileindex}).xls
     #BA
-    ${fileindex}    Run Keyword If    '${ba}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_ba_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenameba}    Set Variable    ${filename}(${fileindex}).xls
     #Live Casino
-    ${fileindex}    Run Keyword If    '${livecasino}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_livecasino_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamelc}    Set Variable    ${filename}(${fileindex}).xls
     #Virtual Sports
-    ${fileindex}    Run Keyword If    '${virtualsports}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_virtualsports_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamevs}    Set Variable    ${filename}(${fileindex}).xls
     #RNG Casino
-    ${fileindex}    Run Keyword If    '${rngcasino}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_rngcasino_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamerngcasino}    Set Variable    ${filename}(${fileindex}).xls
     #Keno
-    ${fileindex}    Run Keyword If    '${keno}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_keno_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamekn}    Set Variable    ${filename}(${fileindex}).xls
     #AG Casino
-    ${fileindex}    Run Keyword If    '${agcasino}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_agcasino_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenameagcasino}    Set Variable    ${filename}(${fileindex}).xls
     #Gold Deluxe
-    ${fileindex}    Run Keyword If    '${golddeluxe}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_golddeluxe_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamegd}    Set Variable    ${filename}(${fileindex}).xls
     #Macau
-    ${fileindex}    Run Keyword If    '${macau}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_macau_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamemc}    Set Variable    ${filename}(${fileindex}).xls
     #Microgaming Live Casino
-    ${fileindex}    Run Keyword If    '${microgaminglivecasino}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_microgaminglivecasino_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamemlc}    Set Variable    ${filename}(${fileindex}).xls
     #Microgaming RNG Casino
-    ${fileindex}    Run Keyword If    '${microgamingrngcasino}'<>'None'    Evaluate    ${fileindex}+1
+    ${fileindex}    Run Keyword If    '${suite_microgamingrngcasino_licensees}'<>''    Evaluate    ${fileindex}+1
     ...    ELSE    Evaluate    ${fileindex}+0
     ${filenamemrngc}    Set Variable    ${filename}(${fileindex}).xls
-    #Bettrade
-    ${bettradefile}    get file name exported excel for Bet Trade Win Loss
-    ${filenamebettrade}    Set Variable    ${bettradefile}.xls
+    #Macau Games    ${suite_bettrade_licensees}
+    ${fileindex}    Run Keyword If    '${suite_macaugames_licensees}'<>''    Evaluate    ${fileindex}+1
+    ...    ELSE    Evaluate    ${fileindex}+0
+    ${filenamevb}    Set Variable    ${filename}(${fileindex}).xls
+    #Bettrade    by licensee
+    ${bettradefile}    Run Keyword If    '${suite_bettrade_licensees}'<>''    get file name exported excel for Bet Trade Win Loss    Licensee
+    ${filenamebettrade}    Set Variable If    '${suite_bettrade_licensees}'<>''    ${bettradefile}.xls
+    #Bettrade    Daily
+    ${bettradedailyfile}    Run Keyword If    '${suite_bettrade_licensees}'<>''    get file name exported excel for Bet Trade Win Loss    Daily
+    ${filenamebettradedaily}    Set Variable If    '${suite_bettrade_licensees}'<>''    ${bettradedailyfile}.xls
+    #Platform Win Loss
+    ${platformwlfile}    Run Keyword If    '${suite_platformwinloss}'<>''    get file name exported excel for Platfrom Win Loss
+    ${filenameplatformwl}    Set Variable If    '${suite_platformwinloss}'<>''    ${platformwlfile}.xls
     # Create dictionary for file name
     ${dictionaryfilename}    Create Dictionary    Sportsbook=${filenamesportbook}    Racing=${filenameracing}    Number Game=${filenamenumbergame}    BA=${filenameba}    Live Casino=${filenamelc}
     ...    Virtual Sports=${filenamevs}    RNG Casino=${filenamerngcasino}    Keno=${filenamekn}    AG Casino=${filenameagcasino}    Gold Deluxe=${filenamegd}    Macau=${filenamemc}
-    ...    Microgaming-Live Casino=${filenamemlc}    Microgaming-RNG Casino=${filenamemrngc}    Bet Trade=${filenamebettrade}
+    ...    Microgaming-Live Casino=${filenamemlc}    Microgaming-RNG Casino=${filenamemrngc}    Bet Trade=${filenamebettrade}    BetTrade=${filenamebettrade}    Macau Games=${filenamevb}    Platform Win Loss=${filenameplatformwl}
+    ...    Bettrade daily=${filenamebettradedaily}
     Set Suite Variable    ${dictionaryfilename}
+    log    ${dictionaryfilename}
 
 Export excel for all of seperated product
-    [Arguments]    ${sportsbook}    ${racing}    ${numbergame}    ${ba}    ${livecasino}    ${virtualsports}
-    ...    ${rngcasino}    ${keno}    ${agcasino}    ${golddeluxe}    ${macau}    ${microgaminglivecasino}
-    ...    ${microgamingrngcasino}    ${bettrade}
     [Documentation]    This keywork is used to export excel file for each particular product if set Yes (if any product is declared as None, it will be not export):
     ...
     ...    -1 Delete all files from C:/Test Data
@@ -99,140 +105,57 @@ Export excel for all of seperated product
     ...
     ...    -6 Loop from step 2-5
     Empty Directory    ${cf_export_dir}
-    # Exclude Credit Licensees
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]
-    Click Element    xpath=//label[contains(text(),'Credit Licensees')]    # Credit Licensees
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]
     # Get data for Sportsbook
-    Run Keyword If    '${sportsbook}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${sportsbook}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${sportsbook}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${sportsbook}'<>'None'    Click Element    xpath=//*[@id='product-SB']    #SB
-    Run Keyword If    '${sportsbook}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${sportsbook}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${sportsbook}'<>'None'    Click Element    ${export_to_excel_button}
-    # Get data for Racing    # Get data for Racing
-    Run Keyword If    '${racing}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${racing}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${racing}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${racing}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${racing}'<>'None'    Click Element    xpath=//*[@id='product-RB']    #RC
-    Run Keyword If    '${racing}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${racing}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${racing}'<>'None'    Click Element    ${export_to_excel_button}
-    # Get data for Number Game    # Get data for Number Game
-    Run Keyword If    '${numbergame}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${numbergame}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${numbergame}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${numbergame}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${numbergame}'<>'None'    Click Element    xpath=//*[@id='product-NG']    #Number Game
-    Run Keyword If    '${numbergame}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${numbergame}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${numbergame}'<>'None'    Click Element    ${export_to_excel_button}
-    # Get data for BA    # Get data for BA
-    Run Keyword If    '${ba}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${ba}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${ba}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${ba}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${ba}'<>'None'    Click Element    xpath=//*[@id='product-BA']    #BA
-    Run Keyword If    '${ba}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${ba}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${ba}'<>'None'    Click Element    ${export_to_excel_button}
-    # Get data for Live Casino    # Get data for Live Casino
-    Run Keyword If    '${livecasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${livecasino}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${livecasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${livecasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${livecasino}'<>'None'    Click Element    xpath=//*[@id='product-LC']    #LC
-    Run Keyword If    '${livecasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${livecasino}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${livecasino}'<>'None'    Click Element    ${export_to_excel_button}
-    # Get data for Virtual Sport    # Get data for Virtual Sport
-    Run Keyword If    '${virtualsports}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${virtualsports}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${virtualsports}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${virtualsports}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${virtualsports}'<>'None'    Click Element    xpath=//*[@id='product-VS']    #VS
-    Run Keyword If    '${virtualsports}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${virtualsports}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${virtualsports}'<>'None'    Click Element    ${export_to_excel_button}
-    # Get data for RNG Casino    # Get data for RNG Casino
-    Run Keyword If    '${rngcasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${rngcasino}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${rngcasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${rngcasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${rngcasino}'<>'None'    Click Element    xpath=//*[@id='product-CS']    #CS
-    Run Keyword If    '${rngcasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${rngcasino}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${rngcasino}'<>'None'    Click Element    ${export_to_excel_button}
-    # Get data for keno    # Get data for keno
-    Run Keyword If    '${keno}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${keno}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${keno}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${keno}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${keno}'<>'None'    Click Element    xpath=//*[@id='product-KN']    #Keno
-    Run Keyword If    '${keno}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${keno}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${keno}'<>'None'    Click Element    ${export_to_excel_button}
-    # Get data for AG Casino    # Get data for AG Casino
-    Run Keyword If    '${agcasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${agcasino}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${agcasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${agcasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${agcasino}'<>'None'    Click Element    xpath=//*[@id='product-AGC']    #AGC
-    Run Keyword If    '${agcasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${agcasino}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${agcasino}'<>'None'    Click Element    ${export_to_excel_button}
+    Run Keyword If    '${suite_sportsbook_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_sportsbook_licensees}    Sportsbook
+    # Get data for Racing
+    Run Keyword If    '${suite_Racing_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_Racing_licensees}    Racing
+    # Get data for Number Game
+    Run Keyword If    '${suite_numbergame_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_numbergame_licensees}    Number Game
+    # Get data for BA
+    Run Keyword If    '${suite_ba_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_ba_licensees}    BA
+    # Get data for Live Casino
+    Run Keyword If    '${suite_livecasino_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_livecasino_licensees}    Live Casino
+    # Get data for Virtual Sport
+    Run Keyword If    '${suite_virtualsports_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_virtualsports_licensees}    Virtual Sports
+    # Get data for RNG Casino
+    Run Keyword If    '${suite_rngcasino_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_rngcasino_licensees}    RNG Casino
+    # Get data for keno
+    Run Keyword If    '${suite_keno_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_keno_licensees}    Keno
+    # Get data for AG Casino
+    Run Keyword If    '${suite_agcasino_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_agcasino_licensees}    AG Casino
     # Get data for GD
-    Run Keyword If    '${golddeluxe}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${golddeluxe}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${golddeluxe}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${golddeluxe}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${golddeluxe}'<>'None'    Click Element    xpath=//*[@id='product-GD']    #GD
-    Run Keyword If    '${golddeluxe}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${golddeluxe}'<>'None'    Click Button    ${submit_button}
-    ${exit}    Run Keyword If    '${golddeluxe}'<>'None'    does control exist    ${export_to_excel_button}
-    Run Keyword If    '${exit}'=='True' and '${golddeluxe}'<>'None'    Click Element    ${export_to_excel_button}
-    # Get data for Macau    # Get data for Macau
-    Run Keyword If    '${macau}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${macau}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${macau}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${macau}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${macau}'<>'None'    Click Element    xpath=//*[@id='product-VG']    #Macau
-    Run Keyword If    '${macau}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${macau}'<>'None'    Click Button    ${submit_button}
-    Run Keyword If    '${macau}'<>'None'    Click Element    ${export_to_excel_button}
+    Run Keyword If    '${suite_golddeluxe_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_golddeluxe_licensees}    Gold Deluxe
+    # Get data for Macau
+    Run Keyword If    '${suite_macau_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_macau_licensees}    Macau
     # Get data for Microgaming Live Casino
-    Run Keyword If    '${microgaminglivecasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${microgaminglivecasino}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${microgaminglivecasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${microgaminglivecasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${microgaminglivecasino}'<>'None'    Click Element    xpath=//*[@id='product-MGCLC']    #MGCLC
-    Run Keyword If    '${microgaminglivecasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${microgaminglivecasino}'<>'None'    Click Button    ${submit_button}
-    ${exit}    Run Keyword If    '${microgaminglivecasino}'<>'None'    does control exist    ${export_to_excel_button}
-    Run Keyword If    '${exit}'=='True' and '${microgaminglivecasino}'<>'None'    Click Element    ${export_to_excel_button}
+    Run Keyword If    '${suite_microgaminglivecasino_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_microgaminglivecasino_licensees}    Microgaming - Live Casino
     # Get data for Microgaming RNG Casino
-    Run Keyword If    '${microgamingrngcasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${microgamingrngcasino}'<>'None'    Wait Until Element Is Visible    xpath=//*[@id='product-optionHeaderCheckBox']
-    Run Keyword If    '${microgamingrngcasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${microgamingrngcasino}'<>'None'    Click Element    xpath=//*[@id='product-optionHeaderCheckBox']    #All
-    Run Keyword If    '${microgamingrngcasino}'<>'None'    Click Element    xpath=//*[@id='product-MGCRNG']    #MGCRNG
-    Run Keyword If    '${microgamingrngcasino}'<>'None'    Click Element    ${products_listbox}
-    Run Keyword If    '${microgamingrngcasino}'<>'None'    Click Button    ${submit_button}
-    ${exit}    Run Keyword If    '${microgamingrngcasino}'<>'None'    does control exist    ${export_to_excel_button}
-    Run Keyword If    '${exit}'=='True' and '${microgamingrngcasino}'<>'None'    Run Keyword If    '${exit}'=='True'    Click Element    ${export_to_excel_button}
+    Run Keyword If    '${suite_microgamingrngcasino_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_microgamingrngcasino_licensees}    Microgaming - RNG Casino
+    # Macau Games
+    Run Keyword If    '${suite_macaugames_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_macaugames_licensees}    Macau Games
     # Get data for Bettrade
-    Run Keyword If    '${bettrade}'<>'None'    navigate menu    Win Loss Report    Bet Trade Win Loss
-    Run Keyword If    '${bettrade}'<>'None'    Click Button    ${submit_button}
+    # by.Licensee    Bet.Trade.Win.Loss.(by.Licensee).from.May.01.2016.to.May.31.2016.xls
+    Run Keyword If    '${suite_bettrade_licensees}'<>''    navigate menu    Win Loss Report    Bet Trade Win Loss
+    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Button    ${submit_button}
     sleep    0.5s
-    Run Keyword If    '${bettrade}'<>'None'    wait page settlement loading
-    Run Keyword If    '${bettrade}'<>'None'    Click Element    xpath=//*[@class='btn-export-excel']    # Click Export Excel button
+    Run Keyword If    '${suite_bettrade_licensees}'<>''    wait page settlement loading
+    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Element    ${export_to_excel_button}    # Click Export Excel button
+    # Daily    Bet.Trade.Win.Loss.(Daily).from.May.01.2016.to.May.31.2016.xls
+    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Element    xpath=.//*[@id='GroupByLicensee']
+    sleep    0.5s
+    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Button    ${submit_button}
+    Run Keyword If    '${suite_bettrade_licensees}'<>''    wait page settlement loading
+    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Element    ${export_to_excel_button}    # Click Export Excel button
+    # Get data for Platform Win Loss
+    Run Keyword If    '${suite_platformwinloss}'<>''    navigate menu    Misc    Platform Win Loss
+    sleep    1s
+    Run Keyword If    '${suite_platformwinloss}'<>''    select licensees Platform WL    ${suite_platformwinloss}
+    Run Keyword If    '${suite_platformwinloss}'<>''    Click Button    ${submit_button}
+    sleep    0.5s
+    Run Keyword If    '${suite_platformwinloss}'<>''    wait page settlement loading
+    Run Keyword If    '${suite_platformwinloss}'<>''    Click Element    ${export_to_excel_button}    # Click Export Excel button
 
 compare data between Licensee WinLoss and Win Loss By Product
-    [Arguments]    ${sportsbook}    ${racing}    ${numbergame}    ${ba}    ${livecasino}    ${virtualsports}
-    ...    ${rngcasino}    ${keno}    ${agcasino}    ${golddeluxe}    ${macau}    ${microgaminglivecasino}
-    ...    ${microgamingrngcasino}
     [Documentation]    This keywork is used to compare data between Win Loss by Product report with data from Excel file of Licensee Win loss report
     ...
     ...    - Navigate to Win Loss by Product report
@@ -242,53 +165,56 @@ compare data between Licensee WinLoss and Win Loss By Product
     ...    - Get data from particular excel files for each product then compare with data of Win Loss by Product report on site
     ...
     ...    - ** Data compare: Amount
+    ...
+    ...    - ** Bettrade is not available
     navigate menu    Win Loss Report    Win Loss by Product
     ${fileindex}    Set Variable    0
     Click Button    ${submit_button}
     sleep    5s
     ${filenamesportbook}    Get From Dictionary    ${dictionaryfilename}    Sportsbook
     #SportsBook
-    Run Keyword If    '${sportsbook}'<>'None'    compare winloss by product for sportsbook    ${filenamesportbook}
+    Run Keyword If    '${suite_sportsbook_licensees}'<>''    compare winloss by product for sportsbook    ${filenamesportbook}
     #Racing
     ${filenameracing}    Get From Dictionary    ${dictionaryfilename}    Racing
-    Run Keyword If    '${racing}'<>'None'    compare winloss by product for racing    ${filenameracing}
+    Run Keyword If    '${suite_Racing_licensees}'<>''    compare winloss by product for racing    ${filenameracing}
     #Number game
     ${filenamenumbergame}    Get From Dictionary    ${dictionaryfilename}    Number Game
-    Run Keyword If    '${numbergame}'<>'None'    compare winloss by product for number game    ${filenamenumbergame}
+    Run Keyword If    '${suite_numbergame_licensees}'<>''    compare winloss by product for number game    ${filenamenumbergame}
     #BA
     ${filenameba}    Get From Dictionary    ${dictionaryfilename}    BA
-    Run Keyword If    '${ba}'<>'None'    compare winloss by product for ba    ${filenameba}
+    Run Keyword If    '${suite_ba_licensees}'<>''    compare winloss by product for ba    ${filenameba}
     #Live Casino
     ${filenamelc}    Get From Dictionary    ${dictionaryfilename}    Live Casino
-    Run Keyword If    '${livecasino}'<>'None'    compare winloss by product for live casino    ${filenamelc}
+    Run Keyword If    '${suite_livecasino_licensees}'<>''    compare winloss by product for live casino    ${filenamelc}
     #Virtual Sports
     ${filenamevs}    Get From Dictionary    ${dictionaryfilename}    Virtual Sports
-    Run Keyword If    '${virtualsports}'<>'None'    compare winloss by product for virtual sports    ${filenamevs}
+    Run Keyword If    '${suite_virtualsports_licensees}'<>''    compare winloss by product for virtual sports    ${filenamevs}
     #RNG Casino
     ${filenamerngcasino}    Get From Dictionary    ${dictionaryfilename}    RNG Casino
-    Run Keyword If    '${rngcasino}'<>'None'    compare winloss by product for rng casino    ${filenamerngcasino}
+    Run Keyword If    '${suite_rngcasino_licensees}'<>''    compare winloss by product for rng casino    ${filenamerngcasino}
     #Keno
     ${filenamekn}    Get From Dictionary    ${dictionaryfilename}    Keno
-    Run Keyword If    '${keno}'<>'None'    compare winloss by product for keno    ${filenamekn}
+    Run Keyword If    '${suite_keno_licensees}'<>''    compare winloss by product for keno    ${filenamekn}
     #AG Casino
     ${filenameagcasino}    Get From Dictionary    ${dictionaryfilename}    AG Casino
-    Run Keyword If    '${agcasino}'<>'None'    compare winloss by product for ag casino    ${filenameagcasino}
+    Run Keyword If    '${suite_agcasino_licensees}'<>''    compare winloss by product for ag casino    ${filenameagcasino}
     #Gold Deluxe
     ${filenamegd}    Get From Dictionary    ${dictionaryfilename}    Gold Deluxe
-    Run Keyword If    '${golddeluxe}'<>'None'    compare winloss by product for gold deluxe    ${filenamegd}
+    Run Keyword If    '${suite_golddeluxe_licensees}'<>''    compare winloss by product for gold deluxe    ${filenamegd}
     #Macau
     ${filenamemc}    Get From Dictionary    ${dictionaryfilename}    Macau
-    Run Keyword If    '${macau}'<>'None'    compare winloss by product for macau    ${filenamemc}
+    Run Keyword If    '${suite_macau_licensees}'<>''    compare winloss by product for macau    ${filenamemc}
     #Microgaming Live Casino
     ${filenamemlc}    Get From Dictionary    ${dictionaryfilename}    Microgaming-Live Casino
-    Run Keyword If    '${microgaminglivecasino}'<>'None'    compare winloss by product for microgaming live casino    ${filenamemlc}
+    Run Keyword If    '${suite_microgamingrngcasino_licensees}'<>''    compare winloss by product for microgaming live casino    ${filenamemlc}
     #Microgaming RNG Casino
     ${filenamemrngc}    Get From Dictionary    ${dictionaryfilename}    Microgaming-RNG Casino
-    Run Keyword If    '${microgamingrngcasino}'<>'None'    compare winloss by product for microgaming rng casino    ${filenamemrngc}
+    Run Keyword If    '${suite_microgaminglivecasino_licensees}'<>''    compare winloss by product for microgaming rng casino    ${filenamemrngc}
+    #Voidbridge
+    ${filenamemacaugames}    Get From Dictionary    ${dictionaryfilename}    Macau Games
+    Run Keyword If    '${suite_macaugames_licensees}'<>''    compare winloss by product for macau games    ${filenamemacaugames}
 
 compare data between Licensee WinLoss and Settlement Report
-    [Arguments]    ${sportsbook}    ${numbergame}    ${ba}    ${livecasino}    ${virtualsports}    ${rngcasino}
-    ...    ${keno}    ${agcasino}    ${golddeluxe}    ${macau}    ${microgaminglivecasino}    ${microgamingrngcasino}
     [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report
     ...
     ...    - Navigate to Invoice / Settlement Report report
@@ -301,20 +227,21 @@ compare data between Licensee WinLoss and Settlement Report
     ...
     ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
     navigate menu    Invoice    Settlement Report
-    sleep    3s
     # Select Product: Sportsbook
-    Run Keyword If    '${sportsbook}'<>'None'    compare settlement report for SportsBook    ${sportsbook}
-    Run Keyword If    '${numbergame}'<>'None'    compare settlement report for number game    ${numbergame}
-    Run Keyword If    '${ba}'<>'None'    compare settlement report for BA    ${ba}
-    Run Keyword If    '${livecasino}'<>'None'    compare settlement report for Live Casino    ${livecasino}
-    Run Keyword If    '${virtualsports}'<>'None'    compare settlement report for Virtual Sports    ${virtualsports}
-    Run Keyword If    '${rngcasino}'<>'None'    compare settlement report for RNG Casino    ${rngcasino}
-    Run Keyword If    '${keno}'<>'None'    compare settlement report for Keno    ${keno}
-    Run Keyword If    '${agcasino}'<>'None'    compare settlement report for AG Casino    ${agcasino}
-    Run Keyword If    '${golddeluxe}'<>'None'    compare settlement report for Gold Deluxe    ${golddeluxe}
-    Run Keyword If    '${macau}'<>'None'    compare settlement report for Macau    ${macau}
-    Run Keyword If    '${microgaminglivecasino}'<>'None'    compare settlement report for Microgaming Live Casino    ${microgaminglivecasino}
-    Run Keyword If    '${microgamingrngcasino}'<>'None'    compare settlement report for Microgaming RNG Casino    ${microgamingrngcasino}
+    Run Keyword If    '${suite_sportsbook_licensees}'<>''    compare settlement report for SportsBook    ${suite_sportsbook_licensees}
+    Run Keyword If    '${suite_numbergame_licensees}'<>''    compare settlement report for number game    ${suite_numbergame_licensees}
+    Run Keyword If    '${suite_ba_licensees}'<>''    compare settlement report for BA    ${suite_ba_licensees}
+    Run Keyword If    '${suite_livecasino_licensees}'<>''    compare settlement report for Live Casino    ${suite_livecasino_licensees}
+    Run Keyword If    '${suite_virtualsports_licensees}'<>''    compare settlement report for Virtual Sports    ${suite_virtualsports_licensees}
+    Run Keyword If    '${suite_rngcasino_licensees}'<>''    compare settlement report for RNG Casino    ${suite_rngcasino_licensees}
+    Run Keyword If    '${suite_keno_licensees}'<>''    compare settlement report for Keno    ${suite_keno_licensees}
+    Run Keyword If    '${suite_agcasino_licensees}'<>''    compare settlement report for AG Casino    ${suite_agcasino_licensees}
+    Run Keyword If    '${suite_golddeluxe_licensees}'<>''    compare settlement report for Gold Deluxe    ${suite_golddeluxe_licensees}
+    Run Keyword If    '${suite_macau_licensees}'<>''    compare settlement report for Macau    ${suite_macau_licensees}
+    Run Keyword If    '${suite_microgaminglivecasino_licensees}'<>''    compare settlement report for Microgaming Live Casino    ${suite_microgaminglivecasino_licensees}
+    Run Keyword If    '${suite_microgamingrngcasino_licensees}'<>''    compare settlement report for Microgaming RNG Casino    ${suite_microgamingrngcasino_licensees}
+    Run Keyword If    '${suite_macaugames_licensees}'<>''    compare settlement report for Macau Games    ${suite_macaugames_licensees}
+    Comment    Run Keyword If    '${suite_bettrade_licensees}'<>''    compare settlement report for Bettrade    ${suite_bettrade_licensees}
 
 compare data between LA Lic WL with LRF reports
     # Check data for 1st licensees    Sportsbook, Racing, Number Game, Live Casino, Virtual Sports, RNG Casino, Keno
@@ -367,5 +294,118 @@ select 1st licensee on lrf based on excel file
     \    ${licensee}    Read Cell Data By Coordinates    Data    0    ${index}    #Bettrade
     \    ${bettradecol}    Read Cell Data By Coordinates    Data    14    ${index}
     \    Exit For Loop If    '${bettradecol}'=='Yes'
+    \    ${licensee}    Read Cell Data By Coordinates    Data    0    ${index}    #Macau Games
+    \    ${macaugames}    Read Cell Data By Coordinates    Data    15    ${index}
+    \    Exit For Loop If    '${macaugames}'=='Yes'
+    \    ${licensee}    Read Cell Data By Coordinates    Data    0    ${index}    #Platfrom Win Loss
+    \    ${platfromwl}    Read Cell Data By Coordinates    Data    16    ${index}
+    \    Exit For Loop If    '${platfromwl}'=='Yes'
     Set Suite Variable    ${suite_1stlicensee_row}    ${index}
     select licensee after login lrf    ${licensee}
+
+get data from Reconciliation list file by Match Month
+    [Arguments]    ${currencyLA}    ${sheet}    ${FROMrow}    ${TOrow}
+    Open Excel    ${Reconciliationlistfile}
+    : FOR    ${index}    IN RANGE    ${FROMrow}+2    ${TOrow}-1
+    \    ${currencyReconciliation}    Read Cell Data By Coordinates    ${sheet}    1    ${index}
+    \    ${BetTicketBettrade}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    2
+    \    ...    ${index}
+    \    ${BetTicketONEWorks}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    3
+    \    ...    ${index}
+    \    ${ActualStakeAmt}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    6
+    \    ...    ${index}
+    \    ${BuyBackAmtONEWorks}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    10
+    \    ...    ${index}
+    \    ${Win/LossONEWorks}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    12
+    \    ...    ${index}
+    \    ${ClientcommissionONEWorks}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    May 2016    16
+    \    ...    ${index}
+    \    Exit For Loop If    '${currencyLA}'=='${currencyReconciliation}'
+    [Return]    ${BetTicketBettrade}    ${BetTicketONEWorks}    ${ActualStakeAmt}    ${BuyBackAmtONEWorks}    ${Win/LossONEWorks}    ${ClientcommissionONEWorks}
+
+get data from Reconciliation list file by Match Date
+    [Arguments]    ${currencyLA}    ${sheet}    ${FROMrow}    ${TOrow}
+    ${startdate31}    Set Variable    31
+    ${startdate30}    Set Variable    30
+    ${startdate29}    Set Variable    29
+    ${startdate28}    Set Variable    28
+    : FOR    ${index}    IN RANGE    1    31
+    \    ${m1}    ${n1}    get range from excel    ${Reconciliationlistfile}    ${sheet}    0
+    \    ...    2016 May ${startdate31}    2016 May ${startdate}-1
+    \    compare bettrade detail by date    ${m1}    ${n1}
+    \    ${startdate31}    Evaluate    ${startdate31}-1
+    [Return]    ${BetTicketBettrade}    ${BetTicketONEWorks}    ${ActualStakeAmt}    ${BuyBackAmtONEWorks}    ${Win/LossONEWorks}    ${ClientcommissionONEWorks}
+
+Verify bettrade data for reconciliation list by Match Month
+    ${Reconciliationlist_sheetname}    get date format    MMMYYY
+    ${filenamesbettradedaily}    Get From Dictionary    ${dictionaryfilename}    Bettrade daily
+    ${TotalRow}    ${GrandTotalrow}    get range from excel    C:\\Test Data\\${filenamesbettradedaily}    Data    0    Total
+    ...    Grand Total
+    ${MatchMonthrow}    ${BroughtForwardNoterow}    get range from excel    ${Reconciliationlistfile}    ${Reconciliationlist_sheetname}    0    Match Month
+    ...    Brought Forward Note
+    # Get currency of Total field
+    : FOR    ${i}    IN RANGE    ${TotalRow}    ${GrandTotalrow}
+    \    Open Excel    C:\\Test Data\\${filenamesbettradedaily}
+    \    ${currencyLA}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${TotalTransLA}    Read Cell Data By Coordinates    Data    2    ${i}
+    \    ${ActualStakeLA}    Read Cell Data By Coordinates    Data    3    ${i}
+    \    ${BuyBackAmtTotalLA}    Read Cell Data By Coordinates    Data    6    ${i}
+    \    ${WinLossonBoughtTicketsLA}    Read Cell Data By Coordinates    Data    8    ${i}
+    \    ${BetTradeCommLA}    Read Cell Data By Coordinates    Data    9    ${i}
+    \    ${BetTicketBettrade}    ${BetTicketONEWorks}    ${ActualStakeAmt}    ${BuyBackAmtONEWorks}    ${Win/LossONEWorks}    ${ClientcommissionONEWorks}
+    \    ...    get data from Reconciliation list file by Match Month    ${currencyLA}    ${Reconciliationlist_sheetname}    ${MatchMonthrow}    ${BroughtForwardNoterow}
+    \    check value equal with approximation    ${TotalTransLA}    ${BetTicketBettrade}    Compare bettrade from LA and Reconciliation file for: Total Trans (LA) vs BetTicket Bettrade (Reconciliation), Currency: ${currencyLA},
+    \    check value equal with approximation    ${TotalTransLA}    ${BetTicketONEWorks}    Compare bettrade from LA and Reconciliation file for: Total Trans (LA) vs Bet Ticket ONEWorks (Reconciliation), Currency: ${currencyLA},
+    \    check value equal with approximation    ${ActualStakeLA}    ${ActualStakeAmt}    Compare bettrade from LA and Reconciliation file for: Actual Stake (LA) vs Actual Stake Amt (Reconciliation), Currency: ${currencyLA},
+    \    check value equal with approximation    ${BuyBackAmtTotalLA}    ${BuyBackAmtONEWorks}    Compare bettrade from LA and Reconciliation file for: Buy Back Amt Total (LA) vs Buy Back Amt ONEWorks (Reconciliation), Currency: ${currencyLA},
+    \    check value equal with approximation    ${WinLossonBoughtTicketsLA}    ${Win/LossONEWorks}    Compare bettrade from LA and Reconciliation file for: Win Loss on Bought Tickets (LA) vs Win/Loss ONEWorks (Reconciliation), Currency: ${currencyLA},
+    \    check value equal with approximation    ${BetTradeCommLA}    ${ClientcommissionONEWorks}    Compare bettrade from LA and Reconciliation file for: BetTrade Comm (LA) vs Client commission ONEWorks (Reconciliation), Currency: ${currencyLA},
+
+Verify bettrade data for reconciliation list by Match Date
+    Open Excel    C:\\Test Data\\Bet.Trade.Win.Loss.(Daily).from.May.01.2016.to.May.31.2016.xls
+    ${yyyy}    Get Time    yyyy
+    ${Mmm}    get date format    Mmm
+    ${m}    ${n}    get range from excel    C:\\Test Data\\Bet.Trade.Win.Loss.(Daily).from.May.01.2016.to.May.31.2016.xls    Data    0    Date
+    ...    Total
+    # Get row number of Total field
+    : FOR    ${i}    IN RANGE    1    32
+    \    ${a}    Read Cell Data By Coordinates    Data    0    ${m}
+    \    Run Keyword If    '${a}'=='May 01, 2016'    zzz
+    ${m}    Evaluate    ${m}+2
+    : FOR    ${i}    IN RANGE    ${m}    ${n}
+    \    ${a}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    Run Keyword If    '${a}'<>''    Append To List    ${list}
+    log    ${list}[15]
+    Comment    ${Reconciliationlist_sheetname}    get date format    MMMYYY
+    Comment    ${m}    ${n}    get range from excel    C:\\Test Data\\Bet.Trade.Win.Loss.(Daily).from.May.01.2016.to.May.31.2016.xls    Data    0
+    ...    May 01, 2016    May 02, 2016
+    Comment    : FOR    ${i}    IN RANGE    ${m}    ${n}-1
+    Comment    \    Open Excel    C:\\Test Data\\Bet.Trade.Win.Loss.(Daily).from.May.01.2016.to.May.31.2016.xls
+    Comment    \    ${currencyLA}    Read Cell Data By Coordinates    Data    1    ${i}
+    Comment    \    ${TotalTransLA}    Read Cell Data By Coordinates    Data    2    ${i}
+    Comment    \    ${ActualStakeLA}    Read Cell Data By Coordinates    Data    3    ${i}
+    Comment    \    ${BuyBackAmtTotalLA}    Read Cell Data By Coordinates    Data    6    ${i}
+    Comment    \    ${WinLossonBoughtTicketsLA}    Read Cell Data By Coordinates    Data    8    ${i}
+    Comment    \    ${BetTradeCommLA}    Read Cell Data By Coordinates    Data    9    ${i}
+    Comment    \    ${BetTicketBettrade}    ${BetTicketONEWorks}    ${ActualStakeAmt}    ${BuyBackAmtONEWorks}    ${Win/LossONEWorks}
+    ...    ${ClientcommissionONEWorks}    get data from Reconciliation list file by Match date    ${currencyLA}    ${Reconciliationlist_sheetname}    ${MatchMonthrow}    ${BroughtForwardNoterow}
+    Comment
+    Comment    ${MatchMonthrow}    ${BroughtForwardNoterow}    get range from excel    ${Reconciliationlistfile}    ${Reconciliationlist_sheetname}    0
+    ...    Match Month    Brought Forward Note
+    Comment    # Get currency of Total field
+    Comment    : FOR    ${i}    IN RANGE    ${TotalRow}    ${GrandTotalrow}
+    Comment    \    Open Excel    C:\\Test Data\\Bet.Trade.Win.Loss.(Daily).from.May.01.2016.to.May.31.2016.xls
+    Comment    \    ${currencyLA}    Read Cell Data By Coordinates    Data    1    ${i}
+    Comment    \    ${TotalTransLA}    Read Cell Data By Coordinates    Data    2    ${i}
+    Comment    \    ${ActualStakeLA}    Read Cell Data By Coordinates    Data    3    ${i}
+    Comment    \    ${BuyBackAmtTotalLA}    Read Cell Data By Coordinates    Data    6    ${i}
+    Comment    \    ${WinLossonBoughtTicketsLA}    Read Cell Data By Coordinates    Data    8    ${i}
+    Comment    \    ${BetTradeCommLA}    Read Cell Data By Coordinates    Data    9    ${i}
+    Comment    \    ${BetTicketBettrade}    ${BetTicketONEWorks}    ${ActualStakeAmt}    ${BuyBackAmtONEWorks}    ${Win/LossONEWorks}
+    ...    ${ClientcommissionONEWorks}    get data from Reconciliation list file by Match Month    ${currencyLA}    ${Reconciliationlist_sheetname}    ${MatchMonthrow}    ${BroughtForwardNoterow}
+    Comment    \    check value equal with approximation    ${TotalTransLA}    ${BetTicketBettrade}    Compare bettrade from LA and Reconciliation file for: Total Trans (LA) vs BetTicket Bettrade (Reconciliation), Currency: ${currencyLA},
+    Comment    \    check value equal with approximation    ${TotalTransLA}    ${BetTicketONEWorks}    Compare bettrade from LA and Reconciliation file for: Total Trans (LA) vs Bet Ticket ONEWorks (Reconciliation), Currency: ${currencyLA},
+    Comment    \    check value equal with approximation    ${ActualStakeLA}    ${ActualStakeAmt}    Compare bettrade from LA and Reconciliation file for: Actual Stake (LA) vs Actual Stake Amt (Reconciliation), Currency: ${currencyLA},
+    Comment    \    check value equal with approximation    ${BuyBackAmtTotalLA}    ${BuyBackAmtONEWorks}    Compare bettrade from LA and Reconciliation file for: Buy Back Amt Total (LA) vs Buy Back Amt ONEWorks (Reconciliation), Currency: ${currencyLA},
+    Comment    \    check value equal with approximation    ${WinLossonBoughtTicketsLA}    ${Win/LossONEWorks}    Compare bettrade from LA and Reconciliation file for: Win Loss on Bought Tickets (LA) vs Win/Loss ONEWorks (Reconciliation), Currency: ${currencyLA},
+    Comment    \    check value equal with approximation    ${BetTradeCommLA}    ${ClientcommissionONEWorks}    Compare bettrade from LA and Reconciliation file for: BetTrade Comm (LA) vs Client commission ONEWorks (Reconciliation), Currency: ${currencyLA},

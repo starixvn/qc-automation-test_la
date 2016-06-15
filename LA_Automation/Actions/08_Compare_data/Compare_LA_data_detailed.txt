@@ -8,9 +8,11 @@ get file name exported excel for Licensee WL
     ...
     ...    It's automatically create date range of Last Month and generate to file name
     ...
+    ...    Default currency is EUR
+    ...
     ...    - Ex:
     ...
-    ...    - LicenseeWinLoss.from.February-01-2016.to.February-29-2016.in.All.currencies.Base.GBP
+    ...    - LicenseeWinLoss.from.February-01-2016.to.February-29-2016.in.All.currencies.Base.EUR
     Comment    LicenseeWinLoss.from.February-01-2016.to.February-29-2016.in.All.currencies.Base.GBP
     ${yyyy}    ${mm}    Get Time    year,month
     ${mm}    Convert To string    ${mm}
@@ -71,6 +73,7 @@ get file name exported excel for Licensee WL
     [Return]    ${filename}
 
 get file name exported excel for Bet Trade Win Loss
+    [Arguments]    ${GroupBy}
     [Documentation]    This keywork is used to create NAME for exported excel from Bet Trade WL on LA:
     ...
     ...    It's automatically create date range of Last Month and generate to file name
@@ -107,35 +110,146 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm}'=='11'
     \    ${mm1}    Run Keyword If    '${mm}'=='12'    Set Variable    November
     \    Exit For Loop If    '${mm}'=='12'
-    # set file name for Licensee Winloss
+    # set file name for Bettrade Win Loss by Licensee
     : FOR    ${index}    IN RANGE    1    12
-    \    ${filename}    Run Keyword If    '${mm1}'=='December'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='December' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='December'
-    \    ${filename}    Run Keyword If    '${mm1}'=='January'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='January' \ and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='January'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}    #leap year
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016' \ and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}    #leap year
     \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016' \ and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}
     \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
-    \    ${filename}    Run Keyword If    '${mm1}'=='March'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='March' \ and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='March'
-    \    ${filename}    Run Keyword If    '${mm1}'=='April'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='April' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='April'
-    \    ${filename}    Run Keyword If    '${mm1}'=='May'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='May' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='May'
-    \    ${filename}    Run Keyword If    '${mm1}'=='June'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='June' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='June'
-    \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='July' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='Agust'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='Semtemper'
-    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='October'
-    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    Bet.Trade.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='November' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='November'
+    # set file name for Bettrade Win Loss by Licensee
+    : FOR    ${index}    IN RANGE    1    12
+    \    ${filename}    Run Keyword If    '${mm1}'=='December' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='December'
+    \    ${filename}    Run Keyword If    '${mm1}'=='January' \ and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='January'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016' \ and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}    #leap year
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016' \ and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
+    \    ${filename}    Run Keyword If    '${mm1}'=='March' \ and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='March'
+    \    ${filename}    Run Keyword If    '${mm1}'=='April' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='April'
+    \    ${filename}    Run Keyword If    '${mm1}'=='May' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='May'
+    \    ${filename}    Run Keyword If    '${mm1}'=='June' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='June'
+    \    ${filename}    Run Keyword If    '${mm1}'=='July' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='July'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='October'
+    \    ${filename}    Run Keyword If    '${mm1}'=='November' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='November'
     [Return]    ${filename}
+
+get file name exported excel for Platfrom Win Loss
+    [Documentation]    This keywork is used to create NAME for exported excel from Platfrom WL on LA:
+    ...
+    ...    It's automatically create date range of Last Month and generate to file name
+    ...
+    ...    - Ex:
+    ...
+    ...    - Platform.Win.Loss.from.May.01.2016.to.May.31.2016.in.EUR
+    Comment    Platform.Win.Loss.from.May.01.2016.to.May.31.2016.in.EUR
+    ${yyyy}    ${mm}    Get Time    year,month
+    ${mm}    Convert To string    ${mm}
+    ${yyyy}    Convert To string    ${yyyy}
+    : FOR    ${index}    IN RANGE    0    1
+    \    ${mm1}    Run Keyword If    '${mm}'=='01'    Set Variable    December
+    \    Exit For Loop If    '${mm}'=='01'
+    \    ${mm1}    Run Keyword If    '${mm}'=='02'    Set Variable    January
+    \    Exit For Loop If    '${mm}'=='02'
+    \    ${mm1}    Run Keyword If    '${mm}'=='03'    Set Variable    February
+    \    Exit For Loop If    '${mm}'=='03'
+    \    ${mm1}    Run Keyword If    '${mm}'=='04'    Set Variable    March
+    \    Exit For Loop If    '${mm}'=='04'
+    \    ${mm1}    Run Keyword If    '${mm}'=='05'    Set Variable    April
+    \    Exit For Loop If    '${mm}'=='05'
+    \    ${mm1}    Run Keyword If    '${mm}'=='06'    Set Variable    May
+    \    Exit For Loop If    '${mm}'=='06'
+    \    ${mm1}    Run Keyword If    '${mm}'=='07'    Set Variable    June
+    \    Exit For Loop If    '${mm}'=='07'
+    \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
+    \    Exit For Loop If    '${mm}'=='08'
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    Exit For Loop If    '${mm}'=='09'
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    Exit For Loop If    '${mm}'=='10'
+    \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
+    \    Exit For Loop If    '${mm}'=='11'
+    \    ${mm1}    Run Keyword If    '${mm}'=='12'    Set Variable    November
+    \    Exit For Loop If    '${mm}'=='12'
+    # set file name for Licensee Winloss
+    : FOR    ${index}    IN RANGE    1    12
+    \    ${filename}    Run Keyword If    '${mm1}'=='December'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='December'
+    \    ${filename}    Run Keyword If    '${mm1}'=='January'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='January'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}.in.EUR    #leap year
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
+    \    ${filename}    Run Keyword If    '${mm1}'=='March'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='March'
+    \    ${filename}    Run Keyword If    '${mm1}'=='April'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='April'
+    \    ${filename}    Run Keyword If    '${mm1}'=='May'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='May'
+    \    ${filename}    Run Keyword If    '${mm1}'=='June'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='June'
+    \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='July'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='October'
+    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='November'
+    [Return]    ${filename}
+
+select licensees Platform WL
+    [Arguments]    ${product}
+    [Documentation]    This keywork is used to count amount of available row of excel file then set it as suite variable
+    Wait Until Element Is Visible    ${licensee_filter}
+    Click Element    ${licensee_filter}    # Click Arrow V
+    Click Element    ${licensee_check_all}    # Uncheck All dropbox
+    #
+    ${count}    Get Match Count    ${product}    ,
+    @{words}    Split String    ${product}    ,
+    ${list}    Create List    @{words}
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${party}    get from list    ${list}    ${index}
+    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${party}')]
+    #
+    Click Element    ${licensee_filter}    # Click Arrow V
 
 count row of excel file
     [Arguments]    ${filename}    ${sheet}
@@ -235,6 +349,30 @@ get data of licensee on excel file for racing
     \    ...    ${i}    #Amount
     \    Exit For Loop If    '${contain}'=='True'
     [Return]    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}
+
+get data of platform win loss excel file
+    [Arguments]    ${licenseename}    ${row}    ${PlatformName}
+    ${t}    Set Variable    4
+    : FOR    ${r}    IN RANGE    4    ${row}
+    \    ${licensee}    Read Cell Data By Coordinates    Data    0    ${r}
+    \    ${t}    Run Keyword If    '${licensee}'=='${licenseename}'    Evaluate    ${t}+0
+    \    ...    ELSE    Evaluate    ${t}+1
+    \    Exit For Loop If    '${licensee}'=='${licenseename}'
+    ${TO_Asia}    Read Cell Data By Coordinates    Data    1    ${t}
+    ${TO_China}    Read Cell Data By Coordinates    Data    2    ${t}
+    ${TO_Euro}    Read Cell Data By Coordinates    Data    3    ${t}
+    ${TO_WAP}    Read Cell Data By Coordinates    Data    4    ${t}
+    ${TO_SP}    Read Cell Data By Coordinates    Data    5    ${t}
+    ${LicWL_Asia}    Read Cell Data By Coordinates    Data    6    ${t}
+    ${LicWL_China}    Read Cell Data By Coordinates    Data    7    ${t}
+    ${LicWL_Euro}    Read Cell Data By Coordinates    Data    8    ${t}
+    ${LicWL_WAP}    Read Cell Data By Coordinates    Data    9    ${t}
+    ${LicWL_SP}    Read Cell Data By Coordinates    Data    10    ${t}
+    ${Turnover}    Set Variable If    '${PlatformName}'=='Asia'    ${TO_Asia}    '${PlatformName}'=='China'    ${TO_China}    '${PlatformName}'=='Euro'
+    ...    ${TO_Euro}    '${PlatformName}'=='WAP'    ${TO_WAP}    '${PlatformName}'=='Smart Site'    ${TO_SP}
+    ${LicenseeWL}    Set Variable If    '${PlatformName}'=='Asia'    ${LicWL_Asia}    '${PlatformName}'=='China'    ${LicWL_China}    '${PlatformName}'=='Euro'
+    ...    ${LicWL_Euro}    '${PlatformName}'=='WAP'    ${LicWL_WAP}    '${PlatformName}'=='Smart Site'    ${LicWL_SP}
+    [Return]    ${Turnover}    ${LicenseeWL}
 
 compare winloss by product for sportsbook
     [Arguments]    ${filename}
@@ -691,6 +829,41 @@ compare winloss by product for microgaming rng casino
     \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
     \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
 
+compare winloss by product for macau games
+    [Arguments]    ${filename}
+    [Documentation]    This keywork is used to compare data between Win loss by Product and \ exported excel file for Macau Games
+    ...
+    ...    - Open exported excel file of Licensee WL for Macau Games
+    ...
+    ...    - Start loop with row of 1st licensee
+    ...
+    ...    - Get data from Amount column of file
+    ...
+    ...    - Get data from Win Loss by Product report on site for \ Macau Games
+    ...
+    ...    - Compare then return status
+    ...
+    ...    - Continue loops with next licensees
+    ...
+    ...    - ** Note: Make an exception case for AG licensee caused by it is belong to wildcard text with AG Casino Product
+    [Timeout]
+    Open Excel    C:\\Test Data\\${filename}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-11
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+5
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${amountLicWL}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${amountLicWL}    Convert To Number    ${amountLicWL}    0
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    Get Text    xpath=.//td[contains(text(),'${licenseenameLicWL}')]/following::td[14]    #Macau Games
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbP}    Run Keyword If    '${licenseenameLicWL}'<>'AG'    remove string    ${amountLicWLWLbP}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'<>'AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbP}
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    Get Text    xpath=(.//td[contains(text(),'${licenseenameLicWL}')]/following::td[14])[2]    #Macau Games for AG licensee
+    \    ...    # Exclude case: AG licensee is the same name with AG Casino column
+    \    ${amountLicWLWLbPforAG}    Run Keyword If    '${licenseenameLicWL}'=='AG'    remove string    ${amountLicWLWLbPforAG}    ,
+    \    Run Keyword If    '${licenseenameLicWL}'=='AG'    check value equal with approximation    ${amountLicWL}    ${amountLicWLWLbPforAG}
+
 compare settlement report for SportsBook
     [Arguments]    ${Licensees}
     [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Sportsbook
@@ -707,17 +880,18 @@ compare settlement report for SportsBook
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee dropdown
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]    # Select licensee
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee dropdown
+    Comment    # Click on 1st licensee available for product
+    Comment    ${licensee}    get from list    ${l}    0
+    Wait Until Element Is Visible    ${licensee_filter}
+    Comment    Click Element    ${licensee_filter}    # Licensee dropdown
+    Comment    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]    # Select licensee
+    Comment    Click Element    ${licensee_filter}    # Licensee dropdown
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Click Element    id=submit-button
     \    Sleep    0.5s
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -740,14 +914,10 @@ compare settlement report for SportsBook
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    Log    Compare Total Trans for ${licensee}, Sportsbook
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    Log    Compare Turnover for ${licensee}, Sportsbook
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    Log    Compare Customerwl for ${licensee}, Sportsbook
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    Log    Compare Amount for ${licensee}, Sportsbook
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Sportsbook
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Sportsbook
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Sportsbook
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Sportsbook
 
 compare settlement report for Number game
     [Arguments]    ${Licensees}
@@ -765,19 +935,13 @@ compare settlement report for Number game
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    Number Game
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Number Game
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -800,14 +964,10 @@ compare settlement report for Number game
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    Log    Compare Total Trans for ${licensee}
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    Log    Compare Turnover for ${licensee}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    Log    Compare Customerwl for ${licensee}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    Log    Compare Amount for ${licensee}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Number Game: Compare Total Trans for ${licensee}
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Number Game:Compare Turnover for ${licensee}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Number Game: Compare Customerwl for ${licensee}
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Number Game: Compare Amount for ${licensee}
 
 compare settlement report for BA
     [Arguments]    ${Licensees}
@@ -825,19 +985,13 @@ compare settlement report for BA
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    BA
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    BA
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -853,12 +1007,9 @@ compare settlement report for BA
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    Log    Compare Customerwl for ${licensee}, BA product
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    Log    Compare BA commission for ${licensee}, BA product
-    \    check value equal with approximation    ${BAComm}    ${BAComm_settlement}
-    \    Log    Compare Amount for ${licensee}, BA Product
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, BA product
+    \    check value equal with approximation    ${BAComm}    ${BAComm_settlement}    Compare BA commission for ${licensee}, BA product
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, BA Product
 
 compare settlement report for Live Casino
     [Arguments]    ${Licensees}
@@ -876,19 +1027,13 @@ compare settlement report for Live Casino
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    Live Casino
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Live Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -911,14 +1056,10 @@ compare settlement report for Live Casino
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    Log    Compare Total Trans for ${licensee}
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    Log    Compare Turnover for ${licensee}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    Log    Compare Customerwl for ${licensee}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    Log    Compare Amount for ${licensee}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Live Casino
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Live Casino
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Live Casino
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Live Casino
 
 compare settlement report for Virtual Sports
     [Arguments]    ${Licensees}
@@ -936,25 +1077,21 @@ compare settlement report for Virtual Sports
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    Virtual Sports
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Virtual Sports
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    Capture Page Screenshot
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -971,14 +1108,10 @@ compare settlement report for Virtual Sports
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    Log    Compare Total Trans for ${licensee}
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    Log    Compare Turnover for ${licensee}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    Log    Compare Customerwl for ${licensee}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    Log    Compare Amount for ${licensee}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Virtual Sports
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Virtual Sports
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Virtual Sports
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Virtual Sports
 
 compare settlement report for RNG Casino
     [Arguments]    ${Licensees}
@@ -996,25 +1129,21 @@ compare settlement report for RNG Casino
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    RNG Casino
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    RNG Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    Capture Page Screenshot
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -1031,14 +1160,10 @@ compare settlement report for RNG Casino
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    Log    Compare Total Trans for ${licensee}
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    Log    Compare Turnover for ${licensee}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    Log    Compare Customerwl for ${licensee}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    Log    Compare Amount for ${licensee}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, RNG Casino
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, RNG Casino
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, RNG Casino
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, RNG Casino
 
 compare settlement report for Keno
     [Arguments]    ${Licensees}
@@ -1056,19 +1181,14 @@ compare settlement report for Keno
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    Keno
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Keno
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1091,14 +1211,10 @@ compare settlement report for Keno
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    Log    Compare Total Trans for ${licensee}
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    Log    Compare Turnover for ${licensee}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    Log    Compare Customerwl for ${licensee}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    Log    Compare Amount for ${licensee}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Keno
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Keno
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Keno
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Keno
 
 compare settlement report for AG Casino
     [Arguments]    ${Licensees}
@@ -1116,19 +1232,14 @@ compare settlement report for AG Casino
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    AG Casino
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    AG Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1151,14 +1262,10 @@ compare settlement report for AG Casino
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    Log    Compare Total Trans for ${licensee}
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    Log    Compare Turnover for ${licensee}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    Log    Compare Customerwl for ${licensee}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    Log    Compare Amount for ${licensee}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, AG Casino
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, AG Casino
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, AG Casino
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, AG Casino
 
 compare settlement report for Gold Deluxe
     [Arguments]    ${Licensees}
@@ -1176,19 +1283,14 @@ compare settlement report for Gold Deluxe
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    Gold Deluxe
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Gold Deluxe
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1211,10 +1313,10 @@ compare settlement report for Gold Deluxe
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, GD
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, GD
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, GD
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, GD
 
 compare settlement report for Macau
     [Arguments]    ${Licensees}
@@ -1232,19 +1334,14 @@ compare settlement report for Macau
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    Macau
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Macau
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1267,14 +1364,10 @@ compare settlement report for Macau
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    Log    Compare Total Trans for ${licensee}
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    Log    Compare Turnover for ${licensee}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    Log    Compare Customerwl for ${licensee}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    Log    Compare Amount for ${licensee}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Macau
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Macau
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Macau
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Macau
 
 compare settlement report for Microgaming Live Casino
     [Arguments]    ${Licensees}
@@ -1292,19 +1385,14 @@ compare settlement report for Microgaming Live Casino
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - Live Casino
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - Live Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
@@ -1327,10 +1415,10 @@ compare settlement report for Microgaming Live Casino
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Microgaming-Live Casino
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Microgaming-Live Casino
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Microgaming-Live Casino
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Microgaming-Live Casino
 
 compare settlement report for Microgaming RNG Casino
     [Arguments]    ${Licensees}
@@ -1348,20 +1436,66 @@ compare settlement report for Microgaming RNG Casino
     ${count}    Get Match Count    ${Licensees}    ,
     @{words}    Split String    ${Licensees}    ,
     ${l}    Create List    @{words}
-    # Click on 1st licensee available for product
-    ${licensee}    get from list    ${l}    0
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    # Select product
-    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - RNG Casino
+    Wait Until Element Is Visible    ${licensee_filter}
     #
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
-    \    Click Element    xpath=.//label[contains(text(),'${licensee}')]
-    \    Click Element    xpath=.//*[@id='party-filter']/div/div[2]    # Licensee
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Microgaming - RNG Casino
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[11]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Microgaming-RNG Casino
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Microgaming-RNG Casino
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Microgaming-RNG Casino
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Microgaming-RNG Casino
+
+compare settlement report for Bettrade
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Microgaming-RNG Casino
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    BetTrade
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    Wait Until Element Is Visible    ${licensee_filter}
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    BetTrade
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
@@ -1383,7 +1517,281 @@ compare settlement report for Microgaming RNG Casino
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}
-    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Bet Trade
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Bet Trade
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Bet Trade
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Bet Trade
+
+compare settlement report for Macau Games
+    [Arguments]    ${Licensees}
+    [Documentation]    This keywork is used to compare data between Settlement Report report with data from Excel file of Licensee Win loss report for Macau Games
+    ...
+    ...    - Select Product from defination
+    ...
+    ...    - Select Licensees from defination
+    ...
+    ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
+    ...
+    ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
+    ${filename}    Get From Dictionary    ${dictionaryfilename}    Macau Games
+    # Get Licensees name from string
+    ${count}    Get Match Count    ${Licensees}    ,
+    @{words}    Split String    ${Licensees}    ,
+    ${l}    Create List    @{words}
+    Wait Until Element Is Visible    ${licensee_filter}
+    #
+    : FOR    ${index}    IN RANGE    0    ${count}+1
+    \    ${licensee}    get from list    ${l}    ${index}
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    ${licensee_filter}    # Licensee
+    \    Select From List By Label    xpath=.//select[@id='Product']    Macau Games
+    \    Click Element    id=submit-button
+    \    ${exist}    does control exist    ${icon_loading_settlementrpt}
+    \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
+    \    ...    ${licensee}
+    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
+    \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
+    \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Macau Games
+    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Macau Games
+    \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Macau Games
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Macau Games
+
+get string licensees for products from excel file
+    [Documentation]    This keyword is used to get information from DeclareProductforLicensees.xls excel file
+    ...
+    ...    It will create string of available licensees for each products
+    Open Excel    ${DeclareProductforLicensees}
+    ${rowcount}    Get Row Count    Data
+    ${AmoutofLic}    Evaluate    ${rowcount}-1
+    ${Sportsbook}    Set Variable
+    ${Racing}    Set Variable
+    ${Number Game}    Set Variable
+    ${BA}    Set Variable
+    ${Live Casino}    Set Variable
+    ${Virtual Sports}    Set Variable
+    ${RNG Casino}    Set Variable
+    ${Keno}    Set Variable
+    ${AG Casino}    Set Variable
+    ${Gold Deluxe}    Set Variable
+    ${Macau}    Set Variable
+    ${Microgaming Live Casino}    Set Variable
+    ${Microgaming RNG Casino}    Set Variable
+    ${Bettrade}    Set Variable
+    ${Macau Games}    Set Variable
+    ${Platform Win Loss}    Set Variable
+    #SportsBook
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    1    ${i}
+    \    ${Sportsbook}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Sportsbook},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Sportsbook}
+    ${suite_sportsbook_licensees}    Get Substring    ${Sportsbook}    1
+    Set Suite Variable    ${suite_sportsbook_licensees}
+    #Racing
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    2    ${i}
+    \    ${Racing}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Racing},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Racing}
+    ${suite_racing_licensees}    Get Substring    ${Racing}    1
+    Set Suite Variable    ${suite_racing_licensees}
+    #Number Game
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    3    ${i}
+    \    ${Number Game}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Number Game},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Number Game}
+    ${suite_numbergame_licensees}    Get Substring    ${Number Game}    1
+    Set Suite Variable    ${suite_numbergame_licensees}
+    #BA
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    4    ${i}
+    \    ${BA}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${BA},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${BA}
+    ${suite_ba_licensees}    Get Substring    ${BA}    1
+    Set Suite Variable    ${suite_ba_licensees}
+    #Live Casino
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    5    ${i}
+    \    ${Live Casino}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Live Casino},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Live Casino}
+    ${suite_livecasino_licensees}    Get Substring    ${Live Casino}    1
+    Set Suite Variable    ${suite_livecasino_licensees}
+    #Virtual Sports
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    6    ${i}
+    \    ${Virtual Sports}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Virtual Sports},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Virtual Sports}
+    ${suite_virtualsports_licensees}    Get Substring    ${Virtual Sports}    1
+    Set Suite Variable    ${suite_virtualsports_licensees}
+    #RNG Casino
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    7    ${i}
+    \    ${RNG Casino}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${RNG Casino},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${RNG Casino}
+    ${suite_rngcasino_licensees}    Get Substring    ${RNG Casino}    1
+    Set Suite Variable    ${suite_rngcasino_licensees}
+    #Keno
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    8    ${i}
+    \    ${Keno}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Keno},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Keno}
+    ${suite_keno_licensees}    Get Substring    ${Keno}    1
+    Set Suite Variable    ${suite_keno_licensees}
+    #AG Casino
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    9    ${i}
+    \    ${AG Casino}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${AG Casino},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${AG Casino}
+    ${suite_agcasino_licensees}    Get Substring    ${AG Casino}    1
+    Set Suite Variable    ${suite_agcasino_licensees}
+    #Gold Deluxe
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    10    ${i}
+    \    ${Gold Deluxe}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Gold Deluxe},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Gold Deluxe}
+    ${suite_golddeluxe_licensees}    Get Substring    ${Gold Deluxe}    1
+    Set Suite Variable    ${suite_golddeluxe_licensees}
+    #Macau
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    11    ${i}
+    \    ${Macau}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Macau},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Macau}
+    ${suite_macau_licensees}    Get Substring    ${Macau}    1
+    Set Suite Variable    ${suite_macau_licensees}
+    #Microgaming Live Casino
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    12    ${i}
+    \    ${Microgaming Live Casino}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Microgaming Live Casino},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Microgaming Live Casino}
+    ${suite_microgaminglivecasino_licensees}    Get Substring    ${Microgaming Live Casino}    1
+    Set Suite Variable    ${suite_microgaminglivecasino_licensees}
+    #Microgaming RNG Casino
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    13    ${i}
+    \    ${Microgaming RNG Casino}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Microgaming RNG Casino},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Microgaming RNG Casino}
+    ${suite_microgamingrngcasino_licensees}    Get Substring    ${Microgaming RNG Casino}    1
+    Set Suite Variable    ${suite_microgamingrngcasino_licensees}
+    #Bettrade
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    14    ${i}
+    \    ${Bettrade}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Bettrade},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Bettrade}
+    ${suite_bettrade_licensees}    Get Substring    ${Bettrade}    1
+    Set Suite Variable    ${suite_bettrade_licensees}
+    #Macau Games
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    15    ${i}
+    \    ${Macau Games}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Macau Games},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Macau Games}
+    ${suite_macaugames_licensees}    Get Substring    ${Macau Games}    1
+    Set Suite Variable    ${suite_macaugames_licensees}
+    #Platform Win Loss
+    : FOR    ${index}    IN RANGE    0    ${AmoutofLic}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${licenseenameLicWL}    Read Cell Data By Coordinates    Data    0    ${i}
+    \    ${statusProduct}    Read Cell Data By Coordinates    Data    16    ${i}
+    \    ${Platform Win Loss}    Run Keyword If    '${statusProduct}'=='Yes'    Set Variable    ${Platform Win Loss},${licenseenameLicWL}
+    \    ...    ELSE    Set Variable    ${Platform Win Loss}
+    ${suite_platformwinloss}    Get Substring    ${Platform Win Loss}    1
+    Set Suite Variable    ${suite_platformwinloss}
+
+export data for Licensee winloss base on licensees and products
+    [Arguments]    ${licensees}    ${product_name}
+    select licensee in checkbox list    ${licensees}
+    Click Element    ${licensee_filter}
+    Click Element    ${products_listbox}    # Click on Product filter
+    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'All')]/parent::label/input[@type='checkbox']    #Get status of All checkbox
+    Run Keyword If    '${Allcheckboxstatus}'=='True'    Click Element    ${licensee_check_all}
+    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    ${licensee_check_all}
+    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    ${licensee_check_all}
+    Click Element    xpath=//div[@class='ddci__text' and contains(text(),'${product_name}')]    # Click specific product
+    Click Element    ${products_listbox}    # Click on Product filter
+    Click Button    ${submit_button}
+    Click Element    ${export_to_excel_button}
+    sleep    1s
+
+get range from excel
+    [Arguments]    ${excelfile}    ${sheet}    ${rangecolumn}    ${itemFROM}    ${itemTO}
+    Open Excel    ${excelfile}
+    # Get row number of Total field
+    ${rowcount}    Get Row Count    ${sheet}
+    ${FROM}    Set Variable    0
+    : FOR    ${i}    IN RANGE    0    ${rowcount}
+    \    ${a}    Read Cell Data By Coordinates    ${sheet}    ${rangecolumn}    ${i}
+    \    ${FROM}    Run Keyword If    '${a}'=='${itemFROM}'    Evaluate    ${FROM}+0
+    \    ...    ELSE    Evaluate    ${FROM}+1
+    \    Exit For Loop If    '${a}'=='${itemFROM}'
+    # Get row number of Total Grand field
+    ${TO}    Set Variable    ${FROM}
+    : FOR    ${i}    IN RANGE    ${FROM}    ${rowcount}
+    \    ${a}    Read Cell Data By Coordinates    ${sheet}    ${rangecolumn}    ${i}
+    \    ${TO}    Run Keyword If    '${a}'=='${itemTO}'    Evaluate    ${TO}+0
+    \    ...    ELSE    Evaluate    ${TO}+1
+    \    Exit For Loop If    '${a}'=='${itemTO}'
+    [Return]    ${FROM}    ${TO}
+
+compare bettrade detail by date
+    [Arguments]    ${m1}    ${n1}
+    ${m1}    ${n1}    get range from excel    ${Reconciliationlistfile}    ${sheet}    0    2016 May 31
+    ...    2016 May 30
+    : FOR    ${index}    IN RANGE    ${m1}    ${n1}
+    \    ${currencyReconciliation}    Read Cell Data By Coordinates    ${sheet}    1    ${index}
+    \    ${BetTicketBettrade}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    2
+    \    ...    ${index}
+    \    ${BetTicketONEWorks}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    3
+    \    ...    ${index}
+    \    ${ActualStakeAmt}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    6
+    \    ...    ${index}
+    \    ${BuyBackAmtONEWorks}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    10
+    \    ...    ${index}
+    \    ${Win/LossONEWorks}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    ${sheet}    12
+    \    ...    ${index}
+    \    ${ClientcommissionONEWorks}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    May 2016    16
+    \    ...    ${index}
+    \    Exit For Loop If    '${currencyLA}'=='${currencyReconciliation}'

@@ -12,7 +12,7 @@ Documentation     This suite is used to compare data from reports :
 ...               - Gold Deluxe
 ...               - Macau
 Suite Setup       config
-Suite Teardown    Close Browser
+Suite Teardown    Close All Browsers
 Library           Selenium2Library
 Library           String
 Library           OperatingSystem
@@ -59,7 +59,7 @@ TM_00_ST_Precondition_Login
 TM_00_ST_Precondition_Declare Licensees for Products
     [Documentation]    This is the precondition TM is used to:
     ...
-    ...    -- Define which licensees need to be verify on specific product:
+    ...    -- Get string which licensees need to be verify on specific product:
     ...    - Sportsbook
     ...    - Racing
     ...    - Number Game
@@ -73,64 +73,22 @@ TM_00_ST_Precondition_Declare Licensees for Products
     ...    - Macau
     ...    - Microgaming-Live Casino: this product is not available so far
     ...    - Microgaming-RNG Casino: this product is not available so far
+    ...    - Macau Games
     ...
+    ...    -- Platfrom Win Loss ==>special report
+    ...    -- Bettrade Win Loss report
     ...    -- Navigate to Licensees Win Loss on LA
     ...
     ...    -- Export excel file for each particular product (if any product is declared as None, it will be not export) for LAST MONTH
     ...
     ...    -- Create file name for each of product based on defination and set them as Suite Variable (file name for LAST MONTH)
-    ...
-    ...    ** Reference Licensees:
-    ...    12Bet,368Cash,3star88,67BET,88Macao,9bet,9Club,Abcasino,Ae88,AG,Allbetclub,alog,Aoncash,asiabet88,
-    ...    AsianBet,Avia,BE7,Bodog,Boma365,DBP,DUOLE,GamingSoft,GooBet,HAIFA,Happy1668,Hecbet,Hengcai88,HL8,
-    ...    HONBET,HonorW,iBET,IBO,ITCBet,KeenOcean,King10,Liga,M8bola,Macaubet,mansion88,MayFair,NBCbet,
-    ...    Newhonbet,OLE777,Q8boa,Royal,RYB95,,Salon365,Senibet,SunGame,TLC,TooBet,Unobet,VCasia,Vwin,W88,
-    ...    XTD3,Zzun88
-    ...
-    ...    ** Examples:
-    ...
-    ...    Number Game: 12Bet,368Cash,3star88,67BET,W88
-    ...
-    ...    BA: alog,Aoncash,asiabet88,DELA,Q8bola,TLC,TooBet
-    ...
-    ...    Live Casino: 12Bet,368Cash,3star88,67BET,9bet,9Club,Ae88,Allbetclub,alog,Aoncash,BE7,GamingSoft,GooBet,ISC888,ITCBet,King10,Liga,M8bola,Macaubet,OLE777,Q8bola,RYB95,Salon365,Senibet,Unobet
-    ...
-    ...    VS: Q8bola,Senibet,SunGame
-    ...
-    ...    RNG Casino:12Bet,9bet,Allbetclub,Aoncash
-    ...
-    ...    Keno: 12Bet,9bet,Allbetclub,Aoncash,BE7,GooBet,iBET,ITCBet,M8bola,Macaubet,NBCbet,Q8bola,Unobet
-    ...
-    ...    AG Casino: 12Bet,,9bet,Allbetclub,Aoncash,BE7,GooBet,HonorW,ITCBet,Macaubet
-    ...
-    ...    GD: 12Bet,9bet,Allbetclub,Aoncash,BE7,DUOLE,GooBet,HonorW,ITCBet,M8bola,Macaubet,Q8bola,Unobet
-    ...
-    ...    Macau:12Bet,9bet,Allbetclub,Aoncash,BE7,GooBet,ITCBet,Macaubet,NBCbet,Q8bola,Unobet
     #. Define test data
-    #    Configure Licensees for Settlement, LRF report    --Note: Get available name of Licensees in excel file
-    Set Suite Variable    ${suite_sportsbook_licensees}    12Bet,Unobet,Zzun88    # Licensees available for SB    12Bet,Unobet,Zzun88    12Bet
-    Set Suite Variable    ${suite_racing_licensees}    All    # Not support for Settlement report    All    None
-    Set Suite Variable    ${suite_numbergame_licensees}    12Bet,Unobet,Zzun88    #Number Game    12Bet,Unobet,Zzun88    None
-    Set Suite Variable    ${suite_ba_licensees}    alog    #BA    alog    None
-    Set Suite Variable    ${suite_livecasino_licensees}    12Bet    #Live Casino    12Bet    None
-    Set Suite Variable    ${suite_virtualsports_licensees}    12Bet,Unobet,Zzun88    #Virtual Sports    12Bet,Unobet,Zzun88    None
-    Set Suite Variable    ${suite_rngcasino_licensees}    12Bet,Zzun88    #RNG Casino    12Bet,Zzun88    None
-    Set Suite Variable    ${suite_keno_licensees}    12Bet    #Keno    12Bet    None
-    Set Suite Variable    ${suite_agcasino_licensees}    12Bet    #AG Casino    12Bet    None
-    Set Suite Variable    ${suite_golddeluxe_licensees}    12Bet,Unobet    #Gold Deluxe    12Bet,Unobet    None
-    Set Suite Variable    ${suite_macau_licensees}    12Bet    #Macau    12Bet,Unobet    None
-    Set Suite Variable    ${suite_microgaminglivecasino_licensees}    None    #Microgaming Live Casino    None    None
-    Set Suite Variable    ${suite_microgamingrngcasino_licensees}    None    #Microgaming RNG Casino    None    None
-    Set Suite Variable    ${suite_bettrade_licensees}    asiabet88    #Bettrade    asiabet88    asiabet88
+    get string licensees for products from excel file
     # Get data for Licensee Winloss
     navigate menu    Win Loss Report    Licensee Win Loss
     #Export excel for all of seperated product
-    Export excel for all of seperated product    ${suite_sportsbook_licensees}    ${suite_racing_licensees}    ${suite_numbergame_licensees}    ${suite_ba_licensees}    ${suite_livecasino_licensees}    ${suite_virtualsports_licensees}
-    ...    ${suite_rngcasino_licensees}    ${suite_keno_licensees}    ${suite_agcasino_licensees}    ${suite_golddeluxe_licensees}    ${suite_macau_licensees}    ${suite_microgaminglivecasino_licensees}
-    ...    ${suite_microgamingrngcasino_licensees}    ${suite_bettrade_licensees}
-    create dictionary file name for licensee winloss report    ${suite_sportsbook_licensees}    ${suite_racing_licensees}    ${suite_numbergame_licensees}    ${suite_ba_licensees}    ${suite_livecasino_licensees}    ${suite_virtualsports_licensees}
-    ...    ${suite_rngcasino_licensees}    ${suite_keno_licensees}    ${suite_agcasino_licensees}    ${suite_golddeluxe_licensees}    ${suite_macau_licensees}    ${suite_microgaminglivecasino_licensees}
-    ...    ${suite_microgamingrngcasino_licensees}    ${suite_bettrade_licensees}
+    Export excel for all of seperated product
+    create dictionary file name for licensee winloss report
 
 TM_01_ST_Compate data LA_LicenseeWL_WLbProduct_SettlementRpt
     [Documentation]    This TM performs:
@@ -153,12 +111,9 @@ TM_01_ST_Compate data LA_LicenseeWL_WLbProduct_SettlementRpt
     ...
     ...    - Date range: Last Month
     # Compare data between Licensee WinLoss and Win Loss By Product
-    Compare data between Licensee WinLoss and Win Loss By Product    ${suite_sportsbook_licensees}    ${suite_racing_licensees}    ${suite_numbergame_licensees}    ${suite_ba_licensees}    ${suite_livecasino_licensees}    ${suite_virtualsports_licensees}
-    ...    ${suite_rngcasino_licensees}    ${suite_keno_licensees}    ${suite_agcasino_licensees}    ${suite_golddeluxe_licensees}    ${suite_macau_licensees}    ${suite_microgaminglivecasino_licensees}
-    ...    ${suite_microgamingrngcasino_licensees}
+    Compare data between Licensee WinLoss and Win Loss By Product
     # Compare data between Licensee WinLoss and Settlement Report    #Note: Not support for RACING
-    compare data between Licensee WinLoss and Settlement Report    ${suite_sportsbook_licensees}    ${suite_numbergame_licensees}    ${suite_ba_licensees}    ${suite_livecasino_licensees}    ${suite_virtualsports_licensees}    ${suite_rngcasino_licensees}
-    ...    ${suite_keno_licensees}    ${suite_agcasino_licensees}    ${suite_golddeluxe_licensees}    ${suite_macau_licensees}    ${suite_microgaminglivecasino_licensees}    ${suite_microgamingrngcasino_licensees}
+    compare data between Licensee WinLoss and Settlement Report
 
 TM_02_ST_Compate data LA_LicenseeWL_LRF_Reports
     [Documentation]    This TM performs:
@@ -204,3 +159,10 @@ TM_02_ST_Compate data LA_LicenseeWL_LRF_Reports
     select 1st licensee on lrf based on excel file
     # compare data between LA Lic WL with LRF reports
     compare data between LA Lic WL with LRF reports
+
+TM_03_ST_Compare data Bettrade
+    [Documentation]    This test module is used to comapre bettrade product from Bettrade Win Loss report on LA site and file Reconciliation list.xls
+    ...
+    ...    **support *.XLS only
+    # Verify bettrade data for reconciliation list by Match Month
+    Verify bettrade data for reconciliation list by Match Month
