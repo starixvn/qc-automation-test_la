@@ -29,8 +29,8 @@ config
     Set Suite Variable    ${cf_username}    starix106    #    starix101    starix101
     Set Suite Variable    ${cf_password}    2342323    #    32e2323    erfereege
     # Set Global Variables    LRF
-    Set Suite Variable    ${cf_lrf_username}    pgmwilliam
-    Set Suite Variable    ${cf_lrf_password}    willhill123
+    Set Suite Variable    ${cf_lrf_username}    LRFusername    # <<<====    Configure acc LRF
+    Set Suite Variable    ${cf_lrf_password}    LRFpassword    # <<<====    Configure acc LRF
     Set Suite Variable    ${cf_lrf_static_capcha}    1710
     # Set path data set
     Set Suite Variable    ${DeclareProductforLicensees}    Data Set\\DeclareProductforLicensees.xls
@@ -151,6 +151,7 @@ check value equal with approximation
 does control exist
     [Arguments]    ${ag_control}
     ${exist}    Run Keyword And Return Status    Page Should Contain Element    ${ag_control}
+    sleep    1s
     [Return]    ${exist}    # True | False
 
 does value equal

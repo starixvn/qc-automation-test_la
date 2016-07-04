@@ -940,7 +940,8 @@ compare settlement report for Number game
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
     \    Click Element    ${licensee_filter}    # Licensee
-    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
     \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Number Game
     \    Click Element    id=submit-button
@@ -990,7 +991,8 @@ compare settlement report for BA
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
     \    Click Element    ${licensee_filter}    # Licensee
-    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
     \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    BA
     \    Click Element    id=submit-button
@@ -1032,7 +1034,8 @@ compare settlement report for Live Casino
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
     \    Click Element    ${licensee_filter}    # Licensee
-    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
+    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
     \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Live Casino
     \    Click Element    id=submit-button
