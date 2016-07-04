@@ -27,7 +27,7 @@ config
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
     # Set Global Variables
     Set Suite Variable    ${cf_username}    starix106    #    starix101    starix101
-    Set Suite Variable    ${cf_password}    azsxdc    #    32e2323    erfereege
+    Set Suite Variable    ${cf_password}    2342323    #    32e2323    erfereege
     # Set Global Variables    LRF
     Set Suite Variable    ${cf_lrf_username}    pgmwilliam
     Set Suite Variable    ${cf_lrf_password}    willhill123
@@ -200,7 +200,7 @@ select licensee in checkbox list
     # Split the licensee string
     ${licensee}    Remove String Using Regexp    ${licensee}    ${SPACE}
     @{licensee_list}=    Split String    ${licensee}    ,
-    :FOR    ${ELEMENT}    IN    @{licensee_list}
+    : FOR    ${ELEMENT}    IN    @{licensee_list}
     \    Log    element = ${ELEMENT}
     \    Run Keyword If    '${ELEMENT}'=='All'    Exit For Loop
     \    Comment    # mouse over the checkbox then select checkbox
@@ -453,7 +453,7 @@ get date format
     ${mm}    Convert To string    ${mm}
     ${mm}    Evaluate    ${mm}-1
     ${yyyy}    Convert To string    ${yyyy}
-    :FOR    ${index}    IN RANGE    0    1
+    : FOR    ${index}    IN RANGE    0    1
     \    ${mm1}    Run Keyword If    '${mm}'=='1'    Set Variable    Jan
     \    Exit For Loop If    '${mm}'=='1'
     \    ${mm1}    Run Keyword If    '${mm}'=='2'    Set Variable    Feb
@@ -478,7 +478,7 @@ get date format
     \    Exit For Loop If    '${mm}'=='11'
     \    ${mm1}    Run Keyword If    '${mm}'=='0'    Set Variable    Dec
     \    Exit For Loop If    '${mm}'=='0'
-    :FOR    ${index}    IN RANGE    0    1
+    : FOR    ${index}    IN RANGE    0    1
     \    ${date}    Set Variable if    '${format}'=='yyyyMmm'    ${yyyy} ${mm1}
     \    Exit For Loop If    '${format}'=='yyyyMmm'
     \    ${date}    Set Variable if    '${format}'=='MMMYYY'    ${mm1} ${yyyy}
