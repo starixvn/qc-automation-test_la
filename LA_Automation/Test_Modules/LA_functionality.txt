@@ -166,3 +166,6 @@ TM_03_ST_Compare data Bettrade
     ...    **support *.XLS only
     # Verify bettrade data for reconciliation list by Match Month
     Verify bettrade data for reconciliation list by Match Month
+
+test
+    Open Excel    ${DeclareProductforLicensees}
