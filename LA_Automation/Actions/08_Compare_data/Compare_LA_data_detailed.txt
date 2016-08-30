@@ -1469,10 +1469,10 @@ compare settlement report for Microgaming RNG Casino
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
-    \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Microgaming-RNG Casino
-    \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Microgaming-RNG Casino
+    \    Comment    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Microgaming-RNG Casino
+    \    Comment    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Microgaming-RNG Casino
     \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Microgaming-RNG Casino
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Microgaming-RNG Casino
+    \    Comment    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Microgaming-RNG Casino
 
 compare settlement report for Bettrade
     [Arguments]    ${Licensees}

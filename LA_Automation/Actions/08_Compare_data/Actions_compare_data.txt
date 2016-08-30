@@ -134,25 +134,26 @@ Export excel for all of seperated product
     # Macau Games
     Run Keyword If    '${suite_macaugames_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_macaugames_licensees}    Macau Games
     # Get data for Bettrade
-    # by.Licensee    Bet.Trade.Win.Loss.(by.Licensee).from.May.01.2016.to.May.31.2016.xls
-    Run Keyword If    '${suite_bettrade_licensees}'<>''    navigate menu    Win Loss Report    Bet Trade Win Loss
-    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Button    ${submit_button}
-    sleep    0.5s
-    Run Keyword If    '${suite_bettrade_licensees}'<>''    wait page settlement loading
-    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Element    ${export_to_excel_button}    # Click Export Excel button
-    # Daily    Bet.Trade.Win.Loss.(Daily).from.May.01.2016.to.May.31.2016.xls
-    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Element    xpath=.//*[@id='GroupByLicensee']
-    sleep    0.5s
-    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Button    ${submit_button}
-    Run Keyword If    '${suite_bettrade_licensees}'<>''    wait page settlement loading
-    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Element    ${export_to_excel_button}    # Click Export Excel button
+    Comment    # by.Licensee    Bet.Trade.Win.Loss.(by.Licensee).from.May.01.2016.to.May.31.2016.xls
+    Comment    Run Keyword If    '${suite_bettrade_licensees}'<>''    navigate menu    Win Loss Report    Bet Trade Win Loss
+    Comment    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Button    ${submit_button}
+    Comment    sleep    0.5s
+    Comment    Run Keyword If    '${suite_bettrade_licensees}'<>''    wait page settlement loading
+    Comment    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Element    ${export_to_excel_button}    # Click Export Excel button
+    Comment    # Daily    Bet.Trade.Win.Loss.(Daily).from.May.01.2016.to.May.31.2016.xls
+    Comment    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Element    xpath=.//*[@id='GroupByLicensee']
+    Comment    sleep    0.5s
+    Comment    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Button    ${submit_button}
+    Comment    Run Keyword If    '${suite_bettrade_licensees}'<>''    wait page settlement loading
+    Comment    Run Keyword If    '${suite_bettrade_licensees}'<>''    Click Element    ${export_to_excel_button}    # Click Export Excel button
     # Get data for Platform Win Loss
     Run Keyword If    '${suite_platformwinloss}'<>''    navigate menu    Misc    Platform Win Loss
     sleep    1s
     Run Keyword If    '${suite_platformwinloss}'<>''    select licensees Platform WL    ${suite_platformwinloss}
     Run Keyword If    '${suite_platformwinloss}'<>''    Click Button    ${submit_button}
     sleep    0.5s
-    Run Keyword If    '${suite_platformwinloss}'<>''    wait page settlement loading
+    Comment    Run Keyword If    '${suite_platformwinloss}'<>''    wait page settlement loading
+    Wait Until Page Contains Element    //div[@class='laBlockUi' and @style='display: none;']
     Run Keyword If    '${suite_platformwinloss}'<>''    Click Element    ${export_to_excel_button}    # Click Export Excel button
 
 compare data between Licensee WinLoss and Win Loss By Product
