@@ -34,7 +34,7 @@ get file name exported excel for Licensee WL
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
     \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
     \    Exit For Loop If    '${mm}'=='10'
@@ -62,11 +62,11 @@ get file name exported excel for Licensee WL
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='August'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='August'
     \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='Semtemper'
-    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
+    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='November'
@@ -102,7 +102,7 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
     \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
     \    Exit For Loop If    '${mm}'=='10'
@@ -130,8 +130,8 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='August' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='August'
     \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='Semtemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
@@ -158,8 +158,8 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='August' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='August'
     \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='Semtemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
@@ -197,7 +197,7 @@ get file name exported excel for Platfrom Win Loss
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
     \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
     \    Exit For Loop If    '${mm}'=='10'
@@ -225,8 +225,8 @@ get file name exported excel for Platfrom Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
-    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='August'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='August'
     \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='Semtemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
@@ -910,7 +910,7 @@ compare settlement report for SportsBook
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -961,7 +961,7 @@ compare settlement report for Number game
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -999,13 +999,13 @@ compare settlement report for BA
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${Customerwl}    ${BAComm}    ${Amount}    get data of licensee on excel file for ba    ${filename}    ${licensee}
-    \    ${Customerwl_settlement}    Get Text    xpath=(//td[@class='ralign col-grand-total padding-right'])[2]    #Cus WL
+    \    ${Customerwl_settlement}    Get Text    xpath=(//td[@class='text-right border-bottom laTable__cell laTable__cell-grandTotal'])[2]    #Cus WL
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${BAComm_settlement}    Get Text    xpath=(//td[@class='ralign col-grand-total padding-right'])[3]    #BA Comm
+    \    ${BAComm_settlement}    Get Text    xpath=(//td[@class='text-right border-bottom laTable__cell laTable__cell-grandTotal'])[3]    #BA Comm
     \    ${BAComm_settlement}    remove string    ${BAComm_settlement}    ,
-    \    ${Amount_settlement}    Get Text    xpath=(//td[@class='ralign col-grand-total padding-right'])[4]    #Amount
+    \    ${Amount_settlement}    Get Text    xpath=//td[@class='text-right border-bottom laTable__cell laTable__cell-grandTotal border-right']    #Amount
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -1055,7 +1055,7 @@ compare settlement report for Live Casino
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -1107,7 +1107,7 @@ compare settlement report for Virtual Sports
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -1159,7 +1159,7 @@ compare settlement report for RNG Casino
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -1210,7 +1210,7 @@ compare settlement report for Keno
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -1261,7 +1261,7 @@ compare settlement report for AG Casino
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -1312,7 +1312,7 @@ compare settlement report for Gold Deluxe
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -1363,7 +1363,7 @@ compare settlement report for Macau
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -1414,14 +1414,14 @@ compare settlement report for Microgaming Live Casino
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
     \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Microgaming-Live Casino
     \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Microgaming-Live Casino
     \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Microgaming-Live Casino
-    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Microgaming-Live Casino
+    \    Comment    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Microgaming-Live Casino
 
 compare settlement report for Microgaming RNG Casino
     [Arguments]    ${Licensees}
@@ -1465,7 +1465,7 @@ compare settlement report for Microgaming RNG Casino
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[11]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
@@ -1567,7 +1567,7 @@ compare settlement report for Macau Games
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[9]    #GBP
+    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
     \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
     \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
