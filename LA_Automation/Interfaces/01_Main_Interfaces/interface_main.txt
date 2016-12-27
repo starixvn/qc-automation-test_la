@@ -9,8 +9,8 @@ ${no_draws_radio_button}    xpath=//*[@id='type-nodraw']    # No Draw radio butt
 ${no_draws_for_turnover_radio_button}    xpath=//*[@id='type-nodraw-for-turnover-only']    # No Draw for Turnover only radio button of the filter 'Draw filter'
 ${exclude_test_data_checkbox}    xpath=//input[@id='ExcludeTest']    # 'Exclude Test Data' checkbox on LA site
 ${submit_button}    xpath=//input[@value='Submit']    # Submit button on LA site
-${export_to_excel_button}    xpath=//*[@id='btnExportExcel']    # Export To Excel button on LA site
-${export_to_excel_button2}    xpath=//*[@class='btn-export-excel']    # Export To Excel button on LA site
+${export_to_excel_button}    xpath=//i[@class='icon-excel']    # Export To Excel button on LA site
+${export_to_excel_button2}    xpath=.//*[@id='btnExportExcel']    # Export To Excel button on LA site
 ${back_button}    xpath=//a[@class='btnBack']    # Back button on report Details
 ${date_listbox}    //select[@id='Date']    # Date listbox on LA site
 ${from_date_picker}    xpath=//a[@id='fd-but-FromDate']    # From date picker button on LA site

@@ -36,7 +36,7 @@ get file name exported excel for Licensee WL
     \    Exit For Loop If    '${mm}'=='08'
     \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
@@ -64,11 +64,11 @@ get file name exported excel for Licensee WL
     \    Exit For Loop If    '${mm1}'=='July'
     \    ${filename}    Run Keyword If    '${mm1}'=='August'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='August'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Septemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='October'
-    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
+    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='November'
     [Return]    ${filename}
 
@@ -104,7 +104,7 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm}'=='08'
     \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
@@ -132,8 +132,8 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm1}'=='July'
     \    ${filename}    Run Keyword If    '${mm1}'=='August' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='August'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Septemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
@@ -160,8 +160,8 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm1}'=='July'
     \    ${filename}    Run Keyword If    '${mm1}'=='August' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='August'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Septemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
@@ -199,7 +199,7 @@ get file name exported excel for Platfrom Win Loss
     \    Exit For Loop If    '${mm}'=='08'
     \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
@@ -1756,6 +1756,8 @@ export data for Licensee winloss base on licensees and products
     Click Element    xpath=//div[@class='ddci__text' and contains(text(),'${product_name}')]    # Click specific product
     Click Element    ${products_listbox}    # Click on Product filter
     Click Button    ${submit_button}
+    Wait Until Page Does Not Contain Element    xpath=//div[@style='display: block;']/div/div[@class='laBlockUi__msg' and contains(text(),'Loading')]
+    Sleep    1s
     Click Element    ${export_to_excel_button}
     sleep    1s
 
