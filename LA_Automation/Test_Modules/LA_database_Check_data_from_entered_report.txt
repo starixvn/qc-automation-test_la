@@ -1,0 +1,11 @@
+*** Settings ***
+Suite Setup       database_config
+Library           Selenium2Library
+Library           String
+Library           OperatingSystem
+Library           ../Data Set/DBLibrary.py
+Resource          ../Actions/Database/database_actions.txt
+
+*** Test Cases ***
+TC_01_Check data of SB
+    check data from entered report    0    14    '20170201'    '20170219'    'EUR'    'Settlement Report'

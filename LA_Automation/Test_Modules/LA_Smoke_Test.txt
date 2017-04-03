@@ -300,7 +300,7 @@ TM_11_ST_Performance by Margin
     check export excel function    Performance*
 
 TM_12_ST_Settlement Report
-    # 1. Navigate to Performance >> Performance by Margin
+    n keyword
     navigate menu    Invoice    Settlement Report
     # 2. Select filters then click Submit button
     submit filters for settlement report    12Bet    None    None    None    Sportsbook    All
@@ -331,3 +331,6 @@ TM_13_ST_OANDA Exchange Rate
     take applications screenshot    LA_Local    TM_13_OANDAExchangRate.jpg
     # 4. Check Export Excel
     check export excel function    OANDAExchangeRate*
+
+TM_14_ST_Manage Biller
+    navigate menu    Invoice    Manage Biller

@@ -1,0 +1,418 @@
+*** Settings ***
+Suite Setup       database_config
+Library           Selenium2Library
+Library           String
+Library           OperatingSystem
+Library           ../Data Set/DBLibrary.py
+Resource          ../Actions/Database/database_actions.txt
+
+*** Test Cases ***
+TC01_Create data for any products
+    [Documentation]    This action use to create data for any reports.    ###    ## Param ProductID    ## Param @PartyID    ## Param Fromdate    ## Param Todate    ## CurrencyID    ## Is_rpt_betting    ## Is_rpt_bettingbyproduct    ## Is_rpt_thirdParty_ExtraGMT    ###    ## ProductID    PartyID    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting (input 1 or 0)    ## Is_rpt_bettingbyproduct (input 1 or 0)    ## Is_rpt_thirdParty_extra ( input 1 or 0) ( GMT report support GMT)
+    ...
+    ...    EX:
+    ...
+    ...    ins_data_testing 24 (@ProductID) \ 14(@PartyID) '20161229' (@Fromdate) \ '20161229'(@Todate) 6(@CurrencyID) 1(Is_rpt_betting
+    ...    : 1 if yes, 0 if no) 1(Is_rpt_betting
+    ...    : 1 if yes, 0 if no) \ \ \ \ \ 1 (Is_rpt_thirdParty_ExtraGMT: 1 if have GMT, 0 if no)
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    11    14    '20170110'    '20170110'    6    1
+    ...    1    0
+
+TC02_Create Setting for any products
+    [Documentation]    This action used to create setting for any products ( old and new)    ###    ## ProductID    ## PartyID    ## ToParty    ## From date ( launch date of product with licensee)    ## To date ( belong licensee)    ## Licensee rate    ## 3rd rate    ## Min amt    ## Max amt    ## Is_Lic_WinlostCharge (Input 1 or 0: 1 when having winlost charge, 0 when having no winlost charge)    ## @Is_Lic_CommCharge (Input 1 or 0: 1 when having winlost charge, 0 when having no winlost charge)    ## @Is_Lic_ServiceCharge(Input 1 or 0: 1 when having winlost charge, 0 when having no winlost charge)    ##Is_3rd_WinlostCharge (Input 1 or 0: 1 when having winlost charge, 0 when having no winlost charge)    ## Is_3rd_CommCharge (Input 1 or 0: 1 when having winlost charge, 0 when having no winlost charge)    ## Is_3rd_ServiceCharge (Input 1 or 0: 1 when having winlost charge, 0 when having no winlost charge)    ## @Is_3rd_ProfitSharingCharge(Input 1 or 0: 1 when having winlost charge, 0 when having no winlost charge)    ## @Is_3rd_RebateCharge(Input 1 or 0: 1 when having winlost charge, 0 when having no winlost charge)    ## From date ( billing date between group with 3rd party)    ## Todate ( billing date between group with 3rd party)    ##    ## ProductID    ## From Party    ## To Party    ## From date of Licensee( Launched date of product)    ## Todate of Licensee( Launched date of product)    ## Licensee rate (billing between Licensee and house) \ \    ## 3rd rate (Billing between house and 3rd Party)    ## Min amt    ## Max amt    ## Is_Lic_WinlostCharge (input 1 or 0) 1: If having charge by winlost; 0: if having no charge by winlost    ## Is_Lic_CommCharge (input 1 or 0) 1: If having charge by comm; 0: if having no charge by comm    ## Is_Lic_ServiceCharge (input 1 or 0) 1: If having charge by service charge; 0: if having no charge by service charge    ## Is_3rd_WinlostCharge (input 1 or 0) 1: If having charge by winlost; 0: if having no charge by winlost    ## Is_3rd_CommCharge(input 1 or 0) 1: If having charge by Comm; 0: if having no charge by Comm    ## Is_3rd_ServiceCharge (input 1 or 0) 1: If having charge by Service charge; 0: if having no charge by Service charge    ## Is_3rd_ProfitSharingCharge (input 1 or 0) 1: If having charge by Profitsharing; 0: if having no charge by Profit sharing    ## @Is_3rd_RebateCharge (input 1 or 0) 1: If having charge by rebate; 0: if having no charge by rebate    ## From billing date between houst and 3rd party    ## To billing date between houst and 3rd party    ##    ## ProductID    ## From Party    ## To Party    ## Licensee From date    ## Licensee To date    ## Licensee Rate    ## 3rd rate    ## Min amt    ## Max amt    ## Is Licensee Winlost Charge    ##@Is_Lic_CommCharge    @Is_Lic_ServiceCharge    # @Is_3rd_WinlostCharge    @Is_3rd_CommCharge    \ \ ,@Is_3rd_ServiceCharge \ \ \ = 0    @Is_3rd_ProfitSharingCharge    @Is_3rd_RebateCharge    @3rdFromDate    # @3rdToDate
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    11    14    1    '20160101'    '20500101'    0.15
+    ...    0.05    NULL    NULL    1    0    0
+    ...    0    0    1    0    1    '20151201'
+    ...    '20500101'
+
+TC_03_Create Setting for GD on deposit licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    11    14    1    '20160101'    '20500101'    0.15
+    ...    0.05    NULL    NULL    1    0    0
+    ...    0    0    1    0    1    '20151201'
+    ...    '20500101'
+
+TC_04_Create data for GD on deposit licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    11    14    '20170210'    '20170210'    51    1
+    ...    1    0
+
+TC_05_Create Setting for GD on Credit Licensees
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    11    25    94    '20160101'    '20500101'    NULL
+    ...    0.07    NULL    NULL    0    0    0
+    ...    0    0    1    0    1    '20151201'
+    ...    '20500101'
+    ins_data_setting    11    30    94    '20160101'    '20500101'    NULL
+    ...    0.07    NULL    NULL    0    0    0
+    ...    0    0    1    0    1    '20151201'
+    ...    '20500101'
+
+TC_06_Create data for GD on Credit Licensees
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    11    25    '20170111'    '20170110'    2    1
+    ...    1    0
+    ins_data_testing    11    30    '20170111'    '20170110'    2    1
+    ...    1    0
+
+TC_07_Create Setting for ALL Bet on deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    21    66    1    '20160101'    '20500101'    0.15
+    ...    0.05    NULL    NULL    1    0    0
+    ...    0    0    1    0    1    '20151201'
+    ...    '20500101'
+
+TC_08_Create data for ALL Bet on deposit licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    21    14    '20170110'    '20170110'    6    1
+    ...    1    1
+
+TC_09_Create Setting for ALL Bet on Credit licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    21    25    205    '20160101'    '20500101'    NULL
+    ...    0.07    NULL    NULL    0    0    0
+    ...    0    0    1    0    1    '20151201'
+    ...    '20500101'
+    ins_data_setting    21    30    205    '20160101'    '20500101'    NULL
+    ...    0.07    NULL    NULL    0    0    0
+    ...    0    0    1    0    1    '20151201'
+    ...    '20500101'
+
+TC_10_Create data for ALL Bet on Credit licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    21    25    '20170110'    '20170110'    51    0
+    ...    0    1
+    ins_data_testing    21    30    '20170110'    '20170110'    51    0
+    ...    0    1
+
+TC_11_Create Setting for SB on Deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    0    21    1    '20160101'    '20171030'    0.15
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+
+TC_12_Create data for SB on Deposit Licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    0    21    '20170215'    '20170215'    6    1
+    ...    1    0
+
+TC_13_Create Setting on LC for Deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    4    14    1    '20160101'    '20500101'    0.15
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+
+TC_14_Create Data on LC for Deposit Licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    4    14    '20170110'    '20170110'    6    1
+    ...    1    0
+
+TC_14_Create Setting on VS for Deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    5    24    1    '20160101'    '20500101'    0.15
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+
+TC_16_Create Data on VS for Deposit Licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    5    15    '20170110'    '20170110'    51    1
+    ...    1    0
+
+TC_17_Create Setting on RNG Casino for Deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    6    14    1    '20160101'    '20500101'    0.15
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+
+TC_18_Create Data of RNG Casino for Deposit Licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    6    14    '20170110'    '20170110'    6    1
+    ...    1    0
+
+TC_19_Create Setting for Keno on Deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    8    14    1    '20160101'    '20500101'    0.15
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+
+TC_20_Create Data for Keno on Deposit Licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    8    14    '20170110'    '20170110'    6    1
+    ...    1    0
+
+TC_20_Create Setting for Macau Games on Deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    22    14    1    '20160101'    '20500101'    0.15
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+
+TC_20_Create Data for Macau Games on deposit licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    22    14    '20170110'    '20170110'    6    1
+    ...    1    0
+
+TC_21_Create Setting for MGC Live Casino for deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    14    14    1    '20160101'    '20500101'    0.15
+    ...    NULL    NULL    NULL    1    0    0
+    ...    1    0    0    0    0    '20150101'
+    ...    '20500101'
+
+TC_22_Create data for MGC Live Casino for deposit licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    14    14    '20170216'    '20170216'    6    0
+    ...    1    1
+
+TC_23_Create Setting for MGC RNG on Deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    17    14    1    '20160101'    '20500101'    0.15
+    ...    NULL    NULL    NULL    1    0    0
+    ...    1    0    0    0    0    '20150101'
+    ...    '20500101'
+
+TC_24_Create data for MGC RNG on Deposit Licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    17    15    '20170301'    '20170301'    6    0
+    ...    1    1
+
+TC_25_Create Setting for Fishing World on Deposit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # ThirdPartyRate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ## 12bet for OWA Group
+    ins_data_setting    24    14    1    '20160101'    '20500101'    0.15
+    ...    0.05    NULL    NULL    1    0    0
+    ...    1    0    0    0    0    '20150101'
+    ...    '20500101'
+    ## Macaubet for Boping Group
+    ins_data_setting    24    31    11    '20160101'    '20500101'    0.15
+    ...    0.06    NULL    NULL    1    0    0
+    ...    1    0    0    0    0    '20150101'
+    ...    '20500101'
+    ## For Credit Licensee
+    ins_data_setting    24    25    293    '20160101'    '20500101'    0.15
+    ...    0.07    NULL    NULL    1    0    0
+    ...    NULL    0    0    0    0    NULL
+    ...    NULL
+    ins_data_setting    24    30    293    '20160101'    '20500101'    0.15
+    ...    0.07    NULL    NULL    1    0    0
+    ...    NULL    0    0    0    0    NULL
+    ...    NULL
+
+TC_26_Create Data for FishingWorld on Deposit Licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    24    14    '20170215'    '20170215'    6    1
+    ...    0    1
+    ## for Macaubet on Boping group
+    ins_data_testing    24    31    '20170215'    '20170215'    6    1
+    ...    0    1
+    ins_data_testing    24    25    '20170215'    '20170215'    6    1
+    ...    0    1
+    ins_data_testing    24    30    '20170215'    '20170215'    6    1
+    ...    0    1
+
+TC_27_Create Setting for ColosussBet
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # ThirdPartyRate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ## 12bet for OWA Group
+    ins_data_setting    15    14    1    '20160101'    '20500101'    NULL
+    ...    NULL    NULL    NULL    1    0    0
+    ...    1    0    0    0    0    NULL
+    ...    NULL
+
+TC_28_Create data for ColosussBet
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    15    14    '20170215'    '20170215'    6    0
+    ...    1    0
+    ## for Macaubet on Boping group
+    ins_data_testing    15    31    '20170215'    '20170215'    6    0
+    ...    1    0
+    ins_data_testing    15    25    '20170215'    '20170215'    6    0
+    ...    1    0
+    ins_data_testing    15    30    '20170215'    '20170215'    6    0
+    ...    1    0
+
+TC_29_Create Setting for Bettrade
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # ThirdPartyRate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    13    14    1    '20160101'    '20500101'    0.03
+    ...    0.5    NULL    NULL    0    1    0
+    ...    0    0    0    1    0    '20150101'
+    ...    '20500101'
+
+TC_30_Create data for Bettrade
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    13    14    '20170301'    '20170301'    51    1
+    ...    1    0
+
+TC_31_Create setting for BA
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    3    17    1    '20160101'    '20500101'    1
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+
+TC_32_Create data for BA
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    3    17    '20170110'    '20170110'    6    1
+    ...    1    0
+
+TC_33_Create Setting for NG2 on Credit Licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    23    25    294    '20160101'    '20500101'    0.5
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+    ins_data_setting    23    30    294    '20160101'    '20500101'    0.5
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+
+TC_33_Create Data for NG2 on Credit Licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    23    25    '20170101'    '20170131'    2    1
+    ...    0    0
+    ins_data_testing    23    30    '20170101'    '20170131'    2    1
+    ...    0    0
+
+TC_34_Create Setting NG for deposit licensee
+    Comment    ## ProductID    FromPartyID    ToPartyID    Licensee From Date Charged    Licensee To date charge    Licensee Rate
+    ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
+    ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
+    ...    # 3rdTodate
+    ins_data_setting    2    14    1    '20160101'    '20500101'    0.15
+    ...    NULL    NULL    NULL    1    0    0
+    ...    0    0    0    0    0    NULL
+    ...    NULL
+
+TC_35_Create Data NG for deposit licensee
+    Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
+    ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
+    ins_data_testing    2    14    '20170110'    '20170110'    51    1
+    ...    1    0
+
+TC_Create MGC LC Setting with XML
+    ${LicSetting}    set variable    '<ChargeSettings><ChargeSetting><Rate>0.125</Rate><MinAmount>0</MinAmount><MaxAmount>0</MaxAmount><BaseCurrencyID>0</BaseCurrencyID><ChargeType>1</ChargeType></ChargeSetting><ChargeSetting><Rate>0.2</Rate><MinAmount>0</MinAmount><MaxAmount>0</MaxAmount><BaseCurrencyID</BaseCurrencyID><ChargeType>1</ChargeType></ChargeSetting></ChargeSettings>'
+    ${ThirdSetting}    set variable    '<ChargeSettings><ChargeSetting><Rate>0.08</Rate><MinAmount>2000000</MinAmount><MaxAmount>10000000000000</MaxAmount><BaseCurrencyID>3</BaseCurrencyID><ChargeType>4</ChargeType></ChargeSetting><ChargeSetting><Rate>0.1</Rate><MinAmount>0</MinAmount><MaxAmount>2000000</MaxAmount><BaseCurrencyID>3</BaseCurrencyID><ChargeType>4</ChargeType></ChargeSetting><ChargeSetting><Rate>0.175</Rate><MinAmount>0</MinAmount><MaxAmount>0</MaxAmount><BaseCurrencyID>0</BaseCurrencyID><ChargeType>1</ChargeType></ChargeSetting></ChargeSettings>'
+    ###    ##ProductID    ##FromPartyID    ##ToPartyID    ##LicSetting    ##ThirdPartySetting    ##Fromdate
+    ...    # Todate
+    createSettingByXML    14    14    1    ${LicSetting}    ${ThirdSetting}    '20170101'
+    ...    '20500101'
+
+test
+    Comment    ${a}    set variable    <Rate>[lic_rate1]</Rate>
+    Comment    ${lic_rate1}    set variable    0.15
+    Comment    ${a}    replace string    ${a}    [lic_rate1]    ${lic_rate1}
+    Comment    log    ${a}
+    ${lic_setting}    ${third_setting}    generate XML node    2    3
+    ${new_lic_string}    replace string in XML    ${lic_setting}    [lic_rate1]    0.125
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_rate2]    0.2
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_minamt1]    0
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_maxamt1]    0
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_minamt2]    0
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_maxamt2]    0
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_base_currencyID1]    0
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_base_currencyID2]    0
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_charge_type1]    1
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_charge_type2]    1
+    ${new_third_string}    replace string in XML    ${third_setting}    [3rd_rate1]    0.1
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_rate2]    0.08
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_rate3]    0.175
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_minamt1]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_maxamt1]    2000000
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_minamt2]    2000000
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_maxamt2]    10000000000000
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_minamt3]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_maxamt3]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_base_currencyID1]    3
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_base_currencyID2]    3
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_base_currencyID3]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_chargetype1]    4
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_chargetype2]    4
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_chargetype3]    1
+    ###    ##ProductID    ##FromPartyID    ##ToPartyID    ##LicSetting    ##ThirdPartySetting    ##Fromdate
+    ...    # Todate
+    createSettingByXML    14    14    1    ${new_lic_string}    ${new_third_string}    '20170101'
+    ...    '20500101'
+
+test2
+    Comment    ${a}    set variable    <Rate>[lic_rate1]</Rate>
+    Comment    ${lic_rate1}    set variable    0.15
+    Comment    ${a}    replace string    ${a}    [lic_rate1]    ${lic_rate1}
+    Comment    log    ${a}

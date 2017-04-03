@@ -34,9 +34,9 @@ get file name exported excel for Licensee WL
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
@@ -62,13 +62,13 @@ get file name exported excel for Licensee WL
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='August'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='August'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='Septemper'
-    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='October'
-    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
+    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='November'
     [Return]    ${filename}
 
@@ -102,9 +102,9 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
@@ -130,10 +130,10 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='August' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='August'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Septemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Semtemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
@@ -158,10 +158,10 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='August' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='August'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Septemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Agust'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Semtemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
@@ -197,9 +197,9 @@ get file name exported excel for Platfrom Win Loss
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
@@ -225,8 +225,8 @@ get file name exported excel for Platfrom Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='August'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
-    \    Exit For Loop If    '${mm1}'=='August'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='Agust'
     \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='Semtemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
@@ -893,11 +893,12 @@ compare settlement report for SportsBook
     \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
     \    Click Element    ${licensee_filter}    # Licensee
     \    Click Element    id=submit-button
-    \    Sleep    0.5s
+    \    Sleep    2s
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    Sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -940,8 +941,7 @@ compare settlement report for Number game
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
     \    Click Element    ${licensee_filter}    # Licensee
-    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
-    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
     \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Number Game
     \    Click Element    id=submit-button
@@ -949,6 +949,7 @@ compare settlement report for Number game
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -991,14 +992,14 @@ compare settlement report for BA
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
     \    Click Element    ${licensee_filter}    # Licensee
-    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
-    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
     \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    BA
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${Customerwl}    ${BAComm}    ${Amount}    get data of licensee on excel file for ba    ${filename}    ${licensee}
+    \    sleep    2s
     \    ${Customerwl_settlement}    Get Text    xpath=(//td[@class='text-right border-bottom laTable__cell laTable__cell-grandTotal'])[2]    #Cus WL
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
@@ -1034,13 +1035,13 @@ compare settlement report for Live Casino
     : FOR    ${index}    IN RANGE    0    ${count}+1
     \    ${licensee}    get from list    ${l}    ${index}
     \    Click Element    ${licensee_filter}    # Licensee
-    \    ${Allcheckboxstatus}    Run Keyword And Return Status    Checkbox Should Be Selected    xpath=//div[@class='ddci__text' and contains(text(),'${licensee}')]/parent::label/input[@type='checkbox']    #Get status of licensee radio button
-    \    Run Keyword If    '${Allcheckboxstatus}'<>'True'    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
+    \    Click Element    xpath=//div[@class="ddci__text" and contains(text(),'${licensee}')]
     \    Click Element    ${licensee_filter}    # Licensee
     \    Select From List By Label    xpath=.//select[@id='Product']    Live Casino
     \    Click Element    id=submit-button
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
+    \    sleep    2s
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
@@ -1095,6 +1096,7 @@ compare settlement report for Virtual Sports
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
     \    Capture Page Screenshot
+    \    sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -1147,6 +1149,7 @@ compare settlement report for RNG Casino
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
     \    Capture Page Screenshot
+    \    sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -1198,6 +1201,7 @@ compare settlement report for Keno
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -1249,6 +1253,7 @@ compare settlement report for AG Casino
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -1300,6 +1305,7 @@ compare settlement report for Gold Deluxe
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -1351,6 +1357,7 @@ compare settlement report for Macau
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -1402,6 +1409,7 @@ compare settlement report for Microgaming Live Casino
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -1421,7 +1429,7 @@ compare settlement report for Microgaming Live Casino
     \    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Microgaming-Live Casino
     \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Microgaming-Live Casino
     \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Microgaming-Live Casino
-    \    Comment    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Microgaming-Live Casino
+    \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee}, Microgaming-Live Casino
 
 compare settlement report for Microgaming RNG Casino
     [Arguments]    ${Licensees}
@@ -1453,22 +1461,23 @@ compare settlement report for Microgaming RNG Casino
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
-    \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
-    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
-    \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
-    \    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
-    \    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
-    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
-    \    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
-    \    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
+    \    sleep    2s
+    \    Comment    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
+    \    Comment    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
+    \    Comment    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
+    \    Comment    ${TotalTrans_settlement}    Replace String    ${TotalTrans_settlement}    (    -
+    \    Comment    ${Turnover_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[1]    #Turnover
+    \    Comment    ${Turnover_settlement}    remove string    ${Turnover_settlement}    ,
+    \    Comment    ${Turnover_settlement}    remove string    ${Turnover_settlement}    )
+    \    Comment    ${Turnover_settlement}    Replace String    ${Turnover_settlement}    (    -
     \    ${Customerwl_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[3]    #Cus WL
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    ,
     \    ${Customerwl_settlement}    remove string    ${Customerwl_settlement}    )
     \    ${Customerwl_settlement}    Replace String    ${Customerwl_settlement}    (    -
-    \    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
-    \    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
-    \    ${Amount_settlement}    remove string    ${Amount_settlement}    )
-    \    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
+    \    Comment    ${Amount_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[5]    #GBP
+    \    Comment    ${Amount_settlement}    remove string    ${Amount_settlement}    ,
+    \    Comment    ${Amount_settlement}    remove string    ${Amount_settlement}    )
+    \    Comment    ${Amount_settlement}    Replace String    ${Amount_settlement}    (    -
     \    Comment    check value equal with approximation    ${TotalTrans}    ${TotalTrans_settlement}    Compare Total Trans for ${licensee}, Microgaming-RNG Casino
     \    Comment    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee}, Microgaming-RNG Casino
     \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee}, Microgaming-RNG Casino
@@ -1555,6 +1564,7 @@ compare settlement report for Macau Games
     \    Run Keyword If    '${exist}'=='True'    wait page settlement loading
     \    ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}
     \    ...    ${licensee}
+    \    sleep    2s
     \    ${TotalTrans_settlement}    Get Text    xpath=.//td[contains(text(),'Total in')]/following::td[2]    #Total Trans
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    ,
     \    ${TotalTrans_settlement}    remove string    ${TotalTrans_settlement}    )
@@ -1756,8 +1766,8 @@ export data for Licensee winloss base on licensees and products
     Click Element    xpath=//div[@class='ddci__text' and contains(text(),'${product_name}')]    # Click specific product
     Click Element    ${products_listbox}    # Click on Product filter
     Click Button    ${submit_button}
-    Wait Until Page Does Not Contain Element    xpath=//div[@style='display: block;']/div/div[@class='laBlockUi__msg' and contains(text(),'Loading')]
-    Sleep    1s
+    sleep    2s
+    wait until element is visible    ${export_to_excel_button}
     Click Element    ${export_to_excel_button}
     sleep    1s
 
@@ -1800,3 +1810,608 @@ compare bettrade detail by date
     \    ${ClientcommissionONEWorks}    Run Keyword If    '${currencyLA}'=='${currencyReconciliation}'    Read Cell Data By Coordinates    May 2016    16
     \    ...    ${index}
     \    Exit For Loop If    '${currencyLA}'=='${currencyReconciliation}'
+
+get data from Colossusbet WL in LA
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    navigate menu    Win Loss Report    Colossus Bet Win Loss
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    wait until element is visible    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"]/following::td[1][contains(text(),'EUR')]/following::td[1]
+    ${total_trans}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"]/following::td[1][contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"]/following::td[1][contains(text(),'EUR')]/following::td[2]
+    ${MemberPrize}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"]/following::td[1][contains(text(),'EUR')]/following::td[3]
+    ${MemberCashout}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"]/following::td[1][contains(text(),'EUR')]/following::td[4]
+    ${total_trans}    change format for number    ${total_trans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${MemberPrize}    change format for number    ${MemberPrize}
+    ${MemberCashout}    change format for number    ${MemberCashout}
+    should be true    ${total_trans} >0
+    should be true    ${Turnover} >0
+    Comment    should be true    ${MemberCashout} >0
+    [Return]    ${total_trans}    ${Turnover}    ${MemberPrize}    ${MemberCashout}
+
+get data in gold deluxe win lost report
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    navigate menu    Win Loss Report    Gold Deluxe Win Loss
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    wait until element is visible    xpath=//td[@class="laTable__cell laTable__cell-grandTotal" and @rowspan="5"]
+    ${totaltrans}    get text    xpath=//td[@class="laTable__cell laTable__cell-grandTotal" and @rowspan="5"]
+    ${turnover}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"][contains(text(),'EUR')]/following::td[1]
+    ${valid_bet_amt}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"][contains(text(),'EUR')]/following::td[2]
+    ${customer_wl}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"][contains(text(),'EUR')]/following::td[3]
+    ${licensee_fee}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"][contains(text(),'EUR')]/following::td[4]
+    ${service_charge}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"][contains(text(),'EUR')]/following::td[5]
+    ${rebate_comm}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"][contains(text(),'EUR')]/following::td[6]
+    ${pay_to_supplier}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"][contains(text(),'EUR')]/following::td[7]
+    ${pay_to_supplier}    run key word if    '${pay_to_supplier}' < 0    set variable    0
+    ...    ELSE    set variable    ${pay_to_supplier}
+    ${totaltrans}    change format for number    ${totaltrans}
+    ${turnover}    change format for number    ${turnover}
+    ${valid_bet_amt}    change format for number    ${valid_bet_amt}
+    ${customer_wl}    change format for number    ${customer_wl}
+    ${licensee_fee}    change format for number    ${licensee_fee}
+    ${service_charge}    change format for number    ${service_charge}
+    ${rebate_comm}    change format for number    ${rebate_comm}
+    ${pay_to_supplier}    change format for number    ${pay_to_supplier}
+    [Return]    ${totaltrans}    ${turnover}    ${valid_bet_amt}    ${customer_wl}    ${licensee_fee}    ${service_charge}
+    ...    ${rebate_comm}    ${pay_to_supplier}
+
+submit filter for 3rd report
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${from_date}    ${to_date}
+    sleep    2s
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
+    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
+    click element    xpath=//div[@class="monthPicker"]
+    sleep    1s
+    ${is_selected_year}    run key word and return status    Element Should Be Visible    xpath=//a[@class='selected' and @year='${yyyyy_from}']/span
+    run key word if    '${is_selected_year}'=='False'    double click element    xpath=//a[@year='${yyyyy_from}']/span
+    #FromDate - ToDate
+    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
+    click element    xpath=//*[@id='ddlFromDay']
+    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
+    click element    xpath=//*[@id='ddlToDay']
+    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
+    #Licensee
+    click element    xpath=//*[@id='party-filter']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//input[@placeholder="Filter"]
+    input text    xpath=//input[@placeholder="Filter"]    ${licensee_name}
+    click element    xpath=//label/div[contains(text(),'${licensee_name}')]
+    #GroupByLicensee
+    run key word if    '${is_group_by_licensee}'=='No'    click element    xpath=//*[@id='GroupByLicensee']
+    #Filter
+    double click element    xpath=//*[@id='party-filter']
+    ${is_show_hide}    run keyword and return status    Element Should Be Visible    xpath=//label[contains(text(),'Show/Hide')]
+    run keyword if    '${is_show_hide}'=='True'    click element    xpath=//*[@id='show-hide-filter']
+    run keyword if    '${is_show_hide}'=='True'    click element    xpath=//div[@class="ddci__text"][contains(text(),'All')]
+    #Currency
+    click element    xpath=//*[@id='ddlCurrency']
+    wait until element is visible    xpath=//option[text()='${exchange}']
+    click element    xpath=//option[text()='${exchange}']
+    click element    xpath=//*[@id='submit-button']
+    Sleep    1s
+    click element    xpath=//*[@id='submit-button']
+
+get colossus bet data from settlement report
+    [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${base_currency}
+    submit filter by date range for settlement report    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${base_currency}
+    ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
+    ## In case no data
+    ${ac_no_info_status}    Run Keyword And Return Status    Page Should Contain    No Information Available
+    ## get member winloss
+    sleep    2s
+    ${Turnover}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[1]
+    ${total_trans}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[2]
+    ${MemberWinning}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[3]
+    ${MemberCashout}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[4]
+    ${CashoutShare}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[5]
+    ${CommShare}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[6]
+    ${Turnover}    change format for number    ${Turnover}
+    ${total_trans}    change format for number    ${total_trans}
+    ${MemberWinning}    change format for number    ${MemberWinning}
+    ${MemberCashout}    change format for number    ${MemberCashout}
+    ${CashoutShare}    change format for number    ${CashoutShare}
+    ${CommShare}    change format for number    ${CommShare}
+    should be true    ${Turnover} >0.0
+    should be true    ${total_trans}>0.0
+    should be true    ${CommShare} >0.0
+    [Return]    ${Turnover}    ${total_trans}    ${MemberWinning}    ${MemberCashout}    ${CashoutShare}    ${CommShare}
+
+get data for Allbet from winlost report
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    navigate menu    Win Loss Report (3rd)    Allbet Win Loss (GMT + \ 8)
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    wait until element is visible    xpath=//th[@class="free-grid-td-4"]/div
+    ${totaltrans}    get text    xpath=//th[@class="free-grid-td-4"]/div
+    ${turnover}    get text    xpath=(//th[@class="free-grid-td-5"]/div)[1]
+    ${valid_bet_amt}    get text    xpath=//th[@class="free-grid-td-6"]/div
+    ${customer_wl}    get text    xpath=//th[@class="free-grid-td-7"]/div
+    ${service_charge}    get text    xpath=//th[@class="free-grid-td-8"]/div
+    ${rebate_comm}    get text    xpath=//th[@class="free-grid-td-11"]/div
+    ${pay_to_supplier}    get text    xpath=//th[@class="free-grid-td-14"]/div
+    ${pay_to_supplier}    run key word if    '${pay_to_supplier}' < 0    set variable    0
+    ...    ELSE    set variable    ${pay_to_supplier}
+    ${totaltrans}    change format for number    ${totaltrans}
+    ${turnover}    change format for number    ${turnover}
+    ${valid_bet_amt}    change format for number    ${valid_bet_amt}
+    ${customer_wl}    change format for number    ${customer_wl}
+    ${service_charge}    change format for number    ${service_charge}
+    ${rebate_comm}    change format for number    ${rebate_comm}
+    ${pay_to_supplier}    change format for number    ${pay_to_supplier}
+    [Return]    ${totaltrans}    ${turnover}    ${valid_bet_amt}    ${customer_wl}    ${service_charge}    ${rebate_comm}
+    ...    ${pay_to_supplier}
+
+get data from licensee win loss report
+    [Arguments]    ${licensee_name}    ${product}    ${exchange}    ${from_date}    ${to_date}    ${filter}
+    ...    ${date}
+    navigate menu    Win Loss Report    Licensee Win Loss
+    sleep    2s
+    submit filter for licensee win loss report    ${licensee_name}    ${product}    ${exchange}    ${from_date}    ${to_date}    ${filter}
+    ...    ${date}
+    Sleep    4s
+    # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
+    ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
+    Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
+    # If report has data
+    wait until element is visible    xpath=//*[@class='laTable__data']//..//td[contains(text(),'Grand Total in EUR')]/following::td[1]
+    ${total_trans}    get text    xpath=//*[@class='laTable__data']//..//td[contains(text(),'Grand Total in EUR')]/following::td[1]
+    ${turnover}    get text    xpath=//*[@class='laTable__data']//..//td[contains(text(),'Grand Total in EUR')]/following::td[2]
+    ${customer_wl}    get text    xpath=//*[@class='laTable__data']//..//td[contains(text(),'Grand Total in EUR')]/following::td[3]
+    ${others}    Run keyword if    '${product}'=='BA'    Get Text    xpath=//*[@class='laTable__data']//..//td[contains(text(),'Grand Total in EUR')]/following::td[7]
+    ...    ELSE    Get Text    xpath=//*[@class='laTable__data']//..//td[contains(text(),'Grand Total in EUR')]/following::td[9]
+    ${total_trans}    change format for number    ${total_trans}
+    ${turnover}    change format for number    ${turnover}
+    ${customer_wl}    change format for number    ${customer_wl}
+    ${others}    change format for number    ${others}
+    should be true    ${total_trans} >0
+    should be true    ${turnover} >0
+    [Return]    ${total_trans}    ${turnover}    ${customer_wl}    ${others}
+
+submit filter for licensee win loss report
+    [Arguments]    ${licensee_name}    ${product}    ${exchange}    ${from_date}    ${to_date}    ${filter}
+    ...    ${date}
+    sleep    2s
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date for calendar picker    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date for calendar picker    ${to_date}
+    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
+    #Date
+    click element    xpath=//*[@id='DateRange']
+    click element    xpath=//*[@id='DateRange']/option[text()='${date}']
+    click element    xpath=//*[@id='reportFilter']//label[text()='Date']
+    sleep    2s
+    #FromDate - ToDate
+    click element    xpath=//*[@id='fd-but-FromDate']/span[1]
+    Comment    sleep    1s
+    click element    xpath=//div[@id='fd-FromDate']//td[contains(@class,'yyyymm-${yyyyy_from}${mm_from} mmdd-${mm_from}${dd_from}')]
+    click element    xpath=//*[@id='fd-but-ToDate']/span[1]
+    click element    xpath=//div[@id='fd-ToDate']//td[contains(@class,'yyyymm-${yyyy_to}${mm_to} mmdd-${mm_to}${dd_to}')]
+    #Licensee
+    click element    xpath=//*[@id='party-filter']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//input[@placeholder="Filter"]
+    input text    xpath=//input[@placeholder="Filter"]    ${licensee_name}
+    click element    xpath=//label/div[contains(text(),'${licensee_name}')]
+    #Filter
+    click element    xpath=.//*[@class='laForm__label text-normal']/input[@value='${filter}']
+    #Product
+    click element    xpath=//*[@id='product-option']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//div[text()='${product}']
+    click element    xpath=.//*[@class='laForm__label text-normal']/input[@value='${filter}']
+    #Currency
+    click element    xpath=//*[@id='ddl-base-currency']
+    Click Element    xpath=//*[@id='ddl-base-currency']/option[text()='EUR']
+    click element    xpath=//*[@id='btn-submit']
+    Sleep    2s
+    click element    xpath=//*[@id='btn-submit']
+
+get all data from win loss by product report
+    [Arguments]    ${licensee_name}    ${exchange}    ${from_date}    ${to_date}
+    navigate menu    Win Loss Report    Win Loss by Product
+    sleep    2s
+    submit filter for win loss by product report    ${licensee_name}    ${exchange}    ${from_date}    ${to_date}
+    wait until element is visible    xpath=//td[contains(text(),'Grand Total')]
+    ${sb_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[1]
+    ${racing_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[2]
+    ${ng_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[3]
+    ${ba_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[4]
+    ${lc_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[5]
+    ${vs_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[6]
+    ${rng_casino}    get text    //td[contains(text(),'Grand Total')]//following::td[7]
+    ${keno_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[8]
+    ${ag_casino_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[9]
+    ${gd_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[10]
+    ${macau_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[11]
+    ${mcg_lc_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[12]
+    ${mcg_rng_casino_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[13]
+    ${macaugame_fee}    get text    //td[contains(text(),'Grand Total')]//following::td[14]
+    ${sb_fee}    change format for number    ${sb_fee}
+    ${racing_fee}    change format for number    ${racing_fee}
+    ${ng_fee}    change format for number    ${ng_fee}
+    ${ba_fee}    change format for number    ${ba_fee}
+    ${lc_fee}    change format for number    ${lc_fee}
+    ${vs_fee}    change format for number    ${vs_fee}
+    ${rng_casino}    change format for number    ${rng_casino}
+    ${keno_fee}    change format for number    ${keno_fee}
+    ${ag_casino_fee}    change format for number    ${ag_casino_fee}
+    ${gd_fee}    change format for number    ${gd_fee}
+    ${macau_fee}    change format for number    ${macau_fee}
+    ${mcg_lc_fee}    change format for number    ${mcg_lc_fee}
+    ${mcg_rng_casino_fee}    change format for number    ${mcg_rng_casino_fee}
+    ${macaugame_fee}    change format for number    ${macaugame_fee}
+    [Return]    ${sb_fee}    ${racing_fee}    ${ng_fee}    ${ba_fee}    ${lc_fee}    ${vs_fee}
+    ...    ${rng_casino}    ${keno_fee}    ${ag_casino_fee}    ${gd_fee}    ${macau_fee}    ${mcg_lc_fee}
+    ...    ${mcg_rng_casino_fee}    ${macaugame_fee}
+
+submit filter for win loss by product report
+    [Arguments]    ${licensee_name}    ${exchange}    ${from_date}    ${to_date}
+    navigate menu    Win Loss Report    Win Loss by Product
+    sleep    2s
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
+    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
+    click element    xpath=//div[@class="monthPicker"]
+    sleep    1s
+    ${is_selected_year}    run key word and return status    Element Should Be Visible    xpath=//a[@class='selected' and @year='${yyyyy_from}']/span
+    run key word if    '${is_selected_year}'=='False'    double click element    xpath=//a[@year='${yyyyy_from}']/span
+    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
+    click element    xpath=//*[@id='ddlFromDay']
+    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
+    sleep    1s
+    click element    xpath=//*[@id='ddlToDay']
+    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
+    click element    xpath=//*[@id='party-filter']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//input[@placeholder="Filter"]
+    input text    xpath=//input[@placeholder="Filter"]    ${licensee_name}
+    click element    xpath=//label/div[contains(text(),'${licensee_name}')]
+    click element    xpath=.//*[@id='ddlCurrency']
+    click element    //*[@id='ddlCurrency']/option[text()='EUR']
+    click element    xpath=//*[@id='submit-button']
+    Sleep    1s
+    click element    xpath=//*[@id='submit-button']
+
+submit filter for Virtual Sports in winloss report
+    [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${date_filter}
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date for calendar picker    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date for calendar picker    ${to_date}
+    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
+    Comment    click element    xpath=//*[@id='FromDate-next-month-but']
+    #Date_Filter
+    click element    xpath=//*[@id='DateRange']
+    click element    xpath=//*[@id='DateRange']/option[contains(text(),'${date_filter}')]
+    click element    xpath=//*[@id='FromDate_label']
+    sleep    1s
+    #FromDate - ToDate
+    click element    xpath=//*[@id='fd-but-FromDate']/span[1]    #fix issue load last month
+    click element    xpath=//*[@id='fd-but-FromDate']/span[1]    #fix issue load last month
+    click element    xpath=//*[@id='fd-but-FromDate']/span[1]
+    sleep    1s
+    click element    xpath=//div[@id='fd-FromDate']//td[contains(@class,'yyyymm-${yyyyy_from}${mm_from} mmdd-${mm_from}${dd_from}')]
+    click element    xpath=//*[@id='fd-but-ToDate']/span[1]    #fix issue load last month
+    click element    xpath=//*[@id='fd-but-ToDate']/span[1]    #fix issue load last month
+    click element    xpath=//*[@id='fd-but-ToDate']/span[1]
+    Comment    click element    xpath=//*[@id='ToDate-next-month-but']
+    click element    xpath=//div[@id='fd-ToDate']//td[contains(@class,'yyyymm-${yyyy_to}${mm_to} mmdd-${mm_to}${dd_to}')]
+    #Licensee
+    click element    xpath=//*[@id='party-filter']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//input[@placeholder="Filter"]
+    input text    xpath=//input[@placeholder="Filter"]    ${licensee_name}
+    click element    xpath=//label/div[contains(text(),'${licensee_name}')]
+    click element    xpath=//*[@id='FromDate_label']
+    Sleep    1s
+    click element    xpath=//*[@id='submit-button']
+
+get data from Virtual Sports winloss report
+    [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${date_filter}
+    sleep    4s
+    submit filter for Virtual Sports in winloss report    ${licensee_name}    ${from_date}    ${to_date}    ${date_filter}
+    sleep    4s
+    wait until element is visible    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]
+    ${TotalTrans}    get text    xpath=//td[contains(text(),'Grand Total')]/following::td[1]
+    ${Turnover}    get text    xpath=//td[contains(text(),'Grand Total')]/following::td[2]
+    ${LicenseeWL}    get text    xpath=//td[contains(text(),'Grand Total')]/following::td[3]
+    ${AmountDueTo}    get text    xpath=//td[contains(text(),'Grand Total')]/following::td[5]
+    ${TotalTrans}    change format for number    ${TotalTrans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${LicenseeWL}    change format for number    ${LicenseeWL}
+    ${AmountDueTo}    change format for number    ${AmountDueTo}
+    should be true    ${TotalTrans} >0
+    should be true    ${Turnover} >0
+    [Return]    ${TotalTrans}    ${Turnover}    ${LicenseeWL}    ${AmountDueTo}
+
+get data for winloss report (AG,Keno)
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    wait until element is visible    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
+    ${total_trans}    get text    //tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    //tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[2]
+    ${CustomerWinLoss}    get text    //tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[3]
+    ${LicenseeFee}    get text    //tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[5]
+    ${total_trans}    change format for number    ${total_trans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${CustomerWinLoss}    change format for number    ${CustomerWinLoss}
+    ${LicenseeFee}    change format for number    ${LicenseeFee}
+    should be true    ${total_trans} >0
+    should be true    ${Turnover} >0
+    [Return]    ${total_trans}    ${Turnover}    ${CustomerWinLoss}    ${LicenseeFee}
+
+get bettrade data from settlement report
+    [Arguments]    ${licensee_name}    ${product_name}    ${base_currency}    ${from_date}    ${to_date}
+    submit filter by date range for settlement report    ${licensee_name}    ${product_name}    ${base_currency}    ${from_date}    ${to_date}
+    ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
+    ## In case no data
+    ${ac_no_info_status}    Run Keyword And Return Status    Page Should Contain    No Information Available
+    ## get member winloss
+    sleep    2s
+    ${total_trans}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[1]
+    ${actual_stake}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[2]
+    ${bbamount_sb}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[3]
+    ${bbamount}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[5]
+    ${bt_wl}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[7]
+    ${bt_comm}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[8]
+    ${equivalent}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[9]
+    ${total_trans}    change format for number    ${total_trans}
+    ${actual_stake}    change format for number    ${actual_stake}
+    ${bbamount_sb}    change format for number    ${bbamount_sb}
+    ${bbamount}    change format for number    ${bbamount}
+    ${bt_wl}    change format for number    ${bt_wl}
+    ${bt_comm}    change format for number    ${bt_comm}
+    ${equivalent}    change format for number    ${equivalent}
+    should be true    ${actual_stake} >0.0
+    should be true    ${total_trans}>0.0
+    should be true    ${bbamount} >0.0
+    [Return]    ${total_trans}    ${actual_stake}    ${bbamount_sb}    ${bbamount}    ${bt_wl}    ${bt_comm}
+    ...    ${equivalent}
+
+get data for Bettrade winloss report
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${from_date}    ${to_date}
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${from_date}    ${to_date}
+    wait until element is visible    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]
+    ${total_trans}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[2]
+    ${actual_stake}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[3]
+    ${bbamount}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[6]
+    ${wl_bbamount}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[7]
+    ${wl_bought_ticket}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[8]
+    ${bt_comm}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[9]
+    ${profit_sharing}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[10]
+    ${pay_to_supplier}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[11]
+    ${total_trans}    change format for number    ${total_trans}
+    ${actual_stake}    change format for number    ${actual_stake}
+    ${bbamount}    change format for number    ${bbamount}
+    ${wl_bbamount}    change format for number    ${wl_bbamount}
+    ${wl_bought_ticket}    change format for number    ${wl_bought_ticket}
+    ${bt_comm}    change format for number    ${bt_comm}
+    ${profit_sharing}    change format for number    ${profit_sharing}
+    ${pay_to_supplier}    change format for number    ${pay_to_supplier}
+    should be true    ${total_trans} >0
+    should be true    ${actual_stake} >0
+    should be true    ${bbamount} >0
+    should be true    ${bt_comm} >0
+    [Return]    ${total_trans}    ${actual_stake}    ${bbamount}    ${wl_bbamount}    ${wl_bought_ticket}    ${bt_comm}
+    ...    ${profit_sharing}    ${pay_to_supplier}
+
+get data for FW winloss report
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    wait until element is visible    xpath=//*[@id='data-area']//..//td[contains(text(),'Grand Total in')]
+    ${total_trans}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'Grand Total in')]/following::td[2]
+    ${Turnover}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[1]
+    ${CustomerWL}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[2]
+    ${LicenseeWL}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[3]
+    ${LicenseeFee}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[4]
+    ${PayToSupplier}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[5]
+    ${NetIncome}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[6]
+    ${total_trans}    change format for number    ${total_trans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${CustomerWL}    change format for number    ${CustomerWL}
+    ${LicenseeWL}    change format for number    ${LicenseeWL}
+    ${LicenseeFee}    change format for number    ${LicenseeFee}
+    ${PayToSupplier}    change format for number    ${PayToSupplier}
+    ${NetIncome}    change format for number    ${NetIncome}
+    should be true    ${total_trans} >0
+    should be true    ${Turnover} >0
+    [Return]    ${total_trans}    ${Turnover}    ${CustomerWL}    ${LicenseeWL}    ${LicenseeFee}    ${PayToSupplier}
+    ...    ${NetIncome}
+
+get data for NG2 winloss report
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    wait until element is visible    xpath=//*[@id='data-area']//..//td[contains(text(),'Grand Total in')]
+    ${total_trans}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[2]
+    ${CustomerWL}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[3]
+    ${LicenseeWL}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[4]
+    ${LicenseeFee}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[5]
+    ${PayToSupplier}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[6]
+    ${NetIncome}    get text    xpath=//*[@id='data-area']//..//td[@class='laTable__cell laTable__cell-grandTotal text-center' and contains(text(),'EUR')]/following::td[7]
+    ${total_trans}    change format for number    ${total_trans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${CustomerWL}    change format for number    ${CustomerWL}
+    ${LicenseeWL}    change format for number    ${LicenseeWL}
+    ${LicenseeFee}    change format for number    ${LicenseeFee}
+    ${PayToSupplier}    change format for number    ${PayToSupplier}
+    ${NetIncome}    change format for number    ${NetIncome}
+    should be true    ${total_trans} >0
+    should be true    ${Turnover} >0
+    [Return]    ${total_trans}    ${Turnover}    ${CustomerWL}    ${LicenseeWL}    ${LicenseeFee}    ${PayToSupplier}
+    ...    ${NetIncome}
+
+get data for Muay Thai winloss report
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    sleep    1s
+    wait until element is visible    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]
+    ${Total_Trans}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[2]
+    ${CustomerWL}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[3]
+    ${WLShare}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[4]
+    ${CommLicensee}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[5]
+    ${CommShare}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[6]
+    ${Amt_Licensee}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[7]
+    ${Amt_ThaiPartner}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[8]
+    ${Amt_Income}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[9]
+    ${Total_Trans}    change format for number    ${Total_Trans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${CustomerWL}    change format for number    ${CustomerWL}
+    ${WLShare}    change format for number    ${WLShare}
+    ${CommLicensee}    change format for number    ${CommLicensee}
+    ${CommShare}    change format for number    ${CommShare}
+    ${Amt_Licensee}    change format for number    ${Amt_Licensee}
+    ${Amt_ThaiPartner}    change format for number    ${Amt_ThaiPartner}
+    ${Amt_Income}    change format for number    ${Amt_Income}
+    should be true    ${Total_Trans} >0
+    should be true    ${Turnover} >0
+    [Return]    ${Total_Trans}    ${Turnover}    ${CustomerWL}    ${WLShare}    ${CommLicensee}    ${CommShare}
+    ...    ${Amt_Licensee}    ${Amt_ThaiPartner}    ${Amt_Income}
+
+get data for Super live winloss report
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    wait until element is visible    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
+    ${total_trans}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[2]
+    ${LicenseeWL}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[4]
+    ${LicenseeFee}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[5]
+    ${PayToSupplier}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[6]
+    ${NetIncome}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[7]
+    ${total_trans}    change format for number    ${total_trans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${LicenseeWL}    change format for number    ${LicenseeWL}
+    ${LicenseeFee}    change format for number    ${LicenseeFee}
+    ${PayToSupplier}    change format for number    ${PayToSupplier}
+    ${NetIncome}    change format for number    ${NetIncome}
+    should be true    ${total_trans} >0
+    should be true    ${Turnover} >0
+    [Return]    ${total_trans}    ${Turnover}    ${LicenseeWL}    ${LicenseeFee}    ${PayToSupplier}    ${NetIncome}
+
+get data from winloss report (NG, LC)
+    [Arguments]    ${licensee_name}    ${fromdate}    ${todate}    ${date_filter}
+    sleep    2s
+    submit filter for winloss report ( NG, LC)    ${licensee_name}    ${fromdate}    ${todate}    ${date_filter}
+    wait until element is visible    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[1]
+    ${TotalTrans}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[2]
+    ${Turnover}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[1]
+    ${GrossWin}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[3]
+    ${AmountDueTo}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[4]
+    ${TotalTrans}    change format for number    ${TotalTrans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${GrossWin}    change format for number    ${GrossWin}
+    ${AmountDueTo}    change format for number    ${AmountDueTo}
+    should be true    ${TotalTrans} >0
+    should be true    ${Turnover} >0
+    [Return]    ${TotalTrans}    ${Turnover}    ${GrossWin}    ${AmountDueTo}
+
+submit filter for winloss report (NG, LC)
+    [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${date_filter}
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date for calendar picker    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date for calendar picker    ${to_date}
+    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
+    Comment    click element    xpath=//*[@id='FromDate-prev-month-but']    #for last month
+    #Filter
+    click element    xpath=//*[@id='DateRange']
+    click element    xpath=//*[@id='DateRange']/option[text()='${date_filter}']
+    click element    xpath=//*[@id='FromDate_label']
+    sleep    1s
+    #FromDate - ToDate
+    Comment    click element    xpath=//*[@id='FromDate-next-month-but']
+    click element    xpath=//*[@id='fd-but-FromDate']/span[1]
+    click element    xpath=//div[@id='fd-FromDate']//td[contains(@class,'yyyymm-${yyyyy_from}${mm_from} mmdd-${mm_from}${dd_from}')]
+    click element    xpath=//*[@id='fd-but-ToDate']/span[1]
+    Comment    click element    xpath=//*[@id='ToDate-next-month-but']
+    click element    xpath=//div[@id='fd-ToDate']//td[contains(@class,'yyyymm-${yyyy_to}${mm_to} mmdd-${mm_to}${dd_to}')]
+    #Licensee
+    click element    xpath=//*[@id='party-filter']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//input[@placeholder="Filter"]
+    input text    xpath=//input[@placeholder="Filter"]    ${licensee_name}
+    click element    xpath=//label/div[contains(text(),'${licensee_name}')]
+    click element    xpath=//*[@id='FromDate_label']
+    Sleep    1s
+    click element    xpath=//*[@id='submit-button']
+
+get data for Microgaming Win Loss (GMT - 4)
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
+    wait until element is visible    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
+    ${total_trans}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[2]
+    ${LicenseeWinLoss}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[3]
+    ${ProgressiveContribution}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[5]
+    ${ProgressivePayout}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[6]
+    ${ProgressiveFee}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[8]
+    ${total_trans}    change format for number    ${total_trans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${LicenseeWinLoss}    change format for number    ${LicenseeWinLoss}
+    ${ProgressiveContribution}    change format for number    ${ProgressiveContribution}
+    ${ProgressivePayout}    change format for number    ${ProgressivePayout}
+    ${ProgressiveFee}    change format for number    ${ProgressiveFee}
+    should be true    ${total_trans} >0
+    should be true    ${Turnover} >0
+    [Return]    ${total_trans}    ${Turnover}    ${LicenseeWinLoss}    ${ProgressiveContribution}    ${ProgressivePayout}    ${ProgressiveFee}
+
+submit filter for MCG from licensee win loss report
+    [Arguments]    ${licensee_name}    ${exchange}    ${from_date}    ${to_date}    ${filter}    ${date}
+    sleep    2s
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date for calendar picker    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date for calendar picker    ${to_date}
+    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
+    #Date
+    click element    xpath=//*[@id='DateRange']
+    click element    xpath=//*[@id='DateRange']/option[text()='${date}']
+    click element    xpath=//*[@id='reportFilter']//label[text()='Date']
+    #FromDate - ToDate
+    click element    xpath=//*[@id='fd-but-FromDate']/span[1]
+    Comment    sleep    1s
+    click element    xpath=//div[@id='fd-FromDate']//td[contains(@class,'yyyymm-${yyyyy_from}${mm_from} mmdd-${mm_from}${dd_from}')]
+    click element    xpath=//*[@id='fd-but-ToDate']/span[1]
+    click element    xpath=//div[@id='fd-ToDate']//td[contains(@class,'yyyymm-${yyyy_to}${mm_to} mmdd-${mm_to}${dd_to}')]
+    #Licensee
+    click element    xpath=//*[@id='party-filter']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//input[@placeholder="Filter"]
+    input text    xpath=//input[@placeholder="Filter"]    ${licensee_name}
+    click element    xpath=//label/div[contains(text(),'${licensee_name}')]
+    #Filter
+    click element    xpath=.//*[@class='laForm__label text-normal']/input[@value='${filter}']
+    #Product
+    click element    xpath=//*[@id='product-option']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//div[text()='Microgaming - Live Casino']    # Microgaming - Live Casino
+    click element    xpath=//div[text()='Microgaming - RNG Casino']    # Microgaming - RNG Casino
+    click element    xpath=//*[@class='laForm__label text-normal']/input[@value='${filter}']
+    #Currency
+    click element    xpath=//*[@id='ddl-base-currency']
+    Click Element    xpath=//*[@id='ddl-base-currency']/option[text()='EUR']
+    click element    xpath=//*[@id='btn-submit']
+    Sleep    2s
+    click element    xpath=//*[@id='btn-submit']
+
+get data for MCG from licensee win loss report
+    [Arguments]    ${licensee_name}    ${exchange}    ${from_date}    ${to_date}    ${filter}    ${date}
+    navigate menu    Win Loss Report    Licensee Win Loss
+    sleep    2s
+    submit filter for MCG from licensee win loss report    ${licensee_name}    ${exchange}    ${from_date}    ${to_date}    ${filter}    ${date}
+    Sleep    4s
+    # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
+    ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
+    Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
+    # If report has data
+    wait until element is visible    xpath=//*[@class='laTable__data']//..//td[contains(text(),'Grand Total in EUR')]/following::td[1]
+    ${turnover}    get text    xpath=//*[@class='laTable__data']//..//td[contains(text(),'Grand Total in EUR')]/following::td[2]
+    ${licensee_wl}    get text    xpath=//*[@class='laTable__data']//..//td[contains(text(),'Grand Total in EUR')]/following::td[4]
+    ${turnover}    change format for number    ${turnover}
+    ${licensee_wl}    change format for number    ${licensee_wl}
+    should be true    ${turnover} >0
+    [Return]    ${turnover}    ${licensee_wl}

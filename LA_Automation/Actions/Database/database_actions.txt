@@ -1,0 +1,166 @@
+*** Settings ***
+Library           Selenium2Library
+Library           String
+Library           OperatingSystem
+Library           ../../Data Set/DBLibrary.py
+
+*** Keywords ***
+ins_data_testing
+    [Arguments]    ${ProductID}    ${PartyID}    ${Fromdate}    ${Todate}    ${CurrencyID}    ${Is_rpt_betting}
+    ...    ${Is_rpt_bettingbyproduct}    ${Is_rpt_thirdParty_ExtraGMT}
+    ${orginal_sql}    set variable    -Q "exec [Ins_Data_Testing_HarmonyV2] @ProductId=[ProductId],@PartyId=[PartyID],@FromDate=[FromDate],@ToDate=[Todate],@CurrencyId=[CurrencyId],@Is_rbt_Betting=[Is_rbt_Betting],@Is_rpt_BettingByProduct=[Is_rpt_BettingByProduct],@Is_rpt_ThirdPartyWL_ExtraGMT=[Is_rpt_ThirdPartyWL_ExtraGMT]"
+    ${ProductID}    set variable    ${ProductID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [ProductId]    ${ProductID}    -1
+    ${PartyID}    set variable    ${PartyID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [PartyID]    ${PartyID}    -1
+    ${Fromdate}    set variable    ${Fromdate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [FromDate]    ${Fromdate}    -1
+    ${Todate}    set variable    ${Todate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Todate]    ${Todate}    -1
+    ${CurrencyID}    set variable    ${CurrencyID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [CurrencyId]    ${CurrencyID}    -1
+    ${Is_rpt_betting}    set variable    ${Is_rpt_betting}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_rbt_Betting]    ${Is_rpt_betting}    -1
+    ${Is_rpt_bettingbyproduct}    set variable    ${Is_rpt_bettingbyproduct}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_rpt_BettingByProduct]    ${Is_rpt_bettingbyproduct}    -1
+    ${Is_rpt_thirdParty_ExtraGMT}    set variable    ${Is_rpt_thirdParty_ExtraGMT}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_rpt_ThirdPartyWL_ExtraGMT]    ${Is_rpt_thirdParty_ExtraGMT}    -1
+    Create file    D:\\CreateData.bat
+    ${sql_connect}    set variable    sqlcmd -S 10.18.200.215 -d bodb_licensee -U testteam -P @quality# ^
+    append to file    D:\\CreateData.bat    ${sql_connect}
+    append to file    D:\\CreateData.bat    ${orginal_sql}
+    run    D:\\CreateData.bat
+    remove file    D:\\CreateData.bat
+
+database_config
+    Set Suite Variable    ${cf_sql_connect}    sqlcmd -S 10.18.200.215 -d bodb_licensee -U testteam -P @quality# \
+
+ins_data_setting
+    [Arguments]    ${ProductID}    ${FromPartyID}    ${ToPartID}    ${Fromdate}    ${Todate}    ${LicenseeRate}
+    ...    ${3rdRate}    ${MinAmt}    ${MaxAmt}    ${Is_Lic_Winlost_Charge}    ${Is_Lic_Comm_Charge}    ${Is_Lic_Service_Charge}
+    ...    ${Is_3rd_Winlost_Charge}    ${Is_3rd_Comm_Charge}    ${Is_3rd_Service_Charge}    ${Is_3rd_Profit_Charge}    ${Is_3rd_Rebate_Charge}    ${3rd_Fromdate}
+    ...    ${3rd_Todate}
+    ${orginal_sql}    set variable    -Q "declare @p1 int set @p1=1 exec [Ins_Setting_Testing_HarmonyV2] @ProductId=[ProductID],@FromPartyId=[FromPartyID],@ToPartyId=[ToPartyID],@FromDate=[Fromdate],@ToDate=[Todate],@LicenseeRate=[LicenseeRate],@3rdRate=[ThirdPartyRate],@MinAmount=[MinAmt],@MaxAmount=[MaxAmt],@ChargeId=@p1,@Is_Lic_WinlostCharge=[Is_Lic_WinlostCharge],@Is_Lic_CommCharge=[Is_Lic_CommCharge],@Is_Lic_ServiceCharge=[Is_Lic_ServiceCharge],@Is_3rd_WinlostCharge=[Is_3rd_WinlostCharge],@Is_3rd_CommCharge=[Is_3rd_CommCharge],@Is_3rd_ServiceCharge=[Is_3rd_ServiceCharge],@Is_3rd_ProfitSharingCharge=[Is_3rd_ProfitSharingCharge],@Is_3rd_RebateCharge=[Is_3rd_RebateCharge],@3rdFromDate=[3rdFromDate],@3rdToDate=[3rdToDate]"
+    ${ProductID}    set variable    ${ProductID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [ProductID]    ${ProductID}    -1
+    ${FromPartyID}    set variable    ${FromPartyID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [FromPartyID]    ${FromPartyID}    -1
+    ${ToPartID}    set variable    ${ToPartID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [ToPartyID]    ${ToPartID}    -1
+    ${Fromdate}    set variable    ${Fromdate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Fromdate]    ${Fromdate}    -1
+    ${Todate}    set variable    ${Todate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Todate]    ${Todate}    -1
+    ${LicenseeRate}    set variable    ${LicenseeRate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [LicenseeRate]    ${LicenseeRate}    -1
+    ${3rdRate}    set variable    ${3rdRate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [ThirdPartyRate]    ${3rdRate}    -1
+    ${MinAmt}    set variable    ${MinAmt}
+    ${orginal_sql}    replace string    ${orginal_sql}    [MinAmt]    ${MinAmt}    -1
+    ${MaxAmt}    set variable    ${MaxAmt}
+    ${orginal_sql}    replace string    ${orginal_sql}    [MaxAmt]    ${MaxAmt}    -1
+    ${Is_Lic_Winlost_Charge}    set variable    ${Is_Lic_Winlost_Charge}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_Lic_WinlostCharge]    ${Is_Lic_Winlost_Charge}    -1
+    ${Is_Lic_Comm_Charge}    set variable    ${Is_Lic_Comm_Charge}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_Lic_CommCharge]    ${Is_Lic_Comm_Charge}    -1
+    ${Is_Lic_Service_Charge}    set variable    ${Is_Lic_Service_Charge}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_Lic_ServiceCharge]    ${Is_Lic_Service_Charge}    -1
+    ${Is_3rd_Winlost_Charge}    set variable    ${Is_3rd_Winlost_Charge}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_3rd_WinlostCharge]    ${Is_3rd_Winlost_Charge}    -1
+    ${Is_3rd_Comm_Charge}    set variable    ${Is_3rd_Comm_Charge}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_3rd_CommCharge]    ${Is_3rd_Comm_Charge}    -1
+    ${Is_3rd_Service_Charge}    set variable    ${Is_3rd_Service_Charge}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_3rd_ServiceCharge]    ${Is_3rd_Service_Charge}    -1
+    ${Is_3rd_Profit_Charge}    set variable    ${Is_3rd_Profit_Charge}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_3rd_ProfitSharingCharge]    ${Is_3rd_Profit_Charge}    -1
+    ${Is_3rd_Rebate_Charge}    set variable    ${Is_3rd_Rebate_Charge}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Is_3rd_RebateCharge]    ${Is_3rd_Rebate_Charge}    -1
+    ${3rd_Fromdate}    set variable    ${3rd_Fromdate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [3rdFromDate]    ${3rd_Fromdate}    -1
+    ${3rd_Todate}    set variable    ${3rd_Todate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [3rdToDate]    ${3rd_Todate}    -1
+    Create file    D:\\CreateSetting.bat
+    ${sql_connect}    set variable    sqlcmd -S 10.18.200.215 -d bodb_licensee -U testteam -P @quality# \ \
+    append to file    D:\\CreateSetting.bat    ${sql_connect}
+    append to file    D:\\CreateSetting.bat    ${orginal_sql}
+    ${result}    run    D:\\CreateSetting.bat
+    log    ${result}
+    remove file    D:\\CreateSetting.bat
+
+check data from entered report
+    [Arguments]    ${ProductID}    ${PartyID}    ${FromDate}    ${Todate}    ${BaseCurrencyName}    ${ReportName}
+    ${orginal_sql}    set variable    -Q "exec [Verify_Data_For_ReportV2] @ProductId=[ProductId],@PartyId=[PartyID],@FromDate=[FromDate],@ToDate=[Todate],@BaseCurrencyName=[BaseCurrencyName],@ReportName=[ReportName]"
+    ${ProductID}    set variable    ${ProductID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [ProductId]    ${ProductID}    -1
+    ${PartyID}    set variable    ${PartyID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [PartyID]    ${PartyID}    -1
+    ${Fromdate}    set variable    ${FromDate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [FromDate]    ${FromDate}    -1
+    ${Todate}    set variable    ${Todate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [Todate]    ${Todate}    -1
+    ${CurrencyID}    set variable    ${BaseCurrencyName}
+    ${orginal_sql}    replace string    ${orginal_sql}    [BaseCurrencyName]    ${BaseCurrencyName}    -1
+    ${Is_rpt_betting}    set variable    ${ReportName}
+    ${orginal_sql}    replace string    ${orginal_sql}    [ReportName]    ${ReportName}    -1
+    Create file    D:\\CheckData.bat
+    ${sql_connect}    set variable    sqlcmd -S 10.18.200.215 -d bodb_licensee -U testteam -P @quality# ^
+    append to file    D:\\CheckData.bat    ${sql_connect}
+    append to file    D:\\CheckData.bat    ${orginal_sql}
+    append to file    D:\\CheckData.bat    -s, -W -i findstr /V /C:"-" /B > D:\\Datat.csv
+    run    D:\\CheckData.bat
+    Get Query Result Csv    D:\\CheckData.bat    D:\\Datat.csv    Sheetaa
+    remove file    D:\\CheckData.bat
+
+createSettingByXML
+    [Arguments]    ${ProductID}    ${FromPartyID}    ${ToPartyID}    ${LicChargeSettingXML}    ${ThirdPartyChargeSettingXML}    ${LicFromDate}
+    ...    ${LicToDate}
+    ${orginal_sql}    set variable    -Q " exec [LA_Create_Setting_For_Testing_Harmony] @ProductID=[ProductID],@FromPartyID=[FromPartyID],@ToPartyID=[ToPartyID],@LicChargeSettingXML=[LicChargeSettingXML],@ThirdPartyChargeSettingXML=[ThirdPartyChargeSettingXML],@LicFromDate =[LicFromDate],@LicToDate =[LicToDate]"
+    ${ProductID}    set variable    ${ProductID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [ProductID]    ${ProductID}    -1
+    ${FromPartyID}    set variable    ${FromPartyID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [FromPartyID]    ${FromPartyID}    -1
+    ${ToPartyID}    set variable    ${ToPartyID}
+    ${orginal_sql}    replace string    ${orginal_sql}    [ToPartyID]    ${ToPartyID}    -1
+    ${LicChargeSettingXML}    set variable    ${LicChargeSettingXML}
+    ${orginal_sql}    replace string    ${orginal_sql}    [LicChargeSettingXML]    ${LicChargeSettingXML}    -1
+    ${ThirdPartyChargeSettingXML}    set variable    ${ThirdPartyChargeSettingXML}
+    ${is_empty}    run keyword and return status    should be empty    ${ThirdPartyChargeSettingXML}
+    ${orginal_sql}    run key word if    '${is_empty}' == 'False'    replace string    ${orginal_sql}    [ThirdPartyChargeSettingXML]    ${ThirdPartyChargeSettingXML}
+    ...    -1
+    ...    ELSE    set variable    ${orginal_sql}
+    ${LicFromDate}    set variable    ${LicFromDate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [LicFromDate]    ${LicFromDate}    -1
+    ${LicToDate}    set variable    ${LicToDate}
+    ${orginal_sql}    replace string    ${orginal_sql}    [LicToDate]    ${LicToDate}    -1
+    Create file    D:\\createsettingwithxml.bat
+    ${sql_connect}    set variable    sqlcmd -S 10.18.200.215 -d bodb_licensee -U testteam -P @quality# ^
+    append to file    D:\\createsettingwithxml.bat    ${sql_connect}
+    append to file    D:\\createsettingwithxml.bat    ${orginal_sql}
+    ${result}    run    D:\\createsettingwithxml.bat
+    log    ${result}
+    remove file    D:\\createsettingwithxml.bat
+
+generate XML node
+    [Arguments]    ${number_of_lic_node}    ${number_of_third_party_node}
+    ${LicSetting_1_nodes}    set variable    '<ChargeSettings><ChargeSetting><Rate>[lic_rate1]</Rate><MinAmount>[lic_minamt1]</MinAmount><MaxAmount>[lic_maxamt1]</MaxAmount><BaseCurrencyID>[lic_base_currencyID1]</BaseCurrencyID><ChargeType>[lic_charge_type1]</ChargeType></ChargeSetting></ChargeSettings>'
+    ${LicSetting_2_nodes}    set variable    '<ChargeSettings><ChargeSetting><Rate>[lic_rate1]</Rate><MinAmount>[lic_minamt1]</MinAmount><MaxAmount>[lic_maxamt1]</MaxAmount><BaseCurrencyID>[lic_base_currencyID1]</BaseCurrencyID><ChargeType>[lic_charge_type1]</ChargeType></ChargeSetting><ChargeSetting><Rate>[lic_rate2]</Rate><MinAmount>[lic_minamt2]</MinAmount><MaxAmount>[lic_maxamt2]</MaxAmount><BaseCurrencyID>[lic_base_currencyID2]</BaseCurrencyID><ChargeType>[lic_charge_type2]</ChargeType></ChargeSetting></ChargeSettings>'
+    ${ThirdSetting_1_nodes}    set variable    '<ChargeSettings><ChargeSetting><Rate>[3rd_rate1]</Rate><MinAmount>[3rd_minamt1]</MinAmount><MaxAmount>[3rd_maxamt1]</MaxAmount><BaseCurrencyID>[3rd_base_currencyID1]</BaseCurrencyID><ChargeType>[3rd_chargetype1]</ChargeType></ChargeSetting></ChargeSettings>'
+    ${ThirdSetting_2_nodes}    set variable    '<ChargeSettings><ChargeSetting><Rate>[3rd_rate1]</Rate><MinAmount>[3rd_minamt1]</MinAmount><MaxAmount>[3rd_maxamt1]</MaxAmount><BaseCurrencyID>[3rd_base_currencyID1]</BaseCurrencyID><ChargeType>[3rd_chargetype1]</ChargeType></ChargeSetting><ChargeSetting><Rate>[3rd_rate2]</Rate><MinAmount>[3rd_minamt2]</MinAmount><MaxAmount>[3rd_maxamt2]</MaxAmount><BaseCurrencyID>[3rd_base_currencyID2]</BaseCurrencyID><ChargeType>[3rd_chargetype2]</ChargeType></ChargeSetting></ChargeSettings>'
+    ${ThirdSetting_3_nodes}    set variable    '<ChargeSettings><ChargeSetting><Rate>[3rd_rate1]</Rate><MinAmount>[3rd_minamt1]</MinAmount><MaxAmount>[3rd_maxamt1]</MaxAmount><BaseCurrencyID>[3rd_base_currencyID1]</BaseCurrencyID><ChargeType>[3rd_chargetype1]</ChargeType></ChargeSetting><ChargeSetting><Rate>[3rd_rate2]</Rate><MinAmount>[3rd_minamt2]</MinAmount><MaxAmount>[3rd_maxamt2]</MaxAmount><BaseCurrencyID>[3rd_base_currencyID2]</BaseCurrencyID><ChargeType>[3rd_chargetype2]</ChargeType></ChargeSetting><ChargeSetting><Rate>[3rd_rate3]</Rate><MinAmount>[3rd_minamt3]</MinAmount><MaxAmount>[3rd_maxamt3]</MaxAmount><BaseCurrencyID>[3rd_base_currencyID3]</BaseCurrencyID><ChargeType>[3rd_chargetype3]</ChargeType></ChargeSetting></ChargeSettings>'
+    ${lic_setting}    run key word if    ${number_of_lic_node} ==1    set variable    ${LicSetting_1_nodes}
+    ...    ELSE IF    ${number_of_lic_node} ==2    set variable    ${LicSetting_2_nodes}
+    ${third_setting}    run key word if    ${number_of_third_party_node} ==1    set variable    ${ThirdSetting_1_nodes}
+    ...    ELSE IF    ${number_of_third_party_node} ==2    set variable    ${ThirdSetting_2_nodes}
+    ...    ELSE IF    ${number_of_third_party_node} ==3    set variable    ${ThirdSetting_3_nodes}
+    ...    ELSE    set variable    None
+    [Return]    ${Lic_setting}    ${third_setting}
+
+replace string in XML
+    [Arguments]    ${old_string}    ${orginal_string}    ${replace_string}
+    Comment    ${replace_string}    set variable    0.15
+    Comment    ${orginal_string}    set variable    [lic_rate1]
+    ${is_empty}    run keyword and return status    should be empty    ${old_string}
+    ${new_string}    run key word if    '${replace_string}' != 'None' and '${is_empty}' =='False'    replace string    ${old_string}    ${orginal_string}    ${replace_string}
+    ...    ELSE    set variable    ${old_string}
+    log    ${new_string}
+    [Return]    ${new_string}

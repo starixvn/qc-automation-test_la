@@ -16,8 +16,9 @@ add new biller
     Click Element    //*[@id='StatusId']
     input text    xpath=//*[@id='CompanyName']    Company Testing
     input text    xpath=//*[@id='Address1']    Address testing
+    sleep    1s
     Choose File    xpath=//*[@id='LogoImageFile']    C:\\Test Data\\Oneworks Enterprise Limited logo.jpg
-    ## Need to double click for this case
+    ## Need to double click for this case    ${cf_uploadimage}    LA_Automation\\Data Set\\OneworksEnterpriseLimitedlogo.jpg    D:\\auto LA\\la\\LA_Automation\\Data Set\\OneworksEnterpriseLimitedlogo.jpg
     Click Element    xpath=//*[@id='save-biller-info']/span[2]
     Click Element    xpath=//*[@id='save-biller-info']/span[2]
 
@@ -31,15 +32,15 @@ assign payer to biller
     click element    xpath=//*[@id='payer-filter']
     Input Text    xpath=//input[@class="ddft__input"]    ${ac_payer_name}
     Click Element    xpath=//div[contains(text(),'${ac_payer_name}')]
-    ${ac_total_rows}    Get Matching Xpath Count    xpath=//*[@id='payer-billing-product']/*/label
+    ${ac_total_rows}    Get Matching Xpath Count    xpath=//*[@id='payer-billing-product']/label
     sleep    2s
     : FOR    ${i}    IN RANGE    1    ${ac_total_rows}+1
-    \    ${is_bettrade}    run keyword and return status    get text    xpath=//*[@id='payer-billing-product']/div[${i}]/label[@for="checkbox-1-BT"]
+    \    ${is_bettrade}    run keyword and return status    get text    xpath=//*[@id='checkbox-1-BT']
     \    ## Not yet support bettrade
-    \    run keyword if    '${is_bettrade}'=='False'    click element    xpath=//*[@id='payer-billing-product']/div[${i}]/label
+    \    run keyword if    '${is_bettrade}'=='False'    click element    xpath=//*[@id='payer-billing-product']/label[${i}]
     ## Check to rebate checkbox
     Click Element    xpath=//*[@id='checkbox-3']
-    Click Element    xpath=//div/button[1]/span[contains(text(),'Save')]
+    Click Element    xpath=//button[1][@class="laBtn laBtn-submit"]
 
 get products of licensee
     [Arguments]    ${ac_licensee_name}
@@ -79,9 +80,12 @@ select filter on create invoice
     sleep    5s
     ## Click Rebate, it not, default is Software data fee
     Run Keyword If    '${ac_type}'== 'Rebate'    Click Element    xpath=//div[contains(text(),'${ac_type}')]
+    ...    ELSE IF    '${ac_type}'== 'Hosting'    Click Element    xpath=//div[text()='Hosting']
     input text    xpath=//*[@id='InvoiceSymbol']    ${ac_invoice_symbol}
-    input text    //*[@id='InvoiceNumber']    ${ac_invoice_number}
-    Run Keyword If    '${IsSeparete}'=='Yes'    Click Element    xpath=//*[@id='IsSeparateProduct']
+    input text    xpath=//*[@id='InvoiceNumber']    ${ac_invoice_number}
+    ${is_exist_separate}    run keyword and return status    Element Should Be Visible    xpath=//*[@id='IsSeparateProduct']
+    Run Keyword If    '${IsSeparete}'=='Yes' and '${is_exist_separate}'=='True'    double click element    xpath=//*[@id='IsSeparateProduct']
+    Click Element    xpath=//*[@id='InvoiceNumber']
     Click Element    xpath=//*[@id='generate-invoice-button']
     ### Confirm pop up, In case billing date is not full month
     ${is_popup}    run keyword and return status    Element Should Be Visible    xpath=//div/*/span[contains(text(),'Ok')]
@@ -96,13 +100,18 @@ get invoice data of each product
     ...    EX:
     ...
     ...    ${tm_SB} ${tm_NG} ${tm_BA} ${tm_LC} ${tm_VS} ${tm_RNG} ${tm_KN} ${tm_AG} ${tm_GD} ${tm_Macau} ${tm_MGCLC} ${tm_MGCRNG} ${toal} ${tm_discount_amt} ${tm_Macau_Games} ${tm_rebate_amt} get invoice data of each product Fun88 \ \ \ \ \ \
+    sleep    3s
+    ${is_no_data}    Run Keyword And Return Status    get text    xpath=//td[@class="text-center no-info-column"]
+    run keyword if    '${is_no_data}'=='True'    pass execution    There is no data
+    log    ${ac_payer_name}
+    sleep    2s
     ${is_sb}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Sportsbook')]
     ${SB}    Run Keyword If    '${is_sb}'=='True'    get text    xpath=//*/tr[@product-id="0"]/td[4]
     ${is_ng}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Number Game')]
     ${NG}    Run Keyword If    '${is_ng}'=='True'    get text    xpath=//*/tr[@product-id="2"]/td[4]
     ${is_ba}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'BA')]
     ${BA}    Run Keyword If    '${is_ba}'=='True'    get text    xpath=//*/tr[@product-id="3"]/td[4]
-    ${is_lc}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Live Casino')]
+    ${is_lc}    Run Keyword And Return Status    get text    xpath=//textarea[text='Live Casino']
     ${LC}    Run Keyword If    '${is_lc}'=='True'    get text    xpath=//*/tr[@product-id="4"]/td[4]
     ${is_vs}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Virtual Sports')]
     ${VS}    Run Keyword If    '${is_vs}'=='True'    get text    xpath=//*/tr[@product-id="5"]/td[4]
@@ -123,7 +132,9 @@ get invoice data of each product
     ${is_macau_games}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Macau Games')]
     ${Macau_Games}    Run Keyword If    '${is_macau_games}'=='True'    get text    xpath=//*/tr[@product-id="22"]/td[4]
     ${is_discount}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Discount')]
-    ${discount_amt}    Run Keyword If    '${is_discount}'=='True'    get text    xpath=//*[@id='invoive-billing-table']//*/td[2]/textarea[contains(text(),'Discount')]/following::td[2]/span
+    ${discount_amt}    Run Keyword If    '${is_discount}'=='True' and '${ac_payer_name}' <> 'Bbin'    get text    xpath=//*[@id='invoive-billing-table']//*/td[2]/textarea[contains(text(),'Discount')]/following::td[2]/span
+    ${vs_discount_haifa}    Run Keyword If    '${is_discount}'=='True' and '${ac_payer_name}' == 'Bbin'    get text    xpath=(//*[@id='invoive-billing-table']//*/td[2]/textarea[contains(text(),'Discount')]/following::td[2]/span)[1]
+    ${sb_discount_haifa}    Run Keyword If    '${is_discount}'=='True' and '${ac_payer_name}' == 'Bbin'    get text    xpath=(//*[@id='invoive-billing-table']//*/td[2]/textarea[contains(text(),'Discount')]/following::td[2]/span)[2]
     ${total}    get text    xpath=//tr[@class="border-item total-item"]/td[3]/span[2]
     ${is_rebate}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Rebate on Access')]
     ${rebate_amt}    Run Keyword If    '${is_rebate}'=='True'    get text    xpath=//*[@id='invoive-billing-table']//*/td[2]/textarea[contains(text(),'Rebate')]/following::td[2]/span
@@ -142,9 +153,12 @@ get invoice data of each product
     ${Macau_Games}    change format for number    ${Macau_Games}
     ${discount_amt}    change format for number    ${discount_amt}
     ${rebate_amt}    change format for number    ${rebate_amt}
+    ${sb_discount_haifa}    change format for number    ${sb_discount_haifa}
+    ${vs_discount_haifa}    change format for number    ${vs_discount_haifa}
+    ${total}    change format for number    ${total}
     [Return]    ${SB}    ${NG}    ${BA}    ${LC}    ${VS}    ${RNG}
     ...    ${KN}    ${AG}    ${GD}    ${Macau}    ${MGCLC}    ${MGCRNG}
-    ...    ${total}    ${discount_amt}    ${Macau_Games}    ${rebate_amt}
+    ...    ${total}    ${discount_amt}    ${Macau_Games}    ${rebate_amt}    ${vs_discount_haifa}    ${sb_discount_haifa}
 
 get licensee setting
     [Arguments]    ${ac_licensee_name}
@@ -155,11 +169,11 @@ get licensee setting
     ...    ${tm_minfee_amt} ${tm_minfee_group_name} ${tm_waive_from} ${tm_waive_to} ${tm_discount_name} ${tm_rebate_name} ${tm_billing_currency} ${tm_sb_rate} ${tm_ng_rate} ${tm_ba_rate} ${tm_lc_rate} ${tm_vs_rate} ${tm_rng_rate} ${tm_keno_rate} ${tm_ag_rate} ${tm_gd_rate} ${tm_macau_rate} ${tm_bettrade_rate} ${tm_mgclc_generic_rate} ${tm_mgclc_branded_rate} ${tm_mgcrng_generic_rate} ${tm_mgcrng_branded_rate} ${tm_macau_games_rate} get licensee setting Fun88
     select filter on manage payer setting    ${ac_licensee_name}    All    All    All
     sleep    5s
-    ${output_minfee_group_name}    get text    xpath=//*/tr[2]/td[2]
+    ${output_minfee_group_name}    get text    xpath=//*[@id='manage-payer-setting-content']/table/tbody/tr[1]/td[2]
     ${output_minfee_group_name}    Set Variable if    '${output_minfee_group_name}'=='${EMPTY}'    None    '${output_minfee_group_name}'<>'${EMPTY}'    ${output_minfee_group_name}
-    ${output_discount_name}    get text    xpath=//*/tr[2]/td[8]
-    ${output_rebate_name}    get text    xpath=//*/tr[2]/td[9]
-    ${output_billing_currency}    get text    xpath=//*/tr[2]/td[11]
+    Comment    ${output_discount_name}    get text    xpath=//*/tr[2]/td[8]
+    Comment    ${output_rebate_name}    get text    xpath=//*/tr[2]/td[9]
+    ${output_billing_currency}    get text    xpath=//*[@id='manage-payer-setting-content']/table/tbody/tr[1]/td[9]
     ${is_sb}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'Sportsbook')]
     ${output_sb_rate}    run keyword if    '${is_sb}'=='True'    get text    xpath=//td[contains(text(),'Sportsbook')]/following-sibling::td[contains(text(),'%')]
     ${output_sb_rate}    run keyword if    '${is_sb}'=='True'    remove string    ${output_sb_rate}    %
@@ -194,18 +208,26 @@ get licensee setting
     ${output_bettrade_rate}    run keyword if    '${is_bettrade}'=='True'    get text    xpath=//td[contains(text(),'Bettrade')]/following-sibling::td[contains(text(),'%')]
     ${output_bettrade_rate}    run keyword if    '${is_bettrade}'=='True'    remove string    ${output_bettrade_rate}    %
     ${is_mgclc}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'Microgaming - Live Casino')]
-    ${output_mgclc_generic_rate}    run keyword if    '${is_mgclc}'=='True'    get text    xpath=(//td[contains(text(),'Microgaming - Live Casino')]/following::td[contains(text(),'G: ')])[1]
+    ${output_mgclc_generic_rate}    run keyword if    '${is_mgclc}'=='True'    get text    xpath=(//td[contains(text(),'RNG Casino')]/following::td[contains(text(),'Generic Games Licensing Fee')])[1]
     ${output_mgclc_generic_rate}    run keyword if    '${is_mgclc}'=='True'    remove string    ${output_mgclc_generic_rate}    %
-    ${output_mgclc_branded_rate}    run keyword if    '${is_mgclc}'=='True'    get text    xpath=(//td[contains(text(),'Microgaming - Live Casino')]/following::td[contains(text(),'B: ')])[1]
+    ${output_mgclc_branded_rate}    run keyword if    '${is_mgclc}'=='True'    get text    xpath=(//td[contains(text(),'RNG Casino')]/following::td[contains(text(),'Branded Games Licensing Fee')])[1]
     ${output_mgclc_branded_rate}    run keyword if    '${is_mgclc}'=='True'    remove string    ${output_mgclc_branded_rate}    %
     ${is_mgcrng}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'Microgaming - RNG Casino')]
-    ${output_mgcrng_generic_rate}    run keyword if    '${is_mgcrng}'=='True'    get text    xpath=(//td[contains(text(),'RNG Casino')]/following::td[contains(text(),'G: ')])[2]
+    ${output_mgcrng_generic_rate}    run keyword if    '${is_mgcrng}'=='True'    get text    xpath=(//td[contains(text(),'RNG Casino')]/following::td[contains(text(),'Generic Games Licensing Fee')])[last()]
     ${output_mgcrng_generic_rate}    run keyword if    '${is_mgcrng}'=='True'    remove string    ${output_mgcrng_generic_rate}    %
-    ${output_mgcrng_branded_rate}    run keyword if    '${is_mgcrng}'=='True'    get text    xpath=(//td[contains(text(),'RNG Casino')]/following::td[contains(text(),'B: ')])[2]
+    ${output_mgcrng_branded_rate}    run keyword if    '${is_mgcrng}'=='True'    get text    xpath=(//td[contains(text(),'RNG Casino')]/following::td[contains(text(),'Branded Games Licensing Fee')])[last()]
     ${output_mgcrng_branded_rate}    run keyword if    '${is_mgcrng}'=='True'    remove string    ${output_mgcrng_branded_rate}    %
     ${is_mcgames}    Run Keyword And Return Status    get text    xpath=(//td[contains(text(),'Macau')])[2]
     ${output_macau_games_rate}    run keyword if    '${is_mcgames}'=='True'    get text    xpath=(//td[contains(text(),'Macau')])[2]/following-sibling::td[contains(text(),'%')]
     ${output_macau_games_rate}    run keyword if    '${is_mcgames}'=='True'    remove string    ${output_macau_games_rate}    %
+    click element    xpath=//span[@class="icon-edit"]
+    sleep    2s
+    ${is_discount}    get text    xpath=//*[@id='discount-id']
+    ${output_discount_name}    run keyword if    '${is_discount}' <> 'No Group'    get text    xpath=//*[@id='discount-id']
+    ...    ELSE    set variable    None
+    ${is_rebate}    get text    xpath=//*[@id='rebate-id']/option
+    ${output_rebate_name}    run keyword if    '${is_rebate}'<> 'No Group'    get text    xpath=//*[@id='rebate-id']/option
+    ...    ELSE    set variable    None
     [Return]    ${output_minfee_group_name}    ${output_discount_name}    ${output_rebate_name}    ${output_billing_currency}    ${output_sb_rate}    ${output_ng_rate}
     ...    ${output_ba_rate}    ${output_lc_rate}    ${output_vs_rate}    ${output_rng_rate}    ${output_keno_rate}    ${output_ag_rate}
     ...    ${output_gd_rate}    ${output_macau_rate}    ${output_bettrade_rate}    ${output_mgclc_generic_rate}    ${output_mgclc_branded_rate}    ${output_mgcrng_generic_rate}
@@ -216,7 +238,7 @@ select filter on manage payer setting
     [Documentation]    This action used to select filter on Manage Payer Setting
     navigate menu    Invoice    Manage Payer Setting
     click element    xpath=//*[@id='payer-filter']
-    input text    xpath=//*/div[1]/input    ${ac_licensee_name}
+    input text    xpath=//input[@placeholder='Filter']    ${ac_licensee_name}
     click element    //label/div[contains(text(),'${ac_licensee_name}')]
     click element    xpath=//*[@id='filter-discount-id']
     click element    xpath=//*[@id='filter-discount-id']/option[contains(text(),'${ac_discount_name}')]
@@ -224,8 +246,8 @@ select filter on manage payer setting
     click element    xpath=//*[@id='filter-payer-group-id']/option[contains(text(),'${ac_min_fee_group_name}')]
     click element    xpath=//*[@id='filter-rebate-id']
     click element    xpath=//*[@id='filter-rebate-id']/option[contains(text(),'${ac_rebate_name}')]
-    click element    xpath=//*[@id='search-payer-setting']/span
-    click element    xpath=//*[@id='search-payer-setting']/span
+    click element    xpath=//*[@id='search-payer-setting']
+    click element    xpath=//*[@id='search-payer-setting']
 
 calculate licensee fee
     [Arguments]    ${ac_licensee_name}    ${product}    ${billing_currency}    ${rate}    ${minfee_group_name}    ${bill_from}
@@ -248,6 +270,7 @@ calculate licensee fee
     ### Calculate licensee fee in case have \ min fee, waive or min fee group
     ${output_licenseefee}    run keyword if    '${product}'=='Sportsbook' and ${output_licenseefee} < ${prorate} and '${minfee_group_name}'=='None'    set variable    ${prorate}
     ...    ELSE    set variable    ${output_licenseefee}
+    ${output_licenseefee}    set variable if    '${output_licenseefee}'=='None'    0    ${output_licenseefee}
     [Teardown]
     [Return]    ${output_licenseefee}
 
@@ -259,16 +282,18 @@ calculate gross win from settlement report
     ...
     ...    EX:
     ...    ${settlement_licensee_gross_winl} ${settlement_ba_comm} calculate gross win from settlement report ${ac_licensee_name} ${product} ${billing_currency} \ \ \ \ \ \ \ \ \ \ \ \
-    select filter by date range for settlement report    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}
+    submit filter by date range for settlement report    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}
     ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
     ## In case no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     ## get member winloss
+    Run Keyword If    '${is_exsited}'=='True' and '${product_name}' <>'BA' and '${ac_no_info_status}'=='False'    wait until element is visible    xpath=//td[contains(text(),'Total in')]/following::td[3]
+    ...    ELSE IF    '${is_exsited}'=='True' and '${product_name}'=='BA' and '${ac_no_info_status}'=='False'    wait until element is visible    xpath=//*[@id='settlement']/*//td[2][@class="text-right border-bottom laTable__cell laTable__cell-grandTotal"]
     ${member_winloss}    Run Keyword If    '${is_exsited}'=='True' and '${product_name}' <>'BA' and '${ac_no_info_status}'=='False'    Get Text    xpath=//td[contains(text(),'Total in')]/following::td[3]
-    ...    ELSE IF    '${is_exsited}'=='True' and '${product_name}'=='BA' and '${ac_no_info_status}'=='False'    get text    xpath=//*[@id='settlement']/table[2]/tbody/*/td[2][@class="ralign col-grand-total padding-right"]
+    ...    ELSE IF    '${is_exsited}'=='True' and '${product_name}'=='BA' and '${ac_no_info_status}'=='False'    get text    xpath=//*[@id='settlement']/*//td[2][@class="text-right border-bottom laTable__cell laTable__cell-grandTotal"]
     ...    ELSE    Set Variable    0
     ## get ba comm
-    ${ba_comm}    Run Keyword If    '${is_exsited}'=='True' and '${product_name}'=='BA' and '${ac_no_info_status}'=='False'    Get Text    xpath=//*[@id='settlement']/table[2]/tbody/*/td[3][@class="ralign col-grand-total padding-right"]
+    ${ba_comm}    Run Keyword If    '${is_exsited}'=='True' and '${product_name}'=='BA' and '${ac_no_info_status}'=='False'    Get Text    xpath=//*[@id='settlement']/*//td[3][@class="text-right border-bottom laTable__cell laTable__cell-grandTotal" ]
     ...    ELSE    Set Variable    0
     ${member_winloss}    change format for number    ${member_winloss}
     ${ba_comm}    change format for number    ${ba_comm}
@@ -355,12 +380,12 @@ is apply setting
     [Return]    ${is_apply}
 
 calculate discount
-    [Arguments]    ${sb_fee}    ${rng_fee}    ${discount_group_name}
+    [Arguments]    ${sb_fee}    ${rng_fee}    ${discount_group_name}    ${bill_from}    ${bill_to}
     [Documentation]    This action used to calculate discount amt for SB and RNG
     ## Discount is applied to SB and RNG
-    ${sb_fee}    set variable if    '${sb_fee}'=='None'    0    ${sb_fee}
-    ${rng_fee}    set variable if    '${rng_fee}'=='None'    0    ${rng_fee}
-    ${total}    Evaluate    ${sb_fee}+${rng_fee}
+    ${sb_fee}    set variable if    '${discount_group_name}' <> 'Discount HAIFA #3-SB: Sep-16 to current'    ${sb_fee}    0
+    ${rng_fee}    set variable if    '${discount_group_name}' <> 'Discount HAIFA #3-SB: Sep-16 to current'    ${rng_fee}    0
+    ${total}    run keyword if    '${discount_group_name}' <> 'Discount HAIFA #3-SB: Sep-16 to current'    Evaluate    ${sb_fee}+${rng_fee}
     ## Get rate \ based on licensee fee amt for all licensees except haifa
     ${rate_eur}    run keyword if    ${total} < 350001    set variable    0
     ...    ELSE IF    ${total} >= 350001 and ${total} <= 650000    set variable    0.05
@@ -383,9 +408,11 @@ calculate discount
     ...    ELSE IF    ${total} >= 16000001 and ${total} <= 18000000    set variable    0.3
     ...    ELSE IF    ${total} >= 18000001 and ${total} <= 20000000    set variable    0.34
     ...    ELSE    set variable    0.4
-    ${output_discount_amt}    run keyword if    '${discount_group_name}' == 'Discount for Haifa'    Evaluate    -${rate_cny}*${total}
+    ${SB_discount_haifa}    ${VS_discount_haifa}    ${total_haifa_discount}    run keyword if    '${discount_group_name}' == 'Discount HAIFA #3-SB: Sep-16 to current'    calculate discount for haifa    ${bill_from}
+    ...    ${bill_to}
+    ${output_discount_amt}    run keyword if    '${discount_group_name}' == 'Discount HAIFA #3-SB: Sep-16 to current'    set variable    ${total_haifa_discount}
     ...    ELSE    Evaluate    -${rate_eur}*${total}
-    [Return]    ${output_discount_amt}
+    [Return]    ${output_discount_amt}    ${SB_discount_haifa}    ${VS_discount_haifa}
 
 calculate minfee group
     [Arguments]    ${minfee_group_name}    ${licensee_name}    ${minfee_amt}    ${gross_win}    ${waive_from}    ${waive_to}
@@ -432,16 +459,30 @@ get licensees in min fee group
     [Documentation]    This action will return licensee names and no of licensees in min fee group
     navigate menu    Invoice    Manage Payer Group
     ## Get text from tooltip
-    Mouse Over    xpath=//td[contains(text(),'${minfee_group_name}')]/following-sibling::td[1]/div[@class="toolstip-target payer-group-toolstip-target" ]
-    ${init_licensee_list}    get text    xpath=//td[contains(text(),'${minfee_group_name}')]/following-sibling::td[1]/div[@class="toolstip-target payer-group-toolstip-target" ]
-    ## Split string to recognize licensee list and no of licensees in list
-    ${output_count_licensees}    get line    ${init_licensee_list}    0
-    ${temp_licensee_list}    get line    ${init_licensee_list}    1
-    ${temp_licensee_list}    remove string    ${temp_licensee_list}    ,
-    ${temp_licensee_list}    split string    ${temp_licensee_list}
+    sleep    2s
+    Comment    Mouse Over    xpath=//td[contains(text(),'${minfee_group_name}')]/following::td[1]/span
+    Comment    ${init_licensee_list}    get alert message    xpath=//td[contains(text(),'${minfee_group_name}')]/following::td[1]/span
+    Comment    ## Split string to recognize licensee list and no of licensees in list
+    Comment    ${output_count_licensees}    get text    xpath=//td[contains(text(),'${minfee_group_name}')]/following::td[1]/span/a
+    Comment    Comment    ${temp_licensee_list}    get line    ${init_licensee_list}    1
+    Comment    ${temp_licensee_list}    remove string    ${init_licensee_list}    ,
+    Comment    ${temp_licensee_list}    split string    ${temp_licensee_list}
+    Comment    ${output_licensee_list}    create list
+    Comment    :FOR    ${i}    IN RANGE    0    ${output_count_licensees}
+    Comment    \    append to list    ${output_licensee_list}    @{temp_licensee_list}[${i}]
+    ${output_count_licensees}    get text    xpath=//td[contains(text(),'${minfee_group_name}')]/following::td[1]/span
+    click element    //td[contains(text(),'${minfee_group_name}')]/following::td[2]/a[@class='button payer-group-edit-button laBtn laBtn-default btn-edit' and @title='Edit payer group: ${minfee_group_name}']
     ${output_licensee_list}    create list
-    : FOR    ${i}    IN RANGE    0    ${output_count_licensees}
-    \    append to list    ${output_licensee_list}    @{temp_licensee_list}[${i}]
+    : FOR    ${i}    IN RANGE    1    ${output_count_licensees}+1
+    \    sleep    2s
+    \    ${temp}    get text    xpath=(//*[@id='payer-in-group']/option)[${i}]
+    \    ${is_existed_comma}    run keyword and return status    should contain    ${temp}    (
+    \    ${temp}    run keyword if    '${is_existed_comma}'=='True'    fetch from left    ${temp}    (
+    \    ...    ELSE    set variable    ${temp}
+    \    ${is_space}    run keyword and return status    should contain    ${temp}    ${SPACE}
+    \    ${temp}    run keyword if    '${is_space}'=='True'    fetch from left    ${temp}    ${SPACE}
+    \    ...    ELSE    set variable    ${temp}
+    \    append to list    ${output_licensee_list}    ${temp}
     [Return]    ${output_licensee_list}    ${output_count_licensees}
 
 get minfee and waive time from selected licensee
@@ -452,17 +493,18 @@ get minfee and waive time from selected licensee
     click element    xpath=//input[@class="ddft__input"]
     input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
     click element    xpath=//div[contains(text(),'${licensee_name}')]
-    click element    xpath=//*[@id='search-payer-setting']/span
-    Wait Until Element Is Visible    xpath=//tr[2]/td[5]
-    ${output_minfee}    get text    xpath=//tr[2]/td[5]
-    ${output_minfee}    run keyword if    ${output_minfee} > 1000    remove string    ${output_minfee}    ,
+    click element    xpath=//*[@id='search-payer-setting']
+    Wait Until Element Is Visible    xpath=//span[@class='icon-edit']
+    click element    xpath=//span[@class='icon-edit']
+    sleep    2s
+    ${is_minfee}    run keyword and return status    Element Should Be Visible    xpath=(//*[@id='minimum-fee-setting-table']/tbody/*/td[2]/input)[last()]
+    ${output_minfee}    run keyword if    '${is_minfee}'=='True'    get value    xpath=(//*[@id='minimum-fee-setting-table']/tbody/*/td[2]/input)[last()]
+    ${output_minfee}    run keyword if    ${output_minfee} > 1000 and '${is_minfee}'=='True'    remove string    ${output_minfee}    ,
     ...    ELSE    set variable    ${output_minfee}
-    sleep    2s
-    click element    xpath=//a[@class="button edit-button" and @title="Edit payer: ${licensee_name}"]
-    sleep    2s
-    ${is_waive}    run keyword and return status    Element Should Be Visible    xpath=//div[@id="waive-setting-area"]//*/tr[2]/td[2]
-    ${output_waive_from}    run keyword if    '${is_waive}'=='True'    get value    xpath=//div[@id="waive-setting-area"]//*/tr[2]/td[2]/input
-    ${output_waive_to}    run keyword if    '${is_waive}'=='True'    get value    xpath=//div[@id="waive-setting-area"]//*/tr[2]/td[3]/input
+    Comment    click element    xpath=//a[1][@class="button edit-button laBtn laBtn-default btn-edit" and @title="Edit payer: ${licensee_name}"]
+    ${is_waive}    run keyword and return status    Element Should Be Visible    xpath=(//*[@id='waive-setting-table']/tbody/*/td[1])[last()]
+    ${output_waive_from}    run keyword if    '${is_waive}'=='True'    get value    xpath=(//*[@id='waive-setting-table']/tbody/*/td[2])[last()]//input
+    ${output_waive_to}    run keyword if    '${is_waive}'=='True'    get value    xpath=(//*[@id='waive-setting-table']/tbody/*/td[3])[last()]//input
     ${output_waive_from}    run keyword if    '${output_waive_from}'<> 'None'    change date format    ${output_waive_from}
     ${output_waive_to}    run keyword if    '${output_waive_to}'<> 'None'    change date format    ${output_waive_to}
     [Return]    ${output_minfee}    ${output_waive_from}    ${output_waive_to}
@@ -520,8 +562,8 @@ delete biller
     Wait Until Element Is Visible    xpath=//option[text()='${biiler_name}']
     Double Click Element    xpath=//option[text()='${biiler_name}']
     click element    xpath=//option[text()='${biiler_name}']
-    click element    xpath=//td/a[@title="Delete biller ${biiler_name}"]/span
-    click element    xpath=//button[1]/span[contains(text(),'Yes')]
+    click element    xpath=//td/a[@title="Delete biller ${biiler_name}"]
+    click element    xpath=//button[1][contains(text(),'Yes')]
 
 get rebate setting
     [Arguments]    ${group_name}
@@ -533,24 +575,41 @@ get rebate setting
     ${from_date}    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[4]
     ${to_date}    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[5]
     ## if existed product list
-    ${is_exsited}    run keyword and return status    Element Should Be Visible    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[1]/div[@class="toolstip-target product-toolstip-target" ]/a
+    ${is_mutiple_product}    run keyword and return status    Element Should Be Visible    xpath=//td[1][contains(text(),'${group_name}')]/following::td[1]/span/a
+    ${is_multiple_payer}    run keyword and return status    Element Should Be Visible    xpath=//td[1][contains(text(),'${group_name}')]/following::td[3]/span/a
     ## Get product list from tool tip text
-    ${init_products}    run keyword if    '${is_exsited}'=='True'    Mouse Over    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[1]/div[@class="toolstip-target product-toolstip-target" ]/a
-    ${init_products}    run keyword if    '${is_exsited}'=='True'    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[1]/div[@class="toolstip-target product-toolstip-target" ]
-    ## Split string
-    ${number_of_product}    run keyword if    '${is_exsited}'=='True'    get line    ${init_products}    0
+    Comment    ${init_products}    run keyword if    '${is_exsited}'=='True'    Mouse Over    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[1]/div[@class="toolstip-target product-toolstip-target" ]/a
+    Comment    ${init_products}    run keyword if    '${is_exsited}'=='True'    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[1]/div[@class="toolstip-target product-toolstip-target" ]
+    Comment    ## Split string
+    Comment    ${number_of_product}    run keyword if    '${is_exsited}'=='True'    get line    ${init_products}    0
     ...    ELSE    set variable    1
-    ${temp_product_list}    create list
-    ${temp_product_list}    run keyword if    '${is_exsited}'=='True'    get line    ${init_products}    1
+    Comment    ${temp_product_list}    create list
+    Comment    ${temp_product_list}    run keyword if    '${is_exsited}'=='True'    get line    ${init_products}    1
     ...    ELSE    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[1]
-    ${temp_product_list}    run keyword if    '${is_exsited}'=='True'    split string    ${temp_product_list}    ,
+    Comment    ${temp_product_list}    run keyword if    '${is_exsited}'=='True'    split string    ${temp_product_list}    ,
     ...    ELSE    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[1]
+    Comment    ${product_list}    create list
+    Comment    run keyword if    '${is_exsited}'=='False'    append to list    ${product_list}    ${temp_product_list}
+    Comment    : FOR    ${i}    IN RANGE    0    ${number_of_product}
+    Comment    \    ${temp}    run keyword if    ${i}>= 1    get sub string    @{temp_product_list}[${i}]
+    ...    1
+    ...    ELSE IF    '${is_exsited}'=='True'    set variable    @{temp_product_list}[${i}]
+    Comment    \    run keyword if    '${is_exsited}'=='True'    append to list    ${product_list}    ${temp}
+    ${number_of_product}    run keyword if    '${is_mutiple_product}'=='True'    get text    xpath=//td[1][contains(text(),'${group_name}')]/following::td[1]/span/a
+    ...    ELSE    set variable    1
+    ${number_of_payer}    run keyword if    '${is_multiple_payer}'=='True'    get text    xpath=//td[1][contains(text(),'${group_name}')]/following::td[3]/span/a
+    ...    ELSE    set variable    1
+    click element    xpath=//td[1][contains(text(),'${group_name}')]/following::td[6]/a[1][@class="button rebate-group-edit-button laBtn laBtn-default btn-edit" and \ @title="Edit group ${group_name}"]
     ${product_list}    create list
-    run keyword if    '${is_exsited}'=='False'    append to list    ${product_list}    ${temp_product_list}
-    : FOR    ${i}    IN RANGE    0    ${number_of_product}
-    \    ${temp}    run keyword if    ${i}>= 1    get sub string    @{temp_product_list}[${i}]    1
-    \    ...    ELSE IF    '${is_exsited}'=='True'    set variable    @{temp_product_list}[${i}]
-    \    run keyword if    '${is_exsited}'=='True'    append to list    ${product_list}    ${temp}
+    : FOR    ${i}    IN RANGE    1    ${number_of_product}+1
+    \    sleep    2s
+    \    ${temp}    get text    xpath=(//input[@checked=""]/following-sibling::label)[${i}]
+    \    append to list    ${product_list}    ${temp}
+    ${payer}    create list
+    : FOR    ${i}    IN RANGE    1    ${number_of_payer}+1
+    \    sleep    2s
+    \    ${temp_payer}    get text    xpath=(//*[@id='payer-in-group']/option)[${i}]
+    \    append to list    ${payer}    ${temp_payer}
     [Return]    ${product_list}    ${number_of_product}    ${rate}    ${payer}    ${from_date}    ${to_date}
 
 calculate prorate
@@ -601,34 +660,35 @@ calculate prorate
     [Return]    ${output_prorate}
 
 calculate rebate
-    [Arguments]    ${rebate_group_name}    ${bill_from}    ${bill_to}    ${billing_currency}
+    [Arguments]    ${rebate_group_name}    ${bill_from}    ${bill_to}    ${billing_currency}    ${payer_name}
     [Documentation]    This action used to calculate rebate amt
     ## get rebate setting
     ${product_list}    create list
-    ${product_list}    ${number_of_product}    ${rebate_rate}    ${payer}    ${rebate_from_date}    ${rebate_to_date}    get rebate setting
+    ${product_list}    ${number_of_product}    ${rebate_rate}    ${payer_list}    ${rebate_from_date}    ${rebate_to_date}    get rebate setting
     ...    ${rebate_group_name}
     ## get licensee setting
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    ${payer}
+    ...    ${tm_macau_games_rate}    get licensee setting    ${payer_name}
     ${total_amt}    set variable    0
     ## Calculate licensee fee based on product list of licensee have rebate
     : FOR    ${i}    IN RANGE    0    ${number_of_product}
     \    log    @{product_list}[${i}]
-    \    ${product_rate}    get rate from selected product    ${payer}    @{product_list}[${i}]
-    \    ${amt_fee}    run keyword if    '${product_rate}'<> 'None'    calculate licensee fee    ${payer}    @{product_list}[${i}]
+    \    ${product_rate}    get rate from selected product    ${payer_name}    @{product_list}[${i}]
+    \    ${amt_fee}    run keyword if    '${product_rate}'<> 'None'    calculate licensee fee    ${payer_name}    @{product_list}[${i}]
     \    ...    ${billing_currency}    ${product_rate}    ${tm_minfee_group_name}    ${bill_from}    ${bill_to}
     \    ...    ELSE    set variable    0
     \    ${total_amt}    evaluate    ${total_amt} + ${amt_fee}
     ## Checkwhether rebate setting is available to apply
     ${is_apply}    is apply setting    ${rebate_from_date}    ${rebate_to_date}    ${bill_from}    ${bill_to}
     ## Calculate discount
-    ${tm_SB_fee}    calculate licensee fee    ${payer}    Sportsbook    ${billing_currency}    ${tm_sb_rate}    ${tm_minfee_group_name}
+    ${tm_SB_fee}    calculate licensee fee    ${payer_name}    Sportsbook    ${billing_currency}    ${tm_sb_rate}    ${tm_minfee_group_name}
     ...    ${bill_from}    ${bill_to}
-    ${tm_rng_fee}    calculate licensee fee    ${payer}    RNG Casino    ${billing_currency}    ${tm_rng_rate}    ${tm_minfee_group_name}
+    ${tm_rng_fee}    calculate licensee fee    ${payer_name}    RNG Casino    ${billing_currency}    ${tm_rng_rate}    ${tm_minfee_group_name}
     ...    ${bill_from}    ${bill_to}
-    ${ac_discount_amt}    calculate discount    ${tm_SB_fee}    ${tm_rng_fee}    ${tm_discount_name}
+    ${ac_discount_amt}    ${ac_sb_discount_haifa}    ${ac_vs_discount_haifa}    calculate discount    ${tm_SB_fee}    ${tm_rng_fee}    ${tm_discount_name}
+    ...    ${bill_from}    ${bill_to}
     ## Calculate rebate, rebate= total licensee fee of products have applied rebate - discount amt
     ${rebate_amt}    run keyword if    '${is_apply}'=='True'    evaluate    - (${total_amt} + ${ac_discount_amt}) * ${rebate_rate}*0.01
     ...    ELSE    set variable    0
@@ -668,36 +728,6 @@ split date
     ${yyyy}    run keyword if    '${yyyy}' <> 'None'    convert to integer    ${yyyy}
     [Return]    ${dd}    ${mm}    ${yyyy}
 
-select filter by date range for settlement report
-    [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${base_currency}
-    [Documentation]    This action used to select filter on Settlement report based on date range, product name, billing currency and licensee name.
-    ...
-    ...    Note: ${date} will be have format: dd/mm/yyyyy
-    ...
-    ...    EX: select filter by date range for settlement report ${licensee_name} ${bill_from} ${bill_to} ${product_name} ${base_currency} \ \ \ \ \ \ \ \ \
-    navigate menu    Invoice    Settlement Report
-    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
-    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
-    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
-    click element    xpath=//div[@class="monthPicker"]
-    sleep    1s
-    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
-    click element    xpath=//*[@id='ddlFromDay']
-    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
-    click element    xpath=//*[@id='ddlToDay']
-    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
-    click element    xpath=//*[@id='party-filter']
-    input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
-    click element    xpath=//div[contains(text(),'${licensee_name}')]
-    click element    xpath=//*[@id='Product']
-    ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
-    run keyword if    '${is_exsited}'=='True'    click element    xpath=//option[contains(text(),'${product_name}')]
-    ...    ELSE IF    '${is_exsited}'=='False'    Log    This licensee doesn't offer this product.
-    click element    xpath=//*[@id='BaseCurrency']
-    double click element    xpath=//*[@id='BaseCurrency']/option[contains(text(),'${base_currency}')]
-    run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
-    run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
-
 get data in Preview page
     [Arguments]    ${licensee_name}    ${inv_number}    ${inv_symbol}
     [Documentation]    This action used to return data in the Preview page
@@ -708,8 +738,6 @@ get data in Preview page
     ${SB}    Run Keyword If    '${is_sb}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Sportsbook)')]/following::td[2]
     ${is_ng}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Number Game)')]
     ${NG}    Run Keyword If    '${is_ng}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Number Game)')]/following::td[2]
-    ${is_ba}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(BA)')]
-    ${BA}    Run Keyword If    '${is_ba}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(BA)')]/following::td[2]
     ${is_lc}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Live Casino)')]
     ${LC}    Run Keyword If    '${is_lc}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Live Casino)')]/following::td[2]
     ${is_vs}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Virtual Sports)')]
@@ -726,8 +754,6 @@ get data in Preview page
     ${Macau}    Run Keyword If    '${is_macau}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Macau)')]/following::td[2]
     ${is_mgclc}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Microgaming - Live Casino)')]
     ${MGCLC}    Run Keyword If    '${is_mgclc}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Microgaming - Live Casino)')]/following::td[2]
-    ${is_mgcrng}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Microgaming - RNG Casino)')]
-    ${MGCRNG}    Run Keyword If    '${is_mgcrng}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Microgaming - RNG Casino)')]/following::td[2]
     ${is_macau_games}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Macau Games)')]
     ${Macau_Games}    Run Keyword If    '${is_macau_games}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Macau Games')]/following::td[2]
     ${is_discount}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'Discount')]
@@ -737,7 +763,6 @@ get data in Preview page
     ${rebate_amt}    Run Keyword If    '${is_rebate}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'Rebate')]/following::td[2]
     ${SB}    change format for number    ${SB}
     ${NG}    change format for number    ${NG}
-    ${BA}    change format for number    ${BA}
     ${LC}    change format for number    ${LC}
     ${VS}    change format for number    ${VS}
     ${RNG}    change format for number    ${RNG}
@@ -746,25 +771,21 @@ get data in Preview page
     ${GD}    change format for number    ${GD}
     ${Macau}    change format for number    ${Macau}
     ${MGCLC}    change format for number    ${MGCLC}
-    ${MGCRNG}    change format for number    ${MGCRNG}
     ${Macau_Games}    change format for number    ${Macau_Games}
     ${discount_amt}    change format for number    ${discount_amt}
     ${rebate_amt}    change format for number    ${rebate_amt}
-    ${settlement_sb}    run keyword if    '${is_sb}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'SPORTSBOOK')]/following::td[contains(text(),'Total in EUR')]/following::td[9])[1]
-    ${settlement_ng}    run keyword if    '${is_ng}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'NUMBER GAME')]/following::td[contains(text(),'Total in EUR')]/following::td[9])[1]
-    ${settlement_lc}    run keyword if    '${is_lc}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'LIVE CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[9])[1]
-    ${settlement_vs}    run keyword if    '${is_vs}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'VIRTUAL SPORTS')]/following::td[contains(text(),'Total in EUR')]/following::td[9])[1]
-    ${settlement_rng}    run keyword if    '${is_rng}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'RNG CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[9])[1]
-    ${settlement_keno}    run keyword if    '${is_kn}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'KENO')]/following::td[contains(text(),'Total in EUR')]/following::td[9])[1]
-    ${settlement_ag}    run keyword if    '${is_ag}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'AG CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[9])[1]
-    ${settlement_gd}    run keyword if    '${is_gd}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'GOLD DELUXE')]/following::td[contains(text(),'Total in EUR')]/following::td[9])[1]
-    ${settlement_mgclc}    run keyword if    '${is_mgclc}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'MICROGAMING - LIVE CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[9])[1]
-    ${settlement_mgcrng}    run keyword if    '${is_macau_games}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'MICROGAMING - RNG CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[11])[1]
-    ${settlement_macau_games}    run keyword if    '${is_macau_games}'=='True'    get text    xpath=//*[@id='settlement']//*/td[contains(text(),'MACAU GAMES')]/following::td[contains(text(),'Total in EUR')]/following::td[9]
-    ${settlement_ba}    run keyword if    '${is_ba}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[@class="bold-text red-text" and contains(text(),'BA')]/following::td[@class="ralign col-grand-total padding-right"])[4]
+    ${settlement_sb}    run keyword if    '${is_sb}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'SPORTSBOOK')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    ${settlement_ng}    run keyword if    '${is_ng}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'NUMBER GAME')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    ${settlement_lc}    run keyword if    '${is_lc}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'LIVE CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    ${settlement_vs}    run keyword if    '${is_vs}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'VIRTUAL SPORTS')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    ${settlement_rng}    run keyword if    '${is_rng}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'RNG CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    ${settlement_keno}    run keyword if    '${is_kn}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'KENO')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    ${settlement_ag}    run keyword if    '${is_ag}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'AG CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    ${settlement_gd}    run keyword if    '${is_gd}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'GOLD DELUXE')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    ${settlement_mgclc}    run keyword if    '${is_mgclc}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'MICROGAMING - LIVE CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    ${settlement_macau_games}    run keyword if    '${is_macau_games}'=='True'    get text    xpath=//*[@id='settlement']//*/td[contains(text(),'MACAU GAMES')]/following::td[contains(text(),'Total in EUR')]/following::td[5]
     ${settlement_sb}    change format for number    ${settlement_sb}
     ${settlement_ng}    change format for number    ${settlement_ng}
-    ${settlement_ba}    change format for number    ${settlement_ba}
     ${settlement_lc}    change format for number    ${settlement_lc}
     ${settlement_vs}    change format for number    ${settlement_vs}
     ${settlement_rng}    change format for number    ${settlement_rng}
@@ -772,27 +793,25 @@ get data in Preview page
     ${settlement_ag}    change format for number    ${settlement_ag}
     ${settlement_gd}    change format for number    ${settlement_gd}
     ${settlement_mgclc}    change format for number    ${settlement_mgclc}
-    ${settlement_mgcrng}    change format for number    ${settlement_mgcrng}
     ${settlement_macau_games}    change format for number    ${settlement_macau_games}
     close window
-    [Return]    ${SB}    ${NG}    ${BA}    ${LC}    ${VS}    ${RNG}
-    ...    ${KN}    ${AG}    ${GD}    ${Macau}    ${MGCLC}    ${MGCRNG}
-    ...    ${Macau_Games}    ${discount_amt}    ${total}    ${rebate_amt}    ${settlement_sb}    ${settlement_ng}
-    ...    ${settlement_lc}    ${settlement_vs}    ${settlement_rng}    ${settlement_keno}    ${settlement_ag}    ${settlement_gd}
-    ...    ${settlement_mgclc}    ${settlement_mgcrng}    ${settlement_macau_games}    ${settlement_ba}
+    [Return]    ${SB}    ${NG}    ${LC}    ${VS}    ${RNG}    ${KN}
+    ...    ${AG}    ${GD}    ${Macau}    ${MGCLC}    ${Macau_Games}    ${discount_amt}
+    ...    ${total}    ${rebate_amt}    ${settlement_sb}    ${settlement_ng}    ${settlement_lc}    ${settlement_vs}
+    ...    ${settlement_rng}    ${settlement_keno}    ${settlement_ag}    ${settlement_gd}    ${settlement_mgclc}    ${settlement_macau_games}
 
 get licensee fee from settlement report
     [Arguments]    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}
     [Documentation]    This action used to get licensee fee in settlement report.
     ...
     ...    EX: ${settlement_SB} get licensee fee from settlement report Fun88 ${tm_bill_from} ${tm_bill_to} Sportsbook EUR \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
-    select filter by date range for settlement report    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}
+    submit filter by date range for settlement report    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}
     ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
-    sleep    5s
-    ${licensee_fee}    Run Keyword If    '${is_exsited}'=='True' and '${product_name}' <>'BA' and '${ac_no_info_status}'=='False' and '${product_name}' <> 'Microgaming - RNG Casino'    Get Text    xpath=//td[contains(text(),'Total in')]/following::td[9]
-    ...    ELSE IF    '${is_exsited}'=='True' and '${product_name}'=='BA' and '${ac_no_info_status}'=='False'    get text    xpath=//*[@id='settlement']/table[2]/tbody/*/td[4][@class="ralign col-grand-total padding-right"]
-    ...    ELSE IF    '${is_exsited}'=='True' and '${product_name}'== 'Microgaming - RNG Casino' and '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in')]/following::td[11]
+    sleep    7s
+    ${licensee_fee}    Run Keyword If    '${is_exsited}'=='True' and '${product_name}' <>'BA' and '${ac_no_info_status}'=='False' and '${product_name}' <> 'Microgaming - RNG Casino'    Get Text    xpath=//td[contains(text(),'Total in')]/following::td[5]
+    ...    ELSE IF    '${is_exsited}'=='True' and '${product_name}'=='BA' and '${ac_no_info_status}'=='False'    get text    xpath=//td[@class="text-right border-bottom laTable__cell laTable__cell-grandTotal border-right"]
+    ...    ELSE IF    '${is_exsited}'=='True' and '${product_name}'== 'Microgaming - RNG Casino' and '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Grand Total')]/following::td[7]
     ...    ELSE    set variable    0
     ${licensee_fee}    change format for number    ${licensee_fee}
     [Teardown]
@@ -802,7 +821,7 @@ get max invoice no from selected biller on dashboard
     [Arguments]    ${biller_name}
     [Documentation]    This action will return max invoice no of selected biller
     navigate menu    Invoice    Dashboard
-    select first day of previous month
+    select since last 4 months
     wait until element is visible    xpath=//*[@id='ddlBiller']
     click element    xpath=//*[@id='ddlBiller']
     click element    xpath=//label/div[@class="ddci__text" and text()='All']
@@ -835,7 +854,7 @@ get invoice no from create invoice
     ${output_invoice_no}    set variable    ${invoice_symbol}${invoice_no}
     [Return]    ${output_invoice_no}
 
-select first day of previous month
+select since last 4 months
     [Documentation]    This action use to clicking the first day of pervious month on month picker
     wait until element is visible    xpath=//*[@id='fd-but-FromDate']/span[1]
     click element    xpath=//*[@id='fd-but-FromDate']/span[1]
@@ -847,6 +866,12 @@ select first day of previous month
     \    ${first_day}    get text    xpath=//tr[1][@role="row"]/td[${i}]
     \    run keyword if    '${first_day}'=='1'    click element    xpath=//tr[1][@role="row"]/td[${i}]
     \    Exit For Loop If    '${first_day}'=='1'
+    click element    xpath=//*[@id='fd-but-ToDate']/span[1]
+    sleep    1s
+    click element    xpath=//*[@id='ToDate-today-but']
+    focus    xpath=//td[@tabindex="0"]
+    mouse over    xpath=//td[@tabindex="0"]
+    click element    xpath=//*[@id='ToDate-date-picker-hover'][@tabindex="0"]
 
 calculate no of apply waive day in month
     [Arguments]    ${setting_date_from}    ${setting_date_to}    ${bill_from}    ${bill_to}
@@ -873,10 +898,12 @@ calculate no of apply waive day in month
     ${is_waive}    run keyword if    '${setting_date_from}' <> 'None' and '${setting_date_to}' <> 'None'    is apply setting    ${setting_date_from}    ${setting_date_to}    ${bill_from}
     ...    ${bill_to}
     ...    ELSE    set variable    False
-    ${apply_from_date}    run keyword if    (${yyyy_setting_from} == ${yyyy_bill_from} ) and (${mm_setting_from} < ${mm_bill_from} <=${mm_setting_to} )    set variable    ${dd_bill_from}
+    ${apply_from_date}    run keyword if    ${yyyy_setting_from} < ${yyyy_bill_from} and '${yyyy_setting_from}' <> 'None'    set variable    ${dd_bill_from}
+    ...    ELSE IF    (${yyyy_setting_from} == ${yyyy_bill_from} ) and (${mm_setting_from} < ${mm_bill_from} <=${mm_setting_to} )    set variable    ${dd_bill_from}
     ...    ELSE IF    ${yyyy_setting_from} == ${yyyy_bill_from} and ${mm_setting_from} == ${mm_bill_from} and ${dd_setting_from} > ${dd_bill_from}    set variable    ${dd_setting_from}
     ...    ELSE    set variable    None
-    ${apply_to_date}    run keyword if    ${yyyy_setting_to} == ${yyyy_bill_to} and ${mm_setting_from} <= ${mm_bill_to} < ${mm_setting_to}    set variable    ${dd_bill_to}
+    ${apply_to_date}    run keyword if    ${yyyy_setting_to} > ${yyyy_bill_to} and '${yyyy_setting_to}' <> 'None'    set variable    ${dd_bill_to}
+    ...    ELSE IF    ${yyyy_setting_to} == ${yyyy_bill_to} and ${mm_setting_from} <= ${mm_bill_to} < ${mm_setting_to}    set variable    ${dd_bill_to}
     ...    ELSE IF    ${yyyy_setting_to} == ${yyyy_bill_to} and ${mm_setting_to} == ${mm_bill_to} and ${dd_setting_to} <= ${dd_bill_to}    set variable    ${dd_setting_to}
     ...    ELSE    set variable    None
     ${apply_from_date}    run keyword if    '${apply_from_date}' <> 'None'    convert to integer    ${apply_from_date}
@@ -978,3 +1005,244 @@ get date after waive
     ${from_date}    set variable if    '${dd_from_date}'<>'None'    ${dd_from_date}/${mm_bill_from}/${yyyy_bill_from}
     ${to_date}    set variable if    (${from_waive_date} > ${dd_bill_from}) or ('${dd_bill_to}'=='${to_waive_date}')    None    ${dd_bill_to}/${mm_bill_from}/${yyyy_bill_from}
     [Return]    ${from_date}    ${to_date}
+
+calculate discount for haifa
+    [Arguments]    ${bill_from}    ${bill_to}
+    ${SB_grosswin}    ${settlement_ba_comm}    calculate gross win from settlement report    Bbin    Sportsbook    CNY    ${bill_from}
+    ...    ${bill_to}
+    ${VS_grosswin}    ${settlement_ba_comm}    calculate gross win from settlement report    Bbin    Virtual Sports    CNY    ${bill_from}
+    ...    ${bill_to}
+    ${SB_fee}    evaluate    ${SB_grosswin}*0.15
+    ${SB_discount}    run key word if    ${SB_fee} <= 2000000    evaluate    -${SB_grosswin}*0.15*0.3667
+    ...    ELSE IF    ${SB_fee}> 2000000    evaluate    -${SB_grosswin}*0.15*0.4
+    Comment    ${SB_discount}    evaluate    -${SB_grosswin}*0.055
+    ${VS_discount}    evaluate    -${VS_grosswin}*0.025
+    Comment    ${total_discount}    evaluate    ${SB_discount} + ${VS_discount}
+    Comment    ${SB_discount}    change format for number    ${SB_discount}
+    Comment    ${VS_discount}    change format for number    ${VS_discount}
+    Comment    ${total_discount}    change format for number    ${total_discount}
+    ${SB_discount}    run keyword if    '${SB_discount}' <> 'None' and '${SB_discount}' <> '0'    Convert To Number    ${SB_discount}    2
+    ...    ELSE    set variable    ${SB_discount}
+    ${VS_discount}    run keyword if    '${VS_discount}' <> 'None' and '${VS_discount}' <> '0'    Convert To Number    ${VS_discount}    2
+    ...    ELSE    set variable    ${VS_discount}
+    ${total_discount}    evaluate    ${SB_discount} + ${VS_discount}
+    [Return]    ${SB_discount}    ${VS_discount}    ${total_discount}
+
+get licensee list from selected biller
+    ${ac_total_rows}    Get Matching Xpath Count    xpath=/*[@id='ddl-payer']/option
+    ${list}    create list
+    sleep    2s
+    : FOR    ${i}    IN RANGE    2    ${ac_total_rows}
+    \    ${list}    append to list    xpath=//*[@id='ddl-payer']/option[${i}]
+    [Return]    ${list}
+
+get licensee fee for each product from selected licensee
+    [Arguments]    ${licensee_name}
+    Switch Browser    LA PRO
+    navigate menu    Invoice    Settlement Report
+    wait until element is visible    xpath=//*[@id='party-filter']
+    click element    xpath=//*[@id='party-filter']
+    input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
+    click element    xpath=//div[contains(text(),'${licensee_name}')]
+    click element    xpath=//*[@id='lblSelectedMonth']
+    ${yyyyy}    get value    xpath=//input[@name='Year']
+    ${mm}    Get Value    xpath=//input[@id='hdfMonth' and @name='Month']
+    ${mm}    set variable if    ${mm} < 10    0${mm}    ${mm}
+    ${fromdate}    set variable    01/${mm}/${yyyyy}
+    ${to_date}    get text    xpath=(//*[@id='ddlToDay']/option)[last()]
+    ${fromdate}    set variable    01/${mm}/${yyyyy}
+    ${todate}    set variable    ${to_date}/${mm}/${yyyyy}
+    click element    xpath=//*[@id='Product']
+    ${no_of_products}    Get Matching Xpath Count    xpath=//*[@id='Product']/option
+    : FOR    ${i}    IN RANGE    1    ${no_of_products}+1
+    \    Switch Browser    LA UAT
+    \    ${temp_product}    get text    xpath=//*[@id='Product']/option[${i}]
+    \    ${licenseefee_uat}    get licensee fee from settlement report    ${licensee_name}    ${fromdate}    ${todate}    ${temp_product}
+    \    ...    EUR
+    \    Switch Browser    LA PRO
+    \    sleep    2s
+    \    ${licenseefee_Pro}    get licensee fee from settlement report    ${licensee_name}    ${fromdate}    ${todate}    ${temp_product}
+    \    ...    EUR
+    \    check value equal with approximation    ${licenseefee_uat}    ${licenseefee_Pro}
+    \    sleep    5s
+    [Return]    ${licenseefee_uat}    ${licenseefee_pro}
+
+get total line in invoice
+    [Arguments]    ${payer_name}
+    ${is_no_data}    Run Keyword And Return Status    get text    xpath=//td[@class="text-center no-info-column"]
+    run keyword if    '${is_no_data}'=='True'    pass execution    There is no data
+    log    ${payer_name}
+    wait until element is visible    xpath=//tr[@class="border-item total-item"]/td[3]/span[2]
+    ${total}    get text    xpath=//tr[@class="border-item total-item"]/td[3]/span[2]
+    ${total}    change format for number    ${total}
+    [Return]    ${total}
+
+split date for calendar picker
+    [Arguments]    ${date}
+    ${dd}    run keyword if    '${date}'<> 'None'    Fetch From Left    ${date}    /
+    ${mm}    run keyword if    '${date}'<> 'None'    Fetch From Right    ${date}    /
+    ${yyyy}    run keyword if    '${date}'<> 'None'    Get Slice From List    ${date}    3    5
+    [Return]    ${dd}    ${mm}    ${yyyy}
+
+get rate for hosting fee
+    [Arguments]    ${charge_rate_name}    ${no_of_user}
+    navigate menu    Invoice    Manage Hosting Fees - Charge Rate
+    wait until element is visible    xpath=//*[@id='ddl-charge-rate-name']
+    click element    xpath=//*[@id='ddl-charge-rate-name']
+    double click element    xpath=//*[@id='ddl-charge-rate-name']/option[text()='${charge_rate_name}']
+    ${hosting_amt}    run keyword if    '${charge_rate_name}'=='Rate Min 4000' and 0 < ${no_of_user} < 2000    set variable    4000
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 4000' and 2001 < ${no_of_user} < 4000    set variable    6500
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 4000' and 4001 < ${no_of_user} < 6000    set variable    9000
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 4000' and 6001 < ${no_of_user} < 8000    set variable    11500
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 4000' and 8001 < ${no_of_user} < 10000    set variable    14000
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 4000'    set variable    100000
+    ${hosting_amt}    run keyword if    '${charge_rate_name}'=='Rate Min 5000' and 0 < ${no_of_user} < 2000    set variable    5000
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 5000' and 2001 < ${no_of_user} < 4000    set variable    7500
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 5000' and 4001 < ${no_of_user} < 6000    set variable    10000
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 5000' and 6001 < ${no_of_user} < 8000    set variable    12500
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 5000' and 8001 < ${no_of_user} < 10000    set variable    15000
+    ...    ELSE IF    '${charge_rate_name}'=='Rate Min 5000'    set variable    100000
+    ...    ELSE    set variable    ${hosting_amt}
+    ${hosting_amt}    run keyword if    '${charge_rate_name}'=='Fixed TWD'    set variable    12000
+    ...    ELSE    set variable    ${hosting_amt}
+    sleep    2s
+    click element    xpath=//td[text()='${charge_rate_name}']/following::td[6]/button[@class="laBtn laBtn-default btn-edit"]
+    wait until element is visible    xpath=//*[@id='ddl-rate-currency']
+    ${currencyID}    get value    xpath=//*[@id='ddl-rate-currency']
+    sleep    1s
+    ${currency}    get text    xpath=//*[@id='ddl-rate-currency']/option[@value='${currencyID}']
+    [Return]    ${hosting_amt}    ${currency}
+
+get peak concurrent user
+    [Arguments]    ${licensee}    ${from_date}    ${to_date}
+    navigate menu    Misc    Peak Concurrent Users
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
+    Wait Until Element Is Visible    xpath=//*[@id='parties']
+    click element    xpath=//*[@id='parties']
+    click element    xpath=//input[@type="text"]
+    input text    //input[@type="text"]    ${licensee}
+    click element    xpath=//div[@class="ddci__text"][contains(text(),'${licensee}')]
+    click element    xpath=//div[@class="monthPicker"]
+    sleep    1s
+    ${is_selected_year}    run key word and return status    Element Should Be Visible    xpath=//a[@class='selected' and @year='${yyyyy_from}']/span
+    run key word if    '${is_selected_year}'=='False'    double click element    xpath=//a[@year='${yyyyy_from}']/span
+    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
+    click element    xpath=//*[@id='ddlFromDay']
+    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
+    click element    xpath=//*[@id='ddlToDay']
+    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
+    sleep    2s
+    click element    xpath=//*[@id='btn-submit']
+    Wait Until Element Is Visible    xpath=//td[@class="laTable__cell laTable__cell-grandTotal"][contains(text(),'Max Peak Concurrent Users')]/following::td[1]
+    ${max_user}    get text    xpath=//td[@class="laTable__cell laTable__cell-grandTotal"][contains(text(),'Max Peak Concurrent Users')]/following::td[1]
+    ${max_user}    change format for number    ${max_user}
+    [Return]    ${max_user}
+
+get licensee setting for hosting fee
+    [Arguments]    ${licensee}
+    navigate menu    Invoice    Manage Payer Setting
+    wait until element is visible    xpath=//a[2]
+    click element    xpath=//a[2]
+    wait until element is visible    xpath=//*[@id='ddlPayers']
+    click element    xpath=//*[@id='ddlPayers']
+    click element    xpath=//input[@type="text"]
+    input text    //input[@type="text"]    ${licensee}
+    click element    xpath=//div[@class="ddci__text"][contains(text(),'${licensee}')]
+    click element    xpath=//*[@id='btnSearch']
+    wait until element is visible    xpath=//span[@class="tooltip"]
+    ${group_name}    get text    xpath=//span[@class="tooltip"]
+    click element    xpath=//button[@class="laBtn laBtn-default btn-edit"]
+    sleep    2s
+    ${is_waive}    run keyword and return status    Element Should Be Visible    xpath=//div[@class="laForm-panel laForm mhfSettings__waiveSetting"]//*//input[@class="laForm__field mhfSettings__fromDate" ]
+    ${output_waive_from}    run keyword if    '${is_waive}'=='True'    get value    xpath=//div[@class="laForm-panel laForm mhfSettings__waiveSetting"]//*//input[@class="laForm__field mhfSettings__fromDate"]
+    ${output_waive_to}    run keyword if    '${is_waive}'=='True'    get value    xpath=//div[@class="laForm-panel laForm mhfSettings__waiveSetting"]//*//input[@class="laForm__field mhfSettings__toDate"]
+    ${output_waive_from}    run keyword if    '${output_waive_from}'<> 'None'    change date format    ${output_waive_from}
+    ${output_waive_to}    run keyword if    '${output_waive_to}'<> 'None'    change date format    ${output_waive_to}
+    ${is_based_minfee}    run keyword and return status    Element Should Be Visible    //input[@class="mhfSettings__basedFeeCheck confirm-changed"]
+    [Return]    ${group_name}    ${output_waive_from}    ${output_waive_to}    ${is_based_minfee}
+
+calculate hosting fee
+    [Arguments]    ${licensee}    ${bill_from}    ${bill_to}
+    ${minfee_amt}    ${sb_waive_from}    ${sb_waive_to}    get minfee and waive time from selected licensee    ${licensee}
+    ${group_name}    ${waive_from}    ${waive_to}    ${is_based_minfee}    get licensee setting for hosting fee    ${licensee}
+    ${no_of_waive_days}    ${from_apply_date}    ${to_apply_date}    calculate no of apply waive day in month    ${waive_from}    ${waive_to}    ${bill_from}
+    ...    ${bill_to}
+    ${is_waive}    run keyword if    '${no_of_waive_days}'=='0'    set variable    False
+    ...    ELSE    set variable    True
+    ${user}    get peak concurrent user    ${licensee}    ${bill_from}    ${bill_to}
+    ${hosting_fee_amt}    ${currency}    get rate for hosting fee    ${group_name}    ${user}
+    ${prorate}    run keyword if    '${is_waive}'=='True'    calculate prorate    ${bill_from}    ${bill_to}    ${hosting_fee_amt}
+    ...    ${waive_from}    ${waive_to}
+    ...    ELSE    set variable    0
+    ${total_days_in_month}    get total days in month    ${bill_to}
+    ${hosting_fee_amt}    run keyword if    '${is_waive}'=='False'    set variable    ${hosting_fee_amt}
+    ...    ELSE IF    '${is_waive}'=='True' \ and '${is_based_minfee}'== 'False'    set variable    0
+    ...    ELSE IF    '${is_waive}'=='True' \ and '${is_based_minfee}'== 'True' and ${hosting_fee_amt} > ${minfee_amt}    set variable    0
+    ...    ELSE IF    '${is_waive}'=='True' \ and '${is_based_minfee}'== 'True' and ${hosting_fee_amt} < ${minfee_amt}    set variable    ${hosting_fee_amt}
+    ...    ELSE IF    1 <= ${no_of_waive_days} < ${total_days_in_month}    set variable    ${prorate}
+    ${exchange_rate}    get exchange rate    ${bill_from}    ${bill_to}    TWD
+    ${hosting_fee_amt}    run keyword if    '${currency}' <> 'EUR'    evaluate    ${hosting_fee_amt}*${exchange_rate}
+    ...    ELSE    set variable    ${hosting_fee_amt}
+    [Return]    ${hosting_fee_amt}
+
+get exchange rate
+    [Arguments]    ${fromdate}    ${todate}    ${orginal_currency}
+    sleep    3s
+    focus    xpath=//span[contains(text(),'OANDA Exchange Rate')]
+    Click Element    xpath=//span[contains(text(),'OANDA Exchange Rate')]
+    Click Element    xpath=//span[contains(text(),'OANDA Exchange Rate')]
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${fromdate}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${todate}
+    ## select month
+    click element    xpath=//*[@id='fd-but-FromDate']/span[1]
+    ${mm_from}    convert month from text to number    ${mm_from}
+    :FOR    ${i}    IN RANGE    0    12
+    \    ${is_selected_month}    run keyword and return status    element should be visible    xpath=//span[@class="month-display drag-enabled"][contains(text(),'${mm_from}')]
+    \    run key word if    '${is_selected_month}'=='False'    click element    xpath=//*[@id='FromDate-prev-month-but']
+    \    exit for loop if    '${is_selected_month}'=='True'
+    ${fromdate}    set variable    ${mm_from} ${dd_to}, ${yyyyy_from}
+    click element    xpath=//*[@id='FromDate-date-picker-hover'][@title="${fromdate}"]
+    ## Select todate
+    click element    xpath=//*[@id='fd-but-ToDate']/span[1]
+    ## select month
+    ${mm_to}    convert month from text to number    ${mm_to}
+    :FOR    ${i}    IN RANGE    0    12
+    \    ${is_selected_month_to}    run keyword and return status    element should be visible    xpath=//*[@id='fd-ToDate']//*//span[contains(text(),'${mm_to}')]
+    \    run key word if    '${is_selected_month_to}'=='False'    click element    xpath=//*[@id='ToDate-prev-month-but']
+    \    exit for loop if    '${is_selected_month_to}'=='True'
+    ${todate}    set variable    ${mm_to} ${dd_to}, ${yyyyy_from}
+    click element    xpath=//*[@id='ToDate-date-picker-hover'][@title="${todate}"]
+    click element    xpath=//*[@id='reportFilter']/input
+    ${exchange_rate}    get text    xpath=//*[@id='exchangeRateGrid']//*//td[1][contains(text(),'${orginal_currency}')]/following::td[1]
+    [Return]    ${exchange_rate}
+
+Convert month from text to number
+    [Arguments]    ${mm}
+    [Documentation]    Input month such as Mar ==> \ return 03
+    :FOR    ${i}    IN RANGE    0    1
+    \    ${mm}    Set Variable if    ${mm}==1    January    ${mm}
+    \    Exit For Loop If    '${mm}'=='January'
+    \    ${mm}    Set Variable if    ${mm}==2    February    ${mm}
+    \    Exit For Loop If    '${mm}'=='February'
+    \    ${mm}    Set Variable if    ${mm}==3    March    ${mm}
+    \    Exit For Loop If    '${mm}'=='March'
+    \    ${mm}    Set Variable if    ${mm}==4    April    ${mm}
+    \    Exit For Loop If    '${mm}'=='April'
+    \    ${mm}    Set Variable if    ${mm}==5    May    ${mm}
+    \    Exit For Loop If    '${mm}'=='May'
+    \    ${mm}    Set Variable if    ${mm}==6    June    ${mm}
+    \    Exit For Loop If    '${mm}'=='June'
+    \    ${mm}    Set Variable if    ${mm}==7    July    ${mm}
+    \    Exit For Loop If    '${mm}'=='July'
+    \    ${mm}    Set Variable if    ${mm}==8    August    ${mm}
+    \    Exit For Loop If    '${mm}'=='August'
+    \    ${mm}    Set Variable if    ${mm}==9    September    ${mm}
+    \    Exit For Loop If    '${mm}'=='September'
+    \    ${mm}    Set Variable if    ${mm}==10    October    ${mm}
+    \    Exit For Loop If    '${mm}'=='October'
+    \    ${mm}    Set Variable if    ${mm}==11    November    ${mm}
+    \    Exit For Loop If    '${mm}'=='November'
+    \    ${mm}    Set Variable if    ${mm}==12    December    ${mm}
+    \    Exit For Loop If    '${mm}'=='December'
+    [Return]    ${mm}

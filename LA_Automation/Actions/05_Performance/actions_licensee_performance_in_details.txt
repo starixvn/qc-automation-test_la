@@ -1,6 +1,7 @@
 *** Settings ***
 Library           Selenium2Library
 Resource          ../../Interfaces/05_Performance/interface_general_licensee_performance.txt
+Resource          ../../Actions/07_Invoice/actions_create_invoice.txt
 
 *** Keywords ***
 select month from to
@@ -24,3 +25,60 @@ select month from to
     Select From List By Value    ${from_listbox}    ${from date}
     # Select To drop down list
     Select From List By Value    ${to_listbox}    ${to date}
+
+submit filter by selected date range in performance in details
+    [Arguments]    ${licensee_name}    ${product_name}    ${exchange}    ${from_date}    ${to_date}    ${filter}
+    sleep    2s
+    navigate menu    Performance    Licensee Performance in Details
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
+    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
+    click element    xpath=//div[@class="monthPicker"]
+    sleep    1s
+    ${is_selected_year}    run key word and return status    Element Should Be Visible    xpath=//a[@class='selected' and @year='${yyyyy_from}']/span
+    run key word if    '${is_selected_year}'=='False'    double click element    xpath=//a[@year='${yyyyy_from}']/span
+    #FromDate - ToDate
+    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
+    click element    xpath=//*[@id='ddlFromDay']
+    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
+    click element    xpath=//*[@id='ddlToDay']
+    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
+    #Licensee
+    click element    xpath=//*[@id='party-filter']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//input[@placeholder="Filter"]
+    input text    xpath=//input[@placeholder="Filter"]    ${licensee_name}
+    click element    xpath=//label/div[contains(text(),'${licensee_name}')]
+    #Currency
+    click element    xpath=//*[@id='ddl-base-currency']
+    Comment    wait until element is visible    xpath=//option[text()='${exchange}']
+    Comment    click element    xpath=//option[text()='${exchange}']
+    #Filter
+    click element    xpath=//*[@class='field wauto']//..//input[@value=${filter} and @name='DrawFilter']
+    #Product
+    click element    xpath=//*[@id='product-option']
+    click element    xpath=//div[text()='All']
+    click element    xpath=//div[text()='${product_name}']
+    click element    xpath=//*[@id='reportFilter']//label[contains(text(),'Show/Hide')]
+    #Submit
+    Sleep    1s
+    click element    xpath=//*[@id='submitButton']
+
+get data for performance in details report
+    [Arguments]    ${licensee_name}    ${product_name}    ${exchange}    ${from_date}    ${to_date}    ${filter}
+    sleep    2s
+    submit filter by selected date range in performance in details    ${licensee_name}    ${product_name}    ${exchange}    ${from_date}    ${to_date}    ${filter}
+    wait until element is visible    xpath=//*[@class='col_footer_content grid-fixed-table']//..//div[text()='Grand Total']
+    ${total_trans}    get text    xpath=//*[@class='col_footer_content grid-fixed-table']//..//div[text()='Grand Total']/following::th[1]/div
+    ${Turnover}    get text    xpath=//*[@class='col_footer_content grid-fixed-table']//..//div[text()='Grand Total']/following::th[3]/div
+    ${CustomerWinLoss}    get text    xpath=//*[@class='col_footer_content grid-fixed-table']//..//div[text()='Grand Total']/following::th[5]/div
+    Sleep    1s
+    Click Element    xpath=//*[@id='content-data']//div[@class='scrollbar-x-content']
+    ${LicenseeFee}    get text    xpath=//*[@class='col_footer_content grid-fixed-table']//..//div[text()='Grand Total']/following::th[15]/div
+    ${total_trans}    change format for number    ${total_trans}
+    ${Turnover}    change format for number    ${Turnover}
+    ${CustomerWinLoss}    change format for number    ${CustomerWinLoss}
+    ${LicenseeFee}    change format for number    ${LicenseeFee}
+    should be true    ${total_trans} >0
+    should be true    ${Turnover} >0
+    [Return]    ${total_trans}    ${Turnover}    ${CustomerWinLoss}    ${LicenseeFee}

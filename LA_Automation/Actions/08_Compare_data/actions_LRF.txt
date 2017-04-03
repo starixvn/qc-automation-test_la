@@ -12,11 +12,15 @@ Resource          ../../Interfaces/08_LRF_page/interface_lrf_login.txt
 Library           ExcelLibrary
 Resource          ../01_Main_Actions/action_main.txt
 Resource          Compare_LA_data_detailed.txt
+Resource          ../07_Invoice/actions_create_invoice.txt
 
 *** Keywords ***
 login_lrf
     [Arguments]    ${username}    ${password}
-    Go To    ${cf_lrf_url}
+    Comment    Go To    ${cf_lrf_url}
+    # 1. Open browser with LA site
+    Open Browser    ${cf_lrf_url}    ${cf_browser}    LRF PRO    ff_profile_dir=${cf_ff_profile_dir}
+    Maximize Browser Window
     # Input username & password
     Input Text    ${lrf_username_textbox}    ${username}
     Input Password    ${lrf_password_textbox}    ${password}
@@ -163,6 +167,7 @@ get data LRF from Licensee Win Loss
     ...    - Keno
     ${exit}    does control exist    xpath=//iframe[@id='main']
     Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
+    wait until element is visible    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[7]
     ${Turnover_LRF}    Get Text    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[7]    # Turnover SB
     ${Turnover_LRF}    remove string    ${Turnover_LRF}    ,
     ${TotalTransaction_LRF}    Get Text    xpath=.//td[@class="group-EUR" and contains(text(),'Total in EUR')]/following::td[13]    # Total Transaction
@@ -493,3 +498,285 @@ Check data for next licensees
     \    Run Keyword If    '${status_platfromwinloss}'=='Yes'    navigate left menu    REPORTS    Platform Win Loss
     \    Run Keyword If    '${status_platfromwinloss}'=='Yes'    submit filters for Platform Win Loss
     \    Run Keyword If    '${status_platfromwinloss}'=='Yes'    compare Platform Win Loss LRF and LA    ${licensee}
+
+Submit filter for Colossus bet report
+    [Timeout]
+    Select Frame    xpath=//iframe[@id='main']
+    Click Element    xpath=.//img[@class='ui-daterangepicker-trigger']    #Click From Date
+    Click Element    xpath=//a[text()='Last month']    # Select Last month
+    Click Element    xpath=//input[@class='report-by-monthly']    # Select Monthly radio
+    Comment    Click Element    xpath=//*[@id='grid-products-multiselectHeaderCheckBox']    # Select All
+    Comment    Click Element    xpath=//span[@class='ui-multiselect-icon ui-multiselect-icon-triangle-1-s']    #Select product
+    Click Element    xpath=//*[@id='SubmitButton']    # Click on Submit button
+    wait lrf page loading
+
+get data from Colossusbet in LRF
+    [Arguments]    ${fromdate}    ${todate}
+    navigate left menu    REPORTS    Colossus Bets Win Loss
+    submit filter by selected date range in lrf    ${fromdate}    ${todate}    None    1
+    sleep    3s
+    Comment    wait until element is visible    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[5]
+    Comment    Select Frame    xpath=//iframe[@id='main']
+    wait until element is visible    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[5]
+    ${lrf_Turnover}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[5]
+    ${lrf_TotalTrans}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[6]
+    ${lrf_MemberWinning}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[7]
+    ${lrf_MemberCashout}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[8]
+    ${lrf_CashoutShare}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[9]
+    ${lrf_CommShare}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[10]
+    ${lrf_Turnover}    change format for number    ${lrf_Turnover}
+    ${lrf_TotalTrans}    change format for number    ${lrf_TotalTrans}
+    ${lrf_MemberWinning}    change format for number    ${lrf_MemberWinning}
+    ${lrf_MemberCashout}    change format for number    ${lrf_MemberCashout}
+    ${lrf_CashoutShare}    change format for number    ${lrf_CashoutShare}
+    ${lrf_CommShare}    change format for number    ${lrf_CommShare}
+    should be true    ${lrf_Turnover} >0
+    should be true    ${lrf_TotalTrans}>0
+    Comment    should be true    ${lrf_CashoutShare}>0
+    should be true    ${lrf_CommShare}>0
+    [Return]    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_MemberWinning}    ${lrf_MemberCashout}    ${lrf_CashoutShare}    ${lrf_CommShare}
+
+submit filter by selected date range in lrf
+    [Arguments]    ${fromdate}    ${todate}    ${product_name}    ${filter}
+    [Documentation]    Input ${fromdate} format: 13/01/2017 ( dd/mm/yyyy}
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${fromdate}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${todate}
+    Select Frame    xpath=//iframe[@id='main']
+    click element    xpath=//input[@id='FromDate']
+    ## select from year
+    click element    xpath=(//select[@data-handler="selectYear"])[1]
+    click element    xpath=(//select[@data-handler="selectYear"])[1]/option[@value='${yyyyy_from}']
+    ## select from month
+    click element    xpath=(//select[@data-handler="selectMonth"])[1]
+    ${mm_from}    run key word if    '${mm_from}' < 10    fetch from right    ${mm_from}    0
+    ...    ELSE    set variable    ${mm_from}
+    ${mm_from}    evaluate    ${mm_from}-1
+    click element    xpath=(//select[@data-handler="selectMonth"])[1]/option[@value='${mm_from}']
+    ## select from date
+    click element    xpath=(//td[@data-year="${yyyyy_from}" and @data-month="${mm_from}" and @data-event="click" and @data-handler="selectDay"]/a[text()='${dd_from}'])[1]
+    ## select to date
+    ## select to year
+    click element    xpath=(//select[@data-handler="selectYear"])[2]
+    click element    xpath=(//select[@data-handler="selectYear"])[2]/option[@value='${yyyyy_from}']
+    ## select to month
+    click element    xpath=(//select[@data-handler="selectMonth"])[2]
+    click element    xpath=(//select[@data-handler="selectMonth"])[2]/option[@value='${mm_from}']
+    ## select to date
+    click element    xpath=(//td[@data-year="${yyyyy_from}" and @data-month="${mm_from}" and @data-event="click" and @data-handler="selectDay"]/a[text()='${dd_to}'])[2]
+    click element    xpath=//button[text()='OK']
+    ## select report
+    click element    xpath=//*[@id='reportbymonthly']
+    ## select Filter
+    ${is_filter}    run keyword and return status    element should be visible    xpath=//*[@class='grid_9 filter-input option-list']//input[@value=${filter}]
+    run key word if    '${is_filter}'=='True'    click element    xpath=//*[@class='grid_9 filter-input option-list']//input[@value=${filter}]
+    ${is_product_list}    run keyword and return status    element should be visible    xpath=//*[@id='grid-products-multiselect']
+    Comment    run keyword if    '${is_product_list}'=='True'    wait until element is visible    xpath=//input[@id="grid-products-multiselectHeaderCheckBox"]
+    run keyword if    '${is_product_list}'=='True'    click element    xpath=//*[@id='grid-products-multiselect']/input
+    run keyword if    '${is_product_list}'=='True'    wait until element is visible    xpath=//input[@id="grid-products-multiselectHeaderCheckBox"]
+    run keyword if    '${is_product_list}'=='True'    click element    xpath=//input[@id="grid-products-multiselectHeaderCheckBox"]
+    sleep    1s
+    run keyword if    '${is_product_list}'=='True'    click element    xpath=//input[@id="grid-products-multiselectHeaderCheckBox"]
+    run keyword if    '${is_product_list}'=='True'    wait until element is visible    xpath=//input[@title='${product_name}']
+    run keyword if    '${is_product_list}'=='True'    click element    xpath=//input[@title='${product_name}']
+    run keyword if    '${is_product_list}'=='True'    click element    xpath=//*[@id='grid-products-multiselect']
+    wait until element is visible    xpath=//*[@id='SubmitButton']
+    click element    xpath=//*[@id='SubmitButton']
+
+get data from licensee win loss in LRF
+    [Arguments]    ${fromdate}    ${todate}    ${product}    ${filter}
+    navigate left menu    REPORTS    Licensee Win Loss
+    submit filter by selected date range in lrf    ${fromdate}    ${todate}    ${product}    ${filter}
+    # Get data
+    sleep    3s
+    wait until element is visible    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[7]
+    ${lrf_Turnover}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[7]
+    ${lrf_TotalTrans}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[13]
+    ${lrf_CustomerWinLoss}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[16]
+    ${lrf_Turnover}    change format for number    ${lrf_Turnover}
+    ${lrf_TotalTrans}    change format for number    ${lrf_TotalTrans}
+    ${lrf_CustomerWinLoss}    change format for number    ${lrf_CustomerWinLoss}
+    should be true    ${lrf_Turnover} >0
+    should be true    ${lrf_TotalTrans}>0
+    [Return]    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}
+
+get data from AG Casino, GD in LRF
+    [Arguments]    ${fromdate}    ${todate}
+    Comment    navigate left menu    REPORTS    AG Casino Win Loss
+    submit filter for AG Casino, CB, GD, MCG in LRF    ${fromdate}    ${todate}
+    sleep    3s
+    wait until element is visible    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[5]
+    ${lrf_Turnover}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[5]
+    ${lrf_TotalTrans}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[6]
+    ${lrf_CustomerWinLoss}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[7]
+    ${lrf_Turnover}    change format for number    ${lrf_Turnover}
+    ${lrf_TotalTrans}    change format for number    ${lrf_TotalTrans}
+    ${lrf_CustomerWinLoss}    change format for number    ${lrf_CustomerWinLoss}
+    should be true    ${lrf_Turnover} >0
+    should be true    ${lrf_TotalTrans}>0
+    [Return]    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}
+
+submit filter for AG Casino, CB, GD, MCG in LRF
+    [Arguments]    ${fromdate}    ${todate}
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${fromdate}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${todate}
+    Select Frame    xpath=//iframe[@id='main']
+    click element    xpath=//input[@id='FromDate']
+    ## select from year
+    click element    xpath=(//select[@data-handler="selectYear"])[1]
+    click element    xpath=(//select[@data-handler="selectYear"])[1]/option[@value='${yyyyy_from}']
+    ## select from month
+    click element    xpath=(//select[@data-handler="selectMonth"])[1]
+    ${mm_from}    run key word if    '${mm_from}' < 10    fetch from right    ${mm_from}    0
+    ...    ELSE    set variable    ${mm_from}
+    ${mm_from}    evaluate    ${mm_from}-1
+    click element    xpath=(//select[@data-handler="selectMonth"])[1]/option[@value='${mm_from}']
+    ## select from date
+    click element    xpath=(//td[@data-year="${yyyyy_from}" and @data-month="${mm_from}" and @data-event="click" and @data-handler="selectDay"]/a[text()='${dd_from}'])[1]
+    ## select to date
+    ## select to year
+    click element    xpath=(//select[@data-handler="selectYear"])[2]
+    click element    xpath=(//select[@data-handler="selectYear"])[2]/option[@value='${yyyyy_from}']
+    ## select to month
+    click element    xpath=(//select[@data-handler="selectMonth"])[2]
+    click element    xpath=(//select[@data-handler="selectMonth"])[2]/option[@value='${mm_from}']
+    ## selcet to date
+    click element    xpath=(//td[@data-year="${yyyyy_from}" and @data-month="${mm_from}" and @data-event="click" and @data-handler="selectDay"]/a[text()='${dd_to}'])[2]
+    click element    xpath=//button[text()='OK']
+    click element    xpath=//*[@id='reportbymonthly']
+    click element    //*[@id='SubmitButton']
+
+submit filter for Bet Trade in LRF
+    [Arguments]    ${fromdate}    ${todate}
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${fromdate}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${todate}
+    Select Frame    xpath=//iframe[@id='main']
+    click element    xpath=//input[@id='FromDate']
+    ## select from year
+    click element    xpath=(//select[@data-handler="selectYear"])[1]
+    click element    xpath=(//select[@data-handler="selectYear"])[1]/option[@value='${yyyyy_from}']
+    ## select from month
+    click element    xpath=(//select[@data-handler="selectMonth"])[1]
+    ${mm_from}    run key word if    '${mm_from}' < 10    fetch from right    ${mm_from}    0
+    ...    ELSE    set variable    ${mm_from}
+    ${mm_from}    evaluate    ${mm_from}-1
+    click element    xpath=(//select[@data-handler="selectMonth"])[1]/option[@value='${mm_from}']
+    ## select from date
+    click element    xpath=(//td[@data-year="${yyyyy_from}" and @data-month="${mm_from}" and @data-event="click" and @data-handler="selectDay"]/a[text()='${dd_from}'])[1]
+    ## select to year
+    click element    xpath=(//select[@data-handler="selectYear"])[2]
+    click element    xpath=(//select[@data-handler="selectYear"])[2]/option[@value='${yyyyy_from}']
+    ## select to month
+    click element    xpath=(//select[@data-handler="selectMonth"])[2]
+    click element    xpath=(//select[@data-handler="selectMonth"])[2]/option[@value='${mm_from}']
+    ## selcet to date
+    click element    xpath=(//td[@data-year="${yyyyy_from}" and @data-month="${mm_from}" and @data-event="click" and @data-handler="selectDay"]/a[text()='${dd_to}'])[2]
+    click element    xpath=//button[text()='OK']
+    click element    xpath=//*[@id='reportbymonthly']
+    ${is_product_list}    run keyword and return status    element should be visible    xpath=//*[@id='grid-products-multiselect']
+    run keyword if    '${is_product_list}'=='True'    click element    xpath=//*[@id='grid-products-multiselect']/input
+    run keyword if    '${is_product_list}'=='True'    wait until element is visible    xpath=//input[@title='BA']    #Check BA product
+    run keyword if    '${is_product_list}'=='True'    click element    xpath=//input[@title='BA']
+    run keyword if    '${is_product_list}'=='True'    wait until element is visible    xpath=//input[@title='Bet Trade']    #Check Bettrade product
+    run keyword if    '${is_product_list}'=='True'    click element    xpath=//input[@title='Bet Trade']
+    run keyword if    '${is_product_list}'=='True'    click element    xpath=//*[@id='grid-products-multiselect']
+    wait until element is visible    xpath=//*[@id='SubmitButton']
+    click element    xpath=//*[@id='SubmitButton']
+    wait lrf page loading
+
+get data from Bet Trade in LRF
+    [Arguments]    ${fromdate}    ${todate}
+    navigate left menu    REPORTS    Licensee Win Loss
+    submit filter for Bet Trade in LRF    ${fromdate}    ${todate}
+    # Get data
+    Select Frame    xpath=//iframe[@id='main']
+    sleep    3s
+    wait until element is visible    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']
+    ${lrf_actual_stake}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[9]
+    ${lrf_bbamount}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[13]
+    ${lrf_bt_comm}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[22]
+    ${lrf_amount_due_to}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[25]
+    ${lrf_actual_stake}    change format for number    ${lrf_actual_stake}
+    ${lrf_bbamount}    change format for number    ${lrf_bbamount}
+    ${lrf_bt_comm}    change format for number    ${lrf_bt_comm}
+    ${lrf_amount_due_to}    change format for number    ${lrf_amount_due_to}
+    should be true    ${lrf_actual_stake} >0
+    should be true    ${lrf_bbamount} >0
+    should be true    ${lrf_bt_comm}>0
+    [Return]    ${lrf_actual_stake}    ${lrf_bbamount}    ${lrf_bt_comm}    ${lrf_amount_due_to}
+
+submit filter for Macau win loss in LRF
+    [Arguments]    ${fromdate}    ${todate}
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${fromdate}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${todate}
+    Select Frame    xpath=//iframe[@id='main']
+    Click Element    xpath=//*[@id='DateControl']/span
+    sleep    1s
+    Click Element    xpath=//*[@id='ThirdPartyWinLossForm']//..//a[text()='${yyyyy_from}']
+    Click Element    xpath=//*[@id='ThirdPartyWinLossForm']//..//a[text()='${yyyyy_from}']
+    sleep    1s
+    Click Element    xpath=//*[@id='ThirdPartyWinLossForm']//..//li[@year='${yyyyy_from}']/ul/li/a[@month='${mm_from}']
+    #FromDay
+    Click Element    xpath=//*[@id='MonthPickerFromDay']
+    Click Element    xpath=//*[@class="dayPickrDropDown"]/ul/li/a[(text()='${dd_from}')]
+    #ToDay
+    sleep    1s
+    Click Element    xpath=//*[@id='MonthPickerToDay']
+    Click Element    xpath=//*[@id='ThirdPartyWinLossForm']/div/div[3]//ul/li/a[text()='${dd_to}']
+    Click Element    xpath=//*[@id='SubmitButton']
+
+get data from Macau in LRF
+    [Arguments]    ${fromdate}    ${todate}
+    navigate left menu    REPORTS    Macau Win Loss
+    submit filter for Macau win loss in LRF    ${fromdate}    ${todate}
+    sleep    3s
+    wait until element is visible    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[5]
+    ${lrf_Turnover}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[5]
+    ${lrf_TotalTrans}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[6]
+    ${lrf_CustomerWinLoss}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[7]
+    ${lrf_Turnover}    change format for number    ${lrf_Turnover}
+    ${lrf_TotalTrans}    change format for number    ${lrf_TotalTrans}
+    ${lrf_CustomerWinLoss}    change format for number    ${lrf_CustomerWinLoss}
+    should be true    ${lrf_Turnover} >0
+    should be true    ${lrf_TotalTrans}>0
+    [Return]    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}
+
+get data for Microgaming Win Loss in LRF
+    [Arguments]    ${fromdate}    ${todate}
+    submit filter for AG Casino, CB, GD, MCG in LRF    ${fromdate}    ${todate}
+    sleep    3s
+    wait until element is visible    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[5]
+    ${lrf_Turnover}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[4]
+    ${lrf_TotalTrans}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[5]
+    ${lrf_LicenseeWinLoss}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following-sibling::td[9]
+    ${lrf_ProgressiveContribution}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[7]
+    ${lrf_ProgressivePayout}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[8]
+    ${lrf_ProgressiveFee}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[12]
+    ${lrf_Turnover}    change format for number    ${lrf_Turnover}
+    ${lrf_TotalTrans}    change format for number    ${lrf_TotalTrans}
+    ${lrf_LicenseeWinLoss}    change format for number    ${lrf_LicenseeWinLoss}
+    ${lrf_ProgressiveContribution}    change format for number    ${lrf_ProgressiveContribution}
+    ${lrf_ProgressivePayout}    change format for number    ${lrf_ProgressivePayout}
+    ${lrf_ProgressiveFee}    change format for number    ${lrf_ProgressiveFee}
+    should be true    ${lrf_Turnover} >0
+    should be true    ${lrf_TotalTrans}>0
+    [Return]    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_LicenseeWinLoss}    ${lrf_ProgressiveContribution}    ${lrf_ProgressivePayout}    ${lrf_ProgressiveFee}
+
+select licensee from list
+    [Arguments]    ${licensee_name}
+    ${is_after_login}    run keyword and return status    element should be visible    xpath=//div[@class="sel_licensee_title"]
+    run keyword if    '${is_after_login}'=='True'    Wait Until Page Contains Element    xpath=//a[contains(text(),'${licensee_name}')]    10s
+    run keyword if    '${is_after_login}'=='True'    Click Element    xpath=//a[contains(text(),'${licensee_name}')]
+    wait page loading
+    unselect frame
+    select frame    header
+    click element    xpath=//*[@id='ddlLicensee']
+    double click element    xpath=//*[@id='ddlLicensee']/option[contains(text(),'${licensee_name}')]
+    Comment    click element    xpath=//*[@id='ddlLicensee']/option[contains(text(),'${licensee_name}')]
+    unselect frame
+    sleep    3s
+    Comment    select frame    main
+    Comment    wait until element is visible    xpath=//*[@id='BodyContent']//*/div[contains(text(),'Balance Information')]
+    Comment    ${is_after_login}    run keyword and return status    element should be visible    xpath=//div[@class="sel_licensee_title"]
+    Comment    run keyword if    '${is_after_login}'=='True'    Wait Until Page Contains Element    xpath=//a[contains(text(),'${licensee_name}')]    10s
+    Comment    run keyword if    '${is_after_login}'=='True'    Click Element    xpath=//a[contains(text(),'${licensee_name}')]
+    Comment    wait page loading

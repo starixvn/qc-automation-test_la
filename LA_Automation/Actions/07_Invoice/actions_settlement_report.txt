@@ -3,6 +3,8 @@ Library           Selenium2Library
 Resource          ../01_Main_Actions/action_main.txt
 Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
 Resource          ../../Interfaces/07_Invoice/interface_settlement_report.txt
+Resource          ../../Actions/07_Invoice/actions_settlement_report.txt
+Resource          actions_create_invoice.txt
 
 *** Keywords ***
 submit filters for settlement report
@@ -32,3 +34,76 @@ submit filters for settlement report
     \    Run Keyword If    '${ac_status}'=='True'    Sleep    2s
     \    Run Keyword If    '${ac_status}'!='True'    Exit For Loop
     \    ${ac_status}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//div[contains(@class,'blockPage') and contains(text(),'Loading')]
+
+get data for selected product in settlement report
+    [Arguments]    ${licensee_name}    ${fromdate}    ${todate}    ${product_name}    ${exchange}
+    submit filter by date range for settlement report    ${licensee_name}    ${fromdate}    ${todate}    ${product_name}    ${exchange}
+    ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
+    ## In case no data
+    ${ac_no_info_status}    Run Keyword And Return Status    Page Should Contain    No Information Available
+    ## get member winloss
+    sleep    2s
+    ${Turnover}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in')]/following::td[1]
+    ${total_trans}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in')]/following::td[2]
+    ${customer_wl}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in')]/following::td[3]
+    ${licensee_fee}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in')]/following::td[5]
+    ${Turnover}    change format for number    ${Turnover}
+    ${total_trans}    change format for number    ${total_trans}
+    ${customer_wl}    change format for number    ${customer_wl}
+    ${licensee_fee}    change format for number    ${licensee_fee}
+    Comment    ${licensee_fee}    set variable if    ${licensee_fee} < 0    0    ${licensee_fee}
+    should be true    ${Turnover} >0.0
+    should be true    ${total_trans}>0.0
+    [Return]    ${Turnover}    ${total_trans}    ${customer_wl}    ${licensee_fee}
+
+submit filter by date range for settlement report
+    [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${base_currency}
+    [Documentation]    This action used to select filter on Settlement report based on date range, product name, billing currency and licensee name.
+    ...
+    ...    Note: ${date} will be have format: dd/mm/yyyyy
+    ...
+    ...    EX: select filter by date range for settlement report ${licensee_name} ${bill_from} ${bill_to} ${product_name} ${base_currency} \ \ \ \ \ \ \ \ \
+    sleep    2s
+    navigate menu    Invoice    Settlement Report
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
+    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
+    click element    xpath=//div[@class="monthPicker"]
+    sleep    1s
+    ${is_selected_year}    run key word and return status    Element Should Be Visible    xpath=//a[@class='selected' and @year='${yyyyy_from}']/span
+    run key word if    '${is_selected_year}'=='False'    double click element    xpath=//a[@year='${yyyyy_from}']/span
+    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
+    click element    xpath=//*[@id='ddlFromDay']
+    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
+    click element    xpath=//*[@id='ddlToDay']
+    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
+    click element    xpath=//*[@id='party-filter']
+    input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
+    click element    xpath=//div[contains(text(),'${licensee_name}')]
+    click element    xpath=//*[@id='Product']
+    ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
+    run keyword if    '${is_exsited}'=='True'    click element    xpath=//option[contains(text(),'${product_name}')]
+    ...    ELSE IF    '${is_exsited}'=='False'    Log    This licensee doesn't offer this product.
+    click element    xpath=//*[@id='BaseCurrency']
+    double click element    xpath=//*[@id='BaseCurrency']/option[contains(text(),'${base_currency}')]
+    run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
+    Comment    run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
+
+get data for BA product in settlement report
+    [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${exchange}
+    submit filter by date range for settlement report    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${exchange}
+    ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
+    ## In case no data
+    ${ac_no_info_status}    Run Keyword And Return Status    Page Should Contain    No Information Available
+    ## get member winloss
+    sleep    2s
+    ${Turnover}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//*[@id='settlement']//..//td[@class='border-top']/preceding::td[5]
+    ${customer_wl}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//*[@id='settlement']//..//td[@class='border-top']/preceding::td[4]
+    ${ba_comm}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//*[@id='settlement']//..//td[@class='border-top']/preceding::td[3]
+    ${licensee_fee}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//*[@id='settlement']//..//td[@class='border-top']/preceding::td[2]
+    ${Turnover}    change format for number    ${Turnover}
+    ${customer_wl}    change format for number    ${customer_wl}
+    ${ba_comm}    change format for number    ${ba_comm}
+    ${licensee_fee}    change format for number    ${licensee_fee}
+    should be true    ${Turnover} >0.0
+    [Return]    ${Turnover}    ${customer_wl}    ${ba_comm}    ${licensee_fee}
