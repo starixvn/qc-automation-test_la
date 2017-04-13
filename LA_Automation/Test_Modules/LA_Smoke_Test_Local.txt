@@ -1,6 +1,6 @@
 *** Settings ***
 Suite Setup       config local
-Suite Teardown
+Suite Teardown    Close Browser
 Library           Selenium2Library
 Library           String
 Library           OperatingSystem
@@ -28,6 +28,7 @@ Resource          ../Actions/05_Performance/actions_licensee_performance_in_deta
 Resource          ../Actions/05_Performance/action_licensee_performance.txt
 Resource          ../Actions/04_Win_Loss_Report/actions_gold_deluxe_win_loss.txt
 Resource          ../Actions/07_Invoice/actions_create_invoice.txt
+Resource          ../Actions/08_Compare_data/Actions_compare_data.txt
 
 *** Test Cases ***
 TM_00_ST_Login
@@ -58,13 +59,13 @@ TM_01_ST_Licensee Win Loss
     # VP. check export excel
     check export excel function    LicenseeWinLoss.*
     # Get licensee name for checking later
-    ${tm_licensee_drilldown}=    Get Text    xpath=//*[@id='mainGrid']/tbody/tr[${tm_clicked_row}]/td[@class='lalign party wauto']/a
+    ${tm_licensee_drilldown}=    Get Text    xpath=//*[@class='laTable__data']/tbody/tr[${tm_clicked_row}]/td[2]/a
     # 3. Click 1st licensee link in report
     click licensee link on win loss report    ${tm_clicked_row}
     # VP. Check details report table
     Element Should Be Visible    ${report_table_reports}
     # VP. Clicked licensee should displayed on Licensee listbox filter
-    Element Should Be Visible    xpath=//*[@id='party-filter']/div/div[@class='control-header' and contains(text(),'${tm_licensee_drilldown}')]
+    Element Should Be Visible    xpath=//*[@id='party-filter']/span[@class='fdcl__text' and contains(text(),'${tm_licensee_drilldown}')]
     # 4. Click Back button
     Click Element    ${back_button}
     wait page loading
@@ -185,15 +186,17 @@ TM_05_ST_Live Casino Win Loss
 
 TM_06_ST_Keno Win Loss
     # Define test data
-    ${tm_fromdate}=    Get Time    \    NOW - 7d
-    ${tm_todate}=    Get Time    \    NOW - 1d
+    Comment    ${tm_fromdate}=    Get Time    \    NOW - 7d
+    Comment    ${tm_todate}=    Get Time    \    NOW - 1d
     ${tm_clicked_row}=    Set Variable    2
+    ${today-3}    ${tm_fromdate}    ${tm_todate}    get before yesterday and last month
     # 1. Navigate to Win Loss Report > Keno Win Loss
     navigate menu    Win Loss Report    Keno Win Loss
     Comment    Go To    ${cf_url}Keno/Main
     # 2. Select filters then click Submit button
-    submit filters for keno win loss    All    Date Range    ${tm_fromdate}    ${tm_todate}    All    All
-    ...    Normal    No
+    Comment    submit filters for keno win loss    All    Date Range    ${tm_fromdate}    ${tm_todate}    All
+    ...    All    Normal    No
+    submit filter for 3rd report    All    Yes    EUR    ${tm_fromdate}    ${tm_todate}
     take applications screenshot    LA_Local    TM_06_WinLossReport_KenoWinLoss.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available

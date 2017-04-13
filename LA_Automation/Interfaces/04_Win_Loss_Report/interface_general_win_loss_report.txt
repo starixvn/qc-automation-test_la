@@ -1,5 +1,5 @@
 *** Variables ***
-${report_table_reports}    xpath=//table[@id='mainGrid']    # Report table of Win Loss Report pages
-${details_link}    xpath=//div[@class='content']/h1/a[@href][contains(text(),'Details')]    # Details link on LA site
+${report_table_reports}    xpath=//table[@class='laTable__data']    # Report table of Win Loss Report pages
+${details_link}    xpath=//h3/a[@href][contains(text(),'Details')]    # Details link on LA site
 ${game_type_listbox}    xpath=//*[@id='ddlGameType']    # Game Type listbox
 ${report_table_reports2}    xpath=//table[@class='report-data-table']    # Report table of Win Loss Report pages

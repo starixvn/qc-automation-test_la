@@ -113,6 +113,6 @@ submit filters for currency win loss details
 click licensee link on win loss report
     [Arguments]    ${row}
     [Documentation]    click licensee link on win loss report | 1
-    Wait Until Element Is Visible    xpath=//*[@id='mainGrid']/tbody/tr['${row}']/td[@class='lalign party wauto']/a    30s
-    Click Element    xpath=//*[@id='mainGrid']/tbody/tr['${row}']/td[@class='lalign party wauto']/a
+    Wait Until Element Is Visible    xpath=//*[@class='laTable__data']/tbody/tr['${row}']/td[2]/a    30s
+    Click Element    xpath=//*[@class='laTable__data']/tbody/tr['${row}']/td[2]/a
     wait page loading

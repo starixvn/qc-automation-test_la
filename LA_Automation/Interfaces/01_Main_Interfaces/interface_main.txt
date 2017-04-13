@@ -11,8 +11,8 @@ ${exclude_test_data_checkbox}    xpath=//input[@id='ExcludeTest']    # 'Exclude 
 ${submit_button}    xpath=//input[@value='Submit']    # Submit button on LA site
 ${export_to_excel_button}    xpath=//*[@id='xlsForm']/button    # Export To Excel button on LA site
 ${export_to_excel_button2}    xpath=//*[@class='btn-export-excel']    # Export To Excel button on LA site
-${back_button}    xpath=//a[@class='btnBack']    # Back button on report Details
-${date_listbox}    //select[@id='Date']    # Date listbox on LA site
+${back_button}    xpath=//a[@class='btn-back inlineBlock']    # Back button on report Details
+${date_listbox}    //select[@id='DateRange']    # Date listbox on LA site
 ${from_date_picker}    xpath=//a[@id='fd-but-FromDate']    # From date picker button on LA site
 ${to_date_picker}    xpath=//a[@id='fd-but-ToDate']    # To date picker button on LA site
 ${from_date_picker_today}    xpath=//span[@id='FromDate-today-but']    # Today on From date picker
