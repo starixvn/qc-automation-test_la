@@ -267,10 +267,10 @@ TM_09_ST_Performance by Turnover
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${performance_report_table}
+    Element Should Be Visible    ${report_performance_table}
     # VP. Check Licensee link on report table
     Click Element    ${sorting_licensee_link}
-    Element Should Be Visible    ${performance_report_table}
+    Element Should Be Visible    ${report_performance_table}
     # VP. Check export excel
     check export excel function    Performance*
 
@@ -289,10 +289,10 @@ TM_10_ST_Performance by Licensing Fee
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${performance_report_table}
+    Element Should Be Visible    ${report_performance_table}
     # VP. Check Licensee link on report table
     Click Element    ${sorting_licensee_link}
-    Element Should Be Visible    ${performance_report_table}
+    Element Should Be Visible    ${report_performance_table}
     # VP. Check export excel
     check export excel function    Performance*
 
@@ -304,14 +304,14 @@ TM_11_ST_Performance by Margin
     navigate menu    Performance    Performance by Margin
     Comment    Go To    ${cf_url}Performance/PerformanceByFee
     # 2. Select filters then click Submit button
-    submit filters for performance by margin    12Bet1 (12Bet), Boping Licensees    THB (TB)    No    Date Range    ${tm_fromdate}    ${tm_todate}
+    submit filters for performance by margin    12Bet, Boping Licensees    All    No    Date Range    ${tm_fromdate}    ${tm_todate}
     ...    No Draw    RNG Casino
     take applications screenshot    LA_Local    TM_11_Performance_PerformaceByMargin.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${performance_report_table}
+    Element Should Be Visible    ${report_performance_table}
     # VP. check export excel
     check export excel function    Performance*
 
@@ -339,18 +339,18 @@ TM_13_ST_OANDA Exchange Rate
     ${tm_todate}=    Get Time    \    NOW - 1d
     # 1. Navigate to Win Loss Report > Licensee Win Loss
     Comment    Click Element    ${oanda_menu}
-    Go To    ${cf_url}ExchangeRate/Main
+    Go To    ${cf_url}/ExchangeRate/Main
     # 2. Select From and To date picker then click Submit button
     select date picker    From    ${tm_fromdate}
     select date picker    To    ${tm_todate}
-    Click Element    ${submit_button}
+    Click Element    ${oanda_submit_button}
     wait page loading
     take applications screenshot    LA_Local    TM_13_OANDAExchangRate.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # 3. Check report table
-    Element Should Be Visible    ${oanda_report_table}
+    Element Should Be Visible    ${report_performance_table}
     # 4. Check Export Excel
     check export excel function    OANDAExchangeRate*
 
@@ -365,8 +365,7 @@ TM_14_ST_Gold Deluxe Win Loss
     navigate menu    Win Loss Report    Gold Deluxe Win Loss
     Comment    Go To    ${cf_url}GoldDeluxe/Main
     # 2. Select filters then click Submit button
-    submit filter for gold deluxe win loss    All    ${tm_year}    ${tm_month}    1    28    No Draw
-    ...    No    EUR
+    submit filter for gold deluxe win loss    All    ${tm_year}    ${tm_month}    1    28    EUR
     take applications screenshot    LA_Local    TM_14_WinLossReport_GoldDeluxe.jpg
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
@@ -382,233 +381,3 @@ TM_15_ST_Manage Biller
     input text    xpath=//*[@id='CompanyName']    Company Testing
     input text    xpath=//*[@id='Address1']    Address testing
     Click Button    xpath=//*[@id='save-biller-info']
-
-check SB and BA data
-    add new biller    Testing Biller
-    assign payer to biller    Fun88
-    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    biller name    Fun88    Software Data & Licensing Fees    INV
-    ...    1    Yes
-    Wait Until Element Is Visible    xpath=//textarea[contains(text(),'Data transmission fees')]
-    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
-    ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    get invoice data of each product    Fun88
-    ${tm_minfee_amt}    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}
-    ...    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}
-    ...    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}
-    ...    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}    ${tm_macau_games_rate}    get licensee setting    Fun88
-    ${tm_waive_from}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_from}
-    ${tm_waive_to}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_to}
-    ${tm_SB_fee}    calculate licensee fee    Fun88    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_amt}
-    ...    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_bill_from}    ${tm_bill_to}
-    check value equal with approximation    ${tm_SB_fee}    ${tm_SB}
-    ${tm_BA_fee}    calculate licensee fee    Fun88    BA    EUR    ${tm_ba_rate}    ${tm_minfee_amt}
-    ...    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_bill_from}    ${tm_bill_to}
-    check value equal with approximation    ${tm_BA_fee}    ${tm_BA}
-
-check data for all products
-    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    12Bet    Software Data & Licensing Fees    INV
-    ...    1    Yes
-    Wait Until Element Is Visible    xpath=//textarea[contains(text(),'Data transmission fees')]
-    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
-    ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    12Bet
-    ${tm_minfee_amt}    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}
-    ...    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}
-    ...    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}
-    ...    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}    ${tm_macau_games_rate}    get licensee setting    12Bet
-    ${tm_SB_fee}    calculate licensee fee    12Bet    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_amt}
-    ...    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_bill_from}    ${tm_bill_to}
-    ${tm_rng_fee}    calculate licensee fee    12Bet    RNG Casino    EUR    ${tm_rng_rate}    ${tm_minfee_amt}
-    ...    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_bill_from}    ${tm_bill_to}
-    ${ac_discount_amt}    calculate discount    ${tm_SB}    ${tm_RNG}    ${tm_discount_name}
-    ## compare discount amt
-    check value equal with approximation    ${ac_discount_amt}    ${tm_discount_amt}
-    ## Compare SB fee
-    check value equal with approximation    ${tm_SB_fee}    ${tm_SB}
-    ## Compare RNG Casino fee
-    check value equal with approximation    ${tm_rng_fee}    ${tm_RNG}
-    ${tm_NG_fee}    calculate licensee fee    12Bet    Number Game    EUR    ${tm_ng_rate}    ${tm_minfee_amt}
-    ...    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_bill_from}    ${tm_bill_to}
-    ## Compare Number Game fee
-    check value equal with approximation    ${tm_NG_fee}    ${tm_NG}
-
-Check rebate data
-    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    3star88    Rebate    INV
-    ...    1    Yes
-    Wait Until Element Is Visible    xpath=//textarea[contains(text(),'Rebate on Access Fees')]
-    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
-    ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    3star88
-    ${rebate_amt}    calculate rebate    3star88    ${tm_bill_from}    ${tm_bill_to}    EUR
-    ## compare rebate
-    check value equal with approximation    ${rebate_amt}    ${tm_rebate_amt}
-
-Check min fee group
-    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    Aoncash    Software Data & Licensing Fees    INV
-    ...    1    Yes
-    Wait Until Element Is Visible    xpath=//textarea[contains(text(),'Data transmission fees')]
-    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
-    ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    Aoncash
-    ${tm_minfee_amt}    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}
-    ...    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}
-    ...    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}
-    ...    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}    ${tm_macau_games_rate}    get licensee setting    Aoncash
-    ${tm_waive_from}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_from}
-    ${tm_waive_to}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_to}
-    ${tm_SB_fee}    calculate licensee fee    Aoncash    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_amt}
-    ...    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_bill_from}    ${tm_bill_to}
-    ## compare SB fee
-    check value equal with approximation    ${tm_SB_fee}    ${tm_SB}
-    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    M8Bola    Software Data & Licensing Fees    INV
-    ...    1    Yes
-    Wait Until Element Is Visible    xpath=//textarea[contains(text(),'Data transmission fees')]
-    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
-    ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    M8Bola
-    ${tm_minfee_amt}    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}
-    ...    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}
-    ...    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}
-    ...    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}    ${tm_macau_games_rate}    get licensee setting    M8Bola
-    ${tm_waive_from}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_from}
-    ${tm_waive_to}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_to}
-    ${tm_SB_fee}    calculate licensee fee    M8Bola    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_amt}
-    ...    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_bill_from}    ${tm_bill_to}
-    ## compare SB fee
-    check value equal with approximation    ${tm_SB_fee}    ${tm_SB}
-    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    Q8Bola    Software Data & Licensing Fees    INV
-    ...    1    Yes
-    Wait Until Element Is Visible    xpath=//textarea[contains(text(),'Data transmission fees')]
-    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
-    ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    Q8Bola
-    ${tm_minfee_amt}    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}
-    ...    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}
-    ...    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}
-    ...    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}    ${tm_macau_games_rate}    get licensee setting    Q8Bola
-    ${tm_waive_from}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_from}
-    ${tm_waive_to}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_to}
-    ${tm_SB_fee}    calculate licensee fee    Q8Bola    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_amt}
-    ...    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_bill_from}    ${tm_bill_to}
-    ## compare SB fee
-    check value equal with approximation    ${tm_SB_fee}    ${tm_SB}
-    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    NBCBet    Software Data & Licensing Fees    INV
-    ...    1    Yes
-    Wait Until Element Is Visible    xpath=//textarea[contains(text(),'Data transmission fees')]
-    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
-    ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    NBCBet
-    ${tm_minfee_amt}    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}
-    ...    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}
-    ...    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}
-    ...    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}    ${tm_macau_games_rate}    get licensee setting    NBCBet
-    ${tm_waive_from}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_from}
-    ${tm_waive_to}    run keyword if    '${tm_waive_from}'<> 'None'    change date format    ${tm_waive_to}
-    ${tm_SB_fee}    calculate licensee fee    NBCBet    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_amt}
-    ...    ${tm_minfee_group_name}    ${tm_waive_from}    ${tm_waive_to}    ${tm_bill_from}    ${tm_bill_to}
-    ## compare SB fee
-    check value equal with approximation    ${tm_SB_fee}    ${tm_SB}
-
-test
-    Comment    ## Action will return prorate = 0
-    Comment    ${prorate}    calculate prorate    01/06/2016    30/06/2016    5000    01/02/2016
-    ...    15/08/2016
-    Comment    ## Action will calculate prorate on 30 days = 30 *5000/ 30
-    Comment    ${prorate}    calculate prorate    01/06/2016    30/06/2016    5000    01/04/2016
-    ...    30/05/2016
-    Comment    ## Action will calculate prorate on 30 days = 30 *5000/ 30
-    Comment    ${prorate}    calculate prorate    01/06/2016    30/06/2016    5000    01/08/2016
-    ...    30/09/2016
-    Comment    ## Action will calculate prorate=0, because before start waive, licensee hasn't launched yet
-    Comment    ${prorate}    calculate prorate    01/06/2016    30/06/2016    5000    10/06/2016
-    ...    30/09/2016
-    Comment    ## Action will calculate prorate on 21 days and calculate = 21*5000/30
-    Comment    ${prorate}    calculate prorate    01/06/2016    30/06/2016    5000    10/03/2016
-    ...    10/06/2016
-    Comment    ## In case no waive,
-    Comment    ${prorate}    calculate prorate    01/06/2016    30/06/2016    5000    None
-    ...    None
-    Comment    Comment    ${from_date}    ${to_date}    get date after waive    10/06/2016    10/10/2016
-    ...    01/06/2016    30/06/2016
-    Comment    ${licensee_fee}    calculate gross win    01/04/2016    15/06/2016    01/06/2016    30/06/2016
-    ...    12Bet    Sportsbook    EUR    15    5000
-    Comment    ${licensee_fee}    calculate gross win    01/08/2016    20/10/2016    01/06/2016    30/06/2016
-    ...    12Bet    Sportsbook    EUR    15    5000
-    Comment    ${no_of_days}    ${from_apply_date}    ${to_apply_date}    calculate no of apply waive day in month    01/08/2016    20/10/2016
-    ...    01/06/2016    30/06/2016
-    Comment    ${no_of_days}    ${from_apply_date}    ${to_apply_date}    calculate no of apply waive day in month    01/02/2016    20/04/2016
-    ...    01/06/2016    30/06/2016
-    Comment    ${no_of_days}    ${from_apply_date}    ${to_apply_date}    calculate no of apply waive day in month    01/05/2016    20/10/2016
-    ...    01/06/2016    30/06/2016
-    Comment    ${no_of_days}    ${from_apply_date}    ${to_apply_date}    calculate no of apply waive day in month    10/06/2016    20/10/2016
-    ...    01/06/2016    30/06/2016
-    Comment    ${no_of_days}    ${from_apply_date}    ${to_apply_date}    calculate no of apply waive day in month    01/04/2016    15/06/2016
-    ...    01/06/2016    30/06/2016
-    Comment    ${tm_SB_fee}    calculate licensee fee    12Bet    Number Game    EUR    15
-    ...    5000    None    None    None    01/06/2016    30/06/2016
-    Comment    ${from_date}    ${to_date}    get date after waive    01/08/2016    01/10/2016    01/06/2016
-    ...    30/06/2016
-    Comment    ${tm_SB_fee}    calculate licensee fee    12Bet    Sportsbook    EUR    15
-    ...    5000    Test Group    None    None    01/06/2016    30/06/2016
-    Comment    ${tm_SB_fee}    calculate licensee fee    mansion88    Sportsbook    EUR    15
-    ...    5000    Test Group    01/02/2016    15/06/2016    01/06/2016    30/06/2016
-    Comment    ${total_minfee}    calculate total minfee group    Test Group    01/06/2016    30/06/2016
-    Comment    ${minfee_amt}    ${waive_from}    ${waive_to}    get minfee and waive time from selected licensee    12Bet
-    Comment    ${total_minfee}    calculate total minfee group    Test Group    01/06/2016    30/06/2016
-    Comment    ${total_amt}    calculate total amt due to SB of licensees in min fee group    Test Group    01/06/2016    30/06/2016    15
-    add new biller    Testing Biller
-
-test 2
-    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    12Bet    Software Data & Licensing Fees    INV
-    ...    1    Yes
-    Wait Until Element Is Visible    xpath=//textarea[contains(text(),'Data transmission fees')]
-    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
-    ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    12Bet
-    ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
-    ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
-    ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    12Bet
-    ${tm_SB_fee}    calculate licensee fee    12Bet    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ${tm_rng_fee}    calculate licensee fee    12Bet    RNG Casino    EUR    ${tm_rng_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ${ac_discount_amt}    calculate discount    ${tm_SB}    ${tm_RNG}    ${tm_discount_name}
-    ## compare discount amt
-    check value equal with approximation    ${ac_discount_amt}    ${tm_discount_amt}
-    ## Compare SB fee
-    check value equal with approximation    ${tm_SB_fee}    ${tm_SB}
-    ## Compare RNG Casino fee
-    check value equal with approximation    ${tm_rng_fee}    ${tm_RNG}
-    ${tm_NG_fee}    calculate licensee fee    12Bet    Number Game    EUR    ${tm_ng_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ## Compare Number Game fee
-    check value equal with approximation    ${tm_NG_fee}    ${tm_NG}
-    ${tm_LC_fee}    calculate licensee fee    12Bet    Live Casino    EUR    ${tm_lc_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ## Compare Live Casino fee
-    check value equal with approximation    ${tm_LC_fee}    ${tm_LC}
-    ${tm_VS_fee}    calculate licensee fee    12Bet    Virtual Sports    EUR    ${tm_vs_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ## Compare Virtual Sports \ fee
-    check value equal with approximation    ${tm_VS_fee}    ${tm_VS}
-    ${tm_KN_fee}    calculate licensee fee    12Bet    Keno    EUR    ${tm_keno_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ## Compare Keno fee
-    check value equal with approximation    ${tm_KN_fee}    ${tm_KN}
-    ${tm_AG_fee}    calculate licensee fee    12Bet    AG Casino    EUR    ${tm_ag_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ## Compare AG fee
-    check value equal with approximation    ${tm_AG_fee}    ${tm_AG}
-    ${tm_GD_fee}    calculate licensee fee    12Bet    Gold Deluxe    EUR    ${tm_gd_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ## Compare Gold Deluxe fee
-    check value equal with approximation    ${tm_GD_fee}    ${tm_GD}
-    ${tm_macau_fee}    calculate licensee fee    12Bet    Macau    EUR    ${tm_macau_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ## Compare macau fee
-    run keyword if    '${tm_Macau}' <> 'None'    check value equal with approximation    ${tm_macau_fee}    ${tm_Macau}
-    ${tm_macau_games_fee}    calculate licensee fee    12Bet    Macau Games    EUR    ${tm_macau_games_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
-    ## Compare macau fee
-    check value equal with approximation    ${tm_macau_games_fee}    ${tm_Macau_Games}

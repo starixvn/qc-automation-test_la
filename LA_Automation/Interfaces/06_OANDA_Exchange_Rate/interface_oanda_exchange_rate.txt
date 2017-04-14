@@ -1,3 +1,4 @@
 *** Variables ***
 ${oanda_menu}     xpath=//span[contains(text(),'OANDA Exchange Rate')]    # OANDA Exchange Rate menu in LA site
 ${oanda_report_table}    xpath=//table[@id='exchangeRateGrid']    # Report table of Oanda Exchange Rate report
+${oanda_submit_button}    xpath=//button[@type='submit']

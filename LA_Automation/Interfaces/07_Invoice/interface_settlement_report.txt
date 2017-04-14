@@ -7,6 +7,6 @@ ${licensee_comm_checkbox}    xpath=//div[@class="ddci__text" and contains(text()
 ${licensee_total_checkbox}    xpath=//div[@class="ddci__text" and contains(text(),'Licensee Total')]
 ${exchange_listbox}    xpath=//*[@id='BaseCurrency']
 ${product_listbox}    xpath=//*[@id='Product']
-${report_table_settlement}    xpath=//div[@id='settlement']/table[@class='report-table']
+${report_table_settlement}    xpath=//div[@id='settlement']/table[@class='report-table laTable__data']
 ${currency_listbox_settlement}    xpath=//*[@id='Currency']
 ${icon_loading_settlementrpt}    xpath=//div[@class='blockUI blockMsg blockPage' and contains(text(),'Loading...')]
