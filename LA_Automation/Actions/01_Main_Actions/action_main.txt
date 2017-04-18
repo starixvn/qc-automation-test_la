@@ -116,6 +116,22 @@ check export excel function2
     File Should Exist    ${cf_export_dir}${checked file name}
     Empty Directory    ${cf_export_dir}
 
+check export excel function3
+    [Arguments]    ${checked file name}
+    [Documentation]    This action is used to check Export To Excel function.
+    ...
+    ...    Example: Check file 'RunningBetList.xls' existed after exporting sucessfully. And exporting file need 5 seconds to be saved.
+    ...
+    ...    check export excel function | 5s | RunningBetList.xls
+    # Check to see Folder existed or not. If not, create folder
+    create test directory    ${cf_export_dir}
+    # Click Export
+    Click Element    xpath=//*[@id='btnExportExcel']
+    # Check file existed
+    wait for export file    ${cf_export_dir}${checked file name}
+    File Should Exist    ${cf_export_dir}${checked file name}
+    Empty Directory    ${cf_export_dir}
+
 check export pdf function
     [Arguments]    ${checked file name}
     [Documentation]    This action is used to check Export To PDF function.

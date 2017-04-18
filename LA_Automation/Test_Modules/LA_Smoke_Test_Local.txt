@@ -136,9 +136,9 @@ TM_03_ST_Number Game Win Loss
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${report_table_reports2}
+    Element Should Be Visible    ${report_table_reports}
     # VP. check export excel
-    check export excel function2    Number.Game.Win.Loss*
+    check export excel function    Number.Game.Win.Loss*
 
 TM_04_ST_Virtual Sports Win Loss
     # Define test data
@@ -158,7 +158,7 @@ TM_04_ST_Virtual Sports Win Loss
     # VP. Check report table
     Element Should Be Visible    ${report_table_reports2}
     # VP. check export excel
-    check export excel function2    Virtual.Sports.Win.Loss*
+    check export excel function    Virtual.Sports.Win.Loss*
     # 3. Click 1st licensee link in report
     click licensee link on Virtual Sports win loss report    ${tm_clicked_row}
     # VP. Check licensee info show details
@@ -182,7 +182,7 @@ TM_05_ST_Live Casino Win Loss
     # VP. Check report table
     Element Should Be Visible    ${report_table_reports2}
     # VP. check export excel
-    check export excel function2    Live.Casino.Win.Loss*
+    check export excel function    Live.Casino.Win.Loss*
 
 TM_06_ST_Keno Win Loss
     # Define test data
@@ -204,12 +204,12 @@ TM_06_ST_Keno Win Loss
     # VP. Check report table
     Element Should Be Visible    ${report_table_reports2}
     # VP. check export excel
-    check export excel function2    Keno.Win.Loss*
+    check export excel function3    Keno.Win.Loss*
     # 3. Click 1st licensee link in report
     click licensee link on win loss report2    ${tm_clicked_row}
     # VP. Check licensee info show details
     ${tm_clicked_row}=    Convert To Integer    ${tm_clicked_row}
-    Element Should Be Visible    xpath=//table[@id='mainGrid']/tbody/tr[${tm_clicked_row+1}][not(contains(@style,'none'))]
+    Element Should Be Visible    xpath=//*[@id='data-area']/table[2]/tbody/tr[${tm_clicked_row+1}]/td[2]
 
 TM_07_ST_Licensee Performance
     #1. Define test data
@@ -371,7 +371,7 @@ TM_14_ST_Gold Deluxe Win Loss
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Wait Until Element Is Visible    ${report_table_reports2}    60s
+    Wait Until Element Is Visible    ${report_table_reports}    60s
 
 TM_15_ST_Manage Biller
     navigate menu    Invoice    Manage Biller
