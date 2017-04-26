@@ -294,6 +294,8 @@ TM_10_ST_Performance by Licensing Fee
     Element Should Be Visible    ${report_performance_table}
     # VP. Check Licensee link on report table
     Click Element    ${sorting_licensee_link}
+    sleep    2s
+    Wait Until Element Is Visible    ${report_performance_table}
     Element Should Be Visible    ${report_performance_table}
     # VP. Check export excel
     check export excel function    Performance*
