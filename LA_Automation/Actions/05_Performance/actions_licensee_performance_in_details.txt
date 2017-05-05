@@ -54,7 +54,7 @@ submit filter by selected date range in performance in details
     Comment    wait until element is visible    xpath=//option[text()='${exchange}']
     Comment    click element    xpath=//option[text()='${exchange}']
     #Filter
-    click element    xpath=//*[@class='field wauto']//..//input[@value=${filter} and @name='DrawFilter']
+    click element    xpath=//*[@id='reportFilter']//..//input[@value='${filter}' and @name='DrawFilter']
     #Product
     click element    xpath=//*[@id='product-option']
     click element    xpath=//div[text()='All']

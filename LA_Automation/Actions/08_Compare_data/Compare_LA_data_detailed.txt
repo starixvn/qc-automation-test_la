@@ -1821,14 +1821,16 @@ get data from Colossusbet WL in LA
     ${Turnover}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"]/following::td[1][contains(text(),'EUR')]/following::td[2]
     ${MemberPrize}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"]/following::td[1][contains(text(),'EUR')]/following::td[3]
     ${MemberCashout}    get text    xpath=//td[@class="text-center laTable__cell laTable__cell-grandTotal"]/following::td[1][contains(text(),'EUR')]/following::td[4]
+    ${Margin_amt}    get text    //td[@class="text-center laTable__cell laTable__cell-grandTotal"]/following::td[1][contains(text(),'EUR')]/following::td[5]
     ${total_trans}    change format for number    ${total_trans}
     ${Turnover}    change format for number    ${Turnover}
     ${MemberPrize}    change format for number    ${MemberPrize}
     ${MemberCashout}    change format for number    ${MemberCashout}
+    ${Margin_amt}    change format for number    ${Margin_amt}
     should be true    ${total_trans} >0
     should be true    ${Turnover} >0
     Comment    should be true    ${MemberCashout} >0
-    [Return]    ${total_trans}    ${Turnover}    ${MemberPrize}    ${MemberCashout}
+    [Return]    ${total_trans}    ${Turnover}    ${MemberPrize}    ${MemberCashout}    ${Margin_Amt}
 
 get data in gold deluxe win lost report
     [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
@@ -1946,11 +1948,9 @@ get data for Allbet from winlost report
 
 get data from licensee win loss report
     [Arguments]    ${licensee_name}    ${product}    ${exchange}    ${from_date}    ${to_date}    ${filter}
-    ...    ${date}
     navigate menu    Win Loss Report    Licensee Win Loss
     sleep    2s
     submit filter for licensee win loss report    ${licensee_name}    ${product}    ${exchange}    ${from_date}    ${to_date}    ${filter}
-    ...    ${date}
     Sleep    4s
     # Special Case: If "No Information Available" text displays, we'll pass this test case since there is no data
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
@@ -1972,22 +1972,44 @@ get data from licensee win loss report
 
 submit filter for licensee win loss report
     [Arguments]    ${licensee_name}    ${product}    ${exchange}    ${from_date}    ${to_date}    ${filter}
-    ...    ${date}
     sleep    2s
     ${dd_from}    ${yyyyy_from}    ${mm_from}    split date for calendar picker    ${from_date}
     ${dd_to}    ${yyyy_to}    ${mm_to}    split date for calendar picker    ${to_date}
     Wait Until Element Is Visible    xpath=//*[@id='party-filter']
     #Date
-    click element    xpath=//*[@id='DateRange']
-    click element    xpath=//*[@id='DateRange']/option[text()='${date}']
-    click element    xpath=//*[@id='reportFilter']//label[text()='Date']
-    sleep    2s
-    #FromDate - ToDate
+    ## select month
     click element    xpath=//*[@id='fd-but-FromDate']/span[1]
-    Comment    sleep    1s
-    click element    xpath=//div[@id='fd-FromDate']//td[contains(@class,'yyyymm-${yyyyy_from}${mm_from} mmdd-${mm_from}${dd_from}')]
+    ${mm_from_text}    Convert month from number to text    ${mm_from}
+    : FOR    ${i}    IN RANGE    0    12
+    \    ${is_selected_month}    run keyword and return status    element should be visible    xpath=//span[@class="month-display drag-enabled"][contains(text(),'${mm_from_text}')]
+    \    ${current_month_in_picker}    get text    xpath=//*[@id='fd-FromDate']//span[@class="month-display drag-enabled"]
+    \    ${current_month_in_picker}    remove string    ${current_month_in_picker}    ${SPACE}
+    \    ## convert month from text to number
+    \    ${current_month_in_picker_number}    convert month from text to number    ${current_month_in_picker}
+    \    ${current_month_in_picker_number}    remove string    ${current_month_in_picker_number}    0
+    \    ${mm_from}    remove string    ${mm_from}    0
+    \    run key word if    '${is_selected_month}'=='False' and ${current_month_in_picker_number} > ${mm_from}    click element    xpath=//*[@id='FromDate-prev-month-but']
+    \    ...    ELSE IF    '${is_selected_month}'=='False' and ${current_month_in_picker_number} < ${mm_from}    click element    xpath=//*[@id='FromDate-next-month-but']
+    \    exit for loop if    '${is_selected_month}'=='True'
+    ${fromdate}    set variable    ${mm_from_text} ${dd_from}, ${yyyyy_from}
+    click element    xpath=(//td[@title="${fromdate}"])[1]
+    ## Select todate
     click element    xpath=//*[@id='fd-but-ToDate']/span[1]
-    click element    xpath=//div[@id='fd-ToDate']//td[contains(@class,'yyyymm-${yyyy_to}${mm_to} mmdd-${mm_to}${dd_to}')]
+    ## select month
+    ${mm_to_text}    Convert month from number to text    ${mm_to}
+    : FOR    ${i}    IN RANGE    0    12
+    \    ${is_selected_month_to}    run keyword and return status    element should be visible    xpath=//*[@id='fd-ToDate']//span[@class="month-display drag-enabled"][contains(text(),'${mm_to_text}')]
+    \    ${current_month_in_picker}    get text    xpath=//*[@id='fd-ToDate']//span[@class="month-display drag-enabled"]
+    \    ${current_month_in_picker}    remove string    ${current_month_in_picker}    ${SPACE}
+    \    ## convert month from text to number
+    \    ${current_month_in_picker_number}    convert month from text to number    ${current_month_in_picker}
+    \    ${current_month_in_picker_number}    remove string    ${current_month_in_picker_number}    0
+    \    ${mm_to}    remove string    ${mm_to}    0
+    \    run key word if    '${is_selected_month_to}'=='False' and ${current_month_in_picker_number} > ${mm_to}    click element    xpath=//*[@id='ToDate-prev-month-but']
+    \    ...    ELSE IF    '${is_selected_month_to}'=='False' and ${current_month_in_picker_number} < ${mm_to}    click element    xpath=//*[@id='ToDate-next-month-but']
+    \    exit for loop if    '${is_selected_month_to}'=='True'
+    ${todate}    set variable    ${mm_to_text} ${dd_to}, ${yyyyy_from}
+    click element    xpath=(//td[@title="${todate}"])[2]
     #Licensee
     click element    xpath=//*[@id='party-filter']
     click element    xpath=//div[text()='All']

@@ -21,19 +21,19 @@ config
     # Set Browser & URL testing
     Set Suite Variable    ${cf_browser}    ff
     Set Suite Variable    ${cf_ff_profile_dir}    C:\\firefox_profile
-    Set Suite Variable    ${cf_url}    http://58.86.55.10:8090/Auth/Login/?umtoken=eqRwflPKp0Dzd9K-JYI_Vg2    ## http://58.86.55.10:8090/
+    Set Suite Variable    ${cf_url}    http://58.86.55.10:8090/    ## http://58.86.55.10:8090/
     Set Suite Variable    ${cf_url_uat}    http://qa-i2.la.starific.net/
-    Set Suite Variable    ${cf_lrf_url}    http://internal.amazzu.com/authorization/signin?UMtoken=_Hn5eQpSIDIwGDVD65AcsQ2    #LRF
+    Set Suite Variable    ${cf_lrf_url}    http://internal.amazzu.com/Authorization/SignIn    #LRF
     Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
     # Set Global Variables
-    Set Suite Variable    ${cf_username1}    starix105
-    Set Suite Variable    ${cf_password1}    1q2w3e4r
+    Set Suite Variable    ${cf_username1}    starix104    #starix103
+    Set Suite Variable    ${cf_password1}    123QWEasd    #1q2w3e4r
     Set Suite Variable    ${cf_username}    starix101    # starix101    starix103
     Set Suite Variable    ${cf_password}    123QWEasd    # 123QWEasd    4r3e2w1q
     # Set Global Variables    LRF
-    Set Suite Variable    ${cf_lrf_username}    StarixQC3
-    Set Suite Variable    ${cf_lrf_password}    1q2w3e4r
+    Set Suite Variable    ${cf_lrf_username}    pgmwilliam
+    Set Suite Variable    ${cf_lrf_password}    willhill123
     Set Suite Variable    ${cf_lrf_static_capcha}    1710
     # Set path data set
     Set Suite Variable    ${DeclareProductforLicensees}    Data Set\\DeclareProductforLicensees.xls
@@ -143,6 +143,9 @@ check export pdf function
     create test directory    ${cf_export_dir}
     # Click Export
     Click Element    ${export_pdf_button}
+    sleep    3s
+    Comment    select window    Settlement*.pdf
+    Comment    confirm action
     # Check file existed
     wait for export file    ${cf_export_dir}${checked file name}
     File Should Exist    ${cf_export_dir}${checked file name}
@@ -519,10 +522,6 @@ get date format
 
 get before yesterday and last month
     ${yyyy}    ${mm}    ${dd}    Get Time    year,month,day
-    ${dd-3}    Evaluate    ${dd}-3
-    ${dd-3}    run key word if    ${dd-3} < 10    set variable    0${dd-3}
-    ...    ELSE    set variable    ${dd-3}
-    ${today-3}    set variable    ${dd-3}/${mm}/${yyyy}
     Comment    ${mm-1}    run key word if    ${mm-1} < 10    set variable    0${mm}-1
     ...    ELSE    set variable    ${mm}-1
     ${mm-1}    run key word if    '${mm}'=='01'    set variable    12
@@ -537,9 +536,15 @@ get before yesterday and last month
     ...    ELSE    set variable    30
     Comment    ${no_of_day}    Set Variable if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' \ or '${mm-1}'=='10' \ or '${mm-1}'=='12' \ \ \    31    '${mm-1}'=='2'    28
     ...    30
+    ${yyyy1}    ${mm1}    ${dd-3}    Get Time    year,month,day    Now-3d
+    ${today-3}    set variable    ${dd-3}/${mm1}/${yyyy1}
     ${From_last_month}    set variable    01/${mm-1}/${yyyy}
     ${To_last_month}    set variable    ${no_of_day}/${mm-1}/${yyyy}
-    [Return]    ${today-3}    ${From_last_month}    ${To_last_month}
+    ${From_current_month}    run key word if    ${dd-3} > 3    set variable    01/${mm}/${yyyy}
+    ...    ELSE    set variable    ${today-3}
+    ${To_current_month}    run key word if    ${dd-3} > 3    set variable    ${dd-3}/${mm}/${yyyy}
+    ...    ELSE    set variable    ${today-3}
+    [Return]    ${today-3}    ${From_last_month}    ${To_last_month}    ${From_current_month}    ${To_current_month}
 
 check value equal with approximation for negative value
     [Arguments]    ${value1}    ${value2}    ${message}=None

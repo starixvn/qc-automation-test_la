@@ -694,7 +694,7 @@ get data from Bet Trade in LRF
     ${lrf_actual_stake}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[9]
     ${lrf_bbamount}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[13]
     ${lrf_bt_comm}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[22]
-    ${lrf_amount_due_to}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[25]
+    ${lrf_amount_due_to}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[26]
     ${lrf_actual_stake}    change format for number    ${lrf_actual_stake}
     ${lrf_bbamount}    change format for number    ${lrf_bbamount}
     ${lrf_bt_comm}    change format for number    ${lrf_bt_comm}

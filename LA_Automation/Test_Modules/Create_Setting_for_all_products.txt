@@ -661,3 +661,36 @@ TC_18_Create Setting for Fishing World
     ...    ##FromPartyID    ##ToPartyID    ##LicSetting    ##ThirdPartySetting    ##Fromdate    # Todate
     createSettingByXML    24    14    1    ${new_lic_string}    ${new_third_string}    '20170101'
     ...    '20500101'
+
+TC_19_Create Setting for Cash out
+    ### 12bet
+    ## generate XML node for setting of licensee and third party    ## no of node of licensee setting    ## no of node of third party setting
+    ${lic_setting}    ${third_setting}    generate XML node    1    2
+    ${new_lic_string}    replace string in XML    ${lic_setting}    [lic_rate1]    0.03
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_minamt1]    0
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_maxamt1]    0
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_base_currencyID1]    0
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_charge_type1]    5
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_rate2]    None
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_minamt2]    None
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_maxamt2]    None
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_base_currencyID2]    None
+    ${new_lic_string}    replace string in XML    ${new_lic_string}    [lic_charge_type2]    None
+    ${new_third_string}    replace string in XML    ${third_setting}    [3rd_rate1]    0.01
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_minamt1]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_maxamt1]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_base_currencyID1]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_chargetype1]    5
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_rate2]    0.5
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_minamt2]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_maxamt2]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_base_currencyID2]    0
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_chargetype2]    8
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_rate3]    None
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_minamt3]    None
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_maxamt3]    None
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_base_currencyID3]    None
+    ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_chargetype3]    None    ###    ##ProductID
+    ...    ##FromPartyID    ##ToPartyID    ##LicSetting    ##ThirdPartySetting    ##Fromdate    # Todate
+    createSettingByXML    25    14    1    ${new_lic_string}    ${new_third_string}    '20170101'
+    ...    '20500101'

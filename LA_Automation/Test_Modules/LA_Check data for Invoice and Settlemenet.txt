@@ -12,7 +12,7 @@ Documentation     This suite is used to compare data from reports :
 ...               - Gold Deluxe
 ...               - Macau
 Suite Setup       config
-Suite Teardown
+Suite Teardown    close browser
 Library           Selenium2Library
 Library           String
 Library           OperatingSystem
@@ -58,12 +58,13 @@ TM_05_FUN_INV_Check data for SB and BA
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    get invoice data of each product
-    ...    asiabet88
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    asiabet88
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    asiabet88
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    asiabet88
     ${tm_SB_fee}    calculate licensee fee    asiabet88    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_group_name}
     ...    ${tm_bill_from}    ${tm_bill_to}
     check value equal with approximation    ${tm_SB_fee}    ${tm_SB}
@@ -79,12 +80,13 @@ TM_06_FUN_INV_Check data in invoice
     ...    ${toal}    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    12Bet
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    get invoice data of each product
-    ...    12Bet
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    12Bet
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    12Bet
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    12Bet
     ${tm_SB_fee}    calculate licensee fee    12Bet    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_group_name}
     ...    ${tm_bill_from}    ${tm_bill_to}
     ${tm_rng_fee}    calculate licensee fee    12Bet    RNG Casino    EUR    ${tm_rng_rate}    ${tm_minfee_group_name}
@@ -101,8 +103,8 @@ TM_06_FUN_INV_Check data in invoice
     ...    ${tm_bill_from}    ${tm_bill_to}
     ## Compare Number Game fee
     check value equal with approximation    ${tm_NG_fee}    ${tm_NG}
-    ${tm_LC_fee}    calculate licensee fee    12Bet    Live Casino    EUR    ${tm_lc_rate}    ${tm_minfee_group_name}
-    ...    ${tm_bill_from}    ${tm_bill_to}
+    Comment    ${tm_LC_fee}    calculate licensee fee    12Bet    Live Casino    EUR    ${tm_lc_rate}
+    ...    ${tm_minfee_group_name}    ${tm_bill_from}    ${tm_bill_to}
     ## Compare Live Casino fee
     Comment    check value equal with approximation    ${tm_LC_fee}    ${tm_LC}
     ${tm_VS_fee}    calculate licensee fee    12Bet    Virtual Sports    EUR    ${tm_vs_rate}    ${tm_minfee_group_name}
@@ -129,18 +131,39 @@ TM_06_FUN_INV_Check data in invoice
     ...    ${tm_bill_from}    ${tm_bill_to}
     ## Compare macau fee
     check value equal with approximation    ${tm_macau_games_fee}    ${tm_Macau_Games}
+    Comment    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    12Bet    Software Data & Licensing Fees
+    ...    INV    1    Yes
+    Comment    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}
+    ...    ${tm_KN}    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}
+    ...    ${toal}    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}
+    ...    ${colossusbet}    ${allbet}    ${fishingworld}    get invoice data of each product    12Bet
+    Comment    ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}
+    ...    ${tm_ba_rate}    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}
+    ...    ${tm_gd_rate}    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}
+    ...    ${tm_mgcrng_branded_rate}    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}
+    ...    get licensee setting    12Bet
+    ${ac_allbet_fee}    calculate licensee fee    12Bet    Allbet    EUR    ${allbet_rate}    ${tm_minfee_group_name}
+    ...    ${tm_bill_from}    ${tm_bill_to}
+    check value equal with approximation    ${ac_allbet_fee}    ${allbet}
+    ${ac_fishingworkd_fee}    calculate licensee fee    12Bet    Fishing World    EUR    ${fishingworld_rate}    ${tm_minfee_group_name}
+    ...    ${tm_bill_from}    ${tm_bill_to}
+    check value equal with approximation    ${ac_fishingworkd_fee}    ${fishingworld}
+    ${ac_Colossusbets_fee}    calculate licensee fee for colossusbet from CB WL report    12Bet    EUR    ${tm_bill_from}    ${tm_bill_to}    ${colossusbet_comm_rate}
+    ...    ${colossusbet_cash_rate}
+    check value equal with approximation    ${ac_Colossusbets_fee}    ${colossusbet}
 
 TM_07_FUN_INV_Check data in case having min fee group
     ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    Aoncash    Software Data & Licensing Fees    INV
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    get invoice data of each product
-    ...    Aoncash
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    Aoncash
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    Aoncash
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    Aoncash
     ${tm_SB_fee}    calculate licensee fee    Aoncash    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_group_name}
     ...    ${tm_bill_from}    ${tm_bill_to}
     ## compare SB fee
@@ -149,12 +172,13 @@ TM_07_FUN_INV_Check data in case having min fee group
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    get invoice data of each product
-    ...    M8Bola
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    M8Bola
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    M8Bola
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    M8Bola
     ${tm_SB_fee}    calculate licensee fee    M8Bola    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_group_name}
     ...    ${tm_bill_from}    ${tm_bill_to}
     ## compare SB fee
@@ -163,12 +187,13 @@ TM_07_FUN_INV_Check data in case having min fee group
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    get invoice data of each product
-    ...    Q8Bola
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    Q8Bola
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    Q8Bola
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    Q8Bola
     ${tm_SB_fee}    calculate licensee fee    Q8Bola    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_group_name}
     ...    ${tm_bill_from}    ${tm_bill_to}
     ## compare SB fee
@@ -177,12 +202,13 @@ TM_07_FUN_INV_Check data in case having min fee group
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    get invoice data of each product
-    ...    NBCBet
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    NBCBet
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    NBCBet
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    NBCBet
     ${tm_SB_fee}    calculate licensee fee    NBCBet    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_group_name}
     ...    ${tm_bill_from}    ${tm_bill_to}
     ## compare SB fee
@@ -194,8 +220,8 @@ TM_08_FUN_INV_Check data in case having Rebate
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    get invoice data of each product
-    ...    3star88
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    3star88
     ${rebate_amt}    calculate rebate    3star88    ${tm_bill_from}    ${tm_bill_to}    EUR    3star88
     ## compare rebate
     check value equal with approximation    ${rebate_amt}    ${tm_rebate_amt}
@@ -205,12 +231,13 @@ TM_09_FUN_INV_Check data for Haifa
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    get invoice data of each product
-    ...    Bbin
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    Bbin
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    Bbin
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    Bbin
     ${tm_SB_fee}    calculate licensee fee    Bbin    Sportsbook    CNY    ${tm_sb_rate}    ${tm_minfee_group_name}
     ...    ${tm_bill_from}    ${tm_bill_to}
     ${ac_discount_amt}    ${sb_discount_haifa}    ${vs_discount_haifa}    calculate discount    ${tm_SB}    ${tm_RNG}    Discount HAIFA #3-SB: Sep-16 to current
@@ -235,8 +262,8 @@ TM_10_FUN_INV_Check data in the Preview page
     ...    ${toal}    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    12Bet
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    get invoice data of each product
-    ...    12Bet
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    12Bet
     sleep    3s
     ${SB_fee}    ${NG_fee}    ${LC_fee}    ${VS_fee}    ${RNG_fee}    ${KN_fee}    ${AG_fee}
     ...    ${GD_fee}    ${Macau_fee}    ${MGCLC_fee}    ${Macau_games_fee}    ${discount_fee}    ${total_fee}
@@ -310,12 +337,13 @@ TM_12_FUN_INV_Check data in case new licensee is launched in midle of month
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    get invoice data of each product
-    ...    12Bet
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    12Bet
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    12Bet
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    12Bet
     ${tm_SB_fee}    calculate licensee fee    Uwin18    Sportsbook    EUR    ${tm_sb_rate}    ${tm_minfee_group_name}
     ...    ${tm_bill_from}    ${tm_bill_to}
     check value equal with approximation    ${tm_SB_fee}    ${tm_SB}
@@ -442,50 +470,7 @@ TM_04_FUN_INV_Precondition_Add biller and Assign payers_No Need To Use Now
 TM_13_FUN_INV_End_Condition_Delete Testing biller_No Need To Use Now
     Comment    delete biller    Testing Biller
 
-test
-    Comment    ${a}    get time
-    Comment    Comment    2017-01-13 09:25:03
-    Comment    ${yyyy}    ${mm}    ${dd}    Get Time    year,month,day
-    Comment    Comment    ${mm}    Convert To string    ${mm}
-    Comment    Comment    ${mm}    Evaluate    ${mm}-1
-    Comment    Comment    ${yyyy}    Convert To string    ${yyyy}
-    Comment    ${dd-3}    Evaluate    ${dd}-3
-    Comment    ${today-3}    set variable    ${dd-3}/${mm}/${yyyy}
-    Comment    ${mm-1}    run key word if    '${mm}'=='01'    set variable    12
-    ...    ELSE    Evaluate    ${mm}-1
-    Comment    ${yyyy-1}    Evaluate    ${yyyy}-1
-    Comment    ${yyyy}    run key word if    '${mm}'=='1'    set variable    ${yyyy-1}
-    ...    ELSE    set variable    ${yyyy}
-    Comment    ${no_of_day}    Set Variable if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' \ or '${mm-1}'=='10' \ or '${mm-1}'=='12' \ \ \    31    '${mm-1}'=='02'    28
-    ...    30
-    Comment    ${From_last_month}    set variable    01/${mm-1}/${yyyy}
-    Comment    ${To_last_month}    set variable    ${no_of_day}/${mm-1}/${yyyy}
-    Comment    ${today-3}    ${from_last_month}    ${to_last_month}    get before yesterday and last month
-    Comment    navigate menu    Win Loss Report    Colossus Bet Win Loss
-    Comment    sleep    2s
-    Comment    submit filter for 3rd report    12Bet    Yes    EUR    ${today-3}    ${today-3}
-    Comment    login lrf    ${cf_lrf_username}    ${cf_lrf_password}
-    Comment    select licensee after login lrf    12Bet
-    Comment    navigate left menu    REPORTS    Colossus Bets Win Loss
-    Comment    ${today-3}    ${from_last_month}    ${to_last_month}    get before yesterday and last month
-    Comment    submit filter by selected date range in lrf    ${today-3}    ${today-3}
-    Comment    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    Fun88    Software Data & Licensing Fees
-    ...    INV    1    Yes
-    Comment    Comment    Wait Until Element Is Visible    xpath=//textarea[contains(text(),'Data transmission fees')]
-    Comment    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}
-    ...    ${tm_KN}    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}
-    ...    ${toal}    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}
-    ...    get invoice data of each product    Fun88
-    Comment    navigate menu    Invoice    Dashboard
-    Comment    select since last 4 months
-    Comment    ${group_name}    ${waive_from}    ${waive_to}    ${is_based_minfee}    get licensee setting for hosting fee    asiabet88
-    Comment    ${user}    get peak concurrent user    asiabet88    01/03/2017    26/03/2017
-    Comment    ${hosting_fee_amt}    get rate for hosting fee    ${group_name}    ${user}
-    Comment    ${hosting_fee_amt}    calculate hosting fee    Aoncash    01/02/2017    28/02/2017
-    ${exchange_rate}    get exchange rate    01/02/2017    28/02/2017    TWD
-
 TM_14_FUN_INV_Check data for hosting fee
-    Comment    ${hosting_fee_amt}    calculate hosting fee    Aoncash    01/02/2017    28/02/2017
     ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    Aoncash    Hosting    INV
     ...    1    Yes
     ${inv_hosting_fee}    get total line in invoice    Aoncash

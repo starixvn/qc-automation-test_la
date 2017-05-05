@@ -67,8 +67,8 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
     ...    1    Yes
     ${tm_SB_uat}    ${tm_NG_uat}    ${tm_BA_uat}    ${tm_LC_uat}    ${tm_VS_uat}    ${tm_RNG_uat}    ${tm_KN_uat}
     ...    ${tm_AG_uat}    ${tm_GD_uat}    ${tm_Macau_uat}    ${tm_MGCLC_uat}    ${tm_MGCRNG_uat}    ${toal_uat}
-    ...    ${tm_discount_amt_uat}    ${tm_Macau_Games_uat}    ${tm_rebate_amt_uat}    ${tm_vs_discount_haifa_uat}    ${tm_sb_discount_haifa_uat}    get invoice data of each product
-    ...    12Bet
+    ...    ${tm_discount_amt_uat}    ${tm_Macau_Games_uat}    ${tm_rebate_amt_uat}    ${tm_vs_discount_haifa_uat}    ${tm_sb_discount_haifa_uat}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    12Bet
     #########
     sleep    5s
     Switch Browser    LA PRO
@@ -76,8 +76,8 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    get invoice data of each product
-    ...    12Bet
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    12Bet
     check value equal with approximation    ${tm_SB_uat}    ${tm_SB}
     check value equal with approximation    ${tm_NG_uat}    ${tm_NG}
     Comment    check value equal with approximation    ${tm_LC_uat}    ${tm_LC}
@@ -99,8 +99,8 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
     ...    1    Yes
     ${tm_SB_uat}    ${tm_NG_uat}    ${tm_BA_uat}    ${tm_LC_uat}    ${tm_VS_uat}    ${tm_RNG_uat}    ${tm_KN_uat}
     ...    ${tm_AG_uat}    ${tm_GD_uat}    ${tm_Macau_uat}    ${tm_MGCLC_uat}    ${tm_MGCRNG_uat}    ${toal_uat}
-    ...    ${tm_discount_amt_uat}    ${tm_Macau_Games_uat}    ${tm_rebate_amt_uat}    ${tm_vs_discount_haifa_uat}    ${tm_sb_discount_haifa_uat}    get invoice data of each product
-    ...    asiabet88
+    ...    ${tm_discount_amt_uat}    ${tm_Macau_Games_uat}    ${tm_rebate_amt_uat}    ${tm_vs_discount_haifa_uat}    ${tm_sb_discount_haifa_uat}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    asiabet88
     #########
     sleep    5s
     Switch Browser    LA PRO
@@ -108,8 +108,8 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    get invoice data of each product
-    ...    asiabet88
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    asiabet88
     check value equal with approximation    ${tm_SB_uat}    ${tm_SB}
     check value equal with approximation    ${tm_BA_uat}    ${tm_BA}
     check value equal with approximation    ${toal_uat}    ${toal}
@@ -120,8 +120,8 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
     ...    1    Yes
     ${tm_SB_uat}    ${tm_NG_uat}    ${tm_BA_uat}    ${tm_LC_uat}    ${tm_VS_uat}    ${tm_RNG_uat}    ${tm_KN_uat}
     ...    ${tm_AG_uat}    ${tm_GD_uat}    ${tm_Macau_uat}    ${tm_MGCLC_uat}    ${tm_MGCRNG_uat}    ${toal_uat}
-    ...    ${tm_discount_amt_uat}    ${tm_Macau_Games_uat}    ${tm_rebate_amt_uat}    ${tm_vs_discount_haifa_uat}    ${tm_sb_discount_haifa_uat}    get invoice data of each product
-    ...    Bbin
+    ...    ${tm_discount_amt_uat}    ${tm_Macau_Games_uat}    ${tm_rebate_amt_uat}    ${tm_vs_discount_haifa_uat}    ${tm_sb_discount_haifa_uat}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    Bbin
     #########
     sleep    5s
     Switch Browser    LA PRO
@@ -129,8 +129,8 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
     ...    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
-    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    get invoice data of each product
-    ...    Bbin
+    ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    ${colossusbet}
+    ...    ${allbet}    ${fishingworld}    get invoice data of each product    Bbin
     check value equal with approximation    ${tm_SB_uat}    ${tm_SB}
     check value equal with approximation    ${tm_VS_uat}    ${tm_VS}
     check value equal with approximation    ${tm_vs_discount_haifa_uat}    ${tm_vs_discount_haifa}

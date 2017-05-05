@@ -4,6 +4,7 @@ Resource          ../01_Main_Actions/action_main.txt
 Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
 Resource          ../../Interfaces/07_Invoice/interface_settlement_report.txt
 Resource          ../../Actions/07_Invoice/actions_settlement_report.txt
+Resource          ../08_Compare_data/Compare_LA_data_detailed.txt
 
 *** Keywords ***
 add new biller
@@ -83,8 +84,9 @@ select filter on create invoice
     ...    ELSE IF    '${ac_type}'== 'Hosting'    Click Element    xpath=//div[text()='Hosting']
     input text    xpath=//*[@id='InvoiceSymbol']    ${ac_invoice_symbol}
     input text    xpath=//*[@id='InvoiceNumber']    ${ac_invoice_number}
-    ${is_exist_separate}    run keyword and return status    Element Should Be Visible    xpath=//*[@id='IsSeparateProduct']
-    Run Keyword If    '${IsSeparete}'=='Yes' and '${is_exist_separate}'=='True'    double click element    xpath=//*[@id='IsSeparateProduct']
+    ${is_exist_separate}    run keyword and return status    Element Should Be Visible    xpath=//label[@class="invoice-label seperated-product-checkbox laForm__label"]
+    ${is_checked_separate}    run keyword and return status    checkbox should be selected    xpath=//*[@id='IsSeparateProduct']
+    Run Keyword If    '${IsSeparete}'=='Yes' and '${is_exist_separate}'=='True' and '${is_checked_separate}'=='False'    click element    xpath=//*[@id='IsSeparateProduct']
     Click Element    xpath=//*[@id='InvoiceNumber']
     Click Element    xpath=//*[@id='generate-invoice-button']
     ### Confirm pop up, In case billing date is not full month
@@ -156,9 +158,19 @@ get invoice data of each product
     ${sb_discount_haifa}    change format for number    ${sb_discount_haifa}
     ${vs_discount_haifa}    change format for number    ${vs_discount_haifa}
     ${total}    change format for number    ${total}
+    ${is_colossusbet}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Colossus Bets')]
+    ${Colossusbets}    Run Keyword If    '${is_colossusbet}'=='True'    get text    xpath=//*/tr[@product-id="15"]/td[4]
+    ${is_allbet}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Allbet')]
+    ${Allbet}    Run Keyword If    '${is_allbet}'=='True'    get text    xpath=//*/tr[@product-id="21"]/td[4]
+    ${is_fishingworld}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Fishing World')]
+    ${FishingWorld}    Run Keyword If    '${is_fishingworld}'=='True'    get text    xpath=//*/tr[@product-id="24"]/td[4]
+    ${Colossusbets}    change format for number    ${Colossusbets}
+    ${Allbet}    change format for number    ${Allbet}
+    ${FishingWorld}    change format for number    ${FishingWorld}
     [Return]    ${SB}    ${NG}    ${BA}    ${LC}    ${VS}    ${RNG}
     ...    ${KN}    ${AG}    ${GD}    ${Macau}    ${MGCLC}    ${MGCRNG}
     ...    ${total}    ${discount_amt}    ${Macau_Games}    ${rebate_amt}    ${vs_discount_haifa}    ${sb_discount_haifa}
+    ...    ${Colossusbets}    ${Allbet}    ${FishingWorld}
 
 get licensee setting
     [Arguments]    ${ac_licensee_name}
@@ -220,6 +232,17 @@ get licensee setting
     ${is_mcgames}    Run Keyword And Return Status    get text    xpath=(//td[contains(text(),'Macau')])[2]
     ${output_macau_games_rate}    run keyword if    '${is_mcgames}'=='True'    get text    xpath=(//td[contains(text(),'Macau')])[2]/following-sibling::td[contains(text(),'%')]
     ${output_macau_games_rate}    run keyword if    '${is_mcgames}'=='True'    remove string    ${output_macau_games_rate}    %
+    ${is_colossusbet}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'Colossus Bets')]
+    ${CB_comm_rate}    run keyword if    '${is_colossusbet}'=='True'    get text    xpath=//td[contains(text(),'Colossus Bets')]/following-sibling::td[contains(text(),'Commission Share')]/following::td[1]
+    ${CB_cash_share_rate}    run keyword if    '${is_colossusbet}'=='True'    get text    xpath=//td[contains(text(),'Colossus Bets')]/following::tr/td[contains(text(),'Cash-in Share')]/following::td[1]
+    ${CB_comm_rate}    run keyword if    '${is_colossusbet}'=='True'    remove string    ${CB_comm_rate}    %
+    ${CB_cash_share_rate}    run keyword if    '${is_colossusbet}'=='True'    remove string    ${CB_cash_share_rate}    %
+    ${is_allbet}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'Allbet')]
+    ${Allbet_rate}    run keyword if    '${is_allbet}'=='True'    get text    xpath=//td[contains(text(),'Allbet')]/following::td[2]
+    ${Allbet_rate}    run keyword if    '${is_allbet}'=='True'    remove string    ${Allbet_rate}    %
+    ${is_fishingworld}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'Fishing World')]
+    ${FishingWorld_rate}    run keyword if    '${is_fishingworld}'=='True'    get text    xpath=//td[contains(text(),'Fishing World')]/following::td[2]
+    ${FishingWorld_rate}    run keyword if    '${is_fishingworld}'=='True'    remove string    ${FishingWorld_rate}    %
     click element    xpath=//span[@class="icon-edit"]
     sleep    2s
     ${is_discount}    get text    xpath=//*[@id='discount-id']
@@ -231,7 +254,7 @@ get licensee setting
     [Return]    ${output_minfee_group_name}    ${output_discount_name}    ${output_rebate_name}    ${output_billing_currency}    ${output_sb_rate}    ${output_ng_rate}
     ...    ${output_ba_rate}    ${output_lc_rate}    ${output_vs_rate}    ${output_rng_rate}    ${output_keno_rate}    ${output_ag_rate}
     ...    ${output_gd_rate}    ${output_macau_rate}    ${output_bettrade_rate}    ${output_mgclc_generic_rate}    ${output_mgclc_branded_rate}    ${output_mgcrng_generic_rate}
-    ...    ${output_mgcrng_branded_rate}    ${output_macau_games_rate}
+    ...    ${output_mgcrng_branded_rate}    ${output_macau_games_rate}    ${CB_comm_rate}    ${CB_cash_share_rate}    ${Allbet_rate}    ${FishingWorld_rate}
 
 select filter on manage payer setting
     [Arguments]    ${ac_licensee_name}    ${ac_discount_name}    ${ac_min_fee_group_name}    ${ac_rebate_name}
@@ -670,7 +693,8 @@ calculate rebate
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    ${payer_name}
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    ${payer_name}
     ${total_amt}    set variable    0
     ## Calculate licensee fee based on product list of licensee have rebate
     : FOR    ${i}    IN RANGE    0    ${number_of_product}
@@ -701,7 +725,8 @@ get rate from selected product
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    get licensee setting    ${licensee_name}
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
+    ...    ${licensee_name}
     ${output_rate}    set variable if    '${product_name}'=='Sportsbook'    ${tm_sb_rate}    '${product_name}'== 'Number Game'    ${tm_ng_rate}    '${product_name}'=='BA'
     ...    ${tm_ba_rate}    '${product_name}'=='Live Casino'    ${tm_lc_rate}    '${product_name}'== 'Virtual Sports'    ${tm_vs_rate}    '${product_name}'=='RNG Casino'
     ...    ${tm_rng_rate}    '${product_name}'=='Keno'    ${tm_keno_rate}    '${product_name}'=='AG Casino'    ${tm_ag_rate}    '${product_name}'=='Gold Deluxe'
@@ -898,11 +923,13 @@ calculate no of apply waive day in month
     ${is_waive}    run keyword if    '${setting_date_from}' <> 'None' and '${setting_date_to}' <> 'None'    is apply setting    ${setting_date_from}    ${setting_date_to}    ${bill_from}
     ...    ${bill_to}
     ...    ELSE    set variable    False
-    ${apply_from_date}    run keyword if    ${yyyy_setting_from} < ${yyyy_bill_from} and '${yyyy_setting_from}' <> 'None'    set variable    ${dd_bill_from}
+    ${apply_from_date}    run keyword if    ${yyyy_setting_from} < ${yyyy_bill_from} and '${yyyy_setting_from}' <> 'None' and ${yyyy_setting_to} < ${yyyy_bill_to} and '${yyyy_setting_to}' <> 'None'    set variable    None
+    ...    ELSE IF    ${yyyy_setting_from} < ${yyyy_bill_from} and '${yyyy_setting_from}' <> 'None'    set variable    ${dd_bill_from}
     ...    ELSE IF    (${yyyy_setting_from} == ${yyyy_bill_from} ) and (${mm_setting_from} < ${mm_bill_from} <=${mm_setting_to} )    set variable    ${dd_bill_from}
     ...    ELSE IF    ${yyyy_setting_from} == ${yyyy_bill_from} and ${mm_setting_from} == ${mm_bill_from} and ${dd_setting_from} > ${dd_bill_from}    set variable    ${dd_setting_from}
     ...    ELSE    set variable    None
-    ${apply_to_date}    run keyword if    ${yyyy_setting_to} > ${yyyy_bill_to} and '${yyyy_setting_to}' <> 'None'    set variable    ${dd_bill_to}
+    ${apply_to_date}    run keyword if    ${yyyy_setting_from} < ${yyyy_bill_from} and '${yyyy_setting_from}' <> 'None' and ${yyyy_setting_to} < ${yyyy_bill_to} and '${yyyy_setting_to}' <> 'None'    set variable    None
+    ...    ELSE IF    ${yyyy_setting_to} > ${yyyy_bill_to} and '${yyyy_setting_to}' <> 'None'    set variable    ${dd_bill_to}
     ...    ELSE IF    ${yyyy_setting_to} == ${yyyy_bill_to} and ${mm_setting_from} <= ${mm_bill_to} < ${mm_setting_to}    set variable    ${dd_bill_to}
     ...    ELSE IF    ${yyyy_setting_to} == ${yyyy_bill_to} and ${mm_setting_to} == ${mm_bill_to} and ${dd_setting_to} <= ${dd_bill_to}    set variable    ${dd_setting_to}
     ...    ELSE    set variable    None
@@ -1038,7 +1065,24 @@ get licensee list from selected biller
 
 get licensee fee for each product from selected licensee
     [Arguments]    ${licensee_name}
+    [Documentation]    \## 26/04/2017 - Harmony - Fix issue
     Switch Browser    LA PRO
+    navigate menu    Invoice    Settlement Report
+    wait until element is visible    xpath=//*[@id='party-filter']
+    click element    xpath=//*[@id='party-filter']
+    input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
+    click element    xpath=//div[contains(text(),'${licensee_name}')]
+    click element    xpath=//*[@id='lblSelectedMonth']
+    ${yyyyy}    get value    xpath=//input[@name='Year']
+    ${mm}    Get Value    xpath=//input[@id='hdfMonth' and @name='Month']
+    ${mm}    set variable if    ${mm} < 10    0${mm}    ${mm}
+    ${fromdate}    set variable    01/${mm}/${yyyyy}
+    ${to_date}    get text    xpath=(//*[@id='ddlToDay']/option)[last()]
+    ${fromdate}    set variable    01/${mm}/${yyyyy}
+    ${todate}    set variable    ${to_date}/${mm}/${yyyyy}
+    click element    xpath=//*[@id='Product']
+    ${no_of_products}    Get Matching Xpath Count    xpath=//*[@id='Product']/option
+    Switch Browser    LA UAT
     navigate menu    Invoice    Settlement Report
     wait until element is visible    xpath=//*[@id='party-filter']
     click element    xpath=//*[@id='party-filter']
@@ -1196,31 +1240,31 @@ get exchange rate
     ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${todate}
     ## select month
     click element    xpath=//*[@id='fd-but-FromDate']/span[1]
-    ${mm_from}    convert month from text to number    ${mm_from}
-    :FOR    ${i}    IN RANGE    0    12
+    ${mm_from}    Convert month from number to text    ${mm_from}
+    : FOR    ${i}    IN RANGE    0    12
     \    ${is_selected_month}    run keyword and return status    element should be visible    xpath=//span[@class="month-display drag-enabled"][contains(text(),'${mm_from}')]
     \    run key word if    '${is_selected_month}'=='False'    click element    xpath=//*[@id='FromDate-prev-month-but']
     \    exit for loop if    '${is_selected_month}'=='True'
     ${fromdate}    set variable    ${mm_from} ${dd_to}, ${yyyyy_from}
-    click element    xpath=//*[@id='FromDate-date-picker-hover'][@title="${fromdate}"]
+    click element    xpath=(//td[@title="${fromdate}"])[1]
     ## Select todate
     click element    xpath=//*[@id='fd-but-ToDate']/span[1]
     ## select month
-    ${mm_to}    convert month from text to number    ${mm_to}
-    :FOR    ${i}    IN RANGE    0    12
+    ${mm_to}    Convert month from number to text    ${mm_to}
+    : FOR    ${i}    IN RANGE    0    12
     \    ${is_selected_month_to}    run keyword and return status    element should be visible    xpath=//*[@id='fd-ToDate']//*//span[contains(text(),'${mm_to}')]
     \    run key word if    '${is_selected_month_to}'=='False'    click element    xpath=//*[@id='ToDate-prev-month-but']
     \    exit for loop if    '${is_selected_month_to}'=='True'
     ${todate}    set variable    ${mm_to} ${dd_to}, ${yyyyy_from}
-    click element    xpath=//*[@id='ToDate-date-picker-hover'][@title="${todate}"]
-    click element    xpath=//*[@id='reportFilter']/input
-    ${exchange_rate}    get text    xpath=//*[@id='exchangeRateGrid']//*//td[1][contains(text(),'${orginal_currency}')]/following::td[1]
+    click element    xpath=(//td[@title="${todate}"])[2]
+    click element    xpath=//*[@id='mainForm']/div/button
+    ${exchange_rate}    get text    xpath=//td[contains(text(),'${orginal_currency}')]/following::td[1]
     [Return]    ${exchange_rate}
 
-Convert month from text to number
+Convert month from number to text
     [Arguments]    ${mm}
     [Documentation]    Input month such as Mar ==> \ return 03
-    :FOR    ${i}    IN RANGE    0    1
+    : FOR    ${i}    IN RANGE    0    1
     \    ${mm}    Set Variable if    ${mm}==1    January    ${mm}
     \    Exit For Loop If    '${mm}'=='January'
     \    ${mm}    Set Variable if    ${mm}==2    February    ${mm}
@@ -1245,4 +1289,42 @@ Convert month from text to number
     \    Exit For Loop If    '${mm}'=='November'
     \    ${mm}    Set Variable if    ${mm}==12    December    ${mm}
     \    Exit For Loop If    '${mm}'=='December'
+    [Return]    ${mm}
+
+calculate licensee fee for colossusbet from CB WL report
+    [Arguments]    ${licensee_name}    ${exchange}    ${fromdate}    ${todate}    ${licensee_comm_share_rate}    ${licensee_cash_share_rate}
+    ${total_trans}    ${turnover}    ${MemberPrize}    ${MemberCashout}    ${Margin_amt}    get data from Colossusbet WL in LA    ${licensee_name}
+    ...    Yes    ${exchange}    ${fromdate}    ${todate}
+    ${licensee_cash_out_share}    evaluate    ${Margin_amt}*${licensee_cash_share_rate}*0.01
+    ${licensee_comm_share}    evaluate    ${turnover}*${licensee_comm_share_rate}*0.01
+    ${licensee_fee}    evaluate    ${turnover}-${MemberPrize}-${MemberCashout}-${licensee_cash_out_share}-${licensee_comm_share}
+    [Return]    ${licensee_fee}
+
+convert month from text to number
+    [Arguments]    ${mm}
+    : FOR    ${i}    IN RANGE    0    1
+    \    ${mm}    Set Variable if    '${mm}'=='January'    01    ${mm}
+    \    Exit For Loop If    '${mm}'=='01'
+    \    ${mm}    Set Variable if    '${mm}'=='February'    02    ${mm}
+    \    Exit For Loop If    '${mm}'=='02'
+    \    ${mm}    Set Variable if    '${mm}'=='March'    03    ${mm}
+    \    Exit For Loop If    '${mm}'=='03'
+    \    ${mm}    Set Variable if    '${mm}'=='APRIL'    04    ${mm}
+    \    Exit For Loop If    '${mm}'=='04'
+    \    ${mm}    Set Variable if    '${mm}'=='May'    05    ${mm}
+    \    Exit For Loop If    '${mm}'=='05'
+    \    ${mm}    Set Variable if    '${mm}'=='June'    06    ${mm}
+    \    Exit For Loop If    '${mm}'=='06'
+    \    ${mm}    Set Variable if    '${mm}'=='July'    07    ${mm}
+    \    Exit For Loop If    '${mm}'=='07'
+    \    ${mm}    Set Variable if    '${mm}'=='August'    08    ${mm}
+    \    Exit For Loop If    '${mm}'=='08'
+    \    ${mm}    Set Variable if    '${mm}'=='September'    09    ${mm}
+    \    Exit For Loop If    '${mm}'=='09'
+    \    ${mm}    Set Variable if    '${mm}'=='October'    10    ${mm}
+    \    Exit For Loop If    '${mm}'=='10'
+    \    ${mm}    Set Variable if    '${mm}'=='November'    11    ${mm}
+    \    Exit For Loop If    '${mm}'=='11'
+    \    ${mm}    Set Variable if    '${mm}'=='December'    12    ${mm}
+    \    Exit For Loop If    '${mm}'=='12'
     [Return]    ${mm}
