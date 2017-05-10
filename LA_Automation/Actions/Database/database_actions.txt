@@ -108,7 +108,7 @@ check data from entered report
     append to file    D:\\CheckData.bat    ${orginal_sql}
     append to file    D:\\CheckData.bat    -s, -W -i findstr /V /C:"-" /B > D:\\Datat.csv
     run    D:\\CheckData.bat
-    Get Query Result Csv    D:\\CheckData.bat    D:\\Datat.csv    Sheetaa
+    Get Query Result Csv    D:\\CheckData.bat    D:\\Data.csv    Sheetaa
     remove file    D:\\CheckData.bat
 
 createSettingByXML

@@ -158,7 +158,7 @@ TM_04_ST_Virtual Sports Win Loss
     # VP. Check report table
     Element Should Be Visible    ${report_table_reports2}
     # VP. check export excel
-    check export excel function    Virtual.Sports.Win.Loss*
+    check export excel function2    Virtual.Sports.Win.Loss*
     # 3. Click 1st licensee link in report
     click licensee link on Virtual Sports win loss report    ${tm_clicked_row}
     # VP. Check licensee info show details
@@ -292,6 +292,7 @@ TM_10_ST_Performance by Licensing Fee
     Element Should Be Visible    ${report_performance_bylicensingfee_table}
     # VP. Check Licensee link on report table
     Click Element    ${sorting_licensee_link}
+    sleep    5s
     Element Should Be Visible    ${report_performance_bylicensingfee_table}
     # VP. Check export excel
     check export excel function    Performance*
