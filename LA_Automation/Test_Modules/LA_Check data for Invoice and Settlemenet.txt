@@ -12,7 +12,7 @@ Documentation     This suite is used to compare data from reports :
 ...               - Gold Deluxe
 ...               - Macau
 Suite Setup       config
-Suite Teardown
+Suite Teardown    close browser
 Library           Selenium2Library
 Library           String
 Library           OperatingSystem
@@ -474,8 +474,8 @@ TM_14_FUN_INV_Check data for hosting fee
     check value equal with approximation    ${hosting_fee_amt}    ${inv_hosting_fee}
 
 TM_15_FUN_INV_Check data for new products
-    ${product_list}    get products of licensee    12Bet
-    : FOR    ${i}    IN RANGE    0    15
+    ${product_list}    ${no_of_products}    get products of licensee    12Bet
+    : FOR    ${i}    IN RANGE    0    ${no_of_products}-1
     \    log    @{product_list}[${i}]
     \    ${productid}    get productid from excel    @{product_list}[${i}]
     \    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    12Bet    Software Data & Licensing Fees

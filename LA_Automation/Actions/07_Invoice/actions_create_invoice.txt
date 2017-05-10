@@ -47,28 +47,8 @@ assign payer to biller
 get products of licensee
     [Arguments]    ${licensee_name}
     [Documentation]    This action will returns products belong licensee
-    Comment    click element    //*[@id='payer-filter']
-    Comment    input text    xpath=//*/div[8]/div[1]/input    ${ac_licensee_name}
-    Comment    ${ac_product_list}    create list
-    Comment    ${ac_total_rows}    Get Matching Xpath Count    xpath=//*[@id='payer-billing-product']/*/label
-    Comment    : FOR    ${i}    IN RANGE    1    ${ac_total_rows}+1
-    Comment    \    ${temp}    get text    xpath=//*[@id='payer-billing-product']/div[${i}]/label
-    Comment    \    Append To List    ${ac_product_list}    ${temp},
     sleep    2s
     navigate menu    Invoice    Settlement Report
-    Comment    ## Select date range
-    Comment    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
-    Comment    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
-    Comment    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
-    Comment    click element    xpath=//div[@class="monthPicker"]
-    Comment    sleep    1s
-    Comment    ${is_selected_year}    run key word and return status    Element Should Be Visible    xpath=//a[@class='selected' and @year='${yyyyy_from}']/span
-    Comment    run key word if    '${is_selected_year}'=='False'    double click element    xpath=//a[@year='${yyyyy_from}']/span
-    Comment    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
-    Comment    click element    xpath=//*[@id='ddlFromDay']
-    Comment    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
-    Comment    click element    xpath=//*[@id='ddlToDay']
-    Comment    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
     click element    xpath=//*[@id='party-filter']
     ## Select licensee
     input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
@@ -79,7 +59,8 @@ get products of licensee
     : FOR    ${i}    IN RANGE    1    ${total_rows}+1
     \    ${temp}    get text    xpath=//*[@id='Product']/option[${i}]
     \    Append To List    ${product_list}    ${temp}
-    [Return]    ${product_list}
+    ${no_of_products}    Get Matching Xpath Count    xpath=//*[@id='Product']/option
+    [Return]    ${product_list}    ${no_of_products}
 
 select filter on create invoice
     [Arguments]    ${ac_biller_name}    ${ac_payer_name}    ${ac_type}    ${ac_invoice_symbol}    ${ac_invoice_number}    ${IsSeparete}
