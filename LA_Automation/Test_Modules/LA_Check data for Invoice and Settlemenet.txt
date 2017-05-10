@@ -12,7 +12,7 @@ Documentation     This suite is used to compare data from reports :
 ...               - Gold Deluxe
 ...               - Macau
 Suite Setup       config
-Suite Teardown    close browser
+Suite Teardown
 Library           Selenium2Library
 Library           String
 Library           OperatingSystem
@@ -75,9 +75,6 @@ TM_05_FUN_INV_Check data for SB and BA
 TM_06_FUN_INV_Check data in invoice
     ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    12Bet    Software Data & Licensing Fees    INV
     ...    1    Yes
-    Comment    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}
-    ...    ${tm_KN}    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}
-    ...    ${toal}    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    get invoice data of each product    12Bet
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
     ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
@@ -131,17 +128,6 @@ TM_06_FUN_INV_Check data in invoice
     ...    ${tm_bill_from}    ${tm_bill_to}
     ## Compare macau fee
     check value equal with approximation    ${tm_macau_games_fee}    ${tm_Macau_Games}
-    Comment    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    12Bet    Software Data & Licensing Fees
-    ...    INV    1    Yes
-    Comment    ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}
-    ...    ${tm_KN}    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}
-    ...    ${toal}    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}
-    ...    ${colossusbet}    ${allbet}    ${fishingworld}    get invoice data of each product    12Bet
-    Comment    ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}
-    ...    ${tm_ba_rate}    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}
-    ...    ${tm_gd_rate}    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}
-    ...    ${tm_mgcrng_branded_rate}    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}
-    ...    get licensee setting    12Bet
     ${ac_allbet_fee}    calculate licensee fee    12Bet    Allbet    EUR    ${allbet_rate}    ${tm_minfee_group_name}
     ...    ${tm_bill_from}    ${tm_bill_to}
     check value equal with approximation    ${ac_allbet_fee}    ${allbet}
@@ -486,3 +472,22 @@ TM_14_FUN_INV_Check data for hosting fee
     ${inv_hosting_fee}    get total line in invoice    asiabet88
     ${hosting_fee_amt}    calculate hosting fee    asiabet88    ${tm_bill_from}    ${tm_bill_to}
     check value equal with approximation    ${hosting_fee_amt}    ${inv_hosting_fee}
+
+TM_15_FUN_INV_Check data for new products
+    ${product_list}    get products of licensee    12Bet
+    : FOR    ${i}    IN RANGE    0    15
+    \    log    @{product_list}[${i}]
+    \    ${productid}    get productid from excel    @{product_list}[${i}]
+    \    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    12Bet    Software Data & Licensing Fees
+    \    ...    INV    1    Yes
+    \    ${inv_licensee_fee}    ${discount}    ${sb_disocunt_haifa}    ${vs_discount_haifa}    ${rebate}    ${total}
+    \    ...    get invoice data from list    12Bet    ${tm_bill_from}    ${tm_bill_to}    ${productid}
+    \    ...    @{product_list}[${i}]
+    \    select filter on manage payer setting    12Bet    All    All    All
+    \    ${minfee_group_name}    ${discount_group_name}    ${rebate_group_name}    ${billing_currency}    ${charge_rate_1}    ${charge_rate_2}
+    \    ...    get product setting from list    12Bet    @{product_list}[${i}]    ${productid}
+    \    ${tm_product_fee}    run keyword if    '@{product_list}[${i}]'=='Colossus Bets'    calculate licensee fee for colossusbet from CB WL report    12Bet    EUR
+    \    ...    ${tm_bill_from}    ${tm_bill_to}    ${charge_rate_1}    ${charge_rate_2}
+    \    ...    ELSE IF    ${productid} <>17    calculate licensee fee    12Bet    @{product_list}[${i}]
+    \    ...    EUR    ${charge_rate_1}    ${minfee_group_name}    ${tm_bill_from}    ${tm_bill_to}
+    \    run keyword if    ${productid} <>17    check value equal with approximation    ${tm_product_fee}    ${inv_licensee_fee}

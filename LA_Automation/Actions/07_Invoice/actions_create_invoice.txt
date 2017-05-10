@@ -1,5 +1,6 @@
 *** Settings ***
 Library           Selenium2Library
+Library           ExcelLibrary
 Resource          ../01_Main_Actions/action_main.txt
 Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
 Resource          ../../Interfaces/07_Invoice/interface_settlement_report.txt
@@ -44,16 +45,41 @@ assign payer to biller
     Click Element    xpath=//button[1][@class="laBtn laBtn-submit"]
 
 get products of licensee
-    [Arguments]    ${ac_licensee_name}
+    [Arguments]    ${licensee_name}
     [Documentation]    This action will returns products belong licensee
-    click element    //*[@id='payer-filter']
-    input text    xpath=//*/div[8]/div[1]/input    ${ac_licensee_name}
-    ${ac_product_list}    create list
-    ${ac_total_rows}    Get Matching Xpath Count    xpath=//*[@id='payer-billing-product']/*/label
-    : FOR    ${i}    IN RANGE    1    ${ac_total_rows}+1
-    \    ${temp}    get text    xpath=//*[@id='payer-billing-product']/div[${i}]/label
-    \    Append To List    ${ac_product_list}    ${temp},
-    [Return]    ${ac_product_list}
+    Comment    click element    //*[@id='payer-filter']
+    Comment    input text    xpath=//*/div[8]/div[1]/input    ${ac_licensee_name}
+    Comment    ${ac_product_list}    create list
+    Comment    ${ac_total_rows}    Get Matching Xpath Count    xpath=//*[@id='payer-billing-product']/*/label
+    Comment    : FOR    ${i}    IN RANGE    1    ${ac_total_rows}+1
+    Comment    \    ${temp}    get text    xpath=//*[@id='payer-billing-product']/div[${i}]/label
+    Comment    \    Append To List    ${ac_product_list}    ${temp},
+    sleep    2s
+    navigate menu    Invoice    Settlement Report
+    Comment    ## Select date range
+    Comment    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
+    Comment    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
+    Comment    Wait Until Element Is Visible    xpath=//*[@id='party-filter']
+    Comment    click element    xpath=//div[@class="monthPicker"]
+    Comment    sleep    1s
+    Comment    ${is_selected_year}    run key word and return status    Element Should Be Visible    xpath=//a[@class='selected' and @year='${yyyyy_from}']/span
+    Comment    run key word if    '${is_selected_year}'=='False'    double click element    xpath=//a[@year='${yyyyy_from}']/span
+    Comment    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
+    Comment    click element    xpath=//*[@id='ddlFromDay']
+    Comment    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
+    Comment    click element    xpath=//*[@id='ddlToDay']
+    Comment    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
+    click element    xpath=//*[@id='party-filter']
+    ## Select licensee
+    input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
+    click element    xpath=//div[contains(text(),'${licensee_name}')]
+    click element    xpath=//*[@id='Product']
+    ${product_list}    create list
+    ${total_rows}    Get Matching Xpath Count    xpath=//*[@id='Product']/option
+    : FOR    ${i}    IN RANGE    1    ${total_rows}+1
+    \    ${temp}    get text    xpath=//*[@id='Product']/option[${i}]
+    \    Append To List    ${product_list}    ${temp}
+    [Return]    ${product_list}
 
 select filter on create invoice
     [Arguments]    ${ac_biller_name}    ${ac_payer_name}    ${ac_type}    ${ac_invoice_symbol}    ${ac_invoice_number}    ${IsSeparete}
@@ -1328,3 +1354,86 @@ convert month from text to number
     \    ${mm}    Set Variable if    '${mm}'=='December'    12    ${mm}
     \    Exit For Loop If    '${mm}'=='12'
     [Return]    ${mm}
+
+get invoice data from list
+    [Arguments]    ${ac_payer_name}    ${fromdate}    ${todate}    ${productid}    ${product_name}
+    sleep    3s
+    ${is_no_data}    Run Keyword And Return Status    get text    xpath=//td[@class="text-center no-info-column"]
+    run keyword if    '${is_no_data}'=='True'    pass execution    There is no data
+    log    ${ac_payer_name}
+    sleep    2s
+    ${is_exsited}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'${product_name}')]
+    ${inv_licensee_fee}    Run Keyword If    '${is_exsited}'=='True'    get text    xpath=//*/tr[@product-id="${productID}"]/td[4]
+    ${is_discount}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Discount')]
+    ${discount}    Run Keyword If    '${is_discount}'=='True' and '${ac_payer_name}' <> 'Bbin' and '${product_name}'=='Discount'    get text    xpath=//*[@id='invoive-billing-table']//*/td[2]/textarea[contains(text(),'Discount')]/following::td[2]/span
+    ${vs_discount_haifa}    Run Keyword If    '${is_discount}'=='True' and '${ac_payer_name}' == 'Bbin' and '${product_name}'=='Discount'    get text    xpath=(//*[@id='invoive-billing-table']//*/td[2]/textarea[contains(text(),'Discount')]/following::td[2]/span)[1]
+    ${sb_discount_haifa}    Run Keyword If    '${is_discount}'=='True' and '${ac_payer_name}' == 'Bbin' and '${product_name}'=='Discount'    get text    xpath=(//*[@id='invoive-billing-table']//*/td[2]/textarea[contains(text(),'Discount')]/following::td[2]/span)[2]
+    ${total}    get text    xpath=//tr[@class="border-item total-item"]/td[3]/span[2]
+    ${is_rebate}    Run Keyword And Return Status    get text    xpath=//textarea[contains(text(),'Rebate on Access')]
+    ${rebate}    Run Keyword If    '${is_rebate}'=='True' and '${product_name}'=='Rebate'    get text    xpath=//*[@id='invoive-billing-table']//*/td[2]/textarea[contains(text(),'Rebate')]/following::td[2]/span
+    ${inv_licensee_fee}    change format for number    ${inv_licensee_fee}
+    ${discount}    change format for number    ${discount}
+    ${rebate}    change format for number    ${rebate}
+    ${sb_discount_haifa}    change format for number    ${sb_discount_haifa}
+    ${vs_discount_haifa}    change format for number    ${vs_discount_haifa}
+    ${total}    change format for number    ${total}
+    [Return]    ${inv_licensee_fee}    ${discount}    ${sb_discount_haifa}    ${vs_discount_haifa}    ${rebate}    ${total}
+
+get productid from product name
+    [Arguments]    ${product_name}
+    ${productid}    run keyword if    '${product_name}'=='Sportsbook'    set variable    0
+    ...    ELSE IF    '${product_name}'=='Number Game'    set variable    2
+    ...    ELSE IF    '${product_name}'=='BA'    set variable    3
+    ...    ELSE IF    '${product_name}'=='Live Casino'    set variable    4
+    ...    ELSE IF    '${product_name}'=='Virtual Sports'    set variable    5
+    ...    ELSE IF    '${product_name}'=='RNG Casino'    set variable    6
+    ...    ELSE IF    '${product_name}'=='Keno'    set variable    8
+    ...    ELSE IF    '${product_name}'=='AG Casino'    set variable    10
+    ...    ELSE IF    '${product_name}'=='Gold Deluxe'    set variable    11
+    ...    ELSE IF    '${product_name}'=='Macau'    set variable    12
+    ...    ELSE IF    '${product_name}'=='Microgaming - Live Casino'    set variable    14
+    ...    ELSE IF    '${product_name}'=='Microgaming - RNG Casino'    set variable    17
+    ...    ELSE IF    '${product_name}'=='Colossus Bets'    set variable    15
+    ...    ELSE IF    '${product_name}'=='Allbet'    set variable    21
+    ...    ELSE IF    '${product_name}'=='Macau Games'    set variable    22
+    ...    ELSE IF    '${product_name}'=='Fishing World'    set variable    24
+    [Return]    ${productid}
+
+get product setting from list
+    [Arguments]    ${licensee_name}    ${product_name}    ${productid}
+    select filter on manage payer setting    ${licensee_name}    All    All    All
+    sleep    3s
+    ${output_minfee_group_name}    get text    xpath=//*[@id='manage-payer-setting-content']/table/tbody/tr[1]/td[2]
+    ${output_minfee_group_name}    Set Variable if    '${output_minfee_group_name}'=='${EMPTY}'    None    '${output_minfee_group_name}'<>'${EMPTY}'    ${output_minfee_group_name}
+    ${output_billing_currency}    get text    xpath=//*[@id='manage-payer-setting-content']/table/tbody/tr[1]/td[9]
+    ${is_exsited}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'${product_name}')]
+    ${output_product_rate1}    run keyword if    '${is_exsited}'=='True'    get text    xpath=//td[contains(text(),'${product_name}')]/following::td[2]
+    ${output_product_rate1}    run keyword if    '${is_exsited}'=='True'    remove string    ${output_product_rate1}    %
+    ${output_product_rate2}    run keyword if    '${is_exsited}'=='True' and ${productid}==14    get text    xpath=(//td[contains(text(),'Branded Games Licensing Fee')]/following::td[1])[1]
+    ...    ELSE IF    '${is_exsited}'=='True' and ${productid}==17    get text    xpath=(//td[contains(text(),'Branded Games Licensing Fee')]/following::td[1])[2]
+    ...    ELSE IF    '${is_exsited}'=='True' and ${productid}==15    get text    xpath=//td[contains(text(),'Colossus Bets')]/following::tr/td[contains(text(),'Cash-in Share')]/following::td[1]
+    ${output_product_rate2}    run keyword if    '${is_exsited}'=='True' and '${output_product_rate2}' <> 'None'    remove string    ${output_product_rate2}    %
+    click element    xpath=//span[@class="icon-edit"]
+    sleep    2s
+    ${is_discount}    get text    xpath=//*[@id='discount-id']
+    ${output_discount_name}    run keyword if    '${is_discount}' <> 'No Group'    get text    xpath=//*[@id='discount-id']
+    ...    ELSE    set variable    None
+    ${is_rebate}    get text    xpath=//*[@id='rebate-id']/option
+    ${output_rebate_name}    run keyword if    '${is_rebate}'<> 'No Group'    get text    xpath=//*[@id='rebate-id']/option
+    ...    ELSE    set variable    None
+    [Return]    ${output_minfee_group_name}    ${output_discount_name}    ${output_rebate_name}    ${output_billing_currency}    ${output_product_rate1}    ${output_product_rate2}
+
+get productid from excel
+    [Arguments]    ${product_name}
+    Open Excel    ${DeclareProductID}
+    ${rowcount}    Get Row Count    ProductInfo
+    ${rowcount}    Evaluate    ${rowcount}-1
+    # Get productid from excel
+    : FOR    ${index}    IN RANGE    0    ${rowcount}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${product_name_excel}    Read Cell Data By Coordinates    ProductInfo    0    ${i}
+    \    ${excel_productid}    Read Cell Data By Coordinates    ProductInfo    1    ${i}
+    \    ${productid}    Run Keyword If    '${product_name_excel}'=='${product_name}'    Set Variable    ${excel_productid}
+    \    ${productid}    Run Keyword If    '${productid}' <> 'None'    convert to integer    ${productid}
+    \    exit for loop if    '${product_name_excel}'=='${product_name}'
+    [Return]    ${productid}

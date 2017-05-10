@@ -385,15 +385,23 @@ TM_10_Compare Fishing World data
     ############# Compare data for FDL
     ## Get data from Fishing World WL report
     navigate menu    Win Loss Report (3rd)    Fishing World Win Loss
-    ${Total_Trans}    ${Turnover}    ${CustomerWinLoss}    ${LicenseeWinLoss}    ${LicenseeFee}    ${PayToSupplier}    ${NetIncome}
+    ${Total_Trans_Credit}    ${Turnover_Credit}    ${CustomerWinLoss_Credit}    ${LicenseeWinLoss_Credit}    ${LicenseeFee_Credit}    ${PayToSupplier_Credit}    ${NetIncome_Credit}
     ...    get data for FW winloss report    FDL    Yes    EUR    ${today-3}    ${today-3}
-    ${LicenseeFee_Formula}    Set Variable    0
-    check value equal with approximation    ${LicenseeFee_Formula}    ${LicenseeFee}
-    ${PayToSupplier_Formula}    evaluate    ${LicenseeWinLoss}*0.05
-    check value equal with approximation    ${PayToSupplier}    ${PayToSupplier_Formula}
-    ${NetIncome_Formula}    evaluate    ${LicenseeFee_Formula}-${PayToSupplier_Formula}
-    check value equal with approximation    ${NetIncome}    ${NetIncome_Formula}
-    ## Will update LRF when has launched Licensee
+    ${LicenseeFee_Credit_Formula}    Set Variable    0
+    check value equal with approximation    ${LicenseeFee_Credit_Formula}    ${LicenseeFee_Credit}
+    ${PayToSupplier_Credit_Formula}    evaluate    ${LicenseeWinLoss_Credit}*0.05
+    check value equal with approximation    ${PayToSupplier_Credit}    ${PayToSupplier_Credit_Formula}
+    ${NetIncome_Credit_Formula}    evaluate    ${LicenseeFee_Credit_Formula}-${PayToSupplier_Credit_Formula}
+    check value equal with approximation    ${NetIncome_Credit}    ${NetIncome_Credit_Formula}
+    ##################
+    ## get data Keno from LRF (12Bet)
+    switch browser    LRF PRO
+    select licensee from list    12Bet
+    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}    get data from licensee win loss in LRF    ${today-3}    ${today-3}    Fishing World
+    ...    1
+    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
+    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
+    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
 
 TM_11_Compare NG2 data
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
@@ -764,9 +772,3 @@ TM_20_Compare Super Live data
     Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
     Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
     Comment
-
-test
-    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
-    navigate menu    Win Loss Report    Licensee Win Loss
-    sleep    2s
-    submit filter for licensee win loss report    12Bet    Sportsbook    EUR    ${today-3}    ${today-3}    1

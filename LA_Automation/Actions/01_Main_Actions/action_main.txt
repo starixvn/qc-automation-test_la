@@ -37,6 +37,7 @@ config
     Set Suite Variable    ${cf_lrf_static_capcha}    1710
     # Set path data set
     Set Suite Variable    ${DeclareProductforLicensees}    Data Set\\DeclareProductforLicensees.xls
+    Set Suite Variable    ${DeclareProductID}    Data Set\\ProductID.xls
     Set Suite Variable    ${Reconciliationlistfile}    Data Set\\Reconciliation list.xls
     Set Suite Variable    ${cf_uploadimage}    Data Set\\Oneworks Enterprise Limited logo.jpg
     Set Suite Variable    ${cf_databasefile}    Data Set\\CreateData.bat
@@ -200,12 +201,13 @@ navigate menu
     # Mouse over top menu to display submenu
     sleep    3s
     focus    xpath=//span[contains(text(),'${mainmenu}')]
-    Click Element    xpath=//span[contains(text(),'${mainmenu}')]
-    Click Element    xpath=//span[contains(text(),'${mainmenu}')]
+    click element    xpath=//span[contains(text(),'${mainmenu}')]
+    click element    xpath=//span[contains(text(),'${mainmenu}')]
+    Comment    Click Element    xpath=//span[contains(text(),'${mainmenu}')]
     # Click submenu
-    Comment    sleep    3s
-    Run Keyword If    '${submenu}'=='Keno Win Loss'    Click Element    xpath=//a[(text()='Keno Win Loss')]
-    ...    ELSE    Click Element    xpath=//a[contains(text(),'${submenu}')]
+    sleep    1s
+    Run Keyword If    '${submenu}'=='Keno Win Loss'    click element    xpath=//a[(text()='Keno Win Loss')]
+    ...    ELSE    click element    xpath=//a[contains(text(),'${submenu}')]
 
 select licensee in checkbox list
     [Arguments]    ${licensee}
