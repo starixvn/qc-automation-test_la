@@ -1,6 +1,7 @@
 *** Settings ***
 Library           Selenium2Library
 Library           String
+Library           Collections
 Library           OperatingSystem
 Library           ../../Data Set/DBLibrary.py
 
@@ -103,10 +104,10 @@ check data from entered report
     ${Is_rpt_betting}    set variable    ${ReportName}
     ${orginal_sql}    replace string    ${orginal_sql}    [ReportName]    ${ReportName}    -1
     Create file    D:\\CheckData.bat
-    ${sql_connect}    set variable    sqlcmd -S 10.18.200.215 -d bodb_licensee -U testteam -P @quality# ^
+    ${sql_connect}    set variable    sqlcmd -S 10.18.200.215 -d bodb_licensee -U testteam -P @quality# \
     append to file    D:\\CheckData.bat    ${sql_connect}
     append to file    D:\\CheckData.bat    ${orginal_sql}
-    append to file    D:\\CheckData.bat    -s, -W -i findstr /V /C:"-" /B > D:\\Datat.csv
+    append to file    D:\\CheckData.bat    \ -s, -W -i | findstr /V /C:"-" /B > D:\\Data.csv
     run    D:\\CheckData.bat
     Get Query Result Csv    D:\\CheckData.bat    D:\\Data.csv    Sheetaa
     remove file    D:\\CheckData.bat
@@ -164,3 +165,19 @@ replace string in XML
     ...    ELSE    set variable    ${old_string}
     log    ${new_string}
     [Return]    ${new_string}
+
+change db date format
+    [Arguments]    ${date}
+    [Documentation]    Input date with format: dd/mm/yyyy ==> this action will return yyyymmdd
+    ${dd}    run keyword if    '${date}'<> 'None'    Fetch From Left    ${date}    /
+    ${yyyy}    run keyword if    '${date}'<> 'None'    Fetch From Right    ${date}    /
+    ${mm}    run keyword if    '${date}'<> 'None'    Get Slice From List    ${date}    3    5
+    ${dd}    run keyword if    '${dd}' <> 'None'    convert to integer    ${dd}
+    ${mm}    run keyword if    '${mm}' <> 'None'    convert to integer    ${mm}
+    ${yyyy}    run keyword if    '${yyyy}' <> 'None'    convert to integer    ${yyyy}
+    ${mm}    run keyword if    ${mm} < 10    set variable    0${mm}
+    ...    ELSE    set variable    ${mm}
+    ${dd}    run keyword if    ${dd} < 10    set variable    0${dd}
+    ...    ELSE    set variable    ${dd}
+    ${date}    set variable    '${yyyy}${mm}${dd}'
+    [Return]    ${date}

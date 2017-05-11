@@ -182,7 +182,7 @@ TM_05_ST_Live Casino Win Loss
     # VP. Check report table
     Element Should Be Visible    ${report_table_reports2}
     # VP. check export excel
-    check export excel function    Live.Casino.Win.Loss*
+    check export excel function2    Live.Casino.Win.Loss*
 
 TM_06_ST_Keno Win Loss
     # Define test data

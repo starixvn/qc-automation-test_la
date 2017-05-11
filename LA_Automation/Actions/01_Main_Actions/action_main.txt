@@ -542,9 +542,11 @@ get before yesterday and last month
     ${today-3}    set variable    ${dd-3}/${mm1}/${yyyy1}
     ${From_last_month}    set variable    01/${mm-1}/${yyyy}
     ${To_last_month}    set variable    ${no_of_day}/${mm-1}/${yyyy}
+    ${current_dd-3}    set variable    ${dd-3}
+    ${dd-3}    convert to integer    ${dd-3}
     ${From_current_month}    run key word if    ${dd-3} > 3    set variable    01/${mm}/${yyyy}
     ...    ELSE    set variable    ${today-3}
-    ${To_current_month}    run key word if    ${dd-3} > 3    set variable    ${dd-3}/${mm}/${yyyy}
+    ${To_current_month}    run key word if    ${dd-3} > 3    set variable    ${current_dd-3}/${mm}/${yyyy}
     ...    ELSE    set variable    ${today-3}
     [Return]    ${today-3}    ${From_last_month}    ${To_last_month}    ${From_current_month}    ${To_current_month}
 
