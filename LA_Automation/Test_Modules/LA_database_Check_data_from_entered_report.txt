@@ -1,11 +1,14 @@
 *** Settings ***
-Suite Setup       database_config
+Documentation     database_config
+Suite Setup       config
 Library           Selenium2Library
 Library           String
 Library           OperatingSystem
 Library           ../Data Set/DBLibrary.py
 Resource          ../Actions/Database/database_actions.txt
+Resource          ../Actions/01_Main_Actions/action_main.txt
 
 *** Test Cases ***
 TC_01_Check data of SB
-    check data from entered report    0    14    '20170505'    '20170505'    'EUR'    'Settlement Report'
+    check data from entered report    0    14    '20170401'    '20170430'    'EUR'    'Settlement Report'
+    Comment    ${totaltrans_excel}    get data in report from excel

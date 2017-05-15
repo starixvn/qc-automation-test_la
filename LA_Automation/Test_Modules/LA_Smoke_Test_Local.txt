@@ -267,10 +267,10 @@ TM_09_ST_Performance by Turnover
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${report_performance_byturnover_table}
+    Element Should Be Visible    ${report_performance_table}
     # VP. Check Licensee link on report table
     Click Element    ${sorting_licensee_link}
-    Element Should Be Visible    ${report_performance_byturnover_table}
+    Element Should Be Visible    ${report_performance_table}
     # VP. Check export excel
     check export excel function    Performance*
 
@@ -289,11 +289,11 @@ TM_10_ST_Performance by Licensing Fee
     ${tm_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${tm_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # VP. Check report table
-    Element Should Be Visible    ${report_performance_bylicensingfee_table}
+    Element Should Be Visible    ${report_performance_table}
     # VP. Check Licensee link on report table
     Click Element    ${sorting_licensee_link}
     sleep    5s
-    Element Should Be Visible    ${report_performance_bylicensingfee_table}
+    Element Should Be Visible    ${report_performance_table}
     # VP. Check export excel
     check export excel function    Performance*
 
@@ -351,7 +351,7 @@ TM_13_ST_OANDA Exchange Rate
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
     Run Keyword If    '${ac_no_info_status}'=='True'    Pass Execution    There is no report data at this moment.
     # 3. Check report table
-    Element Should Be Visible    ${report_performance_table}
+    Element Should Be Visible    ${onada_exchange_table}
     # 4. Check Export Excel
     check export excel function    OANDAExchangeRate*
 

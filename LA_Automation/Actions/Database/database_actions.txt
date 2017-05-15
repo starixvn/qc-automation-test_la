@@ -1,9 +1,11 @@
 *** Settings ***
 Library           Selenium2Library
 Library           String
-Library           Collections
+Library           ExcelLibrary
 Library           OperatingSystem
 Library           ../../Data Set/DBLibrary.py
+Resource          ../01_Main_Actions/action_main.txt
+Resource          ../07_Invoice/actions_create_invoice.txt
 
 *** Keywords ***
 ins_data_testing
@@ -90,26 +92,28 @@ ins_data_setting
 
 check data from entered report
     [Arguments]    ${ProductID}    ${PartyID}    ${FromDate}    ${Todate}    ${BaseCurrencyName}    ${ReportName}
-    ${orginal_sql}    set variable    -Q "exec [Verify_Data_For_ReportV2] @ProductId=[ProductId],@PartyId=[PartyID],@FromDate=[FromDate],@ToDate=[Todate],@BaseCurrencyName=[BaseCurrencyName],@ReportName=[ReportName]"
+    ${orginal_sql}    set variable    "exec [Verify_Data_For_ReportV2] @ProductId=[ProductId],@PartyId=[PartyID],@FromDate=[FromDate],@ToDate=[Todate],@BaseCurrencyName=[BaseCurrencyName],@ReportName=[ReportName]"
+    Comment    \    sqlcmd -S 10.18.200.215 -d bodb_licensee \ \ \ \ \ \ \ \ \ \ \ \ \ \ -U testteam -P \ @quality# -s, -W -Q "exec [Verify_Data_For_ReportV2] @ProductId=0,@PartyId=14,@FromDate='20170201',@ToDate='20170219',@BaseCurrencyName='EUR',@ReportName='Settlement Report'" \ \ \ | findstr /V /C:"-" /B > D:\ExcelTest1.csv \ \ \ \ \ \ \ \ \ \
     ${ProductID}    set variable    ${ProductID}
-    ${orginal_sql}    replace string    ${orginal_sql}    [ProductId]    ${ProductID}    -1
+    ${orginal_sql}    replace string    ${orginal_sql}    [ProductId]    ${ProductID}
     ${PartyID}    set variable    ${PartyID}
-    ${orginal_sql}    replace string    ${orginal_sql}    [PartyID]    ${PartyID}    -1
+    ${orginal_sql}    replace string    ${orginal_sql}    [PartyID]    ${PartyID}
     ${Fromdate}    set variable    ${FromDate}
-    ${orginal_sql}    replace string    ${orginal_sql}    [FromDate]    ${FromDate}    -1
+    ${orginal_sql}    replace string    ${orginal_sql}    [FromDate]    ${FromDate}
     ${Todate}    set variable    ${Todate}
-    ${orginal_sql}    replace string    ${orginal_sql}    [Todate]    ${Todate}    -1
+    ${orginal_sql}    replace string    ${orginal_sql}    [Todate]    ${Todate}
     ${CurrencyID}    set variable    ${BaseCurrencyName}
-    ${orginal_sql}    replace string    ${orginal_sql}    [BaseCurrencyName]    ${BaseCurrencyName}    -1
+    ${orginal_sql}    replace string    ${orginal_sql}    [BaseCurrencyName]    ${BaseCurrencyName}
     ${Is_rpt_betting}    set variable    ${ReportName}
-    ${orginal_sql}    replace string    ${orginal_sql}    [ReportName]    ${ReportName}    -1
+    ${orginal_sql}    replace string    ${orginal_sql}    [ReportName]    ${ReportName}
+    log    ${orginal_sql}
     Create file    D:\\CheckData.bat
-    ${sql_connect}    set variable    sqlcmd -S 10.18.200.215 -d bodb_licensee -U testteam -P @quality# \
+    ${sql_connect}    set variable    sqlcmd -S 10.18.200.215 -d bodb_licensee \ \ \ \ \ \ \ \ \ \ \ \ \ \ -U testteam -P \ @quality# -s, -W -Q
     append to file    D:\\CheckData.bat    ${sql_connect}
     append to file    D:\\CheckData.bat    ${orginal_sql}
-    append to file    D:\\CheckData.bat    \ -s, -W -i | findstr /V /C:"-" /B > D:\\Data.csv
-    run    D:\\CheckData.bat
-    Get Query Result Csv    D:\\CheckData.bat    D:\\Data.csv    Sheetaa
+    append to file    D:\\CheckData.bat    \ | findstr /V /C:"-" /B > D:\\DataCSV.xls
+    Comment    get query result xlsx    ${orginal_sql}    D:\\DataCSV.xlsx    Data Report
+    Run    D:\\CheckData.bat
     remove file    D:\\CheckData.bat
 
 createSettingByXML
@@ -166,18 +170,24 @@ replace string in XML
     log    ${new_string}
     [Return]    ${new_string}
 
+get data in report from excel
+    Open Excel    ${DeclareDataCSV}
+    ${rowcount}    Get Row Count    DataReport
+    ${rowcount}    Evaluate    ${rowcount}-1
+    # Get productid from excel
+    : FOR    ${index}    IN RANGE    20    ${rowcount}
+    \    ${i}    Evaluate    ${index}+1
+    \    ${totaltrans_excel}    Read Cell Data By Coordinates    DataReport    1    ${i}
+    \    Comment    ${excel_productid}    Read Cell Data By Coordinates    DataReport    1    ${i}
+    \    Comment    ${productid}    Run Keyword If    '${product_name_excel}'=='${product_name}'    Set Variable    ${excel_productid}
+    \    Comment    ${productid}    Run Keyword If    '${productid}' <> 'None'    convert to integer    ${productid}
+    \    Comment    exit for loop if    '${product_name_excel}'=='${product_name}'
+    [Return]    ${totaltrans_excel}
+
 change db date format
     [Arguments]    ${date}
-    [Documentation]    Input date with format: dd/mm/yyyy ==> this action will return yyyymmdd
-    ${dd}    run keyword if    '${date}'<> 'None'    Fetch From Left    ${date}    /
-    ${yyyy}    run keyword if    '${date}'<> 'None'    Fetch From Right    ${date}    /
-    ${mm}    run keyword if    '${date}'<> 'None'    Get Slice From List    ${date}    3    5
-    ${dd}    run keyword if    '${dd}' <> 'None'    convert to integer    ${dd}
-    ${mm}    run keyword if    '${mm}' <> 'None'    convert to integer    ${mm}
-    ${yyyy}    run keyword if    '${yyyy}' <> 'None'    convert to integer    ${yyyy}
-    ${mm}    run keyword if    ${mm} < 10    set variable    0${mm}
-    ...    ELSE    set variable    ${mm}
-    ${dd}    run keyword if    ${dd} < 10    set variable    0${dd}
-    ...    ELSE    set variable    ${dd}
-    ${date}    set variable    '${yyyy}${mm}${dd}'
+    ${dd}    ${yyyy}    ${mm}    split date    ${date}
+    ${mm}    set variable if    ${mm} < 10     0${mm}    ${mm}
+    ${dd}    set variable if    ${dd} < 10     0${dd}    ${dd}
+    ${date}    set variable    '${yyyy}-${mm}-${dd}'
     [Return]    ${date}

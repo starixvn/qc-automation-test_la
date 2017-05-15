@@ -4,7 +4,8 @@ ${sorting_licensee_link}    xpath=//div[@class='clickable text-underline'][conta
 ${month_listbox}    xpath=//span[@id='lblSelectedMonth']    # Month drop down list on Licensee Performance in Details page
 ${from_listbox}    xpath=//select[@id='ddlFromDay']    # From list box on Licensee Performance in Details page
 ${to_listbox}     xpath=//select[@id='ddlToDay']    # To list box on Licensee Performance in Details page
-${report_performance_table}    xpath=//table[@class='laTable__data']    # Report table of licensee performance
+${report_performance_table}    xpath=//*[@id='datatable']    # Report table of licensee performance
 ${report_performance_detail_table}    id=content-data    # Report Detailed table of licensee performance
 ${report_performance_byturnover_table}    xpath=//table[@class='laTable__data laTable__data-auto']
 ${report_performance_bylicensingfee_table}    xpath=//table[@class='laTable__data laTable__data-auto']
+${onada_exchange_table}    xpath=//*[@id='table']    ## Onada exchange rate table

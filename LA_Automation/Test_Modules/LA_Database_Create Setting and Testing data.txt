@@ -136,9 +136,9 @@ TC_11_Create Setting for SB on Deposit Licensee
 TC_12_Create data for SB on Deposit Licensee
     Comment    ## ProductID    ## FromParty    ## From date: '20170130'    ## Todate    ## CurrencyID    ## Is_rpt_betting
     ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
-    ${today-3}    ${from_last_month}    ${from_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
+    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     ${fromdate}    change db date format    ${from_last_month}
-    ${todate}    change db date format    ${from_last_month}
+    ${todate}    change db date format    ${to_last_month}
     ins_data_testing    0    14    ${fromdate}    ${todate}    6    1
     ...    1    0
 
@@ -155,9 +155,9 @@ TC_13_Create Setting on LC for Deposit Licensee
 TC_14_Create Data on LC for Deposit Licensee
     Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
     ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
-    ${today-3}    ${from_last_month}    ${from_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
+    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     ${fromdate}    change db date format    ${from_last_month}
-    ${todate}    change db date format    ${from_last_month}
+    ${todate}    change db date format    ${to_last_month}
     ins_data_testing    4    14    ${fromdate}    ${todate}    6    1
     ...    1    0
 

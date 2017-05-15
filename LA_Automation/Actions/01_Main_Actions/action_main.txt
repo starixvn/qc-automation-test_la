@@ -38,6 +38,7 @@ config
     # Set path data set
     Set Suite Variable    ${DeclareProductforLicensees}    Data Set\\DeclareProductforLicensees.xls
     Set Suite Variable    ${DeclareProductID}    Data Set\\ProductID.xls
+    Set Suite Variable    ${DeclareDataCSV}    D:\\DataCSV.xls
     Set Suite Variable    ${Reconciliationlistfile}    Data Set\\Reconciliation list.xls
     Set Suite Variable    ${cf_uploadimage}    Data Set\\Oneworks Enterprise Limited logo.jpg
     Set Suite Variable    ${cf_databasefile}    Data Set\\CreateData.bat
