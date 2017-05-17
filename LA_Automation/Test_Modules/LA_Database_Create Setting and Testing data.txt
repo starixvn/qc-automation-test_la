@@ -128,7 +128,7 @@ TC_11_Create Setting for SB on Deposit Licensee
     ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
     ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
     ...    # 3rdTodate
-    ins_data_setting    0    14    1    '20160101'    '20171030'    0.15
+    ins_data_setting    0    17    1    '20160101'    '20181030'    0.15
     ...    NULL    NULL    NULL    1    0    0
     ...    0    0    0    0    0    NULL
     ...    NULL

@@ -29,11 +29,11 @@ config
     # Set Global Variables
     Set Suite Variable    ${cf_username1}    starix104    #starix103
     Set Suite Variable    ${cf_password1}    123QWEasd    #1q2w3e4r
-    Set Suite Variable    ${cf_username}    starix101    # starix101    starix103
-    Set Suite Variable    ${cf_password}    123QWEasd    # 123QWEasd    4r3e2w1q
+    Set Suite Variable    ${cf_username}     starix105    # starix101    starix103
+    Set Suite Variable    ${cf_password}    1q2w3e4r    # 123QWEasd    4r3e2w1q
     # Set Global Variables    LRF
-    Set Suite Variable    ${cf_lrf_username}    pgmwilliam
-    Set Suite Variable    ${cf_lrf_password}    willhill123
+    Set Suite Variable    ${cf_lrf_username}    StarixQC3
+    Set Suite Variable    ${cf_lrf_password}    1q2w3e4r
     Set Suite Variable    ${cf_lrf_static_capcha}    1710
     # Set path data set
     Set Suite Variable    ${DeclareProductforLicensees}    Data Set\\DeclareProductforLicensees.xls
