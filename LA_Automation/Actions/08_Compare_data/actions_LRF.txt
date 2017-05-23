@@ -591,6 +591,7 @@ get data from licensee win loss in LRF
     wait until element is visible    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[7]
     ${lrf_Turnover}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[7]
     ${lrf_TotalTrans}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[13]
+    focus    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[16]
     ${lrf_CustomerWinLoss}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[16]
     ${lrf_Turnover}    change format for number    ${lrf_Turnover}
     ${lrf_TotalTrans}    change format for number    ${lrf_TotalTrans}
@@ -693,7 +694,9 @@ get data from Bet Trade in LRF
     wait until element is visible    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']
     ${lrf_actual_stake}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[9]
     ${lrf_bbamount}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[13]
+    focus    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[22]
     ${lrf_bt_comm}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[22]
+    focus    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[26]
     ${lrf_amount_due_to}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[26]
     ${lrf_actual_stake}    change format for number    ${lrf_actual_stake}
     ${lrf_bbamount}    change format for number    ${lrf_bbamount}

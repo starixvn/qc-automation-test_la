@@ -22,15 +22,15 @@ config
     Set Suite Variable    ${cf_browser}    ff
     Set Suite Variable    ${cf_ff_profile_dir}    C:\\firefox_profile
     Set Suite Variable    ${cf_url}    http://58.86.55.10:8090/    ## http://58.86.55.10:8090/
-    Set Suite Variable    ${cf_url_uat}    http://qa-i2.la.starific.net/
+    Set Suite Variable    ${cf_url_uat}    http://qa-i1.la.starific.net/
     Set Suite Variable    ${cf_lrf_url}    http://internal.amazzu.com/Authorization/SignIn    #LRF
     Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
     # Set Global Variables
     Set Suite Variable    ${cf_username1}    starix104    #starix103
     Set Suite Variable    ${cf_password1}    123QWEasd    #1q2w3e4r
-    Set Suite Variable    ${cf_username}     starix105    # starix101    starix103
-    Set Suite Variable    ${cf_password}    1q2w3e4r    # 123QWEasd    4r3e2w1q
+    Set Suite Variable    ${cf_username}    starix101    # starix101    starix103
+    Set Suite Variable    ${cf_password}    123QWEasd    # 123QWEasd    4r3e2w1q
     # Set Global Variables    LRF
     Set Suite Variable    ${cf_lrf_username}    StarixQC3
     Set Suite Variable    ${cf_lrf_password}    1q2w3e4r

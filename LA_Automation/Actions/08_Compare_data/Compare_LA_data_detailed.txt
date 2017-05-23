@@ -1932,7 +1932,9 @@ get data for Allbet from winlost report
     ${valid_bet_amt}    get text    xpath=//th[@class="free-grid-td-6"]/div
     ${customer_wl}    get text    xpath=//th[@class="free-grid-td-7"]/div
     ${service_charge}    get text    xpath=//th[@class="free-grid-td-8"]/div
+    focus    xpath=//th[@class="free-grid-td-11"]/div
     ${rebate_comm}    get text    xpath=//th[@class="free-grid-td-11"]/div
+    focus    xpath=//th[@class="free-grid-td-14"]/div
     ${pay_to_supplier}    get text    xpath=//th[@class="free-grid-td-14"]/div
     ${pay_to_supplier}    run key word if    '${pay_to_supplier}' < 0    set variable    0
     ...    ELSE    set variable    ${pay_to_supplier}

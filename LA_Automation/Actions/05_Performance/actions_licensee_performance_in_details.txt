@@ -73,6 +73,7 @@ get data for performance in details report
     ${Turnover}    get text    xpath=//*[@class='col_footer_content grid-fixed-table']//..//div[text()='Grand Total']/following::th[3]/div
     ${CustomerWinLoss}    get text    xpath=//*[@class='col_footer_content grid-fixed-table']//..//div[text()='Grand Total']/following::th[5]/div
     Sleep    1s
+    focus    xpath=//*[@id='content-data']//div[@class='scrollbar-x-content']
     Click Element    xpath=//*[@id='content-data']//div[@class='scrollbar-x-content']
     ${LicenseeFee}    get text    xpath=//*[@class='col_footer_content grid-fixed-table']//..//div[text()='Grand Total']/following::th[15]/div
     ${total_trans}    change format for number    ${total_trans}
