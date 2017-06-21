@@ -11,7 +11,8 @@ Resource          ../08_Compare_data/Compare_LA_data_detailed.txt
 add new biller
     [Arguments]    ${ac_biller_name}
     [Documentation]    This action used to add new biller to generate invoice.
-    navigate menu    Invoice    Manage Biller
+    Comment    navigate menu    Invoice    Manage Biller
+    go to    ${cf_url}InvoiceReport/ManageBiller
     Click Element    xpath=//*[@id='add-new-biller']
     wait until element is visible    xpath=//*[@id='BillerName']
     Input Text    xpath=//*[@id='BillerName']    ${ac_biller_name}
@@ -48,7 +49,8 @@ get products of licensee
     [Arguments]    ${licensee_name}
     [Documentation]    This action will returns products belong licensee
     sleep    2s
-    navigate menu    Invoice    Settlement Report
+    Comment    navigate menu    Invoice    Settlement Report
+    go to    ${cf_url}InvoiceReport/Settlement
     click element    xpath=//*[@id='party-filter']
     ## Select licensee
     input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
@@ -64,13 +66,16 @@ get products of licensee
 
 select filter on create invoice
     [Arguments]    ${ac_biller_name}    ${ac_payer_name}    ${ac_type}    ${ac_invoice_symbol}    ${ac_invoice_number}    ${IsSeparete}
+    ...    ${environment}=LA PRO
     [Documentation]    This action will select filter condition and return from date, to date in invoice filter
     ...
     ...    EX1:
     ...    ${tm_bill_from} ${tm_bill_to} select filter on create invoice Testing Biller Fun88 Software Data & Licensing Fees INV 1 Yes \ \ \ \ \ \ EX2:
     ...    ${tm_bill_from} ${tm_bill_to} select filter on create invoice Testing Biller Macaubet Rebate INV 1 Yes \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
-    sleep    3s
-    navigate menu    Invoice    Create Invoice
+    sleep    1s
+    Comment    navigate menu    Invoice    Create Invoice
+    ${tc_env}    Set Variable If    '${environment}'=='LA PRO'    ${cf_url}    ${cf_url_uat}
+    go to    ${tc_env}InvoiceReport/CreateInvoice
     ## get billing date
     ${yyyyy}    get value    xpath=//input[@name='Year']
     ${mm}    Get Value    xpath=//input[@name='Month']
@@ -266,7 +271,8 @@ get licensee setting
 select filter on manage payer setting
     [Arguments]    ${ac_licensee_name}    ${ac_discount_name}    ${ac_min_fee_group_name}    ${ac_rebate_name}
     [Documentation]    This action used to select filter on Manage Payer Setting
-    navigate menu    Invoice    Manage Payer Setting
+    Comment    navigate menu    Invoice    Manage Payer Setting
+    go to     ${cf_url}InvoiceReport/ManagePayerSetting
     click element    xpath=//*[@id='payer-filter']
     input text    xpath=//input[@placeholder='Filter']    ${ac_licensee_name}
     click element    //label/div[contains(text(),'${ac_licensee_name}')]
@@ -487,7 +493,8 @@ calculate minfee group
 get licensees in min fee group
     [Arguments]    ${minfee_group_name}
     [Documentation]    This action will return licensee names and no of licensees in min fee group
-    navigate menu    Invoice    Manage Payer Group
+    Comment    navigate menu    Invoice    Manage Payer Group
+    go to    ${cf_url}InvoiceReport/ManagePayerGroup
     ## Get text from tooltip
     sleep    2s
     Comment    Mouse Over    xpath=//td[contains(text(),'${minfee_group_name}')]/following::td[1]/span
@@ -518,7 +525,8 @@ get licensees in min fee group
 get minfee and waive time from selected licensee
     [Arguments]    ${licensee_name}
     [Documentation]    This action get min fee from select licensee
-    navigate menu    Invoice    Manage Payer Setting
+    Comment    navigate menu    Invoice    Manage Payer Setting
+    go to    ${cf_url}InvoiceReport/ManagePayerSetting
     click element    xpath=//*[@id='payer-filter']
     click element    xpath=//input[@class="ddft__input"]
     input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
@@ -587,7 +595,8 @@ get max between amts
 delete biller
     [Arguments]    ${biiler_name}
     [Documentation]    This action used to delete biller
-    navigate menu    Invoice    Manage Biller
+    Comment    navigate menu    Invoice    Manage Biller
+    go to    ${cf_url}InvoiceReport/ManageBiller
     click element    xpath=//*[@id='ddlBiller']
     Wait Until Element Is Visible    xpath=//option[text()='${biiler_name}']
     Double Click Element    xpath=//option[text()='${biiler_name}']
@@ -598,7 +607,8 @@ delete biller
 get rebate setting
     [Arguments]    ${group_name}
     [Documentation]    This action used to get rebate setting from entered setting group name
-    navigate menu    Invoice    Manage Rebate Group
+    Comment    navigate menu    Invoice    Manage Rebate Group
+    go to    ${cf_url}InvoiceReport/ManageRebateGroup
     ${rate}    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[2]
     ${rate}    fetch from left    ${rate}    .
     ${payer}    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[3]
@@ -833,14 +843,14 @@ get data in Preview page
     ...    ${settlement_rng}    ${settlement_keno}    ${settlement_ag}    ${settlement_gd}    ${settlement_mgclc}    ${settlement_macau_games}
 
 get licensee fee from settlement report
-    [Arguments]    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}
+    [Arguments]    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}    ${evironment}=LA PRO
     [Documentation]    This action used to get licensee fee in settlement report.
     ...
     ...    EX: ${settlement_SB} get licensee fee from settlement report Fun88 ${tm_bill_from} ${tm_bill_to} Sportsbook EUR \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
-    submit filter by date range for settlement report    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}
+    submit filter by date range for settlement report    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}    ${evironment}
+    sleep    1s
     ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
     ${ac_no_info_status}=    Run Keyword And Return Status    Page Should Contain    No Information Available
-    sleep    7s
     ${licensee_fee}    Run Keyword If    '${is_exsited}'=='True' and '${product_name}' <>'BA' and '${ac_no_info_status}'=='False' and '${product_name}' <> 'Microgaming - RNG Casino'    Get Text    xpath=//td[contains(text(),'Total in')]/following::td[5]
     ...    ELSE IF    '${is_exsited}'=='True' and '${product_name}'=='BA' and '${ac_no_info_status}'=='False'    get text    xpath=//td[@class="text-right border-bottom laTable__cell laTable__cell-grandTotal border-right"]
     ...    ELSE IF    '${is_exsited}'=='True' and '${product_name}'== 'Microgaming - RNG Casino' and '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Grand Total')]/following::td[7]
@@ -852,13 +862,15 @@ get licensee fee from settlement report
 get max invoice no from selected biller on dashboard
     [Arguments]    ${biller_name}
     [Documentation]    This action will return max invoice no of selected biller
-    navigate menu    Invoice    Dashboard
+    Comment    navigate menu    Invoice    Dashboard
+    go to    ${cf_url}InvoiceReport/Dashboard
     select since last 4 months
     wait until element is visible    xpath=//*[@id='ddlBiller']
     click element    xpath=//*[@id='ddlBiller']
     click element    xpath=//label/div[@class="ddci__text" and text()='All']
     click element    xpath=//div[@class="ddci__text" and text()='${biller_name}']
-    click element    xpath=//*[@id='search-invoice-button']/span
+    Click Element    xpath=.//*[@id='ddlBiller']
+    click element    xpath=//*[@id='search-invoice-button']
     sleep    3s
     wait until element is visible    xpath=//tr[1]/td[1]/div
     ${invoice_no}    get text    xpath=//tr[1]/td[1]/div
@@ -867,7 +879,8 @@ get max invoice no from selected biller on dashboard
 get invoice no from create invoice
     [Arguments]    ${biller_name}    ${payer_name}    ${ac_type}
     [Documentation]    This action will get new generated invoice no, new invoice no = old invoice no + 1
-    navigate menu    Invoice    Create Invoice
+    Comment    navigate menu    Invoice    Create Invoice
+    go to    ${cf_url}InvoiceReport/CreateInvoice
     Click Element    xpath=//*[@id='ddl-biller']
     Double Click Element    xpath=//option[contains(text(),'${biller_name}')]
     wait until element is visible    xpath=//*[@id='ddl-payer']/option[contains(text(),'${payer_name}')]
@@ -1074,7 +1087,8 @@ get licensee fee for each product from selected licensee
     [Arguments]    ${licensee_name}
     [Documentation]    \## 26/04/2017 - Harmony - Fix issue
     Switch Browser    LA PRO
-    navigate menu    Invoice    Settlement Report
+    Comment    navigate menu    Invoice    Settlement Report
+    go to    ${cf_url}InvoiceReport/Settlement
     wait until element is visible    xpath=//*[@id='party-filter']
     click element    xpath=//*[@id='party-filter']
     input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
@@ -1090,7 +1104,8 @@ get licensee fee for each product from selected licensee
     click element    xpath=//*[@id='Product']
     ${no_of_products}    Get Matching Xpath Count    xpath=//*[@id='Product']/option
     Switch Browser    LA UAT
-    navigate menu    Invoice    Settlement Report
+    Comment    navigate menu    Invoice    Settlement Report
+    go to    ${cf_url_uat}InvoiceReport/Settlement
     wait until element is visible    xpath=//*[@id='party-filter']
     click element    xpath=//*[@id='party-filter']
     input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
@@ -1109,11 +1124,11 @@ get licensee fee for each product from selected licensee
     \    Switch Browser    LA UAT
     \    ${temp_product}    get text    xpath=//*[@id='Product']/option[${i}]
     \    ${licenseefee_uat}    get licensee fee from settlement report    ${licensee_name}    ${fromdate}    ${todate}    ${temp_product}
-    \    ...    EUR
+    \    ...    EUR    LA UAT
     \    Switch Browser    LA PRO
     \    sleep    2s
     \    ${licenseefee_Pro}    get licensee fee from settlement report    ${licensee_name}    ${fromdate}    ${todate}    ${temp_product}
-    \    ...    EUR
+    \    ...    EUR    LA PRO
     \    check value equal with approximation    ${licenseefee_uat}    ${licenseefee_Pro}
     \    sleep    5s
     [Return]    ${licenseefee_uat}    ${licenseefee_pro}
@@ -1137,7 +1152,8 @@ split date for calendar picker
 
 get rate for hosting fee
     [Arguments]    ${charge_rate_name}    ${no_of_user}
-    navigate menu    Invoice    Manage Hosting Fees - Charge Rate
+    Comment    navigate menu    Invoice    Manage Hosting Fees - Charge Rate
+    go to    ${cf_url}InvoiceReport/ManageHostingFeesChargeRate
     wait until element is visible    xpath=//*[@id='ddl-charge-rate-name']
     click element    xpath=//*[@id='ddl-charge-rate-name']
     double click element    xpath=//*[@id='ddl-charge-rate-name']/option[text()='${charge_rate_name}']
@@ -1192,7 +1208,8 @@ get peak concurrent user
 
 get licensee setting for hosting fee
     [Arguments]    ${licensee}
-    navigate menu    Invoice    Manage Payer Setting
+    Comment    navigate menu    Invoice    Manage Payer Setting
+    go to    ${cf_url}InvoiceReport/ManagePayerSetting
     wait until element is visible    xpath=//a[2]
     click element    xpath=//a[2]
     wait until element is visible    xpath=//*[@id='ddlPayers']

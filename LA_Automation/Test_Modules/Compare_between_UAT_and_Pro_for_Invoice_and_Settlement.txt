@@ -64,7 +64,7 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
     sleep    5s
     Switch Browser    LA UAT
     ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    12Bet    Software Data & Licensing Fees    INV
-    ...    1    Yes
+    ...    1    Yes    LA UAT
     ${tm_SB_uat}    ${tm_NG_uat}    ${tm_BA_uat}    ${tm_LC_uat}    ${tm_VS_uat}    ${tm_RNG_uat}    ${tm_KN_uat}
     ...    ${tm_AG_uat}    ${tm_GD_uat}    ${tm_Macau_uat}    ${tm_MGCLC_uat}    ${tm_MGCRNG_uat}    ${toal_uat}
     ...    ${tm_discount_amt_uat}    ${tm_Macau_Games_uat}    ${tm_rebate_amt_uat}    ${tm_vs_discount_haifa_uat}    ${tm_sb_discount_haifa_uat}    ${colossusbet}
@@ -96,7 +96,7 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
     sleep    5s
     Switch Browser    LA UAT
     ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    asiabet88    Software Data & Licensing Fees    INV
-    ...    1    Yes
+    ...    1    Yes    LA UAT
     ${tm_SB_uat}    ${tm_NG_uat}    ${tm_BA_uat}    ${tm_LC_uat}    ${tm_VS_uat}    ${tm_RNG_uat}    ${tm_KN_uat}
     ...    ${tm_AG_uat}    ${tm_GD_uat}    ${tm_Macau_uat}    ${tm_MGCLC_uat}    ${tm_MGCRNG_uat}    ${toal_uat}
     ...    ${tm_discount_amt_uat}    ${tm_Macau_Games_uat}    ${tm_rebate_amt_uat}    ${tm_vs_discount_haifa_uat}    ${tm_sb_discount_haifa_uat}    ${colossusbet}
@@ -117,7 +117,7 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
     sleep    5s
     Switch Browser    LA UAT
     ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    Bbin    Software Data & Licensing Fees    INV
-    ...    1    Yes
+    ...    1    Yes    LA UAT
     ${tm_SB_uat}    ${tm_NG_uat}    ${tm_BA_uat}    ${tm_LC_uat}    ${tm_VS_uat}    ${tm_RNG_uat}    ${tm_KN_uat}
     ...    ${tm_AG_uat}    ${tm_GD_uat}    ${tm_Macau_uat}    ${tm_MGCLC_uat}    ${tm_MGCRNG_uat}    ${toal_uat}
     ...    ${tm_discount_amt_uat}    ${tm_Macau_Games_uat}    ${tm_rebate_amt_uat}    ${tm_vs_discount_haifa_uat}    ${tm_sb_discount_haifa_uat}    ${colossusbet}
@@ -139,7 +139,8 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
 
 TM_16_FUN_INV_Compare data between UAT and Pro for Invoice
     sleep    3s
-    navigate menu    Invoice    Create Invoice
+    Comment    navigate menu    Invoice    Create Invoice
+    Go to    ${cf_url}InvoiceReport/CreateInvoice
     Click Element    xpath=//*[@id='ddl-biller']
     Double Click Element    xpath=//option[contains(text(),'Testing Biller')]
     ${ac_total_rows}    Get Matching Xpath Count    xpath=//*[@id='ddl-payer']/option
@@ -150,7 +151,7 @@ TM_16_FUN_INV_Compare data between UAT and Pro for Invoice
     \    sleep    5s
     \    Switch Browser    LA UAT
     \    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    ${temp_licensee}    Software Data & Licensing Fees
-    \    ...    INV    1    Yes
+    \    ...    INV    1    Yes    LA UAT
     \    ${total_uat}    get total line in invoice    ${temp_licensee}
     \    Comment    ${tm_SB_uat}    ${tm_NG_uat}    ${tm_BA_uat}    ${tm_LC_uat}    ${tm_VS_uat}
     \    ...    ${tm_RNG_uat}    ${tm_KN_uat}    ${tm_AG_uat}    ${tm_GD_uat}    ${tm_Macau_uat}
@@ -171,11 +172,13 @@ TM_16_FUN_INV_Compare data between UAT and Pro for Invoice
     \    check value equal with approximation    ${total_uat}    ${total_pro}
 
 TM_17_FUN_INV_Compare data between UAT and Pro for Setlement report
-    navigate menu    Invoice    Settlement Report
+    Comment    navigate menu    Invoice    Settlement Report
+    go to    ${cf_url_uat}InvoiceReport/Settlement
     click element    xpath=//*[@id='party-filter']
     ${total_licensees}    Get Matching Xpath Count    xpath=//input[@type="checkbox"]/following-sibling::div[@class="ddci__text"]
     : FOR    ${i}    IN RANGE    1    ${total_licensees}+1
     \    ${temp_licensee}    get text    xpath=(//input[@type="checkbox"]/following-sibling::div[@class="ddci__text"])[${i}]
+    \    Exit For Loop If    '${temp_licensee}'=='spondemo'
     \    ${licenseefee_uat}    ${licenseefee_pro}    get licensee fee for each product from selected licensee    ${temp_licensee}
     \    check value equal with approximation    ${licenseefee_uat}    ${licenseefee_pro}
     \    double click element    xpath=//*[@id='party-filter']/span

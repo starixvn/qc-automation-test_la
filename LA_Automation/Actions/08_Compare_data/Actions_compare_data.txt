@@ -234,7 +234,8 @@ compare data between Licensee WinLoss and Settlement Report
     ...    - Get data from particular excel files for each product then compare with data of Settlement Report report on site
     ...
     ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
-    navigate menu    Invoice    Settlement Report
+    Comment    navigate menu    Invoice    Settlement Report
+    go to    ${cf_url}InvoiceReport/Settlement
     # Select Product: Sportsbook
     Run Keyword If    '${suite_sportsbook_licensees}'<>''    compare settlement report for SportsBook    ${suite_sportsbook_licensees}
     Run Keyword If    '${suite_numbergame_licensees}'<>''    compare settlement report for number game    ${suite_numbergame_licensees}

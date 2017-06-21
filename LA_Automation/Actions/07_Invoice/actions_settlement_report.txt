@@ -57,14 +57,16 @@ get data for selected product in settlement report
     [Return]    ${Turnover}    ${total_trans}    ${customer_wl}    ${licensee_fee}
 
 submit filter by date range for settlement report
-    [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${base_currency}
+    [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${base_currency}    ${environment}=LA PRO
     [Documentation]    This action used to select filter on Settlement report based on date range, product name, billing currency and licensee name.
     ...
     ...    Note: ${date} will be have format: dd/mm/yyyyy
     ...
     ...    EX: select filter by date range for settlement report ${licensee_name} ${bill_from} ${bill_to} ${product_name} ${base_currency} \ \ \ \ \ \ \ \ \
     sleep    2s
-    navigate menu    Invoice    Settlement Report
+    Comment    navigate menu    Invoice    Settlement Report
+    ${tc_env}    Set Variable If    '${environment}'=='LA PRO'    ${cf_url}    ${cf_url_uat}
+    go to    ${tc_env}InvoiceReport/Settlement
     ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
     ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
     Wait Until Element Is Visible    xpath=//*[@id='party-filter']
@@ -88,6 +90,11 @@ submit filter by date range for settlement report
     double click element    xpath=//*[@id='BaseCurrency']/option[contains(text(),'${base_currency}')]
     run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
     Comment    run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
+    sleep    0.1s
+    :FOR    ${i}    in range    1    50
+    \    ${loadingico_exist}    does control exist    xpath=//div[@style="display: block;"]//div[@class='laBlockUi__msg' and contains(text(),'Loading')]
+    \    Run Keyword If    '${loadingico_exist}'=='True'    sleep    2s
+    \    Exit For Loop If    '${loadingico_exist}'=='False'
 
 get data for BA product in settlement report
     [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${exchange}
