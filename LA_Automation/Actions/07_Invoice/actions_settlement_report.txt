@@ -90,11 +90,7 @@ submit filter by date range for settlement report
     double click element    xpath=//*[@id='BaseCurrency']/option[contains(text(),'${base_currency}')]
     run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
     Comment    run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
-    sleep    0.1s
-    :FOR    ${i}    in range    1    50
-    \    ${loadingico_exist}    does control exist    xpath=//div[@style="display: block;"]//div[@class='laBlockUi__msg' and contains(text(),'Loading')]
-    \    Run Keyword If    '${loadingico_exist}'=='True'    sleep    2s
-    \    Exit For Loop If    '${loadingico_exist}'=='False'
+    wait for loading disappear
 
 get data for BA product in settlement report
     [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${product_name}    ${exchange}

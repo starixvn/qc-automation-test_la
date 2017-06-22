@@ -256,7 +256,7 @@ get licensee setting
     ${FishingWorld_rate}    run keyword if    '${is_fishingworld}'=='True'    get text    xpath=//td[contains(text(),'Fishing World')]/following::td[2]
     ${FishingWorld_rate}    run keyword if    '${is_fishingworld}'=='True'    remove string    ${FishingWorld_rate}    %
     click element    xpath=//span[@class="icon-edit"]
-    sleep    2s
+    wait for loading disappear
     ${is_discount}    get text    xpath=//*[@id='discount-id']
     ${output_discount_name}    run keyword if    '${is_discount}' <> 'No Group'    get text    xpath=//*[@id='discount-id']
     ...    ELSE    set variable    None
@@ -272,7 +272,7 @@ select filter on manage payer setting
     [Arguments]    ${ac_licensee_name}    ${ac_discount_name}    ${ac_min_fee_group_name}    ${ac_rebate_name}
     [Documentation]    This action used to select filter on Manage Payer Setting
     Comment    navigate menu    Invoice    Manage Payer Setting
-    go to     ${cf_url}InvoiceReport/ManagePayerSetting
+    go to    ${cf_url}InvoiceReport/ManagePayerSetting
     click element    xpath=//*[@id='payer-filter']
     input text    xpath=//input[@placeholder='Filter']    ${ac_licensee_name}
     click element    //label/div[contains(text(),'${ac_licensee_name}')]
@@ -1282,6 +1282,8 @@ get exchange rate
     ${todate}    set variable    ${mm_to} ${dd_to}, ${yyyyy_from}
     click element    xpath=(//td[@title="${todate}"])[2]
     click element    xpath=//*[@id='mainForm']/div/button
+    sleep    2s
+    Focus    xpath=//td[contains(text(),'INH')]
     ${exchange_rate}    get text    xpath=//td[contains(text(),'${orginal_currency}')]/following::td[1]
     [Return]    ${exchange_rate}
 
