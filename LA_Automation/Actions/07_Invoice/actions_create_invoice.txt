@@ -1329,29 +1329,29 @@ calculate licensee fee for colossusbet from CB WL report
 convert month from text to number
     [Arguments]    ${mm}
     : FOR    ${i}    IN RANGE    0    1
-    \    ${mm}    Set Variable if    '${mm}'=='January'    01    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='JANUARY'    01    ${mm}
     \    Exit For Loop If    '${mm}'=='01'
-    \    ${mm}    Set Variable if    '${mm}'=='February'    02    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='FEBRUARY'    02    ${mm}
     \    Exit For Loop If    '${mm}'=='02'
-    \    ${mm}    Set Variable if    '${mm}'=='March'    03    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='MARCH'    03    ${mm}
     \    Exit For Loop If    '${mm}'=='03'
     \    ${mm}    Set Variable if    '${mm}'=='APRIL'    04    ${mm}
     \    Exit For Loop If    '${mm}'=='04'
-    \    ${mm}    Set Variable if    '${mm}'=='May'    05    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='MAY'    05    ${mm}
     \    Exit For Loop If    '${mm}'=='05'
-    \    ${mm}    Set Variable if    '${mm}'=='June'    06    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='JUNE'    06    ${mm}
     \    Exit For Loop If    '${mm}'=='06'
-    \    ${mm}    Set Variable if    '${mm}'=='July'    07    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='JULY'    07    ${mm}
     \    Exit For Loop If    '${mm}'=='07'
-    \    ${mm}    Set Variable if    '${mm}'=='August'    08    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='AUGUST'    08    ${mm}
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm}    Set Variable if    '${mm}'=='September'    09    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='SEPTEMBER'    09    ${mm}
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm}    Set Variable if    '${mm}'=='October'    10    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='OCTOBER'    10    ${mm}
     \    Exit For Loop If    '${mm}'=='10'
-    \    ${mm}    Set Variable if    '${mm}'=='November'    11    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='NOVEMBER'    11    ${mm}
     \    Exit For Loop If    '${mm}'=='11'
-    \    ${mm}    Set Variable if    '${mm}'=='December'    12    ${mm}
+    \    ${mm}    Set Variable if    '${mm}'=='DECEMBER'    12    ${mm}
     \    Exit For Loop If    '${mm}'=='12'
     [Return]    ${mm}
 

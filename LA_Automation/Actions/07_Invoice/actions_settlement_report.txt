@@ -43,17 +43,23 @@ get data for selected product in settlement report
     ${ac_no_info_status}    Run Keyword And Return Status    Page Should Contain    No Information Available
     ## get member winloss
     sleep    2s
-    ${Turnover}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in')]/following::td[1]
-    ${total_trans}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in')]/following::td[2]
-    ${customer_wl}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in')]/following::td[3]
-    ${licensee_fee}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in')]/following::td[5]
-    ${Turnover}    change format for number    ${Turnover}
-    ${total_trans}    change format for number    ${total_trans}
-    ${customer_wl}    change format for number    ${customer_wl}
-    ${licensee_fee}    change format for number    ${licensee_fee}
+    ${Turnover}    Set Variable    None
+    ${total_trans}    Set Variable    None
+    ${customer_wl}    Set Variable    None
+    ${licensee_fee}    Set Variable    None
+    :FOR    ${i}    in range    0    1
+    \    Exit For Loop If    '${ac_no_info_status}'=='True'
+    \    ${Turnover}    get text    xpath=//td[contains(text(),'Total in')]/following::td[1]
+    \    ${total_trans}    get text    xpath=//td[contains(text(),'Total in')]/following::td[2]
+    \    ${customer_wl}    get text    xpath=//td[contains(text(),'Total in')]/following::td[3]
+    \    ${licensee_fee}    get text    xpath=//td[contains(text(),'Total in')]/following::td[5]
+    \    ${Turnover}    change format for number    ${Turnover}
+    \    ${total_trans}    change format for number    ${total_trans}
+    \    ${customer_wl}    change format for number    ${customer_wl}
+    \    ${licensee_fee}    change format for number    ${licensee_fee}
+    \    should be true    ${Turnover} >0.0
+    \    should be true    ${total_trans}>0.0
     Comment    ${licensee_fee}    set variable if    ${licensee_fee} < 0    0    ${licensee_fee}
-    should be true    ${Turnover} >0.0
-    should be true    ${total_trans}>0.0
     [Return]    ${Turnover}    ${total_trans}    ${customer_wl}    ${licensee_fee}
 
 submit filter by date range for settlement report

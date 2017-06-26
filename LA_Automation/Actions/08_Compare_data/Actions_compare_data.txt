@@ -158,10 +158,10 @@ Export excel for all of seperated product
     Run Keyword If    '${suite_platformwinloss}'<>''    navigate menu    Misc    Platform Win Loss
     sleep    1s
     Run Keyword If    '${suite_platformwinloss}'<>''    select licensees Platform WL    ${suite_platformwinloss}
-    Run Keyword If    '${suite_platformwinloss}'<>''    Click Button    ${submit_button}
+    Run Keyword If    '${suite_platformwinloss}'<>''    Click Button    ${submit_button1}
     sleep    2s
     Run Keyword If    '${suite_platformwinloss}'<>''    wait page settlement loading
-    Run Keyword If    '${suite_platformwinloss}'<>''    Click Element    xpath=//*[@id='btnExportExcel']    # Click Export Excel button
+    Run Keyword If    '${suite_platformwinloss}'<>''    Click Element    xpath=//*[@id='xlsForm']/button    # Click Export Excel button
 
 compare data between Licensee WinLoss and Win Loss By Product
     [Documentation]    This keywork is used to compare data between Win Loss by Product report with data from Excel file of Licensee Win loss report

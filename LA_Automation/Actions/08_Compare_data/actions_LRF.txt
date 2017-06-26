@@ -592,7 +592,12 @@ get data from licensee win loss in LRF
     ${lrf_Turnover}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[7]
     ${lrf_TotalTrans}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[13]
     focus    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[16]
-    ${lrf_CustomerWinLoss}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[16]
+    :FOR    ${i}    in range    0    1
+    \    ${lrf_CustomerWinLoss}    Run Keyword If    '${product}'<>'BA'    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[14]
+    \    Exit For Loop If    '${product}'<>'BA'
+    \    ${lrf_CustomerWinLoss}    Run Keyword If    '${product}'=='BA'    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[16]
+    \    Exit For Loop If    '${product}'=='BA'
+    \    ${lrf_CustomerWinLoss}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[14]    # Not Customer W/L Total
     ${lrf_Turnover}    change format for number    ${lrf_Turnover}
     ${lrf_TotalTrans}    change format for number    ${lrf_TotalTrans}
     ${lrf_CustomerWinLoss}    change format for number    ${lrf_CustomerWinLoss}

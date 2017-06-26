@@ -32,8 +32,8 @@ config
     # Set Global Variables
     Set Suite Variable    ${cf_username1}    starix103    #starix103
     Set Suite Variable    ${cf_password1}    1q2w3e4r    #1q2w3e4r
-    Set Suite Variable    ${cf_username}    starix101    # starix101    starix103
-    Set Suite Variable    ${cf_password}    123QWEasd    # 123QWEasd    4r3e2w1q
+    Set Suite Variable    ${cf_username}    starix103    # starix101    starix103
+    Set Suite Variable    ${cf_password}    1q2w3e4r    # 123QWEasd    4r3e2w1q
     # Set Global Variables    LRF
     Set Suite Variable    ${cf_lrf_username}    StarixQC3
     Set Suite Variable    ${cf_lrf_password}    1q2w3e4r
@@ -563,7 +563,7 @@ check value equal with approximation for negative value
 
 wait for loading disappear
     sleep    0.1s
-    :FOR    ${i}    IN RANGE    1    50
+    : FOR    ${i}    IN RANGE    1    50
     \    ${loadingico_exist}    does control exist    xpath=//div[@style="display: block;"]//div[@class='laBlockUi__msg' and contains(text(),'Loading')]
     \    Run Keyword If    '${loadingico_exist}'=='True'    sleep    2s
     \    Exit For Loop If    '${loadingico_exist}'=='False'
