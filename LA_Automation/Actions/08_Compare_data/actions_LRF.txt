@@ -380,25 +380,29 @@ Check data for 1st licensees
     ${status_racing}    Read Cell Data By Coordinates    Data    2    ${suite_1stlicensee_row}
     ${status_numbergame}    Read Cell Data By Coordinates    Data    3    ${suite_1stlicensee_row}
     ${status_ba}    Read Cell Data By Coordinates    Data    4    ${suite_1stlicensee_row}
-    ${status_livecasino}    Read Cell Data By Coordinates    Data    5    ${suite_1stlicensee_row}
+    Comment    ${status_livecasino}    Read Cell Data By Coordinates    Data    5    ${suite_1stlicensee_row}    #Remove
     ${status_virtualsports}    Read Cell Data By Coordinates    Data    6    ${suite_1stlicensee_row}
     ${status_rngcasino}    Read Cell Data By Coordinates    Data    7    ${suite_1stlicensee_row}
     ${status_keno}    Read Cell Data By Coordinates    Data    8    ${suite_1stlicensee_row}
     ${status_agcasino}    Read Cell Data By Coordinates    Data    9    ${suite_1stlicensee_row}
     ${status_golddeluxe}    Read Cell Data By Coordinates    Data    10    ${suite_1stlicensee_row}
-    ${status_macau}    Read Cell Data By Coordinates    Data    11    ${suite_1stlicensee_row}
+    Comment    ${status_macau}    Read Cell Data By Coordinates    Data    11    ${suite_1stlicensee_row}    #Remove
     ${status_microgaminglivecasino}    Read Cell Data By Coordinates    Data    12    ${suite_1stlicensee_row}
     ${status_microgamingrngcasino}    Read Cell Data By Coordinates    Data    13    ${suite_1stlicensee_row}
     ${status_bettrade}    Read Cell Data By Coordinates    Data    14    ${suite_1stlicensee_row}
     ${status_macaugames}    Read Cell Data By Coordinates    Data    15    ${suite_1stlicensee_row}
-    ${status_platfromwinloss}    Read Cell Data By Coordinates    Data    16    ${suite_1stlicensee_row}
-    Run Keyword If    '${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes'    navigate left menu    REPORTS    Win Loss By Products
-    Run Keyword If    '${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes'    submit filters for Win Loss By Products
+    ${status_allbet}    Read Cell Data By Coordinates    Data    16    ${suite_1stlicensee_row}
+    ${status_fishingworld}    Read Cell Data By Coordinates    Data    17    ${suite_1stlicensee_row}
+    ${status_colossusbet}    Read Cell Data By Coordinates    Data    18    ${suite_1stlicensee_row}
+    ${status_cashout}    Read Cell Data By Coordinates    Data    19    ${suite_1stlicensee_row}
+    ${status_platfromwinloss}    Read Cell Data By Coordinates    Data    20    ${suite_1stlicensee_row}
+    Run Keyword If    '${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes'    navigate left menu    REPORTS    Win Loss By Products
+    Run Keyword If    '${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes'    submit filters for Win Loss By Products
     Run Keyword If    '${status_sportsbook}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Sportsbook
     Run Keyword If    '${status_racing}'=='Yes'    compare LRF licensee by product with LA for Racing product    ${licensee}
     Run Keyword If    '${status_numbergame}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Number Game
     Run Keyword If    '${status_ba}'=='Yes'    compare LRF licensee by product with LA for BA product    ${licensee}
-    Run Keyword If    '${status_livecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Live Casino
+    Comment    Run Keyword If    '${status_livecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Live Casino    #Remove
     Run Keyword If    '${status_rngcasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    RNG Casino
     Run Keyword If    '${status_keno}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Keno
     Run Keyword If    '${status_microgaminglivecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-Live Casino
@@ -419,10 +423,10 @@ Check data for 1st licensees
     Run Keyword If    '${status_golddeluxe}'=='Yes'    navigate left menu    REPORTS    Gold Deluxe Win Loss
     Run Keyword If    '${status_golddeluxe}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    Gold Deluxe
     Run Keyword If    '${status_golddeluxe}'=='Yes'    compare LRF AG Casino GD Macau WL with LA    ${licensee}    Gold Deluxe
-    # Navigate to Macau report
-    Run Keyword If    '${status_macau}'=='Yes'    navigate left menu    REPORTS    Macau Win Loss
-    Run Keyword If    '${status_macau}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    Macau
-    Run Keyword If    '${status_macau}'=='Yes'    compare LRF AG Casino GD Macau WL with LA    ${licensee}    Macau
+    Comment    # Navigate to Macau report    #Remove
+    Comment    Run Keyword If    '${status_macau}'=='Yes'    navigate left menu    REPORTS    Macau Win Loss
+    Comment    Run Keyword If    '${status_macau}'=='Yes'    submit filters for AG Casino GD Macau Win Loss    Macau
+    Comment    Run Keyword If    '${status_macau}'=='Yes'    compare LRF AG Casino GD Macau WL with LA    ${licensee}    Macau
     # Navigate to Platform Win Loss
     Run Keyword If    '${status_platfromwinloss}'=='Yes'    navigate left menu    REPORTS    Platform Win Loss
     Run Keyword If    '${status_platfromwinloss}'=='Yes'    submit filters for Platform Win Loss
@@ -592,7 +596,7 @@ get data from licensee win loss in LRF
     ${lrf_Turnover}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[7]
     ${lrf_TotalTrans}    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[13]
     focus    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[16]
-    :FOR    ${i}    in range    0    1
+    : FOR    ${i}    IN RANGE    0    1
     \    ${lrf_CustomerWinLoss}    Run Keyword If    '${product}'<>'BA'    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[14]
     \    Exit For Loop If    '${product}'<>'BA'
     \    ${lrf_CustomerWinLoss}    Run Keyword If    '${product}'=='BA'    get text    xpath=//*[@id='gview_ReportGrid']//*//td[text()='Total in EUR']/following::td[16]
