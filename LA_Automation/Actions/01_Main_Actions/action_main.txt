@@ -482,7 +482,7 @@ wait page loading
 wait page settlement loading
     : FOR    ${index}    IN RANGE    1    60
     \    ${exist}    does control exist    ${icon_loading_settlementrpt}
-    \    ${exist2}    does control exist    xpath=//*[@id='btnExportExcel']
+    \    ${exist2}    does control exist    xpath=//*[@id='xlsForm']/button
     \    Run Keyword If    '${exist}'=='True' or '${exist2}'=='False'    sleep    2s
     \    Exit For Loop If    '${exist}'=='False' and '${exist2}'=='True'
 

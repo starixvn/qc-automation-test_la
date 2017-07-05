@@ -187,7 +187,7 @@ Export excel for all of seperated product
     Run Keyword If    '${suite_platformwinloss}'<>''    select licensees Platform WL    ${suite_platformwinloss}
     Run Keyword If    '${suite_platformwinloss}'<>''    Click Button    xpath=.//button[@id='submit-button']
     sleep    2s
-    Run Keyword If    '${suite_platformwinloss}'<>''    wait page settlement loading
+    Run Keyword If    '${suite_platformwinloss}'<>''    wait for loading disappear
     Run Keyword If    '${suite_platformwinloss}'<>''    Click Element    xpath=//*[@id='xlsForm']/button    # Click Export Excel button
 
 compare data between Licensee WinLoss and Win Loss By Product

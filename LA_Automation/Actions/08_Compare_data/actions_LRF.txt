@@ -121,15 +121,17 @@ select licensees from dropdown then navigate to report
     navigate left menu    REPORTS    ${report}
     Comment    Select Frame    xpath=//iframe[@id='main']
 
-submit filters for Virtual Sports on Licensee Win Loss report
-    Select Frame    xpath=//iframe[@id='main']
+submit filters on Licensee Win Loss report
+    [Arguments]    ${tc_Product}
+    ${exit}    does control exist    xpath=//iframe[@id='main']
+    Run Keyword If    '${exit}'=='True'    Select Frame    xpath=//iframe[@id='main']
     Click Element    xpath=.//img[@class='ui-daterangepicker-trigger']    #Click From Date
     Click Element    xpath=//a[text()='Last month']    # Select Last month
     Click Element    xpath=//input[@class='report-by-monthly']    # Select Monthly radio
     Click Element    xpath=//span[@class='ui-multiselect-icon ui-multiselect-icon-triangle-1-s']    #Select product
     Click Element    xpath=//*[@id='grid-products-multiselectHeaderCheckBox']    # Select All
     Click Element    xpath=//*[@id='grid-products-multiselectHeaderCheckBox']    # Select All
-    Click Element    xpath=.//*[@id='VS']    # Select Virtual Sports
+    Click Element    xpath=//label[contains(text(),'${tc_Product}')]    # Select Product
     Click Element    xpath=//span[@class='ui-multiselect-icon ui-multiselect-icon-triangle-1-s']    #Select product
     Click Element    xpath=//*[@id='SubmitButton']    # Click on Submit button
     wait lrf page loading
@@ -245,7 +247,7 @@ get data LRF from Platform Win Loss report
     ${LicWL_LRF}    remove string    ${LicWL_LRF}    ,
     [Return]    ${Turnover_LRF}    ${LicWL_LRF}
 
-compare LRF Licensee WL by product with LA for Virtual Sports product
+compare LRF Licensee WL by product with LA for product
     [Arguments]    ${licensee}    ${product}
     [Documentation]    This report is used to compare data (Turnover, Total Transaction, Customer W/L) from Licensee WL reports with LA for prouduct:
     ...
@@ -253,9 +255,9 @@ compare LRF Licensee WL by product with LA for Virtual Sports product
     ${Turnover_LRF}    ${TotalTransaction_LRF}    ${CustomerWL_LRF}    get data LRF from Licensee Win Loss
     ${filename}    Get From Dictionary    ${dictionaryfilename}    ${product}
     ${TotalTrans}    ${Turnover}    ${Customerwl}    ${Amount}    get data of licensee on licensee win loss excel file    ${filename}    ${licensee}
-    check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}    Compare Total Trans licensee ${licensee} for Virtual Sports
-    check value equal with approximation    ${Turnover}    ${Turnover_LRF}    Compare Turnover, licensee ${licensee} for Virtual Sports
-    check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}    Compare Customer wl, licensee ${licensee} for Virtual Sports
+    check value equal with approximation    ${TotalTrans}    ${TotalTransaction_LRF}    Compare Total Trans licensee ${licensee} for ${product}
+    check value equal with approximation    ${Turnover}    ${Turnover_LRF}    Compare Turnover, licensee ${licensee} for ${product}
+    check value equal with approximation    ${Customerwl}    ${CustomerWL_LRF}    Compare Customer wl, licensee ${licensee} for ${product}
 
 compare LRF Licensee WL by product with LA for Bet Trade product
     [Arguments]    ${licensee}    ${product}
@@ -408,11 +410,18 @@ Check data for 1st licensees
     Run Keyword If    '${status_microgaminglivecasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-Live Casino
     Run Keyword If    '${status_microgamingrngcasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-RNG Casino
     Run Keyword If    '${status_macaugames}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Macau Games
-    # Navigate to Licensee WL to check Virtual Sports and Bettrade    ----------
-    Run Keyword If    '${status_virtualsports}'=='Yes' or '${status_bettrade}'=='Yes'    navigate left menu    REPORTS    Licensee Win Loss    # Navigate to Licensee WL if Virtual Sports or Bettrade available
-    Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters for Virtual Sports on Licensee Win Loss report
-    Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for Virtual Sports product    ${licensee}    Virtual Sports
-    Comment    #Bet Trade
+    # Navigate to Licensee WL to check Virtual Sports and Bettrade, AllBet, Fishing World    ----------
+    Run Keyword If    '${status_virtualsports}'=='Yes' or '${status_bettrade}'=='Yes' or '${status_allbet}'=='Yes' or '${status_fishingworld}'=='Yes'    navigate left menu    REPORTS    Licensee Win Loss    # Navigate to Licensee WL if Virtual Sports or Bettrade available
+    # Virtual Sports
+    Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters on Licensee Win Loss report    Virtual Sports
+    Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for product    ${licensee}    Virtual Sports
+    # AllBet
+    Run Keyword If    '${status_allbet}'=='Yes'    submit filters on Licensee Win Loss report    AllBet
+    Run Keyword If    '${status_allbet}'=='Yes'    compare LRF Licensee WL by product with LA for product    ${licensee}    AllBet
+    # Fishing World
+    Run Keyword If    '${status_fishingworld}'=='Yes'    submit filters on Licensee Win Loss report    Fishing World
+    Run Keyword If    '${status_fishingworld}'=='Yes'    compare LRF Licensee WL by product with LA for product    ${licensee}    Fishing World
+    #Bet Trade
     Comment    Run Keyword If    '${status_bettrade}'=='Yes'    submit filters for Bet Trade on Licensee Win Loss report    ${status_virtualsports}    # Check If Virtual Sport is checked before, no need to submit date rage again
     Comment    Run Keyword If    '${status_bettrade}'=='Yes'    compare LRF Licensee WL by product with LA for Bet Trade product    ${licensee}    Bet Trade
     # Navigate to AG Casino WL report
@@ -466,7 +475,11 @@ Check data for next licensees
     \    ${status_microgamingrngcasino}    Read Cell Data By Coordinates    Data    13    ${index}
     \    ${status_bettrade}    Read Cell Data By Coordinates    Data    14    ${index}
     \    ${status_macaugames}    Read Cell Data By Coordinates    Data    15    ${index}
-    \    ${status_platfromwinloss}    Read Cell Data By Coordinates    Data    16    ${index}
+    \    ${status_allbet}    Read Cell Data By Coordinates    Data    16    ${index}
+    \    ${status_fishingworld}    Read Cell Data By Coordinates    Data    17    ${index}
+    \    ${status_colossusbet}    Read Cell Data By Coordinates    Data    18    ${index}
+    \    ${status_cashout}    Read Cell Data By Coordinates    Data    19    ${index}
+    \    ${status_platfromwinloss}    Read Cell Data By Coordinates    Data    20    ${index}
     \    Run Keyword If    ('${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_golddeluxe}'=='Yes' or '${status_macau}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes')    select licensees from dropdown then navigate to report    ${licensee}    Win Loss By Products
     \    Run Keyword If    ('${status_sportsbook}'=='Yes' or '${status_racing}'=='Yes' or '${status_numbergame}'=='Yes' or '${status_ba}'=='Yes' or '${status_livecasino}'=='Yes' or '${status_rngcasino}'=='Yes' or '${status_keno}'=='Yes' or '${status_golddeluxe}'=='Yes' or '${status_macau}'=='Yes' or '${status_microgaminglivecasino}'=='Yes' or '${status_microgamingrngcasino}'=='Yes')    submit filters for Win Loss By Products
     \    Run Keyword If    '${status_sportsbook}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Sportsbook
@@ -480,10 +493,17 @@ Check data for next licensees
     \    Run Keyword If    '${status_microgamingrngcasino}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Microgaming-RNG Casino
     \    Run Keyword If    '${status_macaugames}'=='Yes'    compare LRF WL by product with LA    ${licensee}    Macau Games
     \    Comment    # Navigate to Licensee WL to check Virtual Sports and Bettrade
-    \    Run Keyword If    '${status_virtualsports}'=='Yes' or '${status_bettrade}'=='Yes'    select licensees from dropdown then navigate to report    ${licensee}    Licensee Win Loss    # Navigate to Licensee WL if Virtual Sports or Bettrade available
-    \    Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters for Virtual Sports on Licensee Win Loss report
-    \    Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for Virtual Sports product    ${licensee}    Virtual Sports
-    \    Comment    Bet trade
+    \    Run Keyword If    '${status_virtualsports}'=='Yes' or '${status_bettrade}'=='Yes' or '${status_allbet}'=='Yes' or '${status_fishingworld}'=='Yes'    select licensees from dropdown then navigate to report    ${licensee}    Licensee Win Loss    # Navigate to Licensee WL if Virtual Sports or Bettrade available
+    \    #Virtual Sports
+    \    Run Keyword If    '${status_virtualsports}'=='Yes'    submit filters on Licensee Win Loss report    Virtual Sports
+    \    Run Keyword If    '${status_virtualsports}'=='Yes'    compare LRF Licensee WL by product with LA for product    ${licensee}    Virtual Sports
+    # AllBet
+    \    Run Keyword If    '${status_allbet}'=='Yes'    submit filters on Licensee Win Loss report    AllBet
+    \    Run Keyword If    '${status_allbet}'=='Yes'    compare LRF Licensee WL by product with LA for product    ${licensee}    AllBet
+    # Fishing World
+    \    Run Keyword If    '${status_fishingworld}'=='Yes'    submit filters on Licensee Win Loss report    Fishing World
+    \    Run Keyword If    '${status_fishingworld}'=='Yes'    compare LRF Licensee WL by product with LA for product    ${licensee}    Fishing World
+    \    #Bet trade
     \    Comment    Run Keyword If    '${status_bettrade}'=='Yes'    submit filters for Bet Trade on Licensee Win Loss report    ${status_virtualsports}    # Check If Virtual Sport is checked before, no need to submit date range again
     \    Comment    Run Keyword If    '${status_bettrade}'=='Yes'    compare LRF Licensee WL by product with LA for Bet Trade product    ${licensee}    Bet Trade
     \    Comment    Navigate to AG Casino WL report
