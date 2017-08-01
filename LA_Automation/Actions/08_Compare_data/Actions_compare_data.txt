@@ -268,7 +268,7 @@ compare data between Licensee WinLoss and Settlement Report
     ...
     ...    - **Note: Data compare: Turnover, Total Trans, Customer Win Loss, \ Amount
     Comment    navigate menu    Invoice    Settlement Report
-    go to    ${cf_url}InvoiceReport/Settlement
+    go to    ${cf_url}Invoice/SettlementReport/Settlement
     # Select Product: Sportsbook
     Run Keyword If    '${suite_sportsbook_licensees}'<>''    compare settlement report for SportsBook    ${suite_sportsbook_licensees}
     Run Keyword If    '${suite_numbergame_licensees}'<>''    compare settlement report for number game    ${suite_numbergame_licensees}

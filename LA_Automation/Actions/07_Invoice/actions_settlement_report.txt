@@ -47,7 +47,7 @@ get data for selected product in settlement report
     ${total_trans}    Set Variable    None
     ${customer_wl}    Set Variable    None
     ${licensee_fee}    Set Variable    None
-    :FOR    ${i}    in range    0    1
+    : FOR    ${i}    IN RANGE    0    1
     \    Exit For Loop If    '${ac_no_info_status}'=='True'
     \    ${Turnover}    get text    xpath=//td[contains(text(),'Total in')]/following::td[1]
     \    ${total_trans}    get text    xpath=//td[contains(text(),'Total in')]/following::td[2]
@@ -72,7 +72,7 @@ submit filter by date range for settlement report
     sleep    2s
     Comment    navigate menu    Invoice    Settlement Report
     ${tc_env}    Set Variable If    '${environment}'=='LA PRO'    ${cf_url}    ${cf_url_uat}
-    go to    ${tc_env}InvoiceReport/Settlement
+    go to    ${cf_url}Invoice/SettlementReport/Settlement
     ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
     ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
     Wait Until Element Is Visible    xpath=//*[@id='party-filter']

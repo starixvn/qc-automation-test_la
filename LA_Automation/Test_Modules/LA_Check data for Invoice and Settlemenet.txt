@@ -251,11 +251,11 @@ TM_10_FUN_INV_Check data in the Preview page
     ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${discount_on_winlost_VS}    ${discount_on_winlost_SB}    ${colossusbet}
     ...    ${allbet}    ${fishingworld}    get invoice data of each product    12Bet
     sleep    3s
-    ${SB_fee}    ${NG_fee}    ${LC_fee}    ${VS_fee}    ${RNG_fee}    ${KN_fee}    ${AG_fee}
-    ...    ${GD_fee}    ${Macau_fee}    ${MGCLC_fee}    ${Macau_games_fee}    ${discount_fee}    ${total_fee}
-    ...    ${rebate_fee}    ${detail_sb}    ${detail_ng}    ${detail_lc}    ${detail_vs}    ${detail_rng}
-    ...    ${detail_keno}    ${detail_ag}    ${detail_gd}    ${detail_mgclc}    ${detail_macau_games}    get data in Preview page
-    ...    12Bet    INV    001
+    ${SB_fee}    ${NG_fee}    ${VS_fee}    ${RNG_fee}    ${KN_fee}    ${AG_fee}    ${GD_fee}
+    ...    ${Macau_fee}    ${MGCLC_fee}    ${Macau_games_fee}    ${discount_fee}    ${total_fee}    ${rebate_fee}
+    ...    ${detail_sb}    ${detail_ng}    ${detail_vs}    ${detail_rng}    ${detail_keno}    ${detail_ag}
+    ...    ${detail_gd}    ${detail_mgclc}    ${detail_macau_games}    get data in Preview page    12Bet    INV
+    ...    001
     sleep    5s
     select window    Create Invoice
     ${settlement_ng}    get licensee fee from settlement report    12Bet    ${tm_bill_from}    ${tm_bill_to}    Number Game    EUR

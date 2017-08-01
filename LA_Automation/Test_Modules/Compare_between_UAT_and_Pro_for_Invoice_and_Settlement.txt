@@ -140,7 +140,7 @@ TM_15_FUN_INV_Compare data between UAT and Pro for each product in Invoice
 TM_16_FUN_INV_Compare data between UAT and Pro for Invoice
     sleep    3s
     Comment    navigate menu    Invoice    Create Invoice
-    Go to    ${cf_url}InvoiceReport/CreateInvoice
+    Go to    ${cf_url}Invoice/CreateInvoice/Main
     Click Element    xpath=//*[@id='ddl-biller']
     Double Click Element    xpath=//option[contains(text(),'Testing Biller')]
     ${ac_total_rows}    Get Matching Xpath Count    xpath=//*[@id='ddl-payer']/option
@@ -173,7 +173,7 @@ TM_16_FUN_INV_Compare data between UAT and Pro for Invoice
 
 TM_17_FUN_INV_Compare data between UAT and Pro for Setlement report
     Comment    navigate menu    Invoice    Settlement Report
-    go to    ${cf_url_uat}InvoiceReport/Settlement
+    go to    ${cf_url_uat}Invoice/SettlementReport/Settlement
     click element    xpath=//*[@id='party-filter']
     ${total_licensees}    Get Matching Xpath Count    xpath=//input[@type="checkbox"]/following-sibling::div[@class="ddci__text"]
     : FOR    ${i}    IN RANGE    1    ${total_licensees}+1

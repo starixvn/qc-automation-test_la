@@ -12,7 +12,7 @@ add new biller
     [Arguments]    ${ac_biller_name}
     [Documentation]    This action used to add new biller to generate invoice.
     Comment    navigate menu    Invoice    Manage Biller
-    go to    ${cf_url}InvoiceReport/ManageBiller
+    go to    ${cf_url}Invoice/Settings/ManageBiller
     Click Element    xpath=//*[@id='add-new-biller']
     wait until element is visible    xpath=//*[@id='BillerName']
     Input Text    xpath=//*[@id='BillerName']    ${ac_biller_name}
@@ -50,7 +50,7 @@ get products of licensee
     [Documentation]    This action will returns products belong licensee
     sleep    2s
     Comment    navigate menu    Invoice    Settlement Report
-    go to    ${cf_url}InvoiceReport/Settlement
+    go to    ${cf_url}Invoice/SettlementReport/Settlement
     click element    xpath=//*[@id='party-filter']
     ## Select licensee
     input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
@@ -75,7 +75,7 @@ select filter on create invoice
     sleep    1s
     Comment    navigate menu    Invoice    Create Invoice
     ${tc_env}    Set Variable If    '${environment}'=='LA PRO'    ${cf_url}    ${cf_url_uat}
-    go to    ${tc_env}InvoiceReport/CreateInvoice
+    go to    ${cf_url}Invoice/CreateInvoice/Main
     ## get billing date
     ${yyyyy}    get value    xpath=//input[@name='Year']
     ${mm}    Get Value    xpath=//input[@name='Month']
@@ -272,7 +272,7 @@ select filter on manage payer setting
     [Arguments]    ${ac_licensee_name}    ${ac_discount_name}    ${ac_min_fee_group_name}    ${ac_rebate_name}
     [Documentation]    This action used to select filter on Manage Payer Setting
     Comment    navigate menu    Invoice    Manage Payer Setting
-    go to    ${cf_url}InvoiceReport/ManagePayerSetting
+    go to    ${cf_url}Invoice/ManagePayerSetting/Main
     click element    xpath=//*[@id='payer-filter']
     input text    xpath=//input[@placeholder='Filter']    ${ac_licensee_name}
     click element    //label/div[contains(text(),'${ac_licensee_name}')]
@@ -494,7 +494,7 @@ get licensees in min fee group
     [Arguments]    ${minfee_group_name}
     [Documentation]    This action will return licensee names and no of licensees in min fee group
     Comment    navigate menu    Invoice    Manage Payer Group
-    go to    ${cf_url}InvoiceReport/ManagePayerGroup
+    go to    ${cf_url}Invoice/Settings/ManagePayerGroup
     ## Get text from tooltip
     sleep    2s
     Comment    Mouse Over    xpath=//td[contains(text(),'${minfee_group_name}')]/following::td[1]/span
@@ -526,7 +526,7 @@ get minfee and waive time from selected licensee
     [Arguments]    ${licensee_name}
     [Documentation]    This action get min fee from select licensee
     Comment    navigate menu    Invoice    Manage Payer Setting
-    go to    ${cf_url}InvoiceReport/ManagePayerSetting
+    go to    ${cf_url}Invoice/ManagePayerSetting/Main
     click element    xpath=//*[@id='payer-filter']
     click element    xpath=//input[@class="ddft__input"]
     input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
@@ -534,7 +534,7 @@ get minfee and waive time from selected licensee
     click element    xpath=//*[@id='search-payer-setting']
     Wait Until Element Is Visible    xpath=//span[@class='icon-edit']
     click element    xpath=//span[@class='icon-edit']
-    sleep    2s
+    wait for loading disappear
     ${is_minfee}    run keyword and return status    Element Should Be Visible    xpath=(//*[@id='minimum-fee-setting-table']/tbody/*/td[2]/input)[last()]
     ${output_minfee}    run keyword if    '${is_minfee}'=='True'    get value    xpath=(//*[@id='minimum-fee-setting-table']/tbody/*/td[2]/input)[last()]
     ${output_minfee}    run keyword if    ${output_minfee} > 1000 and '${is_minfee}'=='True'    remove string    ${output_minfee}    ,
@@ -596,7 +596,7 @@ delete biller
     [Arguments]    ${biiler_name}
     [Documentation]    This action used to delete biller
     Comment    navigate menu    Invoice    Manage Biller
-    go to    ${cf_url}InvoiceReport/ManageBiller
+    go to    ${cf_url}Invoice/Settings/ManageBiller
     click element    xpath=//*[@id='ddlBiller']
     Wait Until Element Is Visible    xpath=//option[text()='${biiler_name}']
     Double Click Element    xpath=//option[text()='${biiler_name}']
@@ -608,7 +608,7 @@ get rebate setting
     [Arguments]    ${group_name}
     [Documentation]    This action used to get rebate setting from entered setting group name
     Comment    navigate menu    Invoice    Manage Rebate Group
-    go to    ${cf_url}InvoiceReport/ManageRebateGroup
+    go to    ${cf_url}Invoice/Settings/ManageRebateGroup
     ${rate}    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[2]
     ${rate}    fetch from left    ${rate}    .
     ${payer}    get text    xpath=//td[1][contains(text(),'${group_name}')]/following-sibling::td[3]
@@ -780,8 +780,8 @@ get data in Preview page
     ${SB}    Run Keyword If    '${is_sb}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Sportsbook)')]/following::td[2]
     ${is_ng}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Number Game)')]
     ${NG}    Run Keyword If    '${is_ng}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Number Game)')]/following::td[2]
-    ${is_lc}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Live Casino)')]
-    ${LC}    Run Keyword If    '${is_lc}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Live Casino)')]/following::td[2]
+    Comment    ${is_lc}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Live Casino)')]
+    Comment    ${LC}    Run Keyword If    '${is_lc}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Live Casino)')]/following::td[2]
     ${is_vs}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(Virtual Sports)')]
     ${VS}    Run Keyword If    '${is_vs}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'(Virtual Sports)')]/following::td[2]
     ${is_rng}    Run Keyword And Return Status    get text    xpath=//td[2]/pre[contains(text(),'(RNG Casino)')]
@@ -805,7 +805,7 @@ get data in Preview page
     ${rebate_amt}    Run Keyword If    '${is_rebate}'=='True'    get text    xpath=//td[2]/pre[contains(text(),'Rebate')]/following::td[2]
     ${SB}    change format for number    ${SB}
     ${NG}    change format for number    ${NG}
-    ${LC}    change format for number    ${LC}
+    Comment    ${LC}    change format for number    ${LC}
     ${VS}    change format for number    ${VS}
     ${RNG}    change format for number    ${RNG}
     ${KN}    change format for number    ${KN}
@@ -818,7 +818,7 @@ get data in Preview page
     ${rebate_amt}    change format for number    ${rebate_amt}
     ${settlement_sb}    run keyword if    '${is_sb}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'SPORTSBOOK')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
     ${settlement_ng}    run keyword if    '${is_ng}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'NUMBER GAME')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
-    ${settlement_lc}    run keyword if    '${is_lc}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'LIVE CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
+    Comment    ${settlement_lc}    run keyword if    '${is_lc}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'LIVE CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
     ${settlement_vs}    run keyword if    '${is_vs}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'VIRTUAL SPORTS')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
     ${settlement_rng}    run keyword if    '${is_rng}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'RNG CASINO')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
     ${settlement_keno}    run keyword if    '${is_kn}'=='True'    get text    xpath=(//*[@id='settlement']//*/td[contains(text(),'KENO')]/following::td[contains(text(),'Total in EUR')]/following::td[5])[1]
@@ -828,7 +828,7 @@ get data in Preview page
     ${settlement_macau_games}    run keyword if    '${is_macau_games}'=='True'    get text    xpath=//*[@id='settlement']//*/td[contains(text(),'MACAU GAMES')]/following::td[contains(text(),'Total in EUR')]/following::td[5]
     ${settlement_sb}    change format for number    ${settlement_sb}
     ${settlement_ng}    change format for number    ${settlement_ng}
-    ${settlement_lc}    change format for number    ${settlement_lc}
+    Comment    ${settlement_lc}    change format for number    ${settlement_lc}
     ${settlement_vs}    change format for number    ${settlement_vs}
     ${settlement_rng}    change format for number    ${settlement_rng}
     ${settlement_keno}    change format for number    ${settlement_keno}
@@ -837,10 +837,10 @@ get data in Preview page
     ${settlement_mgclc}    change format for number    ${settlement_mgclc}
     ${settlement_macau_games}    change format for number    ${settlement_macau_games}
     close window
-    [Return]    ${SB}    ${NG}    ${LC}    ${VS}    ${RNG}    ${KN}
-    ...    ${AG}    ${GD}    ${Macau}    ${MGCLC}    ${Macau_Games}    ${discount_amt}
-    ...    ${total}    ${rebate_amt}    ${settlement_sb}    ${settlement_ng}    ${settlement_lc}    ${settlement_vs}
-    ...    ${settlement_rng}    ${settlement_keno}    ${settlement_ag}    ${settlement_gd}    ${settlement_mgclc}    ${settlement_macau_games}
+    [Return]    ${SB}    ${NG}    ${VS}    ${RNG}    ${KN}    ${AG}
+    ...    ${GD}    ${Macau}    ${MGCLC}    ${Macau_Games}    ${discount_amt}    ${total}
+    ...    ${rebate_amt}    ${settlement_sb}    ${settlement_ng}    ${settlement_vs}    ${settlement_rng}    ${settlement_keno}
+    ...    ${settlement_ag}    ${settlement_gd}    ${settlement_mgclc}    ${settlement_macau_games}
 
 get licensee fee from settlement report
     [Arguments]    ${licensee_name}    ${bill_from}    ${bill_to}    ${product_name}    ${base_currency}    ${evironment}=LA PRO
@@ -863,7 +863,7 @@ get max invoice no from selected biller on dashboard
     [Arguments]    ${biller_name}
     [Documentation]    This action will return max invoice no of selected biller
     Comment    navigate menu    Invoice    Dashboard
-    go to    ${cf_url}InvoiceReport/Dashboard
+    go to    ${cf_url}Invoice/Dashboard/Main
     select since last 4 months
     wait until element is visible    xpath=//*[@id='ddlBiller']
     click element    xpath=//*[@id='ddlBiller']
@@ -880,7 +880,7 @@ get invoice no from create invoice
     [Arguments]    ${biller_name}    ${payer_name}    ${ac_type}
     [Documentation]    This action will get new generated invoice no, new invoice no = old invoice no + 1
     Comment    navigate menu    Invoice    Create Invoice
-    go to    ${cf_url}InvoiceReport/CreateInvoice
+    go to    ${cf_url}Invoice/CreateInvoice/Main
     Click Element    xpath=//*[@id='ddl-biller']
     Double Click Element    xpath=//option[contains(text(),'${biller_name}')]
     wait until element is visible    xpath=//*[@id='ddl-payer']/option[contains(text(),'${payer_name}')]
@@ -1105,7 +1105,7 @@ get licensee fee for each product from selected licensee
     ${no_of_products}    Get Matching Xpath Count    xpath=//*[@id='Product']/option
     Switch Browser    LA UAT
     Comment    navigate menu    Invoice    Settlement Report
-    go to    ${cf_url_uat}InvoiceReport/Settlement
+    go to    ${cf_url_uat}Invoice/SettlementReport/Settlement
     wait until element is visible    xpath=//*[@id='party-filter']
     click element    xpath=//*[@id='party-filter']
     input text    xpath=//input[@class="ddft__input"]    ${licensee_name}
@@ -1153,7 +1153,7 @@ split date for calendar picker
 get rate for hosting fee
     [Arguments]    ${charge_rate_name}    ${no_of_user}
     Comment    navigate menu    Invoice    Manage Hosting Fees - Charge Rate
-    go to    ${cf_url}InvoiceReport/ManageHostingFeesChargeRate
+    go to    ${cf_url}Invoice/ManageHostingFeesChargeRate/Main
     wait until element is visible    xpath=//*[@id='ddl-charge-rate-name']
     click element    xpath=//*[@id='ddl-charge-rate-name']
     double click element    xpath=//*[@id='ddl-charge-rate-name']/option[text()='${charge_rate_name}']
@@ -1209,7 +1209,7 @@ get peak concurrent user
 get licensee setting for hosting fee
     [Arguments]    ${licensee}
     Comment    navigate menu    Invoice    Manage Payer Setting
-    go to    ${cf_url}InvoiceReport/ManagePayerSetting
+    go to    ${cf_url}Invoice/ManagePayerSetting/Main
     wait until element is visible    xpath=//a[2]
     click element    xpath=//a[2]
     wait until element is visible    xpath=//*[@id='ddlPayers']
