@@ -530,6 +530,7 @@ get before yesterday and last month
     ${yyyy}    ${mm}    ${dd}    Get Time    year,month,day
     Comment    ${mm-1}    run key word if    ${mm-1} < 10    set variable    0${mm}-1
     ...    ELSE    set variable    ${mm}-1
+    ${mm}    Convert To Integer    ${mm}
     ${mm-1}    run key word if    '${mm}'=='01'    set variable    12
     ...    ELSE    Evaluate    ${mm}-1
     ${mm-1}    run key word if    ${mm-1} <10    set variable    0${mm-1}
@@ -537,7 +538,7 @@ get before yesterday and last month
     ${yyyy-1}    Evaluate    ${yyyy}-1
     ${yyyy}    run key word if    '${mm}'=='01'    set variable    ${yyyy-1}
     ...    ELSE    set variable    ${yyyy}
-    ${no_of_day}    run key word if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' \ or '${mm-1}'=='10' \ or '${mm-1}'=='12' \ \ \    set variable    31
+    ${no_of_day}    run key word if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' or '${mm-1}'=='10' or '${mm-1}'=='12'    set variable    31
     ...    ELSE IF    ${mm-1}==02    set variable    28
     ...    ELSE    set variable    30
     Comment    ${no_of_day}    Set Variable if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' \ or '${mm-1}'=='10' \ or '${mm-1}'=='12' \ \ \    31    '${mm-1}'=='2'    28
@@ -548,6 +549,7 @@ get before yesterday and last month
     ${To_last_month}    set variable    ${no_of_day}/${mm-1}/${yyyy}
     ${current_dd-3}    set variable    ${dd-3}
     ${dd-3}    convert to integer    ${dd-3}
+    ${mm}    Set Variable if    ${mm}<10    0${mm}    ${mm}
     ${From_current_month}    run key word if    ${dd-3} > 3    set variable    01/${mm}/${yyyy}
     ...    ELSE    set variable    ${today-3}
     ${To_current_month}    run key word if    ${dd-3} > 3    set variable    ${current_dd-3}/${mm}/${yyyy}
