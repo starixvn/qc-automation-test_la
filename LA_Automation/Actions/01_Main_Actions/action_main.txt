@@ -32,8 +32,8 @@ config
     # Set Global Variables
     Set Suite Variable    ${cf_username1}    starix103    #starix103
     Set Suite Variable    ${cf_password1}    1q2w3e4r    #1q2w3e4r
-    Set Suite Variable    ${cf_username}    starix103    # starix101    starix103
-    Set Suite Variable    ${cf_password}    1q2w3e4r    # 123QWEasd    4r3e2w1q
+    Set Suite Variable    ${cf_username}    starix101    # starix101    starix103
+    Set Suite Variable    ${cf_password}    123QWEasd    # 123QWEasd    4r3e2w1q
     # Set Global Variables    LRF
     Set Suite Variable    ${cf_lrf_username}    StarixQC3
     Set Suite Variable    ${cf_lrf_password}    1q2w3e4r
@@ -477,7 +477,7 @@ wait for export file
 wait page loading
     [Documentation]    This action is used to wait for loading page disappear.
     ${ac_state}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'block')]
-    Run Keyword If    '${ac_state}'=='True'    Wait Until Element Is Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'none')]    120s
+    Run Keyword If    '${ac_state}'=='True'    Wait Until Element Is Visible    xpath=//div[@id='msg' and contains(text(),'Loading') and contains(@style,'none')]    150s
 
 wait page settlement loading
     : FOR    ${index}    IN RANGE    1    60
@@ -539,7 +539,7 @@ get before yesterday and last month
     ${yyyy}    run key word if    '${mm}'=='01'    set variable    ${yyyy-1}
     ...    ELSE    set variable    ${yyyy}
     ${no_of_day}    run key word if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' or '${mm-1}'=='10' or '${mm-1}'=='12'    set variable    31
-    ...    ELSE IF    ${mm-1}==02    set variable    28
+    ...    ELSE IF    '${mm-1}'==02    set variable    28
     ...    ELSE    set variable    30
     Comment    ${no_of_day}    Set Variable if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' \ or '${mm-1}'=='10' \ or '${mm-1}'=='12' \ \ \    31    '${mm-1}'=='2'    28
     ...    30
@@ -569,3 +569,34 @@ wait for loading disappear
     \    ${loadingico_exist}    does control exist    xpath=//div[@style="display: block;"]//div[@class='laBlockUi__msg' and contains(text(),'Loading')]
     \    Run Keyword If    '${loadingico_exist}'=='True'    sleep    2s
     \    Exit For Loop If    '${loadingico_exist}'=='False'
+
+get rebate month
+    [Arguments]    ${mm}
+    [Documentation]    This action will return current month have rebate
+    ${mm}    Convert To string    ${mm}
+    : FOR    ${index}    IN RANGE    0    1
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='01'    Set Variable    2
+    \    Exit For Loop If    '${mm}'=='01'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='02'    Set Variable    2
+    \    Exit For Loop If    '${mm}'=='02'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='03'    Set Variable    3
+    \    Exit For Loop If    '${mm}'=='03'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='04'    Set Variable    4
+    \    Exit For Loop If    '${mm}'=='04'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='05'    Set Variable    5
+    \    Exit For Loop If    '${mm}'=='05'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='06'    Set Variable    6
+    \    Exit For Loop If    '${mm}'=='06'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='07'    Set Variable    7
+    \    Exit For Loop If    '${mm}'=='07'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='08'    Set Variable    8
+    \    Exit For Loop If    '${mm}'=='08'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='09'    Set Variable    9
+    \    Exit For Loop If    '${mm}'=='09'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='10'    Set Variable    10
+    \    Exit For Loop If    '${mm}'=='10'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='11'    Set Variable    11
+    \    Exit For Loop If    '${mm}'=='11'
+    \    ${rebate_month}    Run Keyword If    '${mm}'=='12'    Set Variable    12
+    \    Exit For Loop If    '${mm}'=='12'
+    [Return]    ${rebate_month}

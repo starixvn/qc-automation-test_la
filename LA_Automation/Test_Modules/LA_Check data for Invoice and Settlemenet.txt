@@ -202,8 +202,8 @@ TM_07_FUN_INV_Check data in case having min fee group
 
 TM_08_FUN_INV_Check data in case having Rebate
     ####### check rebate for 3Star88 Group
-    ${tm_bill_from}    ${tm_bill_to}    select filter on create invoice    Testing Biller    3star88    Rebate    INV
-    ...    1    Yes
+    ${tm_bill_from}    ${tm_bill_to}    ${mm}    select filter on create invoice    Testing Biller    3star88    Rebate
+    ...    INV    1    Yes
     ${tm_SB}    ${tm_NG}    ${tm_BA}    ${tm_LC}    ${tm_VS}    ${tm_RNG}    ${tm_KN}
     ...    ${tm_AG}    ${tm_GD}    ${tm_Macau}    ${tm_MGCLC}    ${tm_MGCRNG}    ${toal}
     ...    ${tm_discount_amt}    ${tm_Macau_Games}    ${tm_rebate_amt}    ${tm_vs_discount_haifa}    ${tm_sb_discount_haifa}    ${colossusbet}
@@ -491,3 +491,30 @@ TM_15_FUN_INV_Check data for new products
     \    ...    ELSE IF    ${productid} <>17    calculate licensee fee    12Bet    @{product_list}[${i}]
     \    ...    EUR    ${charge_rate_1}    ${minfee_group_name}    ${tm_bill_from}    ${tm_bill_to}
     \    run keyword if    ${productid} <>17    check value equal with approximation    ${tm_product_fee}    ${inv_licensee_fee}
+
+TM_16_Check data in case having Rebate without discount
+    ##### Check rebate for 3Star88 Group
+    ${tm_bill_from}    ${tm_bill_to}    ${mm}    select filter on create invoice    Testing Biller    3star88    Rebate
+    ...    INV    1    Yes
+    ${main_rebate_amt}    get rebate data from main page    3star88
+    ##### Check rebate in Preview page
+    ## Rebate in main area
+    Click Element    xpath=//*[@id='preview-invoice-button']
+    sleep    2s
+    ${a}    Get Window Titles
+    ${title}    Get From List    ${a}    1
+    sleep    2s
+    Select Window    ${title}
+    sleep    2s
+    ${main_preview_rebate}    get text    xpath=//td[@class='total-amount-column']/span
+    ${main_preview_rebate}    change format for number    ${main_preview_rebate}
+    ${rebate_month}    get rebate month    ${mm}
+    ## Rebate in worksheet
+    ${rebate_worksheet_amt}    get text    xpath=//td[@class="ralign green-cell bold-text"][${rebate_month}]
+    ${rebate_worksheet_amt}    change format for number    ${rebate_worksheet_amt}
+    ## Rebate in detail
+    ${rebate_detail_amt}    calculate rebate without discount    3star88    ${tm_bill_from}    ${tm_bill_to}    EUR    3star88
+    #### Compare rebate
+    check value equal with approximation for negative value    ${rebate_worksheet_amt}    ${main_rebate_amt}
+    check value equal with approximation for negative value    ${rebate_worksheet_amt}    ${main_preview_rebate}
+    check value equal with approximation for negative value    ${rebate_detail_amt}    ${rebate_worksheet_amt}

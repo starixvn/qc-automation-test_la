@@ -2410,11 +2410,11 @@ get data for winloss report (AG,Keno)
     [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
     sleep    2s
     submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
-    wait until element is visible    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
-    ${total_trans}    get text    //tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
-    ${Turnover}    get text    //tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[2]
-    ${CustomerWinLoss}    get text    //tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[3]
-    ${LicenseeFee}    get text    //tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[5]
+    wait until element is visible    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[1]
+    ${total_trans}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[2]
+    ${CustomerWinLoss}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[3]
+    ${LicenseeFee}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[5]
     ${total_trans}    change format for number    ${total_trans}
     ${Turnover}    change format for number    ${Turnover}
     ${CustomerWinLoss}    change format for number    ${CustomerWinLoss}
@@ -2532,16 +2532,16 @@ get data for Muay Thai winloss report
     sleep    2s
     submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
     sleep    1s
-    wait until element is visible    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]
-    ${Total_Trans}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
-    ${Turnover}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[2]
-    ${CustomerWL}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[3]
-    ${WLShare}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[4]
-    ${CommLicensee}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[5]
-    ${CommShare}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[6]
-    ${Amt_Licensee}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[7]
-    ${Amt_ThaiPartner}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[8]
-    ${Amt_Income}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[9]
+    wait until element is visible    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[1]
+    ${Total_Trans}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[2]
+    ${CustomerWL}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[3]
+    ${WLShare}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[4]
+    ${CommLicensee}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[5]
+    ${CommShare}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[6]
+    ${Amt_Licensee}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[7]
+    ${Amt_ThaiPartner}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[8]
+    ${Amt_Income}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[9]
     ${Total_Trans}    change format for number    ${Total_Trans}
     ${Turnover}    change format for number    ${Turnover}
     ${CustomerWL}    change format for number    ${CustomerWL}
@@ -2560,13 +2560,13 @@ get data for Super live winloss report
     [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
     sleep    2s
     submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
-    wait until element is visible    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
-    ${total_trans}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
-    ${Turnover}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[2]
-    ${LicenseeWL}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[4]
-    ${LicenseeFee}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[5]
-    ${PayToSupplier}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[6]
-    ${NetIncome}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[7]
+    wait until element is visible    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[1]
+    ${total_trans}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[2]
+    ${LicenseeWL}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[4]
+    ${LicenseeFee}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[5]
+    ${PayToSupplier}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[6]
+    ${NetIncome}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[7]
     ${total_trans}    change format for number    ${total_trans}
     ${Turnover}    change format for number    ${Turnover}
     ${LicenseeWL}    change format for number    ${LicenseeWL}
@@ -2626,13 +2626,13 @@ get data for Microgaming Win Loss (GMT - 4)
     [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
     sleep    2s
     submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
-    wait until element is visible    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
-    ${total_trans}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[1]
-    ${Turnover}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[2]
-    ${LicenseeWinLoss}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[3]
-    ${ProgressiveContribution}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[5]
-    ${ProgressivePayout}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[6]
-    ${ProgressiveFee}    get text    xpath=//tr[@class='grand-total-row first-row']/td[contains(text(),'EUR')]/following::td[8]
+    wait until element is visible    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[1]
+    ${total_trans}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[1]
+    ${Turnover}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[2]
+    ${LicenseeWinLoss}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[3]
+    ${ProgressiveContribution}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[5]
+    ${ProgressivePayout}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[6]
+    ${ProgressiveFee}    get text    xpath=//td[@class='text-center laTable__cell laTable__cell-grandTotal' and contains(text(),'EUR')]/following::td[8]
     ${total_trans}    change format for number    ${total_trans}
     ${Turnover}    change format for number    ${Turnover}
     ${LicenseeWinLoss}    change format for number    ${LicenseeWinLoss}
@@ -2670,8 +2670,8 @@ submit filter for MCG from licensee win loss report
     #Product
     click element    xpath=//*[@id='product-option']
     click element    xpath=//div[text()='All']
-    click element    xpath=//div[text()='Microgaming - Live Casino']    # Microgaming - Live Casino
-    click element    xpath=//div[text()='Microgaming - RNG Casino']    # Microgaming - RNG Casino
+    click element    xpath=//div[text()='Microgaming Live Casino']    # Microgaming - Live Casino
+    click element    xpath=//div[text()='Microgaming RNG Casino']    # Microgaming - RNG Casino
     click element    xpath=//*[@class='laForm__label text-normal']/input[@value='${filter}']
     #Currency
     click element    xpath=//*[@id='ddl-base-currency']

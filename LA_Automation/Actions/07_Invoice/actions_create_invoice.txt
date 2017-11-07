@@ -6,6 +6,7 @@ Resource          ../../Interfaces/01_Main_Interfaces/interface_main.txt
 Resource          ../../Interfaces/07_Invoice/interface_settlement_report.txt
 Resource          ../../Actions/07_Invoice/actions_settlement_report.txt
 Resource          ../08_Compare_data/Compare_LA_data_detailed.txt
+Library           String
 
 *** Keywords ***
 add new biller
@@ -104,7 +105,7 @@ select filter on create invoice
     ### Confirm pop up, In case billing date is not full month
     ${is_popup}    run keyword and return status    Element Should Be Visible    xpath=//div/*/span[contains(text(),'Ok')]
     run keyword if    '${is_popup}'=='True'    click element    xpath=//div/*/span[contains(text(),'Ok')]
-    [Return]    ${fromdate}    ${todate}
+    [Return]    ${fromdate}    ${todate}    ${mm}
 
 get invoice data of each product
     [Arguments]    ${ac_payer_name}
@@ -255,6 +256,13 @@ get licensee setting
     ${is_fishingworld}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'Fishing World')]
     ${FishingWorld_rate}    run keyword if    '${is_fishingworld}'=='True'    get text    xpath=//td[contains(text(),'Fishing World')]/following::td[2]
     ${FishingWorld_rate}    run keyword if    '${is_fishingworld}'=='True'    remove string    ${FishingWorld_rate}    %
+    #Add VS2, Lottery
+    ${is_vs2}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'Virtual Sports 2')]
+    ${output_vs_rate2}    run keyword if    '${is_vs2}'=='True'    get text    xpath=//td[contains(text(),'Virtual Sports 2')]/following-sibling::td[contains(text(),'%')]
+    ${output_vs_rate2}    run keyword if    '${is_vs2}'=='True'    remove string    ${output_vs_rate2}    %
+    ${is_lottery}    Run Keyword And Return Status    get text    xpath=//td[contains(text(),'Lottery')]
+    ${Lottery_rate}    run keyword if    '${is_lottery}'=='True'    get text    xpath=//td[contains(text(),'Lottery')]/following::td[2]
+    ${Lottery_rate}    run keyword if    '${is_lottery}'=='True'    remove string    ${Lottery_rate}    %
     click element    xpath=//span[@class="icon-edit"]
     wait for loading disappear
     ${is_discount}    get text    xpath=//*[@id='discount-id']
@@ -267,6 +275,7 @@ get licensee setting
     ...    ${output_ba_rate}    ${output_lc_rate}    ${output_vs_rate}    ${output_rng_rate}    ${output_keno_rate}    ${output_ag_rate}
     ...    ${output_gd_rate}    ${output_macau_rate}    ${output_bettrade_rate}    ${output_mgclc_generic_rate}    ${output_mgclc_branded_rate}    ${output_mgcrng_generic_rate}
     ...    ${output_mgcrng_branded_rate}    ${output_macau_games_rate}    ${CB_comm_rate}    ${CB_cash_share_rate}    ${Allbet_rate}    ${FishingWorld_rate}
+    ...    ${output_vs_rate2}    ${Lottery_rate}
 
 select filter on manage payer setting
     [Arguments]    ${ac_licensee_name}    ${ac_discount_name}    ${ac_min_fee_group_name}    ${ac_rebate_name}
@@ -710,8 +719,8 @@ calculate rebate
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
-    ...    ${payer_name}
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    ${tm_vs2_rate}
+    ...    ${tm_lottery_rate}    get licensee setting    ${payer_name}
     ${total_amt}    set variable    0
     ## Calculate licensee fee based on product list of licensee have rebate
     : FOR    ${i}    IN RANGE    0    ${number_of_product}
@@ -742,12 +751,14 @@ get rate from selected product
     ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
     ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
     ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
-    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    get licensee setting
-    ...    ${licensee_name}
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    ${tm_vs2_rate}
+    ...    ${lottery_rate}    get licensee setting    ${licensee_name}
     ${output_rate}    set variable if    '${product_name}'=='Sportsbook'    ${tm_sb_rate}    '${product_name}'== 'Number Game'    ${tm_ng_rate}    '${product_name}'=='BA'
     ...    ${tm_ba_rate}    '${product_name}'=='Live Casino'    ${tm_lc_rate}    '${product_name}'== 'Virtual Sports'    ${tm_vs_rate}    '${product_name}'=='RNG Casino'
     ...    ${tm_rng_rate}    '${product_name}'=='Keno'    ${tm_keno_rate}    '${product_name}'=='AG Casino'    ${tm_ag_rate}    '${product_name}'=='Gold Deluxe'
-    ...    ${tm_gd_rate}    '${product_name}'=='Macau'    ${tm_macau_rate}    '${product_name}'=='Macau Games'    ${tm_macau_games_rate}
+    ...    ${tm_gd_rate}    '${product_name}'=='Macau'    ${tm_macau_rate}    '${product_name}'=='Macau Games'    ${tm_macau_games_rate}    '${product_name}'=='Allbet'
+    ...    ${allbet_rate}    '${product_name}'=='Fishing World'    ${fishingworld_rate}    '${product_name}'== 'Virtual Sports 2'    ${tm_vs2_rate}    '${product_name}'== 'Lottery'
+    ...    ${lottery_rate}
     [Return]    ${output_rate}
 
 get total days in month
@@ -1290,6 +1301,7 @@ get exchange rate
 Convert month from number to text
     [Arguments]    ${mm}
     [Documentation]    Input month such as Mar ==> \ return 03
+    ${mm}    Convert To Integer    ${mm}
     : FOR    ${i}    IN RANGE    0    1
     \    ${mm}    Set Variable if    ${mm}==1    January    ${mm}
     \    Exit For Loop If    '${mm}'=='January'
@@ -1437,3 +1449,44 @@ get productid from excel
     \    ${productid}    Run Keyword If    '${productid}' <> 'None'    convert to integer    ${productid}
     \    exit for loop if    '${product_name_excel}'=='${product_name}'
     [Return]    ${productid}
+
+get rebate data from main page
+    [Arguments]    ${ac_payer_name}
+    [Documentation]    This action will return rebate data get from invoice page
+    sleep    3s
+    ${is_no_data}    Run Keyword And Return Status    get text    xpath=//td[@class="text-center no-info-column"]
+    run keyword if    '${is_no_data}'=='True'    pass execution    There is no data
+    log    ${ac_payer_name}
+    sleep    2s
+    ${total}    get text    xpath=//*[@id='billing-table']/tbody/tr[5]/td[3]/span[2]/span
+    ${total}    change format for number    ${total}
+    [Return]    ${total}
+
+calculate rebate without discount
+    [Arguments]    ${rebate_group_name}    ${bill_from}    ${bill_to}    ${billing_currency}    ${payer_name}
+    [Documentation]    This action used to calculate rebate amt without discount
+    ## get rebate setting
+    ${product_list}    create list
+    ${product_list}    ${number_of_product}    ${rebate_rate}    ${payer_list}    ${rebate_from_date}    ${rebate_to_date}    get rebate setting
+    ...    ${rebate_group_name}
+    ## get licensee setting
+    ${tm_minfee_group_name}    ${tm_discount_name}    ${tm_rebate_name}    ${tm_billing_currency}    ${tm_sb_rate}    ${tm_ng_rate}    ${tm_ba_rate}
+    ...    ${tm_lc_rate}    ${tm_vs_rate}    ${tm_rng_rate}    ${tm_keno_rate}    ${tm_ag_rate}    ${tm_gd_rate}
+    ...    ${tm_macau_rate}    ${tm_bettrade_rate}    ${tm_mgclc_generic_rate}    ${tm_mgclc_branded_rate}    ${tm_mgcrng_generic_rate}    ${tm_mgcrng_branded_rate}
+    ...    ${tm_macau_games_rate}    ${colossusbet_comm_rate}    ${colossusbet_cash_rate}    ${allbet_rate}    ${fishingworld_rate}    ${tm_vs2_rate}
+    ...    ${tm_lottery_rate}    get licensee setting    ${payer_name}
+    ${total_amt}    set variable    0
+    ## Calculate licensee fee based on product list of licensee have rebate
+    : FOR    ${i}    IN RANGE    0    ${number_of_product}
+    \    log    @{product_list}[${i}]
+    \    ${product_rate}    get rate from selected product    ${payer_name}    @{product_list}[${i}]
+    \    ${amt_fee}    run keyword if    '${product_rate}'<> 'None'    calculate licensee fee    ${payer_name}    @{product_list}[${i}]
+    \    ...    ${billing_currency}    ${product_rate}    ${tm_minfee_group_name}    ${bill_from}    ${bill_to}
+    \    ...    ELSE    set variable    0
+    \    ${total_amt}    evaluate    ${total_amt} + ${amt_fee}
+    ## Checkwhether rebate setting is available to apply
+    ${is_apply}    is apply setting    ${rebate_from_date}    ${rebate_to_date}    ${bill_from}    ${bill_to}
+    ## Calculate rebate, rebate= total licensee fee of products have applied rebate
+    ${rebate_amt}    run keyword if    '${is_apply}'=='True'    evaluate    - ${total_amt} * ${rebate_rate}*0.01
+    ...    ELSE    set variable    0
+    [Return]    ${rebate_amt}

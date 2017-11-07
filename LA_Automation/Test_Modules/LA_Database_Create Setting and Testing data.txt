@@ -30,8 +30,8 @@ TC02_Create Setting for any products
     ...    # Rd Rate    ## Min amt    ## Max amt    Is_Lic_Winlost_Charge    Is_lic_Comm_charge    Is_Lic_Service_charge
     ...    # Is_3rd_Winlost_Charge    Is_3rd_Comm_Charge    Is_3rd_Service_Charge    Is_3rd_Profit_Charge    Is_3rd_Rebate_Charge    3rdFromdate
     ...    # 3rdTodate
-    ins_data_setting    11    14    1    '20160101'    '20500101'    0.15
-    ...    0.05    NULL    NULL    1    0    0
+    ins_data_setting    0    337    1    '20160101'    '20500101'    0.15
+    ...    0    NULL    NULL    1    0    0
     ...    0    0    1    0    1    '20151201'
     ...    '20500101'
 
@@ -139,7 +139,7 @@ TC_12_Create data for SB on Deposit Licensee
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     ${fromdate}    change db date format    ${from_last_month}
     ${todate}    change db date format    ${to_last_month}
-    ins_data_testing    0    14    ${fromdate}    ${todate}    6    1
+    ins_data_testing    0    337    ${fromdate}    ${todate}    6    1
     ...    1    0
 
 TC_13_Create Setting on LC for Deposit Licensee
@@ -177,7 +177,7 @@ TC_16_Create Data on VS for Deposit Licensee
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     ${fromdate}    change db date format    ${from_last_month}
     ${todate}    change db date format    ${to_last_month}
-    ins_data_testing    5    14    ${fromdate}    ${todate}    51    1
+    ins_data_testing    5    337    ${fromdate}    ${todate}    3    1
     ...    1    0
 
 TC_17_Create Setting on RNG Casino for Deposit Licensee
@@ -196,7 +196,7 @@ TC_18_Create Data of RNG Casino for Deposit Licensee
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     ${fromdate}    change db date format    ${from_last_month}
     ${todate}    change db date format    ${to_last_month}
-    ins_data_testing    6    14    ${fromdate}    ${todate}    6    1
+    ins_data_testing    6    337    ${fromdate}    ${todate}    6    1
     ...    1    0
 
 TC_19_Create Setting for Keno on Deposit Licensee

@@ -37,16 +37,19 @@ select licensee after login lrf
 navigate left menu
     [Arguments]    ${mainmenu}    ${submenu}
     Select Window
-    Select Frame    menu
+    Comment    Select Frame    menu
     # Click Main Menu label
-    ${ac_submenu_status}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//*[contains(@id,'child-menu')][text()='${submenu}']
+    ${ac_submenu_status}=    Run Keyword And Return Status    Element Should Be Visible    xpath=//a[text()='${submenu}']    # Old: xpath=//*[contains(@id,'child-menu')][text()='${submenu}']
+    ${ac_submenu_status}=    Set Variable If    '${mainmenu}'=='FORECAST' and '${submenu}'=='Handicap/Over Under/Live' and '${ac_submenu_status}'=='True'    False    ${ac_submenu_status}
     Run Keyword If    '${ac_submenu_status}'!='True'    Click Element    xpath=//span[contains(text(),'${mainmenu}')]
     # Click Sub Menu label
     # Handle special case: click duplicated labels "Handicap/Over Under/Live"
     ${ac_status}=    Evaluate    '${mainmenu}'=='FORECAST' and '${submenu}'=='Handicap/Over Under/Live'
-    Run Keyword If    '${ac_status}'=='True'    Click Element    xpath=//td/a[contains(text(),'${submenu}') and contains(@href,'Forecast')]
-    # Handle normal case
-    Run Keyword If    '${ac_status}'!='True'    Click Element    xpath=//td/a[text()='${submenu}']
+    Run Keyword If    '${ac_status}'=='True'    Click Element    xpath=//a[contains(@href,'HandicapOverUnderForecast')]    #Old: xpath=//td/a[contains(text(),'${submenu}') and contains(@href,'Forecast')]
+    sleep    20s
+    Click Element    xpath=//a[text()='${submenu}']
+    Comment    # Handle normal case
+    Comment    Run Keyword If    '${ac_status}'!='True'    Click Element    xpath=//a[text()='${submenu}']    #Old: xpath=//td/a[text()='${submenu}']
     Capture Page Screenshot
     Unselect Frame
     wait page loading
@@ -795,15 +798,14 @@ get data for Microgaming Win Loss in LRF
 
 select licensee from list
     [Arguments]    ${licensee_name}
-    ${is_after_login}    run keyword and return status    element should be visible    xpath=//div[@class="sel_licensee_title"]
+    ${is_after_login}    run keyword and return status    element should be visible    xpath=//div[contains(text(),'Please select a Licensee')]    # Old xpath=//div[@class="sel_licensee_title"]
     run keyword if    '${is_after_login}'=='True'    Wait Until Page Contains Element    xpath=//a[contains(text(),'${licensee_name}')]    10s
     run keyword if    '${is_after_login}'=='True'    Click Element    xpath=//a[contains(text(),'${licensee_name}')]
     wait page loading
     unselect frame
-    select frame    header
-    click element    xpath=//*[@id='ddlLicensee']
-    double click element    xpath=//*[@id='ddlLicensee']/option[contains(text(),'${licensee_name}')]
-    Comment    click element    xpath=//*[@id='ddlLicensee']/option[contains(text(),'${licensee_name}')]
+    Comment    select frame    Top Window
+    click element    xpath=//*[@id='select-list-ddlLicensee']    # Old: xpath=//*[@id='ddlLicensee']
+    double click element    xpath=//*[@id='select-list-ddlLicensee-result-container']/div/div[2]/ul/li[contains(text(),'${licensee_name}')]    # Old: xpath=//*[@id='ddlLicensee']/option[contains(text(),'${licensee_name}')]    //*[@id='select-list-ddlLicensee-result-container']/div/div[2]/ul/li[contains(text(),'asiabet88')]
     unselect frame
     sleep    3s
     Comment    select frame    main

@@ -426,7 +426,7 @@ TC_12_Create Setting for Gold Deluxe
     ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_base_currencyID3]    None
     ${new_third_string}    replace string in XML    ${new_third_string}    [3rd_chargetype3]    None    ###    ##ProductID
     ...    ##FromPartyID    ##ToPartyID    ##LicSetting    ##ThirdPartySetting    ##Fromdate    # Todate
-    createSettingByXML    11    14    1    ${new_lic_string}    ${new_third_string}    '20170101'
+    createSettingByXML    11    15    1    ${new_lic_string}    ${new_third_string}    '20170101'
     ...    '20500101'
 
 TC_13_Create Macau Setting
