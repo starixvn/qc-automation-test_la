@@ -175,17 +175,14 @@ TM_03_FUN_Compare data Bettrade
 TM_04_FUN_Compare CB data
     [Documentation]    _ This function used to compare CB for last month
     ${tc_licensees}    Set Variable    12Bet
-    ## Get data from settlement for Colossusbet
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_MemberWinning}    ${Settlement_MemberCashout}    ${Settlement_CashoutShare}    ${Settlement_CommShare}    ${Settlement_Equivalent}
     ...    get colossus bet data from settlement report    ${tc_licensees}    ${from_last_month}    ${to_last_month}    Colossus Bets    EUR
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    ${tc_licensees}    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_CB_Fee}
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Colossus Bet
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
     ## Get data from Colossusbet WL report
     ${total_trans}    ${turnover}    ${MemberPrize}    ${MemberCashout}    ${Margin_amt}    get data from Colossusbet WL in LA    ${tc_licensees}
     ...    Yes    EUR    ${from_last_month}    ${to_last_month}
@@ -209,25 +206,21 @@ TM_04_FUN_Compare CB data
 
 TM_05_FUN_Compare GD data
     ${tc_licensees}    Set Variable    12Bet
-    ## Compare data for 12Bet
+    ##### Compare internal LA
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
+    ## Get data from GD WL report
     ${total_trans}    ${turnover}    ${valid_bet_amt}    ${customer_wl}    ${licensee_fee}    ${service_charge}    ${rebate_comm}
     ...    ${pay_to_supplier}    get data in gold deluxe win lost report    ${tc_licensees}    Yes    EUR    ${from_last_month}
     ...    ${to_last_month}
-    ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_customer_wl}    ${Settlement_licensee_fee}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
+    ## Get data from Settlement report
+    ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    Gold Deluxe    EUR
     check value equal with approximation    ${total_trans}    ${Settlement_totaltrans}
     check value equal with approximation    ${turnover}    ${Settlement_Turnover}
-    check value equal with approximation    ${customer_wl}    ${Settlement_customer_wl}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_licensee_fee}    ${ByProduct_GD_Fee}
-    ${Settlement_licensee_fee}    set variable if    ${Settlement_licensee_fee} < 0    0    ${Settlement_licensee_fee}
-    check value equal with approximation    ${licensee_fee}    ${Settlement_licensee_fee}
+    check value equal with approximation    ${customer_wl}    ${Settlement_CustomerWinLoss}
+    ${Settlement_Equivalent}    set variable if    ${Settlement_Equivalent} < 0    0    ${Settlement_Equivalent}
+    check value equal with approximation    ${licensee_fee}    ${Settlement_Equivalent}
     ${tm_service_charge}    evaluate    -${customer_wl}*5*0.01
     ${tm_pay_to_supplier}    evaluate    ${tm_service_charge} - ${rebate_comm}
     ${tm_pay_to_supplier}    set variable if    ${tm_pay_to_supplier} < 0    0    ${tm_pay_to_supplier}
@@ -235,8 +228,17 @@ TM_05_FUN_Compare GD data
     check value equal with approximation    ${tm_pay_to_supplier}    ${pay_to_supplier}
     should be true    ${total_trans} > 0
     should be true    ${turnover} >0
-    ## Check data for Credit licensees
-    Comment    ${today-3}    ${from_last_month}    ${to_last_month}    get before yesterday and last month
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Gold Deluxe
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    Gold Deluxe
+    ...    EUR    ${from_last_month}    ${to_last_month}    1
+    check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
+    check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
+    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
+    #### Check data for Credit licensees
     ${total_trans}    ${turnover}    ${valid_bet_amt}    ${customer_wl}    ${licensee_fee}    ${service_charge}    ${rebate_comm}
     ...    ${pay_to_supplier}    get data in gold deluxe win lost report    Credit Licensees    Yes    EUR    ${from_last_month}
     ...    ${to_last_month}
@@ -261,68 +263,69 @@ TM_05_FUN_Compare GD data
 
 TM_06_FUN_Compare Allbet data
     ${tc_licensees}    Set Variable    12Bet
-    ## Check data for credit licensees
+    #### Check data for credit licensees
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
-    Comment    ${total_trans}    ${turnover}    ${valid_bet_amt}    ${customer_wl}    ${service_charge}    ${rebate_comm}
-    ...    ${pay_to_supplier}    get data for Allbet from winlost report    Credit Licensees    Yes    EUR    ${from_last_month}
-    ...    ${to_last_month}
-    Comment    ${tm_service_charge}    evaluate    -${customer_wl}*5*0.01
-    Comment    ${tm_rebate_comm}    evaluate    ${valid_bet_amt}*0.01*5*0.01
-    Comment    ${tm_pay_to_supplier}    evaluate    ${tm_service_charge} - ${rebate_comm}
-    Comment    check value equal with approximation    ${tm_service_charge}    ${service_charge}
-    Comment    check value equal with approximation    ${tm_pay_to_supplier}    ${pay_to_supplier}
-    Comment    should be true    ${total_trans} > 0
-    Comment    should be true    ${turnover} >0
-    Comment    should be true    ${valid_bet_amt} > 0
-    Comment    ### Compare data for 12bet
-    Comment    ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_customer_wl}    ${Settlement_licensee_fee}    get data for selected product in settlement report    ${tc_licensees}
-    ...    ${from_last_month}    ${to_last_month}    Allbet    EUR
-    Comment    Comment    ${Settlement_licensee_fee}    set variable if    ${Settlement_licensee_fee} <0    0    ${Settlement_licensee_fee}
-    Comment    Comment    ## Get data from Win Loss By Product report
-    Comment    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}
-    ...    ${ByProduct_VS_Fee}    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}
-    ...    ${ByProduct_MCG_LC_Fee}    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}
-    ...    ${ByProduct_CB_Fee}    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}
-    ...    ${to_last_month}
-    Comment    Comment    check value equal with approximation    ${Settlement_licensee_fee}    ${ByProduct_AB_Fee}
+    ${total_trans}    ${turnover}    ${valid_bet_amt}    ${customer_wl}    ${service_charge}    ${rebate_comm}    ${pay_to_supplier}
+    ...    get data for Allbet from winlost report    Credit Licensees    Yes    EUR    ${from_last_month}    ${to_last_month}
+    ${tm_service_charge}    evaluate    -${customer_wl}*5*0.01
+    ${tm_rebate_comm}    evaluate    ${valid_bet_amt}*0.01*5*0.01
+    ${tm_pay_to_supplier}    evaluate    ${tm_service_charge} - ${rebate_comm}
+    check value equal with approximation    ${tm_service_charge}    ${service_charge}
+    check value equal with approximation    ${tm_pay_to_supplier}    ${pay_to_supplier}
+    should be true    ${total_trans} > 0
+    should be true    ${turnover} >0
+    should be true    ${valid_bet_amt} > 0
+    ##################
+    #### Compare data for 12bet
+    ## Get data from Settlement report
+    ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
+    ...    ${to_last_month}    Allbet    EUR
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    AllBet
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    AllBet
+    ...    EUR    ${from_last_month}    ${to_last_month}    1
+    check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
+    check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
+    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
     ##################
     ## get data Allbet from LRF
-    switch browser    LRF PRO
-    select licensee from list    12Bet
-    navigate left menu    REPORTS    Licensee Win Loss
-    submit filter by selected date range in lrf    ${from_last_month}    ${to_last_month}    AllBet    1
-    ${lrf_turnover}    ${lrf_total_trans}    ${lrf_member_wl}    get data LRF from Licensee Win Loss
-    ${lrf_turnover}    change format for number    ${lrf_turnover}
-    ${lrf_total_trans}    change format for number    ${lrf_total_trans}
-    ${lrf_member_wl}    change format for number    ${lrf_member_wl}
-    check value equal with approximation    ${lrf_turnover}    ${Settlement_Turnover}
-    check value equal with approximation    ${lrf_total_trans}    ${Settlement_totaltrans}
-    check value equal with approximation    ${lrf_member_wl}    ${Settlement_customer_wl}
+    Comment    switch browser    LRF PRO
+    Comment    select licensee from list    12Bet
+    Comment    navigate left menu    REPORTS    Licensee Win Loss
+    Comment    submit filter by selected date range in lrf    ${from_last_month}    ${to_last_month}    AllBet    1
+    Comment    ${lrf_turnover}    ${lrf_total_trans}    ${lrf_member_wl}    get data LRF from Licensee Win Loss
+    Comment    ${lrf_turnover}    change format for number    ${lrf_turnover}
+    Comment    ${lrf_total_trans}    change format for number    ${lrf_total_trans}
+    Comment    ${lrf_member_wl}    change format for number    ${lrf_member_wl}
+    Comment    check value equal with approximation    ${lrf_turnover}    ${Settlement_Turnover}
+    Comment    check value equal with approximation    ${lrf_total_trans}    ${Settlement_totaltrans}
+    Comment    check value equal with approximation    ${lrf_member_wl}    ${Settlement_CustomerWinLoss}
 
 TM_07_FUN_Compare Sportsbook data
     ${tc_licensees}    Set Variable    12Bet
-    #### Compare LA internal
-    ## Get data from settlement for Sportsbook
+    ##### Compare internal LA
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    Sportsbook    EUR
     ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.15
     check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_SB_Fee}
-    ## Get data from Licensee Win Loss for Sportsbook
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    Sportsbook
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Sportsbook
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    Sportsbook
     ...    EUR    ${from_last_month}    ${to_last_month}    1
     check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
+    ## Get data from Currency Win Loss report
     ##################
     Comment    ## get data Sportsbook from LRF
     Comment    switch browser    LRF PRO
@@ -336,38 +339,31 @@ TM_07_FUN_Compare Sportsbook data
 TM_08_FUN_Compare Number Game data
     ${tc_licensees}    Set Variable    12Bet
     #### Compare LA internal
-    ## Get data from settlement for Number Game (in EUR)
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    Number Game    EUR
     ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.15
     check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_NG_Fee}
-    ## Get data from Licensee Win Loss for Number Game
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    Number Game
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Number Game
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    Number Game
     ...    EUR    ${from_last_month}    ${to_last_month}    1
     check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
-    Comment    ## Get data from settlement for Number Game (in GBP)
-    Comment    ${Settlement_Turnover_GBP}    ${Settlement_totaltrans_GBP}    ${Settlement_CustomerWinLoss_GBP}    ${Settlement_Equivalent_GBP}    get data for selected product in settlement report    12Bet
-    ...    ${from_last_month}    ${to_last_month}    Number Game    GBP
-    Comment    ${Settlement_Equivalent_GBP}    set variable if    ${Settlement_Equivalent_GBP}<0    0    ${Settlement_Equivalent_GBP}
-    Comment    ## Get data from Number Game WL report
-    Comment    navigate menu    Win Loss Report    Number Game Win Loss
-    Comment    ${TotalTrans}    ${Turnover}    ${GrossWin}    ${AmountDueTo}    get data from winloss report (NG, LC)    12Bet
-    ...    ${from_last_month}    ${to_last_month}    Last Month
-    Comment    check value equal with approximation    ${Settlement_Turnover_GBP}    ${Turnover}
-    Comment    check value equal with approximation    ${Settlement_totaltrans_GBP}    ${TotalTrans}
-    Comment    check value equal with approximation for negative value    ${Settlement_CustomerWinLoss_GBP}    ${GrossWin}
-    Comment    check value equal with approximation    ${Settlement_Equivalent_GBP}    ${AmountDueTo}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
+    ## Get data from Number Game WL report
+    navigate menu    Win Loss Report    Number Game Win Loss
+    ${TotalTrans}    ${Turnover}    ${GrossWin}    ${LicensingFee}    get data from winloss report (NG, LC)    12Bet    ${from_last_month}
+    ...    ${to_last_month}    Last Month
+    check value equal with approximation    ${Settlement_Turnover}    ${Turnover}
+    check value equal with approximation    ${Settlement_totaltrans}    ${TotalTrans}
+    check value equal with approximation for negative value    ${Settlement_CustomerWinLoss}    ${GrossWin}
+    check value equal with approximation    ${Settlement_Equivalent}    ${LicensingFee}
     ##################
     Comment    ## get data Number Game from LRF
     Comment    switch browser    LRF PRO
@@ -381,26 +377,23 @@ TM_08_FUN_Compare Number Game data
 TM_10_FUN_Compare Virtual Sport data
     ${tc_licensees}    Set Variable    12Bet
     #### Compare LA internal
-    ## Get data from settlement for Virtual Sports
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    Virtual Sports    EUR
     ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.15
     check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_VS_Fee}
-    ## Get data from Licensee Win Loss for Virtual Sports
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    Virtual Sports
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Virtual Sports
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    Virtual Sports
     ...    EUR    ${from_last_month}    ${to_last_month}    1
     check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
     ## Get data from Virtual Sports Win Loss report
     navigate menu    Win Loss Report    Virtual Sports Win Loss
     ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data from Virtual Sports winloss report    ${tc_licensees}    ${from_last_month}
@@ -423,29 +416,26 @@ TM_10_FUN_Compare Virtual Sport data
 TM_11_FUN_Compare Keno data
     ${tc_licensees}    Set Variable    12Bet
     #### Compare LA internal
-    ## Get data from settlement for Keno
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    Keno    EUR
     ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.1
     check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_Keno_Fee}
-    ## Get data from Licensee Win Loss for Keno
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    Keno
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Keno
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    Keno
     ...    EUR    ${from_last_month}    ${to_last_month}    1
     check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
     ## Get data from Keno WL report
     navigate menu    Win Loss Report    Keno Win Loss
-    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno)    ${tc_licensees}    Yes
+    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno,LT,VS2)    ${tc_licensees}    Yes
     ...    EUR    ${from_last_month}    ${to_last_month}
     check value equal with approximation    ${Settlement_Turnover}    ${turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${total_trans}
@@ -465,29 +455,26 @@ TM_11_FUN_Compare Keno data
 TM_12_FUN_Compare AG Casino data
     ${tc_licensees}    Set Variable    12Bet
     #### Compare LA internal
-    ## Get data from settlement for AG Casino
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    AG Casino    EUR
     ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.11
     check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_AG_Casino_Fee}
-    ## Get data from Licensee Win Loss for AG Casino
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    AG Casino
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    AG Casino
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    AG Casino
     ...    EUR    ${from_last_month}    ${to_last_month}    1
     check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
     ## Get data from AG Casino Win Loss report
     navigate menu    Win Loss Report    AG Casino Win Loss
-    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno)    ${tc_licensees}    Yes
+    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno,LT,VS2)    ${tc_licensees}    Yes
     ...    EUR    ${from_last_month}    ${to_last_month}
     check value equal with approximation    ${Settlement_Turnover}    ${turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${total_trans}
@@ -506,23 +493,26 @@ TM_12_FUN_Compare AG Casino data
 
 TM_13_FUN_Compare Fishing World data
     ${tc_licensees}    Set Variable    12Bet
-    ## Compare data for 12Bet
-    ## Get data from settlement for Fishing World
+    #### Compare LA internal
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    Fishing World    EUR
     ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.08
     check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
-    Comment    ${Settlement_Equivalent}    set variable if    ${Settlement_Equivalent} < 0    0    ${Settlement_Equivalent}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_FW_Fee}
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Fishing World
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    Fishing World
+    ...    EUR    ${from_last_month}    ${to_last_month}    1
+    check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
+    check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
+    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
     ## Get data from Fishing World WL report
-    navigate menu    Win Loss Report (3rd)    Fishing World Win Loss
+    navigate menu    Win Loss Report (3rd)    Fishing World Win Loss (GMT +8)
     ${Total_Trans}    ${Turnover}    ${CustomerWinLoss}    ${LicenseeWinLoss}    ${LicenseeFee}    ${PayToSupplier}    ${NetIncome}
     ...    get data for FW winloss report    ${tc_licensees}    Yes    EUR    ${from_last_month}    ${to_last_month}
     ${LicenseeFee_Formula}    evaluate    ${LicenseeWinLoss}*0.08
@@ -531,10 +521,9 @@ TM_13_FUN_Compare Fishing World data
     check value equal with approximation    ${PayToSupplier}    ${PayToSupplier_Formula}
     ${NetIncome_Formula}    evaluate    ${LicenseeFee_Formula}-${PayToSupplier_Formula}
     check value equal with approximation    ${NetIncome}    ${NetIncome_Formula}
-    Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${CustomerWinLoss}
     ############# Compare data for FDL
     ## Get data from Fishing World WL report
-    navigate menu    Win Loss Report (3rd)    Fishing World Win Loss
+    navigate menu    Win Loss Report (3rd)    Fishing World Win Loss (GMT +8)
     ${Total_Trans_Credit}    ${Turnover_Credit}    ${CustomerWinLoss_Credit}    ${LicenseeWinLoss_Credit}    ${LicenseeFee_Credit}    ${PayToSupplier_Credit}    ${NetIncome_Credit}
     ...    get data for FW winloss report    FDL    Yes    EUR    ${from_last_month}    ${to_last_month}
     ${LicenseeFee_Credit_Formula}    Set Variable    0
@@ -570,26 +559,23 @@ TM_14_FUN_Compare NG2 data
 TM_15_FUN_Compare Macau Games data
     ${tc_licensees}    Set Variable    12Bet
     #### Compare LA internal
-    ## Get data from settlement for Macau Games
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    Macau Games    EUR
     ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.07
     check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_Macaugame_Fee}
-    ## Get data from Licensee Win Loss for Macau Games
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    Macau Games
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Macau Games
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    Macau Games
     ...    EUR    ${from_last_month}    ${to_last_month}    1
     check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
     ##################
     Comment    ## get data Macau Games from LRF
     Comment    switch browser    LRF PRO
@@ -603,63 +589,29 @@ TM_15_FUN_Compare Macau Games data
 TM_16_FUN_Compare RNG Casino data
     ${tc_licensees}    Set Variable    12Bet
     #### Compare LA internal
-    ## Get data from settlement for RNG Casino
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    RNG Casino    EUR
     ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.07
     check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_RNG_Casino_Fee}
-    ## Get data from Licensee Win Loss for RNG Casino
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    RNG Casino
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    RNG Casino
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    RNG Casino
     ...    EUR    ${from_last_month}    ${to_last_month}    1
     check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
     ##################
     Comment    ## get data RNG Casino from LRF
     Comment    switch browser    LRF PRO
     Comment    select licensee from list    12Bet
     Comment    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}    get data from licensee win loss in LRF    ${from_last_month}    ${to_last_month}
     ...    RNG Casino    1
-    Comment    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
-    Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
-    Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
-
-TM_17_FUN_Compare Micro gaming – Live Casino data
-    ${tc_licensees}    Set Variable    12Bet
-    #### Compare LA internal
-    ## Get data from settlement for Micro gaming – Live Casino
-    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
-    switch browser    LA PRO
-    ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
-    ...    ${to_last_month}    Microgaming Live Casino    EUR
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_MCG_LC_Fee}
-    ## Get data from Licensee Win Loss for Micro gaming – Live Casino
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    Microgaming - Live Casino
-    ...    EUR    ${from_last_month}    ${to_last_month}    1
-    check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
-    check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
-    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
-    ##################
-    Comment    ## get data Micro gaming – Live Casino from LRF
-    Comment    switch browser    LRF PRO
-    Comment    select licensee from list    12Bet
-    Comment    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}    get data from licensee win loss in LRF    ${from_last_month}    ${to_last_month}
-    ...    Microgaming-Live Casino    1
     Comment    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
     Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
     Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
@@ -672,21 +624,18 @@ TM_18_FUN_Compare Micro gaming – RNG Casino data
     switch browser    LA PRO
     ${total_trans}    ${Turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for performance in details report    ${tc_licensees}    Microgaming - RNG Casino
     ...    EUR    ${from_last_month}    ${to_last_month}    1
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}    ${to_last_month}
-    Comment    ${ByProduct_RNG_Casino_Fee}    set variable if    ${ByProduct_RNG_Casino_Fee} < 0    0    ${ByProduct_RNG_Casino_Fee}
-    Comment    check value equal with approximation    ${LicenseeFee}    ${ByProduct_MCG_RNG_Casino_Fee}
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Microgaming RNG Casino
+    ${ByProductAmt}    set variable if    ${ByProductAmt} < 0    0    ${ByProductAmt}
+    check value equal with approximation    ${LicenseeFee}    ${ByProductAmt}
     ## Get data from Licensee Win Loss for Micro gaming – RNG Casino
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    Microgaming RNG Casino
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    Microgaming RNG Casino
     ...    EUR    ${from_last_month}    ${to_last_month}    1
-    ${licenseeWL_others}    set variable if    ${licenseeWL_others} < 0    0    ${licenseeWL_others}
+    ${AmtDueTo_others}    set variable if    ${AmtDueTo_others} < 0    0    ${AmtDueTo_others}
     check value equal with approximation    ${total_trans}    ${licenseeWL_total_trans}
     check value equal with approximation    ${Turnover}    ${licenseeWL_turnover}
     check value equal with approximation    ${CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${LicenseeFee}    ${licenseeWL_others}
+    check value equal with approximation    ${LicenseeFee}    ${AmtDueTo_others}
     ############### Compare LA internal MCG - RNG Casino & MCG - Live Casino
     ## Get data from Microgaming Win Loss (GMT-4)
     navigate menu    Win Loss Report    Microgaming Win Loss (GMT - 4)
@@ -729,12 +678,9 @@ TM_20_FUN_Compare Bettrade data
     check value equal with approximation    ${settlement_equivalent_formula}    ${settlement_equivalent}
     ${settlement_bt_commission}    evaluate    ${settlement_bbamount_sb}*0.03
     check value equal with approximation for negative value    ${settlement_bt_comm}    ${settlement_bt_commission}
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    asiabet88    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${settlement_equivalent}    ${ByProduct_BT_Fee}
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Bet Trade
+    check value equal with approximation    ${settlement_equivalent}    ${ByProductAmt}
     ## Get data from Bet Trade Win Loss report
     navigate menu    Win Loss Report    Bet Trade Win Loss
     ${total_trans}    ${actual_stake}    ${bbamount}    ${wl_bbamount}    ${wl_bought_ticket}    ${bt_comm}    ${profit_sharing}
@@ -765,23 +711,20 @@ TM_20_FUN_Compare Bettrade data
 TM_21_FUN_Compare BA data
     ${tc_licensees}    Set Variable    DELA
     #### Compare LA internal
-    ## Get data from settlement for BA
+    ## Get data from Settlement report
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     switch browser    LA PRO
     ${Settlement_Turnover}    ${Settlement_CustomerWinLoss}    ${Settlement_BA_Comm}    ${Settlement_Equivalent}    get data for BA product in settlement report    ${tc_licensees}    ${from_last_month}
     ...    ${to_last_month}    BA    EUR
-    Comment    ## Get data from Win Loss By Product report
-    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}    ${ByProduct_VS_Fee}
-    ...    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}    ${ByProduct_MCG_LC_Fee}
-    ...    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}    ${ByProduct_CB_Fee}
-    ...    ${ByProduct_CO_Fee}    get all data from win loss by product report    DELA    EUR    ${from_last_month}    ${to_last_month}
-    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_BA_Fee}
-    ## Get data from Licensee Win Loss for BA
-    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    BA
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    BA
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${AmtDueTo_others}    get data from licensee win loss report    ${tc_licensees}    BA
     ...    EUR    ${from_last_month}    ${to_last_month}    2
     check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
-    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
     ##################
     Comment    ## get data BA from LRF
     Comment    switch browser    LRF PRO
@@ -839,8 +782,114 @@ TM_23_FUN_Compare Super Live data
     check value equal with approximation    ${NetIncome_Formula}    ${NetIncome}
 
 TM_24_FUN_Compare Virtual Sports 2 data
+    ${tc_licensees}    Set Variable    12Bet
+    #### Compare LA internal
+    ## Get data from Settlement report
+    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
+    switch browser    LA PRO
+    ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
+    ...    ${to_last_month}    Virtual Sports 2    EUR
+    ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.15
+    check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Virtual Sports 2
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    Virtual Sports 2
+    ...    EUR    ${from_last_month}    ${to_last_month}    1
+    check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
+    check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
+    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
+    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    ## Get data from VS2 WL report
+    navigate menu    Win Loss Report    Virtual Sports 2 Win Loss
+    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno,LT,VS2)    ${tc_licensees}    Yes
+    ...    EUR    ${from_last_month}    ${to_last_month}
+    check value equal with approximation    ${Settlement_Turnover}    ${turnover}
+    check value equal with approximation    ${Settlement_totaltrans}    ${total_trans}
+    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${CustomerWinLoss}
+    ${Settlement_Equivalent}    set variable if    ${Settlement_Equivalent} < 0    0    ${Settlement_Equivalent}
+    check value equal with approximation    ${Settlement_Equivalent}    ${LicenseeFee}
+    ##################
+    Comment    ## get data Keno from LRF
+    Comment    switch browser    LRF PRO
+    Comment    select licensee from list    12Bet
+    Comment    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}    get data from licensee win loss in LRF    ${from_last_month}    ${to_last_month}
+    ...    Keno    1
+    Comment    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
+    Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
+    Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
 
 TM_25_FUN_Compare Lottery data
+    ${tc_licensees}    Set Variable    Macaubet
+    #### Compare LA internal
+    ## Get data from Settlement report
+    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
+    switch browser    LA PRO
+    ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}    ${from_last_month}
+    ...    ${to_last_month}    Lottery    EUR
+    ${Settlement_Equivalent_Formula}    evaluate    ${Settlement_CustomerWinLoss}*0.1
+    check value equal with approximation for negative value    ${Settlement_Equivalent_Formula}    ${Settlement_Equivalent}
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Lottery
+    check value equal with approximation    ${Settlement_Equivalent}    ${ByProductAmt}
+    ## Get data from Licensee Win Loss report
+    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}    Lottery
+    ...    EUR    ${from_last_month}    ${to_last_month}    1
+    check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
+    check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
+    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
+    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    ## Get data from Lottery WL report
+    navigate menu    Win Loss Report    Lottery Win Loss
+    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno,LT,VS2)    ${tc_licensees}    Yes
+    ...    EUR    ${from_last_month}    ${to_last_month}
+    check value equal with approximation    ${Settlement_Turnover}    ${turnover}
+    check value equal with approximation    ${Settlement_totaltrans}    ${total_trans}
+    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${CustomerWinLoss}
+    ${Settlement_Equivalent}    set variable if    ${Settlement_Equivalent} < 0    0    ${Settlement_Equivalent}
+    check value equal with approximation    ${Settlement_Equivalent}    ${LicenseeFee}
+    ##################
+    Comment    ## get data Keno from LRF
+    Comment    switch browser    LRF PRO
+    Comment    select licensee from list    12Bet
+    Comment    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}    get data from licensee win loss in LRF    ${from_last_month}    ${to_last_month}
+    ...    Keno    1
+    Comment    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
+    Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
+    Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
+
+--------Terminated - TM_17_FUN_Compare Micro gaming – Live Casino data
+    Comment    ${tc_licensees}    Set Variable    12Bet
+    Comment    #### Compare LA internal
+    Comment    ## Get data from settlement for Micro gaming – Live Casino
+    Comment    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
+    Comment    switch browser    LA PRO
+    Comment    ${Settlement_Turnover}    ${Settlement_totaltrans}    ${Settlement_CustomerWinLoss}    ${Settlement_Equivalent}    get data for selected product in settlement report    ${tc_licensees}
+    ...    ${from_last_month}    ${to_last_month}    Microgaming Live Casino    EUR
+    Comment    Comment    ## Get data from Win Loss By Product report
+    Comment    Comment    ${ByProduct_SB_Fee}    ${ByProduct_Racing_Fee}    ${ByProduct_NG_Fee}    ${ByProduct_BA_Fee}    ${ByProduct_LC_Fee}
+    ...    ${ByProduct_VS_Fee}    ${ByProduct_RNG_Casino_Fee}    ${ByProduct_Keno_Fee}    ${ByProduct_AG_Casino_Fee}    ${ByProduct_GD_Fee}    ${ByProduct_Macau_Fee}
+    ...    ${ByProduct_MCG_LC_Fee}    ${ByProduct_MCG_RNG_Casino_Fee}    ${ByProduct_Macaugame_Fee}    ${ByProduct_AB_Fee}    ${ByProduct_FW_Fee}    ${ByProduct_BT_Fee}
+    ...    ${ByProduct_CB_Fee}    ${ByProduct_CO_Fee}    get all data from win loss by product report    12Bet    EUR    ${from_last_month}
+    ...    ${to_last_month}
+    Comment    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${ByProduct_MCG_LC_Fee}
+    Comment    ## Get data from Licensee Win Loss for Micro gaming – Live Casino
+    Comment    ${licenseeWL_total_trans}    ${licenseeWL_turnover}    ${licenseeWL_customerWL}    ${licenseeWL_others}    get data from licensee win loss report    ${tc_licensees}
+    ...    Microgaming - Live Casino    EUR    ${from_last_month}    ${to_last_month}    1
+    Comment    check value equal with approximation    ${Settlement_Turnover}    ${licenseeWL_turnover}
+    Comment    check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
+    Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
+    Comment    check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
+    Comment    ##################
+    Comment    Comment    ## get data Micro gaming – Live Casino from LRF
+    Comment    Comment    switch browser    LRF PRO
+    Comment    Comment    select licensee from list    12Bet
+    Comment    Comment    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}    get data from licensee win loss in LRF    ${from_last_month}
+    ...    ${to_last_month}    Microgaming-Live Casino    1
+    Comment    Comment    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
+    Comment    Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
+    Comment    Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
 
 -------Terminated - TM_19_FUN_Compare Macau data
     Comment    #### Compare LA internal
@@ -927,3 +976,14 @@ TM_25_FUN_Compare Lottery data
     Comment    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
     Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
     Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
+
+Test
+    ${yyyy}    ${mm}    ${dd}    Get Time    year,month,day
+    ${mm}    Get Slice From List    Nov/01/2017    4    6
+    Comment    ${mm}    Convert To Integer    ${mm}
+    Comment    ${from_data_month}=    Set Variable    ${mm- 1}
+    ${mm1}    Get Slice From List    ${mm}    0    1
+    ${mm2}    Get Slice From List    ${mm}    1    2
+    ${dd}    Set Variable    06
+    ${dd}    Convert To Integer    ${dd}
+    \    //*[@id='datatable']//..//b[contains(text(),'Grand Total')]/following::td[1]

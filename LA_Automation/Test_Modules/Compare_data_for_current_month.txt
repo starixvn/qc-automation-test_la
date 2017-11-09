@@ -332,7 +332,7 @@ TM_08_Compare data Keno between LA and LRF reports
     check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
     ## Get data from Keno WL report
     navigate menu    Win Loss Report    Keno Win Loss
-    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno)    12Bet    Yes
+    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno,LT,VS2)    12Bet    Yes
     ...    EUR    ${From_current_month}    ${To_current_month}
     check value equal with approximation    ${Settlement_Turnover}    ${turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${total_trans}
@@ -374,7 +374,7 @@ TM_09_Compare data AG Casino between LA and LRF reports
     check value equal with approximation    ${Settlement_Equivalent}    ${licenseeWL_others}
     ## Get data from AG Casino Win Loss report
     navigate menu    Win Loss Report    AG Casino Win Loss
-    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno)    12Bet    Yes
+    ${total_trans}    ${turnover}    ${CustomerWinLoss}    ${LicenseeFee}    get data for winloss report (AG,Keno,LT,VS2)    12Bet    Yes
     ...    EUR    ${From_current_month}    ${To_current_month}
     check value equal with approximation    ${Settlement_Turnover}    ${turnover}
     check value equal with approximation    ${Settlement_totaltrans}    ${total_trans}

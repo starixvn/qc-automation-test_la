@@ -568,7 +568,7 @@ submit filter by selected date range in lrf
     [Documentation]    Input ${fromdate} format: 13/01/2017 ( dd/mm/yyyy}
     ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${fromdate}
     ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${todate}
-    Select Frame    xpath=//iframe[@id='main']
+    Select Frame    mainFrame    #Old: xpath=//iframe[@id='main']
     click element    xpath=//input[@id='FromDate']
     ## select from year
     click element    xpath=(//select[@data-handler="selectYear"])[1]
@@ -805,7 +805,7 @@ select licensee from list
     unselect frame
     Comment    select frame    Top Window
     click element    xpath=//*[@id='select-list-ddlLicensee']    # Old: xpath=//*[@id='ddlLicensee']
-    double click element    xpath=//*[@id='select-list-ddlLicensee-result-container']/div/div[2]/ul/li[contains(text(),'${licensee_name}')]    # Old: xpath=//*[@id='ddlLicensee']/option[contains(text(),'${licensee_name}')]    //*[@id='select-list-ddlLicensee-result-container']/div/div[2]/ul/li[contains(text(),'asiabet88')]
+    click element    xpath=//*[@id='select-list-ddlLicensee-result-container']/div/div[2]/ul/li[contains(text(),'${licensee_name}')]    # Old: xpath=//*[@id='ddlLicensee']/option[contains(text(),'${licensee_name}')]    //*[@id='select-list-ddlLicensee-result-container']/div/div[2]/ul/li[contains(text(),'asiabet88')]
     unselect frame
     sleep    3s
     Comment    select frame    main

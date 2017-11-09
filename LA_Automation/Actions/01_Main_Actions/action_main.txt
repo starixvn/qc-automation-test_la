@@ -30,10 +30,10 @@ config
     Set Suite Variable    ${cf_export_dir}    C:\\Test Data\\
     Set Suite Variable    ${cf_screenshot_dir}    C:\\Test Screenshot\\
     # Set Global Variables
-    Set Suite Variable    ${cf_username1}    starix103    #starix103
+    Set Suite Variable    ${cf_username1}    starix105    #starix103
     Set Suite Variable    ${cf_password1}    1q2w3e4r    #1q2w3e4r
-    Set Suite Variable    ${cf_username}    starix101    # starix101    starix103
-    Set Suite Variable    ${cf_password}    123QWEasd    # 123QWEasd    4r3e2w1q
+    Set Suite Variable    ${cf_username}    starix105    # starix101    starix103
+    Set Suite Variable    ${cf_password}    1q2w3e4r    # 123QWEasd    4r3e2w1q
     # Set Global Variables    LRF
     Set Suite Variable    ${cf_lrf_username}    StarixQC3
     Set Suite Variable    ${cf_lrf_password}    1q2w3e4r
@@ -541,8 +541,6 @@ get before yesterday and last month
     ${no_of_day}    run key word if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' or '${mm-1}'=='10' or '${mm-1}'=='12'    set variable    31
     ...    ELSE IF    '${mm-1}'==02    set variable    28
     ...    ELSE    set variable    30
-    Comment    ${no_of_day}    Set Variable if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' \ or '${mm-1}'=='10' \ or '${mm-1}'=='12' \ \ \    31    '${mm-1}'=='2'    28
-    ...    30
     ${yyyy1}    ${mm1}    ${dd-3}    Get Time    year,month,day    Now-3d
     ${today-3}    set variable    ${dd-3}/${mm1}/${yyyy1}
     ${From_last_month}    set variable    01/${mm-1}/${yyyy}

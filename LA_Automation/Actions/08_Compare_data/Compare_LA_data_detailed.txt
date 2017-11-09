@@ -2196,6 +2196,7 @@ get data for Allbet from winlost report
 
 get data from licensee win loss report
     [Arguments]    ${licensee_name}    ${product}    ${exchange}    ${from_date}    ${to_date}    ${filter}
+    [Documentation]    ${filter}: 1 - Normal, 2 - No Draw, 3 - No Draw for Turnover only
     navigate menu    Win Loss Report    Licensee Win Loss
     sleep    2s
     submit filter for licensee win loss report    ${licensee_name}    ${product}    ${exchange}    ${from_date}    ${to_date}    ${filter}
@@ -2328,32 +2329,32 @@ get all data from win loss by product report
     ...    ${co_fee}
 
 submit filter for win loss by product report
-    [Arguments]    ${licensee_name}    ${exchange}    ${from_date}    ${to_date}
+    [Arguments]    ${licensee_name}    ${exchange}=NULL    ${from_date}=NULL    ${to_date}=NULL
     navigate menu    Win Loss Report    Win Loss by Product
     sleep    2s
-    ${dd_from}    ${yyyyy_from}    ${mm_from}    split date    ${from_date}
-    ${dd_to}    ${yyyy_to}    ${mm_to}    split date    ${to_date}
+    ${dd_from}    ${yyyyy_from}    ${mm_from}    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    split date    ${from_date}
+    ${dd_to}    ${yyyy_to}    ${mm_to}    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    split date    ${to_date}
     Wait Until Element Is Visible    xpath=//*[@id='party-filter']
-    click element    xpath=//div[@class="monthPicker"]
+    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    click element    xpath=//div[@class="monthPicker"]
     sleep    1s
-    ${is_selected_year}    run key word and return status    Element Should Be Visible    xpath=//a[@class='selected' and @year='${yyyyy_from}']/span
-    run key word if    '${is_selected_year}'=='False'    double click element    xpath=//a[@year='${yyyyy_from}']/span
-    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
-    click element    xpath=//*[@id='ddlFromDay']
-    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
-    sleep    1s
-    click element    xpath=//*[@id='ddlToDay']
-    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
+    ${is_selected_year}    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    run key word and return status    Element Should Be Visible    xpath=//a[@class='selected' and @year='${yyyyy_from}']/span
+    run key word if    '${is_selected_year}'=='False' and '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    double click element    xpath=//a[@year='${yyyyy_from}']/span
+    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    double click element    xpath=//a[@month=${mm_from} and @year=${yyyyy_from}]
+    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    click element    xpath=//*[@id='ddlFromDay']
+    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    double click element    xpath=//*[@id='ddlFromDay']//option[@value=${dd_from}]
+    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    sleep    1s
+    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    click element    xpath=//*[@id='ddlToDay']
+    Run Keyword If    '${from_date}'<>'NULL' and '${to_date}'<>'NULL'    double click element    xpath=//*[@id='ddlToDay']//option[@value=${dd_to}]
     click element    xpath=//*[@id='party-filter']
     click element    xpath=//div[text()='All']
     click element    xpath=//input[@placeholder="Filter"]
     input text    xpath=//input[@placeholder="Filter"]    ${licensee_name}
     click element    xpath=//label/div[contains(text(),'${licensee_name}')]
-    click element    xpath=.//*[@id='ddlCurrency']
-    click element    //*[@id='ddlCurrency']/option[text()='EUR']
+    Run Keyword If    '${exchange}'<>'NULL'    click element    xpath=.//*[@id='ddlCurrency']
+    Run Keyword If    '${exchange}'<>'NULL'    click element    //*[@id='ddlCurrency']/option[text()='EUR']
     click element    xpath=//*[@id='submit-button']
-    Sleep    1s
-    click element    xpath=//*[@id='submit-button']
+    Comment    Sleep    1s
+    Comment    click element    xpath=//*[@id='submit-button']
     wait for loading disappear
 
 submit filter for Virtual Sports in winloss report
@@ -2406,7 +2407,7 @@ get data from Virtual Sports winloss report
     should be true    ${Turnover} >0
     [Return]    ${TotalTrans}    ${Turnover}    ${LicenseeWL}    ${AmountDueTo}
 
-get data for winloss report (AG,Keno)
+get data for winloss report (AG,Keno,LT,VS2)
     [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
     sleep    2s
     submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${fromdate}    ${todate}
@@ -2585,14 +2586,14 @@ get data from winloss report (NG, LC)
     ${TotalTrans}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[2]
     ${Turnover}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[1]
     ${GrossWin}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[3]
-    ${AmountDueTo}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[4]
+    ${LicensingFee}    get text    xpath=//*[@id='data-area']//..//td[contains(text(),'${licensee_name}')]/following::td[4]
     ${TotalTrans}    change format for number    ${TotalTrans}
     ${Turnover}    change format for number    ${Turnover}
     ${GrossWin}    change format for number    ${GrossWin}
-    ${AmountDueTo}    change format for number    ${AmountDueTo}
+    ${LicensingFee}    change format for number    ${LicensingFee}
     should be true    ${TotalTrans} >0
     should be true    ${Turnover} >0
-    [Return]    ${TotalTrans}    ${Turnover}    ${GrossWin}    ${AmountDueTo}
+    [Return]    ${TotalTrans}    ${Turnover}    ${GrossWin}    ${LicensingFee}
 
 submit filter for winloss report (NG, LC)
     [Arguments]    ${licensee_name}    ${from_date}    ${to_date}    ${date_filter}
@@ -2802,3 +2803,15 @@ compare settlement report for Fishing World
     \    check value equal with approximation    ${Turnover}    ${Turnover_settlement}    Compare Turnover for ${licensee},    Fishing World
     \    check value equal with approximation    ${Customerwl}    ${Customerwl_settlement}    Compare Customerwl for ${licensee},    Fishing World
     \    check value equal with approximation    ${Amount}    ${Amount_settlement}    Compare Amount for ${licensee},    Fishing World
+
+get data from win loss by product report
+    [Arguments]    ${licensee_name}    ${product}    ${exchange}=NULL    ${from_date}=NULL    ${to_date}=NULL
+    [Documentation]    get data for each product input:
+    ...    Sportsbook \ Racing \ Number Game \ Virtual Sports \ RNG Casino \ Keno \ AG Casino \ Gold Deluxe \ Microgaming RNG Casino \ Macau Games \ AllBet \ Fishing World \ Colossus Bet \ Cash Out \ Virtual Sports 2 \ Lottery
+    submit filter for win loss by product report    ${licensee_name}    ${exchange}    ${from_date}    ${to_date}
+    wait until element is visible    xpath=//td[contains(text(),'Grand Total')]
+    #
+    ${number_product}    Get Matching Xpath Count    xpath=//td[@class='laTable__header']
+    ${out_amount}    get text    xpath=//td[@class='laTable__header' and text()='${product}']/following::td[${number_product}]
+    ${out_amount}    change format for number    ${out_amount}
+    [Return]    ${out_amount}
