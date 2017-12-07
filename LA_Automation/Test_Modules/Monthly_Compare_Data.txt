@@ -810,15 +810,6 @@ TM_24_FUN_Compare Virtual Sports 2 data
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${CustomerWinLoss}
     ${Settlement_Equivalent}    set variable if    ${Settlement_Equivalent} < 0    0    ${Settlement_Equivalent}
     check value equal with approximation    ${Settlement_Equivalent}    ${LicenseeFee}
-    ##################
-    Comment    ## get data Keno from LRF
-    Comment    switch browser    LRF PRO
-    Comment    select licensee from list    12Bet
-    Comment    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}    get data from licensee win loss in LRF    ${from_last_month}    ${to_last_month}
-    ...    Keno    1
-    Comment    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
-    Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
-    Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
 
 TM_25_FUN_Compare Lottery data
     ${tc_licensees}    Set Variable    Macaubet
@@ -850,14 +841,43 @@ TM_25_FUN_Compare Lottery data
     ${Settlement_Equivalent}    set variable if    ${Settlement_Equivalent} < 0    0    ${Settlement_Equivalent}
     check value equal with approximation    ${Settlement_Equivalent}    ${LicenseeFee}
     ##################
-    Comment    ## get data Keno from LRF
-    Comment    switch browser    LRF PRO
-    Comment    select licensee from list    12Bet
-    Comment    ${lrf_Turnover}    ${lrf_TotalTrans}    ${lrf_CustomerWinLoss}    get data from licensee win loss in LRF    ${from_last_month}    ${to_last_month}
-    ...    Keno    1
-    Comment    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
-    Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
-    Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
+
+TM_26_FUN_Compare Cash Out data
+    ${tc_licensees}    Set Variable    12Bet
+    #### Compare LA internal
+    ## Get data from Settlement report
+    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
+    switch browser    LA PRO
+    ${settlement_co_times}    ${settlement_co_tickets}    ${settlement_co_value}    ${settlement_bbamount_sb}    ${settlement_bbamount}    ${settlement_ticket_payout}    ${settlement_co_comm}
+    ...    ${settlement_bb_comm}    ${settlement_equivalent}    get Cash Out data from settlement report    ${tc_licensees}    ${from_last_month}    ${to_last_month}
+    ...    Cash Out    EUR
+    ${settlement_equivalent_formula}    evaluate    ${settlement_ticket_payout} - ${settlement_bb_comm}
+    check value equal with approximation    ${settlement_equivalent_formula}    ${settlement_equivalent}
+    ${settlement_co_commission}    evaluate    ${settlement_bbamount_sb}*0.03
+    check value equal with approximation    ${settlement_co_comm}    ${settlement_co_commission}
+    ## Get data from Win Loss By Product report
+    ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Cash Out
+    check value equal with approximation    ${settlement_equivalent}    ${ByProductAmt}
+    ## Get data from Bet Trade Win Loss report
+    navigate menu    Win Loss Report    Cash Out Win Loss
+    ${co_times}    ${co_tickets}    ${co_value}    ${bbamount}    ${tickets_payout}    ${co_comm}    ${income_a}
+    ...    ${income_b}     ${amt_co_a}    ${amt_co_b}    get data for Cash Out winloss report    ${tc_licensees}    Yes
+    ...    EUR    ${from_last_month}    ${to_last_month}
+    ${co_commission}    evaluate    ${bbamount}*0.03
+    check value equal with approximation    ${co_comm}    ${co_commission}
+    ${incom_a_formula}    evaluate    ${bbamount}*0.01
+    check value equal with approximation    ${incom_a_formula}    ${income_a}
+    ${incom_b_formula}    evaluate    (${tickets_payout} - ${bbamount} - ${co_comm}) * 0.5
+    check value equal with approximation    ${incom_b_formula}    ${income_b}
+    ${amt_co_a_formula}    evaluate    ${tickets_payout} - ${bbamount} - ${co_comm} - ${income_a}
+    check value equal with approximation    ${amt_co_a_formula}    ${amt_co_a}
+    check value equal with approximation    ${income_b}     ${amt_co_b}
+    ##Compare data
+    check value equal with approximation    ${settlement_co_times}    ${co_times}
+    check value equal with approximation    ${settlement_co_tickets}    ${co_tickets}
+    check value equal with approximation    ${settlement_co_value}    ${co_value}
+    check value equal with approximation    ${settlement_bbamount}    ${bbamount}
+    check value equal with approximation    ${settlement_ticket_payout}    ${tickets_payout}
 
 --------Terminated - TM_17_FUN_Compare Micro gaming – Live Casino data
     Comment    ${tc_licensees}    Set Variable    12Bet
@@ -976,14 +996,3 @@ TM_25_FUN_Compare Lottery data
     Comment    check value equal with approximation    ${Settlement_Turnover}    ${lrf_Turnover}
     Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
     Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
-
-Test
-    ${yyyy}    ${mm}    ${dd}    Get Time    year,month,day
-    ${mm}    Get Slice From List    Nov/01/2017    4    6
-    Comment    ${mm}    Convert To Integer    ${mm}
-    Comment    ${from_data_month}=    Set Variable    ${mm- 1}
-    ${mm1}    Get Slice From List    ${mm}    0    1
-    ${mm2}    Get Slice From List    ${mm}    1    2
-    ${dd}    Set Variable    06
-    ${dd}    Convert To Integer    ${dd}
-    \    //*[@id='datatable']//..//b[contains(text(),'Grand Total')]/following::td[1]

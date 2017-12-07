@@ -93,9 +93,11 @@ submit filter by date range for settlement report
     run keyword if    '${is_exsited}'=='True'    click element    xpath=//option[contains(text(),'${product_name}')]
     ...    ELSE IF    '${is_exsited}'=='False'    Log    This licensee doesn't offer this product.
     click element    xpath=//*[@id='BaseCurrency']
-    double click element    xpath=//*[@id='BaseCurrency']/option[contains(text(),'${base_currency}')]
-    run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
+    click element    xpath=//*[@id='BaseCurrency']/option[contains(text(),'${base_currency}')]
+    click element    xpath=//*[@id='reportFilter']//label[contains(text(),'From')]
+    sleep    1s
     Comment    run keyword if    '${is_exsited}'=='True'    Click Element    xpath=//*[@id='submit-button']
+    Click Element    xpath=//*[@id='submit-button']
     wait for loading disappear
 
 get data for BA product in settlement report

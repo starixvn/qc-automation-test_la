@@ -2815,3 +2815,70 @@ get data from win loss by product report
     ${out_amount}    get text    xpath=//td[@class='laTable__header' and text()='${product}']/following::td[${number_product}]
     ${out_amount}    change format for number    ${out_amount}
     [Return]    ${out_amount}
+
+get Cash Out data from settlement report
+    [Arguments]    ${licensee_name}    ${product_name}    ${base_currency}    ${from_date}    ${to_date}
+    submit filter by date range for settlement report    ${licensee_name}    ${product_name}    ${base_currency}    ${from_date}    ${to_date}
+    ${is_exsited}    Run Keyword And Return Status    get text    xpath=//option[contains(text(),'${product_name}')]
+    ## In case no data
+    ${ac_no_info_status}    Run Keyword And Return Status    Page Should Contain    No Information Available
+    ## get member winloss
+    sleep    2s
+    ${co_times}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[1]
+    ${co_tickets}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[2]
+    ${co_value}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[3]
+    ${bbamount_sb}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[4]
+    ${bbamount}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[6]
+    ${tickets_payout}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[7]
+    ${co_comm}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[8]
+    ${co_bb_comm}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[10]
+    ${equivalent}    run keyword if    '${ac_no_info_status}'=='False'    get text    xpath=//td[contains(text(),'Total in EUR')]/following::td[11]
+    ${co_times}    change format for number    ${co_times}
+    ${co_tickets}    change format for number    ${co_tickets}
+    ${co_value}    change format for number    ${co_value}
+    ${bbamount_sb}    change format for number    ${bbamount_sb}
+    ${bbamount}    change format for number    ${bbamount}
+    ${tickets_payout}    change format for number    ${tickets_payout}
+    ${co_comm}    change format for number    ${co_comm}
+    ${co_bb_comm}    change format for number    ${co_bb_comm}
+    ${equivalent}    change format for number    ${equivalent}
+    should be true    ${co_times} >0.0
+    should be true    ${co_tickets} >0.0
+    should be true    ${co_value} >0.0
+    should be true    ${bbamount} >0.0
+    should be true    ${tickets_payout} >0.0
+    [Return]    ${co_times}    ${co_tickets}    ${co_value}    ${bbamount_sb}    ${bbamount}    ${tickets_payout}
+    ...    ${co_comm}    ${co_bb_comm}    ${equivalent}
+
+get data for Cash Out winloss report
+    [Arguments]    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${from_date}    ${to_date}
+    sleep    2s
+    submit filter for 3rd report    ${licensee_name}    ${is_group_by_licensee}    ${exchange}    ${from_date}    ${to_date}
+    wait until element is visible    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]
+    ${co_times}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[2]
+    ${co_tickets}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[3]
+    ${co_value}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[4]
+    ${bbamount}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[7]
+    ${tickets_payout}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[8]
+    ${co_comm}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[9]
+    ${income_a}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[10]
+    ${income_b}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[11]
+    ${amt_co_a}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[12]
+    ${amt_co_b}    get text    xpath=//*[@id='data-area']//..//a[contains(text(),'${licensee_name}')]/following::td[13]
+    ${co_times}    change format for number    ${co_times}
+    ${co_tickets}    change format for number    ${co_tickets}
+    ${co_value}    change format for number    ${co_value}
+    ${bbamount}    change format for number    ${bbamount}
+    ${tickets_payout}    change format for number    ${tickets_payout}
+    ${co_comm}    change format for number    ${co_comm}
+    ${income_a}    change format for number    ${income_a}
+    ${income_b}    change format for number    ${income_b}
+    ${amt_co_a}    change format for number    ${amt_co_a}
+    ${amt_co_b}    change format for number    ${amt_co_b}
+    should be true    ${co_times} >0.0
+    should be true    ${co_tickets} >0.0
+    should be true    ${co_value} >0.0
+    should be true    ${bbamount} >0.0
+    should be true    ${tickets_payout} >0.0
+    [Return]    ${co_times}    ${co_tickets}    ${co_value}    ${bbamount}    ${tickets_payout}    ${co_comm}
+    ...    ${income_a}    ${income_b}    ${amt_co_a}    ${amt_co_b}

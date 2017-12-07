@@ -798,9 +798,3 @@ TM_20_Compare Super Live data
     Comment    check value equal with approximation    ${Settlement_totaltrans}    ${lrf_TotalTrans}
     Comment    check value equal with approximation    ${Settlement_CustomerWinLoss}    ${lrf_CustomerWinLoss}
     Comment
-
-ttt
-    navigate menu    Win Loss Report    Licensee Win Loss
-    sleep    2s
-    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
-    submit filter for licensee win loss report    12Bet    Sportsbook    EUR    ${today-3}    ${today-3}    1
