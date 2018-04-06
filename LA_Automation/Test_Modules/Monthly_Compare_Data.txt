@@ -55,7 +55,7 @@ TM_00_FUN_Precondition_Login
     Open Browser    ${cf_url}    ${cf_browser}    LA PRO    ff_profile_dir=${cf_ff_profile_dir}
     Maximize Browser Window
     # 2. Login with valid account
-    login    ${cf_username}    ${cf_password}
+    login    ${cf_username1}    ${cf_password1}
 
 TM_00_FUN_Precondition_Declare Licensees for Products
     [Documentation]    This is the precondition TM is used to:
@@ -219,8 +219,8 @@ TM_05_FUN_Compare GD data
     check value equal with approximation    ${total_trans}    ${Settlement_totaltrans}
     check value equal with approximation    ${turnover}    ${Settlement_Turnover}
     check value equal with approximation    ${customer_wl}    ${Settlement_CustomerWinLoss}
-    ${Settlement_Equivalent}    set variable if    ${Settlement_Equivalent} < 0    0    ${Settlement_Equivalent}
-    check value equal with approximation    ${licensee_fee}    ${Settlement_Equivalent}
+    Comment    ${Settlement_Equivalent}    set variable if    ${Settlement_Equivalent} < 0    0    ${Settlement_Equivalent}
+    Comment    check value equal with approximation    ${licensee_fee}    ${Settlement_Equivalent}
     ${tm_service_charge}    evaluate    -${customer_wl}*5*0.01
     ${tm_pay_to_supplier}    evaluate    ${tm_service_charge} - ${rebate_comm}
     ${tm_pay_to_supplier}    set variable if    ${tm_pay_to_supplier} < 0    0    ${tm_pay_to_supplier}
@@ -238,6 +238,9 @@ TM_05_FUN_Compare GD data
     check value equal with approximation    ${Settlement_totaltrans}    ${licenseeWL_total_trans}
     check value equal with approximation    ${Settlement_CustomerWinLoss}    ${licenseeWL_customerWL}
     check value equal with approximation    ${Settlement_Equivalent}    ${AmtDueTo_others}
+    ## Compare licensee fee
+    ${Settlement_Equivalent}    set variable if    ${Settlement_Equivalent} < 0    0    ${Settlement_Equivalent}
+    check value equal with approximation    ${licensee_fee}    ${Settlement_Equivalent}
     #### Check data for Credit licensees
     ${total_trans}    ${turnover}    ${valid_bet_amt}    ${customer_wl}    ${licensee_fee}    ${service_charge}    ${rebate_comm}
     ...    ${pay_to_supplier}    get data in gold deluxe win lost report    Credit Licensees    Yes    EUR    ${from_last_month}
@@ -858,10 +861,10 @@ TM_26_FUN_Compare Cash Out data
     ## Get data from Win Loss By Product report
     ${ByProductAmt}    get data from win loss by product report    ${tc_licensees}    Cash Out
     check value equal with approximation    ${settlement_equivalent}    ${ByProductAmt}
-    ## Get data from Bet Trade Win Loss report
+    ## Get data from Cash Out Win Loss report
     navigate menu    Win Loss Report    Cash Out Win Loss
     ${co_times}    ${co_tickets}    ${co_value}    ${bbamount}    ${tickets_payout}    ${co_comm}    ${income_a}
-    ...    ${income_b}     ${amt_co_a}    ${amt_co_b}    get data for Cash Out winloss report    ${tc_licensees}    Yes
+    ...    ${income_b}    ${amt_co_a}    ${amt_co_b}    get data for Cash Out winloss report    ${tc_licensees}    Yes
     ...    EUR    ${from_last_month}    ${to_last_month}
     ${co_commission}    evaluate    ${bbamount}*0.03
     check value equal with approximation    ${co_comm}    ${co_commission}
@@ -871,7 +874,7 @@ TM_26_FUN_Compare Cash Out data
     check value equal with approximation    ${incom_b_formula}    ${income_b}
     ${amt_co_a_formula}    evaluate    ${tickets_payout} - ${bbamount} - ${co_comm} - ${income_a}
     check value equal with approximation    ${amt_co_a_formula}    ${amt_co_a}
-    check value equal with approximation    ${income_b}     ${amt_co_b}
+    check value equal with approximation    ${income_b}    ${amt_co_b}
     ##Compare data
     check value equal with approximation    ${settlement_co_times}    ${co_times}
     check value equal with approximation    ${settlement_co_tickets}    ${co_tickets}

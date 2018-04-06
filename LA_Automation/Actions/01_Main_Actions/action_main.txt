@@ -539,7 +539,7 @@ get before yesterday and last month
     ${yyyy}    run key word if    '${mm}'=='01'    set variable    ${yyyy-1}
     ...    ELSE    set variable    ${yyyy}
     ${no_of_day}    run key word if    '${mm-1}'=='01' or '${mm-1}'=='03' or '${mm-1}'=='05' or '${mm-1}'=='07' or '${mm-1}'=='08' or '${mm-1}'=='10' or '${mm-1}'=='12'    set variable    31
-    ...    ELSE IF    '${mm-1}'==02    set variable    28
+    ...    ELSE IF    '${mm-1}'=='02'    set variable    28
     ...    ELSE    set variable    30
     ${yyyy1}    ${mm1}    ${dd-3}    Get Time    year,month,day    Now-3d
     ${today-3}    set variable    ${dd-3}/${mm1}/${yyyy1}

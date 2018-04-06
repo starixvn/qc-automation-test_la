@@ -21,7 +21,7 @@ TC01_Create data for any products
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     ${fromdate}    change db date format    ${from_last_month}
     ${todate}    change db date format    ${to_last_month}
-    ins_data_testing    2    21    ${fromdate}    ${todate}    6    1
+    ins_data_testing    6    14    ${fromdate}    ${todate}    6    1
     ...    1    0
 
 TC02_Create Setting for any products
@@ -177,7 +177,7 @@ TC_16_Create Data on VS for Deposit Licensee
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     ${fromdate}    change db date format    ${from_last_month}
     ${todate}    change db date format    ${to_last_month}
-    ins_data_testing    5    337    ${fromdate}    ${todate}    3    1
+    ins_data_testing    5    14    ${fromdate}    ${todate}    3    1
     ...    1    0
 
 TC_17_Create Setting on RNG Casino for Deposit Licensee
@@ -234,7 +234,7 @@ TC_20_Create Data for Macau Games on deposit licensee
     ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
     ${fromdate}    change db date format    ${from_last_month}
     ${todate}    change db date format    ${to_last_month}
-    ins_data_testing    22    14    ${fromdate}    ${todate}    6    1
+    ins_data_testing    22    14    20170901    20170930    6    1
     ...    1    0
 
 TC_21_Create Setting for MGC Live Casino for deposit Licensee
@@ -356,10 +356,10 @@ TC_29_Create Setting for Bettrade
 TC_30_Create data for Bettrade
     Comment    ## ProductID    ## FromParty    ## Fromdate    ## Todate    ## CurrencyID    ## Is_rpt_betting
     ...    ## Is_rpt_BettingByProduct    ##@Is_rpt_ThirdPartyWL_ExtraGMT
-    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
-    ${fromdate}    change db date format    ${from_last_month}
-    ${todate}    change db date format    ${to_last_month}
-    ins_data_testing    13    14    ${fromdate}    ${todate}    51    1
+    Comment    ${today-3}    ${from_last_month}    ${to_last_month}    ${From_current_month}    ${To_current_month}    get before yesterday and last month
+    Comment    ${fromdate}    change db date format    ${from_last_month}
+    Comment    ${todate}    change db date format    ${to_last_month}
+    ins_data_testing    13    14    01/12/2017    31/12/2017    6    1
     ...    1    0
 
 TC_31_Create setting for BA
