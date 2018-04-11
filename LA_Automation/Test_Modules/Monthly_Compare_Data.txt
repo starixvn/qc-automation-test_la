@@ -88,7 +88,7 @@ TM_00_FUN_Precondition_Declare Licensees for Products
     # Get data for Licensee Winloss
     navigate menu    Win Loss Report    Licensee Win Loss
     #Export excel for all of seperated product
-    Export excel for all of seperated product
+    Comment    Export excel for all of seperated product
     create dictionary file name for licensee winloss report
 
 TM_01_FUN_Compate data LA_LicenseeWL_WLbProduct_SettlementRpt

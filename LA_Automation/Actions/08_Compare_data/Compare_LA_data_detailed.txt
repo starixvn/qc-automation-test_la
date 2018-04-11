@@ -18,58 +18,58 @@ get file name exported excel for Licensee WL
     ${mm}    Convert To string    ${mm}
     ${yyyy}    Convert To string    ${yyyy}
     : FOR    ${index}    IN RANGE    0    1
-    \    ${mm1}    Run Keyword If    '${mm}'=='01'    Set Variable    December
+    \    ${mm1}    Run Keyword If    '${mm}'=='01'    Set Variable    Dec
     \    Exit For Loop If    '${mm}'=='01'
-    \    ${mm1}    Run Keyword If    '${mm}'=='02'    Set Variable    January
+    \    ${mm1}    Run Keyword If    '${mm}'=='02'    Set Variable    Jan
     \    Exit For Loop If    '${mm}'=='02'
-    \    ${mm1}    Run Keyword If    '${mm}'=='03'    Set Variable    February
+    \    ${mm1}    Run Keyword If    '${mm}'=='03'    Set Variable    Feb
     \    Exit For Loop If    '${mm}'=='03'
-    \    ${mm1}    Run Keyword If    '${mm}'=='04'    Set Variable    March
+    \    ${mm1}    Run Keyword If    '${mm}'=='04'    Set Variable    Mar
     \    Exit For Loop If    '${mm}'=='04'
-    \    ${mm1}    Run Keyword If    '${mm}'=='05'    Set Variable    April
+    \    ${mm1}    Run Keyword If    '${mm}'=='05'    Set Variable    Apr
     \    Exit For Loop If    '${mm}'=='05'
     \    ${mm1}    Run Keyword If    '${mm}'=='06'    Set Variable    May
     \    Exit For Loop If    '${mm}'=='06'
-    \    ${mm1}    Run Keyword If    '${mm}'=='07'    Set Variable    June
+    \    ${mm1}    Run Keyword If    '${mm}'=='07'    Set Variable    Jun
     \    Exit For Loop If    '${mm}'=='07'
-    \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
+    \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    Jul
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Aug
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Sep
     \    Exit For Loop If    '${mm}'=='10'
-    \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
+    \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    Oct
     \    Exit For Loop If    '${mm}'=='11'
-    \    ${mm1}    Run Keyword If    '${mm}'=='12'    Set Variable    November
+    \    ${mm1}    Run Keyword If    '${mm}'=='12'    Set Variable    Nov
     \    Exit For Loop If    '${mm}'=='12'
     # set file name for Licensee Winloss
     : FOR    ${index}    IN RANGE    1    12
-    \    ${filename}    Run Keyword If    '${mm1}'=='December'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='December'
-    \    ${filename}    Run Keyword If    '${mm1}'=='January'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='January'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-29-${yyyy}.in.All.currencies.Base.EUR    #leap year
-    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-28-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
-    \    ${filename}    Run Keyword If    '${mm1}'=='March'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='March'
-    \    ${filename}    Run Keyword If    '${mm1}'=='April'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='April'
-    \    ${filename}    Run Keyword If    '${mm1}'=='May'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
+    \    ${filename}    Run Keyword If    '${mm1}'=='Dec'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.31.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Dec'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Jan'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.31.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Jan'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Feb' and '${yyyy}'=='2020'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.29.${mm1}.${yyyy}.in.All.currencies.Base.EUR    #leap year
+    \    Exit For Loop If    '${mm1}'=='Feb' and '${yyyy}'=='2020'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Feb' and '${yyyy}'<>'2020'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.28.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Feb' and '${yyyy}'<>'2020'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Mar'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.31.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Mar'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Apr'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.30.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Apr'
+    \    ${filename}    Run Keyword If    '${mm1}'=='May'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.31.${mm1}.${yyyy}.in.All.currencies.Base.EUR
     \    Exit For Loop If    '${mm1}'=='May'
-    \    ${filename}    Run Keyword If    '${mm1}'=='June'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='June'
-    \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-31-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='Agust'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='Semtemper'
-    \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    LicenseeWinLoss.from.${mm1}-01-${yyyy}.to.${mm1}-30-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='October'
-    \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    LicenseeWinLoss.from.${mm}-01-${yyyy}.to.${mm}-30-${yyyy}.in.All.currencies.Base.EUR
-    \    Exit For Loop If    '${mm1}'=='November'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Jun'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.30.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Jun'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Jul'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.31.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Jul'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Aug'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.31.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Aug'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Sep'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.30.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Sep'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Oct'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.31.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Oct'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Nov'    Set Variable    LicenseeWinLoss.from.01.${mm1}.${yyyy}.to.30.${mm1}.${yyyy}.in.All.currencies.Base.EUR
+    \    Exit For Loop If    '${mm1}'=='Nov'
     [Return]    ${filename}
 
 get file name exported excel for Bet Trade Win Loss
@@ -85,7 +85,7 @@ get file name exported excel for Bet Trade Win Loss
     ${yyyy}    ${mm}    Get Time    year,month
     ${mm}    Convert To string    ${mm}
     ${yyyy}    Convert To string    ${yyyy}
-    : FOR    ${index}    IN RANGE    0    1
+    :FOR    ${index}    IN RANGE    0    1
     \    ${mm1}    Run Keyword If    '${mm}'=='01'    Set Variable    December
     \    Exit For Loop If    '${mm}'=='01'
     \    ${mm1}    Run Keyword If    '${mm}'=='02'    Set Variable    January
@@ -102,16 +102,16 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
     \    ${mm1}    Run Keyword If    '${mm}'=='12'    Set Variable    November
     \    Exit For Loop If    '${mm}'=='12'
     # set file name for Bettrade Win Loss by Licensee
-    : FOR    ${index}    IN RANGE    1    12
+    :FOR    ${index}    IN RANGE    1    12
     \    ${filename}    Run Keyword If    '${mm1}'=='December' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='December'
     \    ${filename}    Run Keyword If    '${mm1}'=='January' \ and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
@@ -130,25 +130,25 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Agust'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='August' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='August'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Septemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November' and '${GroupBy}'=='Licensee'    Set Variable    Bet.Trade.Win.Loss.(by.Licensee).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='November'
     # set file name for Bettrade Win Loss by Licensee
-    : FOR    ${index}    IN RANGE    1    12
+    :FOR    ${index}    IN RANGE    1    12
     \    ${filename}    Run Keyword If    '${mm1}'=='December' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='December'
-    \    ${filename}    Run Keyword If    '${mm1}'=='January' \ and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='January' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='January'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016' \ and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}    #leap year
-    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016' \ and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
-    \    ${filename}    Run Keyword If    '${mm1}'=='March' \ and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2020' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}    #leap year
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2020'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2020' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2020'
+    \    ${filename}    Run Keyword If    '${mm1}'=='March' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='March'
     \    ${filename}    Run Keyword If    '${mm1}'=='April' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
     \    Exit For Loop If    '${mm1}'=='April'
@@ -158,10 +158,10 @@ get file name exported excel for Bet Trade Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Agust'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
-    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='August' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='August'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
+    \    Exit For Loop If    '${mm1}'=='Septemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November' and '${GroupBy}'=='Daily'    Set Variable    Bet.Trade.Win.Loss.(Daily).from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}
@@ -197,9 +197,9 @@ get file name exported excel for Platfrom Win Loss
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
@@ -211,8 +211,8 @@ get file name exported excel for Platfrom Win Loss
     \    Exit For Loop If    '${mm1}'=='December'
     \    ${filename}    Run Keyword If    '${mm1}'=='January'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='January'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}.in.EUR    #leap year
-    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2020'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}.in.EUR    #leap year
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2020'
     \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
     \    ${filename}    Run Keyword If    '${mm1}'=='March'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
@@ -225,10 +225,10 @@ get file name exported excel for Platfrom Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
-    \    Exit For Loop If    '${mm1}'=='Agust'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
-    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='August'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='August'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='Septemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    Platform.Win.Loss.from.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
@@ -265,9 +265,9 @@ get file name exported excel for Cash Out Win Loss
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
@@ -279,8 +279,8 @@ get file name exported excel for Cash Out Win Loss
     \    Exit For Loop If    '${mm1}'=='December'
     \    ${filename}    Run Keyword If    '${mm1}'=='January'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='January'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}.in.EUR    #leap year
-    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2020'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}.in.EUR    #leap year
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2020'
     \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
     \    ${filename}    Run Keyword If    '${mm1}'=='March'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
@@ -293,10 +293,10 @@ get file name exported excel for Cash Out Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
-    \    Exit For Loop If    '${mm1}'=='Agust'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
-    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='August'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='August'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='Septemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
@@ -333,9 +333,9 @@ get file name exported excel for Colossus Bet Win Loss
     \    Exit For Loop If    '${mm}'=='07'
     \    ${mm1}    Run Keyword If    '${mm}'=='08'    Set Variable    July
     \    Exit For Loop If    '${mm}'=='08'
-    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    Agust
+    \    ${mm1}    Run Keyword If    '${mm}'=='09'    Set Variable    August
     \    Exit For Loop If    '${mm}'=='09'
-    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Semtemper
+    \    ${mm1}    Run Keyword If    '${mm}'=='10'    Set Variable    Septemper
     \    Exit For Loop If    '${mm}'=='10'
     \    ${mm1}    Run Keyword If    '${mm}'=='11'    Set Variable    October
     \    Exit For Loop If    '${mm}'=='11'
@@ -347,10 +347,10 @@ get file name exported excel for Colossus Bet Win Loss
     \    Exit For Loop If    '${mm1}'=='December'
     \    ${filename}    Run Keyword If    '${mm1}'=='January'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='January'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2016'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}.in.EUR    #leap year
-    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2016'
-    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2016'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}.in.EUR
-    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2016'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'=='2020'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.29.${yyyy}.in.EUR    #leap year
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'=='2020'
+    \    ${filename}    Run Keyword If    '${mm1}'=='February' and '${yyyy}'<>'2020'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.28.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='February' and '${yyyy}'<>'2020'
     \    ${filename}    Run Keyword If    '${mm1}'=='March'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='March'
     \    ${filename}    Run Keyword If    '${mm1}'=='April'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
@@ -361,10 +361,10 @@ get file name exported excel for Colossus Bet Win Loss
     \    Exit For Loop If    '${mm1}'=='June'
     \    ${filename}    Run Keyword If    '${mm1}'=='July'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='July'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Agust'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
-    \    Exit For Loop If    '${mm1}'=='Agust'
-    \    ${filename}    Run Keyword If    '${mm1}'=='Semtemper'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
-    \    Exit For Loop If    '${mm1}'=='Semtemper'
+    \    ${filename}    Run Keyword If    '${mm1}'=='August'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='August'
+    \    ${filename}    Run Keyword If    '${mm1}'=='Septemper'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR
+    \    Exit For Loop If    '${mm1}'=='Septemper'
     \    ${filename}    Run Keyword If    '${mm1}'=='October'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.31.${yyyy}.in.EUR
     \    Exit For Loop If    '${mm1}'=='October'
     \    ${filename}    Run Keyword If    '${mm1}'=='November'    Set Variable    ${reportname}.${mm1}.01.${yyyy}.to.${mm1}.30.${yyyy}.in.EUR

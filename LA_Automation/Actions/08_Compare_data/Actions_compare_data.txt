@@ -146,9 +146,9 @@ Export excel for all of seperated product
     Comment    # Get data for Macau    Remove
     Comment    Run Keyword If    '${suite_macau_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_macau_licensees}    Macau
     # Get data for Microgaming Live Casino
-    Run Keyword If    '${suite_microgaminglivecasino_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_microgaminglivecasino_licensees}    Microgaming - Live Casino
+    Run Keyword If    '${suite_microgaminglivecasino_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_microgaminglivecasino_licensees}    Microgaming Live Casino
     # Get data for Microgaming RNG Casino
-    Run Keyword If    '${suite_microgamingrngcasino_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_microgamingrngcasino_licensees}    Microgaming - RNG Casino
+    Run Keyword If    '${suite_microgamingrngcasino_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_microgamingrngcasino_licensees}    Microgaming RNG Casino
     # Macau Games
     Run Keyword If    '${suite_macaugames_licensees}'<>''    export data for Licensee winloss base on licensees and products    ${suite_macaugames_licensees}    Macau Games
     # AllBet
