@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.3 r1808647">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Test Fragment" enabled="false"/>
+      <hashTree>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Licensee Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Licensee Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Currency Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Currency Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Cash Out Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Cash Out Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Number Game Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Number Game Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Virtual Sports Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Virtual Sports Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Keno Win Loss (by Market)" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Keno Win Loss (by Market).jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Gold Deluxe Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Gold Deluxe Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Microgaming Win Loss (GMT - 4)" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Microgaming Win Loss (GMT - 4).jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Bet Trade Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Bet Trade Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Win Loss By Product" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Win Loss By Product.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Muay Thai Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Muay Thai Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Superlive Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Superlive Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Keno Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Keno Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_AG Casino Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_AG Casino Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Lottery Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Lottery Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Virtual Sports 2 Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Virtual Sports 2 Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_NG2 Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_NG2 Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Colossus Bet Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Colossus Bet Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Macau Games Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Macau Games Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report_Exchange Win Loss" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report_Exchange Win Loss.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>

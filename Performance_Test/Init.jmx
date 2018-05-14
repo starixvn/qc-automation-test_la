@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.3 r1808647">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Test Fragment" enabled="false"/>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="glb_Username" elementType="Argument">
+              <stringProp name="Argument.name">glb_Username</stringProp>
+              <stringProp name="Argument.value">starix101</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Pro/UAT:  starix101; Local: pgmWinston1</stringProp>
+            </elementProp>
+            <elementProp name="glb_Password" elementType="Argument">
+              <stringProp name="Argument.name">glb_Password</stringProp>
+              <stringProp name="Argument.value">123QWEasd</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Pro/UAT: 123QWEasd; Local: 1234aa</stringProp>
+            </elementProp>
+            <elementProp name="glb_Salt" elementType="Argument">
+              <stringProp name="Argument.name">glb_Salt</stringProp>
+              <stringProp name="Argument.value">v0f39NSNbs7+2lYe6g==</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Local: uOMtsZoej4nUxY3Ylw==</stringProp>
+            </elementProp>
+            <elementProp name="glb_UserId" elementType="Argument">
+              <stringProp name="Argument.name">glb_UserId</stringProp>
+              <stringProp name="Argument.value">3652</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Pro: pgmwilliam: 3652; Local: tester04:</stringProp>
+            </elementProp>
+            <elementProp name="glb_BaseCurrency" elementType="Argument">
+              <stringProp name="Argument.name">glb_BaseCurrency</stringProp>
+              <stringProp name="Argument.value">Eur</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_CurrencyId" elementType="Argument">
+              <stringProp name="Argument.name">glb_CurrencyId</stringProp>
+              <stringProp name="Argument.value">0</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_CurrencyName" elementType="Argument">
+              <stringProp name="Argument.name">glb_CurrencyName</stringProp>
+              <stringProp name="Argument.value">ALL</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_FirstDateofPrevMonth" elementType="Argument">
+              <stringProp name="Argument.name">glb_FirstDateofPrevMonth</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_IsExportExcel" elementType="Argument">
+              <stringProp name="Argument.name">glb_IsExportExcel</stringProp>
+              <stringProp name="Argument.value">false</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_IsHistory" elementType="Argument">
+              <stringProp name="Argument.name">glb_IsHistory</stringProp>
+              <stringProp name="Argument.value">False</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ProductOptions[0].Status" elementType="Argument">
+              <stringProp name="Argument.name">glb_ProductOptions[0].Status</stringProp>
+              <stringProp name="Argument.value">False</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_LastDateofPrevMonth" elementType="Argument">
+              <stringProp name="Argument.name">glb_LastDateofPrevMonth</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_TodayVal" elementType="Argument">
+              <stringProp name="Argument.name">glb_TodayVal</stringProp>
+              <stringProp name="Argument.value">2/2/2016</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_YesterdayVal" elementType="Argument">
+              <stringProp name="Argument.name">glb_YesterdayVal</stringProp>
+              <stringProp name="Argument.value">2/1/2016</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ServerName" elementType="Argument">
+              <stringProp name="Argument.name">glb_ServerName</stringProp>
+              <stringProp name="Argument.value">123.51.196.23</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Pro: 123.51.196.23; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7615</stringProp>
+            </elementProp>
+            <elementProp name="glb_Protocol" elementType="Argument">
+              <stringProp name="Argument.name">glb_Protocol</stringProp>
+              <stringProp name="Argument.value">http</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Yesterday" elementType="Argument">
+              <stringProp name="Argument.name">glb_Yesterday</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_DateRange" elementType="Argument">
+              <stringProp name="Argument.name">glb_DateRange</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">09/01/2017 - 10/15/2017</stringProp>
+            </elementProp>
+            <elementProp name="glb_LicenseeId" elementType="Argument">
+              <stringProp name="Argument.name">glb_LicenseeId</stringProp>
+              <stringProp name="Argument.value">1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Port" elementType="Argument">
+              <stringProp name="Argument.name">glb_Port</stringProp>
+              <stringProp name="Argument.value">8090</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_URLFolder" elementType="Argument">
+              <stringProp name="Argument.name">glb_URLFolder</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_PartyIds" elementType="Argument">
+              <stringProp name="Argument.name">glb_PartyIds</stringProp>
+              <stringProp name="Argument.value">14,15,17,18,19,20,21,24,33,39,40,42,43,44,46,47,48,55,56,89,92,93,95,100,114,117,136,143,148,154,167,170,186,194,228,236,238,240,251,253,265,267,276,279,281,284,285,293,23,29,31,34,35,36,37,38,41,53,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,88,90,91,96,97,115,124,127,142,146,150,151,157,158,162,165,166,168,169,171,185,217,218,220,222,223,230,233,235,237,241,244,246,248,249,250,251,254,256,257,258,259,260,262,263,264,268,271,273,275,277,286,287,16,22,26,27,45,49,52,54,87,99,101,153,234,247,252,261,272,25,30</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_IsGroupByLicensee" elementType="Argument">
+              <stringProp name="Argument.name">glb_IsGroupByLicensee</stringProp>
+              <stringProp name="Argument.value">true</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Year" elementType="Argument">
+              <stringProp name="Argument.name">glb_Year</stringProp>
+              <stringProp name="Argument.value">2018</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Month" elementType="Argument">
+              <stringProp name="Argument.name">glb_Month</stringProp>
+              <stringProp name="Argument.value">3</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_FDate" elementType="Argument">
+              <stringProp name="Argument.name">glb_FDate</stringProp>
+              <stringProp name="Argument.value">1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_TDate" elementType="Argument">
+              <stringProp name="Argument.name">glb_TDate</stringProp>
+              <stringProp name="Argument.value">31</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ExcludeTest" elementType="Argument">
+              <stringProp name="Argument.name">glb_ExcludeTest</stringProp>
+              <stringProp name="Argument.value">true</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ProductCodes" elementType="Argument">
+              <stringProp name="Argument.name">glb_ProductCodes</stringProp>
+              <stringProp name="Argument.value">SB,RB,NG,BA,LC,VS,CS,KN,AGC,VG,GD,MGCLC,MGCRNG,VB,AB,FW,VS2,LT,CB,CO,BT,BX</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_BaseCurrency1" elementType="Argument">
+              <stringProp name="Argument.name">glb_BaseCurrency1</stringProp>
+              <stringProp name="Argument.value">HKD</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Generate: Date" enabled="true">
+          <stringProp name="scriptLanguage">javascript</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">var now = new Date();
+var prevMonthLastDate = new Date(now.getFullYear(), now.getMonth(), 0);
+var prevMonthFirstDate = new Date(now.getFullYear() - (now.getMonth() &gt; 0 ? 0 : 1), (now.getMonth() - 1 + 12) % 12, 1);
+var yesterday = new Date(now.setDate(now.getDate() - 1));
+var Before10Day = new Date(now.setDate(now.getDate() - 10));
+
+
+var formatDateComponent = function(dateComponent) {
+  return (dateComponent &lt; 10 ? &apos;0&apos; : &apos;&apos;) + dateComponent;
+};
+
+var formatDate = function(date) {
+  return formatDateComponent(date.getMonth() + 1) + &apos;/&apos; + formatDateComponent(date.getDate()) + &apos;/&apos; + date.getFullYear();
+};
+
+//var aaa = &quot;bc&quot;+&quot;${BaseCurrency}&quot;;
+//document.write(formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));
+vars.put(&quot;glb_FirstDateofPrevMonth&quot;,prevMonthFirstDate.toString().substring(0, 15)); //Wed Nov 01 2017
+vars.put(&quot;glb_FirstDateofPrevMonth_2&quot;,formatDate(prevMonthFirstDate)); //10/01/2017  (Reports_Licensee WIn Loss_Submit; Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15)); //Thu Nov 30 2017
+vars.put(&quot;glb_LastDateofPrevMonth_2&quot;,formatDate(prevMonthLastDate)); // (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Yesterday&quot;,formatDate(yesterday)); //11/29/2017 (Reports_Licensee WIn Loss_Submit; Customer Reports_Customer Balance_Submit)
+
+vars.put(&quot;glb_DateRange&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(yesterday)); //10/01/2017 - 11/29/2017 (Reports_Licensee WIn Loss_Submit)
+vars.put(&quot;glb_DateRange_2&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));//10/01/2017 - 10/31/2017 (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Reports_Win Loss By Bet Type_Submit)
+
+//vars.put(&quot;LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15));
+//var i = 0;
+//vars.put(&quot;ProductOptions[&quot;+i+&quot;].Status&quot;,&quot;False&quot;);
+//document.write(prevMonthLastDate);</stringProp>
+        </JSR223PostProcessor>
+        <hashTree/>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate: Date" enabled="true">
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">var now = new Date();
+var prevMonthLastDate = new Date(now.getFullYear(), now.getMonth(), 0);
+var prevMonthFirstDate = new Date(now.getFullYear() - (now.getMonth() &gt; 0 ? 0 : 1), (now.getMonth() - 1 + 12) % 12, 1);
+var yesterday = new Date(now.setDate(now.getDate() - 1));
+var Before10Day = new Date(now.setDate(now.getDate() - 10));
+
+
+var formatDateComponent = function(dateComponent) {
+  return (dateComponent &lt; 10 ? &apos;0&apos; : &apos;&apos;) + dateComponent;
+};
+
+var formatDate = function(date) {
+  return formatDateComponent(date.getMonth() + 1) + &apos;/&apos; + formatDateComponent(date.getDate()) + &apos;/&apos; + date.getFullYear();
+};
+
+//var aaa = &quot;bc&quot;+&quot;${BaseCurrency}&quot;;
+//document.write(formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));
+vars.put(&quot;glb_FirstDateofPrevMonth&quot;,prevMonthFirstDate.toString().substring(0, 15)); //Wed Nov 01 2017
+vars.put(&quot;glb_FirstDateofPrevMonth_2&quot;,formatDate(prevMonthFirstDate)); //10/01/2017  (Reports_Licensee WIn Loss_Submit; Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15)); //Thu Nov 30 2017
+vars.put(&quot;glb_LastDateofPrevMonth_2&quot;,formatDate(prevMonthLastDate)); // (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Yesterday&quot;,formatDate(yesterday)); //11/29/2017 (Reports_Licensee WIn Loss_Submit; Customer Reports_Customer Balance_Submit)
+
+vars.put(&quot;glb_DateRange&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(yesterday)); //10/01/2017 - 11/29/2017 (Reports_Licensee WIn Loss_Submit)
+vars.put(&quot;glb_DateRange_2&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));//10/01/2017 - 10/31/2017 (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Reports_Win Loss By Bet Type_Submit)
+
+//vars.put(&quot;LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15));
+//var i = 0;
+//vars.put(&quot;ProductOptions[&quot;+i+&quot;].Status&quot;,&quot;False&quot;);
+//document.write(prevMonthLastDate);</stringProp>
+          <stringProp name="scriptLanguage">javascript</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Generate: From Date - To Date" enabled="true">
+          <stringProp name="scriptLanguage">javascript</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">var now = new Date();
+var prevMonthLastDate = new Date(now.getFullYear(), now.getMonth(), 0);
+var prevMonthFirstDate = new Date(now.getFullYear() - (now.getMonth() &gt; 0 ? 0 : 1), (now.getMonth() - 1 + 12) % 12, 1);
+var yesterday = new Date(now.setDate(now.getDate() - 1));
+var Before10Day = new Date(now.setDate(now.getDate() - 10));
+
+
+var formatDateComponent = function(dateComponent) {
+  return (dateComponent &lt; 10 ? &apos;0&apos; : &apos;&apos;) + dateComponent;
+};
+
+var formatDate = function(date) {
+  return formatDateComponent(date.getMonth() + 1) + &apos;/&apos; + formatDateComponent(date.getDate()) + &apos;/&apos; + date.getFullYear();
+};
+
+//var aaa = &quot;bc&quot;+&quot;${BaseCurrency}&quot;;
+//document.write(formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));
+vars.put(&quot;glb_FirstDateofPrevMonth&quot;,prevMonthFirstDate.toString().substring(0, 15)); //Wed Nov 01 2017
+vars.put(&quot;glb_FirstDateofPrevMonth_2&quot;,formatDate(prevMonthFirstDate)); //10/01/2017  (Reports_Licensee WIn Loss_Submit; Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15)); //Thu Nov 30 2017
+vars.put(&quot;glb_LastDateofPrevMonth_2&quot;,formatDate(prevMonthLastDate)); // (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Yesterday&quot;,formatDate(yesterday)); //11/29/2017 (Reports_Licensee WIn Loss_Submit; Customer Reports_Customer Balance_Submit)
+
+vars.put(&quot;glb_DateRange&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(yesterday)); //10/01/2017 - 11/29/2017 (Reports_Licensee WIn Loss_Submit)
+vars.put(&quot;glb_DateRange_2&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));//10/01/2017 - 10/31/2017 (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Reports_Win Loss By Bet Type_Submit)
+
+//vars.put(&quot;LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15));
+//var i = 0;
+//vars.put(&quot;ProductOptions[&quot;+i+&quot;].Status&quot;,&quot;False&quot;);
+//document.write(prevMonthLastDate);</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>
