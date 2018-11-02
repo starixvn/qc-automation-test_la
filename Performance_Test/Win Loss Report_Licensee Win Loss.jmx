@@ -62,7 +62,7 @@
             <stringProp name="RegexExtractor.match_number"></stringProp>
           </RegexExtractor>
           <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get: PartyIds" enabled="true">
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get: PartyIds" enabled="false">
             <stringProp name="scriptLanguage">javascript</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
@@ -72,7 +72,7 @@ var PartyData = responnse.replace(&quot;&amp;quot;&quot;,&quot;&quot;);
 var obj = JSON.parse(PartyData);
 //var BalanceUpDay = response.substr(response.indexOf(&quot;BalanceUpDay&quot;) + 26,19);
 //var BalanceUpDayConvert = new Date(Number(BalanceUpDay.substr(a.indexOf(&quot;Date&quot;) + 5,13)));
-vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);    
+//vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);    
 //vars.put(&quot;BalanceUpDay&quot;, BalanceUpDay);    
 //vars.put(&quot;BalanceUpDayConvert&quot;, formatDate(BalanceUpDayConvert));   
 
@@ -194,7 +194,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Params: CustomerId" enabled="true">
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Params: CustomerId" enabled="false">
             <stringProp name="scriptLanguage">groovy</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
@@ -203,7 +203,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
 
 def jsonSlurper = new JsonSlurper();
 def response = jsonSlurper.parseText(prev.getResponseDataAsString());
-vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
+//vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
 //vars.put(&quot;ExternalId&quot;, response.Data[0].CustId.toString());
 //vars.put(&quot;SystemId&quot;, response.Data[0].CustId.toString());
 </stringProp>
@@ -349,7 +349,7 @@ vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
             <stringProp name="RegexExtractor.match_number"></stringProp>
           </RegexExtractor>
           <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get: PartyIds" enabled="true">
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get: PartyIds" enabled="false">
             <stringProp name="scriptLanguage">javascript</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
@@ -359,7 +359,7 @@ var PartyData = responnse.replace(&quot;&amp;quot;&quot;,&quot;&quot;);
 var obj = JSON.parse(PartyData);
 //var BalanceUpDay = response.substr(response.indexOf(&quot;BalanceUpDay&quot;) + 26,19);
 //var BalanceUpDayConvert = new Date(Number(BalanceUpDay.substr(a.indexOf(&quot;Date&quot;) + 5,13)));
-vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);    
+//vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);    
 //vars.put(&quot;BalanceUpDay&quot;, BalanceUpDay);    
 //vars.put(&quot;BalanceUpDayConvert&quot;, formatDate(BalanceUpDayConvert));   
 
@@ -482,7 +482,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Params: CustomerId" enabled="true">
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Params: CustomerId" enabled="false">
             <stringProp name="scriptLanguage">groovy</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
@@ -491,7 +491,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
 
 def jsonSlurper = new JsonSlurper();
 def response = jsonSlurper.parseText(prev.getResponseDataAsString());
-vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
+//vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
 //vars.put(&quot;ExternalId&quot;, response.Data[0].CustId.toString());
 //vars.put(&quot;SystemId&quot;, response.Data[0].CustId.toString());
 </stringProp>
