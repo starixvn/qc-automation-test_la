@@ -1,0 +1,113 @@
+*** Settings ***
+Library           OperatingSystem
+Library           XML
+Library           DatabaseLibrary
+Library           String
+Library           Selenium2Library
+Library           Collections
+
+*** Test Cases ***
+Create_HTML_Report
+    [Tags]    CI
+    #${Username} =    Generate Random String    1    abc
+    #log to console    ${Username}
+    #${Username}    set variable    <b>${Username}</b>
+    #run keyword if    '${Username}' == 'a'    write_variable_in_file    ${Username}
+    #write_variable_in_file    ${Username}
+    ${StrReport}    set variable
+    ${root}    Parse Xml    Performance_Test\\CreateHTMLReport\\result.xml
+    ${root_bk}    Parse Xml    Performance_Test\\CreateHTMLReport\\result_bk.xml
+    #outrights tag
+    ${testResults}    Get Element    ${root}
+    @{httpSamples}    Get Elements    ${testResults}    httpSample
+    ${count_httpSample}    Get Element Count    ${testResults}    httpSample
+    Run Keyword If    ${count_httpSample}==0    Fail
+    ${StrReport}    set variable    ${StrReport}<table style="border:1px solid #dddddd;"><tr>
+    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd;font-weight:bold">URI</td>
+    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd;font-weight:bold">Average (ms)</td>
+    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd;font-weight:bold">Latency</td>
+    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd;font-weight:bold">Http Code</td>
+    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd;font-weight:bold">Errors</td></tr>
+    : FOR    ${index}    IN RANGE    0    ${count_httpSample}
+    \    ${StrReport}    set variable    ${StrReport}<tr>
+    \    ${httpSample}    Get From List    ${httpSamples}    ${index}
+    \    ${detail}    Set Variable    ${httpSample.attrib}
+    \    ${t}    Get From Dictionary    ${detail}    t    #Average (ms)
+    \    ${lt}    Get From Dictionary    ${detail}    lt    #Latency
+    \    ${rc}    Get From Dictionary    ${detail}    rc    #Http Code
+    \    ${lb}    Get From Dictionary    ${detail}    lb    #URI
+    \    #get Old Result Values
+    \    ${DoesOldElementExist}=    Run Keyword And Return Status    Element Should Exist    ${root_bk}    httpSample[@lb="${lb}"]
+    \    ${OldElement_t}=    Run Keyword If    '${DoesOldElementExist}'=='True'    Get Element    ${root_bk}    httpSample[@lb="${lb}"]
+    \    ${OldDetail}=    Run Keyword If    '${DoesOldElementExist}'=='True'    Set Variable    ${OldElement_t.attrib}
+    \    ...    ELSE    Set Variable
+    \    ${Old_t}=    Run Keyword If    '${DoesOldElementExist}'=='True'    Get From Dictionary    ${OldDetail}    t
+    \    ...    ELSE    Set Variable    0
+    \    ${Old_lt}=    Run Keyword If    '${DoesOldElementExist}'=='True'    Get From Dictionary    ${OldDetail}    lt
+    \    ...    ELSE    Set Variable    0
+    \    ${Diff_t}=    Evaluate    ${t} - ${Old_t}
+    \    ${Diff_lt}=    Evaluate    ${lt} - ${Old_lt}
+    \    #${Diff_t_str}=    Set Variable If    ${Diff_t}>=0
+    \    ${Diff_t_str}=    Run keyword if    ${Diff_t}>=0    set variable    <font style="color:red;font-size:10px">+${Diff_t}</font>
+    \    ...    ELSE    set variable    <font style="color:green;font-size:10px">${Diff_t}</font>
+    \    #${Diff_lt_str}=    Set Variable If    ${Diff_lt}>=0    <font style="color:red;font-size:6px">+${Diff_lt}</font>
+    \    ...    # ELSE    <font style="color:blue;font-size:6px">-${Diff_lt}</font>
+    \    ${Diff_lt_str}=    Run keyword if    ${Diff_lt}>=0    set variable    <font style="color:red;font-size:10px">+${Diff_lt}</font>
+    \    ...    ELSE    set variable    <font style="color:green;font-size:10px">${Diff_lt}</font>
+    \    ${StrReport}    set variable    ${StrReport}<td style="border:1px solid #dddddd;font-weight:bold">${lb}</td>
+    \    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd">${t} ${Diff_t_str}</td>
+    \    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd">${lt} ${Diff_lt_str}</td>
+    \    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd">${rc}</td>
+    \    @{assertionResults}    Get Elements    ${httpSample}    assertionResult
+    \    ${count_assertionResults}    Get Element Count    ${httpSample}    assertionResult
+    \    ${ErrorResults}    get errors    ${assertionResults}    ${count_assertionResults}
+    \    ${StrReport}    set variable    ${StrReport}<td style="border:1px solid #dddddd">${ErrorResults}</td>
+    \    ${StrReport}    set variable    ${StrReport}</tr>
+    ${StrReport}    set variable    ${StrReport}</tr></table>
+    #matches tag
+    #${match}    Get Element    ${root}    matches
+    #@{matches}    Get Elements    ${match}    match
+    #${count_match}    Get Element Count    ${match}    match
+    #Run Keyword If    ${count_match}==0    Fail
+    #: FOR    ${index}    IN RANGE    0    ${count_match}
+    #    ${tmp_str}    Get From List    ${matches}    ${index}
+    #    ${id}    Set Variable    ${tmp_str.attrib}
+    #    ${mt}    Get From Dictionary    ${id}    mt
+    #    ${id}    Get From Dictionary    ${id}    id
+    #    compare two days in xml odds feed_soccer    ${mt}    @{current_date}
+    write_variable_in_file    ${StrReport}
+
+*** Keywords ***
+write_variable_in_file
+    [Arguments]    ${variable}
+    Create File    Performance_Test\\CreateHTMLReport\\HTMLReport.html    ${variable}
+
+get errors
+    [Arguments]    ${assertionResults}    ${count_assertionResults}
+    [Documentation]    This action is used to get total rows in a table.
+    ...
+    ...    Example:
+    ...
+    ...    get total rows in table | ${report_table}
+    ${errtmp}    set variable
+    ${IsFailureMessage}    set variable
+    ${failureMessage}    set variable
+    ${failureMessage_str}    set variable
+    : FOR    ${index2}    IN RANGE    0    ${count_assertionResults}
+    \    ${assertionResult}    Get From List    ${assertionResults}    ${index2}
+    \    ${name}    Get Element    ${assertionResult}    name
+    \    ${name_str}    Get Element Text    ${name}
+    \    ${failure}    Get Element    ${assertionResult}    failure
+    \    ${failure_str}    Get Element Text    ${failure}
+    \    ${error}    Get Element    ${assertionResult}    error
+    \    ${error_str}    Get Element Text    ${error}
+    \    ${IsFailureMessage}=    Run Keyword And Return Status    Element Should Exist    ${assertionResult}    failureMessage
+    \    ${failureMessage_str}=    Run Keyword If    '${IsFailureMessage}'=='True'    Get Element Text    ${assertionResult}    failureMessage
+    \    #log to console    ${failureMessage_str}
+    \    #${errtmp}=    Set Variable If    '${failure_str}'=='true' or '${error_str}'=='true'    ${errtmp}<label style="color:red">${name_str}: ${failureMessage_str}</label><br>
+    \    ${errtmp}=    Run Keyword If    '${failure_str}'=='true' or '${error_str}'=='true'    Set Variable    ${errtmp}<label style="color:red">${name_str}: ${failureMessage_str}</label><br>
+    \    ...    ELSE    Set Variable    ${errtmp}
+    \    #${errtmp}=    Set Variable    ${errtmp}<label style="color:red">${name_str}: ${failureMessage_str}</label><br>
+    \    ${failureMessage_str}    set variable
+    ${ErrorResults}=    set variable    ${errtmp}
+    [Return]    ${ErrorResults}
