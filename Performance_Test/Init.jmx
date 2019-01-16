@@ -23,7 +23,7 @@
             </elementProp>
             <elementProp name="glb_Password" elementType="Argument">
               <stringProp name="Argument.name">glb_Password</stringProp>
-              <stringProp name="Argument.value">123QWEasd</stringProp>
+              <stringProp name="Argument.value">1q2w3e4r</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">Pro/UAT: 123QWEasd; Local: 1234aa</stringProp>
             </elementProp>
