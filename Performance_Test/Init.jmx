@@ -171,10 +171,20 @@
               <stringProp name="Argument.value">HKD</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
+            <elementProp name="glb_LABillingLicensees_GoogleSpreadSheetID" elementType="Argument">
+              <stringProp name="Argument.name">glb_LABillingLicensees_GoogleSpreadSheetID</stringProp>
+              <stringProp name="Argument.value">1u9K5NPFE2V1y_EOwt_AodgXu5UElYMz8vySJmYyPzpY</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Report_CheckMonthlyBilling_File" elementType="Argument">
+              <stringProp name="Argument.name">glb_Report_CheckMonthlyBilling_File</stringProp>
+              <stringProp name="Argument.value">Report_CheckMonthlyBilling.html</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
-        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Generate: Date" enabled="true">
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Generate: Date" enabled="false">
           <stringProp name="scriptLanguage">javascript</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -215,7 +225,7 @@ vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Repo
 //document.write(prevMonthLastDate);</stringProp>
         </JSR223PostProcessor>
         <hashTree/>
-        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate: Date" enabled="true">
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate: Date" enabled="false">
           <stringProp name="cacheKey"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
@@ -261,7 +271,11 @@ vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Repo
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="cacheKey"></stringProp>
-          <stringProp name="script">var now = new Date();
+          <stringProp name="script">var d = new Date();
+var localTime = d.getTime();
+var localOffset = d.getTimezoneOffset() * 60000;
+var utc = localTime + localOffset;
+var now = new Date(utc + (3600000*-4)); //get now via GMT -4
 var prevMonthLastDate = new Date(now.getFullYear(), now.getMonth(), 0);
 var prevMonthFirstDate = new Date(now.getFullYear() - (now.getMonth() &gt; 0 ? 0 : 1), (now.getMonth() - 1 + 12) % 12, 1);
 var yesterday = new Date(now.setDate(now.getDate() - 1));
@@ -294,7 +308,26 @@ vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Repo
 //vars.put(&quot;LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15));
 //var i = 0;
 //vars.put(&quot;ProductOptions[&quot;+i+&quot;].Status&quot;,&quot;False&quot;);
-//document.write(prevMonthLastDate);</stringProp>
+//document.write(prevMonthLastDate);
+
+
+var first = new Date(formatDate(prevMonthFirstDate));
+var last = new Date(formatDate(prevMonthLastDate));
+var FDay = first.getDate();
+var FMonth = first.getMonth() + 1;
+var YDay = last.getDate();
+var YMonth = last.getMonth() + 1;
+var Year = first.getFullYear();
+
+//var aaa = &quot;bc&quot;+&quot;${BaseCurrency}&quot;;
+//document.write(formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));
+vars.put(&quot;FDay&quot;,FDay); //1
+vars.put(&quot;FMonth&quot;,FMonth); //1
+
+vars.put(&quot;YDay&quot;,YDay); //31
+vars.put(&quot;YMonth&quot;,YMonth); //1
+
+vars.put(&quot;Year&quot;,Year); //2018</stringProp>
         </JSR223Sampler>
         <hashTree/>
       </hashTree>
