@@ -4086,6 +4086,13 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String Settlement_TicketsPayout = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(20).toString();
 		String Settlement_CashOutCommission = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(21).toString();
 		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
+
+		float IncomeAOnBBAmt_float = Float.parseFloat(RemoveCommaInString(IncomeAOnBBAmt));
+		float IncomeBOnProfitSharing_float = Float.parseFloat(RemoveCommaInString(IncomeBOnProfitSharing));
+		float AmountDuetoCashOutAOnBBAmt_float = Float.parseFloat(RemoveCommaInString(AmountDuetoCashOutAOnBBAmt));
+		float AmountDuetoCashOutBOnProfitSharing_float = Float.parseFloat(RemoveCommaInString(AmountDuetoCashOutBOnProfitSharing));
+		float CashOutEquivalent = Math.max(IncomeAOnBBAmt_float+AmountDuetoCashOutAOnBBAmt_float, IncomeBOnProfitSharing_float+AmountDuetoCashOutBOnProfitSharing_float);
+		//log.info(&quot;William Test &quot;+CashOut_Equivalent.toString()+&quot;=============&quot;);
 		
 		String FlagCashOutTimes = returnStatusFormat(&quot;Fail&quot;);
 		String FlagCashOutTickets = returnStatusFormat(&quot;Fail&quot;);
@@ -4125,11 +4132,11 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}
-		/*if(Settlement_Equivalent == ChangeDataFormat(Licensingfee)){
+		if(Math.abs(ConvertStringToFloat(Settlement_Equivalent)-CashOutEquivalent)&lt;0.02){
 			FlagEquivalent = returnStatusFormat(&quot;Pass&quot;);
 		}else{
 			AssertionResult.setFailure(true);
-		}*/
+		}
 
 		def path = FileServer.getFileServer().getBaseDir();
 		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
@@ -4142,8 +4149,12 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		WriteResultToReport(file,&quot;Buyback Amt - Total&quot;,BuybackAmountTotal,Settlement_BuybackAmountTotal,FlagBuybackAmountTotal);
 		WriteResultToReport(file,&quot;Tickets Payout&quot;,TicketsPayout,Settlement_TicketsPayout,FlagTicketsPayout);
 		WriteResultToReport(file,&quot;Cash Out Commission&quot;,CashOutCommission,Settlement_CashOutCommission,FlagCashOutCommission);
-		//WriteResultToReport(file,&quot;Licensing fee &amp; Equivalent&quot;,Licensingfee,Settlement_Equivalent,FlagEquivalent);
+		WriteResultToReport(file,&quot;Cash Out Equivalent&quot;,CashOutEquivalent.toString(),Settlement_Equivalent,FlagEquivalent);
 		
+		//long a = Double.valueOf(&quot;2,373.39&quot;);//&quot;2373.39&quot;.toInteger();//IncomeAOnBBAmt.toInteger();
+		//if(a&gt;0){
+			//log.info(&quot;William Test=================&quot;);
+		//}
       }
 
       
@@ -4154,6 +4165,15 @@ String ChangeDataFormat(String str){
 	String string = str;//.replaceAll(&quot;(&quot;,&quot;&quot;);
 	if(string.indexOf(&quot;-&quot;)&gt;=0){
 		return string.replaceAll(&quot;-&quot;,&quot;(&quot;) + &quot;)&quot;;
+	}
+   	return string;
+}
+
+String RemoveCommaInString(String str){
+	/* This function will remove comma in String from -185,842.93 -&gt; -185842.93*/
+	String string = str;//.replaceAll(&quot;(&quot;,&quot;&quot;);
+	if(string.indexOf(&quot;,&quot;)&gt;=0){
+		return string.replaceAll(&quot;,&quot;,&quot;&quot;);
 	}
    	return string;
 }
@@ -4188,6 +4208,18 @@ String ConvertNegativeDataToZero(String str){
 	return string;
 }
 
+/* Gross Win = - SettlementReport.Customer WL
+* If Gross Win &lt; 0 -&gt; Web show 0
+* Else show Gross Win
+ */
+float ConvertStringToFloat(String str){
+	String string = str;
+	string = RemoveCommaInString(string);
+	if(string.indexOf(&quot;(&quot;)&gt;=0){
+		string = string.substring(1,string.length()-1);
+	}
+	return Float.parseFloat(string);
+}
 </stringProp>
                 <stringProp name="scriptLanguage">groovy</stringProp>
               </JSR223Assertion>
