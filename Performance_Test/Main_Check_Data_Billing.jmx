@@ -204,7 +204,7 @@ file.delete();
 file.append (&quot;&lt;style&gt;.TableBorderStyleStatus{width:100px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderStatus{width:100px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderValue{width:200px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleValue{width:200px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleDataProperty{width:200px;float:left;font-weight: bold;border-bottom: 2px solid #DCDCDC;}.TableBorderStyleHeader{width:706px;font-weight: bold;border-bottom: 2px solid #DCDCDC;color:red;}.TableBorderStyleBody{width:706px;float:left;border-top: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;border-right: 2px solid #DCDCDC;}&lt;/style&gt;&quot;);
 //write Data Frame
 file.append (&quot;&lt;h1&gt;Check Data from &quot;+&quot;${glb_FirstDateofPrevMonth_2}&quot;+&quot; to &quot;+&quot;${glb_LastDateofPrevMonth_2}&quot;+&quot;&lt;/h1&gt;&quot;);
-file.append (&quot;&lt;h3&gt;Data Between LA Reports&lt;/h3&gt;&quot;);
+//file.append (&quot;&lt;h3&gt;Data Between LA Reports&lt;/h3&gt;&quot;);
 file.append (&quot;&lt;div class=&apos;TableBorderStyleBody&apos;&gt;&quot;);
 /*====================*/
 
@@ -310,11 +310,18 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	}else{
 		vars.put(&quot;PartyId&quot;, PartyId);
 	}
+
+	String ProductName = vars.getObject(&quot;sheet&quot;).get(i).get(3).toString();
+	if(ProductName==&quot;BA&quot;){
+		vars.put(&quot;DrawFilter&quot;, &quot;2&quot;);
+	}else{
+		vars.put(&quot;DrawFilter&quot;, &quot;1&quot;);
+	}
 }
 </stringProp>
           </JSR223Sampler>
           <hashTree/>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF SETTLEMENT REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF SETTLEMENT REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Settlement Report&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -465,6 +472,16 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
                 <stringProp name="XPathExtractor.refname">Turnover</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
                 <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[1]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover - BA" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Turnover - BA</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(@class,&apos;grandTotal&apos;)][1]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -690,6 +707,56 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
               </XPathExtractor>
               <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss - BA" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Customer Win Loss - BA</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(@class,&apos;grandTotal&apos;)][2]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss - BA - Negative" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Customer Win Loss - BA - Negative</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(@class,&apos;grandTotal&apos;)][2]/span</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="BA Comm" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">BA Comm</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(@class,&apos;grandTotal&apos;)][3]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Amt Due To BA" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Amt Due To BA</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(@class,&apos;grandTotal&apos;)][4]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Amt Due To BA - Negative" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Amt Due To BA - Negative</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(@class,&apos;grandTotal&apos;)][4]/span</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
               <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="false">
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                 <stringProp name="RegexExtractor.refname">TestTest</stringProp>
@@ -745,7 +812,7 @@ String status;
 
 //log.info(&quot;${Customer Win Loss}  &quot;+&quot;${ProductName}&quot;);
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
-	if(&quot;${ProductName}&quot;==&quot;Sportsbook&quot; 
+	/*if(&quot;${ProductName}&quot;==&quot;Sportsbook&quot; 
 		|| &quot;${ProductName}&quot;==&quot;Number Game&quot;
 		|| &quot;${ProductName}&quot;==&quot;Virtual Sports&quot;
 		|| &quot;${ProductName}&quot;==&quot;RNG Casino&quot;
@@ -756,17 +823,9 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		|| &quot;${ProductName}&quot;==&quot;Virtual Sports 2&quot;
 		|| &quot;${ProductName}&quot;==&quot;Lottery&quot;
 		|| &quot;${ProductName}&quot;==&quot;Exchange&quot;){
-		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
-		String Turnover = &quot;${Turnover}&quot;;//removeSpecialCharacters(&quot;${Turnover}&quot;);
-		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent}&quot;,&quot;${Equivalent - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
-		String TotalTrans = &quot;${Total Trans}&quot;;
-		List&lt;ValueRange&gt; list = Arrays.asList(
-           new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:L&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss,Equivalent))));     
-	
-		vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
-	                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
-	                    .execute();
-	}else if(&quot;${ProductName}&quot;==&quot;Gold Deluxe&quot;){/* GOLD DELUXE */
+		
+	}else */
+	if(&quot;${ProductName}&quot;==&quot;Gold Deluxe&quot;){/* GOLD DELUXE */
 		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
 		String Turnover = &quot;${Turnover}&quot;;
 		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent - GD}&quot;,&quot;${Equivalent - GD - Negative}&quot;);
@@ -811,6 +870,32 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
            vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
 	     new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
 	     .execute();
+	}else if(&quot;${ProductName}&quot;==&quot;BA&quot;){/* BA */
+		String CustomerWinLossBA = getNotEmptyDataBetween2String(&quot;${Customer Win Loss - BA}&quot;,&quot;${Customer Win Loss - BA - Negative}&quot;);
+		String TurnoverBA = &quot;${Turnover - BA}&quot;;
+		String AmtDueToBA  = getNotEmptyDataBetween2String(&quot;${Amt Due To BA}&quot;,&quot;${Amt Due To BA - Negative}&quot;);
+		String BAComm = &quot;${BA Comm}&quot;;
+
+		List&lt;ValueRange&gt; list = Arrays.asList(
+           new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:I&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(TurnoverBA))),
+           new ValueRange().setRange(&quot;Licensees!K&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(CustomerWinLossBA))),
+           new ValueRange().setRange(&quot;Licensees!AJ&quot; + (i + 1) + &quot;:AK&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(BAComm,AmtDueToBA)))
+           ); 
+
+           vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
+	     new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
+	     .execute();
+	}else{
+		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
+		String Turnover = &quot;${Turnover}&quot;;//removeSpecialCharacters(&quot;${Turnover}&quot;);
+		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent}&quot;,&quot;${Equivalent - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
+		String TotalTrans = &quot;${Total Trans}&quot;;
+		List&lt;ValueRange&gt; list = Arrays.asList(
+           new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:L&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss,Equivalent))));     
+	
+		vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
+	                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
+	                    .execute();
 	}
 }
 	
@@ -879,7 +964,7 @@ if (matcher.find()) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF NUMBER GAME WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF NUMBER GAME WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Number Game Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -1230,7 +1315,7 @@ String ConvertDataToCompareWithGrossWin(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF VIRTUAL SPORTS WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF VIRTUAL SPORTS WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Virtual Sports Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -1558,7 +1643,7 @@ String ConvertLicenseeWinLossToCustomerWL(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF KENO WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF KENO WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Keno Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -1892,7 +1977,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF AG CASINO WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF AG CASINO WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;AG Casino Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -2222,7 +2307,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF MACAU GAMES WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF MACAU GAMES WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Macau Games Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -2530,7 +2615,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF VIRTUAL SPORTS 2 WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF VIRTUAL SPORTS 2 WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Virtual Sports 2 Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -2838,7 +2923,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LOTTERY WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LOTTERY WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Lottery Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -3202,7 +3287,7 @@ int FindColumnIndex(String ColumnName, String Header){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF EXCHANGE WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF EXCHANGE WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Exchange Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -3533,7 +3618,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF COLOSSUS BET WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF COLOSSUS BET WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Colossus Bet Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -3826,7 +3911,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF CASH OUT WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF CASH OUT WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Cash Out Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -4767,7 +4852,7 @@ if(EnableDurationAssertion==true){
                   </elementProp>
                   <elementProp name="DrawFilter" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">1</stringProp>
+                    <stringProp name="Argument.value">${DrawFilter}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">DrawFilter</stringProp>
@@ -4839,11 +4924,14 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	String CustomerWinLoss = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CustomerTotal.toString();
 	String Turnover = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TotalTurnOver.toString();
 	String TotalTrans = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TotalTransaction.toString();
+	String BACommission = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].BACommission.toString();
+	String AmtDueToBA = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].AmtDueToBA.toString();
 	String CashOutCommission = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CashOutCommission.toString();
 
 	List&lt;ValueRange&gt; list = Arrays.asList(
       new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
-      new ValueRange().setRange(&quot;Licensees!Y&quot; + (i + 1) + &quot;:Y&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(CashOutCommission)))
+      new ValueRange().setRange(&quot;Licensees!V&quot; + (i + 1) + &quot;:V&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(CashOutCommission))),
+      new ValueRange().setRange(&quot;Licensees!AJ&quot; + (i + 1) + &quot;:AK&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(BACommission,AmtDueToBA)))
       );     
 
 	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
@@ -4876,10 +4964,16 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String Settlement_CashOutTimes = &quot;&quot;;
 		String Settlement_CashOutCommission = &quot;&quot;;	
 
+		String Settlement_BACommission = &quot;&quot;;
+		String Settlement_AmtDueToBA = &quot;&quot;;
+
 		
 		if(&quot;${ProductName}&quot;==&quot;Cash Out&quot;){
 			Settlement_CashOutTimes = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(16).toString();
 			Settlement_CashOutCommission = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(21).toString();	
+		}else if(&quot;${ProductName}&quot;==&quot;BA&quot;){
+			Settlement_BACommission = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(35).toString();
+			Settlement_AmtDueToBA = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(36).toString();	
 		}
 		
 		
@@ -4887,6 +4981,8 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String FlagTotalTrans = returnStatusFormat(&quot;Fail&quot;);
 		String FlagCustomerWinLoss = returnStatusFormat(&quot;Fail&quot;);
 		String FlagCashOutCommission = returnStatusFormat(&quot;Fail&quot;);
+		String FlagBACommission = returnStatusFormat(&quot;Fail&quot;);
+		String FlagAmtDueToBA = returnStatusFormat(&quot;Fail&quot;);
 		
 		//If Cashout then check Total Trans = Cash Out Times*2 , Cash Out Commission = Cash Out Commission
 		if(&quot;${ProductName}&quot;==&quot;Cash Out&quot;){
@@ -4899,6 +4995,31 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 
 			if(Math.abs(ConvertStringToFloat(Settlement_CashOutCommission) - ConvertStringToFloat(CashOutCommission))&lt;0.2){
 				FlagCashOutCommission = returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
+		}else if(&quot;${ProductName}&quot;==&quot;BA&quot;){
+			
+			if(Math.abs(ConvertStringToFloat(Settlement_Turnover) - ConvertStringToFloat(Turnover))&lt;0.2){
+				FlagTurnOver = returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
+
+			if(Math.abs(ConvertStringToFloat(Settlement_CustomerWinLoss) - ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
+				FlagCustomerWinLoss = returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
+
+			if(Math.abs(ConvertStringToFloat(Settlement_BACommission) - ConvertStringToFloat(BACommission))&lt;0.2){
+				FlagBACommission = returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
+
+			if(Math.abs(ConvertStringToFloat(Settlement_AmtDueToBA) - ConvertStringToFloat(AmtDueToBA))&lt;0.2){
+				FlagAmtDueToBA = returnStatusFormat(&quot;Pass&quot;);
 			}else{
 				AssertionResult.setFailure(true);
 			}
@@ -4929,6 +5050,11 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		if(&quot;${ProductName}&quot;==&quot;Cash Out&quot;){
 			WriteResultToReport(file,&quot;TotalTrans-&quot;+&quot;${ProductCode}&quot;,TotalTrans,Settlement_CashOutTimes.toString()+&quot;*2&quot;,FlagTotalTrans);
 			WriteResultToReport(file,&quot;Cash Out Commission-&quot;+&quot;${ProductCode}&quot;,CashOutCommission,Settlement_CashOutCommission,FlagCashOutCommission);
+		}else if(&quot;${ProductName}&quot;==&quot;BA&quot;){
+			WriteResultToReport(file,&quot;Turnover-&quot;+&quot;${ProductCode}&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
+			WriteResultToReport(file,&quot;Customer WL-&quot;+&quot;${ProductCode}&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+			WriteResultToReport(file,&quot;BA Commission-&quot;+&quot;${ProductCode}&quot;,BACommission,Settlement_BACommission,FlagBACommission);
+			WriteResultToReport(file,&quot;Amt Due To BA-&quot;+&quot;${ProductCode}&quot;,AmtDueToBA,Settlement_AmtDueToBA,FlagAmtDueToBA);
 		}else{
 			WriteResultToReport(file,&quot;TotalTrans-&quot;+&quot;${ProductCode}&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
 			WriteResultToReport(file,&quot;Turnover-&quot;+&quot;${ProductCode}&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
