@@ -181,6 +181,59 @@
               <stringProp name="Argument.value">Report_CheckMonthlyBilling.html</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
+            <elementProp name="glb_Username_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Username_LRF</stringProp>
+              <stringProp name="Argument.value">autQC</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Password_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Password_LRF</stringProp>
+              <stringProp name="Argument.value">1234REWQ</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Salt_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Salt_LRF</stringProp>
+              <stringProp name="Argument.value">ng/sg3P/xCEzGi5VJw==</stringProp>
+              <stringProp name="Argument.desc">Local: uOMtsZoej4nUxY3Ylw==</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_UserId_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_UserId_LRF</stringProp>
+              <stringProp name="Argument.value">5755</stringProp>
+              <stringProp name="Argument.desc">Pro: pgmwilliam: 3652; Local: tester04:</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ServerName_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_ServerName_LRF</stringProp>
+              <stringProp name="Argument.value">lrf.starific.net</stringProp>
+              <stringProp name="Argument.desc">Pro: internal.amazzu.com; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7610/LRF4/</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Protocol_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Protocol_LRF</stringProp>
+              <stringProp name="Argument.value">http</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Port_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Port_LRF</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_URLFolder_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_URLFolder_LRF</stringProp>
+              <stringProp name="Argument.value">LRF3</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_captcha_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_captcha_LRF</stringProp>
+              <stringProp name="Argument.value">1710</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Token_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Token_LRF</stringProp>
+              <stringProp name="Argument.value">ohNKbMalJSzgLP-ky1Q7TQ2</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
