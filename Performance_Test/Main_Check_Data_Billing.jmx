@@ -201,7 +201,7 @@ def path = FileServer.getFileServer().getBaseDir();
 File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
 file.delete();
 //write stylesheet
-file.append (&quot;&lt;style&gt;.TableBorderStyleStatus{width:100px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderStatus{width:100px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderValue{width:200px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleValue{width:200px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleDataProperty{width:200px;float:left;font-weight: bold;border-bottom: 2px solid #DCDCDC;}.TableBorderStyleHeader{width:706px;font-weight: bold;border-bottom: 2px solid #DCDCDC;color:red;}.TableBorderStyleBody{width:706px;float:left;border-top: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;border-right: 2px solid #DCDCDC;}&lt;/style&gt;&quot;);
+file.append (&quot;&lt;style&gt;.TableBorderStyleStatus{width:100px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderStatus{width:100px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderValue{width:200px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleValue{width:200px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleDataProperty{width:200px;float:left;font-weight: bold;border-bottom: 2px solid #DCDCDC;}.TableBorderStyleHeader{width:706px;font-weight: bold;border-bottom: 2px solid #DCDCDC;}.TableBorderStyleBody{width:706px;float:left;border-top: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;border-right: 2px solid #DCDCDC;}&lt;/style&gt;&quot;);
 //write Data Frame
 file.append (&quot;&lt;h1&gt;Check Data from &quot;+&quot;${glb_FirstDateofPrevMonth_2}&quot;+&quot; to &quot;+&quot;${glb_LastDateofPrevMonth_2}&quot;+&quot;&lt;/h1&gt;&quot;);
 //file.append (&quot;&lt;h3&gt;Data Between LA Reports&lt;/h3&gt;&quot;);
@@ -1274,7 +1274,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -1602,7 +1602,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -1951,7 +1951,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -2281,7 +2281,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -2589,7 +2589,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -2897,7 +2897,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -3242,7 +3242,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -3592,7 +3592,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -3885,7 +3885,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -4289,7 +4289,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -4608,7 +4608,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
@@ -5088,7 +5088,7 @@ String returnStatusFormat(String str){
 	return string;
 }
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&quot;+Licensee+&quot; - Compare Data bettwen &quot;+Report1+&quot; &amp; &quot;+Report2+&quot;&lt;/div&gt;&quot;);
+	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
 	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
