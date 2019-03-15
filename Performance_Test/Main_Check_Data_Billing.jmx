@@ -321,7 +321,7 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 </stringProp>
           </JSR223Sampler>
           <hashTree/>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF SETTLEMENT REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF SETTLEMENT REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Settlement Report&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -964,7 +964,7 @@ if (matcher.find()) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF NUMBER GAME WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF NUMBER GAME WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Number Game Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -1315,7 +1315,7 @@ String ConvertDataToCompareWithGrossWin(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF VIRTUAL SPORTS WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF VIRTUAL SPORTS WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Virtual Sports Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -1643,7 +1643,7 @@ String ConvertLicenseeWinLossToCustomerWL(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF KENO WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF KENO WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Keno Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -1977,7 +1977,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF AG CASINO WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF AG CASINO WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;AG Casino Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -2307,7 +2307,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF MACAU GAMES WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF MACAU GAMES WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Macau Games Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -2615,7 +2615,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF VIRTUAL SPORTS 2 WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF VIRTUAL SPORTS 2 WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Virtual Sports 2 Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -2923,7 +2923,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LOTTERY WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LOTTERY WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Lottery Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -3287,7 +3287,7 @@ int FindColumnIndex(String ColumnName, String Header){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF EXCHANGE WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF EXCHANGE WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Exchange Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -3618,7 +3618,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF COLOSSUS BET WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF COLOSSUS BET WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Colossus Bet Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -3911,7 +3911,7 @@ String ConvertNegativeDataToZero(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF CASH OUT WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF CASH OUT WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Cash Out Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -4324,7 +4324,7 @@ float ConvertStringToFloat(String str){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF GOLD DELUXE WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF GOLD DELUXE WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Gold Deluxe Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -4671,7 +4671,7 @@ float ConvertStringToFloat(String str, Boolean FlagReturnZeroWhenNegative=false)
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LAP-LICENSEE WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LAP-LICENSEE WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;LAP-Licensee Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -5158,7 +5158,7 @@ String convertLicenseeIdToPartyId(String LicenseeId){
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LAP-AG CASINO WIN LOSS REPORT" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LAP-AG CASINO WIN LOSS REPORT" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;LAP-AG Casino Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -5447,6 +5447,61 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		
       }
 
+	/* CHECK DATA WITH AG Casino Win Loss REPORT
+	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss
+	 * 
+	 */
+	//Get Index of AG Casino Win Loss Data Row that LAP-AG Casino Win Loss report need to compare with
+	int AGDataRowIndex = 0;
+	strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			AGDataRowIndex = j;
+			break;
+		}
+      }
+
+	
+	//Get Data from AG Casino Win Loss Data Row
+      if(AGDataRowIndex&gt;0){
+      	
+      	String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(AGDataRowIndex).get(10).toString();
+		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(AGDataRowIndex).get(8).toString();
+		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(AGDataRowIndex).get(9).toString();
+	
+		String FlagTurnOver = returnStatusFormat(&quot;Fail&quot;);
+		String FlagTotalTrans = returnStatusFormat(&quot;Fail&quot;);
+		String FlagCustomerWinLoss = returnStatusFormat(&quot;Fail&quot;);
+
+		if(Math.abs(ConvertStringToFloat(Settlement_Turnover) - ConvertStringToFloat(Turnover))&lt;0.2){
+			FlagTurnOver = returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(ConvertStringToFloat(Settlement_TotalTrans) - ConvertStringToFloat(TotalTrans))&lt;0.2){
+			FlagTotalTrans = returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(ConvertStringToFloat(Settlement_CustomerWinLoss) - ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
+			FlagCustomerWinLoss = returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		
+		def path = FileServer.getFileServer().getBaseDir();
+		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+		
+		WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;AG Casino Win Loss&quot;);
+
+		WriteResultToReport(file,&quot;TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
+		WriteResultToReport(file,&quot;Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
+		WriteResultToReport(file,&quot;Customer WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+		
+		
+      }
       
 }
 
@@ -5931,7 +5986,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 			AssertionResult.setFailure(true);
 		}
 		if(Math.abs(ConvertStringToFloat(Settlement_Licensingfee) - ConvertStringToFloat(AmountDue))&lt;0.2){
-			FlagEquivalent = returnStatusFormat(&quot;Pass&quot;);
+			FlagAmountDue = returnStatusFormat(&quot;Pass&quot;);
 		}else{
 			AssertionResult.setFailure(true);
 		}
