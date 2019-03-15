@@ -5361,7 +5361,7 @@ if(EnableDurationAssertion==true){
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Save Data LAP-AG Casino Win Loss To Google SpreadSheet And Compare Data with Settlement Report" enabled="true">
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Save Data LAP-AG Casino Win Loss To Google SpreadSheet And Compare Data with Settlement Report and AG Casino Win Loss" enabled="true">
                 <stringProp name="cacheKey"></stringProp>
                 <stringProp name="filename"></stringProp>
                 <stringProp name="parameters"></stringProp>
@@ -5453,7 +5453,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	 */
 	//Get Index of AG Casino Win Loss Data Row that LAP-AG Casino Win Loss report need to compare with
 	int AGDataRowIndex = 0;
-	strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
+	strCompareDataWithReport = &quot;AG Casino Win Loss, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
 	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
 		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
 		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
