@@ -151,30 +151,61 @@ if (!book.equals(&quot;&quot;)) {
 }</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="false">
-          <stringProp name="scriptLanguage">groovy</stringProp>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Change Date params to This Month" enabled="false">
+          <stringProp name="scriptLanguage">javascript</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="cacheKey"></stringProp>
-          <stringProp name="script">import org.apache.jmeter.services.FileServer;
+          <stringProp name="script">var d = new Date();
+var localTime = d.getTime();
+var localOffset = d.getTimezoneOffset() * 60000;
+var utc = localTime + localOffset;
+var now = new Date(utc + (3600000*-4)); //get now via GMT -4
+var prevMonthLastDate = new Date(now.setDate(now.getDate() - 2));//Get befor yesterday to set to prevMonthLastDate//Date(now.getFullYear(), now.getMonth()+1, 0);
+var prevMonthFirstDate = new Date(now.getFullYear(), now.getMonth(), 1);
 
-def path = FileServer.getFileServer().getBaseDir();
-def csvFile = new File(path+&apos;/DataCenterCheckBilling.csv&apos;)
-def lines = csvFile.readLines()
 
+var formatDateComponent = function(dateComponent) {
+  return (dateComponent &lt; 10 ? &apos;0&apos; : &apos;&apos;) + dateComponent;
+};
 
-def secondLine = lines.get(1)
-def entries = secondLine.split(&quot;,&quot;)
-entries[1] = &apos;hello&apos;
-secondLine = entries.join(&apos;,&apos;)
-lines.set(1, secondLine)
+var formatDate = function(date) {
+  return formatDateComponent(date.getMonth() + 1) + &apos;/&apos; + formatDateComponent(date.getDate()) + &apos;/&apos; + date.getFullYear();
+};
+vars.put(&quot;glb_FirstDateofPrevMonth&quot;,prevMonthFirstDate.toString().substring(0, 15)); //Wed Nov 01 2017
+vars.put(&quot;glb_FirstDateofPrevMonth_2&quot;,formatDate(prevMonthFirstDate)); 
+vars.put(&quot;glb_LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15)); //Thu Nov 30 2017
+vars.put(&quot;glb_LastDateofPrevMonth_2&quot;,formatDate(prevMonthLastDate)); 
 
-csvFile.withWriter{ out -&gt;
-    lines.each {out.println it}
-}</stringProp>
+var first = new Date(formatDate(prevMonthFirstDate));
+var last = new Date(formatDate(prevMonthLastDate));
+var FDay = first.getDate();
+var FMonth = first.getMonth() + 1;
+var YDay = last.getDate();
+var YMonth = last.getMonth() + 1;
+var Year = first.getFullYear();
+
+vars.put(&quot;FDay&quot;,FDay); //1
+vars.put(&quot;FMonth&quot;,FMonth); //1
+
+vars.put(&quot;YDay&quot;,YDay); //31
+vars.put(&quot;YMonth&quot;,YMonth); //1
+
+vars.put(&quot;Year&quot;,Year); //2018
+
+log.info(&quot;First Date: &quot;+prevMonthFirstDate.toString());
+log.info(&quot;Last Date: &quot;+prevMonthLastDate.toString());
+log.info(&quot;FDay: &quot;+FDay.toString());
+log.info(&quot;YDay: &quot;+YDay.toString());
+log.info(&quot;YMonth: &quot;+YMonth.toString());
+log.info(&quot;Year: &quot;+Year.toString());</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Connect Google SpreadSheet" enabled="true">
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Check_Billing" enabled="true">
+          <stringProp name="IncludeController.includepath">Check_Billing.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Connect Google SpreadSheet" enabled="false">
           <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -232,7 +263,7 @@ for( String values : str )
 */</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="true">
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="false">
           <stringProp name="WhileController.condition">${__javaScript(&quot;${stopWhile}&quot; != &quot;OK&quot;)}</stringProp>
         </WhileController>
         <hashTree>
@@ -1176,6 +1207,9 @@ import org.apache.jmeter.services.FileServer;
 
 int i = Integer.parseInt(vars.get(&quot;counter&quot;));
 
+List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
+vars.putObject(&quot;sheet&quot;, sheet);
+
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	String GrossWin = &quot;${Gross Win}&quot;;
 	String Turnover = &quot;${Turnover}&quot;;
@@ -1852,6 +1886,8 @@ import java.nio.file.Paths;
 import org.apache.jmeter.services.FileServer;
 
 int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+
+
 
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	String CustomerWinLoss = &quot;${Customer Win Loss}&quot;;
@@ -4921,6 +4957,9 @@ import groovy.json.JsonSlurper
 
 int i = Integer.parseInt(vars.get(&quot;counter&quot;));
 
+List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
+vars.putObject(&quot;sheet&quot;, sheet);
+
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	def jsonSlurper = new JsonSlurper();
 	def response = jsonSlurper.parseText(prev.getResponseDataAsString());
@@ -5379,6 +5418,9 @@ import org.apache.jmeter.services.FileServer;
 import groovy.json.JsonSlurper
 
 int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+
+List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
+vars.putObject(&quot;sheet&quot;, sheet);
 
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	def jsonSlurper = new JsonSlurper();
@@ -7125,756 +7167,6 @@ if(EnableDurationAssertion==true){
 </stringProp>
                 <stringProp name="scriptLanguage">groovy</stringProp>
               </JSR223Assertion>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Reports_Exchange Win Loss_Load_LRF" enabled="false">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                <collectionProp name="Arguments.arguments"/>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${glb_ServerName_LRF}</stringProp>
-              <stringProp name="HTTPSampler.port">${glb_Port_LRF}</stringProp>
-              <stringProp name="HTTPSampler.protocol">${glb_Protocol_LRF}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder_LRF}/ExchangeWinlossReport</stringProp>
-              <stringProp name="HTTPSampler.method">GET</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="RequestVerificationToken" enabled="true">
-                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                <stringProp name="RegexExtractor.refname">RequestVerificationToken</stringProp>
-                <stringProp name="RegexExtractor.regex">name=&quot;__RequestVerificationToken&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
-                <stringProp name="RegexExtractor.template">$1$</stringProp>
-                <stringProp name="RegexExtractor.default">RequestVerificationToken IS NOT FOUND</stringProp>
-                <stringProp name="RegexExtractor.match_number"></stringProp>
-              </RegexExtractor>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Reports_Exchange Win Loss_Submit_LRF" enabled="false">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&#xd;
-	&quot;CurrencyId&quot;:${CurrencyID},&#xd;
-	&quot;BaseCurrency&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
-	&quot;CurrencyName&quot;:&quot;${glb_CurrencyName}&quot;,&#xd;
-	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
-	&quot;ReportBy&quot;:1,&#xd;
-	&quot;ExcludeTestData&quot;:false,&#xd;
-	&quot;Level&quot;:0&#xd;
-}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${glb_ServerName_LRF}</stringProp>
-              <stringProp name="HTTPSampler.port">${glb_Port_LRF}</stringProp>
-              <stringProp name="HTTPSampler.protocol">${glb_Protocol_LRF}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder_LRF}/api/ExchangeWinLossReport/Index</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">__RequestVerificationToken</stringProp>
-                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Cache-Control</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Connection</stringProp>
-                    <stringProp name="Header.value">keep-alive</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Pragma</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-Requested-With</stringProp>
-                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Save Data LAP-Exchange Win Loss To Google SpreadSheet And Compare Data with Settlement Report" enabled="true">
-                <stringProp name="cacheKey"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
-import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.apache.jmeter.services.FileServer;
-import groovy.json.JsonSlurper
-
-int i = Integer.parseInt(vars.get(&quot;counter&quot;));
-
-if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
-	def jsonSlurper = new JsonSlurper();
-	def response = jsonSlurper.parseText(prev.getResponseDataAsString());
-		
-	String CustomerWinLoss = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CustomerWL.toString();
-	String Turnover = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].Turnover.toString();
-	String TotalTrans = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TotalTransaction.toString();
-	String CustomerComm = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CustomerComm.toString();
-	String CustomerTotal = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CustomerWLTotal.toString();
-	String LicenseeWinLoss = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].LicenseeWL.toString();
-	String AmountDueTo = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].AmountDueTo.toString();
-	String LicenseeComm = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].LicenseeComm.toString();
-
-	List&lt;ValueRange&gt; list = Arrays.asList(
-      new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
-      new ValueRange().setRange(&quot;Licensees!AA&quot; + (i + 1) + &quot;:AA&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(LicenseeWinLoss))),
-      new ValueRange().setRange(&quot;Licensees!AN&quot; + (i + 1) + &quot;:AQ&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(CustomerComm,CustomerTotal,AmountDueTo,LicenseeComm)))
-      );     
-
-	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
-                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
-                    .execute();
-	/* CHECK DATA WITH SETTLEMENT REPORT
-	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss + Customer Comm &lt;=&gt; Customer Win Loss, Amount Due To &lt;=&gt; Equivalent
-	 * 
-	 */
-	//Get Index of Settlement Data Row that LAP-Exchange Win Loss report need to compare with
-	int SettlementDataRowIndex = 0;
-	String strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
-	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
-		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
-		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
-			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
-			SettlementDataRowIndex = j;
-			break;
-		}
-      }
-
-	
-	//Get Data from Settlement Data Row
-      if(SettlementDataRowIndex&gt;0){
-      	
-		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(8).toString();
-		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(9).toString();
-		String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(10).toString();
-		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
-	
-		String FlagTurnOver = returnStatusFormat(&quot;Fail&quot;);
-		String FlagTotalTrans = returnStatusFormat(&quot;Fail&quot;);
-		String FlagCustomerWinLoss = returnStatusFormat(&quot;Fail&quot;);
-		String FlagEquivalent = returnStatusFormat(&quot;Fail&quot;);
-
-		if(Math.abs(ConvertStringToFloat(Settlement_Turnover) - ConvertStringToFloat(Turnover))&lt;0.2){
-			FlagTurnOver = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_TotalTrans) - ConvertStringToFloat(TotalTrans))&lt;0.2){
-			FlagTotalTrans = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_CustomerWinLoss) - (ConvertStringToFloat(CustomerWinLoss)+ConvertStringToFloat(CustomerComm)))&lt;0.2){
-			FlagCustomerWinLoss = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		
-		if(Math.abs(ConvertStringToFloat(Settlement_Equivalent) - ConvertStringToFloat(AmountDueTo))&lt;0.2){
-			FlagEquivalent = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		
-		def path = FileServer.getFileServer().getBaseDir();
-		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
-		
-		WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Settlement Report&quot;);
-
-		WriteResultToReport(file,&quot;TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
-		WriteResultToReport(file,&quot;Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
-		WriteResultToReport(file,&quot;Cust WL+Cust Comm=Cust WL&quot;,(ConvertStringToFloat(CustomerWinLoss)+ConvertStringToFloat(CustomerComm)).toString(),Settlement_CustomerWinLoss,FlagCustomerWinLoss);
-		WriteResultToReport(file,&quot;Amt Due To=Equivalent&quot;,AmountDueTo,Settlement_Equivalent,FlagEquivalent);
-		
-      }
-
-	/* CHECK DATA WITH Exchange Win Loss
-	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss, Customer Comm &lt;=&gt; Customer Charge Comm, Licensee Comm &lt;=&gt; Licensee Charge Comm, Amount Due To &lt;=&gt; Licensing fee
-	 * 
-	 */
-	//Get Index of Exchange Win Loss Data Row that LAP-Exchange Win Loss report need to compare with
-	int ExWLDataRowIndex = 0;
-	strCompareDataWithReport = &quot;Exchange Win Loss, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
-	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
-		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
-		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
-			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
-			ExWLDataRowIndex = j;
-			break;
-		}
-      }
-
-	
-	//Get Data from Settlement Data Row
-      if(ExWLDataRowIndex&gt;0){
-      	
-		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(8).toString();
-		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(9).toString();
-		String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(10).toString();
-		String Settlement_CustomerChargeComm = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(27).toString();
-		String Settlement_LicenseeChargeComm = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(28).toString();
-		String Settlement_Licensingfee = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(24).toString();
-	
-		String FlagTurnOver = returnStatusFormat(&quot;Fail&quot;);
-		String FlagTotalTrans = returnStatusFormat(&quot;Fail&quot;);
-		String FlagCustomerWinLoss = returnStatusFormat(&quot;Fail&quot;);
-		String FlagCustomerComm = returnStatusFormat(&quot;Fail&quot;);
-		String FlagLicenseeComm = returnStatusFormat(&quot;Fail&quot;);
-		String FlagAmountDueTo = returnStatusFormat(&quot;Fail&quot;);
-
-		if(Math.abs(ConvertStringToFloat(Settlement_Turnover) - ConvertStringToFloat(Turnover))&lt;0.2){
-			FlagTurnOver = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_TotalTrans) - ConvertStringToFloat(TotalTrans))&lt;0.2){
-			FlagTotalTrans = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_CustomerWinLoss) - ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
-			FlagCustomerWinLoss = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		
-		if(Math.abs(ConvertStringToFloat(Settlement_CustomerChargeComm) - ConvertStringToFloat(CustomerComm))&lt;0.2){
-			FlagCustomerComm = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_LicenseeChargeComm) - ConvertStringToFloat(LicenseeComm))&lt;0.2){
-			FlagLicenseeComm = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_Licensingfee) - ConvertStringToFloat(AmountDueTo))&lt;0.2){
-			FlagAmountDueTo = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		
-		def path = FileServer.getFileServer().getBaseDir();
-		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
-		
-		WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Exchange Win Loss&quot;);
-
-		WriteResultToReport(file,&quot;TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
-		WriteResultToReport(file,&quot;Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
-		WriteResultToReport(file,&quot;Cust WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
-		WriteResultToReport(file,&quot;Cust Comm=Cust Charge Comm&quot;,CustomerComm,Settlement_CustomerChargeComm,FlagCustomerComm);
-		WriteResultToReport(file,&quot;Lic Comm=Lic Charge Comm&quot;,LicenseeComm,Settlement_LicenseeChargeComm,FlagLicenseeComm);
-		WriteResultToReport(file,&quot;Amt Due To=Lic fee&quot;,AmountDueTo,Settlement_Licensingfee,FlagAmountDueTo);
-      }
-      
-}
-
-String ChangeDataFormat(String str){
-	/* This function will change String from -185,842.93 -&gt; (185,842.93)*/
-	String string = str;//.replaceAll(&quot;(&quot;,&quot;&quot;);
-	if(string.indexOf(&quot;-&quot;)&gt;=0){
-		return string.replaceAll(&quot;-&quot;,&quot;(&quot;) + &quot;)&quot;;
-	}
-   	return string;
-}
-
-String returnStatusFormat(String str){
-	String string = str;
-	if(string==&quot;Fail&quot;){
-		return &quot;&lt;span style=&apos;color:#f33&apos;&gt;Fail&lt;/span&gt;&quot;;
-	}else if(string==&quot;Pass&quot;){
-		return &quot;&lt;span style=&apos;color:#1d4&apos;&gt;Pass&lt;/span&gt;&quot;;
-	}
-	return string;
-}
-def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderStatus&apos;&gt;Status&lt;/div&gt;&quot;);
-}
-def WriteResultToReport(File file,String DataProperty, String value1, String value2, String Result){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&quot;+DataProperty+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleValue&apos;&gt;&quot;+value1+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleValue&apos;&gt;&quot;+value2+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleStatus&apos;&gt;&quot;+Result+&quot;&lt;/div&gt;&quot;);
-}
-String ConvertNegativeDataToZero(String str){
-	String string = str;
-	if(string.indexOf(&quot;(&quot;)&gt;=0){
-		return &quot;0&quot;;
-	}
-	return string;
-}
-
-/*  Licensee Win Loss = - SettlementReport.Customer WL
-* If LicenseeWinLoss &lt; 0 -&gt; Web show -LicenseeWinLoss
-* Else show LicenseeWinLoss
- */
-String ConvertLicenseeWinLossToCustomerWL(String str){
-	String string = str;
-	if(string.indexOf(&quot;-&quot;)&gt;=0){
-		string = string.replaceAll(&quot;-&quot;,&quot;&quot;);
-		//string = string.replaceAll(&apos;\\)&apos;,&apos;&apos;);
-		//string = string.substring(1,string.length()-1);
-		return string;
-	}else{
-		return &quot;(&quot;+string+&quot;)&quot;;
-	}
-}
-
-String RemoveCommaInString(String str){
-	/* This function will remove comma in String from -185,842.93 -&gt; -185842.93*/
-	String string = str;//.replaceAll(&quot;(&quot;,&quot;&quot;);
-	if(string.indexOf(&quot;,&quot;)&gt;=0){
-		return string.replaceAll(&quot;,&quot;,&quot;&quot;);
-	}
-   	return string;
-}
-
-float ConvertStringToFloat(String str, Boolean FlagReturnZeroWhenNegative=false){
-	String string = str;
-	string = RemoveCommaInString(string);
-	if(string.indexOf(&quot;(&quot;)&gt;=0){
-		string = &quot;-&quot;+string.substring(1,string.length()-1);
-	}
-	float returnValue = Float.parseFloat(string);
-	if(returnValue&lt;0 &amp;&amp; FlagReturnZeroWhenNegative==true){
-		return 0;
-	}
-	return returnValue;
-}
-
-String convertLicenseeIdToPartyId(String LicenseeId){
-	switch (LicenseeId){
-		case &quot;1&quot;://12Bet
-			return
-	}
-}
-</stringProp>
-                <stringProp name="scriptLanguage">groovy</stringProp>
-              </JSR223Assertion>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Reports_Exchange Win Loss_Submit_LRF" enabled="false">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&#xd;
-	&quot;CurrencyId&quot;:${CurrencyID},&#xd;
-	&quot;BaseCurrency&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
-	&quot;CurrencyName&quot;:&quot;${glb_CurrencyName}&quot;,&#xd;
-	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
-	&quot;ReportBy&quot;:1,&#xd;
-	&quot;ExcludeTestData&quot;:false,&#xd;
-	&quot;Level&quot;:0&#xd;
-}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${glb_ServerName_LRF}</stringProp>
-              <stringProp name="HTTPSampler.port">${glb_Port_LRF}</stringProp>
-              <stringProp name="HTTPSampler.protocol">${glb_Protocol_LRF}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder_LRF}/api/ExchangeWinLossReport/Index</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">__RequestVerificationToken</stringProp>
-                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Cache-Control</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Connection</stringProp>
-                    <stringProp name="Header.value">keep-alive</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Pragma</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-Requested-With</stringProp>
-                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Save Data LAP-Exchange Win Loss To Google SpreadSheet And Compare Data with Settlement Report" enabled="true">
-                <stringProp name="cacheKey"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
-import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.apache.jmeter.services.FileServer;
-import groovy.json.JsonSlurper
-
-int i = Integer.parseInt(vars.get(&quot;counter&quot;));
-
-if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
-	def jsonSlurper = new JsonSlurper();
-	def response = jsonSlurper.parseText(prev.getResponseDataAsString());
-		
-	String CustomerWinLoss = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CustomerWL.toString();
-	String Turnover = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].Turnover.toString();
-	String TotalTrans = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TotalTransaction.toString();
-	String CustomerComm = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CustomerComm.toString();
-	String CustomerTotal = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CustomerWLTotal.toString();
-	String LicenseeWinLoss = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].LicenseeWL.toString();
-	String AmountDueTo = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].AmountDueTo.toString();
-	String LicenseeComm = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].LicenseeComm.toString();
-
-	List&lt;ValueRange&gt; list = Arrays.asList(
-      new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
-      new ValueRange().setRange(&quot;Licensees!AA&quot; + (i + 1) + &quot;:AA&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(LicenseeWinLoss))),
-      new ValueRange().setRange(&quot;Licensees!AN&quot; + (i + 1) + &quot;:AQ&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(CustomerComm,CustomerTotal,AmountDueTo,LicenseeComm)))
-      );     
-
-	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
-                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
-                    .execute();
-	/* CHECK DATA WITH SETTLEMENT REPORT
-	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss + Customer Comm &lt;=&gt; Customer Win Loss, Amount Due To &lt;=&gt; Equivalent
-	 * 
-	 */
-	//Get Index of Settlement Data Row that LAP-Exchange Win Loss report need to compare with
-	int SettlementDataRowIndex = 0;
-	String strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
-	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
-		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
-		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
-			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
-			SettlementDataRowIndex = j;
-			break;
-		}
-      }
-
-	
-	//Get Data from Settlement Data Row
-      if(SettlementDataRowIndex&gt;0){
-      	
-		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(8).toString();
-		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(9).toString();
-		String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(10).toString();
-		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
-	
-		String FlagTurnOver = returnStatusFormat(&quot;Fail&quot;);
-		String FlagTotalTrans = returnStatusFormat(&quot;Fail&quot;);
-		String FlagCustomerWinLoss = returnStatusFormat(&quot;Fail&quot;);
-		String FlagEquivalent = returnStatusFormat(&quot;Fail&quot;);
-
-		if(Math.abs(ConvertStringToFloat(Settlement_Turnover) - ConvertStringToFloat(Turnover))&lt;0.2){
-			FlagTurnOver = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_TotalTrans) - ConvertStringToFloat(TotalTrans))&lt;0.2){
-			FlagTotalTrans = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_CustomerWinLoss) - (ConvertStringToFloat(CustomerWinLoss)+ConvertStringToFloat(CustomerComm)))&lt;0.2){
-			FlagCustomerWinLoss = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		
-		if(Math.abs(ConvertStringToFloat(Settlement_Equivalent) - ConvertStringToFloat(AmountDueTo))&lt;0.2){
-			FlagEquivalent = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		
-		def path = FileServer.getFileServer().getBaseDir();
-		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
-		
-		WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Settlement Report&quot;);
-
-		WriteResultToReport(file,&quot;TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
-		WriteResultToReport(file,&quot;Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
-		WriteResultToReport(file,&quot;Cust WL+Cust Comm=Cust WL&quot;,(ConvertStringToFloat(CustomerWinLoss)+ConvertStringToFloat(CustomerComm)).toString(),Settlement_CustomerWinLoss,FlagCustomerWinLoss);
-		WriteResultToReport(file,&quot;Amt Due To=Equivalent&quot;,AmountDueTo,Settlement_Equivalent,FlagEquivalent);
-		
-      }
-
-	/* CHECK DATA WITH Exchange Win Loss
-	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss, Customer Comm &lt;=&gt; Customer Charge Comm, Licensee Comm &lt;=&gt; Licensee Charge Comm, Amount Due To &lt;=&gt; Licensing fee
-	 * 
-	 */
-	//Get Index of Exchange Win Loss Data Row that LAP-Exchange Win Loss report need to compare with
-	int ExWLDataRowIndex = 0;
-	strCompareDataWithReport = &quot;Exchange Win Loss, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
-	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
-		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
-		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
-			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
-			ExWLDataRowIndex = j;
-			break;
-		}
-      }
-
-	
-	//Get Data from Settlement Data Row
-      if(ExWLDataRowIndex&gt;0){
-      	
-		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(8).toString();
-		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(9).toString();
-		String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(10).toString();
-		String Settlement_CustomerChargeComm = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(27).toString();
-		String Settlement_LicenseeChargeComm = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(28).toString();
-		String Settlement_Licensingfee = vars.getObject(&quot;sheet&quot;).get(ExWLDataRowIndex).get(24).toString();
-	
-		String FlagTurnOver = returnStatusFormat(&quot;Fail&quot;);
-		String FlagTotalTrans = returnStatusFormat(&quot;Fail&quot;);
-		String FlagCustomerWinLoss = returnStatusFormat(&quot;Fail&quot;);
-		String FlagCustomerComm = returnStatusFormat(&quot;Fail&quot;);
-		String FlagLicenseeComm = returnStatusFormat(&quot;Fail&quot;);
-		String FlagAmountDueTo = returnStatusFormat(&quot;Fail&quot;);
-
-		if(Math.abs(ConvertStringToFloat(Settlement_Turnover) - ConvertStringToFloat(Turnover))&lt;0.2){
-			FlagTurnOver = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_TotalTrans) - ConvertStringToFloat(TotalTrans))&lt;0.2){
-			FlagTotalTrans = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_CustomerWinLoss) - ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
-			FlagCustomerWinLoss = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		
-		if(Math.abs(ConvertStringToFloat(Settlement_CustomerChargeComm) - ConvertStringToFloat(CustomerComm))&lt;0.2){
-			FlagCustomerComm = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_LicenseeChargeComm) - ConvertStringToFloat(LicenseeComm))&lt;0.2){
-			FlagLicenseeComm = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		if(Math.abs(ConvertStringToFloat(Settlement_Licensingfee) - ConvertStringToFloat(AmountDueTo))&lt;0.2){
-			FlagAmountDueTo = returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
-		
-		def path = FileServer.getFileServer().getBaseDir();
-		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
-		
-		WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Exchange Win Loss&quot;);
-
-		WriteResultToReport(file,&quot;TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
-		WriteResultToReport(file,&quot;Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
-		WriteResultToReport(file,&quot;Cust WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
-		WriteResultToReport(file,&quot;Cust Comm=Cust Charge Comm&quot;,CustomerComm,Settlement_CustomerChargeComm,FlagCustomerComm);
-		WriteResultToReport(file,&quot;Lic Comm=Lic Charge Comm&quot;,LicenseeComm,Settlement_LicenseeChargeComm,FlagLicenseeComm);
-		WriteResultToReport(file,&quot;Amt Due To=Lic fee&quot;,AmountDueTo,Settlement_Licensingfee,FlagAmountDueTo);
-      }
-      
-}
-
-String ChangeDataFormat(String str){
-	/* This function will change String from -185,842.93 -&gt; (185,842.93)*/
-	String string = str;//.replaceAll(&quot;(&quot;,&quot;&quot;);
-	if(string.indexOf(&quot;-&quot;)&gt;=0){
-		return string.replaceAll(&quot;-&quot;,&quot;(&quot;) + &quot;)&quot;;
-	}
-   	return string;
-}
-
-String returnStatusFormat(String str){
-	String string = str;
-	if(string==&quot;Fail&quot;){
-		return &quot;&lt;span style=&apos;color:#f33&apos;&gt;Fail&lt;/span&gt;&quot;;
-	}else if(string==&quot;Pass&quot;){
-		return &quot;&lt;span style=&apos;color:#1d4&apos;&gt;Pass&lt;/span&gt;&quot;;
-	}
-	return string;
-}
-def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeader&apos;&gt;&lt;span style=&apos;color:red;&apos;&gt;&quot;+Licensee+&quot;&lt;/span&gt; - Compare Data bettwen &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report1+&quot;&lt;/span&gt; &amp; &lt;span style=&apos;color:red;&apos;&gt;&quot;+Report2+&quot;&lt;/span&gt;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&amp;nbsp;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report1+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderValue&apos;&gt;&quot;+Report2+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleHeaderStatus&apos;&gt;Status&lt;/div&gt;&quot;);
-}
-def WriteResultToReport(File file,String DataProperty, String value1, String value2, String Result){
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleDataProperty&apos;&gt;&quot;+DataProperty+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleValue&apos;&gt;&quot;+value1+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleValue&apos;&gt;&quot;+value2+&quot;&lt;/div&gt;&quot;);
-	file.append (&quot;&lt;div class=&apos;TableBorderStyleStatus&apos;&gt;&quot;+Result+&quot;&lt;/div&gt;&quot;);
-}
-String ConvertNegativeDataToZero(String str){
-	String string = str;
-	if(string.indexOf(&quot;(&quot;)&gt;=0){
-		return &quot;0&quot;;
-	}
-	return string;
-}
-
-/*  Licensee Win Loss = - SettlementReport.Customer WL
-* If LicenseeWinLoss &lt; 0 -&gt; Web show -LicenseeWinLoss
-* Else show LicenseeWinLoss
- */
-String ConvertLicenseeWinLossToCustomerWL(String str){
-	String string = str;
-	if(string.indexOf(&quot;-&quot;)&gt;=0){
-		string = string.replaceAll(&quot;-&quot;,&quot;&quot;);
-		//string = string.replaceAll(&apos;\\)&apos;,&apos;&apos;);
-		//string = string.substring(1,string.length()-1);
-		return string;
-	}else{
-		return &quot;(&quot;+string+&quot;)&quot;;
-	}
-}
-
-String RemoveCommaInString(String str){
-	/* This function will remove comma in String from -185,842.93 -&gt; -185842.93*/
-	String string = str;//.replaceAll(&quot;(&quot;,&quot;&quot;);
-	if(string.indexOf(&quot;,&quot;)&gt;=0){
-		return string.replaceAll(&quot;,&quot;,&quot;&quot;);
-	}
-   	return string;
-}
-
-float ConvertStringToFloat(String str, Boolean FlagReturnZeroWhenNegative=false){
-	String string = str;
-	string = RemoveCommaInString(string);
-	if(string.indexOf(&quot;(&quot;)&gt;=0){
-		string = &quot;-&quot;+string.substring(1,string.length()-1);
-	}
-	float returnValue = Float.parseFloat(string);
-	if(returnValue&lt;0 &amp;&amp; FlagReturnZeroWhenNegative==true){
-		return 0;
-	}
-	return returnValue;
-}
-
-String convertLicenseeIdToPartyId(String LicenseeId){
-	switch (LicenseeId){
-		case &quot;1&quot;://12Bet
-			return
-	}
-}
-</stringProp>
-                <stringProp name="scriptLanguage">groovy</stringProp>
-              </JSR223Assertion>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Reports_Exchange Win Loss_Load_LRF" enabled="false">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                <collectionProp name="Arguments.arguments"/>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${glb_ServerName_LRF}</stringProp>
-              <stringProp name="HTTPSampler.port">${glb_Port_LRF}</stringProp>
-              <stringProp name="HTTPSampler.protocol">${glb_Protocol_LRF}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder_LRF}/ExchangeWinlossReport</stringProp>
-              <stringProp name="HTTPSampler.method">GET</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="RequestVerificationToken" enabled="true">
-                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                <stringProp name="RegexExtractor.refname">RequestVerificationToken</stringProp>
-                <stringProp name="RegexExtractor.regex">name=&quot;__RequestVerificationToken&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
-                <stringProp name="RegexExtractor.template">$1$</stringProp>
-                <stringProp name="RegexExtractor.default">RequestVerificationToken IS NOT FOUND</stringProp>
-                <stringProp name="RegexExtractor.match_number"></stringProp>
-              </RegexExtractor>
               <hashTree/>
             </hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Reports_Cash Out Win Loss_Load_LRF" enabled="true">

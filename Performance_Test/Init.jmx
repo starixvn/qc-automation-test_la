@@ -234,6 +234,27 @@
               <stringProp name="Argument.value">ohNKbMalJSzgLP-ky1Q7TQ2</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
+            <elementProp name="glb_ServerName_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_ServerName_CreateInvoice</stringProp>
+              <stringProp name="Argument.value">la.starific.net</stringProp>
+              <stringProp name="Argument.desc">Pro: internal.amazzu.com; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7610/LRF4/</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Protocol_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_Protocol_CreateInvoice</stringProp>
+              <stringProp name="Argument.value">http</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Port_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_Port_CreateInvoice</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_URLFolder_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_URLFolder_CreateInvoice</stringProp>
+              <stringProp name="Argument.value">V1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
