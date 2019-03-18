@@ -4310,13 +4310,17 @@ String ConvertNegativeDataToZero(String str){
 }
 
 
-float ConvertStringToFloat(String str){
+float ConvertStringToFloat(String str, Boolean FlagReturnZeroWhenNegative=false){
 	String string = str;
 	string = RemoveCommaInString(string);
 	if(string.indexOf(&quot;(&quot;)&gt;=0){
-		string = string.substring(1,string.length()-1);
+		string = &quot;-&quot;+string.substring(1,string.length()-1);
 	}
-	return Float.parseFloat(string);
+	float returnValue = Float.parseFloat(string);
+	if(returnValue&lt;0 &amp;&amp; FlagReturnZeroWhenNegative==true){
+		return 0;
+	}
+	return returnValue;
 }
 </stringProp>
                 <stringProp name="scriptLanguage">groovy</stringProp>
