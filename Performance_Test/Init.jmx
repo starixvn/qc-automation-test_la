@@ -255,6 +255,22 @@
               <stringProp name="Argument.value">V1</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
+            <elementProp name="glb_BillerId" elementType="Argument">
+              <stringProp name="Argument.name">glb_BillerId</stringProp>
+              <stringProp name="Argument.value">221</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_BillerName" elementType="Argument">
+              <stringProp name="Argument.name">glb_BillerName</stringProp>
+              <stringProp name="Argument.value">Testing Biller</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Password_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_Password_CreateInvoice</stringProp>
+              <stringProp name="Argument.value">1q2w3e4r</stringProp>
+              <stringProp name="Argument.desc">Pro/UAT: 123QWEasd; Local: 1234aa</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
