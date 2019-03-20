@@ -642,28 +642,10 @@ import java.util.regex.Pattern;
 
 
 int i = Integer.parseInt(vars.get(&quot;counter&quot;));
-String requestToApi = SampleResult.getSamplerData(); 
-String responseFromApi = SampleResult.getResponseDataAsString();
-String status;
-/*if(&quot;${Customer Win Loss}&quot;==&quot;&quot;){
-	log.info(&quot;${Customer Win Loss}  &quot;+&quot;${ProductName} william&quot;);	
-}*/
 
-//log.info(&quot;${Customer Win Loss}  &quot;+&quot;${ProductName}&quot;);
+
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
-	/*if(&quot;${ProductName}&quot;==&quot;Sportsbook&quot; 
-		|| &quot;${ProductName}&quot;==&quot;Number Game&quot;
-		|| &quot;${ProductName}&quot;==&quot;Virtual Sports&quot;
-		|| &quot;${ProductName}&quot;==&quot;RNG Casino&quot;
-		|| &quot;${ProductName}&quot;==&quot;Keno&quot;
-		|| &quot;${ProductName}&quot;==&quot;AG Casino&quot;
-		|| &quot;${ProductName}&quot;==&quot;Allbet&quot;
-		|| &quot;${ProductName}&quot;==&quot;Macau Games&quot;
-		|| &quot;${ProductName}&quot;==&quot;Virtual Sports 2&quot;
-		|| &quot;${ProductName}&quot;==&quot;Lottery&quot;
-		|| &quot;${ProductName}&quot;==&quot;Exchange&quot;){
-		
-	}else */
+	
 	if(&quot;${ProductName}&quot;==&quot;Gold Deluxe&quot;){/* GOLD DELUXE */
 		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
 		String Turnover = &quot;${Turnover}&quot;;
@@ -726,7 +708,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	     .execute();
 	}else{
 		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
-		String Turnover = &quot;${Turnover}&quot;;//removeSpecialCharacters(&quot;${Turnover}&quot;);
+		String Turnover = &quot;${Turnover}&quot;;
 		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent}&quot;,&quot;${Equivalent - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
 		String TotalTrans = &quot;${Total Trans}&quot;;
 		List&lt;ValueRange&gt; list = Arrays.asList(
@@ -760,14 +742,7 @@ if (i + 1 == vars.getObject(&quot;sheet&quot;).size()) {
 	vars.put(&quot;stopWhile&quot;,&quot;OK&quot;);
 }*/
 
-public String removeSpecialCharacters(String str) { 
-   String string = str;//.replaceAll(&quot;(&quot;,&quot;&quot;);
-   //string = string.replaceAll(&quot;)&quot;,&quot;&quot;);
-   string = string.replaceAll(&quot;,&quot;,&quot;&quot;);
-   return string;
-}
-
-public String getNotEmptyDataBetween2String(String str1, String str2) { 
+String getNotEmptyDataBetween2String(String str1, String str2) { 
    if(str1==&quot;&quot;){
    	return str2;
    }else{
