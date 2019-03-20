@@ -109,11 +109,11 @@ log.info(&quot;YMonth: &quot;+YMonth.toString());
 log.info(&quot;Year: &quot;+Year.toString());</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Check_Billing" enabled="true">
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Check_Billing" enabled="false">
           <stringProp name="IncludeController.includepath">Check_Billing.jmx</stringProp>
         </IncludeController>
         <hashTree/>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Connect Google SpreadSheet" enabled="false">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Connect Google SpreadSheet" enabled="true">
           <stringProp name="scriptLanguage">groovy</stringProp>
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
@@ -171,7 +171,7 @@ for( String values : str )
 */</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="false">
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="true">
           <stringProp name="WhileController.condition">${__javaScript(&quot;${stopWhile}&quot; != &quot;OK&quot;)}</stringProp>
         </WhileController>
         <hashTree>
