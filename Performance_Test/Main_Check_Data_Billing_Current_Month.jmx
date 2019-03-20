@@ -253,18 +253,6 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
           <hashTree>
-            <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="jp@gc - Dummy Sampler" enabled="false">
-              <boolProp name="WAITING">true</boolProp>
-              <boolProp name="SUCCESFULL">true</boolProp>
-              <stringProp name="RESPONSE_CODE">200</stringProp>
-              <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
-              <stringProp name="REQUEST_DATA">{&quot;ProductName&quot;:&quot;${ProductName}&quot;, &quot;Report&quot;:&quot;${Report}&quot;}</stringProp>
-              <stringProp name="RESPONSE_DATA">aaa</stringProp>
-              <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
-              <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
-              <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
-            </kg.apc.jmeter.samplers.DummySampler>
-            <hashTree/>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invoice_Settlement Report_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
