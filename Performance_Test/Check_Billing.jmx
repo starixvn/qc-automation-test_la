@@ -37,13 +37,21 @@ import org.apache.jmeter.services.FileServer;
 def path = FileServer.getFileServer().getBaseDir();
 
 /*CREATE REPORT FILE TO SEND MAIL*/
+File file2 = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_Fails}&quot;);
+file2.delete();
 File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
 file.delete();
 //write stylesheet
-file.append (&quot;&lt;style&gt;.TableBorderStyleStatus{width:100px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderStatus{width:100px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderValue{width:300px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleValue{width:300px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleDataProperty{width:300px;float:left;font-weight: bold;border-bottom: 2px solid #DCDCDC;}.TableBorderStyleHeader{width:1006px;font-weight: bold;border-bottom: 2px solid #DCDCDC;}.TableBorderStyleBody{width:1006px;float:left;border-top: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;border-right: 2px solid #DCDCDC;}&lt;/style&gt;&quot;);
+file2.append (&quot;&lt;style&gt;.TableBorderStyleStatus{width:100px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderStatus{width:100px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleHeaderValue{width:300px;float:left;font-weight: bold;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleValue{width:300px;float:left;text-align: center;border-bottom: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;}.TableBorderStyleDataProperty{width:300px;float:left;font-weight: bold;border-bottom: 2px solid #DCDCDC;}.TableBorderStyleHeader{width:1006px;font-weight: bold;border-bottom: 2px solid #DCDCDC;}.TableBorderStyleBody{width:1006px;float:left;border-top: 2px solid #DCDCDC;border-left: 2px solid #DCDCDC;border-right: 2px solid #DCDCDC;}&lt;/style&gt;&quot;);
 //write Data Frame
-file.append (&quot;&lt;h1&gt;Check Data from &quot;+&quot;${glb_FirstDateofPrevMonth_2}&quot;+&quot; to &quot;+&quot;${glb_LastDateofPrevMonth_2}&quot;+&quot;&lt;/h1&gt;&quot;);
-//file.append (&quot;&lt;h3&gt;Data Between LA Reports&lt;/h3&gt;&quot;);
+file2.append (&quot;&lt;h1&gt;Check Data from &quot;+&quot;${glb_FirstDateofPrevMonth_2}&quot;+&quot; to &quot;+&quot;${glb_LastDateofPrevMonth_2}&quot;+&quot;&lt;/h1&gt;&quot;);
+//file2.append (&quot;&lt;h3&gt;Steps:&lt;/h3&gt;&quot;);
+//file2.append (&quot;&lt;span&gt;1. Settlement Report (LA) vs Specific Report (LA)&lt;/span&gt;&lt;br&gt;&quot;);
+//file2.append (&quot;&lt;span&gt;2. Settlement Report (LA) vs Licensee WL Report (LAP)&lt;/span&gt;&lt;br&gt;&quot;);
+//file2.append (&quot;&lt;span&gt;3. Settlement Report (LA) vs Specific Report (LAP)&lt;/span&gt;&lt;br&gt;&quot;);
+//file2.append (&quot;&lt;span&gt;4. Specific Report (LA) vs Specific Report (LAP)&lt;/span&gt;&lt;br&gt;&quot;);
+//file2.append (&quot;&lt;span&gt;5. Specific Report (LA), Settlement Report (LA) vs Create Invoice (LA)&lt;/span&gt;&lt;br&gt;&quot;);
+//file2.append (&quot;&lt;span&gt;6. Specific Report (LA) vs LPID (LA)&lt;/span&gt;&lt;br&gt;&quot;);
 file.append (&quot;&lt;div class=&apos;TableBorderStyleBody&apos;&gt;&quot;);
 /*====================*/
 

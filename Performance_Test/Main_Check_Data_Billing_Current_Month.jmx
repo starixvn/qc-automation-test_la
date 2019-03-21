@@ -216,6 +216,117 @@ log.info(&quot;Year: &quot;+Year.toString());</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
+      <PostThreadGroup guiclass="PostThreadGroupGui" testclass="PostThreadGroup" testname="tearDown Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1553064560000</longProp>
+        <longProp name="ThreadGroup.end_time">1553064560000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </PostThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="false">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+		
+Functions.WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Settlement Report&quot;);
+
+Functions.WriteResultToReport(file,&quot;TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
+Functions.WriteResultToReport(file,&quot;Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
+Functions.WriteResultToReport(file,&quot;Gross Win = -Customer WL&quot;,GrossWin,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+Functions.WriteResultToReport(file,&quot;Licensing fee &amp; Equivalent&quot;,Licensingfee,Settlement_Equivalent,FlagEquivalent);</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Arrange Report for Send Mail" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">import org.jsoup.*
+import org.jsoup.nodes.*
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+
+
+def DetailsPage = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;) 
+File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_Fails}&quot;);
+file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt;Fails:&lt;/h3&gt;&lt;/div&gt;&lt;div class=&apos;TableBorderStyleBody&apos;&gt;&quot;);
+
+Document doc = Jsoup.parse(DetailsPage, &quot;UTF-8&quot;);
+
+int TotalRows = doc.select(&quot;html &gt; body &gt; div &gt; div&quot;).size();
+Boolean flagFail = false;
+log.info(TotalRows.toString());
+for(int j = 0;j&lt;TotalRows;j++) {
+	String Tag = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+j+&quot;)&quot;).outerHtml();
+	if(Tag.indexOf(&quot;Fail&quot;)&gt;0){
+		flagFail = true;
+		//Get Content Fail
+		String ContentFails = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-3)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-2)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-1)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+j+&quot;)&quot;).outerHtml();
+
+		//Get HeaderValue, Header Status Content Fail
+		for(int k = 4;k&lt;100;j++) {
+			String HeaderStatus = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-k)+&quot;)&quot;).outerHtml();
+			if(HeaderStatus.indexOf(&quot;TableBorderStyleHeaderStatus&quot;)&gt;0){
+				String HeaderValueAndStatus = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+3))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+2))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+1))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k))+&quot;)&quot;).outerHtml();
+				String Header = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+4))+&quot;)&quot;).outerHtml();
+				file.append (Header+HeaderValueAndStatus+ContentFails);
+				break;
+			}
+		}
+	}
+ }
+if(flagFail==false){
+	file.append (&quot;&lt;div style=&apos;width:100%;border-bottom:2px solid #DCDCDC;text-align:center&apos;&gt;&lt;span style=&apos;color:#1d4&apos;&gt;CONGRATULATIONS!!!!! NO FAILS&lt;/span&gt;&lt;/div&gt;&quot;);
+}
+file.append (&quot;&lt;/div&gt;&quot;);
+file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt;Details:&lt;/h3&gt;&lt;/div&gt;&quot; + doc.select(&quot;html &gt; body&quot;).toString());
+//Element content = doc.getElementById(&quot;Pass&quot;);
+//Element Body = doc.body();
+//Passes = Body.getElementsByClass(&quot;Pass&quot;);
+//for (Element Pass : Passes) {
+  //log.info(Pass.parent().outerHtml());
+
+//}
+//log.info(&quot;www&quot;+content.text());
+//log.info(&quot;bbb&quot;+doc.body().text());
+//masterPage.text = doc.outerHtml();
+
+//log.info(doc.select(&quot;html &gt; body &gt; div &gt; div:eq(0)&quot;).outerHtml());//Good
+//log.info(&quot;William: &quot;+doc.select(&quot;html &gt; body &gt; div &gt; div&quot;).size().toString());//good
+//log.info(doc.select(&quot;div:eq(1) &gt; dev:eq(10)&quot;).text());
+//log.info(doc.select(&quot;div:eq(1) &gt; dev:eq(11)&quot;).text());
+
+
+//log.info(doc.toString());</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
     </hashTree>
     <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
       <boolProp name="WorkBench.save">true</boolProp>
