@@ -290,7 +290,7 @@ for(int j = 0;j&lt;TotalRows;j++) {
 		String ContentFails = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-3)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-2)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-1)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+j+&quot;)&quot;).outerHtml();
 
 		//Get HeaderValue, Header Status Content Fail
-		for(int k = 4;k&lt;100;j++) {
+		for(int k = 4;k&lt;100;k++) {
 			String HeaderStatus = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-k)+&quot;)&quot;).outerHtml();
 			if(HeaderStatus.indexOf(&quot;TableBorderStyleHeaderStatus&quot;)&gt;0){
 				String HeaderValueAndStatus = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+3))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+2))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+1))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k))+&quot;)&quot;).outerHtml();

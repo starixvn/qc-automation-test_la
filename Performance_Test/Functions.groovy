@@ -1,5 +1,4 @@
-
-String getLAReportNameFromProductName(String str){
+String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	switch (str) {
 	   case "Number Game":
 	       return "Number Game Win Loss";
@@ -27,7 +26,72 @@ String getLAReportNameFromProductName(String str){
 	       break;
 		case "Gold Deluxe":
 	       return "Gold Deluxe Win Loss";
-	       break;	       	       	       	       	       
+	       break;
+		case "Sportsbook":
+	       return "Licensee Performance in Details";
+	       break;
+		case "RNG Casino":
+	       return "Settlement Report";
+	       break;
+		case "Allbet":
+	       return "Settlement Report";
+	       break;
+		case "Colossus Bets":
+	       return "Settlement Report";
+	       break;
+		case "Pragmatic":
+	       return "Settlement Report";
+	       break;
+		case "BA":
+	       return "Settlement Report";
+	       break;
+	}
+}
+
+String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(String str){
+	switch (str) {
+	   case "Number Game":
+	       return "Number Game Win Loss";
+	       break
+	   case "Virtual Sports":
+	       return "Virtual Sports Win Loss";
+	       break;
+	    case "Keno":
+	       return "Keno Win Loss";
+	       break;
+	    case "AG Casino":
+	       return "AG Casino Win Loss";
+	       break;
+		case "Macau Games":
+	       return "Macau Games Win Loss";
+	       break;
+		case "Virtual Sports 2":
+	       return "Virtual Sports 2 Win Loss";
+	       break;
+		case "Lottery":
+	       return "Lottery Win Loss";
+	       break;
+		case "Exchange":
+	       return "Exchange Win Loss";
+	       break;
+		case "Gold Deluxe":
+	       return "Gold Deluxe Win Loss";
+	       break;
+		case "Sportsbook":
+	       return "Settlement Report";
+	       break;
+		case "RNG Casino":
+	       return "Settlement Report";
+	       break;
+		case "Allbet":
+	       return "Settlement Report";
+	       break;
+		case "Pragmatic":
+	       return "Settlement Report";
+	       break;
+		case "BA":
+	       return "Settlement Report";
+	       break;
 	}
 }
 
@@ -56,7 +120,7 @@ float ConvertStringToFloat(String str, Boolean FlagReturnZeroWhenNegative=false)
 	if(string.indexOf("(")>=0){
 		string = "-"+string.substring(1,string.length()-1);
 	}
-	if(string=="Not_Found"){
+	if(string=="Not_Found" || string==""){
 		return 0;
 	}
 	float returnValue = Float.parseFloat(string);
