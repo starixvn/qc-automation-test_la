@@ -1,3 +1,10 @@
+def TryCatchErrorCode(File file, String responseCode, String strMessage){
+	if(responseCode!="200"){
+		file.append ("<div class='TableBorderTryCatchErrorCode'><span style='color:red;'>"+strMessage+":"+responseCode+"</span></div>");
+	}
+}
+
+
 String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	switch (str) {
 	   case "Number Game":
@@ -40,6 +47,9 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	       return "Settlement Report";
 	       break;
 		case "Pragmatic":
+	       return "Settlement Report";
+	       break;
+		case "Cash Out":
 	       return "Settlement Report";
 	       break;
 		case "BA":
