@@ -124,7 +124,7 @@ String RemoveCommaInString(String str){
    	return string;
 }
 
-float ConvertStringToFloat(String str, Boolean FlagReturnZeroWhenNegative=false){
+double ConvertStringToFloat(String str, Boolean FlagReturnZeroWhenNegative=false){
 	String string = str;
 	string = RemoveCommaInString(string);
 	if(string.indexOf("(")>=0){
@@ -133,13 +133,14 @@ float ConvertStringToFloat(String str, Boolean FlagReturnZeroWhenNegative=false)
 	if(string=="Not_Found" || string==""){
 		return 0;
 	}
-	float returnValue = Float.parseFloat(string);
+	double returnValue = Double.parseDouble(string);
 	if(returnValue<0 && FlagReturnZeroWhenNegative==true){
 		return 0;
 	}
 	
 	return returnValue;
 }
+
 
 def WriteHeaderToReport(File file,String Licensee, String Report1, String Report2){
 	file.append ("<div class='TableBorderStyleHeader'><span style='color:red;'>"+Licensee+"</span> - Compare Data bettwen <span style='color:red;'>"+Report1+"</span> & <span style='color:red;'>"+Report2+"</span></div>");

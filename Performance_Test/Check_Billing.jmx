@@ -3924,11 +3924,11 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String Settlement_CashOutCommission = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(21).toString();
 		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
 
-		float IncomeAOnBBAmt_float = Functions.ConvertStringToFloat(IncomeAOnBBAmt);
-		float IncomeBOnProfitSharing_float = Functions.ConvertStringToFloat(IncomeBOnProfitSharing);
-		float AmountDuetoCashOutAOnBBAmt_float = Functions.ConvertStringToFloat(AmountDuetoCashOutAOnBBAmt);
-		float AmountDuetoCashOutBOnProfitSharing_float = Functions.ConvertStringToFloat(AmountDuetoCashOutBOnProfitSharing);
-		float CashOutEquivalent = Math.max(IncomeAOnBBAmt_float+AmountDuetoCashOutAOnBBAmt_float, IncomeBOnProfitSharing_float+AmountDuetoCashOutBOnProfitSharing_float);
+		double IncomeAOnBBAmt_float = Functions.ConvertStringToFloat(IncomeAOnBBAmt);
+		double IncomeBOnProfitSharing_float = Functions.ConvertStringToFloat(IncomeBOnProfitSharing);
+		double AmountDuetoCashOutAOnBBAmt_float = Functions.ConvertStringToFloat(AmountDuetoCashOutAOnBBAmt);
+		double AmountDuetoCashOutBOnProfitSharing_float = Functions.ConvertStringToFloat(AmountDuetoCashOutBOnProfitSharing);
+		double CashOutEquivalent = Math.max(IncomeAOnBBAmt_float+AmountDuetoCashOutAOnBBAmt_float, IncomeBOnProfitSharing_float+AmountDuetoCashOutBOnProfitSharing_float);
 		//log.info(&quot;William Test &quot;+CashOut_Equivalent.toString()+&quot;=============&quot;);
 		
 		String FlagCashOutTimes = Functions.returnStatusFormat(&quot;Fail&quot;);
@@ -4672,6 +4672,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 				if(Math.abs(Functions.ConvertStringToFloat(Settlement_Turnover) - Functions.ConvertStringToFloat(Turnover))&lt;0.2){
 					FlagTurnOver = Functions.returnStatusFormat(&quot;Pass&quot;);
 				}else{
+					
 					AssertionResult.setFailure(true);
 				}
 	
@@ -4721,9 +4722,10 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 				}
 			}*/
 		}else{
-			if(Math.abs(Functions.ConvertStringToFloat(Settlement_Turnover) - Functions.ConvertStringToFloat(Turnover))&lt;0.2){
+			if(Math.abs(Functions.ConvertStringToFloat(Turnover) - Functions.ConvertStringToFloat(Settlement_Turnover))&lt;0.2){
 				FlagTurnOver = Functions.returnStatusFormat(&quot;Pass&quot;);
 			}else{
+				
 				AssertionResult.setFailure(true);
 			}
 			if(Math.abs(Functions.ConvertStringToFloat(Settlement_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
@@ -6908,7 +6910,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 			AssertionResult.setFailure(true);
 		}
 
-		float Tmp = Math.max(Functions.ConvertStringToFloat(Settlement_IncomeAOnBBAmt)+Functions.ConvertStringToFloat(Settlement_AmountDuetoCashOutAOnBBAmt),Functions.ConvertStringToFloat(Settlement_IncomeBOnProfitSharing)+Functions.ConvertStringToFloat(Settlement_AmountDuetoCashOutBOnProfitSharing));
+		double Tmp = Math.max(Functions.ConvertStringToFloat(Settlement_IncomeAOnBBAmt)+Functions.ConvertStringToFloat(Settlement_AmountDuetoCashOutAOnBBAmt),Functions.ConvertStringToFloat(Settlement_IncomeBOnProfitSharing)+Functions.ConvertStringToFloat(Settlement_AmountDuetoCashOutBOnProfitSharing));
 		if(Math.abs(Functions.ConvertStringToFloat(SettleAmountTotal) - Tmp)&lt;0.2){
 			FlagSettleAmountTotal = Functions.returnStatusFormat(&quot;Pass&quot;);
 		}else{
@@ -7261,7 +7263,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		       break;
 		   case &quot;Exchange&quot;:
 		       String Specific_CustomerChargeComm = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(27).toString();//get from Customer Charge Comm
-		       float tmpCustWL = Functions.ConvertStringToFloat(Specific_CustomerWinLoss) + Functions.ConvertStringToFloat(Specific_CustomerChargeComm);
+		       double tmpCustWL = Functions.ConvertStringToFloat(Specific_CustomerWinLoss) + Functions.ConvertStringToFloat(Specific_CustomerChargeComm);
 		       Specific_CustomerWinLoss = tmpCustWL.toString();
 		       break;
 		   case [&quot;Sportsbook&quot;, &quot;RNG Casino&quot;, &quot;Allbet&quot;, &quot;Pragmatic&quot;]:
