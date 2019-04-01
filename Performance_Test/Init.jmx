@@ -23,7 +23,7 @@
             </elementProp>
             <elementProp name="glb_Password" elementType="Argument">
               <stringProp name="Argument.name">glb_Password</stringProp>
-              <stringProp name="Argument.value">1q2w3e4r</stringProp>
+              <stringProp name="Argument.value">MXEydzNlNHI=</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">Pro/UAT: 123QWEasd; Local: 1234aa</stringProp>
             </elementProp>
@@ -193,7 +193,7 @@
             </elementProp>
             <elementProp name="glb_Password_LRF" elementType="Argument">
               <stringProp name="Argument.name">glb_Password_LRF</stringProp>
-              <stringProp name="Argument.value">1234REWQ</stringProp>
+              <stringProp name="Argument.value">MTIzNFJFV1E=</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="glb_Salt_LRF" elementType="Argument">
@@ -272,7 +272,7 @@
             </elementProp>
             <elementProp name="glb_Password_CreateInvoice" elementType="Argument">
               <stringProp name="Argument.name">glb_Password_CreateInvoice</stringProp>
-              <stringProp name="Argument.value">1q2w3e4r</stringProp>
+              <stringProp name="Argument.value">MXEydzNlNHI=</stringProp>
               <stringProp name="Argument.desc">Pro/UAT: 123QWEasd; Local: 1234aa</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
@@ -422,7 +422,22 @@ vars.put(&quot;FMonth&quot;,FMonth); //1
 vars.put(&quot;YDay&quot;,YDay); //31
 vars.put(&quot;YMonth&quot;,YMonth); //1
 
-vars.put(&quot;Year&quot;,Year); //2018</stringProp>
+vars.put(&quot;Year&quot;,Year); //2018
+
+
+var Base64={_keyStr:&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=&quot;,encode:function(e){var t=&quot;&quot;;var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f&lt;e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n&gt;&gt;2;o=(n&amp;3)&lt;&lt;4|r&gt;&gt;4;u=(r&amp;15)&lt;&lt;2|i&gt;&gt;6;a=i&amp;63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t=&quot;&quot;;var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,&quot;&quot;);while(f&lt;e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s&lt;&lt;2|o&gt;&gt;4;r=(o&amp;15)&lt;&lt;4|u&gt;&gt;2;i=(u&amp;3)&lt;&lt;6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,&quot;\n&quot;);var t=&quot;&quot;;for(var n=0;n&lt;e.length;n++){var r=e.charCodeAt(n);if(r&lt;128){t+=String.fromCharCode(r)}else if(r&gt;127&amp;&amp;r&lt;2048){t+=String.fromCharCode(r&gt;&gt;6|192);t+=String.fromCharCode(r&amp;63|128)}else{t+=String.fromCharCode(r&gt;&gt;12|224);t+=String.fromCharCode(r&gt;&gt;6&amp;63|128);t+=String.fromCharCode(r&amp;63|128)}}return t},_utf8_decode:function(e){var t=&quot;&quot;;var n=0;var r=c1=c2=0;while(n&lt;e.length){r=e.charCodeAt(n);if(r&lt;128){t+=String.fromCharCode(r);n++}else if(r&gt;191&amp;&amp;r&lt;224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&amp;31)&lt;&lt;6|c2&amp;63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&amp;15)&lt;&lt;12|(c2&amp;63)&lt;&lt;6|c3&amp;63);n+=3}}return t}}
+
+
+
+var password = vars.get(&quot;glb_Password&quot;);
+var password_LRF = vars.get(&quot;glb_Password_LRF&quot;);
+var password_CreateInvoice = vars.get(&quot;glb_Password_CreateInvoice&quot;);
+var decode = Base64.decode(password);
+var decode_LRF = Base64.decode(password_LRF);
+var decode_CreateInvoice = Base64.decode(password_CreateInvoice);
+vars.put(&quot;glb_Password&quot;,decode);
+vars.put(&quot;glb_Password_LRF&quot;,decode_LRF);
+vars.put(&quot;glb_Password_CreateInvoice&quot;,decode_CreateInvoice);</stringProp>
         </JSR223Sampler>
         <hashTree/>
       </hashTree>
