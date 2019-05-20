@@ -1,0 +1,5 @@
+20-May-2019:
+ - Add new param InvoiceLanguage: 
+	+ Init.jmx
+	+ Check_Billing.jmx: Invoice_Create Invoice_Submit
+ 

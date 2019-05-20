@@ -276,6 +276,12 @@
               <stringProp name="Argument.desc">Pro/UAT: 123QWEasd; Local: 1234aa</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
+            <elementProp name="glb_InvoiceLanguage" elementType="Argument">
+              <stringProp name="Argument.name">glb_InvoiceLanguage</stringProp>
+              <stringProp name="Argument.value">en-US</stringProp>
+              <stringProp name="Argument.desc">English: en-US, Chinese: zh-CN</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
           </collectionProp>
         </Arguments>
         <hashTree/>

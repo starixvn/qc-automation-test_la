@@ -7474,7 +7474,8 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;ProductCodes&quot;:&quot;${ProductCode}&quot;,&#xd;
 	&quot;InvoiceTypeId&quot;:1,&#xd;
-	&quot;IsSeparateProduct&quot;:false&#xd;
+	&quot;IsSeparateProduct&quot;:false,&#xd;
+	&quot;InvoiceLanguage&quot;: &quot;${glb_InvoiceLanguage}&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
