@@ -3,3 +3,7 @@
 	+ Init.jmx
 	+ Check_Billing.jmx: Invoice_Create Invoice_Submit
  
+21-May-2019:
+ - Check_Billing.jmx
+ 	+ Win Loss Report_Number Game Win Loss_Submit: Xpath Gross Win change to //td[contains(text(),'Grand Total')]/following::td[3]/span
+ 	+ Win Loss Report_Virtual Sports Win Loss_Submit: Xpath Licensee Win Loss change to //td[contains(text(),'Grand Total')]/following::td[3]/span 

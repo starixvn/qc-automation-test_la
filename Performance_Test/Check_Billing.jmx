@@ -1008,7 +1008,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Gross Win</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]/span</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -1341,7 +1341,7 @@ log.info(SampleResult.getSampleLabel());
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Licensee Win Loss</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]/span</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
