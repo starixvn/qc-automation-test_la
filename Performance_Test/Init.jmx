@@ -25,7 +25,7 @@
               <stringProp name="Argument.name">glb_Password</stringProp>
               <stringProp name="Argument.value">MXEydzNlNHI=</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
-              <stringProp name="Argument.desc">Pro/UAT: 123QWEasd; Local: 1234aa</stringProp>
+              <stringProp name="Argument.desc">Pro/UAT: </stringProp>
             </elementProp>
             <elementProp name="glb_Salt" elementType="Argument">
               <stringProp name="Argument.name">glb_Salt</stringProp>
@@ -37,7 +37,7 @@
               <stringProp name="Argument.name">glb_UserId</stringProp>
               <stringProp name="Argument.value">3652</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
-              <stringProp name="Argument.desc">Pro: pgmwilliam: 3652; Local: tester04:</stringProp>
+              <stringProp name="Argument.desc">Pro: </stringProp>
             </elementProp>
             <elementProp name="glb_BaseCurrency" elementType="Argument">
               <stringProp name="Argument.name">glb_BaseCurrency</stringProp>
@@ -91,9 +91,14 @@
             </elementProp>
             <elementProp name="glb_ServerName" elementType="Argument">
               <stringProp name="Argument.name">glb_ServerName</stringProp>
-              <stringProp name="Argument.value">123.51.196.23</stringProp>
+              <stringProp name="Argument.value">la.starific.net</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">Pro: 123.51.196.23; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7615</stringProp>
+            </elementProp>
+            <elementProp name="glb_Token" elementType="Argument">
+              <stringProp name="Argument.name">glb_Token</stringProp>
+              <stringProp name="Argument.value">ztvZSqqA_Elf_A8WAwWEtg2</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="glb_Protocol" elementType="Argument">
               <stringProp name="Argument.name">glb_Protocol</stringProp>
@@ -118,12 +123,13 @@
             </elementProp>
             <elementProp name="glb_Port" elementType="Argument">
               <stringProp name="Argument.name">glb_Port</stringProp>
-              <stringProp name="Argument.value">8090</stringProp>
+              <stringProp name="Argument.value"></stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">8090</stringProp>
             </elementProp>
             <elementProp name="glb_URLFolder" elementType="Argument">
               <stringProp name="Argument.name">glb_URLFolder</stringProp>
-              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.value">V2</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="glb_PartyIds" elementType="Argument">
@@ -236,7 +242,7 @@
             </elementProp>
             <elementProp name="glb_Token_LRF" elementType="Argument">
               <stringProp name="Argument.name">glb_Token_LRF</stringProp>
-              <stringProp name="Argument.value">ohNKbMalJSzgLP-ky1Q7TQ2</stringProp>
+              <stringProp name="Argument.value">Ep_PgsGOMnZL-AijMJC3eA2</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="glb_ServerName_CreateInvoice" elementType="Argument">
