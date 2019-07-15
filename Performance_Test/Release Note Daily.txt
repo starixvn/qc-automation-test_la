@@ -1,0 +1,5 @@
+15-Jul-2019:
+ - Add new param glb_IsGroupByDate
+	+ Init.jmx
+ - Add new reports.
+ - Update assertion for old reports.

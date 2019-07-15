@@ -62,23 +62,6 @@
             <stringProp name="RegexExtractor.match_number"></stringProp>
           </RegexExtractor>
           <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get: PartyIds" enabled="false">
-            <stringProp name="scriptLanguage">javascript</stringProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="cacheKey"></stringProp>
-            <stringProp name="script">var response = &quot;${PartyData}&quot;;
-var PartyData = responnse.replace(&quot;&amp;quot;&quot;,&quot;&quot;);
-var obj = JSON.parse(PartyData);
-//var BalanceUpDay = response.substr(response.indexOf(&quot;BalanceUpDay&quot;) + 26,19);
-//var BalanceUpDayConvert = new Date(Number(BalanceUpDay.substr(a.indexOf(&quot;Date&quot;) + 5,13)));
-vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);    
-//vars.put(&quot;BalanceUpDay&quot;, BalanceUpDay);    
-//vars.put(&quot;BalanceUpDayConvert&quot;, formatDate(BalanceUpDayConvert));   
-
-</stringProp>
-          </JSR223PostProcessor>
-          <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="RequestVerificationToken" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">RequestVerificationToken</stringProp>
@@ -88,13 +71,16 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
             <stringProp name="RegexExtractor.match_number"></stringProp>
           </RegexExtractor>
           <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Misc_Platform Win Loss_Submit" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -104,11 +90,10 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
                 <stringProp name="Argument.value">{&#xd;
 	&quot;PartyIds&quot;:&quot;14&quot;,&#xd;
 	&quot;BaseCurrency&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;ExcludeTest&quot;:false,&#xd;
-	&quot;Year&quot;:&quot;${glb_Year}&quot;,&#xd;
-	&quot;Month&quot;:&quot;${glb_Month}&quot;,&#xd;
-	&quot;FromDay&quot;:&quot;${glb_FDate}&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${glb_TDate}&quot;&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -177,27 +162,12 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
+              <stringProp name="46808752">12Bet</stringProp>
             </collectionProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
-          <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Params: CustomerId" enabled="false">
-            <stringProp name="scriptLanguage">groovy</stringProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="cacheKey"></stringProp>
-            <stringProp name="script">import groovy.json.JsonSlurper
-
-def jsonSlurper = new JsonSlurper();
-def response = jsonSlurper.parseText(prev.getResponseDataAsString());
-vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
-//vars.put(&quot;ExternalId&quot;, response.Data[0].CustId.toString());
-//vars.put(&quot;SystemId&quot;, response.Data[0].CustId.toString());
-</stringProp>
-          </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Misc_Platform Win Loss_Export" enabled="true">
@@ -209,10 +179,10 @@ vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
                 <stringProp name="Argument.value">{&#xd;
 	&quot;PartyIds&quot;:&quot;14&quot;,&#xd;
 	&quot;BaseCurrency&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;Year&quot;:&quot;${glb_Year}&quot;,&#xd;
-	&quot;Month&quot;:&quot;${glb_Month}&quot;,&#xd;
-	&quot;FromDay&quot;:&quot;${glb_FDate}&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${glb_TDate}&quot;&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -276,9 +246,9 @@ vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
+              <stringProp name="46808752">12Bet</stringProp>
             </collectionProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>

@@ -62,23 +62,6 @@
             <stringProp name="RegexExtractor.match_number"></stringProp>
           </RegexExtractor>
           <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get: PartyIds" enabled="false">
-            <stringProp name="scriptLanguage">javascript</stringProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="cacheKey"></stringProp>
-            <stringProp name="script">var response = &quot;${PartyData}&quot;;
-var PartyData = responnse.replace(&quot;&amp;quot;&quot;,&quot;&quot;);
-var obj = JSON.parse(PartyData);
-//var BalanceUpDay = response.substr(response.indexOf(&quot;BalanceUpDay&quot;) + 26,19);
-//var BalanceUpDayConvert = new Date(Number(BalanceUpDay.substr(a.indexOf(&quot;Date&quot;) + 5,13)));
-//vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);    
-//vars.put(&quot;BalanceUpDay&quot;, BalanceUpDay);    
-//vars.put(&quot;BalanceUpDayConvert&quot;, formatDate(BalanceUpDayConvert));   
-
-</stringProp>
-          </JSR223PostProcessor>
-          <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="RequestVerificationToken" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">RequestVerificationToken</stringProp>
@@ -98,12 +81,6 @@ var obj = JSON.parse(PartyData);
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Licensee Win Loss_Submit" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -112,16 +89,15 @@ var obj = JSON.parse(PartyData);
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
-	&quot;ExcludeTest&quot;:true,&#xd;
-	&quot;DateOption&quot;:&quot;6&quot;,&#xd;
+	&quot;DateOption&quot;:6,&#xd;
 	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
-	&quot;ParentIds&quot;:&quot;1,11,98,999&quot;,&#xd;
-	&quot;ProductCodes&quot;:&quot;SB,RB,NG,BA,LC,VS,CS,KN,AGC,VG,GD,MGCLC,MGCRNG,VB,AB,FW,VS2,LT&quot;,&#xd;
+	&quot;ParentIds&quot;:&quot;1,9,11,98&quot;,&#xd;
+	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
 	&quot;BaseCurrencyName&quot;:&quot;EUR&quot;,&#xd;
 	&quot;Currency&quot;:&quot;${glb_CurrencyId}&quot;,&#xd;
-	&quot;FromDate&quot;:&quot;01-Mar-2018&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;31-Mar-2018&quot;,&#xd;
-	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
+	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
+	&quot;DrawFilter&quot;:1,&#xd;
 	&quot;SortColumn&quot;:&quot;&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;&quot;&#xd;
 }</stringProp>
@@ -187,27 +163,12 @@ var obj = JSON.parse(PartyData);
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
+              <stringProp name="-2048954283">Grand Total in</stringProp>
             </collectionProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
-          <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Params: CustomerId" enabled="false">
-            <stringProp name="scriptLanguage">groovy</stringProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="cacheKey"></stringProp>
-            <stringProp name="script">import groovy.json.JsonSlurper
-
-def jsonSlurper = new JsonSlurper();
-def response = jsonSlurper.parseText(prev.getResponseDataAsString());
-//vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
-//vars.put(&quot;ExternalId&quot;, response.Data[0].CustId.toString());
-//vars.put(&quot;SystemId&quot;, response.Data[0].CustId.toString());
-</stringProp>
-          </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Licensee Win Loss_Export" enabled="true">
@@ -219,10 +180,9 @@ def response = jsonSlurper.parseText(prev.getResponseDataAsString());
                 <stringProp name="Argument.value">{&#xd;
 	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,&#xd;
 	&quot;Currency&quot;:&quot;${glb_CurrencyId}&quot;,&#xd;
-	&quot;FromDate&quot;:&quot;3/1/2018 12:00:00 AM&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;3/31/2018 12:00:00 AM&quot;,&#xd;
-	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
-	&quot;ExcludeTest&quot;:&quot;${glb_ExcludeTest}&quot;,&#xd;
+	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
+	&quot;DrawFilter&quot;:1,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
 	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
 	&quot;CurrencyName&quot;:&quot;&quot;,&#xd;
@@ -292,9 +252,9 @@ def response = jsonSlurper.parseText(prev.getResponseDataAsString());
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
+              <stringProp name="-2048954283">Grand Total in</stringProp>
             </collectionProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
@@ -349,23 +309,6 @@ def response = jsonSlurper.parseText(prev.getResponseDataAsString());
             <stringProp name="RegexExtractor.match_number"></stringProp>
           </RegexExtractor>
           <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get: PartyIds" enabled="false">
-            <stringProp name="scriptLanguage">javascript</stringProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="cacheKey"></stringProp>
-            <stringProp name="script">var response = &quot;${PartyData}&quot;;
-var PartyData = responnse.replace(&quot;&amp;quot;&quot;,&quot;&quot;);
-var obj = JSON.parse(PartyData);
-//var BalanceUpDay = response.substr(response.indexOf(&quot;BalanceUpDay&quot;) + 26,19);
-//var BalanceUpDayConvert = new Date(Number(BalanceUpDay.substr(a.indexOf(&quot;Date&quot;) + 5,13)));
-//vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);    
-//vars.put(&quot;BalanceUpDay&quot;, BalanceUpDay);    
-//vars.put(&quot;BalanceUpDayConvert&quot;, formatDate(BalanceUpDayConvert));   
-
-</stringProp>
-          </JSR223PostProcessor>
-          <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="RequestVerificationToken" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">RequestVerificationToken</stringProp>
@@ -385,12 +328,6 @@ var obj = JSON.parse(PartyData);
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Licensee Win Loss Details_Submit" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -400,16 +337,16 @@ var obj = JSON.parse(PartyData);
                 <stringProp name="Argument.value">{&#xd;
 	&quot;BaseCurrencyName&quot;:&quot;EUR&quot;,&#xd;
 	&quot;Currency&quot;:&quot;${glb_CurrencyId}&quot;,&#xd;
-	&quot;DateOption&quot;:&quot;6&quot;,&#xd;
-	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
-	&quot;ExcludeTest&quot;:true,&#xd;
-	&quot;FromDate&quot;:&quot;01-Mar-2018&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;31-Mar-2018&quot;,&#xd;
+	&quot;ParentIds&quot;:&quot;1,9,11,98&quot;,&#xd;
+	&quot;DateOption&quot;:6,&#xd;
+	&quot;DrawFilter&quot;:1,&#xd;
+	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
 	&quot;IsDrilldown&quot;:&quot;False&quot;,&#xd;
-	&quot;PartyId&quot;:&quot;14&quot;,	&#xd;
+	&quot;PartyId&quot;:14,	&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
-	&quot;ReportBy&quot;:&quot;2&quot;,&#xd;
+	&quot;ReportBy&quot;:2,&#xd;
 	&quot;SortColumn&quot;:&quot;CurrencyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;&#xd;
 }</stringProp>
@@ -475,27 +412,12 @@ var obj = JSON.parse(PartyData);
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
+              <stringProp name="-2048954283">Grand Total in</stringProp>
             </collectionProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
-          <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Get Params: CustomerId" enabled="false">
-            <stringProp name="scriptLanguage">groovy</stringProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="cacheKey"></stringProp>
-            <stringProp name="script">import groovy.json.JsonSlurper
-
-def jsonSlurper = new JsonSlurper();
-def response = jsonSlurper.parseText(prev.getResponseDataAsString());
-//vars.put(&quot;CustomerId&quot;, response.Data[0].CustomerId.toString());
-//vars.put(&quot;ExternalId&quot;, response.Data[0].CustId.toString());
-//vars.put(&quot;SystemId&quot;, response.Data[0].CustId.toString());
-</stringProp>
-          </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Licensee Win Loss Details_Export" enabled="true">
@@ -508,15 +430,14 @@ def response = jsonSlurper.parseText(prev.getResponseDataAsString());
 	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
 	&quot;Currency&quot;:&quot;${glb_CurrencyId}&quot;,&#xd;
 	&quot;CurrencyName&quot;:&quot;&quot;,&#xd;
-	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
-	&quot;ExcludeTest&quot;:&quot;${glb_ExcludeTest}&quot;,&#xd;
-	&quot;FromDate&quot;:&quot;3/1/2018 12:00:00 AM&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;3/31/2018 12:00:00 AM&quot;,&#xd;
+	&quot;DrawFilter&quot;:1,&#xd;
+	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
-	&quot;PartyId&quot;:&quot;14&quot;,&#xd;
+	&quot;PartyId&quot;:14,&#xd;
 	&quot;PartyName&quot;:&quot;12Bet&quot;,&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
-	&quot;ReportBy&quot;:&quot;2&quot;,&#xd;
+	&quot;ReportBy&quot;:2,&#xd;
 	&quot;SortColumn&quot;:&quot;CurrencyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;&#xd;
 }</stringProp>
@@ -582,9 +503,9 @@ def response = jsonSlurper.parseText(prev.getResponseDataAsString());
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
+              <stringProp name="-2048954283">Grand Total in</stringProp>
             </collectionProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>

@@ -7,3 +7,8 @@
  - Check_Billing.jmx
  	+ Win Loss Report_Number Game Win Loss_Submit: Xpath Gross Win change to //td[contains(text(),'Grand Total')]/following::td[3]/span
  	+ Win Loss Report_Virtual Sports Win Loss_Submit: Xpath Licensee Win Loss change to //td[contains(text(),'Grand Total')]/following::td[3]/span 
+
+15-Jul-2019:
+ - Add new param glb_Token_LA:
+	+ Init.jmx
+	+ Login.jmx, Login_CreateInvoice.jmx
