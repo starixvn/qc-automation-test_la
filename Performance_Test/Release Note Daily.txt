@@ -3,3 +3,8 @@
 	+ Init.jmx
  - Add new reports.
  - Update assertion for old reports.
+
+19-Jul-2019:
+ - Update NG WL report:
+ 	+ Add new param "Year", "Month", "FromDay", "ToDay".
+ 	+ Add 2 new samplers - _Group By Date. 	
