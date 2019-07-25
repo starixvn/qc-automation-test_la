@@ -12,3 +12,6 @@
  - Add new param glb_Token_LA:
 	+ Init.jmx
 	+ Login.jmx, Login_CreateInvoice.jmx
+25-Jul-2019:
+ - Change param Gross Win to Customer Win Loss and update Xpath
+	+ IF NUMBER GAME WIN LOSS REPORT
