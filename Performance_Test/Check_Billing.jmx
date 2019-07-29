@@ -7285,9 +7285,9 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String Specific_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(10).toString();
 		String Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(24).toString();
 		switch (&quot;${ProductName}&quot;) {
-		   case &quot;Number Game&quot;:
-		       Specific_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(25).toString();//get from Gross Win
-		       break
+//		   case &quot;Number Game&quot;:
+//		       Specific_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(25).toString();//get from Gross Win
+//		       break
 		   case &quot;Virtual Sports&quot;:
 		       Specific_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(26).toString();//get from Licensee Win Loss
 		       break;
