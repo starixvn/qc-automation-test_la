@@ -15,3 +15,6 @@
 25-Jul-2019:
  - Change param Gross Win to Customer Win Loss and update Xpath
 	+ IF NUMBER GAME WIN LOSS REPORT
+15-Aug-2019:
+ - Add Condition Null
+	+ IF LAP-COLOSSUS BET WIN LOSS REPORT 

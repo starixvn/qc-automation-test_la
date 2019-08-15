@@ -5888,14 +5888,24 @@ vars.putObject(&quot;sheet&quot;, sheet);
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	def jsonSlurper = new JsonSlurper();
 	def response = jsonSlurper.parseText(prev.getResponseDataAsString());
-		
-	String MemberWinning = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].MemberWinning.toString();
-	String Turnover = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TurnOver.toString();
-	String TotalTrans = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TotalTransaction.toString();
-	String CashoutAmt = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CashOut.toString();
-	String CashoutShare = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CashOutShare.toString();
-	String CommissionShare = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CommissionShare.toString();
-	String AmountDueToColossusBets = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].AmountDueToCB.toString();
+
+	String MemberWinning = &quot;Not_Found&quot;;
+	String Turnover = &quot;Not_Found&quot;;
+	String TotalTrans = &quot;Not_Found&quot;;
+	String CashoutAmt = &quot;Not_Found&quot;;
+	String CashoutShare = &quot;Not_Found&quot;;
+	String CommissionShare = &quot;Not_Found&quot;;
+	String AmountDueToColossusBets = &quot;Not_Found&quot;;
+
+	if(response.SummaryTotal[&quot;${BaseCurrencyName}&quot;]!=null){	
+		 MemberWinning = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].MemberWinning.toString();
+		 Turnover = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TurnOver.toString();
+		 TotalTrans = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TotalTransaction.toString();
+		 CashoutAmt = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CashOut.toString();
+		 CashoutShare = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CashOutShare.toString();
+		 CommissionShare = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CommissionShare.toString();
+		 AmountDueToColossusBets = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].AmountDueToCB.toString();
+	}
 
 	List&lt;ValueRange&gt; list = Arrays.asList(
       new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:J&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans))),
