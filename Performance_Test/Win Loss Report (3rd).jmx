@@ -25,6 +25,10 @@
           <stringProp name="IncludeController.includepath">Win Loss Report (3rd)_Fishing World Win Loss (GMT +8).jmx</stringProp>
         </IncludeController>
         <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Win Loss Report (3rd)_PP Win Loss (GMT+0)" enabled="true">
+          <stringProp name="IncludeController.includepath">Win Loss Report (3rd)_PP Win Loss (GMT+0).jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
       </hashTree>
     </hashTree>
     <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">

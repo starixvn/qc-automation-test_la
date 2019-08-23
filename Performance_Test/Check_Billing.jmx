@@ -915,13 +915,12 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
 	&quot;PartyIds&quot;:&quot;${PartyId}&quot;,	&#xd;
-	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth}&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth}&quot;,&#xd;
-	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
-	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
-	&quot;DrawFilter&quot;:&quot;a&quot;,&#xd;
-	&quot;ExcludeTest&quot;:&quot;${glb_ExcludeTest}&quot;,&#xd;
-	&quot;BaseCurrencyName&quot;:&quot;${BaseCurrencyName}&quot;&#xd;
+	&quot;GroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;,&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;&#xd;
 }&#xd;
 </stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
@@ -984,6 +983,16 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Turnover</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
               <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
@@ -994,21 +1003,11 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
               </XPathExtractor>
               <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Turnover</stringProp>
+                <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[1]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Gross Win" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Gross Win</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]/span</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[4]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -1018,7 +1017,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[4]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -1069,13 +1068,13 @@ List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).
 vars.putObject(&quot;sheet&quot;, sheet);
 
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
-	String GrossWin = &quot;${Gross Win}&quot;;
+	String CustomerWinLoss = &quot;${Customer Win Loss}&quot;;
 	String Turnover = &quot;${Turnover}&quot;;
 	String TotalTrans = &quot;${Total Trans}&quot;;
 	String Licensingfee = &quot;${Licensing fee}&quot;;
 	List&lt;ValueRange&gt; list = Arrays.asList(
-      new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:J&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans))),
-      new ValueRange().setRange(&quot;Licensees!Y&quot; + (i + 1) + &quot;:Z&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Licensingfee,GrossWin)))
+  	 new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
+      new ValueRange().setRange(&quot;Licensees!Y&quot; + (i + 1) + &quot;:Y&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Licensingfee)))
       );     
 
 	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
@@ -1121,7 +1120,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}
-		if(Math.abs(Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss)) - Functions.ConvertStringToFloat(GrossWin))&lt;0.2){
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss) - Functions.ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
 			FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Pass&quot;);
 		}else{
 			AssertionResult.setFailure(true);
@@ -1140,7 +1139,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 
 		Functions.WriteResultToReport(file,&quot;TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
 		Functions.WriteResultToReport(file,&quot;Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
-		Functions.WriteResultToReport(file,&quot;Gross Win = -Customer WL&quot;,GrossWin,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+		Functions.WriteResultToReport(file,&quot;Customer WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
 		Functions.WriteResultToReport(file,&quot;Licensing fee &amp; Equivalent&quot;,Licensingfee,Settlement_Equivalent,FlagEquivalent);
 		
       }
@@ -5889,14 +5888,24 @@ vars.putObject(&quot;sheet&quot;, sheet);
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	def jsonSlurper = new JsonSlurper();
 	def response = jsonSlurper.parseText(prev.getResponseDataAsString());
-		
-	String MemberWinning = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].MemberWinning.toString();
-	String Turnover = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TurnOver.toString();
-	String TotalTrans = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TotalTransaction.toString();
-	String CashoutAmt = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CashOut.toString();
-	String CashoutShare = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CashOutShare.toString();
-	String CommissionShare = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CommissionShare.toString();
-	String AmountDueToColossusBets = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].AmountDueToCB.toString();
+
+	String MemberWinning = &quot;Not_Found&quot;;
+	String Turnover = &quot;Not_Found&quot;;
+	String TotalTrans = &quot;Not_Found&quot;;
+	String CashoutAmt = &quot;Not_Found&quot;;
+	String CashoutShare = &quot;Not_Found&quot;;
+	String CommissionShare = &quot;Not_Found&quot;;
+	String AmountDueToColossusBets = &quot;Not_Found&quot;;
+
+	if(response.SummaryTotal[&quot;${BaseCurrencyName}&quot;]!=null){	
+		 MemberWinning = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].MemberWinning.toString();
+		 Turnover = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TurnOver.toString();
+		 TotalTrans = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TotalTransaction.toString();
+		 CashoutAmt = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CashOut.toString();
+		 CashoutShare = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CashOutShare.toString();
+		 CommissionShare = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].CommissionShare.toString();
+		 AmountDueToColossusBets = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].AmountDueToCB.toString();
+	}
 
 	List&lt;ValueRange&gt; list = Arrays.asList(
       new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:J&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans))),
@@ -7286,9 +7295,9 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String Specific_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(10).toString();
 		String Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(24).toString();
 		switch (&quot;${ProductName}&quot;) {
-		   case &quot;Number Game&quot;:
-		       Specific_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(25).toString();//get from Gross Win
-		       break
+//		   case &quot;Number Game&quot;:
+//		       Specific_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(25).toString();//get from Gross Win
+//		       break
 		   case &quot;Virtual Sports&quot;:
 		       Specific_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(26).toString();//get from Licensee Win Loss
 		       break;

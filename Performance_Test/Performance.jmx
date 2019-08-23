@@ -29,6 +29,10 @@
           <stringProp name="IncludeController.includepath">Performance_Licensee Performance by Margin.jmx</stringProp>
         </IncludeController>
         <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Performance_Licensee Performance in Details" enabled="true">
+          <stringProp name="IncludeController.includepath">Performance_Licensee Performance in Details.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
       </hashTree>
     </hashTree>
     <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">

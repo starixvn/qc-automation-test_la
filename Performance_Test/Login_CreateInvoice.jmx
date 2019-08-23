@@ -21,7 +21,11 @@
           <stringProp name="HTTPSampler.port">${glb_Port_CreateInvoice}</stringProp>
           <stringProp name="HTTPSampler.protocol">${glb_Protocol_CreateInvoice}</stringProp>
           <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+<<<<<<< HEAD
           <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/Auth/Login?umtoken=${glb_Token}</stringProp>
+=======
+          <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/Auth/Login?umtoken=${glb_Token_LA}</stringProp>
+>>>>>>> 9f9d38d5b84fa323bbc5d9024eff0f9d519f98cf
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

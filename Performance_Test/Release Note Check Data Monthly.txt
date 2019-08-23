@@ -1,0 +1,20 @@
+20-May-2019:
+ - Add new param InvoiceLanguage: 
+	+ Init.jmx
+	+ Check_Billing.jmx: Invoice_Create Invoice_Submit
+ 
+21-May-2019:
+ - Check_Billing.jmx
+ 	+ Win Loss Report_Number Game Win Loss_Submit: Xpath Gross Win change to //td[contains(text(),'Grand Total')]/following::td[3]/span
+ 	+ Win Loss Report_Virtual Sports Win Loss_Submit: Xpath Licensee Win Loss change to //td[contains(text(),'Grand Total')]/following::td[3]/span 
+
+15-Jul-2019:
+ - Add new param glb_Token_LA:
+	+ Init.jmx
+	+ Login.jmx, Login_CreateInvoice.jmx
+25-Jul-2019:
+ - Change param Gross Win to Customer Win Loss and update Xpath
+	+ IF NUMBER GAME WIN LOSS REPORT
+15-Aug-2019:
+ - Add Condition Null
+	+ IF LAP-COLOSSUS BET WIN LOSS REPORT 

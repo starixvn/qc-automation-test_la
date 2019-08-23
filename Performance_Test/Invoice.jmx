@@ -25,6 +25,42 @@
           <stringProp name="IncludeController.includepath">Invoice_Manage AMF.jmx</stringProp>
         </IncludeController>
         <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Invoice_Manage Biller" enabled="true">
+          <stringProp name="IncludeController.includepath">Invoice_Manage Biller.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Invoice_Manage Payer" enabled="true">
+          <stringProp name="IncludeController.includepath">Invoice_Manage Payer.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Invoice_Manage Payer Setting" enabled="true">
+          <stringProp name="IncludeController.includepath">Invoice_Manage Payer Setting.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Invoice_Manage Payer Group" enabled="true">
+          <stringProp name="IncludeController.includepath">Invoice_Manage Payer Group.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Invoice_Manage Hosting Fees Charge Rate" enabled="true">
+          <stringProp name="IncludeController.includepath">Invoice_Manage Hosting Fees Charge Rate.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Invoice_Manage Discount Group" enabled="true">
+          <stringProp name="IncludeController.includepath">Invoice_Manage Discount Group.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Invoice_Manage Rebate Group" enabled="true">
+          <stringProp name="IncludeController.includepath">Invoice_Manage Rebate Group.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Invoice_Group Licensing Fees" enabled="true">
+          <stringProp name="IncludeController.includepath">Invoice_Group Licensing Fees.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Invoice_Manage Licensee Group" enabled="true">
+          <stringProp name="IncludeController.includepath">Invoice_Manage Licensee Group.jmx</stringProp>
+        </IncludeController>
+        <hashTree/>
       </hashTree>
     </hashTree>
     <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
