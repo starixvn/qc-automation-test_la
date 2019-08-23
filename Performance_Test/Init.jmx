@@ -25,11 +25,7 @@
               <stringProp name="Argument.name">glb_Password</stringProp>
               <stringProp name="Argument.value">MXEydzNlNHI=</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
-<<<<<<< HEAD
-              <stringProp name="Argument.desc">Pro/UAT: </stringProp>
-=======
               <stringProp name="Argument.desc">Pro/UAT: MXEydzNlNHI=; Local: MTIzNDVhYQ==</stringProp>
->>>>>>> 9f9d38d5b84fa323bbc5d9024eff0f9d519f98cf
             </elementProp>
             <elementProp name="glb_Salt" elementType="Argument">
               <stringProp name="Argument.name">glb_Salt</stringProp>
@@ -41,11 +37,7 @@
               <stringProp name="Argument.name">glb_UserId</stringProp>
               <stringProp name="Argument.value">3652</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
-<<<<<<< HEAD
-              <stringProp name="Argument.desc">Pro: </stringProp>
-=======
               <stringProp name="Argument.desc">Pro: pgmwilliam: 3652; Local: pgmWinston1:177</stringProp>
->>>>>>> 9f9d38d5b84fa323bbc5d9024eff0f9d519f98cf
             </elementProp>
             <elementProp name="glb_BaseCurrency" elementType="Argument">
               <stringProp name="Argument.name">glb_BaseCurrency</stringProp>
@@ -256,11 +248,7 @@
             </elementProp>
             <elementProp name="glb_Token_LRF" elementType="Argument">
               <stringProp name="Argument.name">glb_Token_LRF</stringProp>
-<<<<<<< HEAD
-              <stringProp name="Argument.value">Ep_PgsGOMnZL-AijMJC3eA2</stringProp>
-=======
               <stringProp name="Argument.value">-0zfpejo4GgbdPrVlo8gHg2</stringProp>
->>>>>>> 9f9d38d5b84fa323bbc5d9024eff0f9d519f98cf
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">ohNKbMalJSzgLP-ky1Q7TQ2</stringProp>
             </elementProp>
