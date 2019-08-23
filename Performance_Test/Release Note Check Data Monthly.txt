@@ -18,3 +18,5 @@
 15-Aug-2019:
  - Add Condition Null
 	+ IF LAP-COLOSSUS BET WIN LOSS REPORT 
+23-Aug-2019:
+ - Change xpath for NG WL Report (feature #117674)
