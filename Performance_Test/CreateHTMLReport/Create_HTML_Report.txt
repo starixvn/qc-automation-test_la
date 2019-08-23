@@ -50,8 +50,7 @@ Create_HTML_Report
     \    #${Diff_t_str}=    Set Variable If    ${Diff_t}>=0
     \    ${Diff_t_str}=    Run keyword if    ${Diff_t}>=0    set variable    <font style="color:red;font-size:10px">+${Diff_t}</font>
     \    ...    ELSE    set variable    <font style="color:green;font-size:10px">${Diff_t}</font>
-    \    #${Diff_lt_str}=    Set Variable If    ${Diff_lt}>=0    <font style="color:red;font-size:6px">+${Diff_lt}</font>
-    \    ...    # ELSE    <font style="color:blue;font-size:6px">-${Diff_lt}</font>
+    \    #${Diff_lt_str}=    Set Variable If    ${Diff_lt}>=0    <font style="color:red;font-size:6px">+${Diff_lt}</font>    # ELSE    <font style="color:blue;font-size:6px">-${Diff_lt}</font>
     \    ${Diff_lt_str}=    Run keyword if    ${Diff_lt}>=0    set variable    <font style="color:red;font-size:10px">+${Diff_lt}</font>
     \    ...    ELSE    set variable    <font style="color:green;font-size:10px">${Diff_lt}</font>
     \    ${StrReport}    set variable    ${StrReport}<td style="border:1px solid #dddddd;font-weight:bold">${lb}</td>
