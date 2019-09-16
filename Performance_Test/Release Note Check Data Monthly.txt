@@ -12,11 +12,22 @@
  - Add new param glb_Token_LA:
 	+ Init.jmx
 	+ Login.jmx, Login_CreateInvoice.jmx
+
 25-Jul-2019:
  - Change param Gross Win to Customer Win Loss and update Xpath
 	+ IF NUMBER GAME WIN LOSS REPORT
+
 15-Aug-2019:
  - Add Condition Null
 	+ IF LAP-COLOSSUS BET WIN LOSS REPORT 
+
 23-Aug-2019:
  - Change xpath for NG WL Report (feature #117674)
+
+16-Sep-2019:
+ - Update Licensingfee for NG Win Loss:
+	+ OLD: if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent,true) - Functions.ConvertStringToFloat(Licensingfee))<0.2)
+	+ NEW: if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent) - Functions.ConvertStringToFloat(Licensingfee))<0.2)
+ - Update LicenseeWinLoss for VS Win Loss:
+	+ OLD: if(Math.abs(Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss)) - Functions.ConvertStringToFloat(LicenseeWinLoss))<0.2)
+	+ NEW: if(((Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss))) - (Math.abs(Functions.ConvertStringToFloat(LicenseeWinLoss))))<0.2)
