@@ -31,3 +31,6 @@
  - Update LicenseeWinLoss for VS Win Loss:
 	+ OLD: if(Math.abs(Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss)) - Functions.ConvertStringToFloat(LicenseeWinLoss))<0.2)
 	+ NEW: if(((Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss))) - (Math.abs(Functions.ConvertStringToFloat(LicenseeWinLoss))))<0.2)
+
+27-Sep-2019:
+ - Update Product Exchange for Create Invoice

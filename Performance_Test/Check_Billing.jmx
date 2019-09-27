@@ -7736,6 +7736,14 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 				}
 			  	Functions.WriteResultToReport(file,&quot;AmtDueToBA-${ProductCode}&quot;,AmtDueToBA,Specific_AmtDueToBA,FlagAmtDueToBA);
 			  	break;
+		   case [&quot;Exchange&quot;, &quot;Colossus Bets&quot;, &quot;Cash Out&quot;]:
+		   		if(Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee) - Functions.ConvertStringToFloat(LicensingFee))&lt;0.2){
+					FlagLicensingFee = Functions.returnStatusFormat(&quot;Pass&quot;);
+				}else{
+					AssertionResult.setFailure(true);
+				}
+		   	  	Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,LicensingFee,Specific_LicensingFee,FlagLicensingFee);
+		   	  	break;
 		   default:
 		   		if(Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(LicensingFee,true))&lt;0.2){
 					FlagLicensingFee = Functions.returnStatusFormat(&quot;Pass&quot;);
