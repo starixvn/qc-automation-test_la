@@ -5606,7 +5606,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}
-		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Licensingfee) - Functions.ConvertStringToFloat(AmountDue))&lt;0.2){
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Licensingfee) - Functions.ConvertStringToFloat(AmountDue,true))&lt;0.2){
 			FlagAmountDue = Functions.returnStatusFormat(&quot;Pass&quot;);
 		}else{
 			AssertionResult.setFailure(true);

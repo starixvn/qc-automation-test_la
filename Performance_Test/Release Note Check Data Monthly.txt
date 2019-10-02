@@ -34,3 +34,6 @@
 
 27-Sep-2019:
  - Update Product Exchange for Create Invoice
+
+02-Oct-2019:
+ - Fix negative number for LAP-Gold Deluxe Win Loss
