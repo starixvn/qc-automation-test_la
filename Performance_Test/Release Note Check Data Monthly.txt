@@ -37,3 +37,6 @@
 
 02-Oct-2019:
  - Fix negative number for LAP-Gold Deluxe Win Loss
+
+04-Oct-2019:
+ - Integrate Card Club product

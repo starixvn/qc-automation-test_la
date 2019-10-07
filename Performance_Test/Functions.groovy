@@ -28,6 +28,9 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "Lottery":
 	       return "Lottery Win Loss";
 	       break;
+		case "Card Club":
+	       return "Card Club Win Loss";
+	       break;
 		case "Exchange":
 	       return "Exchange Win Loss";
 	       break;
@@ -80,6 +83,9 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       break;
 		case "Lottery":
 	       return "Lottery Win Loss";
+	       break;
+		case "Card Club":
+	       return "Card Club Win Loss";
 	       break;
 		case "Exchange":
 	       return "Exchange Win Loss";
