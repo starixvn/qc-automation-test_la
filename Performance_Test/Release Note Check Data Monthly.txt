@@ -40,3 +40,6 @@
 
 04-Oct-2019:
  - Integrate Card Club product
+
+11-Oct-2019:
+ - Update Params for LAP - Exchange

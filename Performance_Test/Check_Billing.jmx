@@ -6565,13 +6565,13 @@ if(EnableDurationAssertion==true){
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
-	&quot;CurrencyId&quot;:${CurrencyID},&#xd;
+	&quot;CurrencyId&quot;:-1,&#xd;
 	&quot;BaseCurrency&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
 	&quot;CurrencyName&quot;:&quot;${glb_CurrencyName}&quot;,&#xd;
 	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
 	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
-	&quot;ReportBy&quot;:1,&#xd;
-	&quot;ExcludeTestData&quot;:true,&#xd;
+	&quot;ReportBy&quot;:2,&#xd;
+	&quot;IsExcludedTestData&quot;:true,&#xd;
 	&quot;Level&quot;:0&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
@@ -7753,7 +7753,7 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF CREATE INVOICE" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF CREATE INVOICE" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Create Invoice&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
