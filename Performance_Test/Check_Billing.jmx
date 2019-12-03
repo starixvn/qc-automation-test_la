@@ -393,6 +393,16 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
               </XPathExtractor>
               <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Tips Amount Due - GD" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Tips Amount Due - GD</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
               <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent - PP" enabled="true">
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Equivalent - PP</stringProp>
@@ -668,8 +678,11 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String Turnover = &quot;${Turnover}&quot;;
 		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent - GD}&quot;,&quot;${Equivalent - GD - Negative}&quot;);
 		String TotalTrans = &quot;${Total Trans}&quot;;
+		String TipsAmtDue = &quot;${Tips Amount Due - GD}&quot;;
 		List&lt;ValueRange&gt; list = Arrays.asList(
-           new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:L&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss,Equivalent)))); 
+           new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:L&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss,Equivalent))),
+           new ValueRange().setRange(&quot;Licensees!AV&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(TipsAmtDue)))
+           ); 
 
            vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
 	     new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
@@ -4296,6 +4309,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(8).toString();
 		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(9).toString();
 		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
+		String Settlement_TipsAmtDue = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(47).toString();
 		
 		String FlagTurnOver = Functions.returnStatusFormat(&quot;Fail&quot;);
 		String FlagTotalTrans = Functions.returnStatusFormat(&quot;Fail&quot;);
@@ -4319,11 +4333,20 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}
-		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent,true) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
-			FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+		if (Functions.ConvertStringToFloat(Settlement_Equivalent,true) &gt; 0)
+		{ 
+			if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent,true) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
+				FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}else{
-			AssertionResult.setFailure(true);
-		}
+			if(Math.abs(Functions.ConvertStringToFloat(Settlement_TipsAmtDue,true) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
+				FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
+		}	
 
 		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
 		
@@ -4332,7 +4355,12 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		Functions.WriteResultToReport(file,&quot;TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
 		Functions.WriteResultToReport(file,&quot;Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
 		Functions.WriteResultToReport(file,&quot;Customer Win Loss&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+		if (Functions.ConvertStringToFloat(Settlement_Equivalent,true) &gt; 0)
+		{
 		Functions.WriteResultToReport(file,&quot;Licensing fee &amp; Equivalent&quot;,Licensingfee,Settlement_Equivalent,FlagEquivalent);
+		}else{
+		Functions.WriteResultToReport(file,&quot;Licensing fee &amp; Equivalent&quot;,Licensingfee,Settlement_TipsAmtDue,FlagEquivalent);	
+		}
 		
       }
 
@@ -5845,6 +5873,9 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	String Turnover = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TurnOver.toString();
 	String TotalTrans = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TotalTransaction.toString();
 	String AmountDue = response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].AmountDue.toString();
+	float TipAmount = new BigDecimal(response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TipAmount.toString()).floatValue();
+	float TipSharing = new BigDecimal(response.SummaryTotal[&quot;${BaseCurrencyName}&quot;].TipSharing.toString()).floatValue();
+	String TipsAmt = (TipAmount-TipSharing).toString();
 
 	List&lt;ValueRange&gt; list = Arrays.asList(
       new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
@@ -5961,10 +5992,18 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}
-		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Licensingfee) - Functions.ConvertStringToFloat(AmountDue,true))&lt;0.2){
-			FlagAmountDue = Functions.returnStatusFormat(&quot;Pass&quot;);
+		if (Functions.ConvertStringToFloat(AmountDue,true) &gt; 0){
+			if(Math.abs(Functions.ConvertStringToFloat(Settlement_Licensingfee) - Functions.ConvertStringToFloat(AmountDue,true))&lt;0.2){
+				FlagAmountDue = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}else{
-			AssertionResult.setFailure(true);
+			if(Math.abs(Functions.ConvertStringToFloat(Settlement_Licensingfee) - Functions.ConvertStringToFloat(TipsAmt,true))&lt;0.2){
+				FlagAmountDue = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}
 		
 		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
@@ -5974,7 +6013,11 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		Functions.WriteResultToReport(file,&quot;TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
 		Functions.WriteResultToReport(file,&quot;Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
 		Functions.WriteResultToReport(file,&quot;Customer WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
-		Functions.WriteResultToReport(file,&quot;Amt Due = Licensee Fee&quot;,AmountDue,Settlement_Licensingfee,FlagAmountDue);
+		if (Functions.ConvertStringToFloat(AmountDue,true) &gt; 0){
+			Functions.WriteResultToReport(file,&quot;Amt Due = Licensee Fee&quot;,AmountDue,Settlement_Licensingfee,FlagAmountDue);
+		}else{
+			Functions.WriteResultToReport(file,&quot;Amt Due = Licensee Fee&quot;,TipsAmt,Settlement_Licensingfee,FlagAmountDue);
+		}
 		
       }
 }

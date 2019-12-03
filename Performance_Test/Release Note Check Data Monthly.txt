@@ -43,3 +43,9 @@
 
 11-Oct-2019:
  - Update Params for LAP - Exchange
+
+03-Dec-2019:
+ - Fix GD - Licensing Fee < 0 and has Tips
+   	+ IF SETTLEMENT REPORT
+	+ IF GOLD DELUXE WIN LOSS REPORT
+	+ IF LAP-GOLD DELUXE WIN LOSS REPORT
