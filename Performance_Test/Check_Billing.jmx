@@ -3840,6 +3840,27 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
               </XPathExtractor>
               <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Buyback Amount - Sportsbook" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Buyback Amount - Sportsbook</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[5]/text()</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+                <boolProp name="XPathExtractor.quiet">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Buyback Amount - BA" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Buyback Amount - BA</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
               <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Buyback Amount - Total" enabled="true">
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Buyback Amount - Total</stringProp>
@@ -3939,6 +3960,8 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	String CashOutTimes = &quot;${Cash Out Times}&quot;;
 	String CashOutTickets = &quot;${Cash Out Tickets}&quot;;
 	String CashOutValue = &quot;${Cash Out Value}&quot;;
+	String BuybackAmountSB = &quot;${Buyback Amount - Sportsbook}&quot;;
+	String BuybackAmountBA = &quot;${Buyback Amount - BA}&quot;;
 	String BuybackAmountTotal = &quot;${Buyback Amount - Total}&quot;;
 	String TicketsPayout = &quot;${Tickets Payout}&quot;;
 	String CashOutCommission = &quot;${Cash Out Commission}&quot;;
@@ -3948,12 +3971,28 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	String AmountDuetoCashOutBOnProfitSharing = &quot;${Amount Due to Cash Out - B - On Profit Sharing}&quot;;
 	List&lt;ValueRange&gt; list = Arrays.asList(
       new ValueRange().setRange(&quot;Licensees!Q&quot; + (i + 1) + &quot;:V&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(CashOutTimes,CashOutTickets,CashOutValue,BuybackAmountTotal,TicketsPayout,CashOutCommission))),
-      new ValueRange().setRange(&quot;Licensees!AF&quot; + (i + 1) + &quot;:AI&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(IncomeAOnBBAmt,IncomeBOnProfitSharing,AmountDuetoCashOutAOnBBAmt,AmountDuetoCashOutBOnProfitSharing)))
+      new ValueRange().setRange(&quot;Licensees!AF&quot; + (i + 1) + &quot;:AI&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(IncomeAOnBBAmt,IncomeBOnProfitSharing,AmountDuetoCashOutAOnBBAmt,AmountDuetoCashOutBOnProfitSharing))),
+      new ValueRange().setRange(&quot;Licensees!AW&quot; + (i + 1) + &quot;:AX&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(BuybackAmountSB,BuybackAmountBA)))
       );     
 
 	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
                     new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
                     .execute();
+                    
+     //Self Calculation - Report has BuybackAmountBA then compare CashOutCommission, CashOutEquivalent of Cash out WL report with Formula
+	//CashOutCommissionSB
+     float flBuybackAmountSB = Functions.ConvertStringToFloat(BuybackAmountSB);
+	String CashOutCommissionSB = (flBuybackAmountSB * 0.03).toString();
+
+     float SCTicketsPayout = Functions.ConvertStringToFloat(TicketsPayout);
+     float SCBuybackAmountTotal = Functions.ConvertStringToFloat(BuybackAmountTotal);
+     float SCCashOutCommission = Functions.ConvertStringToFloat(CashOutCommission);
+      
+     // IncomeBOnProfitSharing = ((SCTicketsPayout - SCBuybackAmountTotal - SCCashOutCommission)  * 0.5)
+     //  AmountDuetoCashOutBOnProfitSharing = IncomeBOnProfitSharing
+     // CashOutEquivalent = IncomeBOnProfitSharing + AmountDuetoCashOutBOnProfitSharing
+     String SCCashOutEquivalent = (SCTicketsPayout - SCBuybackAmountTotal - SCCashOutCommission).toString();
+      
 	/* CHECK DATA WITH SETTLEMENT REPORT
 	 * Cash Out Times = Cash Out Times, Cash Out Tickets = Cash Out Tickets, Cash Out Value = Cash Out Value, Buyback Amount - Total = Buyback Amount - Total, Tickets Payout = Tickets Payout,
 	 * Cash Out Commission = Cash Out Commission, Max((&quot;Income - A - On BB Amt&quot; + &quot;Amount Due to Cash Out - A - On BB Amt&quot;),(&quot;Income - B - On Profit Sharing&quot; + &quot;Amount Due to Cash Out - B - On Profit Sharing&quot;)) = Equivalent
@@ -3971,7 +4010,6 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}
       }
 
-	
 	//Get Data from Settlement Data Row
       if(SettlementDataRowIndex&gt;0){
       	//String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(10).toString();
@@ -4023,15 +4061,34 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}
-		if(Math.abs(Functions.ConvertStringToFloat(Settlement_CashOutCommission) - Functions.ConvertStringToFloat(CashOutCommission))&lt;0.2){
-			FlagCashOutCommission = Functions.returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
+		if(Functions.ConvertStringToFloat(BuybackAmountBA) &gt; 0)
+		{
+			if(Math.abs(Functions.ConvertStringToFloat(Settlement_CashOutCommission) - Functions.ConvertStringToFloat(CashOutCommissionSB))&lt;0.2){
+				FlagCashOutCommission = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
+		}else
+		{
+			if(Math.abs(Functions.ConvertStringToFloat(Settlement_CashOutCommission) - Functions.ConvertStringToFloat(CashOutCommission))&lt;0.2){
+				FlagCashOutCommission = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}
-		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent)-CashOutEquivalent)&lt;0.02){
-			FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+		if(Functions.ConvertStringToFloat(BuybackAmountBA) &gt; 0)
+		{
+			if(Math.abs(Functions.ConvertStringToFloat(SCCashOutEquivalent) -CashOutEquivalent)&lt;0.02){
+				FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}else{
-			AssertionResult.setFailure(true);
+			if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent)-CashOutEquivalent)&lt;0.02){
+				FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}
 
 		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
@@ -4043,12 +4100,20 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		Functions.WriteResultToReport(file,&quot;Cash Out Value&quot;,CashOutValue,Settlement_CashOutValue,FlagCashOutValue);
 		Functions.WriteResultToReport(file,&quot;Buyback Amt - Total&quot;,BuybackAmountTotal,Settlement_BuybackAmountTotal,FlagBuybackAmountTotal);
 		Functions.WriteResultToReport(file,&quot;Tickets Payout&quot;,TicketsPayout,Settlement_TicketsPayout,FlagTicketsPayout);
-		Functions.WriteResultToReport(file,&quot;Cash Out Commission&quot;,CashOutCommission,Settlement_CashOutCommission,FlagCashOutCommission);
-		Functions.WriteResultToReport(file,&quot;Cash Out Equivalent&quot;,CashOutEquivalent.toString(),Settlement_Equivalent,FlagEquivalent);
-		
+		if(Functions.ConvertStringToFloat(BuybackAmountBA)&gt;0){
+			Functions.WriteResultToReport(file,&quot;Cash Out Commission&quot;,CashOutCommissionSB,Settlement_CashOutCommission,FlagCashOutCommission);
+		}else
+		{
+			Functions.WriteResultToReport(file,&quot;Cash Out Commission&quot;,CashOutCommission,Settlement_CashOutCommission,FlagCashOutCommission);
+		}
+		if(Functions.ConvertStringToFloat(BuybackAmountBA)&gt;0){
+			Functions.WriteResultToReport(file,&quot;Cash Out Equivalent&quot;,CashOutEquivalent.toString(),SCCashOutEquivalent,FlagEquivalent);
+		}else
+		{
+			Functions.WriteResultToReport(file,&quot;Cash Out Equivalent&quot;,CashOutEquivalent.toString(),Settlement_Equivalent,FlagEquivalent);
+		}
       }
 
-      
 }
 
 </stringProp>
@@ -4316,7 +4381,9 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String FlagEquivalent = Functions.returnStatusFormat(&quot;Fail&quot;);
 		String FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Fail&quot;);
 
-		
+		if (Settlement_TipsAmtDue == &quot;-&quot;){
+			Settlement_TipsAmtDue = &quot;0&quot;;
+		}
 		
 		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Turnover) - Functions.ConvertStringToFloat(Turnover))&lt;0.2){
 			FlagTurnOver = Functions.returnStatusFormat(&quot;Pass&quot;);
@@ -7305,6 +7372,8 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String Settlement_AmountDuetoCashOutAOnBBAmt = vars.getObject(&quot;sheet&quot;).get(CODataRowIndex).get(33).toString();
 		String Settlement_IncomeBOnProfitSharing = vars.getObject(&quot;sheet&quot;).get(CODataRowIndex).get(32).toString();
 		String Settlement_AmountDuetoCashOutBOnProfitSharing = vars.getObject(&quot;sheet&quot;).get(CODataRowIndex).get(34).toString();
+		String Settlement_BuybackAmountSB = vars.getObject(&quot;sheet&quot;).get(CODataRowIndex).get(48).toString();
+		String Settlement_BuybackAmountBA = vars.getObject(&quot;sheet&quot;).get(CODataRowIndex).get(49).toString();
 		
 		String FlagCashOutTimes = Functions.returnStatusFormat(&quot;Fail&quot;);
 		String FlagCashOutTickets = Functions.returnStatusFormat(&quot;Fail&quot;);
@@ -7313,6 +7382,21 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		String FlagTicketPayout = Functions.returnStatusFormat(&quot;Fail&quot;);
 		String FlagCashOutCommission = Functions.returnStatusFormat(&quot;Fail&quot;);
 		String FlagSettleAmountTotal = Functions.returnStatusFormat(&quot;Fail&quot;);
+
+     //Self Calculation - Report has BuybackAmountBA then compare CashOutCommission, CashOutEquivalent of Cash out WL report with Formula
+	//CashOutCommissionSB
+     	float flBuybackAmountSB = Functions.ConvertStringToFloat(Settlement_BuybackAmountSB);
+		String Settlement_CashOutCommissionSB = (flBuybackAmountSB * 0.03).toString();
+		
+		float SCTicketsPayout = Functions.ConvertStringToFloat(Settlement_TicketsPayout);
+     	float SCBuybackAmountTotal = Functions.ConvertStringToFloat(Settlement_BuybackAmountTotal);
+     	float SCCashOutCommission = Functions.ConvertStringToFloat(Settlement_CashOutCommission);
+      
+   	// IncomeBOnProfitSharing = ((SCTicketsPayout - SCBuybackAmountTotal - SCCashOutCommission)  * 0.5)
+    	// AmountDuetoCashOutBOnProfitSharing = IncomeBOnProfitSharing
+   	// CashOutEquivalent = IncomeBOnProfitSharing + AmountDuetoCashOutBOnProfitSharing
+    		String SCCashOutEquivalent = (SCTicketsPayout - SCBuybackAmountTotal - SCCashOutCommission).toString();
+	
 
 		if(Math.abs(Functions.ConvertStringToFloat(Settlement_CashOutTimes) - Functions.ConvertStringToFloat(CashOutTimes))&lt;0.2){
 			FlagCashOutTimes = Functions.returnStatusFormat(&quot;Pass&quot;);
@@ -7335,26 +7419,39 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}
-
-
 		if(Math.abs(Functions.ConvertStringToFloat(Settlement_TicketsPayout) - Functions.ConvertStringToFloat(TicketPayout))&lt;0.2){
 			FlagTicketPayout = Functions.returnStatusFormat(&quot;Pass&quot;);
 		}else{
 			AssertionResult.setFailure(true);
 		}
-		if(Math.abs(Functions.ConvertStringToFloat(Settlement_CashOutCommission) - Functions.ConvertStringToFloat(CashOutCommission))&lt;0.2){
-			FlagCashOutCommission = Functions.returnStatusFormat(&quot;Pass&quot;);
+		if (Functions.ConvertStringToFloat(Settlement_BuybackAmountBA) &gt; 0){
+			if(Math.abs(Functions.ConvertStringToFloat(Settlement_CashOutCommissionSB) - Functions.ConvertStringToFloat(CashOutCommission))&lt;0.2){
+				FlagCashOutCommission = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}else{
-			AssertionResult.setFailure(true);
+			if(Math.abs(Functions.ConvertStringToFloat(Settlement_CashOutCommission) - Functions.ConvertStringToFloat(CashOutCommission))&lt;0.2){
+				FlagCashOutCommission = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}
 
 		double Tmp = Math.max(Functions.ConvertStringToFloat(Settlement_IncomeAOnBBAmt)+Functions.ConvertStringToFloat(Settlement_AmountDuetoCashOutAOnBBAmt),Functions.ConvertStringToFloat(Settlement_IncomeBOnProfitSharing)+Functions.ConvertStringToFloat(Settlement_AmountDuetoCashOutBOnProfitSharing));
-		if(Math.abs(Functions.ConvertStringToFloat(SettleAmountTotal) - Tmp)&lt;0.2){
-			FlagSettleAmountTotal = Functions.returnStatusFormat(&quot;Pass&quot;);
+		if (Functions.ConvertStringToFloat(Settlement_BuybackAmountBA) &gt; 0){
+			if(Math.abs(Functions.ConvertStringToFloat(SCCashOutEquivalent) - Tmp)&lt;0.2){
+				FlagSettleAmountTotal = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}else{
-			AssertionResult.setFailure(true);
+			if(Math.abs(Functions.ConvertStringToFloat(SettleAmountTotal) - Tmp)&lt;0.2){
+				FlagSettleAmountTotal = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 		}
-
 		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
 		
 		Functions.WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Cash Out Win Loss&quot;);
@@ -7364,8 +7461,17 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		Functions.WriteResultToReport(file,&quot;Cash Out Value&quot;,CashOutValue,Settlement_CashOutValue,FlagCashOutValue);
 		Functions.WriteResultToReport(file,&quot;Buyback Amt - Total&quot;,BuyBackAmountTotal,Settlement_BuybackAmountTotal,FlagBuyBackAmountTotal);
 		Functions.WriteResultToReport(file,&quot;Tickets Payout&quot;,TicketPayout,Settlement_TicketsPayout,FlagTicketPayout);
-		Functions.WriteResultToReport(file,&quot;Cash Out Commission&quot;,CashOutCommission,Settlement_CashOutCommission,FlagCashOutCommission);
-		Functions.WriteResultToReport(file,&quot;Settle Amt Total&quot;,SettleAmountTotal,Tmp.toString(),FlagSettleAmountTotal);
+		if (Functions.ConvertStringToFloat(Settlement_BuybackAmountBA) &gt; 0){
+			Functions.WriteResultToReport(file,&quot;Cash Out Commission&quot;,CashOutCommission,Settlement_CashOutCommissionSB,FlagCashOutCommission);
+		}else{
+			Functions.WriteResultToReport(file,&quot;Cash Out Commission&quot;,CashOutCommission,Settlement_CashOutCommission,FlagCashOutCommission);
+		}
+		if (Functions.ConvertStringToFloat(Settlement_BuybackAmountBA) &gt; 0){
+			Functions.WriteResultToReport(file,&quot;Settle Amt Total&quot;,SCCashOutEquivalent,Tmp.toString(),FlagSettleAmountTotal);
+		}
+		else{
+			Functions.WriteResultToReport(file,&quot;Settle Amt Total&quot;,SettleAmountTotal,Tmp.toString(),FlagSettleAmountTotal);
+		}
       }
       
 }

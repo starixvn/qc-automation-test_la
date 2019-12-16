@@ -49,3 +49,8 @@
    	+ IF SETTLEMENT REPORT
 	+ IF GOLD DELUXE WIN LOSS REPORT
 	+ IF LAP-GOLD DELUXE WIN LOSS REPORT
+
+16-Dec-2019:
+ - Fix Cash Out - Report has BuybackAmountBA then compare CashOutCommission, CashOutEquivalent of Cash out WL report with Formula.
+	+ IF CASH OUT WIN LOSS REPORT
+	+ IF LAP-CASH OUT WIN LOSS REPORT
