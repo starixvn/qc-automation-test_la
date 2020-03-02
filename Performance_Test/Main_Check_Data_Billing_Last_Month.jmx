@@ -268,6 +268,78 @@ ${__setProperty(fFailed,&quot;1&quot;)}</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
       </PostThreadGroup>
       <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Arrange Report for Send Mail" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">import org.jsoup.*
+import org.jsoup.nodes.*
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+
+
+def DetailsPage = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;) 
+File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_Fails}&quot;);
+file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt;Fails:&lt;/h3&gt;&lt;/div&gt;&lt;div class=&apos;TableBorderStyleBody&apos;&gt;&quot;);
+
+Document doc = Jsoup.parse(DetailsPage, &quot;UTF-8&quot;);
+
+int TotalRows = doc.select(&quot;html &gt; body &gt; div &gt; div&quot;).size();
+Boolean flagFail = false;
+log.info(TotalRows.toString());
+for(int j = 0;j&lt;TotalRows;j++) {
+	String Tag = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+j+&quot;)&quot;).outerHtml();
+	String ContentFails = &quot;&quot;;
+	if(Tag.indexOf(&quot;Fail&quot;)&gt;0){
+		flagFail = true;
+		//Get Content Fail
+		ContentFails = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-3)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-2)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-1)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+j+&quot;)&quot;).outerHtml();
+
+		//Get HeaderValue, Header Status Content Fail
+		for(int k = 4;k&lt;100;k++) {
+			String HeaderStatus = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-k)+&quot;)&quot;).outerHtml();
+			if(HeaderStatus.indexOf(&quot;TableBorderStyleHeaderStatus&quot;)&gt;0){
+				String HeaderValueAndStatus = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+3))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+2))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+1))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k))+&quot;)&quot;).outerHtml();
+				String Header = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+4))+&quot;)&quot;).outerHtml();
+				file.append (Header+HeaderValueAndStatus+ContentFails);
+				break;
+			}
+		}
+	}else if(Tag.indexOf(&quot;TableBorderTryCatchErrorCode&quot;)&gt;0){
+		flagFail = true;
+		ContentFails = Tag;
+		file.append (ContentFails);
+	}
+ }
+if(flagFail==false){
+	file.append (&quot;&lt;div style=&apos;width:100%;border-bottom:2px solid #DCDCDC;text-align:center&apos;&gt;&lt;span style=&apos;color:#1d4&apos;&gt;CONGRATULATIONS!!!!! NO FAILS&lt;/span&gt;&lt;/div&gt;&quot;);
+}
+file.append (&quot;&lt;/div&gt;&quot;);
+file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt;Details:&lt;/h3&gt;&lt;/div&gt;&quot; + doc.select(&quot;html &gt; body&quot;).toString());
+//Element content = doc.getElementById(&quot;Pass&quot;);
+//Element Body = doc.body();
+//Passes = Body.getElementsByClass(&quot;Pass&quot;);
+//for (Element Pass : Passes) {
+  //log.info(Pass.parent().outerHtml());
+
+//}
+//log.info(&quot;www&quot;+content.text());
+//log.info(&quot;bbb&quot;+doc.body().text());
+//masterPage.text = doc.outerHtml();
+
+//log.info(doc.select(&quot;html &gt; body &gt; div &gt; div:eq(0)&quot;).outerHtml());//Good
+//log.info(&quot;William: &quot;+doc.select(&quot;html &gt; body &gt; div &gt; div&quot;).size().toString());//good
+//log.info(doc.select(&quot;div:eq(1) &gt; dev:eq(10)&quot;).text());
+//log.info(doc.select(&quot;div:eq(1) &gt; dev:eq(11)&quot;).text());
+
+
+//log.info(doc.toString());</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
         <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Send Message To Skype" enabled="true">
           <boolProp name="LoopController.continue_forever">true</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
@@ -318,78 +390,6 @@ for(int j = 0;j&lt;TotalRows;j++) {
 				break;
 			}
 		}
-	}
- }
-if(flagFail==false){
-	file.append (&quot;&lt;div style=&apos;width:100%;border-bottom:2px solid #DCDCDC;text-align:center&apos;&gt;&lt;span style=&apos;color:#1d4&apos;&gt;CONGRATULATIONS!!!!! NO FAILS&lt;/span&gt;&lt;/div&gt;&quot;);
-}
-file.append (&quot;&lt;/div&gt;&quot;);
-file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt;Details:&lt;/h3&gt;&lt;/div&gt;&quot; + doc.select(&quot;html &gt; body&quot;).toString());
-//Element content = doc.getElementById(&quot;Pass&quot;);
-//Element Body = doc.body();
-//Passes = Body.getElementsByClass(&quot;Pass&quot;);
-//for (Element Pass : Passes) {
-  //log.info(Pass.parent().outerHtml());
-
-//}
-//log.info(&quot;www&quot;+content.text());
-//log.info(&quot;bbb&quot;+doc.body().text());
-//masterPage.text = doc.outerHtml();
-
-//log.info(doc.select(&quot;html &gt; body &gt; div &gt; div:eq(0)&quot;).outerHtml());//Good
-//log.info(&quot;William: &quot;+doc.select(&quot;html &gt; body &gt; div &gt; div&quot;).size().toString());//good
-//log.info(doc.select(&quot;div:eq(1) &gt; dev:eq(10)&quot;).text());
-//log.info(doc.select(&quot;div:eq(1) &gt; dev:eq(11)&quot;).text());
-
-
-//log.info(doc.toString());</stringProp>
-        </JSR223Sampler>
-        <hashTree/>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Arrange Report for Send Mail" enabled="true">
-          <stringProp name="scriptLanguage">groovy</stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="cacheKey"></stringProp>
-          <stringProp name="script">import org.jsoup.*
-import org.jsoup.nodes.*
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.apache.jmeter.services.FileServer;
-
-def path = FileServer.getFileServer().getBaseDir();
-
-
-def DetailsPage = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;) 
-File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_Fails}&quot;);
-file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt;Fails:&lt;/h3&gt;&lt;/div&gt;&lt;div class=&apos;TableBorderStyleBody&apos;&gt;&quot;);
-
-Document doc = Jsoup.parse(DetailsPage, &quot;UTF-8&quot;);
-
-int TotalRows = doc.select(&quot;html &gt; body &gt; div &gt; div&quot;).size();
-Boolean flagFail = false;
-log.info(TotalRows.toString());
-for(int j = 0;j&lt;TotalRows;j++) {
-	String Tag = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+j+&quot;)&quot;).outerHtml();
-	String ContentFails = &quot;&quot;;
-	if(Tag.indexOf(&quot;Fail&quot;)&gt;0){
-		flagFail = true;
-		//Get Content Fail
-		ContentFails = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-3)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-2)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-1)+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+j+&quot;)&quot;).outerHtml();
-
-		//Get HeaderValue, Header Status Content Fail
-		for(int k = 4;k&lt;100;k++) {
-			String HeaderStatus = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-k)+&quot;)&quot;).outerHtml();
-			if(HeaderStatus.indexOf(&quot;TableBorderStyleHeaderStatus&quot;)&gt;0){
-				String HeaderValueAndStatus = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+3))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+2))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+1))+&quot;)&quot;).outerHtml()+doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k))+&quot;)&quot;).outerHtml();
-				String Header = doc.select(&quot;html &gt; body &gt; div &gt; div:eq(&quot;+(j-(k+4))+&quot;)&quot;).outerHtml();
-				file.append (Header+HeaderValueAndStatus+ContentFails);
-				break;
-			}
-		}
-	}else if(Tag.indexOf(&quot;TableBorderTryCatchErrorCode&quot;)&gt;0){
-		flagFail = true;
-		ContentFails = Tag;
-		file.append (ContentFails);
 	}
  }
 if(flagFail==false){
