@@ -16,7 +16,7 @@ Create_HTML_Report
     #write_variable_in_file    ${Username}
     ${StrReport}    set variable
     ${root}    Parse Xml    Performance_Test\\CreateHTMLReport\\result.xml
-    ${root_bk}    Parse Xml    Performance_Test\\CreateHTMLReport\\result_bk.xml
+    #${root_bk}    Parse Xml    Performance_Test\\CreateHTMLReport\\result_bk.xml
     #outrights tag
     ${testResults}    Get Element    ${root}
     @{httpSamples}    Get Elements    ${testResults}    httpSample
@@ -36,26 +36,9 @@ Create_HTML_Report
     \    ${lt}    Get From Dictionary    ${detail}    lt    #Latency
     \    ${rc}    Get From Dictionary    ${detail}    rc    #Http Code
     \    ${lb}    Get From Dictionary    ${detail}    lb    #URI
-    \    #get Old Result Values
-    \    ${DoesOldElementExist}=    Run Keyword And Return Status    Element Should Exist    ${root_bk}    httpSample[@lb="${lb}"]
-    \    ${OldElement_t}=    Run Keyword If    '${DoesOldElementExist}'=='True'    Get Element    ${root_bk}    httpSample[@lb="${lb}"]
-    \    ${OldDetail}=    Run Keyword If    '${DoesOldElementExist}'=='True'    Set Variable    ${OldElement_t.attrib}
-    \    ...    ELSE    Set Variable
-    \    ${Old_t}=    Run Keyword If    '${DoesOldElementExist}'=='True'    Get From Dictionary    ${OldDetail}    t
-    \    ...    ELSE    Set Variable    0
-    \    ${Old_lt}=    Run Keyword If    '${DoesOldElementExist}'=='True'    Get From Dictionary    ${OldDetail}    lt
-    \    ...    ELSE    Set Variable    0
-    \    ${Diff_t}=    Evaluate    ${t} - ${Old_t}
-    \    ${Diff_lt}=    Evaluate    ${lt} - ${Old_lt}
-    \    #${Diff_t_str}=    Set Variable If    ${Diff_t}>=0
-    \    ${Diff_t_str}=    Run keyword if    ${Diff_t}>=0    set variable    <font style="color:red;font-size:10px">+${Diff_t}</font>
-    \    ...    ELSE    set variable    <font style="color:green;font-size:10px">${Diff_t}</font>
-    \    #${Diff_lt_str}=    Set Variable If    ${Diff_lt}>=0    <font style="color:red;font-size:6px">+${Diff_lt}</font>    # ELSE    <font style="color:blue;font-size:6px">-${Diff_lt}</font>
-    \    ${Diff_lt_str}=    Run keyword if    ${Diff_lt}>=0    set variable    <font style="color:red;font-size:10px">+${Diff_lt}</font>
-    \    ...    ELSE    set variable    <font style="color:green;font-size:10px">${Diff_lt}</font>
     \    ${StrReport}    set variable    ${StrReport}<td style="border:1px solid #dddddd;font-weight:bold">${lb}</td>
-    \    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd">${t} ${Diff_t_str}</td>
-    \    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd">${lt} ${Diff_lt_str}</td>
+    \    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd">${t}</td>
+    \    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd">${lt}</td>
     \    ${StrReport}    set variable    ${StrReport}<td style="text-align:center;border:1px solid #dddddd">${rc}</td>
     \    @{assertionResults}    Get Elements    ${httpSample}    assertionResult
     \    ${count_assertionResults}    Get Element Count    ${httpSample}    assertionResult
@@ -63,17 +46,6 @@ Create_HTML_Report
     \    ${StrReport}    set variable    ${StrReport}<td style="border:1px solid #dddddd">${ErrorResults}</td>
     \    ${StrReport}    set variable    ${StrReport}</tr>
     ${StrReport}    set variable    ${StrReport}</tr></table>
-    #matches tag
-    #${match}    Get Element    ${root}    matches
-    #@{matches}    Get Elements    ${match}    match
-    #${count_match}    Get Element Count    ${match}    match
-    #Run Keyword If    ${count_match}==0    Fail
-    #: FOR    ${index}    IN RANGE    0    ${count_match}
-    #    ${tmp_str}    Get From List    ${matches}    ${index}
-    #    ${id}    Set Variable    ${tmp_str.attrib}
-    #    ${mt}    Get From Dictionary    ${id}    mt
-    #    ${id}    Get From Dictionary    ${id}    id
-    #    compare two days in xml odds feed_soccer    ${mt}    @{current_date}
     write_variable_in_file    ${StrReport}
 
 *** Keywords ***
