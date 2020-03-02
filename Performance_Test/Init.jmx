@@ -299,6 +299,16 @@
               <stringProp name="Argument.value">en-US</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
+            <elementProp name="glb_flagFailed" elementType="Argument">
+              <stringProp name="Argument.name">glb_flagFailed</stringProp>
+              <stringProp name="Argument.value">0</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ContentSkype" elementType="Argument">
+              <stringProp name="Argument.name">glb_ContentSkype</stringProp>
+              <stringProp name="Argument.value">${__P(glb_ContentSkype)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
