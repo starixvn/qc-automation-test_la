@@ -308,6 +308,17 @@
               <stringProp name="Argument.name">glb_ContentSkype</stringProp>
               <stringProp name="Argument.value">${__P(glb_ContentSkype)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">${__P(glb_ContentSkype)}</stringProp>
+            </elementProp>
+            <elementProp name="botId" elementType="Argument">
+              <stringProp name="Argument.name">botId</stringProp>
+              <stringProp name="Argument.value">SUN Team - Bot</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_SkypePort" elementType="Argument">
+              <stringProp name="Argument.name">glb_SkypePort</stringProp>
+              <stringProp name="Argument.value">443</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
           </collectionProp>
         </Arguments>
