@@ -54,3 +54,9 @@
  - Fix Cash Out - Report has BuybackAmountBA then compare CashOutCommission, CashOutEquivalent of Cash out WL report with Formula.
 	+ IF CASH OUT WIN LOSS REPORT
 	+ IF LAP-CASH OUT WIN LOSS REPORT
+
+16-Mar-2020:
+ - Integrate Prizes - Pragmatic:
+	+ IF SETTLEMENT REPORT
+	+ IF LICENSEE PERFORMANCE IN DETAILS
+	+ IF CREATE INVOICE
