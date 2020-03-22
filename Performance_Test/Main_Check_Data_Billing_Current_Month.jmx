@@ -113,19 +113,57 @@ log.info(&quot;Year: &quot;+Year.toString());</stringProp>
           <stringProp name="IncludeController.includepath">Check_Billing.jmx</stringProp>
         </IncludeController>
         <hashTree/>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="false">
-          <stringProp name="scriptLanguage">groovy</stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="filename"></stringProp>
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Flag Failed For Skype" enabled="true">
           <stringProp name="cacheKey"></stringProp>
-          <stringProp name="script">double aa = 14115770.5019;
-double bb = 14115770.50;
-double cc = aa-bb;
-log.info(aa.toString());
-log.info(bb.toString());
-log.info(cc.toString());</stringProp>
-        </JSR223Sampler>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">if(prev.getErrorCount() != 0){
+	vars.put(&quot;glb_flagFailed&quot;,&quot;1&quot;)
+}
+
+
+
+//
+//// Ping Skype V2
+//if(prev.getErrorCount() != 0) {
+//	def mylist =[]
+//	if(vars.getObject(&quot;list&quot;)==null) {
+//		mylist.add(ctx.getCurrentSampler().getName())
+//	}	
+//	else {
+//		mylist = vars.getObject(&quot;list&quot;)
+//		mylist.add(ctx.getCurrentSampler().getName())
+//	}
+//	vars.putObject(&quot;list&quot;,mylist)
+//}
+//
+</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223PostProcessor>
         <hashTree/>
+        <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Switch Controller - Skype" enabled="true">
+          <stringProp name="SwitchController.value">${glb_flagFailed}</stringProp>
+        </SwitchController>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey"></stringProp>
+            <stringProp name="script">log.info ${glb_flagFailed}.toString()+&quot;and 1&quot;
+${__setProperty(fFailed,&quot;0&quot;)}</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey"></stringProp>
+            <stringProp name="script">log.info ${glb_flagFailed}.toString()+&quot;and 2&quot;
+${__setProperty(fFailed,&quot;1&quot;)}</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+        </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -343,6 +381,10 @@ file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt
 
 //log.info(doc.toString());</stringProp>
         </JSR223Sampler>
+        <hashTree/>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Controller" enabled="true">
+          <stringProp name="IncludeController.includepath">PingSkype.jmx</stringProp>
+        </IncludeController>
         <hashTree/>
       </hashTree>
     </hashTree>
