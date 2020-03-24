@@ -8,3 +8,7 @@
  - Update NG WL report:
  	+ Add new param "Year", "Month", "FromDay", "ToDay".
  	+ Add 2 new samplers - _Group By Date. 	
+
+24-Mar-2020:
+ - Integrate SG WL report
+ - Integrate CC WL report
