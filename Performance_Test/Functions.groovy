@@ -46,6 +46,9 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "RNG Casino":
 	       return "Settlement Report";
 	       break;
+		case "Virtual Games":
+	       return "Settlement Report";
+	       break;
 		case "Allbet":
 	       return "Settlement Report";
 	       break;
@@ -103,6 +106,9 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       return "Settlement Report";
 	       break;
 		case "RNG Casino":
+	       return "Settlement Report";
+	       break;
+		case "Virtual Games":
 	       return "Settlement Report";
 	       break;
 		case "Allbet":

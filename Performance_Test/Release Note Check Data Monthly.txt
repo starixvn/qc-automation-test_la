@@ -65,3 +65,8 @@
  - Integrate SG:
 	+ IF SG WIN LOSS REPORT
 	+ Functions
+
+07-Apr-2020:
+ - Integrate VRG:
+	+ IF LPID/Create Invoice
+	+ Functions
