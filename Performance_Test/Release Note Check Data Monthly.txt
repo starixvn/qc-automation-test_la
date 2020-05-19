@@ -70,3 +70,6 @@
  - Integrate VRG:
 	+ IF LPID/Create Invoice
 	+ Functions
+
+19-May-2020:
+ - Integrate TG

@@ -179,7 +179,7 @@
             </elementProp>
             <elementProp name="glb_ProductCodes" elementType="Argument">
               <stringProp name="Argument.name">glb_ProductCodes</stringProp>
-              <stringProp name="Argument.value">SB,RB,NG,BA,LC,VS,CS,KN,AGC,VG,GD,MGCLC,MGCRNG,VB,AB,FW,VS2,LT,CB,CO,BT,BX,PP,CC,SG,VRG</stringProp>
+              <stringProp name="Argument.value">SB,NG,BA,LC,VS,CS,KN,AGC,GD,BT,MGCLC,MGCRNG,CB,AB,VB,NG2,FW,CO,VS2,LT,BF,BX,PP,PG,CC,SG,SPR,VRG,SAG,TG,SBC,I4D,SXG,IBCLC,BBIN</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="glb_BaseCurrency1" elementType="Argument">

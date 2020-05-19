@@ -12,3 +12,6 @@
 24-Mar-2020:
  - Integrate SG WL report
  - Integrate CC WL report
+
+19-May-2020:
+ - Integrate TG WL report
