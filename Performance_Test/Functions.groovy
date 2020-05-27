@@ -32,8 +32,11 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	       return "Card Club Win Loss";
 	       break;
 		case "SG":
-	       return "SG Win Loss";
+	       return "Settlement Report";
 	       break;
+		case "Sexy Gaming":
+	       return "Settlement Report";
+	       break;   
 		case "Exchange":
 	       return "Exchange Win Loss";
 	       break;
@@ -50,7 +53,13 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	       return "Settlement Report";
 	       break;
 		case "SA Gaming":
-	       return "SA Gaming Win Loss";
+	       return "Settlement Report";
+	       break;
+		case "Indo 4D":
+	       return "Settlement Report";
+	       break;
+		case "Saba.club":
+	       return "Settlement Report";
 	       break;
 		case "Table Game":
 	       return "Table Game Win Loss";
@@ -100,7 +109,10 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       return "Card Club Win Loss";
 	       break;
 		case "SG":
-	       return "SG Win Loss";
+	       return "Settlement Report";
+	       break;
+		case "Sexy Gaming":
+	       return "Settlement Report";
 	       break;
 		case "Exchange":
 	       return "Exchange Win Loss";
@@ -118,7 +130,13 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       return "Settlement Report";
 	       break;
 		case "SA Gaming":
-	       return "SA Gaming Win Loss";
+	       return "Settlement Report";
+	       break;
+		case "Indo 4D":
+	       return "Settlement Report";
+	       break;
+		case "Saba.club":
+	       return "Settlement Report";
 	       break;
 		case "Table Game":
 	       return "Table Game Win Loss";
