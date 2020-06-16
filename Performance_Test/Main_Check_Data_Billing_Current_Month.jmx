@@ -384,7 +384,7 @@ file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt
 //log.info(doc.toString());</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Controller" enabled="false">
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Controller" enabled="true">
           <stringProp name="IncludeController.includepath">PingSkype.jmx</stringProp>
         </IncludeController>
         <hashTree/>
