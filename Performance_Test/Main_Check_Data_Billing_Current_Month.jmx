@@ -69,9 +69,11 @@ var localTime = d.getTime();
 var localOffset = d.getTimezoneOffset() * 60000;
 var utc = localTime + localOffset;
 var now = new Date(utc + (3600000*-4)); //get now via GMT -4
-var prevMonthLastDate = new Date(now.setDate(now.getDate() - 2));//Get befor yesterday to set to prevMonthLastDate//Date(now.getFullYear(), now.getMonth()+1, 0);
-var prevMonthFirstDate = new Date(now.getFullYear(), now.getMonth(), 1);
+var prevMonthLastDate = new Date(now.setDate(now.getDate() - 2));//new Date(2020, 04, 14);  Get befor yesterday to set to prevMonthLastDate//Date(now.getFullYear(), now.getMonth()+1, 0);
+var prevMonthFirstDate = new Date(now.getFullYear(), now.getMonth(), 1);//new Date(2020, 04, 14);
 
+log.info(&quot;WWWWWW&quot;+prevMonthLastDate.toString());
+log.info(&quot;WWWWWW&quot;+prevMonthFirstDate.toString());
 
 var formatDateComponent = function(dateComponent) {
   return (dateComponent &lt; 10 ? &apos;0&apos; : &apos;&apos;) + dateComponent;
@@ -382,7 +384,7 @@ file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt
 //log.info(doc.toString());</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Controller" enabled="true">
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Controller" enabled="false">
           <stringProp name="IncludeController.includepath">PingSkype.jmx</stringProp>
         </IncludeController>
         <hashTree/>
