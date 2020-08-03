@@ -407,7 +407,7 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Equivalent - PP</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[9]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -417,7 +417,7 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Equivalent - PP - Negative</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]/span</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[9]/span</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -8534,7 +8534,11 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}		
-		
+		if(Math.abs(Functions.ConvertStringToFloat(Specific_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
+			FlagTotalTrans = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
 		if(&quot;${ProductName}&quot;==&quot;BA&quot;){
 			if(Math.abs(Functions.ConvertStringToFloat(Specific_BAComm) - Functions.ConvertStringToFloat(BAComm))&lt;0.2){
 				FlagBAComm = Functions.returnStatusFormat(&quot;Pass&quot;);
@@ -8568,11 +8572,6 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 			}
 		}
 		else{
-			if(Math.abs(Functions.ConvertStringToFloat(Specific_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
-				FlagTotalTrans = Functions.returnStatusFormat(&quot;Pass&quot;);
-			}else{
-				AssertionResult.setFailure(true);
-			}
 			if(Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(LicensingFee,true))&lt;0.2){
 				FlagLicensingFee = Functions.returnStatusFormat(&quot;Pass&quot;);
 			}else{
@@ -8966,7 +8965,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		   	  	Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,LicensingFee,Specific_LicensingFee,FlagLicensingFee);
 		   	  	break;
 		   case &quot;Pragmatic&quot;:
-		   		if (Functions.ConvertStringToFloat(Specific_LicensingFee,true) &gt; 0)
+		   		/*if (Functions.ConvertStringToFloat(Specific_LicensingFee,true) &gt; 0)
 				{ 
 					def Specific_LicensingFeePositive = Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(Specific_Prizes,true)).toString();
 					if(Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFeePositive,true) - Functions.ConvertStringToFloat(TotalFee,true))&lt;0.2){
@@ -8983,7 +8982,13 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 						AssertionResult.setFailure(true);
 					}
 					Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,TotalFee,Specific_Prizes,FlagLicensingFee);
+				}*/
+				if(Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(TotalFee,true))&lt;0.2){
+					FlagLicensingFee = Functions.returnStatusFormat(&quot;Pass&quot;);
+				}else{
+					AssertionResult.setFailure(true);
 				}
+		   	  	Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,TotalFee,Specific_LicensingFee,FlagLicensingFee);
 				break;
 		   default:
 		   		if(Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(LicensingFee,true))&lt;0.2){
