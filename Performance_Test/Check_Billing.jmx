@@ -8534,11 +8534,6 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}		
-		if(Math.abs(Functions.ConvertStringToFloat(Specific_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
-			FlagTotalTrans = Functions.returnStatusFormat(&quot;Pass&quot;);
-		}else{
-			AssertionResult.setFailure(true);
-		}
 		if(&quot;${ProductName}&quot;==&quot;BA&quot;){
 			if(Math.abs(Functions.ConvertStringToFloat(Specific_BAComm) - Functions.ConvertStringToFloat(BAComm))&lt;0.2){
 				FlagBAComm = Functions.returnStatusFormat(&quot;Pass&quot;);
@@ -8552,26 +8547,32 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 			}
 			Functions.WriteResultToReport(file,&quot;AmtDueToBA-${ProductCode}&quot;,AmtDueToBA,Specific_AmtDueToBA,FlagAmtDueToBA);
 			Functions.WriteResultToReport(file,&quot;BAComm-${ProductCode}&quot;,BAComm,Specific_BAComm,FlagBAComm);
-		}else if(&quot;${ProductName}&quot;==&quot;Pragmatic&quot;){
-			if (Functions.ConvertStringToFloat(Specific_LicensingFee,true) &gt; 0)
-			{ 
-				def Specific_LicensingFeePositive = Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(Specific_Prizes,true)).toString();
-				if(Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFeePositive,true) - Functions.ConvertStringToFloat(LicensingFee,true))&lt;0.2){
-					FlagLicensingFee = Functions.returnStatusFormat(&quot;Pass&quot;);
-				}else{
-					AssertionResult.setFailure(true);
-				}
-				Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,LicensingFee,Specific_LicensingFeePositive,FlagLicensingFee);
-			}else{
-				if(Math.abs(Functions.ConvertStringToFloat(Specific_Prizes,true) - Functions.ConvertStringToFloat(LicensingFee,true))&lt;0.2){
-				FlagLicensingFee = Functions.returnStatusFormat(&quot;Pass&quot;);
-				}else{
-					AssertionResult.setFailure(true);
-				}
-				Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,LicensingFee,Specific_Prizes,FlagLicensingFee);
-			}
 		}
+//		else if(&quot;${ProductName}&quot;==&quot;Pragmatic&quot;){
+//			if (Functions.ConvertStringToFloat(Specific_LicensingFee,true) &gt; 0)
+//			{ 
+//				def Specific_LicensingFeePositive = Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(Specific_Prizes,true)).toString();
+//				if(Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFeePositive,true) - Functions.ConvertStringToFloat(LicensingFee,true))&lt;0.2){
+//					FlagLicensingFee = Functions.returnStatusFormat(&quot;Pass&quot;);
+//				}else{
+//					AssertionResult.setFailure(true);
+//				}
+//				Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,LicensingFee,Specific_LicensingFeePositive,FlagLicensingFee);
+//			}else{
+//				if(Math.abs(Functions.ConvertStringToFloat(Specific_Prizes,true) - Functions.ConvertStringToFloat(LicensingFee,true))&lt;0.2){
+//				FlagLicensingFee = Functions.returnStatusFormat(&quot;Pass&quot;);
+//				}else{
+//					AssertionResult.setFailure(true);
+//				}
+//				Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,LicensingFee,Specific_Prizes,FlagLicensingFee);
+//			}
+//		}
 		else{
+			if(Math.abs(Functions.ConvertStringToFloat(Specific_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
+				FlagTotalTrans = Functions.returnStatusFormat(&quot;Pass&quot;);
+			}else{
+				AssertionResult.setFailure(true);
+			}
 			if(Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(LicensingFee,true))&lt;0.2){
 				FlagLicensingFee = Functions.returnStatusFormat(&quot;Pass&quot;);
 			}else{
