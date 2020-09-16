@@ -259,7 +259,7 @@
             </elementProp>
             <elementProp name="glb_ServerName_CreateInvoice" elementType="Argument">
               <stringProp name="Argument.name">glb_ServerName_CreateInvoice</stringProp>
-              <stringProp name="Argument.value">la.starific.net</stringProp>
+              <stringProp name="Argument.value">la.starixuat.com</stringProp>
               <stringProp name="Argument.desc">Pro: internal.amazzu.com; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7610/LRF4/</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
