@@ -449,6 +449,17 @@ vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Repo
 //vars.put(&quot;ProductOptions[&quot;+i+&quot;].Status&quot;,&quot;False&quot;);
 //document.write(prevMonthLastDate);
 
+/////////////////////////////////////////////////////////////////////////////////////
+//Test
+var glb_PrevMonth = prevMonthFirstDate.toString().substring(4, 7)
+//vars.put(&quot;glb_PrevMonth&quot;,prevMonthFirstDate.toString().substring(4, 7));
+vars.put(&quot;glb_PrevMonth&quot;,glb_PrevMonth);
+vars.put(&quot;glb_PrevMonthYear&quot;,glb_PrevMonth.toString() + &apos; &apos; + now.getFullYear()); 
+vars.put(&quot;glb_PrevMonthYear_LicenseeWL&quot;,glb_PrevMonth.toString() + &apos;+&apos; + now.getFullYear()); 
+//////////////////////
+//var glb_reportDate = prevMonthFirstDate.toString().substring(4, 7)
+vars.put(&quot;glb_FirstDateofCurrMonth&quot;,now.getFullYear() + &apos;.&apos; + (now.getMonth()+1) + &apos;.&apos;+ 1); 
+//
 
 var first = new Date(formatDate(prevMonthFirstDate));
 var last = new Date(formatDate(prevMonthLastDate));
