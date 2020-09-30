@@ -82,3 +82,6 @@
 
 24-Jun-2020:
  - Update PP JP
+
+30-Sep-2020:
+ - Integrate AE Casino

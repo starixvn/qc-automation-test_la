@@ -34,7 +34,7 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "SG":
 	       return "Settlement Report";
 	       break;
-		case "Sexy Gaming":
+		case "AE Casino":
 	       return "Settlement Report";
 	       break;   
 		case "Exchange":
@@ -111,7 +111,7 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 		case "SG":
 	       return "Settlement Report";
 	       break;
-		case "Sexy Gaming":
+		case "AE Casino":
 	       return "Settlement Report";
 	       break;
 		case "Exchange":
