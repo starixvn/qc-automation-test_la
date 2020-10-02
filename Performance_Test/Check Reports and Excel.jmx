@@ -49446,7 +49446,7 @@ String getNotEmptyDataBetween2String(String str1, String str2) {
 
 //Compare data between Excel and Web
 def FailureMessage =&quot;&quot;
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_BalanceBf) - Functions.ConvertStringToFloat(BalanceBf))&gt;0.1){
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_BalanceBf) - Functions.ConvertStringToFloat(BalanceBf))&gt;0.1	|| Functions.ConvertStringToFloat(BalanceBf) == 0){
 		FailureMessage+=&quot;\nBalance Bf of Excel: &quot;+Excel_BalanceBf +&quot;\nBalance Bf of Report: &quot;+BalanceBf;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Prepayment) - Functions.ConvertStringToFloat(Prepayment))&gt;0.1){
