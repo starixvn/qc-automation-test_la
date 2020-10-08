@@ -41,7 +41,7 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	       return "Exchange Win Loss";
 	       break;
 		case "Gold Deluxe":
-	       return "Gold Deluxe Win Loss";
+	       return "Settlement Report";
 	       break;
 		case "Sportsbook":
 	       return "Licensee Performance in Details";
@@ -118,7 +118,7 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       return "Exchange Win Loss";
 	       break;
 		case "Gold Deluxe":
-	       return "Gold Deluxe Win Loss";
+	       return "Settlement Report";
 	       break;
 		case "Sportsbook":
 	       return "Settlement Report";

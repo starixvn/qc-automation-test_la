@@ -4399,7 +4399,7 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF GOLD DELUXE WIN LOSS REPORT" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF GOLD DELUXE WIN LOSS REPORT - UNUSED" enabled="false">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Gold Deluxe Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
@@ -6898,7 +6898,7 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LAP-GOLD DELUXE WIN LOSS REPORT" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF LAP-GOLD DELUXE WIN LOSS REPORT - UNUSED" enabled="false">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;LAP-Gold Deluxe Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>

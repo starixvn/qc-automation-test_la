@@ -85,3 +85,6 @@
 
 30-Sep-2020:
  - Integrate AE Casino
+
+8-Oct-2020:
+ - Disable GD Product

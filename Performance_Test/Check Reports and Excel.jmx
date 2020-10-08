@@ -4991,6 +4991,658 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Gold Deluxe Win Loss - Unused" enabled="false"/>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Load" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/GoldDeluxe/Main</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Accept-Language" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-US,vi-VN;q=0.8,vi;q=0.5,en;q=0.3</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
+                  </elementProp>
+                  <elementProp name="User-Agent" elementType="Header">
+                    <stringProp name="Header.name">User-Agent</stringProp>
+                    <stringProp name="Header.value">Mozilla/5.0 (Windows NT 6.1; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Encoding" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="PartyData" enabled="true">
+                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                <stringProp name="RegexExtractor.refname">PartyData</stringProp>
+                <stringProp name="RegexExtractor.regex">id=&quot;PartyData&quot; name=&quot;PartyData&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
+                <stringProp name="RegexExtractor.template">$1$</stringProp>
+                <stringProp name="RegexExtractor.default">BetListMetaModel IS NOT FOUND</stringProp>
+                <stringProp name="RegexExtractor.match_number"></stringProp>
+              </RegexExtractor>
+              <hashTree/>
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="RequestVerificationToken" enabled="true">
+                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                <stringProp name="RegexExtractor.refname">RequestVerificationToken</stringProp>
+                <stringProp name="RegexExtractor.regex">name=&quot;__RequestVerificationToken&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
+                <stringProp name="RegexExtractor.template">$1$</stringProp>
+                <stringProp name="RegexExtractor.default">RequestVerificationToken IS NOT FOUND</stringProp>
+                <stringProp name="RegexExtractor.match_number"></stringProp>
+              </RegexExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="49586">200</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Submit_Group By Licensee" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;IsGroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/GoldDeluxe/GetGoldDeluxeReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[2]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Turnover</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Valid Bet Amount" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Valid Bet Amount</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[4]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Tips Amount" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Tips Amount</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[5]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensing fee" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[7]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Rolling Comm" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Rolling Comm</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[8]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Net Win Loss" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Net Win Loss</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[9]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Company Tips Share" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Company Tips Share</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[10]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Pay to Supplier" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Pay to Supplier</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[11]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Net Income" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Net Income</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[12]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-2048954283">Grand Total in</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Export_Group By Licensee" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
+	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;IsGroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/GoldDeluxe/ExportExcel</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-2048954283">Grand Total in</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+              <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
+                <stringProp name="FileSaver.filename">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}Excel Report\Gold Deluxe Win Loss.xlsx</stringProp>
+                <boolProp name="FileSaver.errorsonly">false</boolProp>
+                <boolProp name="FileSaver.successonly">false</boolProp>
+                <boolProp name="FileSaver.skipsuffix">true</boolProp>
+                <boolProp name="FileSaver.skipautonumber">true</boolProp>
+              </ResultSaver>
+              <hashTree/>
+            </hashTree>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Gold Deluxe WL_Group By Licensee - Compare Data with Web Report" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey"></stringProp>
+              <stringProp name="script">&quot;If it fails please check JSR223 Assertion for more details !!!&quot;</stringProp>
+            </JSR223Sampler>
+            <hashTree>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+def pathReport =  path+&quot;/Excel Report/Gold Deluxe Win Loss.xlsx&quot;;
+def pathExist = new File(pathReport)
+def book;
+for(def i=0;i&lt;10;i++)
+{
+	if(pathExist.exists()){
+		book = WorkbookFactory.create(new File(pathReport));	
+		break;
+	} else {sleep(1000)}
+}
+
+int d = book.getSheetAt(0).getLastRowNum();
+Row row = book.getSheetAt(0).getRow(d-4);	
+
+//Get data from Excel file
+	String Excel_TotalTrans = row.getCell(3).toString();
+	String Excel_Turnover = new BigDecimal(row.getCell(4).toString());
+	String Excel_ValidBetAmt = new BigDecimal(row.getCell(5).toString());
+	String Excel_TipsAmt = row.getCell(6).toString();
+	String Excel_CustomerWL = row.getCell(7).toString();
+	String Excel_LicensingFee = row.getCell(8).toString();
+	String Excel_RollingComm = row.getCell(9).toString();
+	String Excel_NetWL = row.getCell(10).toString();
+	String Excel_CompanyTipsShare = row.getCell(11).toString();
+	String Excel_PaytoSupplier = row.getCell(12).toString();
+	String Excel_NetIncome = row.getCell(13).toString();
+
+//Get data from Web
+	String TotalTrans = vars.get(&quot;Total Trans&quot;);
+	String Turnover = vars.get(&quot;Turnover&quot;);
+	String ValidBetAmt = vars.get(&quot;Valid Bet Amount&quot;);
+	String TipsAmt = vars.get(&quot;Tips Amount&quot;);
+	String CustomerWL = vars.get(&quot;Customer Win Loss&quot;);
+	String LicensingFee = vars.get(&quot;Licensing fee&quot;);
+	String RollingComm = vars.get(&quot;Rolling Comm&quot;);
+	String NetWL = vars.get(&quot;Net Win Loss&quot;);
+	String CompanyTipsShare = vars.get(&quot;Company Tips Share&quot;);
+	String PaytoSupplier = vars.get(&quot;Pay to Supplier&quot;);
+	String NetIncome = vars.get(&quot;Net Income&quot;);
+
+String getNotEmptyDataBetween2String(String str1, String str2) { 
+   if(str1==&quot;&quot;){
+   	return str2;
+   }else{
+   	return str1;
+   }
+}
+
+//Compare data between Excel and Web
+def FailureMessage =&quot;&quot;
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&gt;0.1){
+		FailureMessage+=&quot;\nTotal Transactions of Excel: &quot;+Excel_TotalTrans +&quot;\nTotal Transactions of Report: &quot;+TotalTrans;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Turnover) - Functions.ConvertStringToFloat(Turnover))&gt;0.1){
+		FailureMessage+=&quot;\nTurnover of Excel: &quot;+Excel_Turnover +&quot;\nTurnover of Report: &quot;+Turnover;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_ValidBetAmt) - Functions.ConvertStringToFloat(ValidBetAmt))&gt;0.1){
+		FailureMessage+=&quot;\nValid Bet Amount of Excel: &quot;+Excel_ValidBetAmt +&quot;\nValid Bet Amount of Report: &quot;+ValidBetAmt;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_TipsAmt) - Functions.ConvertStringToFloat(TipsAmt))&gt;0.1){
+		FailureMessage+=&quot;\nTips Amount of Excel: &quot;+Excel_TipsAmt +&quot;\nTips Amount of Report: &quot;+TipsAmt;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_CustomerWL) - Functions.ConvertStringToFloat(CustomerWL))&gt;0.1){
+		FailureMessage+=&quot;\nCustomerWL of Excel: &quot;+Excel_CustomerWL +&quot;\nCustomerWL of Report: &quot;+CustomerWL;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicensingFee) - Functions.ConvertStringToFloat(LicensingFee))&gt;0.1){
+		FailureMessage+=&quot;\nLicensing fee of Excel: &quot;+Excel_LicensingFee +&quot;\nLicensing fee of Report: &quot;+LicensingFee;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_RollingComm) - Functions.ConvertStringToFloat(RollingComm))&gt;0.1){
+		FailureMessage+=&quot;\nRolling Comm of Excel: &quot;+Excel_RollingComm +&quot;\nRolling Comm of Report: &quot;+RollingComm;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_NetWL) - Functions.ConvertStringToFloat(NetWL))&gt;0.1){
+		FailureMessage+=&quot;\nNet Win Loss of Excel: &quot;+Excel_NetWL +&quot;\nNet Win Loss of Report: &quot;+NetWL;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_CompanyTipsShare) - Functions.ConvertStringToFloat(CompanyTipsShare))&gt;0.1){
+		FailureMessage+=&quot;\nCompany Tips Share of Excel: &quot;+Excel_CompanyTipsShare +&quot;\nCompany Tips Share of Report: &quot;+CompanyTipsShare;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_PaytoSupplier) - Functions.ConvertStringToFloat(PaytoSupplier))&gt;0.1){
+		FailureMessage+=&quot;\nPay to Supplier of Excel: &quot;+Excel_PaytoSupplier +&quot;\nPay to Supplier of Report: &quot;+PaytoSupplier;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_NetIncome) - Functions.ConvertStringToFloat(NetIncome))&gt;0.1){
+		FailureMessage+=&quot;\nNet Income of Excel: &quot;+Excel_NetIncome +&quot;\nNet Income of Report: &quot;+NetIncome;
+	}
+	if(FailureMessage!=&quot;&quot;){
+		AssertionResult.setFailure(true);
+		AssertionResult.setFailureMessage(FailureMessage);
+	}
+</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Submit_Group By Date" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;IsGroupByLicensee&quot;:&quot;${glb_IsGroupByDate}&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/GoldDeluxe/GetGoldDeluxeReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-2048954283">Grand Total in</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Export_Group By Date" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
+	&quot;FromDate&quot;:&quot;2/1/2018 12:00:00 AM&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;2/28/2018 12:00:00 AM&quot;,&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;IsGroupByLicensee&quot;:&quot;${glb_IsGroupByDate}&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/GoldDeluxe/ExportExcel</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-2048954283">Grand Total in</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="AE Casino Win Loss" enabled="true"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss_Load" enabled="true">
@@ -11648,658 +12300,6 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
               <stringProp name="HTTPSampler.path">${glb_URLFolder}/FishingWorld/ExportExcel</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
-                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Cache-Control</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Connection</stringProp>
-                    <stringProp name="Header.value">keep-alive</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Pragma</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-Requested-With</stringProp>
-                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="-2048954283">Grand Total in</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">2</intProp>
-              </ResponseAssertion>
-              <hashTree/>
-            </hashTree>
-          </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Gold Deluxe Win Loss" enabled="true"/>
-          <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Load" enabled="true">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                <collectionProp name="Arguments.arguments"/>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
-              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
-              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/GoldDeluxe/Main</stringProp>
-              <stringProp name="HTTPSampler.method">GET</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="Accept-Language" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-US,vi-VN;q=0.8,vi;q=0.5,en;q=0.3</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept" elementType="Header">
-                    <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
-                  </elementProp>
-                  <elementProp name="User-Agent" elementType="Header">
-                    <stringProp name="Header.name">User-Agent</stringProp>
-                    <stringProp name="Header.value">Mozilla/5.0 (Windows NT 6.1; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0</stringProp>
-                  </elementProp>
-                  <elementProp name="Accept-Encoding" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="PartyData" enabled="true">
-                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                <stringProp name="RegexExtractor.refname">PartyData</stringProp>
-                <stringProp name="RegexExtractor.regex">id=&quot;PartyData&quot; name=&quot;PartyData&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
-                <stringProp name="RegexExtractor.template">$1$</stringProp>
-                <stringProp name="RegexExtractor.default">BetListMetaModel IS NOT FOUND</stringProp>
-                <stringProp name="RegexExtractor.match_number"></stringProp>
-              </RegexExtractor>
-              <hashTree/>
-              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="RequestVerificationToken" enabled="true">
-                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                <stringProp name="RegexExtractor.refname">RequestVerificationToken</stringProp>
-                <stringProp name="RegexExtractor.regex">name=&quot;__RequestVerificationToken&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
-                <stringProp name="RegexExtractor.template">$1$</stringProp>
-                <stringProp name="RegexExtractor.default">RequestVerificationToken IS NOT FOUND</stringProp>
-                <stringProp name="RegexExtractor.match_number"></stringProp>
-              </RegexExtractor>
-              <hashTree/>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="49586">200</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">2</intProp>
-              </ResponseAssertion>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Submit_Group By Licensee" enabled="true">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&#xd;
-	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
-	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
-	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
-	&quot;IsGroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;&#xd;
-}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
-              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
-              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/GoldDeluxe/GetGoldDeluxeReport</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
-                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Cache-Control</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Connection</stringProp>
-                    <stringProp name="Header.value">keep-alive</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Pragma</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-Requested-With</stringProp>
-                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[2]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Turnover</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Valid Bet Amount" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Valid Bet Amount</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[4]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Tips Amount" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Tips Amount</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[5]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensing fee" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[7]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Rolling Comm" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Rolling Comm</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[8]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Net Win Loss" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Net Win Loss</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[9]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Company Tips Share" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Company Tips Share</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[10]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Pay to Supplier" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Pay to Supplier</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[11]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Net Income" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Net Income</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[12]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="-2048954283">Grand Total in</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">2</intProp>
-              </ResponseAssertion>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Export_Group By Licensee" enabled="true">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&#xd;
-	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
-	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
-	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
-	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
-	&quot;IsGroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;&#xd;
-}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
-              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
-              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/GoldDeluxe/ExportExcel</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
-                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Cache-Control</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Connection</stringProp>
-                    <stringProp name="Header.value">keep-alive</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Pragma</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-Requested-With</stringProp>
-                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="-2048954283">Grand Total in</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">2</intProp>
-              </ResponseAssertion>
-              <hashTree/>
-              <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-                <stringProp name="FileSaver.filename">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}Excel Report\Gold Deluxe Win Loss.xlsx</stringProp>
-                <boolProp name="FileSaver.errorsonly">false</boolProp>
-                <boolProp name="FileSaver.successonly">false</boolProp>
-                <boolProp name="FileSaver.skipsuffix">true</boolProp>
-                <boolProp name="FileSaver.skipautonumber">true</boolProp>
-              </ResultSaver>
-              <hashTree/>
-            </hashTree>
-            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Gold Deluxe WL_Group By Licensee - Compare Data with Web Report" enabled="true">
-              <stringProp name="scriptLanguage">groovy</stringProp>
-              <stringProp name="parameters"></stringProp>
-              <stringProp name="filename"></stringProp>
-              <stringProp name="cacheKey"></stringProp>
-              <stringProp name="script">&quot;If it fails please check JSR223 Assertion for more details !!!&quot;</stringProp>
-            </JSR223Sampler>
-            <hashTree>
-              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
-                <stringProp name="scriptLanguage">groovy</stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="cacheKey"></stringProp>
-                <stringProp name="script">import org.apache.poi.ss.usermodel.*;
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.apache.jmeter.services.FileServer;
-
-def path = FileServer.getFileServer().getBaseDir();
-/*Load Common Functions - Start*/
-ClassLoader parent = getClass().getClassLoader();
-GroovyClassLoader loader = new GroovyClassLoader(parent);
-Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
-GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
-/*Load Common Functions - End*/
-def pathReport =  path+&quot;/Excel Report/Gold Deluxe Win Loss.xlsx&quot;;
-def pathExist = new File(pathReport)
-def book;
-for(def i=0;i&lt;10;i++)
-{
-	if(pathExist.exists()){
-		book = WorkbookFactory.create(new File(pathReport));	
-		break;
-	} else {sleep(1000)}
-}
-
-int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);	
-
-//Get data from Excel file
-	String Excel_TotalTrans = row.getCell(3).toString();
-	String Excel_Turnover = new BigDecimal(row.getCell(4).toString());
-	String Excel_ValidBetAmt = new BigDecimal(row.getCell(5).toString());
-	String Excel_TipsAmt = row.getCell(6).toString();
-	String Excel_CustomerWL = row.getCell(7).toString();
-	String Excel_LicensingFee = row.getCell(8).toString();
-	String Excel_RollingComm = row.getCell(9).toString();
-	String Excel_NetWL = row.getCell(10).toString();
-	String Excel_CompanyTipsShare = row.getCell(11).toString();
-	String Excel_PaytoSupplier = row.getCell(12).toString();
-	String Excel_NetIncome = row.getCell(13).toString();
-
-//Get data from Web
-	String TotalTrans = vars.get(&quot;Total Trans&quot;);
-	String Turnover = vars.get(&quot;Turnover&quot;);
-	String ValidBetAmt = vars.get(&quot;Valid Bet Amount&quot;);
-	String TipsAmt = vars.get(&quot;Tips Amount&quot;);
-	String CustomerWL = vars.get(&quot;Customer Win Loss&quot;);
-	String LicensingFee = vars.get(&quot;Licensing fee&quot;);
-	String RollingComm = vars.get(&quot;Rolling Comm&quot;);
-	String NetWL = vars.get(&quot;Net Win Loss&quot;);
-	String CompanyTipsShare = vars.get(&quot;Company Tips Share&quot;);
-	String PaytoSupplier = vars.get(&quot;Pay to Supplier&quot;);
-	String NetIncome = vars.get(&quot;Net Income&quot;);
-
-String getNotEmptyDataBetween2String(String str1, String str2) { 
-   if(str1==&quot;&quot;){
-   	return str2;
-   }else{
-   	return str1;
-   }
-}
-
-//Compare data between Excel and Web
-def FailureMessage =&quot;&quot;
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&gt;0.1){
-		FailureMessage+=&quot;\nTotal Transactions of Excel: &quot;+Excel_TotalTrans +&quot;\nTotal Transactions of Report: &quot;+TotalTrans;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Turnover) - Functions.ConvertStringToFloat(Turnover))&gt;0.1){
-		FailureMessage+=&quot;\nTurnover of Excel: &quot;+Excel_Turnover +&quot;\nTurnover of Report: &quot;+Turnover;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_ValidBetAmt) - Functions.ConvertStringToFloat(ValidBetAmt))&gt;0.1){
-		FailureMessage+=&quot;\nValid Bet Amount of Excel: &quot;+Excel_ValidBetAmt +&quot;\nValid Bet Amount of Report: &quot;+ValidBetAmt;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_TipsAmt) - Functions.ConvertStringToFloat(TipsAmt))&gt;0.1){
-		FailureMessage+=&quot;\nTips Amount of Excel: &quot;+Excel_TipsAmt +&quot;\nTips Amount of Report: &quot;+TipsAmt;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_CustomerWL) - Functions.ConvertStringToFloat(CustomerWL))&gt;0.1){
-		FailureMessage+=&quot;\nCustomerWL of Excel: &quot;+Excel_CustomerWL +&quot;\nCustomerWL of Report: &quot;+CustomerWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicensingFee) - Functions.ConvertStringToFloat(LicensingFee))&gt;0.1){
-		FailureMessage+=&quot;\nLicensing fee of Excel: &quot;+Excel_LicensingFee +&quot;\nLicensing fee of Report: &quot;+LicensingFee;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_RollingComm) - Functions.ConvertStringToFloat(RollingComm))&gt;0.1){
-		FailureMessage+=&quot;\nRolling Comm of Excel: &quot;+Excel_RollingComm +&quot;\nRolling Comm of Report: &quot;+RollingComm;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_NetWL) - Functions.ConvertStringToFloat(NetWL))&gt;0.1){
-		FailureMessage+=&quot;\nNet Win Loss of Excel: &quot;+Excel_NetWL +&quot;\nNet Win Loss of Report: &quot;+NetWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_CompanyTipsShare) - Functions.ConvertStringToFloat(CompanyTipsShare))&gt;0.1){
-		FailureMessage+=&quot;\nCompany Tips Share of Excel: &quot;+Excel_CompanyTipsShare +&quot;\nCompany Tips Share of Report: &quot;+CompanyTipsShare;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_PaytoSupplier) - Functions.ConvertStringToFloat(PaytoSupplier))&gt;0.1){
-		FailureMessage+=&quot;\nPay to Supplier of Excel: &quot;+Excel_PaytoSupplier +&quot;\nPay to Supplier of Report: &quot;+PaytoSupplier;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_NetIncome) - Functions.ConvertStringToFloat(NetIncome))&gt;0.1){
-		FailureMessage+=&quot;\nNet Income of Excel: &quot;+Excel_NetIncome +&quot;\nNet Income of Report: &quot;+NetIncome;
-	}
-	if(FailureMessage!=&quot;&quot;){
-		AssertionResult.setFailure(true);
-		AssertionResult.setFailureMessage(FailureMessage);
-	}
-</stringProp>
-              </JSR223Assertion>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Submit_Group By Date" enabled="true">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&#xd;
-	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
-	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
-	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
-	&quot;IsGroupByLicensee&quot;:&quot;${glb_IsGroupByDate}&quot;&#xd;
-}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
-              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
-              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/GoldDeluxe/GetGoldDeluxeReport</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
-                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Encoding</stringProp>
-                    <stringProp name="Header.value">gzip, deflate</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept-Language</stringProp>
-                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Cache-Control</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Connection</stringProp>
-                    <stringProp name="Header.value">keep-alive</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Pragma</stringProp>
-                    <stringProp name="Header.value">no-cache</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">X-Requested-With</stringProp>
-                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="-2048954283">Grand Total in</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">2</intProp>
-              </ResponseAssertion>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Gold Deluxe Win Loss_Export_Group By Date" enabled="true">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&#xd;
-	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
-	&quot;FromDate&quot;:&quot;2/1/2018 12:00:00 AM&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;2/28/2018 12:00:00 AM&quot;,&#xd;
-	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
-	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
-	&quot;IsGroupByLicensee&quot;:&quot;${glb_IsGroupByDate}&quot;&#xd;
-}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
-              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
-              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/GoldDeluxe/ExportExcel</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -26602,9 +26602,9 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
               </hashTree>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Performance - Sexy Gaming" enabled="true"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Performance - AE Casino" enabled="true"/>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Licensee Performance_Submit_Sexy Gaming" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Licensee Performance_Submit_AE Casino" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -26745,7 +26745,7 @@ def FailureMessage =&quot;&quot;
                 </ResponseAssertion>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Licensee Performance_Export_Sexy Gaming" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Licensee Performance_Export_AE Casino" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -26842,7 +26842,7 @@ def FailureMessage =&quot;&quot;
                 </ResultSaver>
                 <hashTree/>
               </hashTree>
-              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Licensee Performance Sexy Gaming - Compare Data with Web Report" enabled="true">
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Licensee Performance AE Casino - Compare Data with Web Report" enabled="true">
                 <stringProp name="scriptLanguage">groovy</stringProp>
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
@@ -35133,6 +35133,507 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
               </hashTree>
             </hashTree>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Gold Deluxe - Unused" enabled="false"/>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_Gold Deluxe" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{&#xd;
+	&quot;BaseCurrency&quot;:&quot;6&quot;,&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;EUR&quot;,&#xd;
+	&quot;BrandName&quot;:&quot;&quot;,&#xd;
+	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;PartyId&quot;:14,&#xd;
+	&quot;ProductCode&quot;:&quot;GD&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;Gold Deluxe&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
+}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+                <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+                <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+                <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/SettlementReport/GetSettlementReport</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                      <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept-Encoding</stringProp>
+                      <stringProp name="Header.value">gzip, deflate</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept-Language</stringProp>
+                      <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Cache-Control</stringProp>
+                      <stringProp name="Header.value">no-cache</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Connection</stringProp>
+                      <stringProp name="Header.value">keep-alive</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Pragma</stringProp>
+                      <stringProp name="Header.value">no-cache</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-Requested-With</stringProp>
+                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[1]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Turnover</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[2]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[3]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss - Negative" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Customer Win Loss - Negative</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[3]/span</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensee Win Loss" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Licensee Win Loss</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[4]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensee Win Loss - Negative" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Licensee Win Loss - Negative</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[4]/span</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Tips Amount" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Tips Amount</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Tips Amount Due" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Tips Amount Due</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Equivalent</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent - Negative" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Equivalent - Negative</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]/span</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="-785311839">Total in</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">2</intProp>
+                </ResponseAssertion>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportExcel_Gold Deluxe" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
+	&quot;BrandName&quot;:&quot;12Bet&quot;,&#xd;
+	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;PartyId&quot;:14,&#xd;
+	&quot;ProductCode&quot;:&quot;GD&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;Gold Deluxe&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
+}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+                <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+                <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+                <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/SettlementReport/ExportExcel</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                      <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept-Encoding</stringProp>
+                      <stringProp name="Header.value">gzip, deflate</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept-Language</stringProp>
+                      <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Cache-Control</stringProp>
+                      <stringProp name="Header.value">no-cache</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Connection</stringProp>
+                      <stringProp name="Header.value">keep-alive</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Pragma</stringProp>
+                      <stringProp name="Header.value">no-cache</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-Requested-With</stringProp>
+                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="-785311839">Total in</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">2</intProp>
+                </ResponseAssertion>
+                <hashTree/>
+                <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
+                  <stringProp name="FileSaver.filename">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}Excel Report\Settlement Report GD.xlsx</stringProp>
+                  <boolProp name="FileSaver.errorsonly">false</boolProp>
+                  <boolProp name="FileSaver.successonly">false</boolProp>
+                  <boolProp name="FileSaver.skipsuffix">true</boolProp>
+                  <boolProp name="FileSaver.skipautonumber">true</boolProp>
+                </ResultSaver>
+                <hashTree/>
+              </hashTree>
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Settlement Report Gold Deluxe - Compare Data with Web Report" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">&quot;If it fails please check JSR223 Assertion for more details !!!&quot;</stringProp>
+              </JSR223Sampler>
+              <hashTree>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="cacheKey"></stringProp>
+                  <stringProp name="script">import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+def pathReport =  path+&quot;/Excel Report/Settlement Report GD.xlsx&quot;;
+def pathExist = new File(pathReport)
+def book;
+for(def i=0;i&lt;10;i++)
+{
+	if(pathExist.exists()){
+		book = WorkbookFactory.create(new File(pathReport));	
+		break;
+	} else {sleep(1000)}
+}
+
+int d = book.getSheetAt(0).getLastRowNum();
+log.info &quot;--------------------------------------&quot;
+log.info d.toString();
+Row row = book.getSheetAt(0).getRow(d-3);
+
+//Get data from Excel file
+	String Excel_TotalTrans = row.getCell(3).toString();
+	String Excel_Turnover = row.getCell(4).toString();
+	String Excel_CustomerWL = row.getCell(5).toString();
+	String Excel_LicenseeWL = row.getCell(6).toString();
+	String Excel_TipsAmount = row.getCell(7).toString();
+	String Excel_TipsAmountDue = row.getCell(8).toString();
+	String Excel_Equivalent = row.getCell(10).toString();
+
+	if (Excel_TipsAmount == &quot;-&quot;){
+		Excel_TipsAmount = &quot;0&quot;
+	}
+	if (Excel_TipsAmountDue == &quot;-&quot;){
+		Excel_TipsAmountDue = &quot;0&quot;
+	}
+	
+//Get data from Web
+	String TotalTrans = vars.get(&quot;Total Trans&quot;);
+	String Turnover = vars.get(&quot;Turnover&quot;);
+	
+	String CustomerWLP = vars.get(&quot;Customer Win Loss&quot;);
+	String CustomerWLN = vars.get(&quot;Customer Win Loss - Negative&quot;);
+	String CustomerWL = getNotEmptyDataBetween2String(&quot;${CustomerWLP}&quot;,&quot;${CustomerWLN}&quot;);
+	
+	String LicenseeWLP = vars.get(&quot;Licensee Win Loss&quot;);
+	String LicenseeWLN = vars.get(&quot;Licensee Win Loss - Negative&quot;);
+	String LicenseeWL = getNotEmptyDataBetween2String(&quot;${LicenseeWLP}&quot;,&quot;${LicenseeWLN}&quot;);
+
+	String TipsAmount = vars.get(&quot;Tips Amount&quot;);
+		if (TipsAmount == &quot;-&quot;){
+			TipsAmount = &quot;0&quot;;
+		}
+	
+	String TipsAmountDue = vars.get(&quot;Tips Amount Due&quot;);
+		if (TipsAmountDue == &quot;-&quot;){
+			TipsAmountDue = &quot;0&quot;;
+		}
+	
+	String EquivalentP = vars.get(&quot;Equivalent&quot;);
+	String EquivalentN = vars.get(&quot;Equivalent - Negative&quot;);
+	String Equivalent = getNotEmptyDataBetween2String(&quot;${EquivalentP}&quot;,&quot;${EquivalentN}&quot;);
+
+String getNotEmptyDataBetween2String(String str1, String str2) { 
+   if(str1==&quot;&quot;){
+   	return str2;
+   }else{
+   	return str1;
+   }
+}
+
+//Compare data between Excel and Web
+def FailureMessage =&quot;&quot;
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&gt;0.1){
+		FailureMessage+=&quot;\nTotal Transactions of Excel: &quot;+Excel_TotalTrans +&quot;\nTotal Transactions of Report: &quot;+TotalTrans;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Turnover) - Functions.ConvertStringToFloat(Turnover))&gt;0.1){
+		FailureMessage+=&quot;\nTurnover of Excel: &quot;+Excel_Turnover +&quot;\nTurnover of Report: &quot;+Turnover;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_CustomerWL) - Functions.ConvertStringToFloat(CustomerWL))&gt;0.1){
+		FailureMessage+=&quot;\nCustomerWL of Excel: &quot;+Excel_CustomerWL +&quot;\nCustomerWL of Report: &quot;+CustomerWL;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
+		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_TipsAmount) - Functions.ConvertStringToFloat(TipsAmount))&gt;0.1){
+		FailureMessage+=&quot;\nTips Amount of Excel: &quot;+Excel_TipsAmount +&quot;\nTips Amount of Report: &quot;+TipsAmount;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_TipsAmountDue) - Functions.ConvertStringToFloat(TipsAmountDue))&gt;0.1){
+		FailureMessage+=&quot;\nTips Amount Due of Excel: &quot;+Excel_TipsAmountDue +&quot;\nTips Amount Due of Report: &quot;+TipsAmountDue;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Equivalent) - Functions.ConvertStringToFloat(Equivalent))&gt;0.1){
+		FailureMessage+=&quot;\nEquivalent of Excel: &quot;+Excel_Equivalent +&quot;\nEquivalent of Report: &quot;+Equivalent;
+	}
+	if(FailureMessage!=&quot;&quot;){
+		AssertionResult.setFailure(true);
+		AssertionResult.setFailureMessage(FailureMessage);
+	}
+	</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportPDF_Gold Deluxe" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
+	&quot;BrandName&quot;:&quot;12Bet&quot;,&#xd;
+	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;PartyId&quot;:14,&#xd;
+	&quot;ProductCode&quot;:&quot;GD&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;Gold Deluxe&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
+}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+                <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+                <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+                <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/SettlementReport/ExportPdf</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                      <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept-Encoding</stringProp>
+                      <stringProp name="Header.value">gzip, deflate</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Accept-Language</stringProp>
+                      <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Cache-Control</stringProp>
+                      <stringProp name="Header.value">no-cache</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Connection</stringProp>
+                      <stringProp name="Header.value">keep-alive</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Pragma</stringProp>
+                      <stringProp name="Header.value">no-cache</stringProp>
+                    </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-Requested-With</stringProp>
+                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="49586">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">2</intProp>
+                </ResponseAssertion>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
             <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Sportsbook" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_Sportsbook" enabled="true">
@@ -38404,507 +38905,6 @@ def FailureMessage =&quot;&quot;
 	&quot;PartyId&quot;:14,&#xd;
 	&quot;ProductCode&quot;:&quot;AGC&quot;,&#xd;
 	&quot;ProductName&quot;:&quot;AG Casino&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
-	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
-}</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
-                <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
-                <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
-                <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-                <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/SettlementReport/ExportPdf</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
-              </HTTPSamplerProxy>
-              <hashTree>
-                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                  <collectionProp name="HeaderManager.headers">
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Content-Type</stringProp>
-                      <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">X-CSRF-Token</stringProp>
-                      <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept</stringProp>
-                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept-Encoding</stringProp>
-                      <stringProp name="Header.value">gzip, deflate</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept-Language</stringProp>
-                      <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Cache-Control</stringProp>
-                      <stringProp name="Header.value">no-cache</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Connection</stringProp>
-                      <stringProp name="Header.value">keep-alive</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Pragma</stringProp>
-                      <stringProp name="Header.value">no-cache</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">X-Requested-With</stringProp>
-                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </HeaderManager>
-                <hashTree/>
-                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                  <collectionProp name="Asserion.test_strings">
-                    <stringProp name="49586">200</stringProp>
-                  </collectionProp>
-                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-                  <boolProp name="Assertion.assume_success">false</boolProp>
-                  <intProp name="Assertion.test_type">2</intProp>
-                </ResponseAssertion>
-                <hashTree/>
-              </hashTree>
-            </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Gold Deluxe" enabled="true"/>
-            <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_Gold Deluxe" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">{&#xd;
-	&quot;BaseCurrency&quot;:&quot;6&quot;,&#xd;
-	&quot;BaseCurrencyName&quot;:&quot;EUR&quot;,&#xd;
-	&quot;BrandName&quot;:&quot;&quot;,&#xd;
-	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
-	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
-	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;PartyId&quot;:14,&#xd;
-	&quot;ProductCode&quot;:&quot;GD&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Gold Deluxe&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
-	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
-}</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
-                <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
-                <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
-                <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-                <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/SettlementReport/GetSettlementReport</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
-              </HTTPSamplerProxy>
-              <hashTree>
-                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                  <collectionProp name="HeaderManager.headers">
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Content-Type</stringProp>
-                      <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">X-CSRF-Token</stringProp>
-                      <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept</stringProp>
-                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept-Encoding</stringProp>
-                      <stringProp name="Header.value">gzip, deflate</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept-Language</stringProp>
-                      <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Cache-Control</stringProp>
-                      <stringProp name="Header.value">no-cache</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Connection</stringProp>
-                      <stringProp name="Header.value">keep-alive</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Pragma</stringProp>
-                      <stringProp name="Header.value">no-cache</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">X-Requested-With</stringProp>
-                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </HeaderManager>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[1]</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Turnover</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[2]</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[3]</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss - Negative" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Customer Win Loss - Negative</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[3]/span</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensee Win Loss" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Licensee Win Loss</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[4]</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensee Win Loss - Negative" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Licensee Win Loss - Negative</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[4]/span</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Tips Amount" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Tips Amount</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Tips Amount Due" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Tips Amount Due</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Equivalent</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent - Negative" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Equivalent - Negative</stringProp>
-                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]/span</stringProp>
-                  <boolProp name="XPathExtractor.validate">false</boolProp>
-                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                  <boolProp name="XPathExtractor.namespace">false</boolProp>
-                </XPathExtractor>
-                <hashTree/>
-                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                  <collectionProp name="Asserion.test_strings">
-                    <stringProp name="-785311839">Total in</stringProp>
-                  </collectionProp>
-                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                  <boolProp name="Assertion.assume_success">false</boolProp>
-                  <intProp name="Assertion.test_type">2</intProp>
-                </ResponseAssertion>
-                <hashTree/>
-              </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportExcel_Gold Deluxe" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">{&#xd;
-	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;BrandName&quot;:&quot;12Bet&quot;,&#xd;
-	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
-	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
-	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;PartyId&quot;:14,&#xd;
-	&quot;ProductCode&quot;:&quot;GD&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Gold Deluxe&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
-	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
-}</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
-                <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
-                <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
-                <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-                <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/SettlementReport/ExportExcel</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
-              </HTTPSamplerProxy>
-              <hashTree>
-                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                  <collectionProp name="HeaderManager.headers">
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Content-Type</stringProp>
-                      <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">X-CSRF-Token</stringProp>
-                      <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept</stringProp>
-                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept-Encoding</stringProp>
-                      <stringProp name="Header.value">gzip, deflate</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept-Language</stringProp>
-                      <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Cache-Control</stringProp>
-                      <stringProp name="Header.value">no-cache</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Connection</stringProp>
-                      <stringProp name="Header.value">keep-alive</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Pragma</stringProp>
-                      <stringProp name="Header.value">no-cache</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">X-Requested-With</stringProp>
-                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </HeaderManager>
-                <hashTree/>
-                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                  <collectionProp name="Asserion.test_strings">
-                    <stringProp name="-785311839">Total in</stringProp>
-                  </collectionProp>
-                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                  <boolProp name="Assertion.assume_success">false</boolProp>
-                  <intProp name="Assertion.test_type">2</intProp>
-                </ResponseAssertion>
-                <hashTree/>
-                <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-                  <stringProp name="FileSaver.filename">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}Excel Report\Settlement Report GD.xlsx</stringProp>
-                  <boolProp name="FileSaver.errorsonly">false</boolProp>
-                  <boolProp name="FileSaver.successonly">false</boolProp>
-                  <boolProp name="FileSaver.skipsuffix">true</boolProp>
-                  <boolProp name="FileSaver.skipautonumber">true</boolProp>
-                </ResultSaver>
-                <hashTree/>
-              </hashTree>
-              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Settlement Report Gold Deluxe - Compare Data with Web Report" enabled="true">
-                <stringProp name="scriptLanguage">groovy</stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="cacheKey"></stringProp>
-                <stringProp name="script">&quot;If it fails please check JSR223 Assertion for more details !!!&quot;</stringProp>
-              </JSR223Sampler>
-              <hashTree>
-                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
-                  <stringProp name="scriptLanguage">groovy</stringProp>
-                  <stringProp name="parameters"></stringProp>
-                  <stringProp name="filename"></stringProp>
-                  <stringProp name="cacheKey"></stringProp>
-                  <stringProp name="script">import org.apache.poi.ss.usermodel.*;
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.apache.jmeter.services.FileServer;
-
-def path = FileServer.getFileServer().getBaseDir();
-/*Load Common Functions - Start*/
-ClassLoader parent = getClass().getClassLoader();
-GroovyClassLoader loader = new GroovyClassLoader(parent);
-Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
-GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
-/*Load Common Functions - End*/
-def pathReport =  path+&quot;/Excel Report/Settlement Report GD.xlsx&quot;;
-def pathExist = new File(pathReport)
-def book;
-for(def i=0;i&lt;10;i++)
-{
-	if(pathExist.exists()){
-		book = WorkbookFactory.create(new File(pathReport));	
-		break;
-	} else {sleep(1000)}
-}
-
-int d = book.getSheetAt(0).getLastRowNum();
-log.info &quot;--------------------------------------&quot;
-log.info d.toString();
-Row row = book.getSheetAt(0).getRow(d-3);
-
-//Get data from Excel file
-	String Excel_TotalTrans = row.getCell(3).toString();
-	String Excel_Turnover = row.getCell(4).toString();
-	String Excel_CustomerWL = row.getCell(5).toString();
-	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_TipsAmount = row.getCell(7).toString();
-	String Excel_TipsAmountDue = row.getCell(8).toString();
-	String Excel_Equivalent = row.getCell(10).toString();
-
-	if (Excel_TipsAmount == &quot;-&quot;){
-		Excel_TipsAmount = &quot;0&quot;
-	}
-	if (Excel_TipsAmountDue == &quot;-&quot;){
-		Excel_TipsAmountDue = &quot;0&quot;
-	}
-	
-//Get data from Web
-	String TotalTrans = vars.get(&quot;Total Trans&quot;);
-	String Turnover = vars.get(&quot;Turnover&quot;);
-	
-	String CustomerWLP = vars.get(&quot;Customer Win Loss&quot;);
-	String CustomerWLN = vars.get(&quot;Customer Win Loss - Negative&quot;);
-	String CustomerWL = getNotEmptyDataBetween2String(&quot;${CustomerWLP}&quot;,&quot;${CustomerWLN}&quot;);
-	
-	String LicenseeWLP = vars.get(&quot;Licensee Win Loss&quot;);
-	String LicenseeWLN = vars.get(&quot;Licensee Win Loss - Negative&quot;);
-	String LicenseeWL = getNotEmptyDataBetween2String(&quot;${LicenseeWLP}&quot;,&quot;${LicenseeWLN}&quot;);
-
-	String TipsAmount = vars.get(&quot;Tips Amount&quot;);
-		if (TipsAmount == &quot;-&quot;){
-			TipsAmount = &quot;0&quot;;
-		}
-	
-	String TipsAmountDue = vars.get(&quot;Tips Amount Due&quot;);
-		if (TipsAmountDue == &quot;-&quot;){
-			TipsAmountDue = &quot;0&quot;;
-		}
-	
-	String EquivalentP = vars.get(&quot;Equivalent&quot;);
-	String EquivalentN = vars.get(&quot;Equivalent - Negative&quot;);
-	String Equivalent = getNotEmptyDataBetween2String(&quot;${EquivalentP}&quot;,&quot;${EquivalentN}&quot;);
-
-String getNotEmptyDataBetween2String(String str1, String str2) { 
-   if(str1==&quot;&quot;){
-   	return str2;
-   }else{
-   	return str1;
-   }
-}
-
-//Compare data between Excel and Web
-def FailureMessage =&quot;&quot;
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&gt;0.1){
-		FailureMessage+=&quot;\nTotal Transactions of Excel: &quot;+Excel_TotalTrans +&quot;\nTotal Transactions of Report: &quot;+TotalTrans;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Turnover) - Functions.ConvertStringToFloat(Turnover))&gt;0.1){
-		FailureMessage+=&quot;\nTurnover of Excel: &quot;+Excel_Turnover +&quot;\nTurnover of Report: &quot;+Turnover;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_CustomerWL) - Functions.ConvertStringToFloat(CustomerWL))&gt;0.1){
-		FailureMessage+=&quot;\nCustomerWL of Excel: &quot;+Excel_CustomerWL +&quot;\nCustomerWL of Report: &quot;+CustomerWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
-		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_TipsAmount) - Functions.ConvertStringToFloat(TipsAmount))&gt;0.1){
-		FailureMessage+=&quot;\nTips Amount of Excel: &quot;+Excel_TipsAmount +&quot;\nTips Amount of Report: &quot;+TipsAmount;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_TipsAmountDue) - Functions.ConvertStringToFloat(TipsAmountDue))&gt;0.1){
-		FailureMessage+=&quot;\nTips Amount Due of Excel: &quot;+Excel_TipsAmountDue +&quot;\nTips Amount Due of Report: &quot;+TipsAmountDue;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Equivalent) - Functions.ConvertStringToFloat(Equivalent))&gt;0.1){
-		FailureMessage+=&quot;\nEquivalent of Excel: &quot;+Excel_Equivalent +&quot;\nEquivalent of Report: &quot;+Equivalent;
-	}
-	if(FailureMessage!=&quot;&quot;){
-		AssertionResult.setFailure(true);
-		AssertionResult.setFailureMessage(FailureMessage);
-	}
-	</stringProp>
-                </JSR223Assertion>
-                <hashTree/>
-              </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportPDF_Gold Deluxe" enabled="true">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">{&#xd;
-	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;BrandName&quot;:&quot;12Bet&quot;,&#xd;
-	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
-	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
-	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;PartyId&quot;:14,&#xd;
-	&quot;ProductCode&quot;:&quot;GD&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Gold Deluxe&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>
