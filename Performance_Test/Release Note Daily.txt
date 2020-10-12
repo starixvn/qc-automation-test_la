@@ -21,3 +21,6 @@
 
 8-Oct-2020:
  - Disable GD Product
+
+12-Oct-2020:
+- Integrate PGS,JK product
