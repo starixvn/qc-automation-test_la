@@ -4716,8 +4716,8 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF CARD CLUB WIN LOSS REPORT" enabled="true">
-            <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Card Club Win Loss&quot;</stringProp>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF ARCADIA GAMING WIN LOSS REPORT" enabled="true">
+            <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Arcadia Gaming Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
           <hashTree>
@@ -4729,7 +4729,7 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/CardClub/Main</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/ArcadiaGaming/Main</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -4820,7 +4820,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/CardClub/GetCardClubReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/ArcadiaGaming/GetArcadiaGamingReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -4972,7 +4972,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss, Licensing fee &lt;=&gt; Equivalent
 	 * 
 	 */
-	//Get Index of Settlement Data Row that Lottery Win Loss report need to compare with
+	//Get Index of Settlement Data Row that Arcadia Gaming Win Loss report need to compare with
 	int SettlementDataRowIndex = 0;
 	String strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
 	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
@@ -5650,7 +5650,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss, Licensing fee &lt;=&gt; Equivalent
 	 * 
 	 */
-	//Get Index of Settlement Data Row that Lottery Win Loss report need to compare with
+	//Get Index of Settlement Data Row that Table Game Win Loss report need to compare with
 	int SettlementDataRowIndex = 0;
 	String strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
 	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {

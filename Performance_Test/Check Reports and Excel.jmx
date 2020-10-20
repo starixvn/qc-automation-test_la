@@ -3481,7 +3481,7 @@ Row row = book.getSheetAt(0).getRow(d);
 	String Excel_Lottery = 		(row.getCell(22).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(22).toString() ;
 	String Excel_Exchange = 		(row.getCell(23).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(23).toString() ;
 	String Excel_PP = 			(row.getCell(24).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(24).toString() ;
-	String Excel_CardClub = 		(row.getCell(25).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(25).toString() ;
+	String Excel_ArcadiaGaming = 	(row.getCell(25).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(25).toString() ;
 	String Excel_SG = 			(row.getCell(26).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(26).toString() ;
 	String Excel_VirtualGames = 	(row.getCell(27).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(27).toString() ;
 	String Excel_SAGaming = 		(row.getCell(28).toString() == &quot;null&quot;) ? &quot;0&quot; : row.getCell(28).toString() ;
@@ -3512,7 +3512,7 @@ def ProductList = []
 	def GrandTotal_Lottery = &apos;0&apos;
 	def GrandTotal_Exchange = &apos;0&apos;
 	def GrandTotal_PP = &apos;0&apos;
-	def GrandTotal_CardClub = &apos;0&apos;
+	def GrandTotal_ArcadiaGaming = &apos;0&apos;
 	def GrandTotal_SG = &apos;0&apos;
 	def GrandTotal_VirtualGames = &apos;0&apos;
 	def GrandTotal_SAGaming = &apos;0&apos;
@@ -3579,8 +3579,8 @@ for(def i=0;i&lt;ProductList.size();i++){
 	if(ProductList.get(i).toString()==&apos;PP&apos;){
 		GrandTotal_PP = (GrandTotal.get(i).toString())
 	}	
-	if(ProductList.get(i).toString()==&apos;Card Club&apos;){
-		GrandTotal_CardClub = (GrandTotal.get(i).toString())
+	if(ProductList.get(i).toString()==&apos;Arcadia Gaming&apos;){
+		GrandTotal_ArcadiaGaming = (GrandTotal.get(i).toString())
 	}
 	if(ProductList.get(i).toString()==&apos;SG&apos;){
 		GrandTotal_SG = (GrandTotal.get(i).toString())
@@ -3658,8 +3658,8 @@ def FailureMessage =&quot;&quot;
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_PP) - Functions.ConvertStringToFloat(GrandTotal_PP))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_PP of Excel: &quot;+Excel_PP +&quot;\nGrandTotal_PP of Report: &quot;+GrandTotal_PP;
 	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_CardClub) - Functions.ConvertStringToFloat(GrandTotal_CardClub))&gt;0.1){
-		FailureMessage+=&quot;\nGrandTotal_CardClub of Excel: &quot;+Excel_CardClub +&quot;\nGrandTotal_CardClub of Report: &quot;+GrandTotal_CardClub;
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_ArcadiaGaming) - Functions.ConvertStringToFloat(GrandTotal_ArcadiaGaming))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_ArcadiaGaming of Excel: &quot;+Excel_ArcadiaGaming +&quot;\nGrandTotal_ArcadiaGaming of Report: &quot;+GrandTotal_ArcadiaGaming;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_SG) - Functions.ConvertStringToFloat(GrandTotal_SG))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_SG of Excel: &quot;+Excel_SG +&quot;\nGrandTotal_SG of Report: &quot;+GrandTotal_SG;
@@ -9122,9 +9122,9 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Card Club Win Loss" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Arcadia Gaming Win Loss" enabled="true"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Card Club Win Loss_Load" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Arcadia Gaming Win Loss_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -9132,7 +9132,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/CardClub/Main</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/ArcadiaGaming/Main</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -9200,7 +9200,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
               </RegexExtractor>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Card Club Win Loss_Submit_Group By Licensee" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Arcadia Gaming Win Loss_Submit_Group By Licensee" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -9223,7 +9223,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/CardClub/GetCardClubReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/ArcadiaGaming/GetArcadiaGamingReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -9355,7 +9355,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Card Club Win Loss_Export_Group By Licensee" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Arcadia Gaming Win Loss_Export_Group By Licensee" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -9378,7 +9378,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/CardClub/ExportExcelGroup</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/ArcadiaGaming/ExportExcelGroup</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -9440,7 +9440,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
               </ResponseAssertion>
               <hashTree/>
               <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-                <stringProp name="FileSaver.filename">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}Excel Report\Card Club Win Loss.xlsx</stringProp>
+                <stringProp name="FileSaver.filename">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}Excel Report\Arcadia Gaming Win Loss.xlsx</stringProp>
                 <boolProp name="FileSaver.errorsonly">false</boolProp>
                 <boolProp name="FileSaver.successonly">false</boolProp>
                 <boolProp name="FileSaver.skipsuffix">true</boolProp>
@@ -9448,7 +9448,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
               </ResultSaver>
               <hashTree/>
             </hashTree>
-            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Card Club WL_Group By Licensee - Compare Data with Web Report" enabled="true">
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Arcadia Gaming WL_Group By Licensee - Compare Data with Web Report" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -9476,7 +9476,7 @@ GroovyClassLoader loader = new GroovyClassLoader(parent);
 Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
 GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
 /*Load Common Functions - End*/
-def pathReport =  path+&quot;/Excel Report/Card Club Win Loss.xlsx&quot;;
+def pathReport =  path+&quot;/Excel Report/Arcadia Gaming Win Loss.xlsx&quot;;
 def pathExist = new File(pathReport)
 def book;
 for(def i=0;i&lt;10;i++)
@@ -9541,7 +9541,7 @@ def FailureMessage =&quot;&quot;
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Card Club Win Loss_Submit_Group By Date" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Arcadia Gaming Win Loss_Submit_Group By Date" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -9564,7 +9564,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/CardClub/GetCardClubReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/ArcadiaGaming/GetArcadiaGamingReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -9626,7 +9626,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Card Club Win Loss_Export_Group By Date" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Arcadia Gaming Win Loss_Export_Group By Date" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -9649,7 +9649,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/CardClub/ExportExcelGroup</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/ArcadiaGaming/ExportExcelGroup</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -45513,9 +45513,9 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
               </hashTree>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Card Club" enabled="true"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Arcadia Gaming" enabled="true"/>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_Card Club" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_Arcadia Gaming" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -45684,7 +45684,7 @@ def FailureMessage =&quot;&quot;
                 </ResponseAssertion>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportExcel_Card Club" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportExcel_Arcadia Gaming" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -45780,7 +45780,7 @@ def FailureMessage =&quot;&quot;
                 </ResultSaver>
                 <hashTree/>
               </hashTree>
-              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Settlement Report Card Club - Compare Data with Web Report" enabled="true">
+              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Settlement Report Arcadia Gaming - Compare Data with Web Report" enabled="true">
                 <stringProp name="scriptLanguage">groovy</stringProp>
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
@@ -45890,7 +45890,7 @@ def FailureMessage =&quot;&quot;
                 </JSR223Assertion>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportPDF_Card Club" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportPDF_Arcadia Gaming" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
