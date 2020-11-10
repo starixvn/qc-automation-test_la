@@ -9315,11 +9315,21 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
               </XPathExtractor>
               <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Promotion" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Promotion</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
               <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensing fee" enabled="true">
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -9329,7 +9339,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Pay to Supplier</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[8]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -9339,7 +9349,7 @@ vars.put(&quot;MoveBetsDay&quot;, MoveBetsDay);
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Net Income</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[8]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[9]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -9497,9 +9507,10 @@ Row row = book.getSheetAt(0).getRow(d-4);
 	String Excel_Turnover = row.getCell(4).toString();
 	String Excel_CustomerWL = row.getCell(5).toString();
 	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_LicensingFee = row.getCell(7).toString();
-	String Excel_PaytoSupplier = row.getCell(8).toString();
-	String Excel_NetIncome = row.getCell(9).toString();
+	String Excel_Promotion = row.getCell(7).toString();
+	String Excel_LicensingFee = row.getCell(8).toString();
+	String Excel_PaytoSupplier = row.getCell(9).toString();
+	String Excel_NetIncome = row.getCell(10).toString();
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
@@ -9507,6 +9518,7 @@ Row row = book.getSheetAt(0).getRow(d-4);
 	String CustomerWL = vars.get(&quot;Customer Win Loss&quot;);
 	String LicenseeWL = vars.get(&quot;Licensee Win Loss&quot;);
 	String LicensingFee = vars.get(&quot;Licensing fee&quot;);
+	String Promotion = vars.get(&quot;Promotion&quot;);
 	String PaytoSupplier = vars.get(&quot;Pay to Supplier&quot;);
 	String NetIncome = vars.get(&quot;Net Income&quot;);
 
@@ -9523,6 +9535,9 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
 		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Promotion) - Functions.ConvertStringToFloat(Promotion))&gt;0.1){
+		FailureMessage+=&quot;\nPromotion of Excel: &quot;+Excel_Promotion +&quot;\nPromotion of Report: &quot;+Promotion;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicensingFee) - Functions.ConvertStringToFloat(LicensingFee))&gt;0.1){
 		FailureMessage+=&quot;\nLicensing Fee of Excel: &quot;+Excel_LicensingFee +&quot;\nLicensing Fee of Report: &quot;+LicensingFee;
@@ -45528,9 +45543,9 @@ def FailureMessage =&quot;&quot;
 	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;PartyId&quot;:31,&#xd;
+	&quot;PartyId&quot;:322,&#xd;
 	&quot;ProductCode&quot;:&quot;CC&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Card Club&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;Arcadia Gaming&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>
@@ -45654,11 +45669,21 @@ def FailureMessage =&quot;&quot;
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
                 </XPathExtractor>
                 <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Promotion" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Promotion</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent" enabled="true">
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -45668,7 +45693,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -45692,13 +45717,13 @@ def FailureMessage =&quot;&quot;
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
                       <stringProp name="Argument.value">{&#xd;
 	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;BrandName&quot;:&quot;Macaubet&quot;,&#xd;
+	&quot;BrandName&quot;:&quot;Fabet&quot;,&#xd;
 	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;PartyId&quot;:31,&#xd;
+	&quot;PartyId&quot;:322,&#xd;
 	&quot;ProductCode&quot;:&quot;CC&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Card Club&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;Arcadia Gaming&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>
@@ -45839,11 +45864,13 @@ Row row = book.getSheetAt(0).getRow(DataRowIndex);
 	String Excel_Turnover = row.getCell(3).toString();
 	String Excel_CustomerWL = row.getCell(5).toString();
 	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_Equivalent = row.getCell(8).toString();
+	String Excel_Promotion = row.getCell(7).toString();
+	String Excel_Equivalent = row.getCell(9).toString();
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
 	String Turnover = vars.get(&quot;Turnover&quot;);
+	String Promotion = vars.get(&quot;Promotion&quot;).toString();
 	
 	String CustomerWLP = vars.get(&quot;Customer Win Loss&quot;);
 	String CustomerWLN = vars.get(&quot;Customer Win Loss - Negative&quot;);
@@ -45865,6 +45892,12 @@ String getNotEmptyDataBetween2String(String str1, String str2) {
    }
 }
 
+	if (Promotion== &quot;-&quot;) 
+	Promotion = &quot;0&quot; 
+
+	if (Excel_Promotion== &quot;-&quot;) 
+	Excel_Promotion = &quot;0&quot;
+	
 //Compare data between Excel and Web
 def FailureMessage =&quot;&quot;
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&gt;0.1){
@@ -45878,6 +45911,9 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
 		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Promotion) - Functions.ConvertStringToFloat(Promotion))&gt;0.1){
+		FailureMessage+=&quot;\nPromotion of Excel: &quot;+Excel_Promotion +&quot;\nPromotion of Report: &quot;+Promotion;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Equivalent) - Functions.ConvertStringToFloat(Equivalent))&gt;0.1){
 		FailureMessage+=&quot;\nEquivalent of Excel: &quot;+Excel_Equivalent +&quot;\nEquivalent of Report: &quot;+Equivalent;
@@ -45898,13 +45934,13 @@ def FailureMessage =&quot;&quot;
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
                       <stringProp name="Argument.value">{&#xd;
 	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;BrandName&quot;:&quot;12Bet&quot;,&#xd;
+	&quot;BrandName&quot;:&quot;Fabet&quot;,&#xd;
 	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;PartyId&quot;:14,&#xd;
+	&quot;PartyId&quot;:322,&#xd;
 	&quot;ProductCode&quot;:&quot;CC&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Card Club&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;Arcadia Gaming&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>

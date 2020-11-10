@@ -88,3 +88,6 @@
 
 8-Oct-2020:
  - Disable GD Product
+
+10-Nov-2020:
+ - Integrate Bonus Arcadia Gaming 
