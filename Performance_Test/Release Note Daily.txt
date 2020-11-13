@@ -27,3 +27,6 @@
 
 10-Nov-2020:
  - Integrate Bonus Arcadia Gaming 
+
+13-Nov-2020:
+ - Licensee Reconciliation - Remove Promotion column in Adjustment section

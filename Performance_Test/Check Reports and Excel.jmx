@@ -51860,7 +51860,7 @@ def FailureMessage =&quot;&quot;
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
                 </XPathExtractor>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Adj_Promotion" enabled="true">
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Adj_Promotion" enabled="false">
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Adj_Promotion</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
@@ -51874,7 +51874,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Adj_Forex</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[11]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[10]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -51884,7 +51884,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Adj_Forex - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[11]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[10]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -51894,7 +51894,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Adj_Minfee</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[12]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[11]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -51904,7 +51904,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Adj_Minfee - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[12]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[11]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -51914,7 +51914,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Adj_Others</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[13]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[12]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -51924,7 +51924,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Adj_Others - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[13]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[12]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -51934,7 +51934,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Adj_Total</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[14]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[13]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -51944,7 +51944,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Adj_Total - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[14]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;12Bet&apos;)]/following::td[13]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -52115,17 +52115,15 @@ Row row = book.getSheetAt(0).getRow(d-1);
 	String Excel_LA_Total = row.getCell(7).toString();
 	String Excel_Adj_NAP = row.getCell(8).toString();
 	String Excel_Adj_Discount = row.getCell(9).toString();
-	String Excel_Adj_Promotion = row.getCell(10).toString();
-	String Excel_Adj_Forex = row.getCell(11).toString();
-	String Excel_Adj_Minfee = row.getCell(12).toString();
-	String Excel_Adj_Others = row.getCell(13).toString();
-	String Excel_Adj_Total = row.getCell(14).toString();
+	String Excel_Adj_Forex = row.getCell(10).toString();
+	String Excel_Adj_Minfee = row.getCell(11).toString();
+	String Excel_Adj_Others = row.getCell(12).toString();
+	String Excel_Adj_Total = row.getCell(13).toString();
 
 //Get data from Web
 	String LA_Discount = vars.get(&quot;LA_Discount&quot;);
 	String LA_Promotion = vars.get(&quot;LA_Promotion&quot;);
 	String Adj_Discount = vars.get(&quot;Adj_Discount&quot;);
-	String Adj_Promotion = vars.get(&quot;Adj_Promotion&quot;);
 	
 	String Adj_MinfeeP = vars.get(&quot;Adj_Minfee&quot;);
 	String Adj_MinfeeN = vars.get(&quot;Adj_Minfee - Negative&quot;);
@@ -52203,9 +52201,6 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Adj_Discount) - Functions.ConvertStringToFloat(Adj_Discount))&gt;0.1){
 		FailureMessage+=&quot;\nAdj_Discount of Excel: &quot;+Excel_Adj_Discount +&quot;\nAdj_Discount of Report: &quot;+Adj_Discount;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Adj_Promotion) - Functions.ConvertStringToFloat(Adj_Promotion))&gt;0.1){
-		FailureMessage+=&quot;\nAdj_Promotion of Excel: &quot;+Excel_Adj_Promotion +&quot;\nAdj_Promotion of Report: &quot;+Adj_Promotion;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Adj_Forex) - Functions.ConvertStringToFloat(Adj_Forex))&gt;0.1){
 		FailureMessage+=&quot;\nAdj_Forex of Excel: &quot;+Excel_Adj_Forex +&quot;\nAdj_Forex of Report: &quot;+Adj_Forex;
