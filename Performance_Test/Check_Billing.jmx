@@ -4746,7 +4746,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		}else{
 			AssertionResult.setFailure(true);
 		}
-		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent,true) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
 			FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
 		}else{
 			AssertionResult.setFailure(true);

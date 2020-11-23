@@ -12957,7 +12957,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Joker Win Loss - have not data yet" enabled="false"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Joker Win Loss - has not data yet" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Joker Win Loss_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -16688,11 +16688,21 @@ def FailureMessage =&quot;&quot;
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
               </XPathExtractor>
               <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="ExtraPT WL" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">ExtraPT WL</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[8]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
               <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Pay to Supplier" enabled="true">
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Pay to Supplier</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[8]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[9]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -16702,7 +16712,7 @@ def FailureMessage =&quot;&quot;
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Net Income</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[9]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[10]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -16876,8 +16886,9 @@ Row row = book.getSheetAt(0).getRow(DataRowIndex);
 	String Excel_CustomerWL = row.getCell(6).toString();
 	String Excel_LicenseeWL = row.getCell(7).toString();
 	String Excel_LicensingFee = row.getCell(8).toString();
-	String Excel_PaytoSupplier = row.getCell(9).toString();
-	String Excel_NetIncome = row.getCell(10).toString();
+	String Excel_ExtraPTWL = row.getCell(9).toString();
+	String Excel_PaytoSupplier = row.getCell(10).toString();
+	String Excel_NetIncome = row.getCell(11).toString();
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
@@ -16886,6 +16897,7 @@ Row row = book.getSheetAt(0).getRow(DataRowIndex);
 	String CustomerWL = vars.get(&quot;Customer Win Loss&quot;);
 	String LicenseeWL = vars.get(&quot;Licensee Win Loss&quot;);
 	String LicensingFee = vars.get(&quot;Licensing fee&quot;);
+	String ExtraPTWL = vars.get(&quot;ExtraPT WL&quot;);
 	String PaytoSupplier = vars.get(&quot;Pay to Supplier&quot;);
 	String NetIncome = vars.get(&quot;Net Income&quot;);
 
@@ -16908,6 +16920,9 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicensingFee) - Functions.ConvertStringToFloat(LicensingFee))&gt;0.1){
 		FailureMessage+=&quot;\nLicensing Fee of Excel: &quot;+Excel_LicensingFee +&quot;\nLicensing Fee of Report: &quot;+LicensingFee;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_ExtraPTWL) - Functions.ConvertStringToFloat(ExtraPTWL))&gt;0.1){
+		FailureMessage+=&quot;\nExtraPT WL of Excel: &quot;+Excel_ExtraPTWL +&quot;\nExtraPT WL of Report: &quot;+ExtraPTWL;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_PaytoSupplier) - Functions.ConvertStringToFloat(PaytoSupplier))&gt;0.1){
 		FailureMessage+=&quot;\nPay to Supplier of Excel: &quot;+Excel_PaytoSupplier +&quot;\nPay to Supplier of Report: &quot;+PaytoSupplier;
