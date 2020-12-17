@@ -91,7 +91,7 @@
             </elementProp>
             <elementProp name="glb_ServerName" elementType="Argument">
               <stringProp name="Argument.name">glb_ServerName</stringProp>
-              <stringProp name="Argument.value">123.51.196.23</stringProp>
+              <stringProp name="Argument.value">la.oneops.net</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">Pro: 123.51.196.23; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7615</stringProp>
             </elementProp>
@@ -128,7 +128,7 @@
             </elementProp>
             <elementProp name="glb_Port" elementType="Argument">
               <stringProp name="Argument.name">glb_Port</stringProp>
-              <stringProp name="Argument.value">8090</stringProp>
+              <stringProp name="Argument.value"></stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">8090</stringProp>
             </elementProp>

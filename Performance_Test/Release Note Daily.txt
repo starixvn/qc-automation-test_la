@@ -30,3 +30,6 @@
 
 13-Nov-2020:
  - Licensee Reconciliation - Remove Promotion column in Adjustment section
+
+17-Dec-2020:
+ - Update OddsSpread
