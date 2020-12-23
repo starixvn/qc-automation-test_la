@@ -60186,7 +60186,7 @@ Row row = book.getSheetAt(0).getRow(DataRowIndex);
 	String Excel_Turnover = row.getCell(3).toString();
 	String Excel_CustomerWL = row.getCell(5).toString();
 	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_Equivalent = row.getCell(8).toString();
+	String Excel_Equivalent = row.getCell(9).toString();
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
