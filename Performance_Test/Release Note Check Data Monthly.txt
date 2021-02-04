@@ -91,3 +91,6 @@
 
 10-Nov-2020:
  - Integrate Bonus Arcadia Gaming 
+
+4-Feb-2021:
+ - Update Free Bets for Saba.Club

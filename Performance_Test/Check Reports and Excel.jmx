@@ -59855,11 +59855,21 @@ def FailureMessage =&quot;&quot;
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
                 </XPathExtractor>
                 <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Free Bets" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Free Bets</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent" enabled="true">
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -59869,7 +59879,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -60186,11 +60196,13 @@ Row row = book.getSheetAt(0).getRow(DataRowIndex);
 	String Excel_Turnover = row.getCell(3).toString();
 	String Excel_CustomerWL = row.getCell(5).toString();
 	String Excel_LicenseeWL = row.getCell(6).toString();
+	String Excel_FreeBets = row.getCell(7).toString();
 	String Excel_Equivalent = row.getCell(9).toString();
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
 	String Turnover = vars.get(&quot;Turnover&quot;);
+	String FreeBets = vars.get(&quot;Free Bets&quot;);
 	
 	String CustomerWLP = vars.get(&quot;Customer Win Loss&quot;);
 	String CustomerWLN = vars.get(&quot;Customer Win Loss - Negative&quot;);
@@ -60225,6 +60237,9 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
 		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_FreeBets) - Functions.ConvertStringToFloat(FreeBets))&gt;0.1){
+		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_FreeBets +&quot;\nLicensee Win Loss of Report: &quot;+FreeBets;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Equivalent) - Functions.ConvertStringToFloat(Equivalent))&gt;0.1){
 		FailureMessage+=&quot;\nEquivalent of Excel: &quot;+Excel_Equivalent +&quot;\nEquivalent of Report: &quot;+Equivalent;

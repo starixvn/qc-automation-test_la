@@ -794,6 +794,18 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
 	                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
 	                    .execute();
+	}else if(&quot;${ProductName}&quot;==&quot;Saba.club&quot;){/* Saba.club */
+		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
+		String Turnover = &quot;${Turnover}&quot;;
+		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent - CC}&quot;,&quot;${Equivalent - CC - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
+		String TotalTrans = &quot;${Total Trans}&quot;;
+		List&lt;ValueRange&gt; list = Arrays.asList(
+           new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:L&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss,Equivalent)))
+           );     
+	
+		vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
+	                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
+	                    .execute();
 	}else{
 		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
 		String Turnover = &quot;${Turnover}&quot;;
@@ -8460,7 +8472,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 				}
 		   	  	Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,LicensingFee,Specific_LicensingFee,FlagLicensingFee);
 		   	  	break;
-		   case [&quot;Pragmatic&quot;,&quot;Arcadia Gaming&quot;]:
+		   case [&quot;Pragmatic&quot;,&quot;Arcadia Gaming&quot;,&quot;Saba.club&quot;]:
 		   		/*if (Functions.ConvertStringToFloat(Specific_LicensingFee,true) &gt; 0)
 				{ 
 					def Specific_LicensingFeePositive = Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(Specific_Prizes,true)).toString();

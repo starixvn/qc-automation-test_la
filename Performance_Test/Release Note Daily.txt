@@ -33,3 +33,6 @@
 
 17-Dec-2020:
  - Update OddsSpread
+
+4-Feb-2021:
+ - Update Free Bets for Saba.Club
