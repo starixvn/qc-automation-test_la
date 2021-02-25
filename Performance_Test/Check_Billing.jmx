@@ -797,7 +797,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	}else if(&quot;${ProductName}&quot;==&quot;Saba.club&quot;){/* Saba.club */
 		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
 		String Turnover = &quot;${Turnover}&quot;;
-		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent - CC}&quot;,&quot;${Equivalent - CC - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
+		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent - PP}&quot;,&quot;${Equivalent - PP - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
 		String TotalTrans = &quot;${Total Trans}&quot;;
 		List&lt;ValueRange&gt; list = Arrays.asList(
            new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:L&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss,Equivalent)))

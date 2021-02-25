@@ -94,3 +94,6 @@
 
 4-Feb-2021:
  - Update Free Bets for Saba.Club
+
+25-Feb-2021:
+ - Update Contribution, Jackpot Prize for Saba.Club

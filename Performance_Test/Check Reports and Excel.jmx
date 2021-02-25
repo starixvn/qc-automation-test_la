@@ -28823,10 +28823,10 @@ Row row = book.getSheetAt(0).getRow(d);
 	String Excel_RebateOthersTotalPre = row.getCell(25).toString();
 	String Excel_PromotionSB = row.getCell(26).toString();
 	String Excel_PromotionSBPre = row.getCell(27).toString();
-	String Excel_PromotionOthers = row.getCell(28).toString();
-	String Excel_PromotionOthersPre = row.getCell(29).toString();
-	String Excel_TotalLFee = row.getCell(30).toString();
-	String Excel_TotalLFeePre = row.getCell(31).toString();
+	//String Excel_PromotionOthers = row.getCell(28).toString();
+	//String Excel_PromotionOthersPre = row.getCell(29).toString();
+	String Excel_TotalLFee = row.getCell(28).toString();
+	String Excel_TotalLFeePre = row.getCell(29).toString();
 
 //Get data from Web
 	def jsonSlurper = new JsonSlurper();
@@ -28860,8 +28860,8 @@ Row row = book.getSheetAt(0).getRow(d);
 	String PreviousTotalLicensingFee = response.GrandTotal.PreviousTotalLicensingFee.toString();
 	String PromotionSportsbook = response.GrandTotal.PromotionSportsbook.toString();
 	String PreviousPromotionSportsbook = response.GrandTotal.PreviousPromotionSportsbook.toString();
-	String PromotionOthers = response.GrandTotal.PromotionOthers.toString();
-	String PreviousPromotionOthers = response.GrandTotal.PreviousPromotionOthers.toString();
+	//String PromotionOthers = response.GrandTotal.PromotionOthers.toString();
+	//String PreviousPromotionOthers = response.GrandTotal.PreviousPromotionOthers.toString();
 
 //Compare data between Excel and Web
 def FailureMessage =&quot;&quot;
@@ -28943,12 +28943,12 @@ def FailureMessage =&quot;&quot;
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_PromotionSBPre) - Functions.ConvertStringToFloat(PreviousPromotionSportsbook))&gt;0.1){
 		FailureMessage+=&quot;\nPrevious Promotion Sportsbook of Excel: &quot;+Excel_PromotionSBPre +&quot;\nPrevious Promotion Sportsbook of Report: &quot;+PreviousPromotionSportsbook;
 	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_PromotionOthers) - Functions.ConvertStringToFloat(PromotionOthers))&gt;0.1){
+	/*if(Math.abs(Functions.ConvertStringToFloat(Excel_PromotionOthers) - Functions.ConvertStringToFloat(PromotionOthers))&gt;0.1){
 		FailureMessage+=&quot;\nPromotion Others of Excel: &quot;+Excel_PromotionOthers +&quot;\nPromotion Others of Report: &quot;+PromotionOthers;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_PromotionOthersPre) - Functions.ConvertStringToFloat(PreviousPromotionOthers))&gt;0.1){
 		FailureMessage+=&quot;\nPrevious Promotion Others of Excel: &quot;+Excel_PromotionOthersPre +&quot;\nPrevious Promotion Others of Report: &quot;+PreviousPromotionOthers;
-	}
+	}*/
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalLFee) - Functions.ConvertStringToFloat(TotalLicensingFee))&gt;0.1){
 		FailureMessage+=&quot;\nTotal Licensing Fee of Excel: &quot;+Excel_TotalLFee +&quot;\nTotal Licensing Fee of Report: &quot;+TotalLicensingFee;
 	}
@@ -59855,11 +59855,41 @@ def FailureMessage =&quot;&quot;
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
                 </XPathExtractor>
                 <hashTree/>
-                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Free Bets" enabled="true">
-                  <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                  <stringProp name="XPathExtractor.refname">Free Bets</stringProp>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Contribution" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Contribution</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
                   <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensee Charge Rate" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Licensee Charge Rate</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Free Bets" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Free Bets</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Jackpot Prize" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Jackpot Prize</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[8]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -59869,7 +59899,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[9]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -59879,20 +59909,11 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[9]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
                 </XPathExtractor>
-                <hashTree/>
-                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                  <collectionProp name="Asserion.test_strings">
-                    <stringProp name="-785311839">Total in</stringProp>
-                  </collectionProp>
-                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                  <boolProp name="Assertion.assume_success">false</boolProp>
-                  <intProp name="Assertion.test_type">2</intProp>
-                </ResponseAssertion>
                 <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportExcel_Saba.club" enabled="true">
@@ -60196,12 +60217,16 @@ Row row = book.getSheetAt(0).getRow(DataRowIndex);
 	String Excel_Turnover = row.getCell(3).toString();
 	String Excel_CustomerWL = row.getCell(5).toString();
 	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_FreeBets = row.getCell(7).toString();
-	String Excel_Equivalent = row.getCell(9).toString();
+	String Excel_Contribution = row.getCell(7).toString();
+	String Excel_LicenseeChargeRate = row.getCell(8).toString();
+	String Excel_FreeBets = row.getCell(9).toString();
+	String Excel_JackpotPrize = row.getCell(10).toString();
+	String Excel_Equivalent = row.getCell(12).toString();
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
 	String Turnover = vars.get(&quot;Turnover&quot;);
+	String LicenseeChargeRate = vars.get(&quot;Licensee Charge Rate&quot;);
 	String FreeBets = vars.get(&quot;Free Bets&quot;);
 	
 	String CustomerWLP = vars.get(&quot;Customer Win Loss&quot;);
@@ -60211,6 +60236,12 @@ Row row = book.getSheetAt(0).getRow(DataRowIndex);
 	String LicenseeWLP = vars.get(&quot;Licensee Win Loss&quot;);
 	String LicenseeWLN = vars.get(&quot;Licensee Win Loss - Negative&quot;);
 	String LicenseeWL = getNotEmptyDataBetween2String(&quot;${LicenseeWLP}&quot;,&quot;${LicenseeWLN}&quot;);
+
+	String Contribution = vars.get(&quot;Contribution&quot;);
+	if (Contribution==&quot;-&quot;) {Contribution=&quot;0&quot;;}
+
+	String JackpotPrize = vars.get(&quot;Jackpot Prize&quot;);
+	if (JackpotPrize==&quot;-&quot;) {JackpotPrize=&quot;0&quot;;}
 	
 	String EquivalentP = vars.get(&quot;Equivalent&quot;);
 	String EquivalentN = vars.get(&quot;Equivalent - Negative&quot;);
@@ -60238,8 +60269,17 @@ def FailureMessage =&quot;&quot;
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
 		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
 	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Contribution) - Functions.ConvertStringToFloat(Contribution))&gt;0.1){
+		FailureMessage+=&quot;\nContribution of Excel: &quot;+Excel_Contribution +&quot;\nContribution of Report: &quot;+Contribution;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeChargeRate) - Functions.ConvertStringToFloat(LicenseeChargeRate))&gt;0.1){
+		FailureMessage+=&quot;\nLicensee Charge Rate of Excel: &quot;+Excel_LicenseeChargeRate +&quot;\nLicensee Charge Rate of Report: &quot;+LicenseeChargeRate;
+	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_FreeBets) - Functions.ConvertStringToFloat(FreeBets))&gt;0.1){
 		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_FreeBets +&quot;\nLicensee Win Loss of Report: &quot;+FreeBets;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_JackpotPrize) - Functions.ConvertStringToFloat(JackpotPrize))&gt;0.1){
+		FailureMessage+=&quot;\nJackpot Prize of Excel: &quot;+Excel_JackpotPrize +&quot;\nJackpot Prize of Report: &quot;+JackpotPrize;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Equivalent) - Functions.ConvertStringToFloat(Equivalent))&gt;0.1){
 		FailureMessage+=&quot;\nEquivalent of Excel: &quot;+Excel_Equivalent +&quot;\nEquivalent of Report: &quot;+Equivalent;
