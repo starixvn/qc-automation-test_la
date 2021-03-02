@@ -39,3 +39,6 @@
 
 25-Feb-2021:
  - Update Contribution, Jackpot Prize for Saba.Club
+
+2-Mar-2021:
+ - Update Licensee Charge Rate for Arcadia Gaming 

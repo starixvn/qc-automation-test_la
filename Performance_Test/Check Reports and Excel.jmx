@@ -15038,7 +15038,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report (3rd)_Fishing World Win Loss (GMT +8)_Export_Group By Licensee" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report (3rd)_Fishing World Win Loss (GMT +8)_Export_Group By Licensee" enabled="false">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -15131,7 +15131,7 @@ def FailureMessage =&quot;&quot;
               </ResultSaver>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Fishing World WL_Group By Licensee - Compare Data with Web Report" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Fishing World WL_Group By Licensee - Compare Data with Web Report" enabled="false">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -15171,113 +15171,6 @@ def FailureMessage =&quot;&quot;
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
-              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
-                <stringProp name="scriptLanguage">groovy</stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="cacheKey"></stringProp>
-                <stringProp name="script">import org.apache.poi.ss.usermodel.*;
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.apache.jmeter.services.FileServer;
-
-def path = FileServer.getFileServer().getBaseDir();
-/*Load Common Functions - Start*/
-ClassLoader parent = getClass().getClassLoader();
-GroovyClassLoader loader = new GroovyClassLoader(parent);
-Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
-GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
-/*Load Common Functions - End*/
-def pathReport =  path+&quot;/Excel Report/Fishing World Win Loss.xlsx&quot;;
-def pathExist = new File(pathReport)
-def book;
-for(def i=0;i&lt;10;i++)
-{
-	if(pathExist.exists()){
-		book = WorkbookFactory.create(new File(pathReport));	
-		break;
-	} else {sleep(1000)}
-}
-
-//Get Index need to compare
-	int DataRowIndex = 0;
-	String strCompareDataWithReport = &quot;Grand Total in&quot;;
-	for(int j = 0;j&lt;book.getSheetAt(0).getLastRowNum();j++) {
-		if(book.getSheetAt(0).getRow(j)!=null){
-			String RowData = book.getSheetAt(0).getRow(j).getCell(0).toString();
-			log.info RowData; 
-			if(RowData==strCompareDataWithReport){
-				//log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
-				DataRowIndex = j;
-				break;
-			}
-		}
-      }
-
-log.info &quot;--------------------------------------&quot;
-log.info DataRowIndex.toString();
-Row row = book.getSheetAt(0).getRow(DataRowIndex);
-
-//Get data from Excel file
-	String Excel_TotalTrans = row.getCell(3).toString();
-	String Excel_Turnover = row.getCell(4).toString();
-	String Excel_CustomerWL = row.getCell(5).toString();
-	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_LicensingFee = row.getCell(7).toString();
-	String Excel_PaytoSupplier = row.getCell(8).toString();
-	String Excel_NetIncome = row.getCell(9).toString();
-
-//Get data from Web
-	String TotalTrans = vars.get(&quot;Total Trans&quot;);
-	String Turnover = vars.get(&quot;Turnover&quot;);
-	String CustomerWL = vars.get(&quot;Customer Win Loss&quot;);
-	String LicenseeWL = vars.get(&quot;Licensee Win Loss&quot;);
-	String LicensingFee = vars.get(&quot;Licensing fee&quot;);
-	String PaytoSupplier = vars.get(&quot;Pay to Supplier&quot;);
-	String NetIncome = vars.get(&quot;Net Income&quot;);
-
-//Compare data between Excel and Web
-def FailureMessage =&quot;&quot;
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&gt;0.1){
-		FailureMessage+=&quot;\nTotal Transactions of Excel: &quot;+Excel_TotalTrans +&quot;\nTotal Transactions of Report: &quot;+TotalTrans;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Turnover) - Functions.ConvertStringToFloat(Turnover))&gt;0.1){
-		FailureMessage+=&quot;\nTurnover of Excel: &quot;+Excel_Turnover +&quot;\nTurnover of Report: &quot;+Turnover;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_CustomerWL) - Functions.ConvertStringToFloat(CustomerWL))&gt;0.1){
-		FailureMessage+=&quot;\nCustomerWL of Excel: &quot;+Excel_CustomerWL +&quot;\nCustomerWL of Report: &quot;+CustomerWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
-		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicensingFee) - Functions.ConvertStringToFloat(LicensingFee))&gt;0.1){
-		FailureMessage+=&quot;\nLicensing Fee of Excel: &quot;+Excel_LicensingFee +&quot;\nLicensing Fee of Report: &quot;+LicensingFee;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_PaytoSupplier) - Functions.ConvertStringToFloat(PaytoSupplier))&gt;0.1){
-		FailureMessage+=&quot;\nPay to Supplier of Excel: &quot;+Excel_PaytoSupplier +&quot;\nPay to Supplier of Report: &quot;+PaytoSupplier;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_NetIncome) - Functions.ConvertStringToFloat(NetIncome))&gt;0.1){
-		FailureMessage+=&quot;\nNet Income of Excel: &quot;+Excel_NetIncome +&quot;\nNet Income of Report: &quot;+NetIncome;
-	}
-	if(FailureMessage!=&quot;&quot;){
-		AssertionResult.setFailure(true);
-		AssertionResult.setFailureMessage(FailureMessage);
-	}
-</stringProp>
-              </JSR223Assertion>
-              <hashTree/>
-            </hashTree>
-            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Fishing World WL_Group By Licensee - Compare Data with Web Report" enabled="false">
-              <stringProp name="scriptLanguage">groovy</stringProp>
-              <stringProp name="parameters"></stringProp>
-              <stringProp name="filename"></stringProp>
-              <stringProp name="cacheKey"></stringProp>
-              <stringProp name="script">&quot;If it fails please check JSR223 Assertion for more details !!!&quot;</stringProp>
-            </JSR223Sampler>
-            <hashTree>
               <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
                 <stringProp name="scriptLanguage">groovy</stringProp>
                 <stringProp name="parameters"></stringProp>
@@ -15462,7 +15355,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report (3rd)_Fishing World Win Loss (GMT +8)_Export_Group By Date" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report (3rd)_Fishing World Win Loss (GMT +8)_Export_Group By Date" enabled="false">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -51847,7 +51740,7 @@ def FailureMessage =&quot;&quot;
                 </ResponseAssertion>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportExcel_Fishing World" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportExcel_Fishing World" enabled="false">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -51943,95 +51836,7 @@ def FailureMessage =&quot;&quot;
                 </ResultSaver>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportPDF_Fishing World" enabled="false">
-                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">{&#xd;
-	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
-	&quot;BrandName&quot;:&quot;12Bet&quot;,&#xd;
-	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
-	&quot;FromDay&quot;:1,&#xd;
-	&quot;Month&quot;:11,&#xd;
-	&quot;PartyId&quot;:14,&#xd;
-	&quot;ProductCode&quot;:&quot;FW&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Fishing World&quot;,&#xd;
-	&quot;ToDay&quot;:30,&#xd;
-	&quot;Year&quot;:2018&#xd;
-}</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-                <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
-                <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
-                <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
-                <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-                <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/SettlementReport/ExportPdf</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
-              </HTTPSamplerProxy>
-              <hashTree>
-                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                  <collectionProp name="HeaderManager.headers">
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Content-Type</stringProp>
-                      <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">X-CSRF-Token</stringProp>
-                      <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept</stringProp>
-                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept-Encoding</stringProp>
-                      <stringProp name="Header.value">gzip, deflate</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Accept-Language</stringProp>
-                      <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Cache-Control</stringProp>
-                      <stringProp name="Header.value">no-cache</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Connection</stringProp>
-                      <stringProp name="Header.value">keep-alive</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Pragma</stringProp>
-                      <stringProp name="Header.value">no-cache</stringProp>
-                    </elementProp>
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">X-Requested-With</stringProp>
-                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </HeaderManager>
-                <hashTree/>
-                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
-                  <collectionProp name="Asserion.test_strings">
-                    <stringProp name="49586">200</stringProp>
-                  </collectionProp>
-                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-                  <boolProp name="Assertion.assume_success">false</boolProp>
-                  <intProp name="Assertion.test_type">2</intProp>
-                </ResponseAssertion>
-                <hashTree/>
-              </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report Fishing World - Compare Data with Web Report" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report Fishing World - Compare Data with Web Report" enabled="false">
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                   <collectionProp name="Arguments.arguments"/>
                 </elementProp>
@@ -56767,11 +56572,21 @@ def FailureMessage =&quot;&quot;
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
                 </XPathExtractor>
                 <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensee Charge Rate" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Licensee Charge Rate</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Promotion" enabled="true">
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Promotion</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -56781,7 +56596,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -56791,7 +56606,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -56903,127 +56718,6 @@ def FailureMessage =&quot;&quot;
                 </ResultSaver>
                 <hashTree/>
               </hashTree>
-              <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Settlement Report Arcadia Gaming - Compare Data with Web Report" enabled="false">
-                <stringProp name="scriptLanguage">groovy</stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="cacheKey"></stringProp>
-                <stringProp name="script">&quot;If it fails please check JSR223 Assertion for more details !!!&quot;</stringProp>
-              </JSR223Sampler>
-              <hashTree>
-                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
-                  <stringProp name="scriptLanguage">groovy</stringProp>
-                  <stringProp name="parameters"></stringProp>
-                  <stringProp name="filename"></stringProp>
-                  <stringProp name="cacheKey"></stringProp>
-                  <stringProp name="script">import org.apache.poi.ss.usermodel.*;
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.apache.jmeter.services.FileServer;
-
-def path = FileServer.getFileServer().getBaseDir();
-/*Load Common Functions - Start*/
-ClassLoader parent = getClass().getClassLoader();
-GroovyClassLoader loader = new GroovyClassLoader(parent);
-Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
-GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
-/*Load Common Functions - End*/
-def pathReport =  path+&quot;/Excel Report/Settlement Report CC.xlsx&quot;;
-def pathExist = new File(pathReport)
-def book;
-for(def i=0;i&lt;10;i++)
-{
-	if(pathExist.exists()){
-		book = WorkbookFactory.create(new File(pathReport));	
-		break;
-	} else {sleep(1000)}
-}
-
-//Get Index need to compare
-	int DataRowIndex = 0;
-	String strCompareDataWithReport = &quot;Total in Eur&quot;;
-	for(int j = 0;j&lt;book.getSheetAt(0).getLastRowNum();j++) {
-		if(book.getSheetAt(0).getRow(j)!=null){
-			String RowData = book.getSheetAt(0).getRow(j).getCell(1).toString();
-			log.info RowData; 
-			if(RowData==strCompareDataWithReport){
-				//log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
-				DataRowIndex = j;
-				break;
-			}
-		}
-      }
-Row row = book.getSheetAt(0).getRow(DataRowIndex);
-//Get data from Excel file
-	String Excel_TotalTrans = row.getCell(4).toString();
-	String Excel_Turnover = row.getCell(3).toString();
-	String Excel_CustomerWL = row.getCell(5).toString();
-	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_Promotion = row.getCell(7).toString();
-	String Excel_Equivalent = row.getCell(9).toString();
-
-//Get data from Web
-	String TotalTrans = vars.get(&quot;Total Trans&quot;);
-	String Turnover = vars.get(&quot;Turnover&quot;);
-	String Promotion = vars.get(&quot;Promotion&quot;).toString();
-	
-	String CustomerWLP = vars.get(&quot;Customer Win Loss&quot;);
-	String CustomerWLN = vars.get(&quot;Customer Win Loss - Negative&quot;);
-	String CustomerWL = getNotEmptyDataBetween2String(&quot;${CustomerWLP}&quot;,&quot;${CustomerWLN}&quot;);
-	
-	String LicenseeWLP = vars.get(&quot;Licensee Win Loss&quot;);
-	String LicenseeWLN = vars.get(&quot;Licensee Win Loss - Negative&quot;);
-	String LicenseeWL = getNotEmptyDataBetween2String(&quot;${LicenseeWLP}&quot;,&quot;${LicenseeWLN}&quot;);
-	
-	String EquivalentP = vars.get(&quot;Equivalent&quot;);
-	String EquivalentN = vars.get(&quot;Equivalent - Negative&quot;);
-	String Equivalent = getNotEmptyDataBetween2String(&quot;${EquivalentP}&quot;,&quot;${EquivalentN}&quot;);
-
-String getNotEmptyDataBetween2String(String str1, String str2) { 
-   if(str1==&quot;&quot;){
-   	return str2;
-   }else{
-   	return str1;
-   }
-}
-
-	if (Promotion== &quot;-&quot;) 
-	Promotion = &quot;0&quot; 
-
-	if (Excel_Promotion== &quot;-&quot;) 
-	Excel_Promotion = &quot;0&quot;
-	
-//Compare data between Excel and Web
-def FailureMessage =&quot;&quot;
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&gt;0.1){
-		FailureMessage+=&quot;\nTotal Transactions of Excel: &quot;+Excel_TotalTrans +&quot;\nTotal Transactions of Report: &quot;+TotalTrans;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Turnover) - Functions.ConvertStringToFloat(Turnover))&gt;0.1){
-		FailureMessage+=&quot;\nTurnover of Excel: &quot;+Excel_Turnover +&quot;\nTurnover of Report: &quot;+Turnover;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_CustomerWL) - Functions.ConvertStringToFloat(CustomerWL))&gt;0.1){
-		FailureMessage+=&quot;\nCustomerWL of Excel: &quot;+Excel_CustomerWL +&quot;\nCustomerWL of Report: &quot;+CustomerWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
-		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Promotion) - Functions.ConvertStringToFloat(Promotion))&gt;0.1){
-		FailureMessage+=&quot;\nPromotion of Excel: &quot;+Excel_Promotion +&quot;\nPromotion of Report: &quot;+Promotion;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Equivalent) - Functions.ConvertStringToFloat(Equivalent))&gt;0.1){
-		FailureMessage+=&quot;\nEquivalent of Excel: &quot;+Excel_Equivalent +&quot;\nEquivalent of Report: &quot;+Equivalent;
-	}
-	if(FailureMessage!=&quot;&quot;){
-		AssertionResult.setFailure(true);
-		AssertionResult.setFailureMessage(FailureMessage);
-	}
-	</stringProp>
-                </JSR223Assertion>
-                <hashTree/>
-              </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report Arcadia Gaming - Compare Data with Web Report" enabled="true">
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                   <collectionProp name="Arguments.arguments"/>
@@ -57115,13 +56809,15 @@ Row row = book.getSheetAt(0).getRow(DataRowIndex);
 	String Excel_Turnover = row.getCell(3).toString();
 	String Excel_CustomerWL = row.getCell(5).toString();
 	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_Promotion = row.getCell(7).toString();
-	String Excel_Equivalent = row.getCell(9).toString();
+	String Excel_LicenseeChargeRate = row.getCell(7).toString();
+	String Excel_Promotion = row.getCell(8).toString();
+	String Excel_Equivalent = row.getCell(10).toString();
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
 	String Turnover = vars.get(&quot;Turnover&quot;);
 	String Promotion = vars.get(&quot;Promotion&quot;).toString();
+	String LicenseeChargeRate = vars.get(&quot;Licensee Charge Rate&quot;);
 	
 	String CustomerWLP = vars.get(&quot;Customer Win Loss&quot;);
 	String CustomerWLN = vars.get(&quot;Customer Win Loss - Negative&quot;);
@@ -57162,6 +56858,9 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
 		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeChargeRate) - Functions.ConvertStringToFloat(LicenseeChargeRate))&gt;0.1){
+		FailureMessage+=&quot;\nLicensee Charge Rate of Excel: &quot;+Excel_LicenseeChargeRate +&quot;\nLicensee Charge Rate of Report: &quot;+LicenseeChargeRate;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Promotion) - Functions.ConvertStringToFloat(Promotion))&gt;0.1){
 		FailureMessage+=&quot;\nPromotion of Excel: &quot;+Excel_Promotion +&quot;\nPromotion of Report: &quot;+Promotion;
