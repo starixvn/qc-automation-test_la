@@ -99,7 +99,7 @@ if (!book.equals(&quot;&quot;)) {
           <stringProp name="IncludeController.includepath">Check_Billing.jmx</stringProp>
         </IncludeController>
         <hashTree/>
-        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Flag Failed For Skype" enabled="false">
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Flag Failed For Skype" enabled="true">
           <stringProp name="cacheKey"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
@@ -127,7 +127,7 @@ if (!book.equals(&quot;&quot;)) {
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223PostProcessor>
         <hashTree/>
-        <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Switch Controller - Skype" enabled="false">
+        <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Switch Controller - Skype" enabled="true">
           <stringProp name="SwitchController.value">${glb_flagFailed}</stringProp>
         </SwitchController>
         <hashTree>
@@ -340,7 +340,7 @@ file.append (&quot;&lt;div style=&apos;float:left;width:100%;&apos;&gt;&lt;h3&gt
 //log.info(doc.toString());</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Controller" enabled="false">
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Controller" enabled="true">
           <stringProp name="IncludeController.includepath">PingSkype.jmx</stringProp>
         </IncludeController>
         <hashTree/>
