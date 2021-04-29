@@ -5291,10 +5291,13 @@ Row row = book.getSheetAt(0).getRow(d);
 	String Excel_SG = 			(row.getCell(26).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(26).toString() ;
 	String Excel_VirtualGames = 	(row.getCell(27).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(27).toString() ;
 	String Excel_SAGaming = 		(row.getCell(28).toString() == &quot;null&quot;) ? &quot;0&quot; : row.getCell(28).toString() ;
-	String Excel_Indo4D = 		(row.getCell(29).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(29).toString() ;
+	String Excel_Togel4D = 		(row.getCell(29).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(29).toString() ;
 	String Excel_TableGame = 	(row.getCell(30).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(30).toString() ;
 	String Excel_Sabaclub = 		(row.getCell(31).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(31).toString() ;
-	String Excel_AECasino = 		(row.getCell(32).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(32).toString() ;
+	String Excel_AESexy = 		(row.getCell(32).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(32).toString() ;
+	String Excel_PGSoft = 		(row.getCell(32).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(32).toString() ;
+	String Excel_Joker = 		(row.getCell(32).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(32).toString() ;
+	String Excel_GDG = 			(row.getCell(32).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(32).toString() ;
 
 //Get data from Web
 def data =prev.getResponseDataAsString()
@@ -5322,10 +5325,13 @@ def ProductList = []
 	def GrandTotal_SG = &apos;0&apos;
 	def GrandTotal_VirtualGames = &apos;0&apos;
 	def GrandTotal_SAGaming = &apos;0&apos;
-	def GrandTotal_Indo4D = &apos;0&apos;
+	def GrandTotal_Togel4D = &apos;0&apos;
 	def GrandTotal_TableGame = &apos;0&apos;
 	def GrandTotal_Sabaclub = &apos;0&apos;
-	def GrandTotal_AECasino = &apos;0&apos;
+	def GrandTotal_AESexy = &apos;0&apos;
+	def GrandTotal_PGSoft = &apos;0&apos;
+	def GrandTotal_Joker = &apos;0&apos;
+	def GrandTotal_GDG = &apos;0&apos;
 
 for (def i=3; i&lt;50; i++)
 {
@@ -5397,17 +5403,26 @@ for(def i=0;i&lt;ProductList.size();i++){
 	if(ProductList.get(i).toString()==&apos;SA Gaming&apos;){
 		GrandTotal_SAGaming = (GrandTotal.get(i).toString())
 	}	
-	if(ProductList.get(i).toString()==&apos;Indo 4D&apos;){
-		GrandTotal_Indo4D = (GrandTotal.get(i).toString())
+	if(ProductList.get(i).toString()==&apos;Togel 4D&apos;){
+		GrandTotal_Togel4D = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Table Game&apos;){
+		GrandTotal_TableGame = (GrandTotal.get(i).toString())
 	}
 	if(ProductList.get(i).toString()==&apos;Saba.club&apos;){
 		GrandTotal_Sabaclub = (GrandTotal.get(i).toString())
 	}	
-	if(ProductList.get(i).toString()==&apos;Table Game&apos;){
-		GrandTotal_TableGame = (GrandTotal.get(i).toString())
+	if(ProductList.get(i).toString()==&apos;AE Sexy&apos;){
+		GrandTotal_AESexy = (GrandTotal.get(i).toString())
 	}	
-	if(ProductList.get(i).toString()==&apos;AE Casino&apos;){
-		GrandTotal_AECasino = (GrandTotal.get(i).toString())
+	if(ProductList.get(i).toString()==&apos;PG Soft&apos;){
+		GrandTotal_PGSoft = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Joker&apos;){
+		GrandTotal_Joker = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;GDG&apos;){
+		GrandTotal_GDG = (GrandTotal.get(i).toString())
 	}				
 }
 
@@ -5476,8 +5491,8 @@ def FailureMessage =&quot;&quot;
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_SAGaming) - Functions.ConvertStringToFloat(GrandTotal_SAGaming))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_SAGaming of Excel: &quot;+Excel_SAGaming +&quot;\nGrandTotal_SAGaming of Report: &quot;+GrandTotal_SAGaming;
 	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Indo4D) - Functions.ConvertStringToFloat(GrandTotal_Indo4D))&gt;0.1){
-		FailureMessage+=&quot;\nGrandTotal_Indo4D of Excel: &quot;+Excel_Indo4D +&quot;\nGrandTotal_Indo4D of Report: &quot;+GrandTotal_Indo4D;
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Togel4D) - Functions.ConvertStringToFloat(GrandTotal_Togel4D))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Togel4D of Excel: &quot;+Excel_Togel4D +&quot;\nGrandTotal_Togel4D of Report: &quot;+GrandTotal_Togel4D;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_TableGame) - Functions.ConvertStringToFloat(GrandTotal_TableGame))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_TableGame of Excel: &quot;+Excel_TableGame +&quot;\nGrandTotal_TableGame of Report: &quot;+GrandTotal_TableGame;
@@ -5485,8 +5500,8 @@ def FailureMessage =&quot;&quot;
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Sabaclub) - Functions.ConvertStringToFloat(GrandTotal_Sabaclub))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_Sabaclub of Excel: &quot;+Excel_Sabaclub +&quot;\nGrandTotal_Sabaclub of Report: &quot;+GrandTotal_Sabaclub;
 	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_AECasino) - Functions.ConvertStringToFloat(GrandTotal_AECasino))&gt;0.1){
-		FailureMessage+=&quot;\nGrandTotal_AE Casino of Excel: &quot;+Excel_AECasino +&quot;\nGrandTotal_AE Casino of Report: &quot;+GrandTotal_AECasino;
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_AESexy) - Functions.ConvertStringToFloat(GrandTotal_AESexy))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_AESexy of Excel: &quot;+Excel_AESexy +&quot;\nGrandTotal_AESexy of Report: &quot;+GrandTotal_AESexy;
 	}
 	if(FailureMessage!=&quot;&quot;){
 		AssertionResult.setFailure(true);
@@ -7459,7 +7474,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AECasino/Main</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AESexy/Main</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -7543,7 +7558,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AECasino/GetAECasinoReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AESexy/GetAESexyReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -7699,7 +7714,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AECasino/ExportExcelGroup</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AESexy/ExportExcelGroup</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -7777,7 +7792,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AECasino/Main</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AESexy/Main</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -8007,7 +8022,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AECasino/GetAECasinoReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AESexy/GetAESexyReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -8093,7 +8108,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AECasino/ExportExcelDate</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AESexy/ExportExcelDate</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -8179,7 +8194,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AECasino/GetAECasinoReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AESexy/GetAESexyReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -8335,7 +8350,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AECasino/ExportExcelGroup</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AESexy/ExportExcelGroup</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -8413,7 +8428,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AECasino/Main</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AESexy/Main</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -8643,7 +8658,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AECasino/GetAECasinoReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AESexy/GetAESexyReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -8729,7 +8744,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AECasino/ExportExcelDate</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AESexy/ExportExcelDate</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -59968,9 +59983,9 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
               </hashTree>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Indo 4D" enabled="true"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report -Togel 4D" enabled="true"/>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_Indo 4D" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_Togel 4D" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -59985,7 +60000,7 @@ def FailureMessage =&quot;&quot;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;PartyId&quot;:440,&#xd;
 	&quot;ProductCode&quot;:&quot;I4D&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Indo 4D&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;Togel 4D&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>
@@ -60149,7 +60164,7 @@ def FailureMessage =&quot;&quot;
                 </ResponseAssertion>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportExcel_Indo 4D" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportExcel_Togel 4D" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -60163,7 +60178,7 @@ def FailureMessage =&quot;&quot;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;PartyId&quot;:440,&#xd;
 	&quot;ProductCode&quot;:&quot;I4D&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Indo 4D&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;Togel 4D&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>
@@ -60362,7 +60377,7 @@ def FailureMessage =&quot;&quot;
                 </JSR223Assertion>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report Indo 4D- Compare Data with Web Report" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report Togel 4D- Compare Data with Web Report" enabled="true">
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                   <collectionProp name="Arguments.arguments"/>
                 </elementProp>
@@ -60511,7 +60526,7 @@ def FailureMessage =&quot;&quot;
                 </JSR223Assertion>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportPDF_Indo 4D" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_ExportPDF_Togel 4D" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -60525,7 +60540,7 @@ def FailureMessage =&quot;&quot;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;PartyId&quot;:440,&#xd;
 	&quot;ProductCode&quot;:&quot;I4D&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Indo 4D&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;Togel 4D&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>

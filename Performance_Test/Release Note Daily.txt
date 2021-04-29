@@ -42,3 +42,6 @@
 
 2-Mar-2021:
  - Update Licensee Charge Rate for Arcadia Gaming 
+
+29-Apr-2021:
+ - Integrate Sport Lottery

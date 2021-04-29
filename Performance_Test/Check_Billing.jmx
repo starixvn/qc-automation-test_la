@@ -5143,12 +5143,12 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF AE CASINO WIN LOSS REPORT" enabled="true">
-            <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;AE Casino Win Loss&quot;</stringProp>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF AE SEXY WIN LOSS REPORT" enabled="true">
+            <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;AE Sexy Win Loss&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss_Load" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -5156,7 +5156,7 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AECasino/Main</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/AESexy/Main</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -5231,7 +5231,7 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AECasino/GetAECasinoReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AESexy/GetAESexyReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -8005,7 +8005,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		       double tmpCustWL = Functions.ConvertStringToFloat(Specific_CustomerWinLoss) + Functions.ConvertStringToFloat(Specific_CustomerChargeComm);
 		       Specific_CustomerWinLoss = tmpCustWL.toString();
 		       break;
-		   case [&quot;Sportsbook&quot;, &quot;RNG Casino&quot;, &quot;Allbet&quot;, &quot;Pragmatic&quot;, &quot;Virtual Games&quot;, &quot;SG&quot;, &quot;AE Casino&quot;, &quot;Saba.club&quot;]:
+		   case [&quot;Sportsbook&quot;, &quot;RNG Casino&quot;, &quot;Allbet&quot;, &quot;Pragmatic&quot;, &quot;Virtual Games&quot;, &quot;SG&quot;, &quot;AE Casino&quot;, &quot;Saba.club&quot;, &quot;Sports Lottery&quot;]:
 		   	  Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(11).toString();//get from Settlement Report -&gt; Equivalent 
 		       break
 		}
@@ -8418,7 +8418,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		       Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(51).toString(); //get from LPID
 		       //Specific_DiscountSB = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(46).toString(); //get from LPID
 		       break;
-		   case [&quot;RNG Casino&quot;, &quot;Allbet&quot;, &quot;Colossus Bets&quot;, &quot;Cash Out&quot;, &quot;Virtual Games&quot;, &quot;SG&quot;, &quot;AE Casino&quot;, &quot;Saba.club&quot;]:      
+		   case [&quot;RNG Casino&quot;, &quot;Allbet&quot;, &quot;Colossus Bets&quot;, &quot;Cash Out&quot;, &quot;Virtual Games&quot;, &quot;SG&quot;, &quot;AE Casino&quot;, &quot;Saba.club&quot;, &quot;Sports Lottery&quot;]:      
 		       Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(11).toString(); //get from Settlement Report
 		       break;
 		   case &quot;Pragmatic&quot;:
