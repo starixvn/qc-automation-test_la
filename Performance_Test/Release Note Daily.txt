@@ -45,3 +45,7 @@
 
 29-Apr-2021:
  - Integrate Sport Lottery
+
+11-Jun-2021:
+ - Update Platform Win Loss (Summary)
+ - Integrate Win Loss By Product Billing Data

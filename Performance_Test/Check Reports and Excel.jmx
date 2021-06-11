@@ -4984,7 +4984,7 @@ def FailureMessage =&quot;&quot;
           </hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Win Loss By Product" enabled="true"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Win Loss By Product_Load" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Win Loss By Product Original Data_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -5052,7 +5052,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Win Loss By Product_Export" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Win Loss By Product Original Data_Export" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -5144,7 +5144,7 @@ def FailureMessage =&quot;&quot;
               </ResultSaver>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Win Loss By Product_Submit and Compare" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Win Loss By Product Original Data_Submit and Compare" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -5502,6 +5502,567 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_AESexy) - Functions.ConvertStringToFloat(GrandTotal_AESexy))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_AESexy of Excel: &quot;+Excel_AESexy +&quot;\nGrandTotal_AESexy of Report: &quot;+GrandTotal_AESexy;
+	}
+	if(FailureMessage!=&quot;&quot;){
+		AssertionResult.setFailure(true);
+		AssertionResult.setFailureMessage(FailureMessage);
+	}</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Win Loss By Product Billing Data_Export" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
+	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/BillingDataByProduct/ExportBillingDataByProduct</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-902861072">Grand Total</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+              <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
+                <stringProp name="FileSaver.filename">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}Excel Report\Win Loss By Product Billing Data.xlsx</stringProp>
+                <boolProp name="FileSaver.errorsonly">false</boolProp>
+                <boolProp name="FileSaver.successonly">false</boolProp>
+                <boolProp name="FileSaver.skipsuffix">true</boolProp>
+                <boolProp name="FileSaver.skipautonumber">true</boolProp>
+              </ResultSaver>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Win Loss By Product Billing Data_Submit and Compare" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/BillingDataByProduct/GetBillingDataByProductReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-902861072">Grand Total</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+import groovy.json.JsonSlurper;
+import com.jayway.jsonpath.*;
+import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+
+def path = FileServer.getFileServer().getBaseDir();
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClassUtilities = loader.parseClass(new File(path + &quot;/Library/&quot;+&quot;Utilities.groovy&quot;));
+GroovyObject Utilities  = (GroovyObject) groovyClassUtilities.newInstance();
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+
+/*Load Common Functions - End*/
+def pathReport =  path+&quot;/Excel Report/Win Loss By Product Billing Data.xlsx&quot;;
+def pathExist = new File(pathReport)
+def book;
+for(def i=0;i&lt;10;i++)
+{
+	if(pathExist.exists()){
+		book = WorkbookFactory.create(new File(pathReport));	
+		break;
+	} else {sleep(1000)}
+}
+
+int d = book.getSheetAt(0).getLastRowNum();
+Row row = book.getSheetAt(0).getRow(d); 
+
+log.info &apos;Index: &apos; + d.toString()
+
+//Get data from Excel file
+
+	String Excel_Discount = 		(row.getCell(2).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(2).toString() ;	
+	String Excel_Rebate = 		(row.getCell(3).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(3).toString() ;	
+	String Excel_SBPromotion = 	(row.getCell(4).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(4).toString() ;	
+	String Excel_Sportsbook = 	(row.getCell(5).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(5).toString() ;	
+	String Excel_NumberGame = 	(row.getCell(6).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(6).toString() ;
+	String Excel_BA = 			(row.getCell(7).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(7).toString() ;
+	String Excel_VirtualSports = 	(row.getCell(8).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(8).toString() ;
+	String Excel_RNGCasino = 	(row.getCell(9).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(9).toString() ;
+	String Excel_RNGKeno = 		(row.getCell(10).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(10).toString() ;
+	String Excel_AGCasino = 		(row.getCell(11).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(11).toString() ;
+	String Excel_ColossusBet = 	(row.getCell(12).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(12).toString() ;
+	String Excel_AllBet = 		(row.getCell(13).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(13).toString() ;
+	String Excel_MacauGames = 	(row.getCell(14).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(14).toString() ;
+	String Excel_FishingWorld = 	(row.getCell(15).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(15).toString() ;
+	String Excel_CashOut = 		(row.getCell(16).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(16).toString() ;
+	String Excel_VirtualSports2 = (row.getCell(17).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(17).toString() ;
+	String Excel_Lottery = 		(row.getCell(18).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(18).toString() ;
+	String Excel_Exchange = 		(row.getCell(19).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(19).toString() ;
+	String Excel_PP = 			(row.getCell(20).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(20).toString() ;
+	String Excel_ArcadiaGaming = 	(row.getCell(21).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(21).toString() ;
+	String Excel_SG = 			(row.getCell(22).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(22).toString() ;
+	String Excel_VirtualGames = 	(row.getCell(23).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(23).toString() ;
+	String Excel_SAGaming = 		(row.getCell(24).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(24).toString() ;
+	String Excel_TableGame = 	(row.getCell(25).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(25).toString() ;
+	String Excel_Sabaclub = 		(row.getCell(26).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(26).toString() ;
+	String Excel_Togel4D = 		(row.getCell(27).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(27).toString() ;	
+	String Excel_AESexy = 		(row.getCell(28).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(28).toString() ;
+	String Excel_VirtualSports3 = (row.getCell(29).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(29).toString() ;
+	String Excel_WM = 			(row.getCell(30).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(30).toString() ;
+	String Excel_PGSoft = 		(row.getCell(31).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(31).toString() ;
+	String Excel_Joker = 		(row.getCell(32).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(32).toString() ;
+	String Excel_BG = 			(row.getCell(33).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(33).toString() ;
+	String Excel_GDG = 			(row.getCell(34).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(34).toString() ;
+	String Excel_Habanero = 		(row.getCell(35).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(35).toString() ;
+	String Excel_CG = 			(row.getCell(36).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(36).toString() ;
+	String Excel_SportsLottery = 	(row.getCell(37).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(37).toString() ;
+	String Excel_Vgaming = 		(row.getCell(38).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(38).toString() ;
+	String Excel_AdvantPlay = 	(row.getCell(39).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(39).toString() ;
+	String Excel_AdvantPlayMini = (row.getCell(40).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(40).toString() ;
+
+	log.info Excel_Sportsbook
+//Get data from Web
+def data =prev.getResponseDataAsString()
+def GrandTotal =[]
+def ProductList = []
+
+	def GrandTotal_Discount = &apos;0&apos;
+	def GrandTotal_Rebate = &apos;0&apos;
+	def GrandTotal_SBPromotion = &apos;0&apos;
+	def GrandTotal_Sportsbook = &apos;0&apos;
+	def GrandTotal_NumberGame = &apos;0&apos;
+	def GrandTotal_BA = &apos;0&apos;
+	def GrandTotal_VirtualSports = &apos;0&apos;
+	def GrandTotal_RNGCasino = &apos;0&apos;
+	def GrandTotal_RNGKeno = &apos;0&apos;
+	def GrandTotal_AGCasino = &apos;0&apos;
+	def GrandTotal_ColossusBet = &apos;0&apos;
+	def GrandTotal_AllBet = &apos;0&apos;
+	def GrandTotal_MacauGames = &apos;0&apos;
+	def GrandTotal_FishingWorld = &apos;0&apos;
+	def GrandTotal_CashOut = &apos;0&apos;
+	def GrandTotal_VirtualSports2 = &apos;0&apos;
+	def GrandTotal_Lottery = &apos;0&apos;
+	def GrandTotal_Exchange = &apos;0&apos;
+	def GrandTotal_PP = &apos;0&apos;
+	def GrandTotal_ArcadiaGaming = &apos;0&apos;
+	def GrandTotal_SG = &apos;0&apos;
+	def GrandTotal_VirtualGames = &apos;0&apos;
+	def GrandTotal_SAGaming = &apos;0&apos;
+	def GrandTotal_TableGame = &apos;0&apos;
+	def GrandTotal_Sabaclub = &apos;0&apos;
+	def GrandTotal_Togel4D = &apos;0&apos;
+	def GrandTotal_AESexy = &apos;0&apos;
+	def GrandTotal_VirtualSports3 = &apos;0&apos;
+	def GrandTotal_WM = &apos;0&apos;
+	def GrandTotal_PGSoft = &apos;0&apos;
+	def GrandTotal_Joker = &apos;0&apos;
+	def GrandTotal_BG = &apos;0&apos;
+	def GrandTotal_GDG = &apos;0&apos;
+	def GrandTotal_Habanero = &apos;0&apos;
+	def GrandTotal_CG = &apos;0&apos;
+	def GrandTotal_SportsLottery = &apos;0&apos;
+	def GrandTotal_Vgaming = &apos;0&apos;
+	def GrandTotal_AdvantPlay = &apos;0&apos;
+	def GrandTotal_AdvantPlayMini = &apos;0&apos;
+	
+for (def i=3; i&lt;50; i++)
+{
+		ProductList.add(Utilities.processXml(data,&apos;//tr[@class=\&apos;laTable__row\&apos;]/td[&apos;+ i +&apos;]&apos;))
+		GrandTotal.add(Utilities.processXml(data,&apos;//td[contains(text(),\&apos;Grand Total\&apos;)]/following::td[&apos; + (i-2) + &apos;]/span&apos;))
+}
+
+for(def i=0;i&lt;ProductList.size();i++){
+	if(ProductList.get(i).toString()==&apos;Discount&apos;){
+		GrandTotal_Discount = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Rebate&apos;){
+		GrandTotal_Rebate = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;SB Promotion&apos;){
+		GrandTotal_SBPromotion = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Sportsbook&apos;){
+		GrandTotal_Sportsbook = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Number Game&apos;){
+		GrandTotal_NumberGame = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;BA&apos;){
+		GrandTotal_BA = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Virtual Sports&apos;){
+		GrandTotal_VirtualSports = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;RNG Casino&apos;){
+		GrandTotal_RNGCasino = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;RNG Keno&apos;){
+		GrandTotal_RNGKeno = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;AG Casino&apos;){
+		GrandTotal_AGCasino = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Colossus Bets&apos;){
+		GrandTotal_ColossusBet = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Allbet&apos;){
+		GrandTotal_AllBet = (GrandTotal.get(i).toString())
+	}		
+	if(ProductList.get(i).toString()==&apos;Macau Games&apos;){
+		GrandTotal_MacauGames = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Fishing World&apos;){
+		GrandTotal_FishingWorld = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Cash Out&apos;){
+		GrandTotal_CashOut = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Virtual Sports 2&apos;){
+		GrandTotal_VirtualSports2 = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Lottery&apos;){
+		GrandTotal_Lottery = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Exchange&apos;){
+		GrandTotal_Exchange = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Pragmatic&apos;){
+		GrandTotal_PP = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Arcadia Gaming&apos;){
+		GrandTotal_ArcadiaGaming = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;SG&apos;){
+		GrandTotal_SG = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Virtual Games&apos;){
+		GrandTotal_VirtualGames = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;SA Gaming&apos;){
+		GrandTotal_SAGaming = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Table Game&apos;){
+		GrandTotal_TableGame = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Saba.club&apos;){
+		GrandTotal_Sabaclub = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Togel 4D&apos;){
+		GrandTotal_Togel4D = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;AE Sexy&apos;){
+		GrandTotal_AESexy = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Virtual Sports 3&apos;){
+		GrandTotal_VirtualSports3 = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;WM&apos;){
+		GrandTotal_WM = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;PG Soft&apos;){
+		GrandTotal_PGSoft = (GrandTotal.get(i).toString())
+	}	
+	if(ProductList.get(i).toString()==&apos;Joker&apos;){
+		GrandTotal_Joker = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;BG&apos;){
+		GrandTotal_BG = (GrandTotal.get(i).toString())
+	}		
+	if(ProductList.get(i).toString()==&apos;GDG&apos;){
+		GrandTotal_GDG = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Habanero&apos;){
+		GrandTotal_Habanero = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;CG&apos;){
+		GrandTotal_CG = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Sports Lottery&apos;){
+		GrandTotal_SportsLottery = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Vgaming&apos;){
+		GrandTotal_Vgaming = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;AdvantPlay&apos;){
+		GrandTotal_AdvantPlay = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;AdvantPlay Mini&apos;){
+		GrandTotal_AdvantPlayMini = (GrandTotal.get(i).toString())
+	}					
+}
+log.info GrandTotal_CashOut
+log.info GrandTotal_ColossusBet
+log.info GrandTotal_AllBet
+log.info GrandTotal_PP
+log.info GrandTotal_WM
+//Compare data between Excel and Web
+def FailureMessage =&quot;&quot;
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Discount) - Functions.ConvertStringToFloat(GrandTotal_Discount))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Discount of Excel: &quot;+Excel_Discount +&quot;\nGrandTotal_Discount of Report: &quot;+GrandTotal_Discount;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Rebate) - Functions.ConvertStringToFloat(GrandTotal_Rebate))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Rebate of Excel: &quot;+Excel_Rebate +&quot;\nGrandTotal_Rebate of Report: &quot;+GrandTotal_Rebate;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_SBPromotion) - Functions.ConvertStringToFloat(GrandTotal_SBPromotion))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_SB Promotion of Excel: &quot;+Excel_SBPromotion +&quot;\nGrandTotal_SB Promotion of Report: &quot;+GrandTotal_SBPromotion;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Sportsbook) - Functions.ConvertStringToFloat(GrandTotal_Sportsbook))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Sportsbook of Excel: &quot;+Excel_Sportsbook +&quot;\nGrandTotal_Sportsbook of Report: &quot;+GrandTotal_Sportsbook;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_NumberGame) - Functions.ConvertStringToFloat(GrandTotal_NumberGame))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_NumberGame of Excel: &quot;+Excel_NumberGame +&quot;\nGrandTotal_NumberGame of Report: &quot;+GrandTotal_NumberGame;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_BA) - Functions.ConvertStringToFloat(GrandTotal_BA))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_BA of Excel: &quot;+Excel_BA +&quot;\nGrandTotal_BA of Report: &quot;+GrandTotal_BA;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_VirtualSports) - Functions.ConvertStringToFloat(GrandTotal_VirtualSports))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_VirtualSports of Excel: &quot;+Excel_VirtualSports +&quot;\nGrandTotal_VirtualSports of Report: &quot;+GrandTotal_VirtualSports;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_RNGCasino) - Functions.ConvertStringToFloat(GrandTotal_RNGCasino))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_RNGCasino of Excel: &quot;+Excel_RNGCasino +&quot;\nGrandTotal_RNGCasino of Report: &quot;+GrandTotal_RNGCasino;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_RNGKeno) - Functions.ConvertStringToFloat(GrandTotal_RNGKeno))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_RNGKeno of Excel: &quot;+Excel_RNGKeno +&quot;\nGrandTotal_RNGKeno of Report: &quot;+GrandTotal_RNGKeno;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_AGCasino) - Functions.ConvertStringToFloat(GrandTotal_AGCasino))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_AGCasino of Excel: &quot;+Excel_AGCasino +&quot;\nGrandTotal_AGCasino of Report: &quot;+GrandTotal_AGCasino;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_ColossusBet) - Functions.ConvertStringToFloat(GrandTotal_ColossusBet))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_ColossusBet of Excel: &quot;+Excel_ColossusBet +&quot;\nGrandTotal_ColossusBet of Report: &quot;+GrandTotal_ColossusBet;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_AllBet) - Functions.ConvertStringToFloat(GrandTotal_AllBet))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_AllBet of Excel: &quot;+Excel_AllBet +&quot;\nGrandTotal_AllBet of Report: &quot;+GrandTotal_AllBet;
+	}	
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_MacauGames) - Functions.ConvertStringToFloat(GrandTotal_MacauGames))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_MacauGames of Excel: &quot;+Excel_MacauGames +&quot;\nGrandTotal_MacauGames of Report: &quot;+GrandTotal_MacauGames;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_FishingWorld) - Functions.ConvertStringToFloat(GrandTotal_FishingWorld))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_FishingWorld of Excel: &quot;+Excel_FishingWorld +&quot;\nGrandTotal_FishingWorld of Report: &quot;+GrandTotal_FishingWorld;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_CashOut) - Functions.ConvertStringToFloat(GrandTotal_CashOut))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_CashOut of Excel: &quot;+Excel_CashOut +&quot;\nGrandTotal_CashOut of Report: &quot;+GrandTotal_CashOut;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_VirtualSports2) - Functions.ConvertStringToFloat(GrandTotal_VirtualSports2))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_VirtualSports2 of Excel: &quot;+Excel_VirtualSports2 +&quot;\nGrandTotal_VirtualSports2 of Report: &quot;+GrandTotal_VirtualSports2;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Lottery) - Functions.ConvertStringToFloat(GrandTotal_Lottery))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Lottery of Excel: &quot;+Excel_Lottery +&quot;\nGrandTotal_Lottery of Report: &quot;+GrandTotal_Lottery;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Exchange) - Functions.ConvertStringToFloat(GrandTotal_Exchange))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Exchange of Excel: &quot;+Excel_Exchange +&quot;\nGrandTotal_Exchange of Report: &quot;+GrandTotal_Exchange;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_PP) - Functions.ConvertStringToFloat(GrandTotal_PP))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_PP of Excel: &quot;+Excel_PP +&quot;\nGrandTotal_PP of Report: &quot;+GrandTotal_PP;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_ArcadiaGaming) - Functions.ConvertStringToFloat(GrandTotal_ArcadiaGaming))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_ArcadiaGaming of Excel: &quot;+Excel_ArcadiaGaming +&quot;\nGrandTotal_ArcadiaGaming of Report: &quot;+GrandTotal_ArcadiaGaming;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_SG) - Functions.ConvertStringToFloat(GrandTotal_SG))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_SG of Excel: &quot;+Excel_SG +&quot;\nGrandTotal_SG of Report: &quot;+GrandTotal_SG;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_VirtualGames) - Functions.ConvertStringToFloat(GrandTotal_VirtualGames))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_VirtualGames of Excel: &quot;+Excel_VirtualGames +&quot;\nGrandTotal_VirtualGames of Report: &quot;+GrandTotal_VirtualGames;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_SAGaming) - Functions.ConvertStringToFloat(GrandTotal_SAGaming))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_SAGaming of Excel: &quot;+Excel_SAGaming +&quot;\nGrandTotal_SAGaming of Report: &quot;+GrandTotal_SAGaming;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_TableGame) - Functions.ConvertStringToFloat(GrandTotal_TableGame))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_TableGame of Excel: &quot;+Excel_TableGame +&quot;\nGrandTotal_TableGame of Report: &quot;+GrandTotal_TableGame;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Sabaclub) - Functions.ConvertStringToFloat(GrandTotal_Sabaclub))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Sabaclub of Excel: &quot;+Excel_Sabaclub +&quot;\nGrandTotal_Sabaclub of Report: &quot;+GrandTotal_Sabaclub;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Togel4D) - Functions.ConvertStringToFloat(GrandTotal_Togel4D))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Togel4D of Excel: &quot;+Excel_Togel4D +&quot;\nGrandTotal_Togel4D of Report: &quot;+GrandTotal_Togel4D;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_AESexy) - Functions.ConvertStringToFloat(GrandTotal_AESexy))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_AESexy of Excel: &quot;+Excel_AESexy +&quot;\nGrandTotal_AESexy of Report: &quot;+GrandTotal_AESexy;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_VirtualSports3) - Functions.ConvertStringToFloat(GrandTotal_VirtualSports3))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Virtual Sports 3  of Excel: &quot;+Excel_VirtualSports3 +&quot;\nGrandTotal_Virtual Sports 3  of Report: &quot;+GrandTotal_VirtualSports3;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_WM) - Functions.ConvertStringToFloat(GrandTotal_WM))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_WM of Excel: &quot;+Excel_WM +&quot;\nGrandTotal_WM of Report: &quot;+GrandTotal_WM;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_PGSoft) - Functions.ConvertStringToFloat(GrandTotal_PGSoft))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_PG Soft of Excel: &quot;+Excel_PGSoft +&quot;\nGrandTotal_PG Soft of Report: &quot;+GrandTotal_PGSoft;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Joker) - Functions.ConvertStringToFloat(GrandTotal_Joker))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Joker of Excel: &quot;+Excel_Joker +&quot;\nGrandTotal_Joker of Report: &quot;+GrandTotal_Joker;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_BG) - Functions.ConvertStringToFloat(GrandTotal_BG))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_BG of Excel: &quot;+Excel_BG +&quot;\nGrandTotal_BG of Report: &quot;+GrandTotal_BG;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_GDG) - Functions.ConvertStringToFloat(GrandTotal_GDG))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_GDG of Excel: &quot;+Excel_GDG +&quot;\nGrandTotal_GDG of Report: &quot;+GrandTotal_GDG;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Habanero) - Functions.ConvertStringToFloat(GrandTotal_Habanero))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Habanero of Excel: &quot;+Excel_Habanero +&quot;\nGrandTotal_Habanero of Report: &quot;+GrandTotal_Habanero;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_CG) - Functions.ConvertStringToFloat(GrandTotal_CG))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_CG of Excel: &quot;+Excel_CG +&quot;\nGrandTotal_CG of Report: &quot;+GrandTotal_CG;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_SportsLottery) - Functions.ConvertStringToFloat(GrandTotal_SportsLottery))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Sports Lottery of Excel: &quot;+Excel_SportsLottery +&quot;\nGrandTotal_Sports Lottery of Report: &quot;+GrandTotal_SportsLottery;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Vgaming) - Functions.ConvertStringToFloat(GrandTotal_Vgaming))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_Vgaming of Excel: &quot;+Excel_Vgaming +&quot;\nGrandTotal_Vgaming of Report: &quot;+GrandTotal_Vgaming;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_AdvantPlay) - Functions.ConvertStringToFloat(GrandTotal_AdvantPlay))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_AdvantPlay of Excel: &quot;+Excel_AdvantPlay +&quot;\nGrandTotal_AdvantPlay of Report: &quot;+GrandTotal_AdvantPlay;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_AdvantPlayMini) - Functions.ConvertStringToFloat(GrandTotal_AdvantPlayMini))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_AdvantPlay Mini of Excel: &quot;+Excel_AdvantPlayMini +&quot;\nGrandTotal_AdvantPlay Mini of Report: &quot;+GrandTotal_AdvantPlayMini;
 	}
 	if(FailureMessage!=&quot;&quot;){
 		AssertionResult.setFailure(true);
@@ -14828,7 +15389,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Fishing World Win Loss (GMT +8)" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Fishing World Win Loss (GMT +8) - No Data" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report (3rd)_Fishing World Win Loss (GMT +8)_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -51584,7 +52145,7 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
               </hashTree>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Fishing World" enabled="true"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Fishing World  - No Data" enabled="false"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_Fishing World" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
@@ -65179,7 +65740,7 @@ def FailureMessage =&quot;&quot;
         </hashTree>
         <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Misc" enabled="true"/>
         <hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Platform Win Loss" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Platform Win Loss - Unused" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Platform Win Loss_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -66321,7 +66882,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Platform Win Loss (Summary)_Submit" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Platform Win Loss (Summary)_Submit" enabled="false">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -66334,6 +66895,110 @@ def FailureMessage =&quot;&quot;
 	&quot;ToDate&quot;:&quot;31-Jul-2020&quot;,&#xd;
 	&quot;Platforms&quot;:&quot;d,g,x,a,z,e,u,m,l,r,o,c,0,v,1,2,3,4,5,6,t,*&quot;,&#xd;
 	&quot;SelectedColumnIndexes&quot;:&quot;0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Platform/GetSummaryReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Total Trans" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">Total Trans</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.Total.TotalTrans</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">0</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Turnover" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">Turnover</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.Total.Turnover</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">0</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Licensee WL" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">Licensee WL</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.Total.LicenseeWinLoss</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">0</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="80997156">Total</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">2</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Platform Win Loss (Summary)_Submit" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;PartyIds&quot;:&quot;14&quot;,&#xd;
+	&quot;BaseCurrency&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
+	&quot;FromDate&quot;:&quot;01-May-2021&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;31-May-2021&quot;,&#xd;
+	&quot;Platforms&quot;:&quot;Desktop New Asia,Desktop China,Desktop Others,E-Sports Desktop,Mobile Standard,Mobile Euro,Mobile Compact,Mobile Others,E-Sports Mobile,E-Sports APP,Mobile APP,Native APP,Tablet,WAP,Odds Feed,Deep Link,Others&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
@@ -66446,37 +67111,30 @@ def FailureMessage =&quot;&quot;
                   <elementProp name="FromDate" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">FromDate</stringProp>
-                    <stringProp name="Argument.value">01-Jul-2020</stringProp>
+                    <stringProp name="Argument.value">01-May-2021</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
                   <elementProp name="ToDate" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">ToDate</stringProp>
-                    <stringProp name="Argument.value">31-Jul-2020</stringProp>
+                    <stringProp name="Argument.value">31-May-2021</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
                   <elementProp name="ReportData" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">ReportData</stringProp>
-                    <stringProp name="Argument.value">{&quot;Data1&quot;:[{&quot;Platform&quot;:&quot;Desktop&quot;,&quot;TotalTrans&quot;:1458573,&quot;Turnover&quot;:41757184.6794,&quot;TurnoverPercent&quot;:0.2955,&quot;LicenseeWinLoss&quot;:1345053.1098,&quot;LicenseeWinLossPercent&quot;:0.2321,&quot;Margin&quot;:0.0322},{&quot;Platform&quot;:&quot;Mobile&quot;,&quot;TotalTrans&quot;:2812845,&quot;Turnover&quot;:99569795.0113,&quot;TurnoverPercent&quot;:0.7045,&quot;LicenseeWinLoss&quot;:4449599.4074,&quot;LicenseeWinLossPercent&quot;:0.7679,&quot;Margin&quot;:0.0447},{&quot;Platform&quot;:&quot;Odds Feed&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;Other&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0}],&quot;Data2&quot;:[{&quot;Platform&quot;:&quot;Asia&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;New Asia&quot;,&quot;TotalTrans&quot;:1450041,&quot;Turnover&quot;:41501289.1455,&quot;TurnoverPercent&quot;:0.2937,&quot;LicenseeWinLoss&quot;:1330212.3364,&quot;LicenseeWinLossPercent&quot;:0.2296,&quot;Margin&quot;:0.0321},{&quot;Platform&quot;:&quot;China&quot;,&quot;TotalTrans&quot;:7902,&quot;Turnover&quot;:218154.1979,&quot;TurnoverPercent&quot;:0.0015,&quot;LicenseeWinLoss&quot;:11161.9382,&quot;LicenseeWinLossPercent&quot;:0.0019,&quot;Margin&quot;:0.0512},{&quot;Platform&quot;:&quot;Euro&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;WAP&quot;,&quot;TotalTrans&quot;:14,&quot;Turnover&quot;:535.9444,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:-168.2734,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:-0.314},{&quot;Platform&quot;:&quot;Mobile&quot;,&quot;TotalTrans&quot;:1279629,&quot;Turnover&quot;:36764391.4819,&quot;TurnoverPercent&quot;:0.2601,&quot;LicenseeWinLoss&quot;:1786026.1696,&quot;LicenseeWinLossPercent&quot;:0.3082,&quot;Margin&quot;:0.0486},{&quot;Platform&quot;:&quot;Tablet&quot;,&quot;TotalTrans&quot;:12,&quot;Turnover&quot;:87.2928,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:41.4881,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0.4753},{&quot;Platform&quot;:&quot;Mobile App&quot;,&quot;TotalTrans&quot;:20489,&quot;Turnover&quot;:712057.9814,&quot;TurnoverPercent&quot;:0.005,&quot;LicenseeWinLoss&quot;:28935.6656,&quot;LicenseeWinLossPercent&quot;:0.005,&quot;Margin&quot;:0.0406},{&quot;Platform&quot;:&quot;Mobile Lite Version&quot;,&quot;TotalTrans&quot;:1512701,&quot;Turnover&quot;:62092722.3108,&quot;TurnoverPercent&quot;:0.4394,&quot;LicenseeWinLoss&quot;:2634764.3575,&quot;LicenseeWinLossPercent&quot;:0.4547,&quot;Margin&quot;:0.0424},{&quot;Platform&quot;:&quot;Native App&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;Odds Feed&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;E-Sports Web Desktop&quot;,&quot;TotalTrans&quot;:630,&quot;Turnover&quot;:37741.336,&quot;TurnoverPercent&quot;:0.0003,&quot;LicenseeWinLoss&quot;:3678.8352,&quot;LicenseeWinLossPercent&quot;:0.0006,&quot;Margin&quot;:0.0975},{&quot;Platform&quot;:&quot;E-Sports Web Mobile&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;E-Sports APP&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;eGamer Desktop&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;eGamer Mobile&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;eGamer APP&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;Others&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0}],&quot;Total&quot;:{&quot;BetFrom&quot;:null,&quot;Turnover&quot;:141326979.6907,&quot;LicenseeWinLoss&quot;:5794652.5172,&quot;TotalTrans&quot;:4271418},&quot;ReportTitle&quot;:&quot;Platform Win Loss (Summary) from July 01, 2020 to July 31, 2020 in EUR&quot;}</stringProp>
+                    <stringProp name="Argument.value">{&quot;Data1&quot;:[{&quot;Platform&quot;:&quot;Desktop&quot;,&quot;TotalTrans&quot;:1586699,&quot;Turnover&quot;:45553295.0458,&quot;TurnoverPercent&quot;:0.2515,&quot;LicenseeWinLoss&quot;:1344708.3123,&quot;LicenseeWinLossPercent&quot;:0.2139,&quot;Margin&quot;:0.0295},{&quot;Platform&quot;:&quot;Mobile&quot;,&quot;TotalTrans&quot;:3599319,&quot;Turnover&quot;:135570325.3067,&quot;TurnoverPercent&quot;:0.7485,&quot;LicenseeWinLoss&quot;:4941029.3573,&quot;LicenseeWinLossPercent&quot;:0.7861,&quot;Margin&quot;:0.0364},{&quot;Platform&quot;:&quot;Odds Feed&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;Others&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0}],&quot;Data2&quot;:[{&quot;Platform&quot;:&quot;Desktop New Asia&quot;,&quot;TotalTrans&quot;:1575636,&quot;Turnover&quot;:44683593.6811,&quot;TurnoverPercent&quot;:0.2467,&quot;LicenseeWinLoss&quot;:1338314.5834,&quot;LicenseeWinLossPercent&quot;:0.2129,&quot;Margin&quot;:0.03},{&quot;Platform&quot;:&quot;Desktop China&quot;,&quot;TotalTrans&quot;:9995,&quot;Turnover&quot;:790730.4764,&quot;TurnoverPercent&quot;:0.0044,&quot;LicenseeWinLoss&quot;:1578.5381,&quot;LicenseeWinLossPercent&quot;:0.0003,&quot;Margin&quot;:0.002},{&quot;Platform&quot;:&quot;Desktop Others&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;Mobile Standard&quot;,&quot;TotalTrans&quot;:1528218,&quot;Turnover&quot;:49371287.1642,&quot;TurnoverPercent&quot;:0.2726,&quot;LicenseeWinLoss&quot;:1985231.415,&quot;LicenseeWinLossPercent&quot;:0.3158,&quot;Margin&quot;:0.0402},{&quot;Platform&quot;:&quot;Mobile Euro&quot;,&quot;TotalTrans&quot;:24653,&quot;Turnover&quot;:439719.9339,&quot;TurnoverPercent&quot;:0.0024,&quot;LicenseeWinLoss&quot;:15240.4671,&quot;LicenseeWinLossPercent&quot;:0.0024,&quot;Margin&quot;:0.0347},{&quot;Platform&quot;:&quot;Mobile Compact&quot;,&quot;TotalTrans&quot;:2017141,&quot;Turnover&quot;:83987102.8342,&quot;TurnoverPercent&quot;:0.4637,&quot;LicenseeWinLoss&quot;:2852208.3025,&quot;LicenseeWinLossPercent&quot;:0.4538,&quot;Margin&quot;:0.034},{&quot;Platform&quot;:&quot;Mobile Others&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;E-Sports Desktop&quot;,&quot;TotalTrans&quot;:1068,&quot;Turnover&quot;:78970.8883,&quot;TurnoverPercent&quot;:0.0004,&quot;LicenseeWinLoss&quot;:4815.1908,&quot;LicenseeWinLossPercent&quot;:0.0008,&quot;Margin&quot;:0.061},{&quot;Platform&quot;:&quot;E-Sports Mobile&quot;,&quot;TotalTrans&quot;:297,&quot;Turnover&quot;:41426.0949,&quot;TurnoverPercent&quot;:0.0002,&quot;LicenseeWinLoss&quot;:-2954.9756,&quot;LicenseeWinLossPercent&quot;:-0.0005,&quot;Margin&quot;:-0.0713},{&quot;Platform&quot;:&quot;E-Sports APP&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;Mobile APP&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;Native APP&quot;,&quot;TotalTrans&quot;:1178,&quot;Turnover&quot;:27958.0305,&quot;TurnoverPercent&quot;:0.0002,&quot;LicenseeWinLoss&quot;:1137.4756,&quot;LicenseeWinLossPercent&quot;:0.0002,&quot;Margin&quot;:0.0407},{&quot;Platform&quot;:&quot;Tablet&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;Deep Link&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;WAP&quot;,&quot;TotalTrans&quot;:27832,&quot;Turnover&quot;:1702831.2489,&quot;TurnoverPercent&quot;:0.0094,&quot;LicenseeWinLoss&quot;:90166.6727,&quot;LicenseeWinLossPercent&quot;:0.0143,&quot;Margin&quot;:0.053},{&quot;Platform&quot;:&quot;Odds Feed&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0},{&quot;Platform&quot;:&quot;Others&quot;,&quot;TotalTrans&quot;:0,&quot;Turnover&quot;:0,&quot;TurnoverPercent&quot;:0,&quot;LicenseeWinLoss&quot;:0,&quot;LicenseeWinLossPercent&quot;:0,&quot;Margin&quot;:0}],&quot;Total&quot;:{&quot;BetFrom&quot;:null,&quot;Turnover&quot;:181123620.3525,&quot;LicenseeWinLoss&quot;:6285737.6695,&quot;TotalTrans&quot;:5186018},&quot;ReportTitle&quot;:&quot;Platform Win Loss (Summary) from May 01, 2021 to May 31, 2021 in EUR&quot;}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
                   <elementProp name="Platforms" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">d,g,x,a,z,e,u,m,l,r,o,c,0,v,1,2,3,4,5,6,t,*</stringProp>
+                    <stringProp name="Argument.value">Desktop New Asia,Desktop China,Desktop Others,E-Sports Desktop,Mobile Standard,Mobile Euro,Mobile Compact,Mobile Others,E-Sports Mobile,E-Sports APP,Mobile APP,Native APP,Tablet,WAP,Odds Feed,Deep Link,Others</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">Platforms</stringProp>
-                  </elementProp>
-                  <elementProp name="SelectedColumnIndexes" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                    <stringProp name="Argument.name">SelectedColumnIndexes</stringProp>
                   </elementProp>
                 </collectionProp>
               </elementProp>
@@ -66586,78 +67244,6 @@ def FailureMessage =&quot;&quot;
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
-              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
-                <stringProp name="scriptLanguage">groovy</stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="cacheKey"></stringProp>
-                <stringProp name="script">import org.apache.poi.ss.usermodel.*;
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.apache.jmeter.services.FileServer;
-
-def path = FileServer.getFileServer().getBaseDir();
-/*Load Common Functions - Start*/
-ClassLoader parent = getClass().getClassLoader();
-GroovyClassLoader loader = new GroovyClassLoader(parent);
-Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
-GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
-/*Load Common Functions - End*/
-def pathReport =  path+&quot;/Excel Report/Platform Win Loss Summary.xlsx&quot;;
-def pathExist = new File(pathReport)
-def book;
-for(def i=0;i&lt;10;i++)
-{
-	if(pathExist.exists()){
-		book = WorkbookFactory.create(new File(pathReport));	
-		break;
-	} else {sleep(1000)}
-}
-
-int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d);	
-
-//Get data from Excel file
-	String Excel_TotalTrans = row.getCell(1).toString();
-	String Excel_Turnover = row.getCell(2).toString();
-	String Excel_LicenseeWL = row.getCell(4).toString();
-
-//Get data from Web
-	String	TotalTrans	=new BigDecimal(&quot;${Total Trans}&quot;).toString();
-	String	Turnover		=new BigDecimal(&quot;${Turnover}&quot;).toString();
-	String	LicenseeWL	=new BigDecimal(&quot;${Licensee WL}&quot;).toString();
-
-//Compare data between Excel and Web
-def FailureMessage =&quot;&quot;
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&gt;0.1){
-		FailureMessage+=&quot;\nTotal Transactions of Excel: &quot;+Excel_TotalTrans +&quot;\nTotal Transactions of Report: &quot;+TotalTrans;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Turnover) - Functions.ConvertStringToFloat(Turnover))&gt;0.1){
-		FailureMessage+=&quot;\nTurnover of Excel: &quot;+Excel_Turnover +&quot;\nTurnover of Report: &quot;+Turnover;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
-		FailureMessage+=(&quot;\nLicenseeWL of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicenseeWL of Report: &quot;+LicenseeWL);
-	}
-	if(FailureMessage!=&quot;&quot;){
-		AssertionResult.setFailure(true);
-		AssertionResult.setFailureMessage(FailureMessage);
-	}
-
-</stringProp>
-              </JSR223Assertion>
-              <hashTree/>
-            </hashTree>
-            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Platform Win Loss (Summary) - Compare Data with Web Report" enabled="false">
-              <stringProp name="scriptLanguage">groovy</stringProp>
-              <stringProp name="parameters"></stringProp>
-              <stringProp name="filename"></stringProp>
-              <stringProp name="cacheKey"></stringProp>
-              <stringProp name="script">&quot;If it fails please check JSR223 Assertion for more details !!!&quot;</stringProp>
-            </JSR223Sampler>
-            <hashTree>
               <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
                 <stringProp name="scriptLanguage">groovy</stringProp>
                 <stringProp name="parameters"></stringProp>
