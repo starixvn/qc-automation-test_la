@@ -8025,9 +8025,9 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="AE Casino Win Loss" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="AE Sexy Win Loss" enabled="true"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss_Load" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -8095,7 +8095,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss_Submit_Group By Licensee" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss_Submit_Group By Licensee" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -8251,7 +8251,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss_Export_Group By Licensee" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss_Export_Group By Licensee" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -8345,7 +8345,7 @@ def FailureMessage =&quot;&quot;
               </ResultSaver>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AE Casino Win Loss_Group By Licensee - Compare Data with Web Report" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AE Sexy Win Loss_Group By Licensee - Compare Data with Web Report" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -8559,7 +8559,7 @@ def FailureMessage =&quot;&quot;
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss_Submit_Group By Date" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss_Submit_Group By Date" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -8645,7 +8645,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss_Export_Group By Date" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss_Export_Group By Date" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -8731,7 +8731,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss (GMT +8)_Submit_Group By Licensee" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss (GMT +8)_Submit_Group By Licensee" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -8887,7 +8887,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss (GMT +8)_Export_Group By Licensee" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss (GMT +8)_Export_Group By Licensee" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -8981,7 +8981,7 @@ def FailureMessage =&quot;&quot;
               </ResultSaver>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AE Casino Win Loss (GMT +8)_Group By Licensee - Compare Data with Web Report" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AE Sexy Win Loss (GMT +8)_Group By Licensee - Compare Data with Web Report" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -9195,7 +9195,7 @@ def FailureMessage =&quot;&quot;
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss (GMT +8)_Submit_Group By Date" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss (GMT +8)_Submit_Group By Date" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -9281,7 +9281,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Casino Win Loss (GMT +8)_Export_Group By Date" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_AE Sexy Win Loss (GMT +8)_Export_Group By Date" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -37971,7 +37971,7 @@ def FailureMessage =&quot;&quot;
 	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
 	&quot;ParentIds&quot;:&quot;1,9,11,98&quot;,&#xd;
-	&quot;PartyIds&quot;:31,&#xd;
+	&quot;PartyIds&quot;:251,&#xd;
 	&quot;ProductCode&quot;:&quot;SG&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;&quot;,&#xd;
@@ -38041,7 +38041,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Turnover</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Macaubet&apos;)]/following::td[1]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Lucky88&apos;)]/following::td[1]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -38049,7 +38049,7 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
                 <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
                   <collectionProp name="Asserion.test_strings">
-                    <stringProp name="-126596082">Macaubet</stringProp>
+                    <stringProp name="-2119819320">Lucky88</stringProp>
                   </collectionProp>
                   <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
                   <boolProp name="Assertion.assume_success">false</boolProp>
@@ -38070,7 +38070,7 @@ def FailureMessage =&quot;&quot;
 	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
 	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
-	&quot;PartyIds&quot;:31,&#xd;
+	&quot;PartyIds&quot;:251,&#xd;
 	&quot;ProductCode&quot;:&quot;SG&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;Licensee&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
@@ -38138,7 +38138,7 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
                 <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
                   <collectionProp name="Asserion.test_strings">
-                    <stringProp name="-126596082">Macaubet</stringProp>
+                    <stringProp name="-2119819320">Lucky88</stringProp>
                   </collectionProp>
                   <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
                   <boolProp name="Assertion.assume_success">false</boolProp>
@@ -40873,7 +40873,7 @@ def FailureMessage =&quot;&quot;
 	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth}&quot;,&#xd;
 	&quot;IsConvert&quot;:false,&#xd;
 	&quot;ParentIds&quot;:&quot;1,9,11,98&quot;,&#xd;
-	&quot;PartyIds&quot;:31,&#xd;
+	&quot;PartyIds&quot;:251,&#xd;
 	&quot;ProductCode&quot;:&quot;SG&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;&quot;,&#xd;
@@ -40969,7 +40969,7 @@ def FailureMessage =&quot;&quot;
 	&quot;Currency&quot;:&quot;${glb_CurrencyId}&quot;,&#xd;
 	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
 	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
-	&quot;PartyIds&quot;:31,&#xd;
+	&quot;PartyIds&quot;:251,&#xd;
 	&quot;ProductCode&quot;:&quot;SG&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;Licensee&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
@@ -43394,7 +43394,7 @@ def FailureMessage =&quot;&quot;
 	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
 	&quot;ParentIds&quot;:&quot;1,9,11,98&quot;,&#xd;
-	&quot;PartyIds&quot;:31,&#xd;
+	&quot;PartyIds&quot;:251,&#xd;
 	&quot;ProductCode&quot;:&quot;SG&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;&quot;,&#xd;
@@ -43464,7 +43464,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Licensing Fee</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Macaubet&apos;)]/following::td[1]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Lucky88&apos;)]/following::td[1]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -43472,7 +43472,7 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
                 <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
                   <collectionProp name="Asserion.test_strings">
-                    <stringProp name="-126596082">Macaubet</stringProp>
+                    <stringProp name="-2119819320">Lucky88</stringProp>
                   </collectionProp>
                   <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
                   <boolProp name="Assertion.assume_success">false</boolProp>
@@ -43493,7 +43493,7 @@ def FailureMessage =&quot;&quot;
 	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
 	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
-	&quot;PartyIds&quot;:31,&#xd;
+	&quot;PartyIds&quot;:251,&#xd;
 	&quot;ProductCode&quot;:&quot;SG&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;Licensee&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
@@ -43561,7 +43561,7 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
                 <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify that data is returned as properly" enabled="true">
                   <collectionProp name="Asserion.test_strings">
-                    <stringProp name="-126596082">Macaubet</stringProp>
+                    <stringProp name="-2119819320">Lucky88</stringProp>
                   </collectionProp>
                   <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
                   <boolProp name="Assertion.assume_success">false</boolProp>
@@ -57556,7 +57556,7 @@ def FailureMessage =&quot;&quot;
 	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;PartyId&quot;:31,&#xd;
+	&quot;PartyId&quot;:251,&#xd;
 	&quot;ProductCode&quot;:&quot;SG&quot;,&#xd;
 	&quot;ProductName&quot;:&quot;SG&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
@@ -57724,7 +57724,7 @@ def FailureMessage =&quot;&quot;
 	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;PartyId&quot;:31,&#xd;
+	&quot;PartyId&quot;:251,&#xd;
 	&quot;ProductCode&quot;:&quot;SG&quot;,&#xd;
 	&quot;ProductName&quot;:&quot;SG&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
@@ -58076,7 +58076,7 @@ def FailureMessage =&quot;&quot;
 	&quot;CurrencyID&quot;:&quot;0&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
-	&quot;PartyId&quot;:31,&#xd;
+	&quot;PartyId&quot;:251,&#xd;
 	&quot;ProductCode&quot;:&quot;SG&quot;,&#xd;
 	&quot;ProductName&quot;:&quot;SG&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
@@ -59377,9 +59377,9 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
               </hashTree>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - AE Casino" enabled="true"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - AE Sexy" enabled="true"/>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_AE Casino" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_AE Sexy" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -59394,7 +59394,7 @@ def FailureMessage =&quot;&quot;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;PartyId&quot;:31,&#xd;
 	&quot;ProductCode&quot;:&quot;SXG&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Sexy Gaming&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;AE Sexy&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>
@@ -59518,11 +59518,31 @@ def FailureMessage =&quot;&quot;
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
                 </XPathExtractor>
                 <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensee Charge Rate" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Licensee Charge Rate</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Promotion" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Promotion</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent" enabled="true">
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -59532,7 +59552,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -59548,7 +59568,7 @@ def FailureMessage =&quot;&quot;
                 </ResponseAssertion>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Export Excel_AE Casino" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Export Excel_AE Sexy" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -59562,7 +59582,7 @@ def FailureMessage =&quot;&quot;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;PartyId&quot;:31,&#xd;
 	&quot;ProductCode&quot;:&quot;SXG&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;Sexy Gaming&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;AE Sexy&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>
@@ -59636,7 +59656,7 @@ def FailureMessage =&quot;&quot;
                 </ResponseAssertion>
                 <hashTree/>
                 <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="Save Responses to a file" enabled="true">
-                  <stringProp name="FileSaver.filename">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}Excel Report\Settlement Report AE Casino.xlsx</stringProp>
+                  <stringProp name="FileSaver.filename">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}Excel Report\Settlement Report AE Sexy.xlsx</stringProp>
                   <boolProp name="FileSaver.errorsonly">false</boolProp>
                   <boolProp name="FileSaver.successonly">false</boolProp>
                   <boolProp name="FileSaver.skipsuffix">true</boolProp>
@@ -59816,7 +59836,7 @@ GroovyClassLoader loader = new GroovyClassLoader(parent);
 Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
 GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
 /*Load Common Functions - End*/
-def pathReport =  path+&quot;/Excel Report/Settlement Report AE Casino.xlsx&quot;;
+def pathReport =  path+&quot;/Excel Report/Settlement Report AE Sexy.xlsx&quot;;
 def pathExist = new File(pathReport)
 def book;
 for(def i=0;i&lt;10;i++)
@@ -59849,11 +59869,15 @@ Row row = book.getSheetAt(0).getRow(DataRowIndex);
 	String Excel_Turnover = row.getCell(3).toString();
 	String Excel_CustomerWL = row.getCell(5).toString();
 	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_Equivalent = row.getCell(8).toString();
+	String Excel_LicenseeChargeRate = row.getCell(7).toString();
+	String Excel_Promotion = row.getCell(8).toString();
+	String Excel_Equivalent = row.getCell(10).toString();
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
 	String Turnover = vars.get(&quot;Turnover&quot;);
+	String LicenseeChargeRate = vars.get(&quot;Licensee Charge Rate&quot;);
+	String Promotion = vars.get(&quot;Promotion&quot;);
 	
 	String CustomerWLP = vars.get(&quot;Customer Win Loss&quot;);
 	String CustomerWLN = vars.get(&quot;Customer Win Loss - Negative&quot;);
@@ -59889,6 +59913,12 @@ def FailureMessage =&quot;&quot;
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
 		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
 	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeChargeRate) - Functions.ConvertStringToFloat(LicenseeChargeRate))&gt;0.1){
+		FailureMessage+=&quot;\nLicensee Charge Rate of Excel: &quot;+Excel_LicenseeChargeRate +&quot;\nLicensee Charge Rate of Report: &quot;+LicenseeChargeRate;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Promotion) - Functions.ConvertStringToFloat(Promotion))&gt;0.1){
+		FailureMessage+=&quot;\nPromotion of Excel: &quot;+Excel_Promotion +&quot;\nPromotion of Report: &quot;+Promotion;
+	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Equivalent) - Functions.ConvertStringToFloat(Equivalent))&gt;0.1){
 		FailureMessage+=&quot;\nEquivalent of Excel: &quot;+Excel_Equivalent +&quot;\nEquivalent of Report: &quot;+Equivalent;
 	}
@@ -59900,7 +59930,7 @@ def FailureMessage =&quot;&quot;
                 </JSR223Assertion>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Export PDF_AE Casino" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Export PDF_AE Sexy" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -59914,7 +59944,7 @@ def FailureMessage =&quot;&quot;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;PartyId&quot;:31,&#xd;
 	&quot;ProductCode&quot;:&quot;SXG&quot;,&#xd;
-	&quot;ProductName&quot;:&quot;AE Casino&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;AE Sexy&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;	&#xd;
 }</stringProp>
@@ -60439,7 +60469,7 @@ def FailureMessage =&quot;&quot;
 		FailureMessage+=&quot;\nLicensee Charge Rate of Excel: &quot;+Excel_LicenseeChargeRate +&quot;\nLicensee Charge Rate of Report: &quot;+LicenseeChargeRate;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_FreeBets) - Functions.ConvertStringToFloat(FreeBets))&gt;0.1){
-		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_FreeBets +&quot;\nLicensee Win Loss of Report: &quot;+FreeBets;
+		FailureMessage+=&quot;\nFreeBets of Excel: &quot;+Excel_FreeBets +&quot;\nFreeBets of Report: &quot;+FreeBets;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_JackpotPrize) - Functions.ConvertStringToFloat(JackpotPrize))&gt;0.1){
 		FailureMessage+=&quot;\nJackpot Prize of Excel: &quot;+Excel_JackpotPrize +&quot;\nJackpot Prize of Report: &quot;+JackpotPrize;
