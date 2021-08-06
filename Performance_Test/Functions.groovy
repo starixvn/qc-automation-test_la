@@ -82,6 +82,33 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "BA":
 	       return "Settlement Report";
 	       break;
+		case "Togel 4D":
+	       return "Settlement Report";
+	       break;
+		case "PG Soft":
+	       return "PG Soft Win Loss";
+	       break;
+		case "Joker":
+	       return "Joker Win Loss";
+	       break;
+		case "WM":
+	       return "WM Win Loss";
+	       break;
+		case "GDG":
+	       return "GDG Win Loss";
+	       break;
+		case "Habanero":
+	       return "Habanero Win Loss";
+	       break;
+		case "CG":
+	       return "CG Win Loss";
+	       break;		
+		case "Vgaming":
+	       return "Settlement Report";
+	       break;
+		case "BG":
+	       return "BG Win Loss";
+	       break;		   
 	}
 }
 
@@ -156,6 +183,33 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 		case "BA":
 	       return "Settlement Report";
 	       break;
+		case "Togel 4D":
+	       return "Settlement Report";
+	       break;
+		case "PG Soft":
+	       return "PG Soft Win Loss";
+	       break;
+		case "Joker":
+	       return "Joker Win Loss";
+	       break;
+		case "WM":
+	       return "WM Win Loss";
+	       break;
+		case "GDG":
+	       return "GDG Win Loss";
+	       break;
+		case "Habanero":
+	       return "Habanero Win Loss";
+	       break;
+		case "CG":
+	       return "CG Win Loss";
+	       break;		
+		case "Vgaming":
+	       return "Settlement Report";
+	       break;
+		case "BG":
+	       return "BG Win Loss";
+	       break;   
 	}
 }
 

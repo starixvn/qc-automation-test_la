@@ -103,3 +103,6 @@
 
 29-Apr-2021:
  - Integrate Sport Lottery
+
+6-Aug-2021:
+ - Intergrate PG Soft, Joker, WM, GDG, Habanero, CG, Vgaming, BG
