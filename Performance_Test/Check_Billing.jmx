@@ -5683,11 +5683,11 @@ Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functi
 GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
 /*Load Common Functions - End*/
 
-List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
-vars.putObject(&quot;sheet&quot;, sheet);
-
 
 int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+
+List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
+vars.putObject(&quot;sheet&quot;, sheet);
 
 if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	String CustomerWinLoss = &quot;${Customer Win Loss}&quot;;
