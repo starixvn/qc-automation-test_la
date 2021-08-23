@@ -407,7 +407,7 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Equivalent - PP</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[9]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[11]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -417,7 +417,27 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Equivalent - PP - Negative</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[9]/span</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[11]/span</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent - VGA" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Equivalent - VGA</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[10]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent - VGA - Negative" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Equivalent - VGA - Negative</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[10]/span</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -794,10 +814,10 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
 	                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
 	                    .execute();
-	}else if(&quot;${ProductName}&quot;==&quot;Saba.club&quot;){/* Saba.club */
+	}else if(&quot;${ProductName}&quot;==&quot;Vgaming&quot;){ /* Vgaming ,Saba.club */
 		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
 		String Turnover = &quot;${Turnover}&quot;;
-		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent - PP}&quot;,&quot;${Equivalent - PP - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
+		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent - VGA}&quot;,&quot;${Equivalent - VGA - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
 		String TotalTrans = &quot;${Total Trans}&quot;;
 		List&lt;ValueRange&gt; list = Arrays.asList(
            new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:L&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss,Equivalent)))
@@ -10380,7 +10400,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		       double tmpCustWL = Functions.ConvertStringToFloat(Specific_CustomerWinLoss) + Functions.ConvertStringToFloat(Specific_CustomerChargeComm);
 		       Specific_CustomerWinLoss = tmpCustWL.toString();
 		       break;
-		   case [&quot;Sportsbook&quot;, &quot;RNG Casino&quot;, &quot;Allbet&quot;, &quot;Pragmatic&quot;, &quot;Virtual Games&quot;, &quot;SG&quot;, &quot;AE Casino&quot;, &quot;Saba.club&quot;, &quot;Sports Lottery&quot;, &quot;Togel 4D&quot;, &quot;Vgaming&quot;]:
+		   case [&quot;Sportsbook&quot;, &quot;RNG Casino&quot;, &quot;Allbet&quot;, &quot;Pragmatic&quot;, &quot;Virtual Games&quot;, &quot;SG&quot;, &quot;AE Casino&quot;, &quot;Sports Lottery&quot;, &quot;Togel 4D&quot;, &quot;Vgaming&quot;]: // &quot;Saba.club&quot; terminated
 		   	  Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(11).toString();//get from Settlement Report -&gt; Equivalent 
 		       break
 		}
@@ -10793,7 +10813,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		       Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(51).toString(); //get from LPID
 		       //Specific_DiscountSB = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(46).toString(); //get from LPID
 		       break;
-		   case [&quot;RNG Casino&quot;, &quot;Allbet&quot;, &quot;Colossus Bets&quot;, &quot;Cash Out&quot;, &quot;Virtual Games&quot;, &quot;SG&quot;, &quot;AE Casino&quot;, &quot;Saba.club&quot;, &quot;Sports Lottery&quot;, &quot;Togel 4D&quot;, &quot;Vgaming&quot;]:      
+		   case [&quot;RNG Casino&quot;, &quot;Allbet&quot;, &quot;Colossus Bets&quot;, &quot;Cash Out&quot;, &quot;Virtual Games&quot;, &quot;SG&quot;, &quot;AE Casino&quot;, &quot;Sports Lottery&quot;, &quot;Togel 4D&quot;, &quot;Vgaming&quot;]: // &quot;Saba.club&quot; terminated
 		       Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(11).toString(); //get from Settlement Report
 		       break;
 		   case &quot;Pragmatic&quot;:
@@ -10847,7 +10867,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 				}
 		   	  	Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,LicensingFee,Specific_LicensingFee,FlagLicensingFee);
 		   	  	break;
-		   case [&quot;Pragmatic&quot;,&quot;Arcadia Gaming&quot;,&quot;Saba.club&quot;]:
+		   case [&quot;Pragmatic&quot;,&quot;Arcadia Gaming&quot;,&quot;Vgaming&quot;]: // &quot;Saba.club&quot; terminated
 		   		/*if (Functions.ConvertStringToFloat(Specific_LicensingFee,true) &gt; 0)
 				{ 
 					def Specific_LicensingFeePositive = Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(Specific_Prizes,true)).toString();
