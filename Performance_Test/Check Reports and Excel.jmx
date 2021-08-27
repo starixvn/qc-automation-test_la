@@ -65705,7 +65705,7 @@ def FailureMessage =&quot;&quot;
         </hashTree>
         <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Misc" enabled="true"/>
         <hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Platform Win Loss - Unused" enabled="false"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Platform Win Loss - Unused" enabled="true"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Platform Win Loss_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -67837,6 +67837,13 @@ def FailureMessage =&quot;&quot;
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
+                  <elementProp name="partyIds" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">284,14,20,148,281,558,316,459,15,95,458,467,542,117,43,552,114,395,374,46,143,92,240,89,236,265,93,285,39,186,44,48,42,18,267,253,19,55,136,348,167,379,380,33,288,70,158,275,556,59,447,551,61,530,260,60,586,41,72,482,572,233,124,65,345,426,68,287,575,67,391,506,326,377,471,34,249,600,142,403,408,487,573,24,296,405,494,568,74,58,246,319,220,346,364,223,396,218,457,271,462,512,241,593,427,35,370,310,436,367,291,524,347,338,428,244,76,350,165,557,97,115,273,525,538,256,217,383,283,419,322,304,576,365,517,495,168,358,337,222,448,449,292,268,81,318,62,381,258,127,424,336,277,71,330,286,505,169,38,73,362,560,263,235,456,166,80,36,411,549,320,417,606,384,501,446,79,536,544,157,146,581,588,354,422,82,484,605,343,413,150,91,37,78,83,598,587,425,490,251,371,66,461,31,360,485,499,162,488,340,445,64,317,420,388,473,323,555,440,483,503,491,88,478,96,502,421,47,329,361,460,513,486,569,259,545,578,356,230,516,75,589,390,410,423,84,77,85,561,257,86,400,352,496,604,404,339,237,270,301,357,475,248,306,433,430,250,262,151,584,69,432,599,401,312,500,438,29,601,522,518,185,254,585,228,300,497,431,416,299,171,194,602,510,531,369,508,335,402,63,393,280,532,264,429,534,308,53,514,594,315,90,303,305,407,442,351,547,570,472,553,504,546,590,539,533,554,574,567,580,577,535,466,550,464,439,455,454,498,541,579,595,582,583,463,289,23,279,342,415,571,302,56,597,382,437,368,17,307,295,387,334,294,412,331,153,332,101,398,247,309,414,327,100,276,313,26,441,481,49,509,87,394,366,521,489,314,261,272,22,479,529,52,537,406,16,355,293,311,252,353,418,333,154,282,476,477,45,375,54,435,397,434,170,21,238,389,559,596,443,344,507,373,234,99,480,359,349,27,40,386,378,341,376,363</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">partyIds</stringProp>
+                  </elementProp>
                 </collectionProp>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
@@ -67844,7 +67851,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
               <stringProp name="HTTPSampler.path">${glb_URLFolder}/LicenseeInformation/GetReports</stringProp>
-              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
               <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -67912,6 +67919,13 @@ def FailureMessage =&quot;&quot;
                     <stringProp name="Argument.value">false</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  </elementProp>
+                  <elementProp name="partyIds" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">284,14,20,148,281,558,316,459,15,95,458,467,542,117,43,552,114,395,374,46,143,92,240,89,236,265,93,285,39,186,44,48,42,18,267,253,19,55,136,348,167,379,380,33,288,70,158,275,556,59,447,551,61,530,260,60,586,41,72,482,572,233,124,65,345,426,68,287,575,67,391,506,326,377,471,34,249,600,142,403,408,487,573,24,296,405,494,568,74,58,246,319,220,346,364,223,396,218,457,271,462,512,241,593,427,35,370,310,436,367,291,524,347,338,428,244,76,350,165,557,97,115,273,525,538,256,217,383,283,419,322,304,576,365,517,495,168,358,337,222,448,449,292,268,81,318,62,381,258,127,424,336,277,71,330,286,505,169,38,73,362,560,263,235,456,166,80,36,411,549,320,417,606,384,501,446,79,536,544,157,146,581,588,354,422,82,484,605,343,413,150,91,37,78,83,598,587,425,490,251,371,66,461,31,360,485,499,162,488,340,445,64,317,420,388,473,323,555,440,483,503,491,88,478,96,502,421,47,329,361,460,513,486,569,259,545,578,356,230,516,75,589,390,410,423,84,77,85,561,257,86,400,352,496,604,404,339,237,270,301,357,475,248,306,433,430,250,262,151,584,69,432,599,401,312,500,438,29,601,522,518,185,254,585,228,300,497,431,416,299,171,194,602,510,531,369,508,335,402,63,393,280,532,264,429,534,308,53,514,594,315,90,303,305,407,442,351,547,570,472,553,504,546,590,539,533,554,574,567,580,577,535,466,550,464,439,455,454,498,541,579,595,582,583,463,289,23,279,342,415,571,302,56,597,382,437,368,17,307,295,387,334,294,412,331,153,332,101,398,247,309,414,327,100,276,313,26,441,481,49,509,87,394,366,521,489,314,261,272,22,479,529,52,537,406,16,355,293,311,252,353,418,333,154,282,476,477,45,375,54,435,397,434,170,21,238,389,559,596,443,344,507,373,234,99,480,359,349,27,40,386,378,341,376,363</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">partyIds</stringProp>
                   </elementProp>
                 </collectionProp>
               </elementProp>
