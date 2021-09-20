@@ -5159,7 +5159,8 @@ def FailureMessage =&quot;&quot;
 	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
-	&quot;ToDay&quot;:&quot;${YDay}&quot;&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;LicenseeStatusIds&quot;: &quot;1,2,3,4,5,6,999&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
@@ -5251,7 +5252,8 @@ def FailureMessage =&quot;&quot;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
-	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;&#xd;
+	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,&#xd;
+	&quot;LicenseeStatusIds&quot;: &quot;1,2,3,4,5,6,999&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
