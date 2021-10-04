@@ -10253,6 +10253,13 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">Year</stringProp>
                   </elementProp>
+                  <elementProp name="PreviousPeriodType" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">1</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">PreviousPeriodType</stringProp>
+                  </elementProp>
                 </collectionProp>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
