@@ -99,7 +99,7 @@ if (!book.equals(&quot;&quot;)) {
           <stringProp name="IncludeController.includepath">Check_Billing.jmx</stringProp>
         </IncludeController>
         <hashTree/>
-        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Flag Failed For Skype" enabled="true">
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Flag Failed For Skype" enabled="false">
           <stringProp name="cacheKey"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
@@ -126,6 +126,23 @@ if (!book.equals(&quot;&quot;)) {
 </stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223PostProcessor>
+        <hashTree/>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Flag Failed For Telegram" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">if(prev!=null){
+	if(prev.getErrorCount() != 0){
+		vars.put(&quot;glb_flagFailed&quot;,&quot;1&quot;)
+	}
+	for(def result in prev.getAssertionResults()) {
+		if(result.isFailure()) {
+			vars.put(&quot;glb_flagFailed&quot;,&quot;1&quot;)
+		}
+	}
+}</stringProp>
+        </JSR223PreProcessor>
         <hashTree/>
         <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Switch Controller - Telegram" enabled="true">
           <stringProp name="SwitchController.value">${glb_flagFailed}</stringProp>
