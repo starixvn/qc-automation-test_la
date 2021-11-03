@@ -21192,7 +21192,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Cash Out Win Loss" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Cash Out Win Loss" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Cash Out Win Loss_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -60584,7 +60584,7 @@ def FailureMessage =&quot;&quot;
                 <hashTree/>
               </hashTree>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Cash Out" enabled="true"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report - Cash Out" enabled="false"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Settlement Report_Submit_Cash Out" enabled="true">
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
