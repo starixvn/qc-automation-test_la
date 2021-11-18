@@ -49,3 +49,6 @@
 11-Jun-2021:
  - Update Platform Win Loss (Summary)
  - Integrate Win Loss By Product Billing Data
+
+18-Nov-21:
+ - Integrate Vendor Payment Report
