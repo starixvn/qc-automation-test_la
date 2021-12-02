@@ -2300,7 +2300,7 @@ def FailureMessage =&quot;&quot;
 	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
 	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
-	&quot;PartyIds&quot;:&quot;14,95&quot;,	&#xd;
+	&quot;PartyIds&quot;:&quot;618&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
@@ -2553,7 +2553,7 @@ def FailureMessage =&quot;&quot;
 	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
 	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
-	&quot;PartyIds&quot;:&quot;14,95&quot;,	&#xd;
+	&quot;PartyIds&quot;:&quot;618&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
@@ -2711,7 +2711,9 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d);	
+Row row = book.getSheetAt(0).getRow(d-1);	
+
+log.info &quot;d: &quot; + d.toString()
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -2726,6 +2728,10 @@ Row row = book.getSheetAt(0).getRow(d);
 	String Excel_OddsSpreadCost = row.getCell(12).toString();
 	float Excel_MarginF = new BigDecimal(row.getCell(13).toString()).floatValue();
 	String Excel_Margin = (Excel_MarginF * 100).toString();
+
+	log.info &quot;Excel_TotalTrans: &quot; + Excel_TotalTrans
+	
+	log.info &quot;Excel_Margin: &quot; + Excel_Margin
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
@@ -2761,6 +2767,8 @@ Row row = book.getSheetAt(0).getRow(d);
 	log.info &quot;Test1---------------------------&quot; + PercentLicenseeWL;
 	def resMargin = &quot;${Margin}&quot;;
 	def Margin = resMargin.replace(&apos;%&apos;,&apos;&apos;);
+
+	log.info &quot;Margin: &quot; + Margin
 	
 String getNotEmptyDataBetween2String(String str1, String str2) { 
    if(str1==&quot;&quot;){
@@ -2827,10 +2835,10 @@ def FailureMessage =&quot;&quot;
 	&quot;DateOption&quot;: &quot;0&quot;,&#xd;
 	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
 	&quot;GroupByType&quot;:&quot;1&quot;,&#xd;
-	&quot;FromDate&quot;:&quot;05/01/2021&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;05/31/2021&quot;,&#xd;
+	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
-	&quot;PartyIds&quot;:&quot;151&quot;,	&#xd;
+	&quot;PartyIds&quot;:&quot;14&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
@@ -3058,10 +3066,10 @@ def FailureMessage =&quot;&quot;
 	&quot;BetType&quot;:&quot;0&quot;,&#xd;
 	&quot;CurrencyIds&quot;:&quot;&quot;,&#xd;
 	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
-	&quot;FromDate&quot;:&quot;05/01/2021&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;05/31/2021&quot;,&#xd;
+	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
-	&quot;PartyIds&quot;:&quot;151&quot;,	&#xd;
+	&quot;PartyIds&quot;:&quot;14&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
@@ -3365,14 +3373,14 @@ def FailureMessage =&quot;&quot;
                   <elementProp name="FromDate" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">FromDate</stringProp>
-                    <stringProp name="Argument.value">05/01/2021</stringProp>
+                    <stringProp name="Argument.value">${glb_FirstDateofPrevMonth_2}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
                   <elementProp name="ToDate" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">ToDate</stringProp>
-                    <stringProp name="Argument.value">05/31/2021</stringProp>
+                    <stringProp name="Argument.value">${glb_LastDateofPrevMonth_2}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
@@ -3421,7 +3429,7 @@ def FailureMessage =&quot;&quot;
                   <elementProp name="SelectedPartyId" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">SelectedPartyId</stringProp>
-                    <stringProp name="Argument.value">151</stringProp>
+                    <stringProp name="Argument.value">14</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
@@ -3483,12 +3491,12 @@ def FailureMessage =&quot;&quot;
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
 	&quot;DateOption&quot;:&quot;0&quot;,&#xd;
-	&quot;PartyIds&quot;:151,&#xd;
+	&quot;PartyIds&quot;:14,&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
 	&quot;BaseCurrencyName&quot;:&quot;EUR&quot;,&#xd;
 	&quot;CurrencyIds&quot;:&quot;&quot;,&#xd;
-	&quot;FromDate&quot;:&quot;05/01/2021&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;05/31/2021&quot;,&#xd;
+	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
@@ -3563,10 +3571,10 @@ def FailureMessage =&quot;&quot;
 	&quot;CurrencyName&quot;:&quot;All&quot;,&#xd;
 	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
 	&quot;ExcludeTest&quot;:true,&#xd;
-	&quot;FromDate&quot;:&quot;05/01/2021&quot;,&#xd;
-	&quot;ToDate&quot;:&quot;05/31/2021&quot;,&#xd;
+	&quot;FromDate&quot;:&quot;${glb_FirstDateofPrevMonth_2}&quot;,&#xd;
+	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;IsConvert&quot;:true,&#xd;
-	&quot;PartyIds&quot;:151,	&#xd;
+	&quot;PartyIds&quot;:14,	&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
@@ -3724,7 +3732,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-1);	
+Row row = book.getSheetAt(0).getRow(d);	
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(1).toString();
@@ -3839,14 +3847,14 @@ def FailureMessage =&quot;&quot;
                   <elementProp name="FromDate" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">FromDate</stringProp>
-                    <stringProp name="Argument.value">5%2F1%2F2020+12%3A00%3A00+AM</stringProp>
+                    <stringProp name="Argument.value">${glb_FirstDateofPrevMonth_2}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
                   <elementProp name="ToDate" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">ToDate</stringProp>
-                    <stringProp name="Argument.value">5%2F31%2F2020+12%3A00%3A00+AM</stringProp>
+                    <stringProp name="Argument.value">${glb_LastDateofPrevMonth_2}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
@@ -30884,9 +30892,9 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="RNG War Win Loss" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Funky Games Win Loss" enabled="true"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_RNG War Win Loss_Load" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Funky Games Win Loss_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -30894,7 +30902,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/RNGWar/Main</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/FunkyGames/Main</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -30954,7 +30962,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_RNG War Win Loss_Submit_Group By Licensee" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Funky Games Win Loss_Submit_Group By Licensee" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -30977,7 +30985,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/RNGWar/GetRNGWarReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/FunkyGames/GetFunkyGamesReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -31109,7 +31117,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_RNG War Win Loss_Export_Group By Licensee" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Funky Games Win Loss_Export_Group By Licensee" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -31132,7 +31140,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/RNGWar/ExportExcelGroup</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/FunkyGames/ExportExcelGroup</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -31202,7 +31210,7 @@ def FailureMessage =&quot;&quot;
               </ResultSaver>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="RNG War WL - Compare Data with Web Report" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Funky Games WL - Compare Data with Web Report" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -31210,7 +31218,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/RNGWar/Main</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/FunkyGames/Main</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -31325,98 +31333,7 @@ def FailureMessage =&quot;&quot;
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="RNG War WL - Compare Data with Web Report" enabled="false">
-              <stringProp name="scriptLanguage">groovy</stringProp>
-              <stringProp name="parameters"></stringProp>
-              <stringProp name="filename"></stringProp>
-              <stringProp name="cacheKey"></stringProp>
-              <stringProp name="script">&quot;If it fails please check JSR223 Assertion for more details !!!&quot;</stringProp>
-            </JSR223Sampler>
-            <hashTree>
-              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
-                <stringProp name="scriptLanguage">groovy</stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="cacheKey"></stringProp>
-                <stringProp name="script">import org.apache.poi.ss.usermodel.*;
-import java.io.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.apache.jmeter.services.FileServer;
-
-def path = FileServer.getFileServer().getBaseDir();
-/*Load Common Functions - Start*/
-ClassLoader parent = getClass().getClassLoader();
-GroovyClassLoader loader = new GroovyClassLoader(parent);
-Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
-GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
-/*Load Common Functions - End*/
-def pathReport =  path+&quot;/Excel Report/RNG War Win Loss.xlsx&quot;;
-def pathExist = new File(pathReport)
-def book;
-for(def i=0;i&lt;10;i++)
-{
-	if(pathExist.exists()){
-		book = WorkbookFactory.create(new File(pathReport));	
-		break;
-	} else {sleep(1000)}
-}
-
-int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
-
-//Get data from Excel file
-	String Excel_TotalTrans = row.getCell(3).toString();
-	String Excel_Turnover = row.getCell(4).toString();
-	String Excel_CustomerWL = row.getCell(5).toString();
-	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_LicensingFee = row.getCell(7).toString();
-	String Excel_PaytoSupplier = row.getCell(8).toString();
-	String Excel_NetIncome = row.getCell(9).toString();
-
-//Get data from Web
-	String TotalTrans = vars.get(&quot;Total Trans&quot;);
-	String Turnover = vars.get(&quot;Turnover&quot;);
-	String CustomerWL = vars.get(&quot;Customer Win Loss&quot;);
-	String LicenseeWL = vars.get(&quot;Licensee Win Loss&quot;);
-	String LicensingFee = vars.get(&quot;Licensing fee&quot;);
-	String PaytoSupplier = vars.get(&quot;Pay to Supplier&quot;);
-	String NetIncome = vars.get(&quot;Net Income&quot;);
-
-//Compare data between Excel and Web
-def FailureMessage =&quot;&quot;
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&gt;0.1){
-		FailureMessage+=&quot;Failure!\nTotal Transactions of Excel: &quot;+Excel_TotalTrans +&quot;\nTotal Transactions of Report: &quot;+TotalTrans;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_Turnover) - Functions.ConvertStringToFloat(Turnover))&gt;0.1){
-		FailureMessage+=&quot;Failure!\nTurnover of Excel: &quot;+Excel_Turnover +&quot;\nTurnover of Report: &quot;+Turnover;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_CustomerWL) - Functions.ConvertStringToFloat(CustomerWL))&gt;0.1){
-		FailureMessage+=&quot;Failure!\nCustomerWL of Excel: &quot;+Excel_CustomerWL +&quot;\nCustomerWL of Report: &quot;+CustomerWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
-		FailureMessage+=&quot;Failure!\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicensingFee) - Functions.ConvertStringToFloat(LicensingFee))&gt;0.1){
-		FailureMessage+=&quot;Failure!\nLicensing Fee of Excel: &quot;+Excel_LicensingFee +&quot;\nLicensing Fee of Report: &quot;+LicensingFee;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_PaytoSupplier) - Functions.ConvertStringToFloat(PaytoSupplier))&gt;0.1){
-		FailureMessage+=&quot;Failure!\nPay to Supplier of Excel: &quot;+Excel_PaytoSupplier +&quot;\nPay to Supplier of Report: &quot;+PaytoSupplier;
-	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_NetIncome) - Functions.ConvertStringToFloat(NetIncome))&gt;0.1){
-		FailureMessage+=&quot;Failure!\nNet Income of Excel: &quot;+Excel_NetIncome +&quot;\nNet Income of Report: &quot;+NetIncome;
-	}
-	if(FailureMessage!=&quot;&quot;){
-		AssertionResult.setFailure(true);
-		AssertionResult.setFailureMessage(FailureMessage);
-	}
-</stringProp>
-              </JSR223Assertion>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_RNG War Win Loss_Submit_Group By Date" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Funky Games Win Loss_Submit_Group By Date" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -31439,7 +31356,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/RNGWar/GetRNGWarReport</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/FunkyGames/GetFunkyGamesReport</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -31501,7 +31418,7 @@ def FailureMessage =&quot;&quot;
               </ResponseAssertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_RNG War Win Loss_Export_Group By Date" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Funky Games Win Loss_Export_Group By Date" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -31524,7 +31441,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/RNGWar/ExportExcelDate</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/FunkyGames/ExportExcelDate</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

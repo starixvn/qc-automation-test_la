@@ -52,3 +52,7 @@
 
 18-Nov-21:
  - Integrate Vendor Payment Report
+
+2-Dec-2021:
+ - Change Name RNG War to Funky Games
+ - Update OddsSpread column 
