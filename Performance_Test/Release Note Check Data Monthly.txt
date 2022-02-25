@@ -106,3 +106,6 @@
 
 6-Aug-2021:
  - Intergrate PG Soft, Joker, WM, GDG, Habanero, CG, Vgaming, BG
+
+25-Feb-2022:
+ - Update Contribution, Jackpot Prize for SG
