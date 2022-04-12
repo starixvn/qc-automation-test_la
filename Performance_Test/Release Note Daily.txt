@@ -59,3 +59,6 @@
 
 25-Feb-2022:
  - Update Contribution, Jackpot Prize for SG
+
+12-Apr-2022:
+ - Integrate Sponsorship
