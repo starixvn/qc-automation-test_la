@@ -62,3 +62,9 @@
 
 12-Apr-2022:
  - Integrate Sponsorship
+
+19-Apr-2022:
+ - Integrate Allbet Promotion
+
+20-Apr-2022:
+ - Integrate Licensee Contribution, Full Contribution for PP Win Loss (GMT +0), SG Win Loss (GMT+8) 	
