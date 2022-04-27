@@ -109,3 +109,6 @@
 
 25-Feb-2022:
  - Update Contribution, Jackpot Prize for SG
+
+27-Apr-2022:
+ - Integrate Allbet Promotion

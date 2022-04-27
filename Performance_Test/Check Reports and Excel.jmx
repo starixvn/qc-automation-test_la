@@ -4651,8 +4651,8 @@ Row row = book.getSheetAt(0).getRow(d);
 	String Excel_NumberGame = 	(row.getCell(4).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(4).toString() ;
 	String Excel_BA = 			(row.getCell(5).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(5).toString() ;
 	String Excel_VirtualSports = 	(row.getCell(7).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(7).toString() ;
-	String Excel_RNGCasino = 	(row.getCell(8).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(8).toString() ;
-	String Excel_RNGKeno = 		(row.getCell(9).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(9).toString() ;
+	String Excel_SabaCasino = 	(row.getCell(8).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(8).toString() ; // RNGCasino
+	String Excel_RNGKeno = 		(row.getCell(9).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(9).toString() ; 
 	String Excel_AGCasino = 		(row.getCell(10).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(10).toString() ;
 	String Excel_GoldDeluxe = 	(row.getCell(11).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(11).toString() ;
 	String Excel_MacauGames = 	(row.getCell(15).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(15).toString() ;
@@ -4690,7 +4690,7 @@ def ProductList = []
 	def GrandTotal_NumberGame 	= &apos;0&apos;
 	def GrandTotal_BA 		 	= &apos;0&apos;
 	def GrandTotal_VirtualSports 	= &apos;0&apos;
-	def GrandTotal_RNGCasino 	= &apos;0&apos;
+	def GrandTotal_SabaCasino 	= &apos;0&apos;
 	def GrandTotal_RNGKeno 		= &apos;0&apos;
 	def GrandTotal_AGCasino 		= &apos;0&apos;
 	def GrandTotal_GoldDeluxe 	= &apos;0&apos;
@@ -4739,8 +4739,8 @@ for(def i=0;i&lt;ProductList.size();i++){
 	if(ProductList.get(i).toString()==&apos;Virtual Sports&apos;){
 		GrandTotal_VirtualSports = (GrandTotal.get(i).toString())
 	}
-	if(ProductList.get(i).toString()==&apos;RNG Casino&apos;){
-		GrandTotal_RNGCasino = (GrandTotal.get(i).toString())
+	if(ProductList.get(i).toString()==&apos;Saba Casino&apos;){
+		GrandTotal_SabaCasino = (GrandTotal.get(i).toString())
 	}	
 	if(ProductList.get(i).toString()==&apos;RNG Keno&apos;){
 		GrandTotal_RNGKeno = (GrandTotal.get(i).toString())
@@ -4842,8 +4842,8 @@ def FailureMessage =&quot;&quot;
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_VirtualSports) - Functions.ConvertStringToFloat(GrandTotal_VirtualSports))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_VirtualSports of Excel: &quot;+Excel_VirtualSports +&quot;\nGrandTotal_VirtualSports of Report: &quot;+GrandTotal_VirtualSports;
 	}
-	if(Math.abs(Functions.ConvertStringToFloat(Excel_RNGCasino) - Functions.ConvertStringToFloat(GrandTotal_RNGCasino))&gt;0.1){
-		FailureMessage+=&quot;\nGrandTotal_RNGCasino of Excel: &quot;+Excel_RNGCasino +&quot;\nGrandTotal_RNGCasino of Report: &quot;+GrandTotal_RNGCasino;
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_SabaCasino) - Functions.ConvertStringToFloat(GrandTotal_SabaCasino))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_SabaCasino of Excel: &quot;+Excel_SabaCasino +&quot;\nGrandTotal_SabaCasino of Report: &quot;+GrandTotal_SabaCasino;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_RNGKeno) - Functions.ConvertStringToFloat(GrandTotal_RNGKeno))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_RNGKeno of Excel: &quot;+Excel_RNGKeno +&quot;\nGrandTotal_RNGKeno of Report: &quot;+GrandTotal_RNGKeno;
