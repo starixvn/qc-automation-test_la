@@ -67,4 +67,7 @@
  - Integrate Allbet Promotion
 
 20-Apr-2022:
- - Integrate Licensee Contribution, Full Contribution for PP Win Loss (GMT +0), SG Win Loss (GMT+8) 	
+ - Integrate Licensee Contribution, Full Contribution for PP Win Loss (GMT +0), SG Win Loss (GMT+8) 
+
+10-May-2022:
+ - Change Name RNG Casino to Saba Casino	
