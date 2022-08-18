@@ -1,0 +1,1367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.3 r1808647">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="W_Invoice" enabled="true">
+      <stringProp name="TestPlan.comments">This test plan was created by the BlazeMeter converter v.3.1.23. Please contact support@blazemeter.com for further support.</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Test Fragment" enabled="false"/>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Connect Google SpreadSheet" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.services.sheets.v4.SheetsScopes;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.sheets.v4.Sheets;
+import com.google.api.services.sheets.v4.SheetsRequestInitializer;
+
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+
+log.info(Paths.get(path+&quot;/client_secret.json&quot;).toString())
+GoogleCredential credential = GoogleCredential.fromStream(Files.newInputStream(Paths.get(path+&quot;/client_secret.json&quot;))).createScoped(Arrays.asList(SheetsScopes.DRIVE));
+
+Sheets.Spreadsheets spreadsheets = new Sheets.Builder(GoogleNetHttpTransport.newTrustedTransport(),JacksonFactory.getDefaultInstance(),credential).setApplicationName(&quot; &quot;).build().spreadsheets();
+                    
+vars.putObject(&quot;spreadsheets&quot;, spreadsheets);
+
+List&lt;List&lt;Object&gt;&gt; sheet = spreadsheets.values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Invoice&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();  
+
+                                    
+vars.putObject(&quot;sheet&quot;, sheet);
+//log.info(&quot;william --- &quot;+vars.getObject(&quot;sheet&quot;).get(0).toString());
+
+
+
+/*String[] str;
+str = vars.getObject(&quot;sheet&quot;).get(0).toString().split(&apos;,&apos;);
+for( String values : str )
+      log.info(&quot;william --- &quot;+values);
+*/</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller" enabled="true">
+          <stringProp name="WhileController.condition">${__javaScript(&quot;${stopWhile}&quot; != &quot;OK&quot;)}</stringProp>
+        </WhileController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+            <stringProp name="CounterConfig.start">1</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">counter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Get Setting From Google SpreadSheet" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey"></stringProp>
+            <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+
+int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+log.info(&quot;winston : &quot;+i.toString());
+vars.put(&quot;GoogleSheetHeader&quot;, vars.getObject(&quot;sheet&quot;).get(0).toString());
+
+if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {	
+     vars.put(&quot;Report&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(0).toString());
+     vars.put(&quot;Licensee&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(1).toString());
+     vars.put(&quot;PartyId&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(2).toString());
+	vars.put(&quot;FromDay&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(3).toString());
+     vars.put(&quot;ToDay&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(4).toString());
+     vars.put(&quot;Month&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(5).toString());
+     vars.put(&quot;Year&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(6).toString());
+     vars.put(&quot;InvoiceTypeShorten&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(7).toString());
+     vars.put(&quot;InvoiceTypeId&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(8).toString());
+     vars.put(&quot;BaseCurrencyName&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(10).toString());
+     vars.put(&quot;BaseCurrency&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(11).toString());
+	vars.put(&quot;BillingCycle&quot;, vars.getObject(&quot;sheet&quot;).get(i).get(12).toString());
+}
+
+
+/*
+	List&lt;ValueRange&gt; list = Arrays.asList(
+      new ValueRange().setRange(&quot;Licensees!BO&quot;).setValues(Arrays.asList(Arrays.asList(&quot;TRUE&quot;)))
+      );     
+
+	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
+                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
+                    .execute();
+*/</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Multiple Invoice Software Fee" enabled="true">
+            <stringProp name="IfController.condition">(&quot;${Report}&quot;==&quot;Multiple Invoice Software Fee&quot;)</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${Report}_${Licensee}_${BillingCycle}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&quot;invoiceGeneratingItems&quot;:[{&quot;InvoiceNumber&quot;:9999,&quot;PartyId&quot;:&quot;${PartyId}&quot;,&quot;InvoiceTypeShorten&quot;:&quot;S&quot;}],&quot;year&quot;:&quot;${Year}&quot;,&quot;month&quot;:&quot;${Month}&quot;,&quot;billerId&quot;:&quot;221&quot;}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/Invoice/MultipleInvoicesGeneration/GetTemporaryInvoices</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">*/*</stringProp>
+                  </elementProp>
+                  <elementProp name="X-CSRF-Token" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">WchfyDrNtUBjEgK7BWWzcejxkMam8rQnD-knzAHOE9hiQt2nGgedmqpNCXdHilQ2IjXSw2TqMm5zxMon4YvRqMcNd95ZQJ-UOVx1M3TVz4F7knQK1PS4siBLhH9-RgPy0</stringProp>
+                  </elementProp>
+                  <elementProp name="X-Requested-With" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total_Multiple_Invoice_Fee" enabled="true">
+                <stringProp name="XPathExtractor.default">Multiple_Invoice_Total_Amount is not found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total_Multiple_Invoice_Fee</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(@class,&apos;total-amount&apos;)]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Verify data as expectation" enabled="true">
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+//Get data from Web
+	String Total_Multiple_Invoice_Fee = vars.get(&quot;Total_Multiple_Invoice_Fee&quot;);
+
+String getNotEmptyDataBetween2String(String str1, String str2) { 
+   if(str1==&quot;&quot;){
+   	return str2;
+   }else{
+   	return str1;
+   }
+}
+	def Licensee = vars.get(&quot;Licensee&quot;);
+	log.info Licensee + &quot; Total_Multiple_Invoice_Fee: &quot;+ Total_Multiple_Invoice_Fee
+//Get Index of Google Sheet Data Row that need to compare with
+	int DataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Multiple Invoice Software Fee, ${Licensee}, ${PartyId}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			DataRowIndex = j;
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			break;
+		}
+      }
+//	log.info &quot;RowData: &quot; + RowData.toString();
+	log.info &quot;strCompareDataWithReport: &quot; + strCompareDataWithReport.toString();
+	
+//Get Data from Google Sheet
+      if(DataRowIndex&gt;0){
+      	String GSheet_TotalFee	= vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(9).toString();
+
+	//Compare data between Google Sheet and Web
+	def FailureMessage =&quot;&quot;
+		if(Math.abs(Functions.ConvertStringToFloat(GSheet_TotalFee) - Functions.ConvertStringToFloat(Total_Multiple_Invoice_Fee))&gt;0.1){
+			FailureMessage+=&quot;\nTotal Fee on Google Sheet: &quot;+GSheet_TotalFee +&quot;\nTotal Multiple Invoice Fee on Report: &quot;+Total_Multiple_Invoice_Fee;
+		}
+		if(FailureMessage!=&quot;&quot;){
+			AssertionResult.setFailure(true);
+			AssertionResult.setFailureMessage(FailureMessage);
+		}
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Multiple Invoice Rebate" enabled="true">
+            <stringProp name="IfController.condition">(&quot;${Report}&quot;==&quot;Multiple Invoice Rebate&quot;)</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${Report}_${Licensee}_${BillingCycle}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&quot;invoiceGeneratingItems&quot;:[{&quot;InvoiceNumber&quot;:9999,&quot;PartyId&quot;:&quot;${PartyId}&quot;,&quot;InvoiceTypeShorten&quot;:&quot;R&quot;}],&quot;year&quot;:&quot;${Year}&quot;,&quot;month&quot;:&quot;${Month}&quot;,&quot;billerId&quot;:&quot;221&quot;}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/Invoice/MultipleInvoicesGeneration/GetTemporaryInvoices</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">*/*</stringProp>
+                  </elementProp>
+                  <elementProp name="X-CSRF-Token" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">WchfyDrNtUBjEgK7BWWzcejxkMam8rQnD-knzAHOE9hiQt2nGgedmqpNCXdHilQ2IjXSw2TqMm5zxMon4YvRqMcNd95ZQJ-UOVx1M3TVz4F7knQK1PS4siBLhH9-RgPy0</stringProp>
+                  </elementProp>
+                  <elementProp name="X-Requested-With" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total_Multiple_Invoice_Rebate" enabled="true">
+                <stringProp name="XPathExtractor.default">Multiple_Invoice_Total_Amount is not found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total_Multiple_Invoice_Rebate</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Testing Biller&apos;)]/following::td[5]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total_Multiple_Invoice_Rebate - Negative" enabled="true">
+                <stringProp name="XPathExtractor.default">Multiple_Invoice_Total_Amount is not found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total_Multiple_Invoice_Rebate - Negative</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Testing Biller&apos;)]/following::td[5]/span</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Verify data as expectation" enabled="true">
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+//Get data from Web
+	String Total_Multiple_Invoice_RebateP = vars.get(&quot;Total_Multiple_Invoice_Rebate&quot;);
+	String Total_Multiple_Invoice_RebateN = vars.get(&quot;Total_Multiple_Invoice_Rebate - Negative&quot;);
+	String Total_Multiple_Invoice_Rebate = getNotEmptyDataBetween2String(&quot;${Total_Multiple_Invoice_RebateP}&quot;,&quot;${Total_Multiple_Invoice_RebateN}&quot;);
+
+String getNotEmptyDataBetween2String(String str1, String str2) { 
+   if(str1==&quot;&quot;){
+   	return str2;
+   }else{
+   	return str1;
+   }
+}
+	def Licensee = vars.get(&quot;Licensee&quot;);
+	log.info Licensee + &quot; Total_Multiple_Invoice_Rebate: &quot;+ Total_Multiple_Invoice_Rebate
+//Get Index of Google Sheet Data Row that need to compare with
+	int DataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Multiple Invoice Rebate, ${Licensee}, ${PartyId}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			DataRowIndex = j;
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			break;
+		}
+      }
+//	log.info &quot;RowData: &quot; + RowData.toString();
+	log.info &quot;strCompareDataWithReport: &quot; + strCompareDataWithReport.toString();
+	
+//Get Data from Google Sheet
+      if(DataRowIndex&gt;0){
+      	String GSheet_TotalFee	= vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(9).toString();
+
+	//Compare data between Google Sheet and Web
+	def FailureMessage =&quot;&quot;
+		if(Math.abs(Functions.ConvertStringToFloat(GSheet_TotalFee) - Functions.ConvertStringToFloat(Total_Multiple_Invoice_Rebate))&gt;0.1){
+			FailureMessage+=&quot;\nTotal Fee on Google Sheet: &quot;+GSheet_TotalFee +&quot;\nTotal Multiple Invoice Rebate on Report: &quot;+Total_Multiple_Invoice_Rebate;
+		}
+		if(FailureMessage!=&quot;&quot;){
+			AssertionResult.setFailure(true);
+			AssertionResult.setFailureMessage(FailureMessage);
+		}
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Individual Invoice Software Fee" enabled="true">
+            <stringProp name="IfController.condition">(&quot;${Report}&quot;==&quot;Individual Invoice Software Fee&quot;)</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${Report}_${Licensee}_${BillingCycle}_Get_Product_Code" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/Invoice/CreateInvoice/GetInvoiceTypeGroups?BillerId=221&amp;PayerId=${PartyId}</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">__RequestVerificationToken</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="ProductCode" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">ProductCode</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$..InvoiceTypeInfos..ProductCode</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">-1</stringProp>
+                <boolProp name="JSONPostProcessor.compute_concat">true</boolProp>
+                <stringProp name="JSONPostProcessor.defaultValues">ProductCode is not found</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${Report}_${Licensee}_${BillingCycle}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;BillerId&quot;:221,&#xd;
+	&quot;BillerName&quot;:&quot;Testing Biller&quot;,&#xd;
+	&quot;PartyId&quot;:&quot;${PartyId}&quot;,&#xd;
+	&quot;BrandName&quot;:&quot;${Licensee}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${Month}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FromDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${ToDay}&quot;,&#xd;
+	&quot;ProductCodes&quot;:&quot;${ProductCode_ALL}&quot;,&#xd;
+	&quot;InvoiceTypeId&quot;:1,&#xd;
+	&quot;IsSeparateProduct&quot;:false,&#xd;
+	&quot;InvoiceLanguage&quot;: &quot;en-US&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/Invoice/CreateInvoice/GenerateAmount</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">__RequestVerificationToken</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total_Individual_Invoice_Fee" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total_Individual_Invoice_Fee</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//span[contains(text(),&apos;TOTAL&apos;)]/following::td[1]/span[2]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Verify data as expectation" enabled="true">
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+//////Get data from Web
+	String Total_Individual_Invoice_Fee = vars.get(&quot;Total_Individual_Invoice_Fee&quot;);
+
+	String getNotEmptyDataBetween2String(String str1, String str2) { 
+	   if(str1==&quot;&quot;){
+	   	return str2;
+	   }else{
+	   	return str1;
+	   }
+	}
+	def Licensee = vars.get(&quot;Licensee&quot;);
+	log.info Licensee + &quot; Total_Individual_Invoice_Fee: &quot;+ Total_Individual_Invoice_Fee
+	
+//////Get Index of Google Sheet Data Row that need to compare with
+	int DataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Individual Invoice Software Fee, ${Licensee}, ${PartyId}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			DataRowIndex = j;
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			break;
+		}
+      }
+//	log.info &quot;RowData: &quot; + RowData.toString();
+	////Get Data from Google Sheet
+      if(DataRowIndex&gt;0){
+      	String GSheet_TotalFee	= vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(9).toString();
+
+	////Compare data between Google Sheet and Web
+	def FailureMessage =&quot;&quot;
+		if(Math.abs(Functions.ConvertStringToFloat(GSheet_TotalFee) - Functions.ConvertStringToFloat(Total_Individual_Invoice_Fee))&gt;0.1){
+			FailureMessage+=&quot;\nTotal Fee on Google Sheet: &quot;+GSheet_TotalFee +&quot;\nTotal Individual Invoice Fee on Report: &quot;+Total_Individual_Invoice_Fee;
+		}
+		if(FailureMessage!=&quot;&quot;){
+			AssertionResult.setFailure(true);
+			AssertionResult.setFailureMessage(FailureMessage);
+		}
+	}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Individual Invoice Rebate" enabled="true">
+            <stringProp name="IfController.condition">(&quot;${Report}&quot;==&quot;Individual Invoice Rebate&quot;)</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${Report}_${Licensee}_${BillingCycle}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;BillerId&quot;:221,&#xd;
+	&quot;BillerName&quot;:&quot;Testing Biller&quot;,&#xd;
+	&quot;PartyId&quot;:&quot;${PartyId}&quot;,&#xd;
+	&quot;BrandName&quot;:&quot;${Licensee}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${Month}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FromDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${ToDay}&quot;,&#xd;
+	&quot;ProductCodes&quot;:&quot;SB,NG,BA,LC,VS,CS,KN,AGC,GD,BT,MGCLC,MGCRNG,CB,AB,VB,NG2,FW,CO,VS2,LT,BF,BX,PP,PG,CC,SG,SPR,VRG,SAG,TG,SBC,I4D,SXG,IBCLC,BBIN,PGS,JK,BGG,GDG,MXG,HB,CG,PPL,VGA,SLT&quot;,&#xd;
+	&quot;InvoiceTypeId&quot;:3,&#xd;
+	&quot;IsSeparateProduct&quot;:false,&#xd;
+	&quot;InvoiceLanguage&quot;: &quot;en-US&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/Invoice/CreateInvoice/GenerateAmount</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">__RequestVerificationToken</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total_Individual_Invoice_Rebate" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total_Individual_Invoice_Rebate</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//span[contains(text(),&apos;TOTAL&apos;)]/following::td[1]/span[2]/span</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Verify data as expectation" enabled="true">
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+//////Get data from Web
+	String Total_Individual_Invoice_Rebate = vars.get(&quot;Total_Individual_Invoice_Rebate&quot;);
+
+	String getNotEmptyDataBetween2String(String str1, String str2) { 
+	   if(str1==&quot;&quot;){
+	   	return str2;
+	   }else{
+	   	return str1;
+	   }
+	}
+	def Licensee = vars.get(&quot;Licensee&quot;);
+	log.info Licensee + &quot; Total_Individual_Invoice_Rebate: &quot;+ Total_Individual_Invoice_Rebate
+	
+//////Get Index of Google Sheet Data Row that need to compare with
+	int DataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Individual Invoice Rebate, ${Licensee}, ${PartyId}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			DataRowIndex = j;
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			break;
+		}
+      }
+//	log.info &quot;RowData: &quot; + RowData.toString();
+	////Get Data from Google Sheet
+      if(DataRowIndex&gt;0){
+      	String GSheet_TotalFee	= vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(9).toString();
+
+	////Compare data between Google Sheet and Web
+	def FailureMessage =&quot;&quot;
+		if(Math.abs(Functions.ConvertStringToFloat(GSheet_TotalFee) - Functions.ConvertStringToFloat(Total_Individual_Invoice_Rebate))&gt;0.1){
+			FailureMessage+=&quot;\nTotal Fee on Google Sheet: &quot;+GSheet_TotalFee +&quot;\nTotal Individual Invoice Rebate on Report: &quot;+Total_Individual_Invoice_Rebate;
+		}
+		if(FailureMessage!=&quot;&quot;){
+			AssertionResult.setFailure(true);
+			AssertionResult.setFailureMessage(FailureMessage);
+		}
+	}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="LPID" enabled="true">
+            <stringProp name="IfController.condition">(&quot;${Report}&quot;==&quot;LPID&quot;)</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${Report}_${Licensee}_${BillingCycle}" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="BaseCurrency" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${BaseCurrency}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">BaseCurrency</stringProp>
+                  </elementProp>
+                  <elementProp name="BaseCurrencyName" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${BaseCurrencyName}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">BaseCurrencyName</stringProp>
+                  </elementProp>
+                  <elementProp name="Currency" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">Currency</stringProp>
+                  </elementProp>
+                  <elementProp name="CurrencyName" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">All</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">CurrencyName</stringProp>
+                  </elementProp>
+                  <elementProp name="DrawFilter" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">1</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">DrawFilter</stringProp>
+                  </elementProp>
+                  <elementProp name="FromDay" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${FromDay}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">FromDay</stringProp>
+                  </elementProp>
+                  <elementProp name="IsConvert" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">true</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">IsConvert</stringProp>
+                  </elementProp>
+                  <elementProp name="LicenseePaying" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">LicenseePaying</stringProp>
+                  </elementProp>
+                  <elementProp name="Month" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${Month}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">Month</stringProp>
+                  </elementProp>
+                  <elementProp name="PartyIds" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${PartyId}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">PartyIds</stringProp>
+                  </elementProp>
+                  <elementProp name="ProductCodes" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">SB,NG,BA,LC,VS,CS,KN,AGC,VG,GD,MGCLC,MGCRNG,VB,AB,FW,VS2,LT,BX,PP,CC,SG,VRG,SAG,I4D,TG,SBC,SXG,PGS,JK,WM,VS3,GDG,BGG,MXG,PPL,HB,CG,SLT,VGA,AP,APM,FGGL</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">ProductCodes</stringProp>
+                  </elementProp>
+                  <elementProp name="SortColumn" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">SortColumn</stringProp>
+                  </elementProp>
+                  <elementProp name="SortMethod" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">SortMethod</stringProp>
+                  </elementProp>
+                  <elementProp name="ToDay" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${ToDay}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">ToDay</stringProp>
+                  </elementProp>
+                  <elementProp name="Year" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${Year}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">Year</stringProp>
+                  </elementProp>
+                  <elementProp name="LicenseeStatusIds" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">1,2,3,4,5,6,999</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">LicenseeStatusIds</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/PerformanceDetail/Main</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/x-www-form-urlencoded; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Verify data as expectation" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+import groovy.json.JsonSlurper;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+//////Get data from Web
+	def jsonSlurper = new JsonSlurper();
+	def response = jsonSlurper.parseText(prev.getResponseDataAsString());
+		
+	String TotalLicensingFee = response.GrandTotal.TotalLicensingFee.toString();
+
+	def Licensee = vars.get(&quot;Licensee&quot;);
+	log.info Licensee + &quot; LPID TotalLicensingFee: &quot;+ TotalLicensingFee
+	
+//////Get Index of Google Sheet Data Row that need to compare with
+	int DataRowIndex = 0;
+	String strCompareDataWithReport = &quot;LPID, ${Licensee}, ${PartyId}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			DataRowIndex = j;
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			break;
+		}
+      }
+
+	////Get Data from Google Sheet
+    	if(DataRowIndex&gt;0){
+      	String GSheet_TotalFee	= vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(9).toString();	
+
+	////Compare data between Google Sheet and Web
+	def FailureMessage =&quot;&quot;
+		if(Math.abs(Functions.ConvertStringToFloat(GSheet_TotalFee) - Functions.ConvertStringToFloat(TotalLicensingFee))&gt;0.1){
+			FailureMessage+=&quot;\nTotal Licensing Fee of Google Sheet: &quot;+GSheet_TotalFee +&quot;\nTotal Licensing Fee of Report: &quot;+TotalLicensingFee;
+		}	
+		if(FailureMessage!=&quot;&quot;){
+			AssertionResult.setFailure(true);
+			AssertionResult.setFailureMessage(FailureMessage);
+		}
+	}	
+	</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Billing Data" enabled="true">
+            <stringProp name="IfController.condition">(&quot;${Report}&quot;==&quot;Billing Data&quot;)</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${Report}_${Licensee}_${BillingCycle}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${Month}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FromDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${ToDay}&quot;,&#xd;
+	&quot;PartyIds&quot;:&quot;${PartyId}&quot;,&#xd;
+	&quot;LicenseeStatusIds&quot;: &quot;1,2,3,4,5,6,999&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/BillingDataByProduct/GetBillingDataByProductReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+import groovy.json.JsonSlurper;
+import com.jayway.jsonpath.*;
+import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClassUtilities = loader.parseClass(new File(path + &quot;/Library/&quot;+&quot;Utilities.groovy&quot;));
+GroovyObject Utilities  = (GroovyObject) groovyClassUtilities.newInstance();
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+
+//////Get data from Web
+def data =prev.getResponseDataAsString()
+def GrandTotal =[]
+def ProductList = []
+
+	def GrandTotal_Total = &apos;0&apos;
+	
+for (def i=3; i&lt;50; i++)
+{
+		ProductList.add(Utilities.processXml(data,&apos;//tr[@class=\&apos;laTable__row\&apos;]/td[&apos;+ i +&apos;]&apos;))
+		GrandTotal.add(Utilities.processXml(data,&apos;//td[contains(text(),\&apos;Grand Total\&apos;)]/following::td[&apos; + (i-2) + &apos;]/span&apos;))
+}
+
+for(def i=0;i&lt;ProductList.size();i++){
+	if(ProductList.get(i).toString()==&apos;Total&apos;){
+		GrandTotal_Total = (GrandTotal.get(i).toString())
+	}					
+}
+	def Licensee = vars.get(&quot;Licensee&quot;);
+	log.info Licensee + &quot; Billing Data GrandTotal_Total: &quot;+ GrandTotal_Total
+	
+//////Get Index of Google Sheet Data Row that need to compare with
+	int DataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Billing Data, ${Licensee}, ${PartyId}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			DataRowIndex = j;
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			break;
+		}
+      }
+
+	////Get Data from Google Sheet
+      if(DataRowIndex&gt;0){
+      	String GSheet_TotalFee	= vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(9).toString();	
+
+	////Compare data between Google Sheet and Web
+	def FailureMessage =&quot;&quot;
+		if(Math.abs(Functions.ConvertStringToFloat(GSheet_TotalFee) - Functions.ConvertStringToFloat(GrandTotal_Total))&gt;0.1){
+			FailureMessage+=&quot;\nTotal Licensing Fee of Google Sheet: &quot;+GSheet_TotalFee +&quot;\nTotal Licensing Fee of Report: &quot;+GrandTotal_Total;
+		}
+		if(FailureMessage!=&quot;&quot;){
+			AssertionResult.setFailure(true);
+			AssertionResult.setFailureMessage(FailureMessage);
+		}
+      }</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Reconciliation" enabled="true">
+            <stringProp name="IfController.condition">(&quot;${Report}&quot;==&quot;Reconciliation&quot;)</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${Report}_${Licensee}_${BillingCycle}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;month&quot;:&quot;${Month}&quot;,&#xd;
+	&quot;year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;selectedMonthText&quot;:&quot;${BillingCycle}&quot;,&#xd;
+	&quot;parties&quot;:[${PartyId}]&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol_CreateInvoice}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder_CreateInvoice}/Invoice/LicenseeReconciliation/GetReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Accept-Language" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="X-Requested-With" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=utf-8</stringProp>
+                  </elementProp>
+                  <elementProp name="X-CSRF-Token" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">L4ymTiFVk5Fl-OTreMyO--OdY3mliLzFMopkvcah-YCxGm4xPIhffISQZBWd330PvMMpHXnMQ8dtJgN0yHpwDD8bgyVUPUo-84m_0du9EFpwCeua0</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Encoding" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="User-Agent" elementType="Header">
+                    <stringProp name="Header.name">User-Agent</stringProp>
+                    <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">*/*</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Adj_Total" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Adj_Total</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;${Licensee}&apos;)]/following::td[16]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Adj_Total - Negative" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Adj_Total - Negative</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//a[contains(text(),&apos;${Licensee}&apos;)]/following::td[16]/span</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Verify data as expectation" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import org.apache.poi.ss.usermodel.*;
+import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+//////Get data from Web
+	String Adj_TotalP = vars.get(&quot;Adj_Total&quot;);
+	String Adj_TotalN = vars.get(&quot;Adj_Total - Negative&quot;);
+	String Adj_Total = getNotEmptyDataBetween2String(&quot;${Adj_TotalP}&quot;,&quot;${Adj_TotalN}&quot;);
+
+String getNotEmptyDataBetween2String(String str1, String str2) { 
+   if(str1==&quot;&quot;){
+   	return str2;
+   }else{
+   	return str1;
+   }
+}
+	def Licensee = vars.get(&quot;Licensee&quot;);
+	log.info Licensee + &quot; Reconciliation Adj_Total: &quot;+ Adj_Total
+
+//////Get Index of Google Sheet Data Row that need to compare with
+	int DataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Reconciliation, ${Licensee}, ${PartyId}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			DataRowIndex = j;
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			break;
+		}
+      }
+
+	////Get Data from Google Sheet
+      if(DataRowIndex&gt;0){
+      	String GSheet_TotalFee	= vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(9).toString();	
+
+	////Compare data between Excel and Web
+	def FailureMessage =&quot;&quot;
+		if(Math.abs(Functions.ConvertStringToFloat(GSheet_TotalFee) - Functions.ConvertStringToFloat(Adj_Total))&gt;0.1){
+			FailureMessage+=&quot;\nTotal Licensing Fee of Google Sheet: &quot;+GSheet_TotalFee +&quot;\nTotal Licensing Fee of Report: &quot;+Adj_Total;
+		}
+		if(FailureMessage!=&quot;&quot;){
+			AssertionResult.setFailure(true);
+			AssertionResult.setFailureMessage(FailureMessage);
+		}
+      }	
+</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Increase Counter" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey"></stringProp>
+            <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+
+if (i + 1 == vars.getObject(&quot;sheet&quot;).size()) {
+	vars.put(&quot;stopWhile&quot;,&quot;OK&quot;);
+}
+//prev.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey"></stringProp>
+              <stringProp name="script">sampler.setName(&quot;&quot;);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>
