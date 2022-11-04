@@ -579,7 +579,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);	
+Row row = book.getSheetAt(0).getRow(d-5);	
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(2).toString();
@@ -1180,7 +1180,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);	
+Row row = book.getSheetAt(0).getRow(d-5);	
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(2).toString();
@@ -5190,11 +5190,12 @@ log.info &apos;Index: &apos; + d.toString()
 	String Excel_Joker = 		(row.getCell(31).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(31).toString() ;
 	String Excel_BG = 			(row.getCell(32).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(32).toString() ;
 	String Excel_GDG = 			(row.getCell(33).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(33).toString() ;
-	String Excel_Habanero = 		(row.getCell(34).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(34).toString() ;
-	String Excel_CG = 			(row.getCell(35).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(35).toString() ;
-	String Excel_Vgaming = 		(row.getCell(36).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(36).toString() ;
-	String Excel_AdvantPlay = 	(row.getCell(37).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(37).toString() ;
-	String Excel_AdvantPlayMini = (row.getCell(38).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(38).toString() ;
+	String Excel_MaxGame = 		(row.getCell(34).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(34).toString() ;
+	String Excel_Habanero = 		(row.getCell(35).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(35).toString() ;
+	String Excel_CG = 			(row.getCell(36).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(36).toString() ;
+	String Excel_Vgaming = 		(row.getCell(37).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(37).toString() ;
+	String Excel_AdvantPlay = 	(row.getCell(38).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(38).toString() ;
+	String Excel_AdvantPlayMini = (row.getCell(39).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(39).toString() ;
 
 	log.info Excel_Sportsbook
 //Get data from Web
@@ -5235,6 +5236,7 @@ def ProductList = []
 	def GrandTotal_Joker = &apos;0&apos;
 	def GrandTotal_BG = &apos;0&apos;
 	def GrandTotal_GDG = &apos;0&apos;
+	def GrandTotal_MaxGame = &apos;0&apos;
 	def GrandTotal_Habanero = &apos;0&apos;
 	def GrandTotal_CG = &apos;0&apos;
 	def GrandTotal_Vgaming = &apos;0&apos;
@@ -5346,6 +5348,9 @@ for(def i=0;i&lt;ProductList.size();i++){
 	}		
 	if(ProductList.get(i).toString()==&apos;GDG&apos;){
 		GrandTotal_GDG = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;MaxGame&apos;){
+		GrandTotal_MaxGame = (GrandTotal.get(i).toString())
 	}
 	if(ProductList.get(i).toString()==&apos;Habanero&apos;){
 		GrandTotal_Habanero = (GrandTotal.get(i).toString())
@@ -5466,6 +5471,9 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_GDG) - Functions.ConvertStringToFloat(GrandTotal_GDG))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_GDG of Excel: &quot;+Excel_GDG +&quot;\nGrandTotal_GDG of Report: &quot;+GrandTotal_GDG;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_MaxGame) - Functions.ConvertStringToFloat(GrandTotal_MaxGame))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_MaxGame of Excel: &quot;+Excel_MaxGame +&quot;\nGrandTotal_MaxGame of Report: &quot;+GrandTotal_MaxGame;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Habanero) - Functions.ConvertStringToFloat(GrandTotal_Habanero))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_Habanero of Excel: &quot;+Excel_Habanero +&quot;\nGrandTotal_Habanero of Report: &quot;+GrandTotal_Habanero;
@@ -12272,7 +12280,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -12884,7 +12892,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -13496,7 +13504,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -14110,7 +14118,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -14655,7 +14663,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -15269,7 +15277,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -15881,7 +15889,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -16495,7 +16503,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -17111,7 +17119,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -17656,7 +17664,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -18272,7 +18280,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -18908,7 +18916,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -19613,7 +19621,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-5); //Grand Total in has 6 Currencies
+Row row = book.getSheetAt(0).getRow(d-6); //Grand Total in has 6 Currencies
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -21018,7 +21026,7 @@ for(def i=0;i&lt;10;i++)
 int d = book.getSheetAt(0).getLastRowNum();
 log.info &quot;--------------------------------------&quot;
 log.info d.toString();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -22337,7 +22345,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -23149,7 +23157,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);	
+Row row = book.getSheetAt(0).getRow(d-5);	
 log.info &quot;ExchangeWL Index: &quot; + d.toString()
 
 //Get data from Excel file
@@ -23882,7 +23890,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -24585,7 +24593,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -25258,7 +25266,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -25874,7 +25882,7 @@ for(def i=0;i&lt;10;i++)
 int d = book.getSheetAt(0).getLastRowNum();
 log.info &quot;--------------------------------------&quot;
 log.info d.toString();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -26579,7 +26587,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);	
+Row row = book.getSheetAt(0).getRow(d-5);	
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -29603,7 +29611,7 @@ for(def i=0;i&lt;10;i++)
 int d = book.getSheetAt(0).getLastRowNum();
 log.info &quot;--------------------------------------&quot;
 log.info d.toString();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -30389,7 +30397,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -31092,7 +31100,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -31746,7 +31754,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);	
+Row row = book.getSheetAt(0).getRow(d-5);	
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -33301,7 +33309,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
@@ -34004,7 +34012,7 @@ for(def i=0;i&lt;10;i++)
 }
 
 int d = book.getSheetAt(0).getLastRowNum();
-Row row = book.getSheetAt(0).getRow(d-4);
+Row row = book.getSheetAt(0).getRow(d-5);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();

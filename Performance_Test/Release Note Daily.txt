@@ -71,3 +71,6 @@
 
 10-May-2022:
  - Change Name RNG Casino to Saba Casino	
+
+4-Nov-2022:
+ - Enhance to adapt Crypto currency
