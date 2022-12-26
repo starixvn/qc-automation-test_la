@@ -112,3 +112,6 @@
 
 27-Apr-2022:
  - Integrate Allbet Promotion
+
+26-Dec-2022:
+ - Enhance new tab Settled and Resettled Report for Exchange WL - LAP
