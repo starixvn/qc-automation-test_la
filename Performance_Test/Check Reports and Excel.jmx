@@ -5161,41 +5161,42 @@ log.info &apos;Index: &apos; + d.toString()
 	String Excel_Rebate = 		(row.getCell(3).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(3).toString() ;	
 	String Excel_SBPromotion = 	(row.getCell(4).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(4).toString() ;
 	String Excel_Sponsorship = 	(row.getCell(5).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(5).toString() ;	
-	String Excel_Sportsbook = 	(row.getCell(6).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(6).toString() ;	
-	String Excel_NumberGame = 	(row.getCell(7).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(7).toString() ;
-	String Excel_BA = 			(row.getCell(8).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(8).toString() ;
-	String Excel_VirtualSports = 	(row.getCell(9).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(9).toString() ;
-	String Excel_SabaCasino = 	(row.getCell(10).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(10).toString() ;
-	String Excel_RNGKeno = 		(row.getCell(11).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(11).toString() ;
-	String Excel_AGCasino = 		(row.getCell(12).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(12).toString() ;
+	String Excel_PlayerTips = 	(row.getCell(6).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(6).toString() ;	
+	String Excel_Sportsbook = 	(row.getCell(7).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(7).toString() ;	
+	String Excel_NumberGame = 	(row.getCell(8).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(8).toString() ;
+	String Excel_BA = 			(row.getCell(9).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(9).toString() ;
+	String Excel_VirtualSports = 	(row.getCell(10).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(10).toString() ;
+	String Excel_SabaCasino = 	(row.getCell(11).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(11).toString() ;
+	String Excel_RNGKeno = 		(row.getCell(12).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(12).toString() ;
+	String Excel_AGCasino = 		(row.getCell(13).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(13).toString() ;
 	//String Excel_ColossusBet = 	(row.getCell(13).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(13).toString() ;
-	String Excel_Allbet = 		(row.getCell(13).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(13).toString() ;
-	String Excel_MacauGames = 	(row.getCell(14).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(14).toString() ;
-	String Excel_FishingWorld = 	(row.getCell(15).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(15).toString() ;
-	String Excel_VirtualSports2 = (row.getCell(16).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(16).toString() ;
-	String Excel_Lottery = 		(row.getCell(17).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(17).toString() ;
-	String Excel_Exchange = 		(row.getCell(18).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(18).toString() ;
-	String Excel_PP = 			(row.getCell(19).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(19).toString() ;
-	String Excel_ArcadiaGaming = 	(row.getCell(20).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(20).toString() ;
-	String Excel_SG = 			(row.getCell(21).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(21).toString() ;
-	String Excel_VirtualGames = 	(row.getCell(22).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(22).toString() ;
-	String Excel_SAGaming = 		(row.getCell(23).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(23).toString() ;
-	String Excel_TableGame = 	(row.getCell(24).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(24).toString() ;
-	String Excel_Sabaclub = 		(row.getCell(25).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(25).toString() ;
-	String Excel_Togel4D = 		(row.getCell(26).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(26).toString() ;	
-	String Excel_AESexy = 		(row.getCell(27).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(27).toString() ;
-	String Excel_VirtualSports3 = (row.getCell(28).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(28).toString() ;
-	String Excel_WM = 			(row.getCell(29).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(29).toString() ;
-	String Excel_PGSoft = 		(row.getCell(30).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(30).toString() ;
-	String Excel_Joker = 		(row.getCell(31).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(31).toString() ;
-	String Excel_BG = 			(row.getCell(32).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(32).toString() ;
-	String Excel_GDG = 			(row.getCell(33).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(33).toString() ;
-	String Excel_MaxGame = 		(row.getCell(34).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(34).toString() ;
-	String Excel_Habanero = 		(row.getCell(35).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(35).toString() ;
-	String Excel_CG = 			(row.getCell(36).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(36).toString() ;
-	String Excel_Vgaming = 		(row.getCell(37).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(37).toString() ;
-	String Excel_AdvantPlay = 	(row.getCell(38).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(38).toString() ;
-	String Excel_AdvantPlayMini = (row.getCell(39).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(39).toString() ;
+	String Excel_Allbet = 		(row.getCell(14).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(14).toString() ;
+	String Excel_MacauGames = 	(row.getCell(15).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(15).toString() ;
+	String Excel_FishingWorld = 	(row.getCell(16).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(16).toString() ;
+	String Excel_VirtualSports2 = (row.getCell(17).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(17).toString() ;
+	String Excel_Lottery = 		(row.getCell(18).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(18).toString() ;
+	String Excel_Exchange = 		(row.getCell(19).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(19).toString() ;
+	String Excel_PP = 			(row.getCell(20).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(20).toString() ;
+	String Excel_ArcadiaGaming = 	(row.getCell(21).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(21).toString() ;
+	String Excel_SG = 			(row.getCell(22).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(22).toString() ;
+	String Excel_VirtualGames = 	(row.getCell(23).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(23).toString() ;
+	String Excel_SAGaming = 		(row.getCell(24).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(24).toString() ;
+	String Excel_TableGame = 	(row.getCell(25).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(25).toString() ;
+	String Excel_Sabaclub = 		(row.getCell(26).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(26).toString() ;
+	String Excel_Togel4D = 		(row.getCell(27).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(27).toString() ;	
+	String Excel_AESexy = 		(row.getCell(28).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(28).toString() ;
+	String Excel_VirtualSports3 = (row.getCell(29).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(29).toString() ;
+	String Excel_WM = 			(row.getCell(30).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(30).toString() ;
+	String Excel_PGSoft = 		(row.getCell(31).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(31).toString() ;
+	String Excel_Joker = 		(row.getCell(32).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(32).toString() ;
+	String Excel_BG = 			(row.getCell(33).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(33).toString() ;
+	String Excel_GDG = 			(row.getCell(34).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(34).toString() ;
+	String Excel_MaxGame = 		(row.getCell(35).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(35).toString() ;
+	String Excel_Habanero = 		(row.getCell(36).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(36).toString() ;
+	String Excel_CG = 			(row.getCell(37).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(37).toString() ;
+	String Excel_Vgaming = 		(row.getCell(38).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(38).toString() ;
+	String Excel_AdvantPlay = 	(row.getCell(39).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(39).toString() ;
+	String Excel_AdvantPlayMini = (row.getCell(40).toString() == &quot;null&quot;) ?  &quot;0&quot; : row.getCell(40).toString() ;
 
 	log.info Excel_Sportsbook
 //Get data from Web
@@ -5207,6 +5208,7 @@ def ProductList = []
 	def GrandTotal_Rebate = &apos;0&apos;
 	def GrandTotal_SBPromotion = &apos;0&apos;
 	def GrandTotal_Sponsorship = &apos;0&apos;
+	def GrandTotal_PlayerTips = &apos;0&apos;
 	def GrandTotal_Sportsbook = &apos;0&apos;
 	def GrandTotal_NumberGame = &apos;0&apos;
 	def GrandTotal_BA = &apos;0&apos;
@@ -5261,6 +5263,9 @@ for(def i=0;i&lt;ProductList.size();i++){
 	}
 	if(ProductList.get(i).toString()==&apos;Sponsorship&apos;){
 		GrandTotal_Sponsorship = (GrandTotal.get(i).toString())
+	}
+	if(ProductList.get(i).toString()==&apos;Player Tips&apos;){
+		GrandTotal_PlayerTips = (GrandTotal.get(i).toString())
 	}
 	if(ProductList.get(i).toString()==&apos;Sportsbook&apos;){
 		GrandTotal_Sportsbook = (GrandTotal.get(i).toString())
@@ -5384,6 +5389,9 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Sponsorship) - Functions.ConvertStringToFloat(GrandTotal_Sponsorship))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_Sponsorship of Excel: &quot;+Excel_Sponsorship +&quot;\nGrandTotal_Sponsorship of Report: &quot;+GrandTotal_Sponsorship;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_PlayerTips) - Functions.ConvertStringToFloat(GrandTotal_PlayerTips))&gt;0.1){
+		FailureMessage+=&quot;\nGrandTotal_PlayerTips of Excel: &quot;+Excel_PlayerTips +&quot;\nGrandTotal_PlayerTips of Report: &quot;+GrandTotal_PlayerTips;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Sportsbook) - Functions.ConvertStringToFloat(GrandTotal_Sportsbook))&gt;0.1){
 		FailureMessage+=&quot;\nGrandTotal_Sportsbook of Excel: &quot;+Excel_Sportsbook +&quot;\nGrandTotal_Sportsbook of Report: &quot;+GrandTotal_Sportsbook;
@@ -51113,8 +51121,10 @@ Row row = book.getSheetAt(0).getRow(d);
 	String Excel_PromotionSBPre = row.getCell(27).toString();
 	String Excel_SponsorshipSB = row.getCell(28).toString();
 	String Excel_SponsorshipSBPre = row.getCell(29).toString();
-	String Excel_TotalLFee = row.getCell(30).toString();
-	String Excel_TotalLFeePre = row.getCell(31).toString();
+	String Excel_PlayerTipsSB = row.getCell(30).toString();
+	String Excel_PlayerTipsSBPre = row.getCell(31).toString();
+	String Excel_TotalLFee = row.getCell(32).toString();
+	String Excel_TotalLFeePre = row.getCell(33).toString();
 
 //Get data from Web
 	def jsonSlurper = new JsonSlurper();
@@ -51150,6 +51160,8 @@ Row row = book.getSheetAt(0).getRow(d);
 	String PreviousPromotionSportsbook = response.GrandTotal.PreviousPromotionSportsbook.toString();
 	String SponsorshipSportsbook = response.GrandTotal.SponsorshipSportsbook.toString();
 	String PreviousSponsorshipSportsbook = response.GrandTotal.PreviousSponsorshipSportsbook.toString();
+	String PlayerTipsSportsbook = response.GrandTotal.PlayerTipsSportsbook.toString();
+	String PreviousPlayerTipsSportsbook = response.GrandTotal.PreviousPlayerTipsSportsbook.toString();
 
 //Compare data between Excel and Web
 def FailureMessage =&quot;&quot;
@@ -51236,6 +51248,12 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_SponsorshipSBPre) - Functions.ConvertStringToFloat(PreviousSponsorshipSportsbook))&gt;0.1){
 		FailureMessage+=&quot;\nPrevious Sponsorship Sportsbook of Excel: &quot;+Excel_SponsorshipSBPre +&quot;\nPrevious Sponsorship Sportsbook of Report: &quot;+PreviousSponsorshipSportsbook;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_PlayerTipsSB) - Functions.ConvertStringToFloat(PlayerTipsSportsbook))&gt;0.1){
+		FailureMessage+=&quot;\nPlayerTips Sportsbook of Excel: &quot;+Excel_PlayerTipsSB +&quot;\nPlayerTips Sportsbook of Report: &quot;+PlayerTipsSportsbook;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_PlayerTipsSBPre) - Functions.ConvertStringToFloat(PreviousPlayerTipsSportsbook))&gt;0.1){
+		FailureMessage+=&quot;\nPrevious PlayerTips Sportsbook of Excel: &quot;+Excel_PlayerTipsSBPre +&quot;\nPrevious PlayerTips Sportsbook of Report: &quot;+PreviousPlayerTipsSportsbook;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_TotalLFee) - Functions.ConvertStringToFloat(TotalLicensingFee))&gt;0.1){
 		FailureMessage+=&quot;\nTotal Licensing Fee of Excel: &quot;+Excel_TotalLFee +&quot;\nTotal Licensing Fee of Report: &quot;+TotalLicensingFee;

@@ -74,3 +74,6 @@
 
 4-Nov-2022:
  - Enhance to adapt Crypto currency
+
+6-Jan-2023
+ - Integrate Player Tips for Billing Data report, LPID report
