@@ -77,3 +77,6 @@
 
 6-Jan-2023
  - Integrate Player Tips for Billing Data report, LPID report
+
+18-Jan-2023
+ - Integrate Player Tips for Recon report
