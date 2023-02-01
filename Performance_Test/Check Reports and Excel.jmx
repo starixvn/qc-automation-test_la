@@ -103,6 +103,7 @@
 	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
 	&quot;DrawFilter&quot;:1,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;SortColumn&quot;:&quot;&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;&quot;&#xd;
 }</stringProp>
@@ -313,6 +314,7 @@
 	&quot;CurrencyName&quot;:&quot;&quot;,&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;	&#xd;
 }</stringProp>
@@ -684,6 +686,7 @@ def FailureMessage =&quot;&quot;
 	&quot;ToDate&quot;:&quot;${glb_LastDateofPrevMonth_2}&quot;,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
 	&quot;DrawFilter&quot;:1,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;SortColumn&quot;:&quot;&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;&quot;&#xd;
 }</stringProp>
@@ -914,6 +917,7 @@ def FailureMessage =&quot;&quot;
 	&quot;CurrencyName&quot;:&quot;&quot;,&#xd;
 	&quot;ProductCodes&quot;:&quot;${glb_ProductCodes}&quot;,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;	&#xd;
 }</stringProp>
@@ -2047,6 +2051,7 @@ def FailureMessage =&quot;&quot;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
 	&quot;SportType&quot;:&quot;0&quot;&#xd;
 }</stringProp>
@@ -2302,6 +2307,7 @@ def FailureMessage =&quot;&quot;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;SportType&quot;:&quot;0&quot;,&#xd;
 	&quot;GroupByType&quot;:&quot;Licensee&quot;&#xd;
 }</stringProp>
@@ -2588,6 +2594,7 @@ def FailureMessage =&quot;&quot;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;SportType&quot;:&quot;0&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
@@ -2821,6 +2828,7 @@ def FailureMessage =&quot;&quot;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
 	&quot;SportType&quot;:&quot;0&quot;,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;GroupByType&quot;:&quot;Licensee&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
@@ -3193,6 +3201,13 @@ def FailureMessage =&quot;&quot;
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">LicenseeStatusIds</stringProp>
                   </elementProp>
+                  <elementProp name="PlatformId" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">PlatformId</stringProp>
+                  </elementProp>
                 </collectionProp>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
@@ -3256,6 +3271,7 @@ def FailureMessage =&quot;&quot;
 	&quot;SportType&quot;:&quot;0&quot;,&#xd;
 	&quot;BetType&quot;:&quot;0&quot;,&#xd;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
 	&quot;IsDrilldown&quot;:&quot;true&quot;&#xd;
 }</stringProp>
@@ -3334,6 +3350,7 @@ def FailureMessage =&quot;&quot;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
 	&quot;SportType&quot;:&quot;0&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
 	&quot;GroupByType&quot;:&quot;Currency&quot;&#xd;
 }</stringProp>
@@ -3669,6 +3686,13 @@ def FailureMessage =&quot;&quot;
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">LicenseeStatusIds</stringProp>
                   </elementProp>
+                  <elementProp name="PlatformId" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">PlatformId</stringProp>
+                  </elementProp>
                 </collectionProp>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
@@ -3847,6 +3871,13 @@ def FailureMessage =&quot;&quot;
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">LicenseeStatusIds</stringProp>
                   </elementProp>
+                  <elementProp name="PlatformId" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">PlatformId</stringProp>
+                  </elementProp>
                 </collectionProp>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
@@ -3910,6 +3941,7 @@ def FailureMessage =&quot;&quot;
 	&quot;SportType&quot;:&quot;0&quot;,&#xd;
 	&quot;BetType&quot;:&quot;0&quot;,&#xd;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
 	&quot;IsDrilldown&quot;:&quot;true&quot;&#xd;
 	}</stringProp>
@@ -4053,6 +4085,13 @@ def FailureMessage =&quot;&quot;
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">LicenseeStatusIds</stringProp>
                   </elementProp>
+                  <elementProp name="PlatformId" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">PlatformId</stringProp>
+                  </elementProp>
                 </collectionProp>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
@@ -4191,6 +4230,7 @@ def FailureMessage =&quot;&quot;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
 	&quot;SportType&quot;:&quot;0&quot;&#xd;
 }</stringProp>
@@ -4283,6 +4323,7 @@ def FailureMessage =&quot;&quot;
 	&quot;ReportBy&quot;:&quot;0&quot;,&#xd;
 	&quot;SortColumn&quot;:&quot;PartyName&quot;,&#xd;
 	&quot;SortMethod&quot;:&quot;asc&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
 	&quot;SportType&quot;:&quot;0&quot;&#xd;
 }</stringProp>
@@ -4437,6 +4478,7 @@ def FailureMessage =&quot;&quot;
 	&quot;BaseCurrencyName&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
 	&quot;PartyIdString&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
@@ -4532,6 +4574,7 @@ def FailureMessage =&quot;&quot;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;LicenseeStatusIds&quot;:&quot;1,2,3,4,5,6,999&quot;,&#xd;
 	&quot;PartyIdString&quot;:&quot;${glb_PartyIds}&quot;&#xd;
 }</stringProp>
@@ -4949,6 +4992,7 @@ def FailureMessage =&quot;&quot;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;LicenseeStatusIds&quot;: &quot;1,2,3,4,5,6,999&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
@@ -5042,6 +5086,7 @@ def FailureMessage =&quot;&quot;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
 	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;LicenseeStatusIds&quot;: &quot;1,2,3,4,5,6,999&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
@@ -36181,6 +36226,7 @@ def FailureMessage =&quot;&quot;
 	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;SB_BetBuilder,SB_MuayThai,NG,VS,KN,AGC,CB,AB,VB,NG2,FW,CO,VS2,LT,BX,PP,CC,SG,SAG,TG,SXG,IBCLC,BBIN,VS3,RNGW,WM,ION,PGS,JK,BGG,GDG,MXG,HB,CG,PPL,AP,APM,BTC&quot;,&#xd;
 	&quot;Timezone&quot;:&quot;1&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
@@ -36267,6 +36313,7 @@ def FailureMessage =&quot;&quot;
 	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;SB_BetBuilder,SB_MuayThai,NG,VS,KN,AGC,CB,AB,VB,NG2,FW,CO,VS2,LT,BX,PP,CC,SG,SAG,TG,SXG,IBCLC,BBIN,VS3,RNGW,WM,ION,PGS,JK,BGG,GDG,MXG,HB,CG,PPL,AP,APM,BTC&quot;,&#xd;
 	&quot;Timezone&quot;:&quot;1&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
@@ -36364,6 +36411,7 @@ def FailureMessage =&quot;&quot;
 	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;PP,PPL&quot;,&#xd;
 	&quot;Timezone&quot;:&quot;0&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
@@ -36450,6 +36498,7 @@ def FailureMessage =&quot;&quot;
 	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;PP,PPL&quot;,&#xd;
 	&quot;Timezone&quot;:&quot;0&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
@@ -36547,6 +36596,7 @@ def FailureMessage =&quot;&quot;
 	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;AB,FW,SG,SAG,SXG,WM,JK,CG&quot;,&#xd;
 	&quot;Timezone&quot;:&quot;2&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
@@ -36633,6 +36683,7 @@ def FailureMessage =&quot;&quot;
 	&quot;PartyIds&quot;:&quot;${glb_PartyIds}&quot;,	&#xd;
 	&quot;ProductCodes&quot;:&quot;AB,FW,SG,SAG,SXG,WM,JK,CG&quot;,&#xd;
 	&quot;Timezone&quot;:&quot;2&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
@@ -50819,7 +50870,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/PerformanceDetail/Export?PartyIds=${glb_PartyIds}&amp;IsConvert=true&amp;BaseCurrencyName=${glb_BaseCurrency}&amp;BaseCurrency=6&amp;Currency=0&amp;CurrencyName=All&amp;SortColumn=&amp;SortMethod=&amp;ProductCodes=${glb_ProductCodes}&amp;DrawFilter=1&amp;Year=${Year}&amp;Month=${FMonth}&amp;FromDay=${FDay}&amp;ToDay=${YDay}&amp;LicenseePaying=0&amp;LicenseeStatusIds=1,2,3,4,5,6,999</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Report/PerformanceDetail/Export?PartyIds=${glb_PartyIds}&amp;IsConvert=true&amp;BaseCurrencyName=${glb_BaseCurrency}&amp;BaseCurrency=6&amp;Currency=0&amp;CurrencyName=All&amp;SortColumn=&amp;SortMethod=&amp;ProductCodes=${glb_ProductCodes}&amp;DrawFilter=1&amp;Year=${Year}&amp;Month=${FMonth}&amp;FromDay=${FDay}&amp;ToDay=${YDay}&amp;LicenseePaying=0&amp;PlatformId=0&amp;LicenseeStatusIds=1,2,3,4,5,6,999</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -50999,6 +51050,13 @@ def FailureMessage =&quot;&quot;
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">LicenseeStatusIds</stringProp>
+                  </elementProp>
+                  <elementProp name="PlatformId" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">PlatformId</stringProp>
                   </elementProp>
                 </collectionProp>
               </elementProp>
@@ -51431,6 +51489,13 @@ def FailureMessage =&quot;&quot;
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">LicenseeStatusIds</stringProp>
                   </elementProp>
+                  <elementProp name="PlatformId" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">PlatformId</stringProp>
+                  </elementProp>
                 </collectionProp>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
@@ -51495,7 +51560,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/PerformanceByLicenseeGroupInDetail/Export?PartyIds=${glb_PartyIds}&amp;IsConvert=true&amp;BaseCurrencyName=${glb_BaseCurrency}&amp;BaseCurrency=6&amp;Currency=${glb_CurrencyId}&amp;CurrencyName=${glb_CurrencyName}&amp;ProductCodes=${glb_ProductCodes}&amp;DrawFilter=1&amp;Year=${Year}&amp;Month=${FMonth}&amp;FromDay=${FDay}&amp;ToDay=${YDay}&amp;LicenseeStatusIds=1,2,3,4,5,6,999</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/PerformanceByLicenseeGroupInDetail/Export?PartyIds=${glb_PartyIds}&amp;IsConvert=true&amp;BaseCurrencyName=${glb_BaseCurrency}&amp;BaseCurrency=6&amp;Currency=${glb_CurrencyId}&amp;CurrencyName=${glb_CurrencyName}&amp;ProductCodes=${glb_ProductCodes}&amp;DrawFilter=1&amp;Year=${Year}&amp;Month=${FMonth}&amp;FromDay=${FDay}&amp;ToDay=${YDay}&amp;PlatformId=0&amp;LicenseeStatusIds=1,2,3,4,5,6,999</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -75100,6 +75165,7 @@ def FailureMessage =&quot;&quot;
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
                       <stringProp name="Argument.value">{&#xd;
 	&quot;reportDate&quot;:&quot;${glb_FirstDateofCurrMonth}&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;parties&quot;:[14]&#xd;
 }</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
@@ -75270,6 +75336,13 @@ def FailureMessage =&quot;&quot;
                       <stringProp name="Argument.value">14</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    </elementProp>
+                    <elementProp name="PlatformId" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">0</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">PlatformId</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
@@ -75634,6 +75707,7 @@ def FailureMessage =&quot;&quot;
 	&quot;month&quot;:&quot;${FMonth}&quot;,&#xd;
 	&quot;year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;selectedMonthText&quot;:&quot;${glb_PrevMonthYear}&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;parties&quot;:[14]&#xd;
 }</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
@@ -75995,6 +76069,13 @@ def FailureMessage =&quot;&quot;
                       <stringProp name="Argument.value">14</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
                       <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    </elementProp>
+                    <elementProp name="PlatformId" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">0</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">PlatformId</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>

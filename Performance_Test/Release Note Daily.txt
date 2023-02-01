@@ -80,3 +80,6 @@
 
 18-Jan-2023
  - Integrate Player Tips for Recon report
+
+1-Feb-2023:
+ - Integrate Licensee Platform

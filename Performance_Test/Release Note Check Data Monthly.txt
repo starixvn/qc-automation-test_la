@@ -115,3 +115,6 @@
 
 26-Dec-2022:
  - Enhance new tab Settled and Resettled Report for Exchange WL - LAP
+
+1-Feb-2023:
+ - Integrate Licensee Platform

@@ -275,7 +275,7 @@
             </elementProp>
             <elementProp name="glb_URLFolder_CreateInvoice" elementType="Argument">
               <stringProp name="Argument.name">glb_URLFolder_CreateInvoice</stringProp>
-              <stringProp name="Argument.value">V2</stringProp>
+              <stringProp name="Argument.value">V4</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="glb_BillerId" elementType="Argument">

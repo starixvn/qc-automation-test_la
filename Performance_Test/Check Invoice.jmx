@@ -898,6 +898,13 @@ GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                     <stringProp name="Argument.name">LicenseeStatusIds</stringProp>
                   </elementProp>
+                  <elementProp name="PlatformId" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">PlatformId</stringProp>
+                  </elementProp>
                 </collectionProp>
               </elementProp>
               <stringProp name="HTTPSampler.domain">${glb_ServerName_CreateInvoice}</stringProp>
@@ -1032,6 +1039,7 @@ GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
 	&quot;FromDay&quot;:&quot;${FromDay}&quot;,&#xd;
 	&quot;ToDay&quot;:&quot;${ToDay}&quot;,&#xd;
 	&quot;PartyIds&quot;:&quot;${PartyId}&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;LicenseeStatusIds&quot;: &quot;1,2,3,4,5,6,999&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
@@ -1188,6 +1196,7 @@ for(def i=0;i&lt;ProductList.size();i++){
 	&quot;month&quot;:&quot;${Month}&quot;,&#xd;
 	&quot;year&quot;:&quot;${Year}&quot;,&#xd;
 	&quot;selectedMonthText&quot;:&quot;${BillingCycle}&quot;,&#xd;
+	&quot;PlatformId&quot;:0,&#xd;
 	&quot;parties&quot;:[${PartyId}]&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
