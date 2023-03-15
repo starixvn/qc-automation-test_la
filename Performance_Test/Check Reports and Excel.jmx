@@ -5552,7 +5552,7 @@ def FailureMessage =&quot;&quot;
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Win Loss Report (3rd)" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Win Loss Report (3rd) - No Use" enabled="false"/>
         <hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Bet Trade Win Loss - Unused " enabled="false"/>
           <hashTree>
