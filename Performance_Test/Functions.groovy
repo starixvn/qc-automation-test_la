@@ -7,209 +7,203 @@ def TryCatchErrorCode(File file, String responseCode, String strMessage){
 
 String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	switch (str) {
-	   case "Number Game":
-	       return "Number Game Win Loss";
-	       break
-	   case "Virtual Sports":
-	       return "Virtual Sports Win Loss";
-	       break;
-	    case "Keno":
-	       return "Keno Win Loss";
-	       break;
-	    case "AG Casino":
-	       return "AG Casino Win Loss";
-	       break;
-		case "Macau Games":
-	       return "Macau Games Win Loss";
-	       break;
-		case "Virtual Sports 2":
-	       return "Virtual Sports 2 Win Loss";
-	       break;
-		case "Lottery":
-	       return "Lottery Win Loss";
-	       break;
-		case "Arcadia Gaming":
-	       return "Arcadia Gaming Win Loss";
-	       break;
-		case "SG":
-	       return "Settlement Report";
-	       break;
-		case "AE Casino":
-	       return "Settlement Report";
-	       break;   
-		case "Exchange":
-	       return "Exchange Win Loss";
-	       break;
-		case "Gold Deluxe":
-	       return "Settlement Report";
-	       break;
 		case "Sportsbook":
 	       return "Licensee Performance in Details";
 	       break;
-		case "RNG Casino":
+		case "Number Game":
+	       return "Vendor Payment Details";
+	       break;
+		case "BA":
+	       return "Settlement Report";
+	       break;
+		case "Virtual Sports":
+	       return "Vendor Payment Details";
+	       break;
+		case "Saba Casino":
+	       return "Settlement Report";
+	       break;
+	    case "RNG Keno":
+	       return "Vendor Payment Details";
+	       break;
+	    case "AG Casino":
+	       return "Vendor Payment Details";
+	       break;
+		case "Allbet":
+	       return "Settlement Report";
+	       break;
+		case "Macau Games":
+	       return "Vendor Payment Details";
+	       break;
+		case "Virtual Sports 2":
+	       return "Vendor Payment Details";
+	       break;
+		case "Lottery":
+	       return "Vendor Payment Details";
+	       break;
+		case "Exchange":
+	       return "Vendor Payment Details";
+	       break;
+		case "Pragmatic":
+	       return "Settlement Report";
+	       break;
+		case "Arcadia Gaming":
+	       return "Vendor Payment Details";
+	       break;
+		case "SG":
 	       return "Settlement Report";
 	       break;
 		case "Virtual Games":
 	       return "Settlement Report";
 	       break;
-		case "Sports Lottery":
-	       return "Settlement Report";
-	       break;  
 		case "SA Gaming":
 	       return "Settlement Report";
 	       break;
-		case "Indo 4D":
-	       return "Settlement Report";
-	       break;
-		case "Saba.club":
-	       return "Settlement Report";
-	       break;
 		case "Table Game":
-	       return "Table Game Win Loss";
-	       break;
-		case "Allbet":
-	       return "Settlement Report";
-	       break;
-		case "Colossus Bets":
-	       return "Settlement Report";
-	       break;
-		case "Pragmatic":
-	       return "Settlement Report";
-	       break;
-		case "Cash Out":
-	       return "Settlement Report";
-	       break;
-		case "BA":
+	       return "Vendor Payment Details";
+	       break;		   
+		case "AE Casino":
 	       return "Settlement Report";
 	       break;
 		case "Togel 4D":
-	       return "Settlement Report";
-	       break;
-		case "PG Soft":
-	       return "PG Soft Win Loss";
-	       break;
-		case "Joker":
-	       return "Joker Win Loss";
+	       return "Vendor Payment Details";
+	       break;		   
+		case "Virtual Sports 3":
+	       return "Vendor Payment Details";
 	       break;
 		case "WM":
-	       return "WM Win Loss";
+	       return "Vendor Payment Details";
 	       break;
-		case "GDG":
-	       return "GDG Win Loss";
+		case "PG Soft":
+	       return "Vendor Payment Details";
 	       break;
+		case "Joker":
+	       return "Vendor Payment Details";
+	       break;
+		case "BG":
+	       return "Vendor Payment Details";
+	       break;
+		case "MaxGame":
+	       return "Vendor Payment Details";
+	       break;	
 		case "Habanero":
-	       return "Habanero Win Loss";
+	       return "Vendor Payment Details";
 	       break;
 		case "CG":
-	       return "CG Win Loss";
+	       return "Vendor Payment Details";
 	       break;		
 		case "Vgaming":
 	       return "Settlement Report";
 	       break;
-		case "BG":
-	       return "BG Win Loss";
-	       break;		   
+		case "AdvantPlay":
+	       return "Vendor Payment Details";
+	       break;
+		case "AdvantPlay Mini":
+	       return "Vendor Payment Details";
+	       break;
+		case "FGG":
+	       return "Vendor Payment Details";
+	       break;
 	}
 }
 
 String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(String str){
 	switch (str) {
-	   case "Number Game":
-	       return "Number Game Win Loss";
-	       break
-	   case "Virtual Sports":
-	       return "Virtual Sports Win Loss";
-	       break;
-	    case "Keno":
-	       return "Keno Win Loss";
-	       break;
-	    case "AG Casino":
-	       return "AG Casino Win Loss";
-	       break;
-		case "Macau Games":
-	       return "Macau Games Win Loss";
-	       break;
-		case "Virtual Sports 2":
-	       return "Virtual Sports 2 Win Loss";
-	       break;
-		case "Lottery":
-	       return "Lottery Win Loss";
-	       break;
-		case "Arcadia Gaming":
-	       return "Arcadia Gaming Win Loss";
-	       break;
-		case "SG":
-	       return "Settlement Report";
-	       break;
-		case "AE Casino":
-	       return "Settlement Report";
-	       break;
-		case "Exchange":
-	       return "Exchange Win Loss";
-	       break;
-		case "Gold Deluxe":
-	       return "Settlement Report";
-	       break;
 		case "Sportsbook":
 	       return "Settlement Report";
 	       break;
-		case "RNG Casino":
+		case "Number Game":
+	       return "Vendor Payment Details";
+	       break;
+		case "BA":
+	       return "Settlement Report";
+	       break;
+		case "Virtual Sports":
+	       return "Vendor Payment Details";
+	       break;
+		case "Saba Casino":
+	       return "Settlement Report";
+	       break;
+	    case "RNG Keno":
+	       return "Vendor Payment Details";
+	       break;
+	    case "AG Casino":
+	       return "Vendor Payment Details";
+	       break;
+		case "Allbet":
+	       return "Settlement Report";
+	       break;
+		case "Macau Games":
+	       return "Vendor Payment Details";
+	       break;
+		case "Virtual Sports 2":
+	       return "Vendor Payment Details";
+	       break;
+		case "Lottery":
+	       return "Vendor Payment Details";
+	       break;
+		case "Exchange":
+	       return "Vendor Payment Details";
+	       break;
+		case "Pragmatic":
+	       return "Settlement Report";
+	       break;
+		case "Arcadia Gaming":
+	       return "Vendor Payment Details";
+	       break;   
+		case "SG":
 	       return "Settlement Report";
 	       break;
 		case "Virtual Games":
 	       return "Settlement Report";
 	       break;
-		case "Sports Lottery":
-	       return "Settlement Report";
-	       break;    
 		case "SA Gaming":
 	       return "Settlement Report";
 	       break;
-		case "Indo 4D":
-	       return "Settlement Report";
-	       break;
-		case "Saba.club":
-	       return "Settlement Report";
-	       break;
 		case "Table Game":
-	       return "Table Game Win Loss";
-	       break;
-		case "Allbet":
-	       return "Settlement Report";
-	       break;
-		case "Pragmatic":
-	       return "Settlement Report";
-	       break;
-		case "BA":
+	       return "Vendor Payment Details";
+	       break;		   
+		case "AE Casino":
 	       return "Settlement Report";
 	       break;
 		case "Togel 4D":
-	       return "Settlement Report";
-	       break;
-		case "PG Soft":
-	       return "PG Soft Win Loss";
-	       break;
-		case "Joker":
-	       return "Joker Win Loss";
+	       return "Vendor Payment Details";
+	       break;		   
+		case "Virtual Sports 3":
+	       return "Vendor Payment Details";
 	       break;
 		case "WM":
-	       return "WM Win Loss";
+	       return "Vendor Payment Details";
 	       break;
-		case "GDG":
-	       return "GDG Win Loss";
+		case "PG Soft":
+	       return "Vendor Payment Details";
+	       break;
+		case "Joker":
+	       return "Vendor Payment Details";
+	       break;
+		case "BG":
+	       return "Vendor Payment Details";
+	       break;
+		case "MaxGame":
+	       return "Vendor Payment Details";
 	       break;
 		case "Habanero":
-	       return "Habanero Win Loss";
+	       return "Vendor Payment Details";
 	       break;
 		case "CG":
-	       return "CG Win Loss";
-	       break;		
+	       return "Vendor Payment Details";
+	       break;
 		case "Vgaming":
 	       return "Settlement Report";
 	       break;
-		case "BG":
-	       return "BG Win Loss";
-	       break;   
+		case "AdvantPlay":
+	       return "Vendor Payment Details";
+	       break;
+		case "AdvantPlay Mini":
+	       return "Vendor Payment Details";
+	       break;
+		case "FGG":
+	       return "Vendor Payment Details";
+	       break;		   
 	}
 }
 
