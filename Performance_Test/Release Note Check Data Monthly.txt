@@ -121,3 +121,6 @@
 
 24-Mar-2023:
  - Enhance to use Vendor Payment Details report and Add product SA Gaming, Togel 4D, Virtual Sports 3, MaxGame, AdvantPlay,  AdvantPlay Mini, FGG
+
+3-Apr-2023:
+ - Integrate SG Promotion

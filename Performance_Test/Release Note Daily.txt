@@ -86,3 +86,6 @@
 
 15-Mar-2023:
  - Disable Win Loss Report (3rd): don't maintain these reports
+
+3-Apr-2023:
+ - Integrate SG Promotion
