@@ -124,3 +124,6 @@
 
 3-Apr-2023:
  - Integrate SG Promotion
+
+9-May-2023:
+ - Remove column Licensee Charge Comm - Vendor Payment Details report

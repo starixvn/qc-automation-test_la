@@ -3300,21 +3300,11 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
               </XPathExtractor>
               <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensee Charge Comm" enabled="true">
-                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
-                <stringProp name="XPathExtractor.refname">Licensee Charge Comm</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">true</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
               <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensing fee" enabled="true">
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[7]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -3351,11 +3341,10 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	String TotalTrans = &quot;${Total Trans}&quot;;
 	String Licensingfee = &quot;${Licensing fee}&quot;;
 	String CustomerChargeComm = &quot;${Customer Charge Comm}&quot;;
-	String LicenseeChargeComm = &quot;${Licensee Charge Comm}&quot;;
 	List&lt;ValueRange&gt; list = Arrays.asList(
       new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
       new ValueRange().setRange(&quot;Licensees!Y&quot; + (i + 1) + &quot;:Y&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Licensingfee))),
-      new ValueRange().setRange(&quot;Licensees!AB&quot; + (i + 1) + &quot;:AC&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(CustomerChargeComm,LicenseeChargeComm)))
+      new ValueRange().setRange(&quot;Licensees!AB&quot; + (i + 1)+ &quot;:AB&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(CustomerChargeComm)))
       );     
 
 	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
