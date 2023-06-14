@@ -51611,7 +51611,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Saba Promotion (GMT +8)" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Saba Promotion (GMT +8) - Drop" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Saba Promotion (GMT +8)_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">

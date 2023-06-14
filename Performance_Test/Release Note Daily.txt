@@ -89,3 +89,6 @@
 
 3-Apr-2023:
  - Integrate SG Promotion
+
+14-Jun-2023:
+ - Exclude Saba Promotion (GMT +8) report
