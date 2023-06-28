@@ -92,3 +92,6 @@
 
 14-Jun-2023:
  - Exclude Saba Promotion (GMT +8) report
+
+27-Jun-2023:
+ - Integrate Licensee Status for AMF report

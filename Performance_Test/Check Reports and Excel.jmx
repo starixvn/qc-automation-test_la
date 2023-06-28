@@ -30618,7 +30618,7 @@ def FailureMessage =&quot;&quot;
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Win Loss Report" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Win Loss Report" enabled="false"/>
         <hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Win Loss" enabled="true"/>
           <hashTree>
@@ -36157,7 +36157,7 @@ def FailureMessage =&quot;&quot;
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Vendor Payment Report" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Vendor Payment Report" enabled="false"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Vendor Payment Report_Load" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -36769,7 +36769,7 @@ def FailureMessage =&quot;&quot;
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Performance" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Performance" enabled="false"/>
         <hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Performance - Drop" enabled="false"/>
           <hashTree>
@@ -53189,7 +53189,7 @@ def FailureMessage =&quot;&quot;
         </hashTree>
         <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Invoice" enabled="true"/>
         <hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Dashboard" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Dashboard" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Dashboard_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -53347,7 +53347,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Settlement Report" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invoice_Settlement Report_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -73061,7 +73061,7 @@ def FailureMessage =&quot;&quot;
               </hashTree>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Biller" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Biller" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Manage Biller_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -73109,7 +73109,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Payer" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Payer" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Manage Payer_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -73248,7 +73248,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Payer Setting" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Payer Setting" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Manage Payer Setting_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -73476,7 +73476,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Payer Group" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Payer Group" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invoice_Manage Payer Group_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -73524,7 +73524,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Discount Group" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Discount Group" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invoice_Manage Discount Group_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -73666,7 +73666,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Rebate Group" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Rebate Group" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invoice_Manage Rebate Group_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -73759,7 +73759,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Hosting Fees - Charge Rate" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Hosting Fees - Charge Rate" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invoice_Manage Hosting Fees Charge Rate_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -73937,7 +73937,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AmfSummary/GetAmfSummary?isFullyDeducted=true&amp;pageIndex=0&amp;pageSize=100</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AmfSummary/GetAmfSummary?isFullyDeducted=true&amp;pageIndex=0&amp;pageSize=100&amp;licenseestatusids=3</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -74014,7 +74014,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/AmfSummary/ExportExcel?isFullyDeducted=true</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/AmfSummary/ExportExcel?isFullyDeducted=true&amp;licenseestatusids=3</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -74091,7 +74091,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AmfSummary/GetAmfSummary?isFullyDeducted=false&amp;pageIndex=0&amp;pageSize=100</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/AmfSummary/GetAmfSummary?isFullyDeducted=false&amp;pageIndex=0&amp;pageSize=100&amp;licenseestatusids=3</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -74168,7 +74168,7 @@ def FailureMessage =&quot;&quot;
               <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
               <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/AmfSummary/ExportExcel?isFullyDeducted=false</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/Invoice/AmfSummary/ExportExcel?isFullyDeducted=false&amp;licenseestatusids=3</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -74587,7 +74587,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Group Licensing Fees" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Group Licensing Fees" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Group Licensing Fees_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -75026,7 +75026,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Licensee Group" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Manage Licensee Group" enabled="false"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invoice_Manage Licensee Group_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -75119,7 +75119,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Reconciliation" enabled="true"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Reconciliation" enabled="false"/>
           <hashTree>
             <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Collection Summary" enabled="true"/>
             <hashTree>
@@ -76527,7 +76527,7 @@ def FailureMessage =&quot;&quot;
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Misc" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Misc" enabled="false"/>
         <hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Platform Win Loss - Unused" enabled="false"/>
           <hashTree>
@@ -78809,7 +78809,7 @@ def FailureMessage =&quot;&quot;
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="OANDA Exchange Rate" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="OANDA Exchange Rate" enabled="false"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OANDA Exchange Rate_Load" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
