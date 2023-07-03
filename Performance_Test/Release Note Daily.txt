@@ -95,3 +95,6 @@
 
 27-Jun-2023:
  - Integrate Licensee Status for AMF report
+
+3-Jul-2023:
+ - Reorganize functions on the menu bar
