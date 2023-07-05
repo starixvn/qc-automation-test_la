@@ -61,8 +61,8 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "Table Game":
 	       return "Vendor Payment Details";
 	       break;		   
-		case "AE Casino":
-	       return "Settlement Report";
+		case "AE Sexy":
+	       return "Vendor Payment Details";
 	       break;
 		case "Togel 4D":
 	       return "Vendor Payment Details";
@@ -162,8 +162,8 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 		case "Table Game":
 	       return "Vendor Payment Details";
 	       break;		   
-		case "AE Casino":
-	       return "Settlement Report";
+		case "AE Sexy":
+	       return "Vendor Payment Details";
 	       break;
 		case "Togel 4D":
 	       return "Vendor Payment Details";

@@ -1960,7 +1960,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Currency Win Loss" enabled="false"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Currency Win Loss" enabled="true"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Currency Win Loss_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -4398,7 +4398,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Win Loss By Product" enabled="false"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Win Loss By Product" enabled="true"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Win Loss Report_Win Loss By Product Original Data_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -5583,7 +5583,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Performance in Details" enabled="false"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Performance in Details" enabled="true"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Performance_Licensee Performance in Details_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -6388,7 +6388,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Platform Win Loss (Summary)" enabled="false"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Platform Win Loss (Summary)" enabled="true"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Platform Win Loss (Summary)_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -6885,7 +6885,7 @@ def FailureMessage =&quot;&quot;
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Group Licensing Fees" enabled="false"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Group Licensing Fees" enabled="true"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Group Licensing Fees_Load" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -7325,7 +7325,7 @@ def FailureMessage =&quot;&quot;
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Vendor Payment" enabled="false"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Vendor Payment" enabled="true"/>
         <hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Vendor Payment Summary" enabled="true"/>
           <hashTree>
@@ -8659,7 +8659,7 @@ def FailureMessage =&quot;&quot;
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Invoice" enabled="false"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Invoice" enabled="true"/>
         <hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Dashboard" enabled="true"/>
           <hashTree>
@@ -25673,11 +25673,31 @@ def FailureMessage =&quot;&quot;
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
                 </XPathExtractor>
                 <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensee Charge Rate" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Licensee Charge Rate</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
+                <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Promotion" enabled="true">
+                  <stringProp name="XPathExtractor.default">Not Found</stringProp>
+                  <stringProp name="XPathExtractor.refname">Promotion</stringProp>
+                  <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                  <boolProp name="XPathExtractor.validate">false</boolProp>
+                  <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                  <boolProp name="XPathExtractor.namespace">false</boolProp>
+                </XPathExtractor>
+                <hashTree/>
                 <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Equivalent" enabled="true">
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -25687,7 +25707,7 @@ def FailureMessage =&quot;&quot;
                   <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                   <stringProp name="XPathExtractor.refname">Equivalent - Negative</stringProp>
                   <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[5]/span</stringProp>
+                  <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[7]/span</stringProp>
                   <boolProp name="XPathExtractor.validate">false</boolProp>
                   <boolProp name="XPathExtractor.tolerant">true</boolProp>
                   <boolProp name="XPathExtractor.namespace">false</boolProp>
@@ -25970,21 +25990,37 @@ for(def i=0;i&lt;10;i++)
 	} else {sleep(1000)}
 }
 
-int d = book.getSheetAt(0).getLastRowNum();
-log.info &quot;--------------------------------------&quot;
-log.info d.toString();
-Row row = book.getSheetAt(0).getRow(d-3);
+//Get Index need to compare
+	int DataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Total in Eur&quot;;
+	for(int j = 0;j&lt;book.getSheetAt(0).getLastRowNum();j++) {
+		if(book.getSheetAt(0).getRow(j)!=null){
+			String RowData = book.getSheetAt(0).getRow(j).getCell(1).toString();
+			log.info RowData; 
+			if(RowData==strCompareDataWithReport){
+				//log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+				DataRowIndex = j;
+				break;
+			}
+		}
+      }
+
+Row row = book.getSheetAt(0).getRow(DataRowIndex);
 
 //Get data from Excel file
 	String Excel_TotalTrans = row.getCell(3).toString();
 	String Excel_Turnover = row.getCell(4).toString();
 	String Excel_CustomerWL = row.getCell(5).toString();
 	String Excel_LicenseeWL = row.getCell(6).toString();
-	String Excel_Equivalent = row.getCell(8).toString();
+	String Excel_LicenseeChargeRate = row.getCell(7).toString();
+	String Excel_Promotion = row.getCell(8).toString();
+	String Excel_Equivalent = row.getCell(10).toString();
 
 //Get data from Web
 	String TotalTrans = vars.get(&quot;Total Trans&quot;);
 	String Turnover = vars.get(&quot;Turnover&quot;);
+	String LicenseeChargeRate = vars.get(&quot;Licensee Charge Rate&quot;);
+	String Promotion = vars.get(&quot;Promotion&quot;);
 	
 	String CustomerWLP = vars.get(&quot;Customer Win Loss&quot;);
 	String CustomerWLN = vars.get(&quot;Customer Win Loss - Negative&quot;);
@@ -26019,6 +26055,12 @@ def FailureMessage =&quot;&quot;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeWL) - Functions.ConvertStringToFloat(LicenseeWL))&gt;0.1){
 		FailureMessage+=&quot;\nLicensee Win Loss of Excel: &quot;+Excel_LicenseeWL +&quot;\nLicensee Win Loss of Report: &quot;+LicenseeWL;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_LicenseeChargeRate) - Functions.ConvertStringToFloat(LicenseeChargeRate))&gt;0.1){
+		FailureMessage+=&quot;\nLicensee Charge Rate of Excel: &quot;+Excel_LicenseeChargeRate +&quot;\nLicensee Charge Rate of Report: &quot;+LicenseeChargeRate;
+	}
+	if(Math.abs(Functions.ConvertStringToFloat(Excel_Promotion) - Functions.ConvertStringToFloat(Promotion))&gt;0.1){
+		FailureMessage+=&quot;\nPromotion of Excel: &quot;+Excel_Promotion +&quot;\nPromotion of Report: &quot;+Promotion;
 	}
 	if(Math.abs(Functions.ConvertStringToFloat(Excel_Equivalent) - Functions.ConvertStringToFloat(Equivalent))&gt;0.1){
 		FailureMessage+=&quot;\nEquivalent of Excel: &quot;+Excel_Equivalent +&quot;\nEquivalent of Report: &quot;+Equivalent;
@@ -31560,7 +31602,7 @@ def FailureMessage =&quot;&quot;
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Configuration" enabled="false"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Licensee Configuration" enabled="true"/>
         <hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Platform Win Loss - No Use" enabled="false"/>
           <hashTree>
