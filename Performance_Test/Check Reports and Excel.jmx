@@ -6574,7 +6574,7 @@ def FailureMessage =&quot;&quot;
 	&quot;BaseCurrency&quot;:&quot;${glb_BaseCurrency}&quot;,&#xd;
 	&quot;FromDate&quot;:&quot;01-May-2021&quot;,&#xd;
 	&quot;ToDate&quot;:&quot;31-May-2021&quot;,&#xd;
-	&quot;Platforms&quot;:&quot;Desktop New Asia,Desktop China,Desktop Others,E-Sports Desktop,Mobile Standard,Mobile Euro,Mobile Compact,Mobile Others,E-Sports Mobile,E-Sports APP,Mobile APP,Native APP,Tablet,WAP,Odds Feed,Deep Link,Others&quot;&#xd;
+	&quot;Platforms&quot;:&quot;Desktop New Asia,Desktop China,Desktop Others,Desktop Galaxy,E-Sports Desktop,Mobile Standard,Mobile Galaxy,Mobile Compact,Mobile Others,E-Sports Mobile,E-Sports APP,Mobile APP,Native APP,Tablet,WAP,Odds Feed,Deep Link,Others,Odds Direct API&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>

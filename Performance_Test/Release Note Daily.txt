@@ -101,3 +101,8 @@
 
 5-Jul-2023:
  - Integrate PG Soft Promotion
+
+19-Oct-2023:
+ - Platform Win Loss Summary: 
+   	+ Change Mobile Euro to Mobile Galaxy
+	+ Add new Desktop Galaxy
