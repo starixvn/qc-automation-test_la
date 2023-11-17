@@ -106,3 +106,6 @@
  - Platform Win Loss Summary: 
    	+ Change Mobile Euro to Mobile Galaxy
 	+ Add new Desktop Galaxy
+
+16-Nov-2023:
+ - Integrate High Forex explanation report

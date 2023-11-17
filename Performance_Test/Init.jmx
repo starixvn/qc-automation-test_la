@@ -95,14 +95,19 @@
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">Pro: 123.51.196.23; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7615</stringProp>
             </elementProp>
+            <elementProp name="glb_ServerName_New" elementType="Argument">
+              <stringProp name="Argument.name">glb_ServerName_New</stringProp>
+              <stringProp name="Argument.value">lbs.oneops.net</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
             <elementProp name="glb_Token_LA" elementType="Argument">
               <stringProp name="Argument.name">glb_Token_LA</stringProp>
-              <stringProp name="Argument.value">fRYUb4y8lpdjD0PF0F_TLA2</stringProp>
+              <stringProp name="Argument.value">PwjQ3ZJnY9rmWuKJE6KvZw2</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="glb_Token" elementType="Argument">
               <stringProp name="Argument.name">glb_Token</stringProp>
-              <stringProp name="Argument.value">fRYUb4y8lpdjD0PF0F_TLA2</stringProp>
+              <stringProp name="Argument.value">PwjQ3ZJnY9rmWuKJE6KvZw2</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="glb_Protocol" elementType="Argument">
