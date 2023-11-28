@@ -109,3 +109,6 @@
 
 16-Nov-2023:
  - Integrate High Forex explanation report
+
+28-Nov-2023:
+ - Platform Win Loss Summary: Add Mobile Euro
