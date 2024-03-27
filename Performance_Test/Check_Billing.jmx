@@ -965,7 +965,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
            vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
 	     new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
 	     .execute();
-	}else if(&quot;${ProductName}&quot;==&quot;Pragmatic&quot;||&quot;${ProductName}&quot;==&quot;SG&quot;){/* Pragmatic, SG */
+	}else if(&quot;${ProductName}&quot;==&quot;Pragmatic&quot;||&quot;${ProductName}&quot;==&quot;SG&quot;||&quot;${ProductName}&quot;==&quot;AG Casino&quot;){/* Pragmatic, SG */
 		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
 		String Turnover = &quot;${Turnover}&quot;;
 		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent - PP}&quot;,&quot;${Equivalent - PP - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
@@ -2022,7 +2022,7 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
                 <stringProp name="XPathExtractor.default">Not_Found</stringProp>
                 <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
                 <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[6]</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Total in&apos;)]/following::td[10]</stringProp>
                 <boolProp name="XPathExtractor.validate">false</boolProp>
                 <boolProp name="XPathExtractor.tolerant">true</boolProp>
                 <boolProp name="XPathExtractor.namespace">false</boolProp>

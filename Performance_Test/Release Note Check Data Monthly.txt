@@ -130,3 +130,6 @@
 
 5-Jul-2023:
  - Integrate PG Soft Promotion
+
+27-Mar-2024:
+ - Vendor Detail, Settlement report: Update AG Casino
