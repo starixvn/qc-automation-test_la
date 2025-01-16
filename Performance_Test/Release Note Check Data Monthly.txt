@@ -133,3 +133,17 @@
 
 27-Mar-2024:
  - Vendor Detail, Settlement report: Update AG Casino
+
+5-Dec-2024:
+ - Integrate GPI, MG-RNG, Jili, YeeBet, Live22, WE Live Casino, Nextspin, FastSpin, FA CHAI, ON Casino, Saba Casino, Virtual Games, SEAL Entertainment, Vgaming
+ - Integrate AG Casino Promotion, Contribution, Jackpot - Vendor Payment Details report
+
+31-Dec-2024:
+- Integrate GPI Live Casino
+
+3-Jan-2025:
+- Enhance Exchange product: Vendor Payment Details report, LAP-Exchange Win Loss
+- Enhance AG Casino product: LAP-AG Casino Win Loss
+
+14-Jan-2025:
+- Integrate PLAYSTAR

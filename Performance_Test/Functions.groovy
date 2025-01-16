@@ -17,7 +17,7 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	       return "Settlement Report";
 	       break;
 		case "Virtual Sports":
-	       return "Vendor Payment Details";
+	       return "Settlement Report";
 	       break;
 		case "Saba Casino":
 	       return "Settlement Report";
@@ -34,23 +34,14 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "Macau Games":
 	       return "Vendor Payment Details";
 	       break;
-		case "Virtual Sports 2":
-	       return "Vendor Payment Details";
-	       break;
 		case "Lottery":
 	       return "Vendor Payment Details";
 	       break;
 		case "Exchange":
 	       return "Vendor Payment Details";
 	       break;
-		case "Pragmatic":
-	       return "Settlement Report";
-	       break;
 		case "Arcadia Gaming":
 	       return "Vendor Payment Details";
-	       break;
-		case "SG":
-	       return "Settlement Report";
 	       break;
 		case "Virtual Games":
 	       return "Settlement Report";
@@ -60,16 +51,22 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	       break;
 		case "Table Game":
 	       return "Vendor Payment Details";
-	       break;		   
+	       break;
 		case "AE Sexy":
 	       return "Vendor Payment Details";
 	       break;
+		case "GPI":
+	       return "Settlement Report";
+	       break;   
+		case "Pragmatic":
+	       return "Settlement Report";
+	       break;
+		case "SG":
+	       return "Settlement Report";
+	       break;		
 		case "Togel 4D":
 	       return "Vendor Payment Details";
 	       break;		   
-		case "Virtual Sports 3":
-	       return "Vendor Payment Details";
-	       break;
 		case "WM":
 	       return "Vendor Payment Details";
 	       break;
@@ -103,6 +100,42 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "FGG":
 	       return "Vendor Payment Details";
 	       break;
+		case "SEAL Entertainment":
+	       return "Settlement Report";
+	       break;
+		case "MG-RNG":
+	       return "Settlement Report";
+	       break;
+		case "Jili":
+	       return "Settlement Report";
+	       break;
+		case "YeeBet":
+	       return "Settlement Report";
+	       break;
+		case "Live22":
+	       return "Settlement Report";
+	       break;
+		case "WE Live Casino":
+	       return "Settlement Report";
+	       break;
+		case "Nextspin":
+	       return "Settlement Report";
+	       break;
+		case "FastSpin":
+	       return "Settlement Report";
+	       break;
+		case "FA CHAI":
+	       return "Settlement Report";
+	       break;
+		case "GPI Live Casino":
+	       return "Settlement Report";
+	       break;
+		case "PLAYSTAR":
+	       return "Settlement Report";
+	       break;
+		case "ON Casino":
+	       return "Settlement Report";
+	       break;
 	}
 }
 
@@ -118,7 +151,7 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       return "Settlement Report";
 	       break;
 		case "Virtual Sports":
-	       return "Vendor Payment Details";
+	       return "Settlement Report";
 	       break;
 		case "Saba Casino":
 	       return "Settlement Report";
@@ -133,9 +166,6 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       return "Settlement Report";
 	       break;
 		case "Macau Games":
-	       return "Vendor Payment Details";
-	       break;
-		case "Virtual Sports 2":
 	       return "Vendor Payment Details";
 	       break;
 		case "Lottery":
@@ -165,12 +195,12 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 		case "AE Sexy":
 	       return "Vendor Payment Details";
 	       break;
+		case "GPI":
+	       return "Settlement Report";
+	       break;
 		case "Togel 4D":
 	       return "Vendor Payment Details";
 	       break;		   
-		case "Virtual Sports 3":
-	       return "Vendor Payment Details";
-	       break;
 		case "WM":
 	       return "Vendor Payment Details";
 	       break;
@@ -203,7 +233,43 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       break;
 		case "FGG":
 	       return "Vendor Payment Details";
-	       break;		   
+	       break;
+		case "SEAL Entertainment":
+	       return "Settlement Report";
+	       break;
+		case "MG-RNG":
+	       return "Settlement Report";
+	       break;
+		case "Jili":
+	       return "Settlement Report";
+	       break;
+		case "YeeBet":
+	       return "Settlement Report";
+	       break;
+		case "Live22":
+	       return "Settlement Report";
+	       break;
+		case "WE Live Casino":
+	       return "Settlement Report";
+	       break;
+		case "Nextspin":
+	       return "Settlement Report";
+	       break;
+		case "FastSpin":
+	       return "Settlement Report";
+	       break;
+		case "FA CHAI":
+	       return "Settlement Report";
+	       break;
+		case "GPI Live Casino":
+	       return "Settlement Report";
+	       break;
+		case "PLAYSTAR":
+	       return "Settlement Report";
+	       break;
+		case "ON Casino":
+	       return "Settlement Report";
+	       break;
 	}
 }
 
