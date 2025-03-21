@@ -11,15 +11,22 @@ from Actions.Action_PerformanceReport_LPID import ActionPerformanceReportLPID
 from Actions.Action_Invoice_Reconciliation import ActionInvoiceReconciliation
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from gspread.exceptions import APIError
 
 # Google Sheets setup
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-#creds = ServiceAccountCredentials.from_json_keyfile_name("D:\Settlement_Hub_Automation\google\sh-automation-453611-bda26c003fc2.json", scope)
 creds_path = os.path.join(os.path.dirname(__file__), '..', 'google', 'sh-automation-453611-bda26c003fc2.json')
 creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
-client = gspread.authorize(creds)
-sheet = client.open("SH - Automation").worksheet("TestSheet")
 
+try:
+    client = gspread.authorize(creds)
+    sheet = client.open("SH - Automation").worksheet("TestSheet")
+except APIError as e:
+    pytest.fail(f"Google Sheets API error: {e}")
+
+# Ensure the screenshot directory exists
+screenshot_dir = os.path.join(os.path.dirname(__file__), '..', 'screenshot')
+os.makedirs(screenshot_dir, exist_ok=True)
 
 def get_expected_results(test_case):
     data = sheet.get_all_records()
@@ -105,7 +112,8 @@ def test_billing_report(setup_browser, test_case):
     print(f"DEBUG - LicenseeWL - Test Case: {test_case}, Report Data: {LiceneeWL_report_data}")
 
     # ✅ Chụp ảnh màn hình để kiểm tra UI thực tế
-    page.screenshot(path=f"debug_screenshot_{test_case}_LicenseeWL.png")
+    #page.screenshot(path=f"debug_screenshot_{test_case}_LicenseeWL.png")
+    page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_LicenseeWL.png"))
 
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
     assert expected_results["Licensee"] in LiceneeWL_report_data["licensee"], \
@@ -144,7 +152,8 @@ def test_billing_report(setup_browser, test_case):
     # ✅ Chụp ảnh màn hình để kiểm tra UI thực tế
     page.locator(InterfacePerformanceReportLPID["lbLicensingFeeSB"]).click()
     #page.wait_for_timeout(5000)
-    page.screenshot(path=f"debug_screenshot_{test_case}_LPID.png")
+    #page.screenshot(path=f"debug_screenshot_{test_case}_LPID.png")
+    page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_LPID.png"))
 
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
     assert expected_results["Licensee"] in LPID_report_data["licensee"], \
@@ -184,8 +193,8 @@ def test_billing_report(setup_browser, test_case):
     print(f"DEBUG - Reconciliation Test Case: {test_case}, Report Data: {Reconciliation_report_data}")
 
     # ✅ Chụp ảnh màn hình để kiểm tra UI thực tế
-    
-    page.screenshot(path=f"debug_screenshot_{test_case}_Licensee_Reconciliation.png")
+    #page.screenshot(path=f"debug_screenshot_{test_case}_Licensee_Reconciliation.png")
+    page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_Licensee_Reconciliation.png"))
 
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
     assert expected_results["Licensee"] in Reconciliation_report_data["licensee"], \
