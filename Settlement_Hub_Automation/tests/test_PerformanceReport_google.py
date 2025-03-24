@@ -112,7 +112,6 @@ def test_billing_report(setup_browser, test_case):
     print(f"DEBUG - LicenseeWL - Test Case: {test_case}, Report Data: {LiceneeWL_report_data}")
 
     # ✅ Chụp ảnh màn hình để kiểm tra UI thực tế
-    #page.screenshot(path=f"debug_screenshot_{test_case}_LicenseeWL.png")
     page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_LicenseeWL.png"))
 
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
@@ -152,7 +151,6 @@ def test_billing_report(setup_browser, test_case):
     # ✅ Chụp ảnh màn hình để kiểm tra UI thực tế
     page.locator(InterfacePerformanceReportLPID["lbLicensingFeeSB"]).click()
     #page.wait_for_timeout(5000)
-    #page.screenshot(path=f"debug_screenshot_{test_case}_LPID.png")
     page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_LPID.png"))
 
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
@@ -193,7 +191,6 @@ def test_billing_report(setup_browser, test_case):
     print(f"DEBUG - Reconciliation Test Case: {test_case}, Report Data: {Reconciliation_report_data}")
 
     # ✅ Chụp ảnh màn hình để kiểm tra UI thực tế
-    #page.screenshot(path=f"debug_screenshot_{test_case}_Licensee_Reconciliation.png")
     page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_Licensee_Reconciliation.png"))
 
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
