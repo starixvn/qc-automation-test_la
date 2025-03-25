@@ -25,4 +25,29 @@ class ActionPerformanceReportLPID:
             
     }
 
+    def check_report_data(self, expected_results, actual_results):
+        """Kiểm tra giá trị trả về với giá trị mong đợi cho report LPID"""
+        assert expected_results["Licensee"] in actual_results["licensee"], \
+            f"Expected {expected_results['Licensee']} to be in {actual_results['licensee']}"
+
+        assert actual_results["total_transaction"] == expected_results["BetCount"], \
+            f"Expected LPID - BetCount : {expected_results['BetCount']} but got {actual_results['total_transaction']}"
+
+        assert actual_results["turnover"] == expected_results["Turnover"], \
+            f"Expected LPID - Turnover : {expected_results['Turnover']} but got {actual_results['turnover']}"
+
+        assert actual_results["customer_wl"] == expected_results["CustomerWL"], \
+            f"Expected LPID - CustomerWL : {expected_results['CustomerWL']} but got {actual_results['customer_wl']}"
+
+        assert actual_results["licensingfee_sb"] == expected_results["LicenseeFee"], \
+            f"Expected LPID - LicenseeFee : {expected_results['LicenseeFee']} but got {actual_results['licensingfee_sb']}"
+
+        assert actual_results["discountSB"] == expected_results["Discount"], \
+            f"Expected LPID - Discount : {expected_results['Discount']} but got {actual_results['discountSB']}"
+    
+        assert actual_results["rebateSB"] == expected_results["RebateSB"], \
+            f"Expected LPID - RebateSB : {expected_results['RebateSB']} but got {actual_results['rebateSB']}"
+    
+        assert actual_results["totallicensingfee"] == expected_results["TotalLicensingFee"], \
+            f"Expected LPID - TotalLicensingFee : {expected_results['TotalLicensingFee']} but got {actual_results['totallicensingfee']}"
 

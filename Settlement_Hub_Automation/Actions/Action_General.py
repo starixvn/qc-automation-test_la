@@ -15,11 +15,6 @@ class ActionGeneral:
     def logout(self)        :
         self.page.click(InterfaceGeneral["btnLogout"])
 
-    # def open_report(self,main_menu,menu_link,tab=None)        :
-    #     self.page.locator(InterfaceGeneral[main_menu]).click()
-    #     self.page.locator(InterfaceGeneral[menu_link]).click()
-    #     self.page.locator(InterfaceGeneral[tab]).click()
-
     def open_report(self, main_menu, menu_link, tab=None):
         self.page.locator(InterfaceGeneral[main_menu]).click()
         self.page.locator(InterfaceGeneral[menu_link]).click()

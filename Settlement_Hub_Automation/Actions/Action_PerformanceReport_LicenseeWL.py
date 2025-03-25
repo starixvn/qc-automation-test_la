@@ -22,4 +22,20 @@ class ActionPerformanceReportLicenseeWL:
             "amount_due_to": parse_float(self.page.locator(InterfacePerformanceReportLicenseeWL["amount_due_to"]).inner_text())
     }
 
+    def check_report_data(self, expected_results, actual_results):
+        """Kiểm tra giá trị trả về với giá trị mong đợi cho report LicenseeWL"""
+        assert expected_results["Licensee"] in actual_results["licensee"], \
+            f"Expected {expected_results['Licensee']} to be in {actual_results['licensee']}"
+
+        assert actual_results["total_transaction"] == expected_results["BetCount"], \
+            f"Expected LiceneeWL - BetCount: {expected_results['BetCount']} but got {actual_results['total_transaction']}"
+
+        assert actual_results["turnover"] == expected_results["Turnover"], \
+            f"Expected LiceneeWL - Turnover: {expected_results['Turnover']} but got {actual_results['turnover']}"
+
+        assert actual_results["customer_wl"] == expected_results["CustomerWL"], \
+            f"Expected LiceneeWL - CustomerWL : {expected_results['CustomerWL']} but got {actual_results['customer_wl']}"
+
+        assert actual_results["licensee_wl"] == expected_results["LicenseeWL"], \
+            f"Expected LiceneeWL - LicenseeWL : {expected_results['LicenseeWL']} but got {actual_results['licensee_wl']}"
 

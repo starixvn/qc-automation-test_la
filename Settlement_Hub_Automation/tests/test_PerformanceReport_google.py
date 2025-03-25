@@ -12,6 +12,7 @@ from Actions.Action_Invoice_Reconciliation import ActionInvoiceReconciliation
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from gspread.exceptions import APIError
+from dataset.Data_sql.sql_file_cases import SQL_FILE_CASES # Import SQL_FILE_CASES
 
 # Google Sheets setup
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -35,33 +36,6 @@ def get_expected_results(test_case):
             return row
     return None
 
-SQL_FILE_CASES = {
-    "test_billing_report_case_1": [
-        {"file": "./dataset/Data_sql/test_data_1_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
-        {"file": "./dataset/Data_sql/test_data_1_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
-    ],
-    "test_billing_report_case_2": [
-        {"file": "./dataset/Data_sql/test_data_2_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
-        {"file": "./dataset/Data_sql/test_data_2_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
-    ],
-    "test_billing_report_case_3": [
-        {"file": "./dataset/Data_sql/test_data_3_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
-        {"file": "./dataset/Data_sql/test_data_3_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
-    ],
-    "test_billing_report_case_4": [
-        {"file": "./dataset/Data_sql/test_data_4_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
-        {"file": "./dataset/Data_sql/test_data_4_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
-    ],
-    "test_billing_report_case_5": [
-        {"file": "./dataset/Data_sql/test_data_5_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
-        {"file": "./dataset/Data_sql/test_data_5_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
-    ],
-    "test_billing_report_case_6": [
-        {"file": "./dataset/Data_sql/test_data_6_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
-        {"file": "./dataset/Data_sql/test_data_6_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
-    ],
-}
-
 @pytest.fixture(scope="function")
 def setup_browser():
     with sync_playwright() as p:
@@ -73,8 +47,8 @@ def setup_browser():
         yield page
         browser.close()
 
-@pytest.mark.parametrize("test_case", ["test_billing_report_case_1"])
-#@pytest.mark.parametrize("test_case", ["test_billing_report_case_1","test_billing_report_case_2","test_billing_report_case_3","test_billing_report_case_4","test_billing_report_case_5","test_billing_report_case_6"])
+#@pytest.mark.parametrize("test_case", ["test_billing_report_case_6"])
+@pytest.mark.parametrize("test_case", ["test_billing_report_case_1","test_billing_report_case_2","test_billing_report_case_3","test_billing_report_case_4","test_billing_report_case_5","test_billing_report_case_6"])
 def test_billing_report(setup_browser, test_case):
     """Chạy test cho từng test case với dữ liệu khác nhau"""
     page = setup_browser
@@ -84,14 +58,12 @@ def test_billing_report(setup_browser, test_case):
     action_InvoiceReconciliation = ActionInvoiceReconciliation(page)
     
     # 1. Thực thi SQL để tạo dữ liệu test
-    # sql_file = SQL_FILE_CASES[test_case]
-    # execute_sql_file(sql_file,"TESTDB053","bodb_LicenseeReport") 
     sql_files = SQL_FILE_CASES[test_case]
     for sql_file_info in sql_files:
         execute_sql_file(sql_file_info["file"], sql_file_info["server"], sql_file_info["database"])
 
     # 2. Đăng nhập vào hệ thống
-    action_General.login(BASE_URL,USERNAME,PASSWORD)
+    action_General.login(BASE_URL, USERNAME, PASSWORD)
     
     # 3. Điều hướng đến Licensee WL Report
     action_General.open_report("mainmenuPerformanceReport","menulinkLicenseeWinLoss")
@@ -114,25 +86,9 @@ def test_billing_report(setup_browser, test_case):
     # ✅ Chụp ảnh màn hình để kiểm tra UI thực tế
     page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_LicenseeWL.png"))
 
-    # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
-    assert expected_results["Licensee"] in LiceneeWL_report_data["licensee"], \
-        f"Expected {expected_results['Licensee']} to be in {LiceneeWL_report_data['licensee']}"
+    # ✅ Kiểm tra giá trị trả về với giá trị mong đợi cho report LicenseeWL
+    action_LicenseeWL.check_report_data(expected_results, LiceneeWL_report_data)
 
-    assert LiceneeWL_report_data["total_transaction"] == expected_results["BetCount"], \
-        f"Expected LiceneeWL - BetCount: {expected_results['BetCount']} but got {LiceneeWL_report_data['total_transaction']}"
-
-    assert LiceneeWL_report_data["turnover"] == expected_results["Turnover"], \
-        f"Expected LiceneeWL - Turnover: {expected_results['Turnover']} but got {LiceneeWL_report_data['turnover']}"
-
-    assert LiceneeWL_report_data["customer_wl"] == expected_results["CustomerWL"], \
-        f"Expected LiceneeWL - CustomerWL : {expected_results['CustomerWL']} but got {LiceneeWL_report_data['customer_wl']}"
-
-    assert LiceneeWL_report_data["licensee_wl"] == expected_results["LicenseeWL"], \
-        f"Expected LiceneeWL - LicenseeWL : {expected_results['LicenseeWL']} but got {LiceneeWL_report_data['licensee_wl']}"
-
-    assert LiceneeWL_report_data["amount_due_to"] == expected_results["AmountDueToOthers"], \
-        f"Expected LiceneeWL - AmountDueToOthers : {expected_results['AmountDueToOthers']} but got {LiceneeWL_report_data['amount_due_to']}"
-    
     ### LPID
     # 6. Điều hướng đến LPID
     action_General.open_report("mainmenuPerformanceReport","menulinkLicenseePerformanceinDetails")
@@ -153,30 +109,8 @@ def test_billing_report(setup_browser, test_case):
     #page.wait_for_timeout(5000)
     page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_LPID.png"))
 
-    # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
-    assert expected_results["Licensee"] in LPID_report_data["licensee"], \
-        f"Expected {expected_results['Licensee']} to be in {LPID_report_data['licensee']}"
-
-    assert LPID_report_data["total_transaction"] == expected_results["BetCount"], \
-        f"Expected LPID - BetCount : {expected_results['BetCount']} but got {LPID_report_data['total_transaction']}"
-
-    assert LPID_report_data["turnover"] == expected_results["Turnover"], \
-        f"Expected LPID - Turnover : {expected_results['Turnover']} but got {LPID_report_data['turnover']}"
-
-    assert LPID_report_data["customer_wl"] == expected_results["CustomerWL"], \
-        f"Expected LPID - CustomerWL : {expected_results['CustomerWL']} but got {LPID_report_data['customer_wl']}"
-
-    assert LPID_report_data["licensingfee_sb"] == expected_results["LicenseeFee"], \
-        f"Expected LPID - LicenseeFee : {expected_results['LicenseeFee']} but got {LPID_report_data['licensingfee_sb']}"
-
-    assert LPID_report_data["discountSB"] == expected_results["Discount"], \
-        f"Expected LPID - Discount : {expected_results['Discount']} but got {LPID_report_data['discountSB']}"
-    
-    assert LPID_report_data["rebateSB"] == expected_results["RebateSB"], \
-        f"Expected LPID - RebateSB : {expected_results['RebateSB']} but got {LPID_report_data['rebateSB']}"
-    
-    assert LPID_report_data["totallicensingfee"] == expected_results["TotalLicensingFee"], \
-        f"Expected LPID - TotalLicensingFee : {expected_results['TotalLicensingFee']} but got {LPID_report_data['totallicensingfee']}"
+    # ✅ Kiểm tra giá trị trả về với giá trị mong đợi cho report LPID
+    action_LPID.check_report_data(expected_results, LPID_report_data)
     
     ### Licensee Reconciliation
     # 9. Điều hướng đến Licensee Reconciliation
@@ -184,7 +118,7 @@ def test_billing_report(setup_browser, test_case):
     action_General.select_licensee(expected_results["Licensee"])
     action_General.submit_report()
     
-    # 8. Kiểm tra dữ liệu trả về từ LPID
+    # 10. Kiểm tra dữ liệu trả về từ Reconciliation
     Reconciliation_report_data = action_InvoiceReconciliation.fetch_report_data()
 
     # ✅ In dữ liệu thực tế để debug nếu cần
@@ -194,32 +128,7 @@ def test_billing_report(setup_browser, test_case):
     page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_Licensee_Reconciliation.png"))
 
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
-    assert expected_results["Licensee"] in Reconciliation_report_data["licensee"], \
-        f"Expected {expected_results['Licensee']} to be in {Reconciliation_report_data['licensee']}"
+    action_LicenseeWL.check_report_data(expected_results, LiceneeWL_report_data)
 
-    assert Reconciliation_report_data["Settlement_Sheet"] == -expected_results["AmountDueToOthers"], \
-        f"Expected Reconciliation - Settlement_Sheet : {-expected_results['AmountDueToOthers']} but got {Reconciliation_report_data['Settlement_Sheet']}"
-
-    assert Reconciliation_report_data["discount"] == expected_results["DiscountRecon"], \
-        f"Expected Reconciliation - discount : {expected_results['DiscountRecon']} but got {Reconciliation_report_data['discount']}"
-
-    assert Reconciliation_report_data["promotion"] == expected_results["PromotionSB"], \
-        f"Expected Reconciliation - promotion : {expected_results['PromotionSB']} but got {Reconciliation_report_data['promotion']}"
-
-    assert Reconciliation_report_data["Sponsorship"] == 0, \
-        f"Expected 0 but got {Reconciliation_report_data['Sponsorship']}"
-    
-    assert Reconciliation_report_data["Odds_Boost_Bonus"] == expected_results["OddsBoostBonus"], \
-        f"Expected Reconciliation - Odds_Boost_Bonus : {expected_results['OddsBoostBonus']} but got {Reconciliation_report_data['Odds_Boost_Bonus']}"
-    
-    assert Reconciliation_report_data["Player_Tips"] == 0, \
-        f"Expected 0 but got {Reconciliation_report_data['Player_Tips']}"
-
-    assert Reconciliation_report_data["Actual_Billing"] == -expected_results["ActualBillingRecon"], \
-        f"Expected Reconciliation - Actual_Billing : {expected_results['ActualBillingRecon']} but got {Reconciliation_report_data['Actual_Billing']}"
-
-    assert Reconciliation_report_data["Total"] == -expected_results["TotalRecon"], \
-        f"Expected Reconciliation - TotalRecon : {expected_results['TotalRecon']} but got {Reconciliation_report_data['Total']}"
-
-    # 10. Logout
+    # End. Logout
     action_General.logout()

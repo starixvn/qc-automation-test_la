@@ -1,4 +1,4 @@
---Case 5
+--Case 6
 use bodb_LicenseeReport
 
 -- Khai báo biến
@@ -12,25 +12,29 @@ SET @LastDayOfLastMonth = DATEADD(DAY, -1, DATEADD(MONTH, DATEDIFF(MONTH, 0, GET
 SET @TwentythDayOfLastMonth = CONVERT(DATE, DATEADD(DAY, 19, @FirstDayOfLastMonth));
 
 -- Lấy PartyID từ OAS_Party
-declare @LicId int  select @LicId=OldRefID from bodb_licensee.dbo.OAS_Party where PartyName='automationSHLic01'; 
-
+declare @LicId int  select @LicId=OldRefID from bodb_licensee.dbo.OAS_Party where PartyName='automationSHLic01';
+																						
 -- Lấy tỷ giá từ bảng ExchangeDailyOanda
 declare @eurcny float, @eurthb float
-select @eurcny=eur from bodb02.dbo.ExchangeDailyOanda where ExchangeDate=@LastDayOfLastMonth and ExchangeId = 13  --CNY
-select @eurthb=eur from bodb02.dbo.ExchangeDailyOanda where ExchangeDate=@LastDayOfLastMonth and ExchangeId = 4   --THB																				
+select @eurcny=eur from bodb02.dbo.ExchangeDailyOanda where ExchangeDate=@LastDayOfLastMonth and ExchangeId =							13																							
+select @eurthb=eur from bodb02.dbo.ExchangeDailyOanda where ExchangeDate=@LastDayOfLastMonth and ExchangeId =							4																							
 
 -- Xóa dữ liệu cũ
-delete rpt_Bettingbyproduct where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and ProductID=0;	
+delete rpt_Bettingbyproduct where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and ProductID=0
+delete rpt_Betting where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and bettype in (select distinct bettype from bodb02.dbo.Sportbettypematrix where ProductID=1)																														
 
--- Insert dữ liệu
+-- Insert rpt_Bettingbyproduct
 insert into rpt_Bettingbyproduct 
-(rptDate, SiteID, ProductID, Bettype, CurrencyId, StatusId, CustomerCategory, GrossWL, MemberWL, Turnover, BetCount, CommissionA, CommissionP, BuyBackAmount, WinPrizeAmount, CashOutAmount, ValidBetAmount, TicketType, ExtraAmount, betfrom) 
-values ( @TwentythDayOfLastMonth,	@LicId, 	0, 	-1, 	6, 	113, 	-1, 	27000, 	-30000, 	2000.89, 	200, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	NULL) 	;
+(rptDate, SiteID, ProductID, Bettype, CurrencyId, StatusId, CustomerCategory, GrossWL, MemberWL, Turnover, BetCount, CommissionA, CommissionP, BuyBackAmount, WinPrizeAmount, CashOutAmount, ValidBetAmount, TicketType, ExtraAmount, betfrom)  values																														
+(@TwentythDayOfLastMonth, 	@LicId, 	0, 	-1, 	6, 	113, 	-1, 	27000, 	-30000, 	2000.89, 	200, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	NULL) 	,										
+(@TwentythDayOfLastMonth, 	@LicId, 	0, 	-1, 	13, 	113, 	-1, 	-9000/@eurcny, 	10000/@eurcny, 	3000.15/@eurcny, 	300, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	NULL) 	,										
+(@TwentythDayOfLastMonth, 	@LicId, 	0, 	-1, 	4, 	113, 	-1, 	31500/@eurthb, 	-35000/@eurthb, 	4000.16/@eurthb, 	400, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	NULL) 											
 
-insert into rpt_Bettingbyproduct 
-(rptDate, SiteID, ProductID, Bettype, CurrencyId, StatusId, CustomerCategory, GrossWL, MemberWL, Turnover, BetCount, CommissionA, CommissionP, BuyBackAmount, WinPrizeAmount, CashOutAmount, ValidBetAmount, TicketType, ExtraAmount, betfrom) 
-values ( @TwentythDayOfLastMonth,	@LicId, 	0, 	-1, 	13, 	113, 	-1, 	-9000/@eurcny, 	10000/@eurcny, 	3000.15/@eurcny, 	300, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	0/@eurcny, 	NULL) 	;
-
-insert into rpt_Bettingbyproduct 
-(rptDate, SiteID, ProductID, Bettype, CurrencyId, StatusId, CustomerCategory, GrossWL, MemberWL, Turnover, BetCount, CommissionA, CommissionP, BuyBackAmount, WinPrizeAmount, CashOutAmount, ValidBetAmount, TicketType, ExtraAmount, betfrom) 
-values ( @TwentythDayOfLastMonth,	@LicId, 	0, 	-1, 	4, 	113, 	-1, 	31500/@eurthb, 	-35000/@eurthb, 	4000.16/@eurthb, 	400, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	0/@eurthb, 	NULL) 	;
+-- Insert rpt_Betting
+insert into rpt_Betting
+ (rptDate, SiteID, Bettype, LeagueID, CurrencyID, Status, IsLive, BetCount, MemberCount, Turnover, WinLoss, WinLossA, WinLossM, WinLossS, CommissionP, CommissionA, CommissionM, CommissionS, WinLossVirtual, CommissionSVirtual, CustomerCategory, BuyBackAmount, WinPrizeAmount, CashOutAmount, oddsspread, ExtraAmount, TicketType, WinLossE, CommissionE, betfrom) 
+values																														
+(@TwentythDayOfLastMonth, 	@LicId, 	1, 	-1, 	6, 	113, 	1, 	200, 	600, 	2000.89, 	-30000, 	27000, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	-1, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	0, 	0.00, 	0.00, 	0.00) 	,
+(@TwentythDayOfLastMonth, 	@LicId, 	1, 	-1, 	13, 	113, 	1, 	300, 	900, 	3000.15/@eurcny, 	10000/@eurcny, 	-9000/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	-1, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00/@eurcny, 	0, 	0.00/@eurcny, 	0.00/@eurcny, 	0.00) 	,
+(@TwentythDayOfLastMonth, 	@LicId, 	1, 	-1, 	4, 	113, 	1, 	400, 	1200, 	4000.16/@eurthb, 	-35000/@eurthb, 	31500/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	-1, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00/@eurthb, 	0, 	0.00/@eurthb, 	0.00/@eurthb, 	0.00) 	
+																														
