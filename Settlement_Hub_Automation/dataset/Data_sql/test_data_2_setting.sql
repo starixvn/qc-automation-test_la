@@ -17,7 +17,7 @@ DECLARE
     @FirstDayOfLastMonth DATETIME,
     @LastDayOfLastMonth DATETIME
 
--- Gán giá trị cho các biến ngày tháng
+-- Gán  giá trị cho các biến ngày tháng
 SET @FirstDayOfLastMonth = DATEADD(MONTH, -1, DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0))
 SET @LastDayOfLastMonth = DATEADD(DAY, -1, DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0))
 

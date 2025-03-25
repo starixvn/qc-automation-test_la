@@ -8,10 +8,6 @@ class ActionInvoiceReconciliation:
     def fetch_report_data(self):
         def parse_float(value):
             """Chuyển đổi giá trị số, loại bỏ dấu phẩy và chuyển thành float"""
-            # try:
-            #     return float(value.replace(",", "").strip()) if value else 0.0
-            # except ValueError:
-            #     return 0.0  # Trả về 0.0 nếu không thể chuyển đổi
             try:
                 value = value.replace(",", "").strip()
                 if value.startswith("(") and value.endswith(")"):
@@ -33,4 +29,30 @@ class ActionInvoiceReconciliation:
             
     }
 
+    def check_report_data(self, expected_results, actual_results):
+        assert expected_results["Licensee"] in actual_results["licensee"], \
+            f"Expected {expected_results['Licensee']} to be in {actual_results['licensee']}"
 
+        assert actual_results["Settlement_Sheet"] == -expected_results["AmountDueToOthers"], \
+            f"Expected Reconciliation - Settlement_Sheet : {-expected_results['AmountDueToOthers']} but got {actual_results['Settlement_Sheet']}"
+
+        assert actual_results["discount"] == expected_results["DiscountRecon"], \
+            f"Expected Reconciliation - discount : {expected_results['DiscountRecon']} but got {actual_results['discount']}"
+
+        assert actual_results["promotion"] == expected_results["PromotionSB"], \
+            f"Expected Reconciliation - promotion : {expected_results['PromotionSB']} but got {actual_results['promotion']}"
+
+        assert actual_results["Sponsorship"] == 0, \
+            f"Expected 0 but got {actual_results['Sponsorship']}"
+        
+        assert actual_results["Odds_Boost_Bonus"] == expected_results["OddsBoostBonus"], \
+            f"Expected Reconciliation - Odds_Boost_Bonus : {expected_results['OddsBoostBonus']} but got {actual_results['Odds_Boost_Bonus']}"
+        
+        assert actual_results["Player_Tips"] == 0, \
+            f"Expected 0 but got {actual_results['Player_Tips']}"
+
+        assert actual_results["Actual_Billing"] == -expected_results["ActualBillingRecon"], \
+            f"Expected Reconciliation - Actual_Billing : {expected_results['ActualBillingRecon']} but got {actual_results['Actual_Billing']}"
+
+        assert actual_results["Total"] == -expected_results["TotalRecon"], \
+            f"Expected Reconciliation - TotalRecon : {expected_results['TotalRecon']} but got {actual_results['Total']}"
