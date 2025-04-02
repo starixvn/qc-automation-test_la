@@ -150,3 +150,6 @@
 
 3-Feb-2025:
 - Enhance LAP-Win Loss Analysis: Currency List
+
+2-Apr-2025:
+- Integrate ASKMESLOT, Funky Games
