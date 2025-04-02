@@ -136,6 +136,12 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "ON Casino":
 	       return "Settlement Report";
 	       break;
+		case "ASKMESLOT":
+	       return "Settlement Report";
+	       break;
+		case "Funky Games":
+	       return "Vendor Payment Details";
+	       break;
 	}
 }
 
@@ -269,6 +275,12 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       break;
 		case "ON Casino":
 	       return "Settlement Report";
+	       break;
+		case "ASKMESLOT":
+	       return "Settlement Report";
+	       break;
+		case "Funky Games":
+	       return "Vendor Payment Details";
 	       break;
 	}
 }
