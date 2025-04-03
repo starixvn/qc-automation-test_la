@@ -41,8 +41,8 @@ class ActionInvoiceReconciliation:
         assert expected_results["Licensee"] in actual_results["licensee1"], \
             f"Expected {expected_results['Licensee']} to be in {actual_results['licensee1']}"
 
-        assert actual_results["Settlement_Sheet"] == -expected_results["LicenseeFee"], \
-            f"Expected Reconciliation - Settlement_Sheet : {-expected_results['LicenseeFee']} but got {actual_results['Settlement_Sheet']}"
+        assert actual_results["Settlement_Sheet"] == expected_results["ReconSettlementSheet"], \
+            f"Expected Reconciliation - Settlement_Sheet : {expected_results['ReconSettlementSheet']} but got {actual_results['Settlement_Sheet']}"
 
         assert actual_results["discount"] == expected_results["DiscountRecon"], \
             f"Expected Reconciliation - discount : {expected_results['DiscountRecon']} but got {actual_results['discount']}"

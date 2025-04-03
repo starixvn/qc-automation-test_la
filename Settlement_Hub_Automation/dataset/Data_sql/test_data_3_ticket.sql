@@ -17,9 +17,12 @@ delete rpt_Bettingbyproduct where SiteID=@LicId and rptDate between @FirstDayOfL
 delete rpt_Betting where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and bettype in (select distinct bettype from bodb02.dbo.Sportbettypematrix where ProductID=1)																													
 
 -- Insert rpt_Bettingbyproduct
-insert into rpt_Bettingbyproduct 
-(rptDate, SiteID, ProductID, Bettype, CurrencyId, StatusId, CustomerCategory, GrossWL, MemberWL, Turnover, BetCount, CommissionA, CommissionP, BuyBackAmount, WinPrizeAmount, CashOutAmount, ValidBetAmount, TicketType, ExtraAmount, betfrom) values ( @TwentythDayOfLastMonth,	@LicId, 	0, 	-1, 	6, 	113, 	-1, 	-1350, 	1500, 	2000.89, 	200, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	NULL) 										
+--insert into rpt_Bettingbyproduct 
+--(rptDate, SiteID, ProductID, Bettype, CurrencyId, StatusId, CustomerCategory, GrossWL, MemberWL, Turnover, BetCount, CommissionA, CommissionP, BuyBackAmount, WinPrizeAmount, CashOutAmount, ValidBetAmount, TicketType, ExtraAmount, betfrom) values ( @TwentythDayOfLastMonth,	@LicId, 	0, 	-1, 	6, 	113, 	-1, 	-1350, 	1500, 	2000.89, 	200, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	0, 	NULL) 										
 
 -- Insert rpt_Betting
 insert into  rpt_Betting (rptDate, SiteID, Bettype, LeagueID, CurrencyID, Status, IsLive, BetCount, MemberCount, Turnover, WinLoss, WinLossA, WinLossM, WinLossS, CommissionP, CommissionA, CommissionM, CommissionS, WinLossVirtual, CommissionSVirtual, CustomerCategory, BuyBackAmount, WinPrizeAmount, CashOutAmount, oddsspread, ExtraAmount, TicketType, WinLossE, CommissionE, betfrom)
 values (@TwentythDayOfLastMonth, 	@LicId, 	1, 	-1, 	6, 	113, 	1, 	200, 	600, 	2000.89, 	1500, 	-1350, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	-1, 	0.00, 	0.00, 	0.00, 	0.00, 	0.00, 	0, 	0.00, 	0.00, 	NULL) 
+
+-- Run job
+exec [dbo].[GEN_rptBettingByProduct] @TwentythDayOfLastMonth
