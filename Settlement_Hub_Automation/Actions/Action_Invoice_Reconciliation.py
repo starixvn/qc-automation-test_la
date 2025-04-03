@@ -15,9 +15,17 @@ class ActionInvoiceReconciliation:
                 return float(value) if value else 0.0
             except ValueError:
                 return 0.0  # Trả về 0.0 nếu không thể chuyển đổi
+        
+        # locator = self.page.locator(InterfaceInvoiceReconciliation["lbSettlementSheet"])
+        # if locator.count() == 0:
+        #     print("Element 'Settlement_Sheet' không tồn tại trong giao diện.")
+        
+        # locator = self.page.locator(InterfaceInvoiceReconciliation["lbLicensee"])
+        # if locator.count() == 0:
+        #     print("Element 'lbLicensee' không tồn tại trong giao diện.")
 
         return {
-            "licensee": self.page.locator(InterfaceInvoiceReconciliation["lbLicensee"]).inner_text().strip(),
+            "licensee1": self.page.locator(InterfaceInvoiceReconciliation["lbLicensee"]).inner_text().strip(),
             "Settlement_Sheet": parse_float(self.page.locator(InterfaceInvoiceReconciliation["lbSettlementSheet"]).inner_text()),
             "discount": parse_float(self.page.locator(InterfaceInvoiceReconciliation["lbDiscount"]).inner_text()),
             "promotion": parse_float(self.page.locator(InterfaceInvoiceReconciliation["lbPromotion"]).inner_text()),
@@ -30,11 +38,11 @@ class ActionInvoiceReconciliation:
     }
 
     def check_report_data(self, expected_results, actual_results):
-        assert expected_results["Licensee"] in actual_results["licensee"], \
-            f"Expected {expected_results['Licensee']} to be in {actual_results['licensee']}"
+        assert expected_results["Licensee"] in actual_results["licensee1"], \
+            f"Expected {expected_results['Licensee']} to be in {actual_results['licensee1']}"
 
-        assert actual_results["Settlement_Sheet"] == -expected_results["AmountDueToOthers"], \
-            f"Expected Reconciliation - Settlement_Sheet : {-expected_results['AmountDueToOthers']} but got {actual_results['Settlement_Sheet']}"
+        assert actual_results["Settlement_Sheet"] == -expected_results["LicenseeFee"], \
+            f"Expected Reconciliation - Settlement_Sheet : {-expected_results['LicenseeFee']} but got {actual_results['Settlement_Sheet']}"
 
         assert actual_results["discount"] == expected_results["DiscountRecon"], \
             f"Expected Reconciliation - discount : {expected_results['DiscountRecon']} but got {actual_results['discount']}"
@@ -51,8 +59,8 @@ class ActionInvoiceReconciliation:
         assert actual_results["Player_Tips"] == 0, \
             f"Expected 0 but got {actual_results['Player_Tips']}"
 
-        assert actual_results["Actual_Billing"] == -expected_results["ActualBillingRecon"], \
+        assert actual_results["Actual_Billing"] == expected_results["ActualBillingRecon"], \
             f"Expected Reconciliation - Actual_Billing : {expected_results['ActualBillingRecon']} but got {actual_results['Actual_Billing']}"
 
-        assert actual_results["Total"] == -expected_results["TotalRecon"], \
+        assert actual_results["Total"] == expected_results["TotalRecon"], \
             f"Expected Reconciliation - TotalRecon : {expected_results['TotalRecon']} but got {actual_results['Total']}"

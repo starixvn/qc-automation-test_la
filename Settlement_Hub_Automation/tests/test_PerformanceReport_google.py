@@ -21,7 +21,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
 
 try:
     client = gspread.authorize(creds)
-    sheet = client.open("SH - Automation").worksheet("TestSheet")
+    sheet = client.open("SH - Automation").worksheet("TestExpectedSheet")
 except APIError as e:
     pytest.fail(f"Google Sheets API error: {e}")
 
@@ -47,8 +47,9 @@ def setup_browser():
         yield page
         browser.close()
 
-#@pytest.mark.parametrize("test_case", ["test_billing_report_case_6"])
-@pytest.mark.parametrize("test_case", ["test_billing_report_case_1","test_billing_report_case_2","test_billing_report_case_3","test_billing_report_case_4","test_billing_report_case_5","test_billing_report_case_6"])
+# @pytest.mark.parametrize("test_case", ["test_billing_report_case_9"])
+# @pytest.mark.parametrize("test_case", ["test_billing_report_case_6","test_billing_report_case_7","test_billing_report_case_8","test_billing_report_case_9"])
+@pytest.mark.parametrize("test_case", ["test_billing_report_case_1","test_billing_report_case_2","test_billing_report_case_3","test_billing_report_case_4","test_billing_report_case_5","test_billing_report_case_6","test_billing_report_case_7","test_billing_report_case_8","test_billing_report_case_9"])
 def test_billing_report(setup_browser, test_case):
     """Chạy test cho từng test case với dữ liệu khác nhau"""
     page = setup_browser
@@ -128,7 +129,7 @@ def test_billing_report(setup_browser, test_case):
     page.screenshot(path=os.path.join(screenshot_dir, f"debug_screenshot_{test_case}_Licensee_Reconciliation.png"))
 
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
-    action_LicenseeWL.check_report_data(expected_results, LiceneeWL_report_data)
+    action_InvoiceReconciliation.check_report_data(expected_results, Reconciliation_report_data)
 
     # End. Logout
     action_General.logout()

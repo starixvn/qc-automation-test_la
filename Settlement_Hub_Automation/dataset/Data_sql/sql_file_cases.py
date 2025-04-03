@@ -23,4 +23,16 @@ SQL_FILE_CASES = {
         {"file": "./dataset/Data_sql/test_data_6_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
         {"file": "./dataset/Data_sql/test_data_6_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
     ],
+        "test_billing_report_case_7": [
+        {"file": "./dataset/Data_sql/test_data_7_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
+        {"file": "./dataset/Data_sql/test_data_7_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
+    ],
+        "test_billing_report_case_8": [
+        {"file": "./dataset/Data_sql/test_data_8_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
+        {"file": "./dataset/Data_sql/test_data_8_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
+    ],
+        "test_billing_report_case_9": [
+        {"file": "./dataset/Data_sql/test_data_9_setting.sql", "server": "TESTDBCUST", "database": "bodb_Licensee"},
+        {"file": "./dataset/Data_sql/test_data_9_ticket.sql", "server": "TESTDB053", "database": "bodb_LicenseeReport"}
+    ],
 }
