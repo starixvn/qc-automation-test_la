@@ -4,7 +4,7 @@ InterfacePerformanceReportLicenseeWL={
     "turnover" : "((//tbody[@class='text-right'])[1]/tr/td)[count(//tr[@class='laTable__row']/td/div[@class='clickable ' and contains(text(),'Turnover')]//parent::td//preceding-sibling::td)-2]",
     "customer_wl" : "((//tbody[@class='text-right'])[1]/tr/td)[count(//tr[@class='laTable__row']/td/div[@class='clickable ' and contains(text(),'Customer')]//parent::td//preceding-sibling::td)-3]",
     "licensee_wl" : "((//tbody[@class='text-right'])[1]/tr/td)[count(//tr[@class='laTable__row']/td/div[@class='clickable ' and contains(text(),'Licensee')]//parent::td//preceding-sibling::td)-4]",
-    "odds_boost_bonus" : "((//tbody[@class='text-right'])[1]/tr/td)[count(//tr[@class='laTable__row']/td/div[@class='clickable ' and contains(text(),'Odds Boost Bonus')]//parent::td//preceding-sibling::td)-5]",
-    "amount_due_to" : "((//tbody[@class='text-right'])[1]/tr/td)[count((//tr[@class='laTable__row'])[1]/td[contains(text(),'Amount Due To')]//preceding-sibling::td)+2]",
-    "odds_spread_cost" : "((//tbody[@class='text-right'])[1]/tr/td)[count((//tr[@class='laTable__row'])[1]/td[contains(text(),'Amount Due To')]//preceding-sibling::td)+3]"
+    "lb_odds_boost_bonus" : "((//tbody[@class='text-right'])[1]/tr/td)[count(//tr[@class='laTable__row']/td/div[@class='clickable ' and contains(text(),'Odds Boost Bonus')]//parent::td//preceding-sibling::td)-5]",
+    "lb_amount_due_to" : "((//tbody[@class='text-right'])[1]/tr/td)[count((//tr[@class='laTable__row'])[1]/td[contains(text(),'Amount Due To')]//preceding-sibling::td)+2]",
+    "lb_odds_spread_cost" : "//table[@class='laTable__data'][//thead/tr[2]/td[contains(., 'Odds Spread Cost')]]/tbody/tr[1]/td[position() = (count(//thead/tr[1]/td[contains(., 'Amount Due To')]/preceding-sibling::td) + count(//thead/tr[2]/td[contains(., 'Odds Spread Cost')]/preceding-sibling::td) + 1)]"
 }
