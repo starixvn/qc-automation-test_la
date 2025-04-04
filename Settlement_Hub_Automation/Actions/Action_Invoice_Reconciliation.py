@@ -50,8 +50,8 @@ class ActionInvoiceReconciliation:
         assert actual_results["promotion"] == expected_results["PromotionSB"], \
             f"Expected Reconciliation - promotion : {expected_results['PromotionSB']} but got {actual_results['promotion']}"
 
-        assert actual_results["Sponsorship"] == 0, \
-            f"Expected 0 but got {actual_results['Sponsorship']}"
+        assert actual_results["Sponsorship"] == expected_results["Sponsorship"], \
+            f"Expected Reconciliation - Sponsorship : {expected_results['Sponsorship']} but got {actual_results['Sponsorship']}"
         
         assert actual_results["Odds_Boost_Bonus"] == expected_results["OddsBoostBonus"], \
             f"Expected Reconciliation - Odds_Boost_Bonus : {expected_results['OddsBoostBonus']} but got {actual_results['Odds_Boost_Bonus']}"
