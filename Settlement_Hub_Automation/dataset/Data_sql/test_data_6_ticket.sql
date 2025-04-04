@@ -20,8 +20,8 @@ select @eurcny=eur from bodb02.dbo.ExchangeDailyOanda where ExchangeDate=@LastDa
 select @eurthb=eur from bodb02.dbo.ExchangeDailyOanda where ExchangeDate=@LastDayOfLastMonth and ExchangeId =							4																							
 
 -- Xóa dữ liệu cũ
-delete rpt_Bettingbyproduct where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and ProductID=0
-delete rpt_Betting where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and bettype in (select distinct bettype from bodb02.dbo.Sportbettypematrix where ProductID=1)																														
+delete rpt_Bettingbyproduct where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and ProductID  in (0,37)
+delete rpt_Betting where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and bettype in (select distinct bettype from bodb02.dbo.Sportbettypematrix where ProductID in (1,37))		
 
 -- Insert rpt_Bettingbyproduct
 --insert into rpt_Bettingbyproduct 

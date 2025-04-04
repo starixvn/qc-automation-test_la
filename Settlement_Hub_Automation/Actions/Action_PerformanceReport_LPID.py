@@ -52,6 +52,12 @@ class ActionPerformanceReportLPID:
         assert actual_results["rebateSB"] == expected_results["RebateSB"], \
             f"Expected LPID - RebateSB : {expected_results['RebateSB']} but got {actual_results['rebateSB']}"
         
+        assert actual_results["promotion_sb"] == expected_results["PromotionSB"], \
+            f"Expected LPID - SB Promotion : {expected_results['PromotionSB']} but got {actual_results['promotion_sb']}"
+        
+        assert actual_results["sponsorship"] == expected_results["Sponsorship"], \
+            f"Expected LPID - Sponsorship : {expected_results['Sponsorship']} but got {actual_results['sponsorship']}"
+        
         assert actual_results["oddsboost_bonus"] == expected_results["OddsBoostBonus"], \
             f"Expected LPID - OddsBoostBonus : {expected_results['OddsBoostBonus']} but got {actual_results['oddsboost_bonus']}"
     
