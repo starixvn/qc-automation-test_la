@@ -27,6 +27,11 @@ class ActionGeneral:
         self.page.click(f'//div[@class="ddci__text"][contains(text(),"{licensee_name}")]')
         self.page.click("//label[@class='laForm__label']")
 
+    def select_licensee_single(self, licensee_name: str):
+        self.page.click("//div[@id='party-filter']")
+        self.page.click(f'//div[@class="ddci__text"][contains(text(),"{licensee_name}")]')
+        self.page.click("//div[@id='party-filter']")
+  
     def select_product(self, product_name: str):
         self.page.click("//span[contains(text(),'All products')]")
         self.page.click("//div[contains(text(),'All')]")
