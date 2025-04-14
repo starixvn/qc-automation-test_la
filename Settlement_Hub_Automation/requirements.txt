@@ -1,0 +1,18 @@
+#Execute command: pip install -r requirements.txt
+# Core dependencies
+playwright==1.38.0  # Thư viện Playwright để tự động hóa trình duyệt
+pytest==8.2.1       # Thư viện pytest để viết và chạy unit test
+pytest-html==4.1.1  # Plugin pytest để tạo báo cáo HTML
+pytest-metadata==3.1.1  # Plugin pytest để thêm metadata vào báo cáo
+pytest-playwright==0.5.0  # Plugin pytest để tích hợp Playwright
+
+# Google Sheets API dependencies
+gspread==5.9.0      # Thư viện để làm việc với Google Sheets
+oauth2client==4.1.3 # Thư viện để xác thực với Google API
+
+# Database utilities
+pyodbc==4.0.39      # Thư viện để kết nối với cơ sở dữ liệu SQL Server
+
+# Other utilities
+anyio==4.6.2.post1  # Thư viện hỗ trợ async I/O
+requests==2.31.0    # Thư viện HTTP để gửi yêu cầu API
