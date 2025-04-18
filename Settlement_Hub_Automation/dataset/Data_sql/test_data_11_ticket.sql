@@ -17,7 +17,7 @@ declare @LicId int  select @LicId=OldRefID from bodb_licensee.dbo.OAS_Party wher
 declare  @eur1 float=1, @eurcny float, @eurthb float
 select @eurcny=eur from bodb02.dbo.ExchangeDailyOanda where ExchangeDate=@LastDayOfLastMonth and ExchangeId =							13																							
 select @eurthb=eur from bodb02.dbo.ExchangeDailyOanda where ExchangeDate=@LastDayOfLastMonth and ExchangeId =							4																							
-
+/*
 -- Xóa dữ liệu cũ
 delete rpt_Bettingbyproduct where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and ProductID  in (0,37)
 delete rpt_Betting where SiteID=@LicId and rptDate between @FirstDayOfLastMonth and @LastDayOfLastMonth and bettype in (select distinct bettype from bodb02.dbo.Sportbettypematrix where ProductID in (1,37))		
@@ -39,3 +39,4 @@ values
 -- Run job 
 exec [dbo].[GEN_rptBettingByProduct] @TenthDayOfLastMonth
 exec [dbo].[GEN_rptBettingByProduct] @TwentythDayOfLastMonth
+*/

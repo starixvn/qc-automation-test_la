@@ -8,7 +8,7 @@ InterfaceGeneral = {
     "menulinkLicenseePerformanceinDetails"  : "//a[contains(text(),'Licensee Performance in Details')]",
     "menulinkLicenseeReconciliation"  : "//a[contains(text(),'Licensee Reconciliation')]",
     "menulinkSettlementReport"  : "//a[contains(text(),'Settlement Report')]",
-    "menulinkWinLossByProduct"  : "//a[contains(text(),'Win Loss By Product')]",
+    "menulinkWinLossByProduct"  : "//a[contains(text(),'Win Loss by Product')]",
 
     
     #Tab
