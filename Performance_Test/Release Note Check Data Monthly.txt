@@ -153,3 +153,6 @@
 
 2-Apr-2025:
 - Integrate ASKMESLOT, Funky Games
+
+28-May-2025
+- Integrate HOTDOG, Microgaming Live, Playtech, Playtech Live, RichGaming

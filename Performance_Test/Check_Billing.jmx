@@ -134,6 +134,10 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		vars.put(&quot;ProductId&quot;, &quot;2&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 2&quot;);		
 	}
+	if(ProductName==&quot;Virtual Sports&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;5&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 3&quot;);		
+	}
 	if(ProductName==&quot;Saba Casino&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;6&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 17&quot;);		
@@ -166,9 +170,17 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		vars.put(&quot;ProductId&quot;, &quot;31&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 4&quot;);		
 	}
+	if(ProductName==&quot;Pragmatic&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;32&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 5&quot;);		
+	}
 	if(ProductName==&quot;Arcadia Gaming&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;34&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 8&quot;);		
+	}
+	if(ProductName==&quot;SG&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;36&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 16&quot;);		
 	}
 	if(ProductName==&quot;Virtual Games&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;38&quot;);
@@ -186,12 +198,24 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		vars.put(&quot;ProductId&quot;, &quot;45&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 6&quot;);		
 	}
+	if(ProductName==&quot;IBCBet Live Casino&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;46&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
+	}
+	if(ProductName==&quot;BBIN&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;47&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
+	}
 	if(ProductName==&quot;GPI&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;48&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
 	}
 	if(ProductName==&quot;WM&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;51&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
+	}
+	if(ProductName==&quot;ION&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;52&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
 	}
 	if(ProductName==&quot;PG Soft&quot;){
@@ -218,6 +242,10 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		vars.put(&quot;ProductId&quot;, &quot;62&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
 	}
+	if(ProductName==&quot;PP Live Casino&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;65&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 14&quot;);		
+	}
 	if(ProductName==&quot;Vgaming&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;66&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 17&quot;);		
@@ -228,6 +256,10 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 	}
 	if(ProductName==&quot;AdvantPlay Mini&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;68&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
+	}
+	if(ProductName==&quot;Bitcoin&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;69&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
 	}
 	if(ProductName==&quot;FGG&quot;){
@@ -270,10 +302,6 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		vars.put(&quot;ProductId&quot;, &quot;89&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 6&quot;);		
 	}
-	if(ProductName==&quot;ASKMESLOT&quot;){
-		vars.put(&quot;ProductId&quot;, &quot;103&quot;);
-		vars.put(&quot;TemplateName&quot;, &quot;Template 6&quot;);		
-	}
 	if(ProductName==&quot;GPI Live Casino&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;90&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
@@ -282,45 +310,37 @@ if(vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		vars.put(&quot;ProductId&quot;, &quot;91&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
 	}
+	if(ProductName==&quot;HOTDOG&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;95&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 6&quot;);		
+	}
 	if(ProductName==&quot;ON Casino&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;96&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
+	}
+	if(ProductName==&quot;Playtech&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;100&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 18&quot;);		
+	}
+	if(ProductName==&quot;Playtech Live&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;101&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
+	}
+	if(ProductName==&quot;ASKMESLOT&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;103&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 6&quot;);		
 	}
 	if(ProductName==&quot;Funky Games&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;104&quot;);
 		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
 	}
-	if(ProductName==&quot;IBCBet Live Casino&quot;){
-		vars.put(&quot;ProductId&quot;, &quot;46&quot;);
-		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
+	if(ProductName==&quot;Microgaming Live&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;107&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 6&quot;);		
 	}
-	if(ProductName==&quot;BBIN&quot;){
-		vars.put(&quot;ProductId&quot;, &quot;47&quot;);
-		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
-	}
-	if(ProductName==&quot;ION&quot;){
-		vars.put(&quot;ProductId&quot;, &quot;52&quot;);
-		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
-	}
-	if(ProductName==&quot;Bitcoin&quot;){
-		vars.put(&quot;ProductId&quot;, &quot;69&quot;);
-		vars.put(&quot;TemplateName&quot;, &quot;Template 1 - Normal Products&quot;);		
-	}
-	if(ProductName==&quot;Virtual Sports&quot;){
-		vars.put(&quot;ProductId&quot;, &quot;5&quot;);
-		vars.put(&quot;TemplateName&quot;, &quot;Template 3&quot;);		
-	}
-	if(ProductName==&quot;Pragmatic&quot;){
-		vars.put(&quot;ProductId&quot;, &quot;32&quot;);
-		vars.put(&quot;TemplateName&quot;, &quot;Template 5&quot;);		
-	}
-	if(ProductName==&quot;PP Live Casino&quot;){
-		vars.put(&quot;ProductId&quot;, &quot;65&quot;);
-		vars.put(&quot;TemplateName&quot;, &quot;Template 14&quot;);		
-	}
-	if(ProductName==&quot;SG&quot;){
-		vars.put(&quot;ProductId&quot;, &quot;36&quot;);
-		vars.put(&quot;TemplateName&quot;, &quot;Template 16&quot;);		
+	if(ProductName==&quot;RichGaming&quot;){
+		vars.put(&quot;ProductId&quot;, &quot;108&quot;);
+		vars.put(&quot;TemplateName&quot;, &quot;Template 6&quot;);		
 	}
 	if(ProductName==&quot;Bet Builder&quot;){
 		vars.put(&quot;ProductId&quot;, &quot;1000&quot;);
@@ -1079,7 +1099,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
 	                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
 	                    .execute();
-	}else if(&quot;${ProductName}&quot;==&quot;Arcadia Gaming&quot;||&quot;${ProductName}&quot;==&quot;AE Sexy&quot;||&quot;${ProductName}&quot;==&quot;Allbet&quot;||&quot;${ProductName}&quot;==&quot;PG Soft&quot;||&quot;${ProductName}&quot;==&quot;MG-RNG&quot;||&quot;${ProductName}&quot;==&quot;Live22&quot;||&quot;${ProductName}&quot;==&quot;FastSpin&quot;||&quot;${ProductName}&quot;==&quot;FA CHAI&quot;||&quot;${ProductName}&quot;==&quot;ASKMESLOT&quot;){
+	}else if(&quot;${ProductName}&quot;==&quot;Arcadia Gaming&quot;||&quot;${ProductName}&quot;==&quot;AE Sexy&quot;||&quot;${ProductName}&quot;==&quot;Allbet&quot;||&quot;${ProductName}&quot;==&quot;PG Soft&quot;||&quot;${ProductName}&quot;==&quot;MG-RNG&quot;||&quot;${ProductName}&quot;==&quot;Live22&quot;||&quot;${ProductName}&quot;==&quot;FastSpin&quot;||&quot;${ProductName}&quot;==&quot;FA CHAI&quot;||&quot;${ProductName}&quot;==&quot;ASKMESLOT&quot;||&quot;${ProductName}&quot;==&quot;Microgaming Live&quot;||&quot;${ProductName}&quot;==&quot;RichGaming&quot;){
 		String CustomerWinLoss = getNotEmptyDataBetween2String(&quot;${Customer Win Loss}&quot;,&quot;${Customer Win Loss - Negative}&quot;);
 		String Turnover = &quot;${Turnover}&quot;;
 		String Equivalent  = getNotEmptyDataBetween2String(&quot;${Equivalent - CC}&quot;,&quot;${Equivalent - CC - Negative}&quot;);//&quot;${EUR equivalent}&quot;;
@@ -11128,12 +11148,811 @@ Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Repo
               <hashTree/>
             </hashTree>
           </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF HOTDOG - VENDOR DETAILS REPORT (Template 6)" enabled="true">
+            <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Vendor Payment Details&quot;&amp;&amp;&quot;${ProductName}&quot;==&quot;HOTDOG&quot;</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HOTDOG_Vendor Details Report_Submit_${Licensee}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;ProductId&quot;:&quot;${ProductId}&quot;,&#xd;
+	&quot;ProductCode&quot;:&quot;${ProductCode}&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;${ProductName}&quot;,&#xd;
+	&quot;PartyIds&quot;:&quot;${PartyId}&quot;,&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
+	&quot;GroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;TimezoneMode&quot;:&quot;1&quot;,&#xd;
+	&quot;TemplateId&quot;:&quot;6&quot;,&#xd;
+	&quot;TemplateName&quot;:&quot;${TemplateName}&quot;,&#xd;
+	&quot;SportType&quot;:&quot;0&quot;,&#xd;
+	&quot;BetType&quot;:&quot;0&quot;,&#xd;
+	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
+	&quot;TicketType&quot;:&quot;3&quot;,&#xd;
+	&quot;PlatformId&quot;:0&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/VendorPaymentDetails/GetVendorPaymentDetailReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Turnover</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[2]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[4]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Promotion" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Promotion</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensing fee" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[7]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Save Data From Report To Google SpreadSheet And Compare Data with Settlement Report" enabled="true">
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
+vars.putObject(&quot;sheet&quot;, sheet);
+
+
+int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+
+if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
+	String CustomerWinLoss = &quot;${Customer Win Loss}&quot;;
+	String Turnover = &quot;${Turnover}&quot;;
+	String TotalTrans = &quot;${Total Trans}&quot;;
+	String Promotion = &quot;${Promotion}&quot;;
+	String Licensingfee = &quot;${Licensing fee}&quot;;
+	List&lt;ValueRange&gt; list = Arrays.asList(
+      new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
+      new ValueRange().setRange(&quot;Licensees!Y&quot; + (i + 1) + &quot;:Y&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Licensingfee))),
+      new ValueRange().setRange(&quot;Licensees!AY&quot; + (i + 1) + &quot;:AY&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Promotion)))
+      );     
+
+	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
+                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
+                    .execute();
+	
+	/* CHECK DATA WITH SETTLEMENT REPORT
+	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss, Licensing fee &lt;=&gt; Equivalent
+	 * 
+	 */
+	//Get Index of Settlement Data Row
+	int SettlementDataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			SettlementDataRowIndex = j;
+			break;
+		}
+      }
+      //Get Data from Settlement Data Row
+      if(SettlementDataRowIndex&gt;0){
+      	String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(10).toString();
+		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(8).toString();
+		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(9).toString();
+		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
+		String Settlement_Promotion = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(50).toString();
+		
+		String FlagTurnOver = Functions.returnStatusFormat(&quot;Fail&quot;);//&quot;&lt;span style=&apos;color:#f33&apos;&gt;Fail&lt;/span&gt;&quot;;
+		String FlagTotalTrans = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagEquivalent = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagPromotion = Functions.returnStatusFormat(&quot;Fail&quot;);
+		
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Turnover) - Functions.ConvertStringToFloat(Turnover))&lt;0.2){
+			FlagTurnOver = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
+			FlagTotalTrans = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss) - Functions.ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
+			FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Promotion) - Functions.ConvertStringToFloat(Promotion))&lt;0.2){
+			FlagPromotion = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
+			FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+
+		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+		
+		
+		Functions.WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Settlement Report&quot;);
+
+		Functions.WriteResultToReport(file,&quot;${ProductName} - TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Customer WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Promotion&quot;,Promotion,Settlement_Promotion,FlagPromotion);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Licensing fee&quot;,Licensingfee,Settlement_Equivalent,FlagEquivalent);
+      }
+	//FindColumnIndex(&quot;Turnover&quot;,&quot;${GoogleSheetHeader}&quot;);
+}
+
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="TryCatchErrorCode" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Report}-${ProductName}&quot;);</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
           <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF ON CASINO - VENDOR DETAILS REPORT (Template 1)" enabled="true">
             <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Vendor Payment Details&quot;&amp;&amp;&quot;${ProductName}&quot;==&quot;ON Casino&quot;</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
           </IfController>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ON Casino_Vendor Details Report_Submit_${Licensee}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;ProductId&quot;:&quot;${ProductId}&quot;,&#xd;
+	&quot;ProductCode&quot;:&quot;${ProductCode}&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;${ProductName}&quot;,&#xd;
+	&quot;PartyIds&quot;:&quot;${PartyId}&quot;,&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
+	&quot;GroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;TimezoneMode&quot;:&quot;1&quot;,&#xd;
+	&quot;TemplateId&quot;:&quot;1&quot;,&#xd;
+	&quot;TemplateName&quot;:&quot;${TemplateName}&quot;,&#xd;
+	&quot;SportType&quot;:&quot;0&quot;,&#xd;
+	&quot;BetType&quot;:&quot;0&quot;,&#xd;
+	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
+	&quot;TicketType&quot;:&quot;3&quot;,&#xd;
+	&quot;PlatformId&quot;:0&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/VendorPaymentDetails/GetVendorPaymentDetailReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Turnover</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[2]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[4]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensing fee" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Save Data From Report To Google SpreadSheet And Compare Data with Settlement Report" enabled="true">
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+
+List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
+vars.putObject(&quot;sheet&quot;, sheet);
+
+if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
+	String CustomerWinLoss = &quot;${Customer Win Loss}&quot;;
+	String Turnover = &quot;${Turnover}&quot;;
+	String TotalTrans = &quot;${Total Trans}&quot;;
+	String Licensingfee = &quot;${Licensing fee}&quot;;
+	List&lt;ValueRange&gt; list = Arrays.asList(
+      new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
+      new ValueRange().setRange(&quot;Licensees!Y&quot; + (i + 1) + &quot;:Y&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Licensingfee)))
+      );     
+
+	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
+                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
+                    .execute();
+	/* CHECK DATA WITH SETTLEMENT REPORT
+	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss, Licensing fee &lt;=&gt; Equivalent
+	 * 
+	 */
+	//Get Index of Settlement Data Row that Keno Win Loss report need to compare with
+	int SettlementDataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			SettlementDataRowIndex = j;
+			break;
+		}
+      }
+
+	
+	//Get Data from Settlement Data Row
+      if(SettlementDataRowIndex&gt;0){
+      	String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(10).toString();
+		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(8).toString();
+		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(9).toString();
+		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
+		
+		String FlagTurnOver = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagTotalTrans = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagEquivalent = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Fail&quot;);
+
+		
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Turnover) - Functions.ConvertStringToFloat(Turnover))&lt;0.2){
+			FlagTurnOver = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
+			FlagTotalTrans = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss) - Functions.ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
+			FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent,true) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
+			FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+
+		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+		
+		Functions.WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Settlement Report&quot;);
+
+		Functions.WriteResultToReport(file,&quot;${ProductName} - TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Customer WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Licensing fee&quot;,Licensingfee,Settlement_Equivalent,FlagEquivalent);
+		
+      }
+
+      
+}
+
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="TryCatchErrorCode" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Report}-${ProductName}&quot;);</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF PLAYTECH - VENDOR DETAILS REPORT (Template 18)" enabled="true">
+            <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Vendor Payment Details&quot;&amp;&amp;&quot;${ProductName}&quot;==&quot;Playtech&quot;</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Playtech_Vendor Details Report_Submit_${Licensee}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;ProductId&quot;:&quot;${ProductId}&quot;,&#xd;
+	&quot;ProductCode&quot;:&quot;${ProductCode}&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;${ProductName}&quot;,&#xd;
+	&quot;PartyIds&quot;:&quot;${PartyId}&quot;,&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
+	&quot;GroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;TimezoneMode&quot;:&quot;1&quot;,&#xd;
+	&quot;TemplateId&quot;:&quot;18&quot;,&#xd;
+	&quot;TemplateName&quot;:&quot;${TemplateName}&quot;,&#xd;
+	&quot;SportType&quot;:&quot;0&quot;,&#xd;
+	&quot;BetType&quot;:&quot;0&quot;,&#xd;
+	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
+	&quot;TicketType&quot;:&quot;3&quot;,&#xd;
+	&quot;PlatformId&quot;:0&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/VendorPaymentDetails/GetVendorPaymentDetailReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Turnover</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[2]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[4]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensing fee" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Save Data From Report To Google SpreadSheet And Compare Data with Settlement Report" enabled="true">
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+
+List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
+vars.putObject(&quot;sheet&quot;, sheet);
+
+if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
+	String CustomerWinLoss = &quot;${Customer Win Loss}&quot;;
+	String Turnover = &quot;${Turnover}&quot;;
+	String TotalTrans = &quot;${Total Trans}&quot;;
+	String Licensingfee = &quot;${Licensing fee}&quot;;
+	List&lt;ValueRange&gt; list = Arrays.asList(
+      new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
+      new ValueRange().setRange(&quot;Licensees!Y&quot; + (i + 1) + &quot;:Y&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Licensingfee)))
+      );     
+
+	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
+                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
+                    .execute();
+	/* CHECK DATA WITH SETTLEMENT REPORT
+	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss, Licensing fee &lt;=&gt; Equivalent
+	 * 
+	 */
+	//Get Index of Settlement Data Row that Keno Win Loss report need to compare with
+	int SettlementDataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			SettlementDataRowIndex = j;
+			break;
+		}
+      }
+
+	
+	//Get Data from Settlement Data Row
+      if(SettlementDataRowIndex&gt;0){
+      	String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(10).toString();
+		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(8).toString();
+		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(9).toString();
+		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
+		
+		String FlagTurnOver = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagTotalTrans = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagEquivalent = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Fail&quot;);
+
+		
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Turnover) - Functions.ConvertStringToFloat(Turnover))&lt;0.2){
+			FlagTurnOver = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
+			FlagTotalTrans = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss) - Functions.ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
+			FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent,true) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
+			FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+
+		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+		
+		Functions.WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Settlement Report&quot;);
+
+		Functions.WriteResultToReport(file,&quot;${ProductName} - TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Customer WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Licensing fee&quot;,Licensingfee,Settlement_Equivalent,FlagEquivalent);
+		
+      }
+
+      
+}
+
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="TryCatchErrorCode" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Report}-${ProductName}&quot;);</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF PLAYTECH LIVE - VENDOR DETAILS REPORT (Template 1)" enabled="true">
+            <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Vendor Payment Details&quot;&amp;&amp;&quot;${ProductName}&quot;==&quot;Playtech Live&quot;</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Playtech Live_Vendor Details Report_Submit_${Licensee}" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -11899,6 +12718,564 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
       }
 
       
+}
+
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="TryCatchErrorCode" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Report}-${ProductName}&quot;);</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF MICROGAMING LIVE - VENDOR DETAILS REPORT (Template 6)" enabled="true">
+            <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Vendor Payment Details&quot;&amp;&amp;&quot;${ProductName}&quot;==&quot;Microgaming Live&quot;</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Microgaming Live_Vendor Details Report_Submit_${Licensee}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;ProductId&quot;:&quot;${ProductId}&quot;,&#xd;
+	&quot;ProductCode&quot;:&quot;${ProductCode}&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;${ProductName}&quot;,&#xd;
+	&quot;PartyIds&quot;:&quot;${PartyId}&quot;,&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
+	&quot;GroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;TimezoneMode&quot;:&quot;1&quot;,&#xd;
+	&quot;TemplateId&quot;:&quot;6&quot;,&#xd;
+	&quot;TemplateName&quot;:&quot;${TemplateName}&quot;,&#xd;
+	&quot;SportType&quot;:&quot;0&quot;,&#xd;
+	&quot;BetType&quot;:&quot;0&quot;,&#xd;
+	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
+	&quot;TicketType&quot;:&quot;3&quot;,&#xd;
+	&quot;PlatformId&quot;:0&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/VendorPaymentDetails/GetVendorPaymentDetailReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Turnover</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[2]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[4]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Promotion" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Promotion</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensing fee" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[7]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Save Data From Report To Google SpreadSheet And Compare Data with Settlement Report" enabled="true">
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
+vars.putObject(&quot;sheet&quot;, sheet);
+
+
+int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+
+if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
+	String CustomerWinLoss = &quot;${Customer Win Loss}&quot;;
+	String Turnover = &quot;${Turnover}&quot;;
+	String TotalTrans = &quot;${Total Trans}&quot;;
+	String Promotion = &quot;${Promotion}&quot;;
+	String Licensingfee = &quot;${Licensing fee}&quot;;
+	List&lt;ValueRange&gt; list = Arrays.asList(
+      new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
+      new ValueRange().setRange(&quot;Licensees!Y&quot; + (i + 1) + &quot;:Y&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Licensingfee))),
+      new ValueRange().setRange(&quot;Licensees!AY&quot; + (i + 1) + &quot;:AY&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Promotion)))
+      );     
+
+	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
+                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
+                    .execute();
+	
+	/* CHECK DATA WITH SETTLEMENT REPORT
+	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss, Licensing fee &lt;=&gt; Equivalent
+	 * 
+	 */
+	//Get Index of Settlement Data Row
+	int SettlementDataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			SettlementDataRowIndex = j;
+			break;
+		}
+      }
+      //Get Data from Settlement Data Row
+      if(SettlementDataRowIndex&gt;0){
+      	String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(10).toString();
+		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(8).toString();
+		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(9).toString();
+		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
+		String Settlement_Promotion = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(50).toString();
+		
+		String FlagTurnOver = Functions.returnStatusFormat(&quot;Fail&quot;);//&quot;&lt;span style=&apos;color:#f33&apos;&gt;Fail&lt;/span&gt;&quot;;
+		String FlagTotalTrans = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagEquivalent = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagPromotion = Functions.returnStatusFormat(&quot;Fail&quot;);
+		
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Turnover) - Functions.ConvertStringToFloat(Turnover))&lt;0.2){
+			FlagTurnOver = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
+			FlagTotalTrans = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss) - Functions.ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
+			FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Promotion) - Functions.ConvertStringToFloat(Promotion))&lt;0.2){
+			FlagPromotion = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
+			FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+
+		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+		
+		
+		Functions.WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Settlement Report&quot;);
+
+		Functions.WriteResultToReport(file,&quot;${ProductName} - TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Customer WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Promotion&quot;,Promotion,Settlement_Promotion,FlagPromotion);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Licensing fee&quot;,Licensingfee,Settlement_Equivalent,FlagEquivalent);
+      }
+	//FindColumnIndex(&quot;Turnover&quot;,&quot;${GoogleSheetHeader}&quot;);
+}
+
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="TryCatchErrorCode" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="script">import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+Functions.TryCatchErrorCode(file,prev.getResponseCode(),&quot;${Licensee}-${Report}-${ProductName}&quot;);</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="IF RICHGAMING - VENDOR DETAILS REPORT (Template 6)" enabled="true">
+            <stringProp name="IfController.condition">&quot;${Report}&quot;==&quot;Vendor Payment Details&quot;&amp;&amp;&quot;${ProductName}&quot;==&quot;RichGaming&quot;</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="RichGaming_Vendor Details Report_Submit_${Licensee}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+	&quot;ProductId&quot;:&quot;${ProductId}&quot;,&#xd;
+	&quot;ProductCode&quot;:&quot;${ProductCode}&quot;,&#xd;
+	&quot;ProductName&quot;:&quot;${ProductName}&quot;,&#xd;
+	&quot;PartyIds&quot;:&quot;${PartyId}&quot;,&#xd;
+	&quot;BaseCurrencyName&quot;:&quot;${BaseCurrencyName}&quot;,&#xd;
+	&quot;GroupByLicensee&quot;:&quot;${glb_IsGroupByLicensee}&quot;,&#xd;
+	&quot;Year&quot;:&quot;${Year}&quot;,&#xd;
+	&quot;Month&quot;:&quot;${FMonth}&quot;,&#xd;
+	&quot;FromDay&quot;:&quot;${FDay}&quot;,&#xd;
+	&quot;ToDay&quot;:&quot;${YDay}&quot;,&#xd;
+	&quot;TimezoneMode&quot;:&quot;1&quot;,&#xd;
+	&quot;TemplateId&quot;:&quot;6&quot;,&#xd;
+	&quot;TemplateName&quot;:&quot;${TemplateName}&quot;,&#xd;
+	&quot;SportType&quot;:&quot;0&quot;,&#xd;
+	&quot;BetType&quot;:&quot;0&quot;,&#xd;
+	&quot;DrawFilter&quot;:&quot;1&quot;,&#xd;
+	&quot;TicketType&quot;:&quot;3&quot;,&#xd;
+	&quot;PlatformId&quot;:0&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${glb_ServerName}</stringProp>
+              <stringProp name="HTTPSampler.port">${glb_Port}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${glb_Protocol}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">${glb_URLFolder}/VendorPaymentDetails/GetVendorPaymentDetailReport</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json; charset=UTF-8</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                    <stringProp name="Header.value">${RequestVerificationToken}</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">en-GB,en;q=0.5</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Cache-Control</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Connection</stringProp>
+                    <stringProp name="Header.value">keep-alive</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Pragma</stringProp>
+                    <stringProp name="Header.value">no-cache</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Turnover" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Turnover</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[3]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Total Trans" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Total Trans</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[2]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Customer Win Loss" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Customer Win Loss</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[4]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Promotion" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Promotion</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[6]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="Licensing fee" enabled="true">
+                <stringProp name="XPathExtractor.default">Not_Found</stringProp>
+                <stringProp name="XPathExtractor.refname">Licensing fee</stringProp>
+                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+                <stringProp name="XPathExtractor.xpathQuery">//td[contains(text(),&apos;Grand Total&apos;)]/following::td[7]</stringProp>
+                <boolProp name="XPathExtractor.validate">false</boolProp>
+                <boolProp name="XPathExtractor.tolerant">true</boolProp>
+                <boolProp name="XPathExtractor.namespace">false</boolProp>
+              </XPathExtractor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Save Data From Report To Google SpreadSheet And Compare Data with Settlement Report" enabled="true">
+                <stringProp name="cacheKey"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import com.google.api.services.sheets.v4.model.ValueRange;
+import com.google.api.services.sheets.v4.model.BatchUpdateValuesRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.jmeter.services.FileServer;
+
+def path = FileServer.getFileServer().getBaseDir();
+/*Load Common Functions - Start*/
+ClassLoader parent = getClass().getClassLoader();
+GroovyClassLoader loader = new GroovyClassLoader(parent);
+Class groovyClass = loader.parseClass(new File(path + &quot;/&quot;+&quot;Functions.groovy&quot;));
+GroovyObject Functions  = (GroovyObject) groovyClass.newInstance();
+/*Load Common Functions - End*/
+
+List&lt;List&lt;Object&gt;&gt; sheet = vars.getObject(&quot;spreadsheets&quot;).values().get(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;, &quot;Licensees&quot;).setMajorDimension(&quot;ROWS&quot;).setValueRenderOption(&quot;UNFORMATTED_VALUE&quot;).setDateTimeRenderOption(&quot;FORMATTED_STRING&quot;).execute().getValues();                                     
+vars.putObject(&quot;sheet&quot;, sheet);
+
+
+int i = Integer.parseInt(vars.get(&quot;counter&quot;));
+
+if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
+	String CustomerWinLoss = &quot;${Customer Win Loss}&quot;;
+	String Turnover = &quot;${Turnover}&quot;;
+	String TotalTrans = &quot;${Total Trans}&quot;;
+	String Promotion = &quot;${Promotion}&quot;;
+	String Licensingfee = &quot;${Licensing fee}&quot;;
+	List&lt;ValueRange&gt; list = Arrays.asList(
+      new ValueRange().setRange(&quot;Licensees!I&quot; + (i + 1) + &quot;:K&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Turnover,TotalTrans,CustomerWinLoss))),
+      new ValueRange().setRange(&quot;Licensees!Y&quot; + (i + 1) + &quot;:Y&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Licensingfee))),
+      new ValueRange().setRange(&quot;Licensees!AY&quot; + (i + 1) + &quot;:AY&quot; + (i + 1)).setValues(Arrays.asList(Arrays.asList(Promotion)))
+      );     
+
+	vars.getObject(&quot;spreadsheets&quot;).values().batchUpdate(&quot;${glb_LABillingLicensees_GoogleSpreadSheetID}&quot;,
+                    new BatchUpdateValuesRequest().setData(list).setValueInputOption(&quot;RAW&quot;))
+                    .execute();
+	
+	/* CHECK DATA WITH SETTLEMENT REPORT
+	 * Turnover &lt;=&gt; Turnover, Total Trans &lt;=&gt; Total Trans, Customer Win Loss &lt;=&gt; Customer Win Loss, Licensing fee &lt;=&gt; Equivalent
+	 * 
+	 */
+	//Get Index of Settlement Data Row
+	int SettlementDataRowIndex = 0;
+	String strCompareDataWithReport = &quot;Settlement Report, ${Licensee}, ${PartyId}, ${ProductName}&quot;;
+	for(int j = 0;j&lt;vars.getObject(&quot;sheet&quot;).size();j++) {
+		String RowData = vars.getObject(&quot;sheet&quot;).get(j).toString();
+		if(RowData.indexOf(strCompareDataWithReport)&gt;=1){
+			log.info(strCompareDataWithReport+&quot;: -&gt; &quot;+j.toString());
+			SettlementDataRowIndex = j;
+			break;
+		}
+      }
+      //Get Data from Settlement Data Row
+      if(SettlementDataRowIndex&gt;0){
+      	String Settlement_CustomerWinLoss = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(10).toString();
+		String Settlement_Turnover = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(8).toString();
+		String Settlement_TotalTrans = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(9).toString();
+		String Settlement_Equivalent = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(11).toString();
+		String Settlement_Promotion = vars.getObject(&quot;sheet&quot;).get(SettlementDataRowIndex).get(50).toString();
+		
+		String FlagTurnOver = Functions.returnStatusFormat(&quot;Fail&quot;);//&quot;&lt;span style=&apos;color:#f33&apos;&gt;Fail&lt;/span&gt;&quot;;
+		String FlagTotalTrans = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagEquivalent = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Fail&quot;);
+		String FlagPromotion = Functions.returnStatusFormat(&quot;Fail&quot;);
+		
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Turnover) - Functions.ConvertStringToFloat(Turnover))&lt;0.2){
+			FlagTurnOver = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_TotalTrans) - Functions.ConvertStringToFloat(TotalTrans))&lt;0.2){
+			FlagTotalTrans = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_CustomerWinLoss) - Functions.ConvertStringToFloat(CustomerWinLoss))&lt;0.2){
+			FlagCustomerWinLoss = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Promotion) - Functions.ConvertStringToFloat(Promotion))&lt;0.2){
+			FlagPromotion = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+		if(Math.abs(Functions.ConvertStringToFloat(Settlement_Equivalent) - Functions.ConvertStringToFloat(Licensingfee))&lt;0.2){
+			FlagEquivalent = Functions.returnStatusFormat(&quot;Pass&quot;);
+		}else{
+			AssertionResult.setFailure(true);
+		}
+
+		File file = new File(path + &quot;/&quot;+&quot;${glb_Report_CheckMonthlyBilling_File}&quot;);
+		
+		
+		Functions.WriteHeaderToReport(file,&quot;${Licensee}&quot;, &quot;${Report}&quot;, &quot;Settlement Report&quot;);
+
+		Functions.WriteResultToReport(file,&quot;${ProductName} - TotalTrans&quot;,TotalTrans,Settlement_TotalTrans,FlagTotalTrans);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Turnover&quot;,Turnover,Settlement_Turnover,FlagTurnOver);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Customer WL&quot;,CustomerWinLoss,Settlement_CustomerWinLoss,FlagCustomerWinLoss);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Promotion&quot;,Promotion,Settlement_Promotion,FlagPromotion);
+		Functions.WriteResultToReport(file,&quot;${ProductName} - Licensing fee&quot;,Licensingfee,Settlement_Equivalent,FlagEquivalent);
+      }
+	//FindColumnIndex(&quot;Turnover&quot;,&quot;${GoogleSheetHeader}&quot;);
 }
 
 </stringProp>
@@ -13650,7 +15027,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		       double tmpCustWL = Functions.ConvertStringToFloat(Specific_CustomerWinLoss) + Functions.ConvertStringToFloat(Specific_CustomerChargeComm);
 		       Specific_CustomerWinLoss = tmpCustWL.toString();
 		       break;
-		   case [&quot;Sportsbook&quot;, &quot;Saba Casino&quot;, &quot;Allbet&quot;, &quot;Pragmatic&quot;, &quot;SG&quot;, &quot;Virtual Games&quot;, &quot;SA Gaming&quot;, &quot;Vgaming&quot;, &quot;Virtual Sports&quot;, &quot;GPI&quot;, &quot;SEAL Entertainment&quot;, &quot;MG-RNG&quot;, &quot;Jili&quot;, &quot;YeeBet&quot;, &quot;Live22&quot;, &quot;WE Live Casino&quot;, &quot;Nextspin&quot;, &quot;FastSpin&quot;, &quot;FA CHAI&quot;, &quot;GPI Live Casino&quot;, &quot;ON Casino&quot;, &quot;PLAYSTAR&quot;, &quot;ASKMESLOT&quot;]: // &quot;Saba.club&quot; terminated
+		   case [&quot;Sportsbook&quot;, &quot;Saba Casino&quot;, &quot;Allbet&quot;, &quot;Pragmatic&quot;, &quot;SG&quot;, &quot;Virtual Games&quot;, &quot;SA Gaming&quot;, &quot;Vgaming&quot;, &quot;Virtual Sports&quot;, &quot;GPI&quot;, &quot;SEAL Entertainment&quot;, &quot;MG-RNG&quot;, &quot;Jili&quot;, &quot;YeeBet&quot;, &quot;Live22&quot;, &quot;WE Live Casino&quot;, &quot;Nextspin&quot;, &quot;FastSpin&quot;, &quot;FA CHAI&quot;, &quot;GPI Live Casino&quot;, &quot;ON Casino&quot;, &quot;PLAYSTAR&quot;, &quot;ASKMESLOT&quot;,&quot;HOTDOG&quot;,&quot;Microgaming Live&quot;,&quot;RichGaming&quot;]: // &quot;Saba.club&quot; terminated
 		   	  Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(11).toString();//get from Settlement Report -&gt; Equivalent 
 		       break
 		}
@@ -14064,7 +15441,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 		       Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(51).toString(); //get from LPID
 		       //Specific_DiscountSB = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(46).toString(); //get from LPID
 		       break;
-		   case [&quot;Saba Casino&quot;, &quot;Allbet&quot;, &quot;SG&quot;, &quot;Virtual Games&quot;,&quot;SA Gaming&quot;, &quot;Vgaming&quot;, &quot;Virtual Sports&quot;, &quot;GPI&quot;, &quot;SEAL Entertainment&quot;, &quot;MG-RNG&quot;, &quot;Jili&quot;, &quot;YeeBet&quot;, &quot;Live22&quot;, &quot;WE Live Casino&quot;, &quot;Nextspin&quot;, &quot;FastSpin&quot;, &quot;FA CHAI&quot;, &quot;GPI Live Casino&quot;, &quot;ON Casino&quot;, &quot;PLAYSTAR&quot;, &quot;ASKMESLOT&quot;]: // &quot;Saba.club&quot; terminated
+		   case [&quot;Saba Casino&quot;, &quot;Allbet&quot;, &quot;SG&quot;, &quot;Virtual Games&quot;,&quot;SA Gaming&quot;, &quot;Vgaming&quot;, &quot;Virtual Sports&quot;, &quot;GPI&quot;, &quot;SEAL Entertainment&quot;, &quot;MG-RNG&quot;, &quot;Jili&quot;, &quot;YeeBet&quot;, &quot;Live22&quot;, &quot;WE Live Casino&quot;, &quot;Nextspin&quot;, &quot;FastSpin&quot;, &quot;FA CHAI&quot;, &quot;GPI Live Casino&quot;, &quot;ON Casino&quot;, &quot;PLAYSTAR&quot;, &quot;ASKMESLOT&quot;,&quot;HOTDOG&quot;,&quot;Microgaming Live&quot;,&quot;RichGaming&quot;]: // &quot;Saba.club&quot; terminated
 		       Specific_LicensingFee = vars.getObject(&quot;sheet&quot;).get(DataRowIndex).get(11).toString(); //get from Settlement Report
 		       break;
 		   case &quot;Pragmatic&quot;:
@@ -14127,7 +15504,7 @@ if (vars.getObject(&quot;sheet&quot;).get(i).size() != 0) {
 				}
 		   	  	Functions.WriteResultToReport(file,&quot;LicensingFee-${ProductCode}&quot;,LicensingFee,Specific_LicensingFee,FlagLicensingFee);
 		   	  	break;
-		   case [&quot;Pragmatic&quot;,&quot;Arcadia Gaming&quot;,&quot;Vgaming&quot;,&quot;SG&quot;,&quot;Allbet&quot;,&quot;SA Gaming&quot;,&quot;PG Soft&quot;,&quot;AG Casino&quot;]: // &quot;Saba.club&quot; terminated
+		   case [&quot;Pragmatic&quot;,&quot;Arcadia Gaming&quot;,&quot;Vgaming&quot;,&quot;SG&quot;,&quot;Allbet&quot;,&quot;SA Gaming&quot;,&quot;PG Soft&quot;,&quot;AG Casino&quot;,&quot;MG-RNG&quot;,&quot;HOTDOG&quot;,&quot;Microgaming Live&quot;,&quot;RichGaming&quot;]: // &quot;Saba.club&quot; terminated
 		   		/*if (Functions.ConvertStringToFloat(Specific_LicensingFee,true) &gt; 0)
 				{ 
 					def Specific_LicensingFeePositive = Math.abs(Functions.ConvertStringToFloat(Specific_LicensingFee,true) - Functions.ConvertStringToFloat(Specific_Prizes,true)).toString();
