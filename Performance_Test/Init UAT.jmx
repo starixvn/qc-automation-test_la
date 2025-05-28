@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.2" jmeter="3.3 r1808647">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Test Fragment" enabled="false"/>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="glb_Username" elementType="Argument">
+              <stringProp name="Argument.name">glb_Username</stringProp>
+              <stringProp name="Argument.value">starix65</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Pro/UAT:  starix101; Local: pgmWinston1</stringProp>
+            </elementProp>
+            <elementProp name="glb_Password" elementType="Argument">
+              <stringProp name="Argument.name">glb_Password</stringProp>
+              <stringProp name="Argument.value">V2luc3RvbjEyMw==</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Pro/UAT: MXEydzNlNHI=; Local: MTIzNDVhYQ==</stringProp>
+            </elementProp>
+            <elementProp name="glb_Salt" elementType="Argument">
+              <stringProp name="Argument.name">glb_Salt</stringProp>
+              <stringProp name="Argument.value">yp5gUdgINvoaGrv5tg==</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Pro/UAT: h+kYNfuiJQ6aPzP5FA==; Local: Oiz98IAhIMJI6vvIcQ==</stringProp>
+            </elementProp>
+            <elementProp name="glb_UserId" elementType="Argument">
+              <stringProp name="Argument.name">glb_UserId</stringProp>
+              <stringProp name="Argument.value">78</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Pro: pgmwilliam: 3652; Local: pgmWinston1:177</stringProp>
+            </elementProp>
+            <elementProp name="glb_BaseCurrency" elementType="Argument">
+              <stringProp name="Argument.name">glb_BaseCurrency</stringProp>
+              <stringProp name="Argument.value">Eur</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_CurrencyId" elementType="Argument">
+              <stringProp name="Argument.name">glb_CurrencyId</stringProp>
+              <stringProp name="Argument.value">0</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_CurrencyName" elementType="Argument">
+              <stringProp name="Argument.name">glb_CurrencyName</stringProp>
+              <stringProp name="Argument.value">ALL</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_FirstDateofPrevMonth" elementType="Argument">
+              <stringProp name="Argument.name">glb_FirstDateofPrevMonth</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_IsExportExcel" elementType="Argument">
+              <stringProp name="Argument.name">glb_IsExportExcel</stringProp>
+              <stringProp name="Argument.value">false</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_IsHistory" elementType="Argument">
+              <stringProp name="Argument.name">glb_IsHistory</stringProp>
+              <stringProp name="Argument.value">False</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ProductOptions[0].Status" elementType="Argument">
+              <stringProp name="Argument.name">glb_ProductOptions[0].Status</stringProp>
+              <stringProp name="Argument.value">False</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_LastDateofPrevMonth" elementType="Argument">
+              <stringProp name="Argument.name">glb_LastDateofPrevMonth</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_TodayVal" elementType="Argument">
+              <stringProp name="Argument.name">glb_TodayVal</stringProp>
+              <stringProp name="Argument.value">2/2/2016</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_YesterdayVal" elementType="Argument">
+              <stringProp name="Argument.name">glb_YesterdayVal</stringProp>
+              <stringProp name="Argument.value">2/1/2016</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ServerName" elementType="Argument">
+              <stringProp name="Argument.name">glb_ServerName</stringProp>
+              <stringProp name="Argument.value">la.starixuat.com</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">Pro: 123.51.196.23; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7615</stringProp>
+            </elementProp>
+            <elementProp name="glb_ServerName_New" elementType="Argument">
+              <stringProp name="Argument.name">glb_ServerName_New</stringProp>
+              <stringProp name="Argument.value">lbs.oneops.net</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Token_LA" elementType="Argument">
+              <stringProp name="Argument.name">glb_Token_LA</stringProp>
+              <stringProp name="Argument.value">PwjQ3ZJnY9rmWuKJE6KvZw2</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Token" elementType="Argument">
+              <stringProp name="Argument.name">glb_Token</stringProp>
+              <stringProp name="Argument.value">PwjQ3ZJnY9rmWuKJE6KvZw2</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Protocol" elementType="Argument">
+              <stringProp name="Argument.name">glb_Protocol</stringProp>
+              <stringProp name="Argument.value">https</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Yesterday" elementType="Argument">
+              <stringProp name="Argument.name">glb_Yesterday</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_DateRange" elementType="Argument">
+              <stringProp name="Argument.name">glb_DateRange</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">09/01/2017 - 10/15/2017</stringProp>
+            </elementProp>
+            <elementProp name="glb_LicenseeId" elementType="Argument">
+              <stringProp name="Argument.name">glb_LicenseeId</stringProp>
+              <stringProp name="Argument.value">1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Port" elementType="Argument">
+              <stringProp name="Argument.name">glb_Port</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">8090</stringProp>
+            </elementProp>
+            <elementProp name="glb_URLFolder" elementType="Argument">
+              <stringProp name="Argument.name">glb_URLFolder</stringProp>
+              <stringProp name="Argument.value">V3</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_PartyIds" elementType="Argument">
+              <stringProp name="Argument.name">glb_PartyIds</stringProp>
+              <stringProp name="Argument.value">284,14,20,148,281,558,316,459,15,95,458,467,771,904,772,542,117,1168,915,863,114,374,46,92,240,89,236,265,93,1122,829,285,39,186,44,48,42,18,267,253,736,19,55,136,348,167,379,380,33,746,288,870,824,70,158,640,275,1082,556,59,447,551,939,687,61,1065,530,260,1021,1047,60,1171,586,41,72,482,572,233,124,738,801,737,65,426,1165,68,906,1026,1130,723,287,721,575,67,391,677,506,326,377,822,471,34,837,249,600,142,917,403,408,1079,487,573,24,296,405,859,494,568,74,821,622,637,58,980,1030,855,923,881,246,319,646,1085,673,220,1090,823,1056,993,700,346,364,223,43,396,218,457,271,462,844,512,643,882,241,593,427,35,695,720,370,1023,1059,641,1103,1104,1078,310,436,367,878,291,1052,907,524,865,347,895,1136,338,428,244,633,711,76,1020,799,350,165,814,828,629,699,788,827,557,743,1076,97,1055,644,877,988,115,273,645,1043,525,538,256,1066,1160,217,383,283,419,961,742,1015,811,322,304,651,1045,576,659,883,365,965,976,951,517,495,168,994,358,652,733,337,1105,222,395,448,449,1088,292,866,758,268,612,776,81,318,938,1132,969,1041,913,755,987,956,62,714,381,258,127,873,841,800,724,424,336,143,838,826,277,71,330,286,791,505,1123,1133,169,1067,1068,1069,1070,1071,38,816,1134,73,362,560,263,696,973,235,991,603,456,166,80,36,833,411,1109,639,549,320,417,1161,606,613,648,384,501,1032,748,1089,1024,1060,446,79,795,536,544,157,146,845,934,946,581,588,354,745,1075,929,422,485,82,484,830,605,647,785,1073,343,413,1083,751,619,372,642,150,773,1063,91,715,739,37,78,83,598,587,924,425,490,667,744,251,972,705,371,1172,66,461,31,360,499,662,162,488,668,340,930,869,1141,445,64,317,689,864,420,388,473,933,1081,968,818,323,555,627,440,768,483,503,945,491,967,88,478,1150,932,96,734,762,693,523,774,861,502,781,678,1061,421,690,1185,47,672,1054,329,361,885,460,1080,513,757,880,486,569,259,545,578,989,356,842,230,936,1173,954,1108,75,589,390,1064,654,410,423,1074,1151,615,1086,820,996,84,77,1176,85,561,257,1008,1010,543,701,702,810,910,761,852,846,86,400,352,1042,896,853,496,1017,664,803,604,468,660,964,995,404,339,237,270,618,1153,784,301,703,357,475,248,1046,306,433,879,927,430,898,887,1177,947,888,959,908,1033,1022,958,1125,1034,998,1004,960,1145,909,1005,1035,1126,1037,1006,1127,1128,1038,1007,1147,1036,1166,1156,1157,1181,1180,1158,1159,889,890,891,1124,1129,860,892,858,1170,899,893,925,1146,894,857,250,957,262,151,851,584,871,69,432,599,1014,401,658,312,500,716,834,955,655,806,438,29,729,345,601,522,782,1154,787,518,680,185,254,585,663,1031,228,704,808,300,914,1019,616,649,735,1016,884,876,712,497,431,416,299,836,171,194,602,875,510,974,531,369,508,335,728,402,63,611,393,1162,280,532,840,717,650,1106,264,429,534,653,666,308,922,928,707,805,53,514,594,1148,676,1049,315,872,90,303,625,634,305,709,752,407,708,442,1101,725,1084,1107,351,740,963,657,1091,1115,1139,1155,1174,1178,1138,1152,674,798,692,802,848,747,770,856,931,902,986,1072,547,570,472,656,981,553,504,638,631,546,590,539,533,554,574,608,691,567,817,754,620,580,719,710,607,577,671,779,623,661,731,741,1027,778,804,874,796,862,1051,897,1092,918,1048,952,982,1131,966,1093,1050,1116,1121,1094,1140,1117,535,466,550,670,621,464,439,455,454,498,541,790,579,753,926,595,582,583,630,665,610,626,1102,767,764,669,713,730,722,732,777,819,760,832,843,769,813,780,812,792,1040,1137,850,1095,975,831,903,849,919,1144,905,948,1118,983,977,901,949,1013,953,940,1062,942,937,1096,985,1184,984,1097,1100,941,463,1098,1120,1099,1163,289,1025,1119,706,23,279,342,835,415,571,302,56,597,382,679,437,368,1009,17,307,295,387,783,920,765,334,686,294,412,552,331,775,153,921,332,101,515,398,997,943,247,309,935,1028,414,327,100,276,809,688,793,313,26,441,481,49,509,87,794,394,763,916,366,521,489,685,314,261,789,272,726,22,479,529,52,537,406,16,355,293,867,944,311,252,353,418,815,333,1003,154,1053,727,282,759,516,476,636,681,477,45,375,786,54,435,397,718,434,170,21,238,389,624,797,749,1113,559,596,443,344,507,756,373,234,99,480,359,349,27,911,40,632,386,378,912,1058,684,766,635,847,341,376,363,1039,1057,979,1175,970,978,1114,1179,1135,1012,30,385,324,25</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_IsGroupByLicensee" elementType="Argument">
+              <stringProp name="Argument.name">glb_IsGroupByLicensee</stringProp>
+              <stringProp name="Argument.value">true</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_IsGroupByDate" elementType="Argument">
+              <stringProp name="Argument.name">glb_IsGroupByDate</stringProp>
+              <stringProp name="Argument.value">false</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Year" elementType="Argument">
+              <stringProp name="Argument.name">glb_Year</stringProp>
+              <stringProp name="Argument.value">2018</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Month" elementType="Argument">
+              <stringProp name="Argument.name">glb_Month</stringProp>
+              <stringProp name="Argument.value">3</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_FDate" elementType="Argument">
+              <stringProp name="Argument.name">glb_FDate</stringProp>
+              <stringProp name="Argument.value">1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_TDate" elementType="Argument">
+              <stringProp name="Argument.name">glb_TDate</stringProp>
+              <stringProp name="Argument.value">31</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ExcludeTest" elementType="Argument">
+              <stringProp name="Argument.name">glb_ExcludeTest</stringProp>
+              <stringProp name="Argument.value">true</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ProductCodes" elementType="Argument">
+              <stringProp name="Argument.name">glb_ProductCodes</stringProp>
+              <stringProp name="Argument.value">SB,NG,BA,LC,VS,CS,KN,AGC,GD,BT,MGCLC,MGCRNG,CB,AB,VB,NG2,FW,CO,VS2,LT,BF,BX,PP,PG,CC,SG,SPR,VRG,SAG,TG,SBC,I4D,SXG,IBCLC,BBIN,PGS,JK,BGG,GDG,MXG,HB,CG,PPL,VGA,AP,APM,FGGL,SEA,MGRNG</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_BaseCurrency1" elementType="Argument">
+              <stringProp name="Argument.name">glb_BaseCurrency1</stringProp>
+              <stringProp name="Argument.value">HKD</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_LABillingLicensees_GoogleSpreadSheetID" elementType="Argument">
+              <stringProp name="Argument.name">glb_LABillingLicensees_GoogleSpreadSheetID</stringProp>
+              <stringProp name="Argument.value">1u9K5NPFE2V1y_EOwt_AodgXu5UElYMz8vySJmYyPzpY</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">1u9K5NPFE2V1y_EOwt_AodgXu5UElYMz8vySJmYyPzpY</stringProp>
+            </elementProp>
+            <elementProp name="glb_Report_CheckMonthlyBilling_File" elementType="Argument">
+              <stringProp name="Argument.name">glb_Report_CheckMonthlyBilling_File</stringProp>
+              <stringProp name="Argument.value">Report_CheckMonthlyBilling.html</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Report_CheckMonthlyBilling_Fails" elementType="Argument">
+              <stringProp name="Argument.name">glb_Report_CheckMonthlyBilling_Fails</stringProp>
+              <stringProp name="Argument.value">Report_CheckMonthlyBilling_Fails.html</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Username_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Username_LRF</stringProp>
+              <stringProp name="Argument.value">autQC</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Password_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Password_LRF</stringProp>
+              <stringProp name="Argument.value">MTIzNFJFV1E=</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Salt_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Salt_LRF</stringProp>
+              <stringProp name="Argument.value">ng/sg3P/xCEzGi5VJw==</stringProp>
+              <stringProp name="Argument.desc">Local: uOMtsZoej4nUxY3Ylw==</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_UserId_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_UserId_LRF</stringProp>
+              <stringProp name="Argument.value">5755</stringProp>
+              <stringProp name="Argument.desc">Pro: pgmwilliam: 3652; Local: tester04:</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ServerName_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_ServerName_LRF</stringProp>
+              <stringProp name="Argument.value">internal.amazzu.com</stringProp>
+              <stringProp name="Argument.desc">Pro: internal.amazzu.com; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7610/LRF4/</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Protocol_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Protocol_LRF</stringProp>
+              <stringProp name="Argument.value">https</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Port_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Port_LRF</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_URLFolder_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_URLFolder_LRF</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_captcha_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_captcha_LRF</stringProp>
+              <stringProp name="Argument.value">1710</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Token_LRF" elementType="Argument">
+              <stringProp name="Argument.name">glb_Token_LRF</stringProp>
+              <stringProp name="Argument.value">-0zfpejo4GgbdPrVlo8gHg2</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">ohNKbMalJSzgLP-ky1Q7TQ2</stringProp>
+            </elementProp>
+            <elementProp name="glb_ServerName_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_ServerName_CreateInvoice</stringProp>
+              <stringProp name="Argument.value">la.starixuat.com</stringProp>
+              <stringProp name="Argument.desc">Pro: internal.amazzu.com; UAT: lrf.starific.net/LRF2; Local: ha.nexdev.net:7610/LRF4/</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Protocol_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_Protocol_CreateInvoice</stringProp>
+              <stringProp name="Argument.value">https</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Port_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_Port_CreateInvoice</stringProp>
+              <stringProp name="Argument.value"></stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_URLFolder_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_URLFolder_CreateInvoice</stringProp>
+              <stringProp name="Argument.value">V3</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_BillerId" elementType="Argument">
+              <stringProp name="Argument.name">glb_BillerId</stringProp>
+              <stringProp name="Argument.value">221</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_BillerName" elementType="Argument">
+              <stringProp name="Argument.name">glb_BillerName</stringProp>
+              <stringProp name="Argument.value">Testing Biller</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_Password_CreateInvoice" elementType="Argument">
+              <stringProp name="Argument.name">glb_Password_CreateInvoice</stringProp>
+              <stringProp name="Argument.value">V2luc3RvbjEyMw==</stringProp>
+              <stringProp name="Argument.desc">Pro/UAT: 123QWEasd; Local: 1234aa</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_InvoiceLanguage" elementType="Argument">
+              <stringProp name="Argument.name">glb_InvoiceLanguage</stringProp>
+              <stringProp name="Argument.value">en-US</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_flagFailed" elementType="Argument">
+              <stringProp name="Argument.name">glb_flagFailed</stringProp>
+              <stringProp name="Argument.value">0</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_ContentSkype" elementType="Argument">
+              <stringProp name="Argument.name">glb_ContentSkype</stringProp>
+              <stringProp name="Argument.value">${__P(glb_ContentSkype)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">${__P(glb_ContentSkype)}</stringProp>
+            </elementProp>
+            <elementProp name="botId" elementType="Argument">
+              <stringProp name="Argument.name">botId</stringProp>
+              <stringProp name="Argument.value">SUN Team - Bot</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="glb_SkypePort" elementType="Argument">
+              <stringProp name="Argument.name">glb_SkypePort</stringProp>
+              <stringProp name="Argument.value">443</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Generate: Date" enabled="false">
+          <stringProp name="scriptLanguage">javascript</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">var now = new Date();
+var prevMonthLastDate = new Date(now.getFullYear(), now.getMonth(), 0);
+var prevMonthFirstDate = new Date(now.getFullYear() - (now.getMonth() &gt; 0 ? 0 : 1), (now.getMonth() - 1 + 12) % 12, 1);
+var yesterday = new Date(now.setDate(now.getDate() - 1));
+var Before10Day = new Date(now.setDate(now.getDate() - 10));
+
+
+var formatDateComponent = function(dateComponent) {
+  return (dateComponent &lt; 10 ? &apos;0&apos; : &apos;&apos;) + dateComponent;
+};
+
+var formatDate = function(date) {
+  return formatDateComponent(date.getMonth() + 1) + &apos;/&apos; + formatDateComponent(date.getDate()) + &apos;/&apos; + date.getFullYear();
+};
+
+//var aaa = &quot;bc&quot;+&quot;${BaseCurrency}&quot;;
+//document.write(formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));
+vars.put(&quot;glb_FirstDateofPrevMonth&quot;,prevMonthFirstDate.toString().substring(0, 15)); //Wed Nov 01 2017
+vars.put(&quot;glb_FirstDateofPrevMonth_2&quot;,formatDate(prevMonthFirstDate)); //10/01/2017  (Reports_Licensee WIn Loss_Submit; Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15)); //Thu Nov 30 2017
+vars.put(&quot;glb_LastDateofPrevMonth_2&quot;,formatDate(prevMonthLastDate)); // (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Yesterday&quot;,formatDate(yesterday)); //11/29/2017 (Reports_Licensee WIn Loss_Submit; Customer Reports_Customer Balance_Submit)
+
+vars.put(&quot;glb_DateRange&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(yesterday)); //10/01/2017 - 11/29/2017 (Reports_Licensee WIn Loss_Submit)
+vars.put(&quot;glb_DateRange_2&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));//10/01/2017 - 10/31/2017 (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Reports_Win Loss By Bet Type_Submit)
+
+//vars.put(&quot;LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15));
+//var i = 0;
+//vars.put(&quot;ProductOptions[&quot;+i+&quot;].Status&quot;,&quot;False&quot;);
+//document.write(prevMonthLastDate);</stringProp>
+        </JSR223PostProcessor>
+        <hashTree/>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Generate: Date" enabled="false">
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">var now = new Date();
+var prevMonthLastDate = new Date(now.getFullYear(), now.getMonth(), 0);
+var prevMonthFirstDate = new Date(now.getFullYear() - (now.getMonth() &gt; 0 ? 0 : 1), (now.getMonth() - 1 + 12) % 12, 1);
+var yesterday = new Date(now.setDate(now.getDate() - 1));
+var Before10Day = new Date(now.setDate(now.getDate() - 10));
+
+
+var formatDateComponent = function(dateComponent) {
+  return (dateComponent &lt; 10 ? &apos;0&apos; : &apos;&apos;) + dateComponent;
+};
+
+var formatDate = function(date) {
+  return formatDateComponent(date.getMonth() + 1) + &apos;/&apos; + formatDateComponent(date.getDate()) + &apos;/&apos; + date.getFullYear();
+};
+
+//var aaa = &quot;bc&quot;+&quot;${BaseCurrency}&quot;;
+//document.write(formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));
+vars.put(&quot;glb_FirstDateofPrevMonth&quot;,prevMonthFirstDate.toString().substring(0, 15)); //Wed Nov 01 2017
+vars.put(&quot;glb_FirstDateofPrevMonth_2&quot;,formatDate(prevMonthFirstDate)); //10/01/2017  (Reports_Licensee WIn Loss_Submit; Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15)); //Thu Nov 30 2017
+vars.put(&quot;glb_LastDateofPrevMonth_2&quot;,formatDate(prevMonthLastDate)); // (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Yesterday&quot;,formatDate(yesterday)); //11/29/2017 (Reports_Licensee WIn Loss_Submit; Customer Reports_Customer Balance_Submit)
+
+vars.put(&quot;glb_DateRange&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(yesterday)); //10/01/2017 - 11/29/2017 (Reports_Licensee WIn Loss_Submit)
+vars.put(&quot;glb_DateRange_2&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));//10/01/2017 - 10/31/2017 (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Reports_Win Loss By Bet Type_Submit)
+
+//vars.put(&quot;LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15));
+//var i = 0;
+//vars.put(&quot;ProductOptions[&quot;+i+&quot;].Status&quot;,&quot;False&quot;);
+//document.write(prevMonthLastDate);</stringProp>
+          <stringProp name="scriptLanguage">javascript</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Generate: From Date - To Date" enabled="true">
+          <stringProp name="scriptLanguage">javascript</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey"></stringProp>
+          <stringProp name="script">var d = new Date();
+var localTime = d.getTime();
+var localOffset = d.getTimezoneOffset() * 60000;
+var utc = localTime + localOffset;
+var now = new Date(utc + (3600000*-4)); //get now via GMT -4
+var prevMonthLastDate = new Date(now.getFullYear(), now.getMonth(), 0);
+var prevMonthFirstDate = new Date(now.getFullYear() - (now.getMonth() &gt; 0 ? 0 : 1), (now.getMonth() - 1 + 12) % 12, 1);
+var yesterday = new Date(now.setDate(now.getDate() - 1));
+var Before10Day = new Date(now.setDate(now.getDate() - 10));
+
+
+var formatDateComponent = function(dateComponent) {
+  return (dateComponent &lt; 10 ? &apos;0&apos; : &apos;&apos;) + dateComponent;
+};
+
+var formatDate = function(date) {
+  return formatDateComponent(date.getMonth() + 1) + &apos;/&apos; + formatDateComponent(date.getDate()) + &apos;/&apos; + date.getFullYear();
+};
+
+//var aaa = &quot;bc&quot;+&quot;${BaseCurrency}&quot;;
+//document.write(formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));
+vars.put(&quot;glb_FirstDateofPrevMonth&quot;,prevMonthFirstDate.toString().substring(0, 15)); //Wed Nov 01 2017
+vars.put(&quot;glb_FirstDateofPrevMonth_2&quot;,formatDate(prevMonthFirstDate)); //10/01/2017  (Reports_Licensee WIn Loss_Submit; Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15)); //Thu Nov 30 2017
+vars.put(&quot;glb_LastDateofPrevMonth_2&quot;,formatDate(prevMonthLastDate)); // (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Yesterday&quot;,formatDate(yesterday)); //11/29/2017 (Reports_Licensee WIn Loss_Submit; Customer Reports_Customer Balance_Submit)
+
+vars.put(&quot;glb_DateRange&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(yesterday)); //10/01/2017 - 11/29/2017 (Reports_Licensee WIn Loss_Submit)
+vars.put(&quot;glb_DateRange_2&quot;,formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));//10/01/2017 - 10/31/2017 (Reports_Win Loss By Products_Submit; Reports_Turnover_Submit; Customer Reports_Customer Balance_Submit; Customer Reports_Customer Turnover_Submit)
+
+vars.put(&quot;glb_Before10Day&quot;,formatDate(Before10Day));//11/20/2017 (Reports_Win Loss By Bet Type_Submit)
+
+//vars.put(&quot;LastDateofPrevMonth&quot;,prevMonthLastDate.toString().substring(0, 15));
+//var i = 0;
+//vars.put(&quot;ProductOptions[&quot;+i+&quot;].Status&quot;,&quot;False&quot;);
+//document.write(prevMonthLastDate);
+
+/////////////////////////////////////////////////////////////////////////////////////
+//Test
+var glb_PrevMonth = prevMonthFirstDate.toString().substring(4, 7)
+//vars.put(&quot;glb_PrevMonth&quot;,prevMonthFirstDate.toString().substring(4, 7));
+vars.put(&quot;glb_PrevMonth&quot;,glb_PrevMonth);
+vars.put(&quot;glb_PrevMonthYear&quot;,glb_PrevMonth.toString() + &apos; &apos; + now.getFullYear()); 
+vars.put(&quot;glb_PrevMonthYear_LicenseeWL&quot;,glb_PrevMonth.toString() + &apos;+&apos; + now.getFullYear()); 
+//////////////////////
+//var glb_reportDate = prevMonthFirstDate.toString().substring(4, 7)
+vars.put(&quot;glb_FirstDateofCurrMonth&quot;,now.getFullYear() + &apos;.&apos; + (now.getMonth()+1) + &apos;.&apos;+ 1); 
+//
+
+var first = new Date(formatDate(prevMonthFirstDate));
+var last = new Date(formatDate(prevMonthLastDate));
+var FDay = first.getDate();
+var FMonth = first.getMonth() + 1;
+var YDay = last.getDate();
+var YMonth = last.getMonth() + 1;
+var Year = first.getFullYear();
+
+//var aaa = &quot;bc&quot;+&quot;${BaseCurrency}&quot;;
+//document.write(formatDate(prevMonthFirstDate) + &apos; - &apos; + formatDate(prevMonthLastDate));
+vars.put(&quot;FDay&quot;,FDay); //1
+vars.put(&quot;FMonth&quot;,FMonth); //1
+
+vars.put(&quot;YDay&quot;,YDay); //31
+vars.put(&quot;YMonth&quot;,YMonth); //1
+
+vars.put(&quot;Year&quot;,Year); //2018
+
+
+var Base64={_keyStr:&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=&quot;,encode:function(e){var t=&quot;&quot;;var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f&lt;e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n&gt;&gt;2;o=(n&amp;3)&lt;&lt;4|r&gt;&gt;4;u=(r&amp;15)&lt;&lt;2|i&gt;&gt;6;a=i&amp;63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t=&quot;&quot;;var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,&quot;&quot;);while(f&lt;e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s&lt;&lt;2|o&gt;&gt;4;r=(o&amp;15)&lt;&lt;4|u&gt;&gt;2;i=(u&amp;3)&lt;&lt;6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,&quot;\n&quot;);var t=&quot;&quot;;for(var n=0;n&lt;e.length;n++){var r=e.charCodeAt(n);if(r&lt;128){t+=String.fromCharCode(r)}else if(r&gt;127&amp;&amp;r&lt;2048){t+=String.fromCharCode(r&gt;&gt;6|192);t+=String.fromCharCode(r&amp;63|128)}else{t+=String.fromCharCode(r&gt;&gt;12|224);t+=String.fromCharCode(r&gt;&gt;6&amp;63|128);t+=String.fromCharCode(r&amp;63|128)}}return t},_utf8_decode:function(e){var t=&quot;&quot;;var n=0;var r=c1=c2=0;while(n&lt;e.length){r=e.charCodeAt(n);if(r&lt;128){t+=String.fromCharCode(r);n++}else if(r&gt;191&amp;&amp;r&lt;224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&amp;31)&lt;&lt;6|c2&amp;63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&amp;15)&lt;&lt;12|(c2&amp;63)&lt;&lt;6|c3&amp;63);n+=3}}return t}}
+
+
+
+var password = vars.get(&quot;glb_Password&quot;);
+var password_LRF = vars.get(&quot;glb_Password_LRF&quot;);
+var password_CreateInvoice = vars.get(&quot;glb_Password_CreateInvoice&quot;);
+var decode = Base64.decode(password);
+var decode_LRF = Base64.decode(password_LRF);
+var decode_CreateInvoice = Base64.decode(password_CreateInvoice);
+vars.put(&quot;glb_Password&quot;,decode);
+vars.put(&quot;glb_Password_LRF&quot;,decode_LRF);
+vars.put(&quot;glb_Password_CreateInvoice&quot;,decode_CreateInvoice);</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+    <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+      <boolProp name="WorkBench.save">true</boolProp>
+    </WorkBench>
+    <hashTree/>
+  </hashTree>
+</jmeterTestPlan>

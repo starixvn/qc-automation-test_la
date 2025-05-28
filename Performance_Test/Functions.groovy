@@ -133,14 +133,29 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "PLAYSTAR":
 	       return "Settlement Report";
 	       break;
+		case "HOTDOG":
+	       return "Settlement Report";
+	       break;
 		case "ON Casino":
 	       return "Settlement Report";
+	       break;
+		case "Playtech":
+	       return "Vendor Payment Details";
+	       break;
+		case "Playtech Live":
+	       return "Vendor Payment Details";
 	       break;
 		case "ASKMESLOT":
 	       return "Settlement Report";
 	       break;
 		case "Funky Games":
 	       return "Vendor Payment Details";
+	       break;
+		case "Microgaming Live":
+	       return "Settlement Report";
+	       break;
+		case "RichGaming":
+	       return "Settlement Report";
 	       break;
 	}
 }
@@ -273,14 +288,29 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 		case "PLAYSTAR":
 	       return "Settlement Report";
 	       break;
+		case "HOTDOG":
+	       return "Settlement Report";
+	       break;
 		case "ON Casino":
 	       return "Settlement Report";
+	       break;
+		case "Playtech":
+	       return "Vendor Payment Details";
+	       break;
+		case "Playtech Live":
+	       return "Vendor Payment Details";
 	       break;
 		case "ASKMESLOT":
 	       return "Settlement Report";
 	       break;
 		case "Funky Games":
 	       return "Vendor Payment Details";
+	       break;
+		case "Microgaming Live":
+	       return "Settlement Report";
+	       break;
+		case "RichGaming":
+	       return "Settlement Report";
 	       break;
 	}
 }
