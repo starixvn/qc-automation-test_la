@@ -156,3 +156,6 @@
 
 28-May-2025
 - Integrate HOTDOG, Microgaming Live, Playtech, Playtech Live, RichGaming
+
+1-Jul-2025
+- Integrate W Casino, ClotPlay, AI Gaming
