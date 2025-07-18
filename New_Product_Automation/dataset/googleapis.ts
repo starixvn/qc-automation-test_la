@@ -1,0 +1,13 @@
+export const GOOGLE_SHEETS_CONFIG = {
+    type: "service_account",
+    project_id: "upbeat-airway-431110-u3",
+    private_key_id: "ead0ddd37ce88bb3127bf20e9df7f49c325400b1",
+    private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDC6uTKpRLNRtc5\nSyzI9qAH5s0H0wzdNdCAnuZYHD4lcByK5q2ybDSjdesvvOe4HCkA9LOwMiWhWn10\n9c6Rl/IybyI4fiZBZyOzPiWiyySBb3eSN81ZA36iaBdzmr9bCLA0PSJDuVTHMci3\nARJPwI0hl72Xu73+4Hn0gf95DsasCV7WEdTqq9MhGwiJXjt5Ihgks8WJWiVsG/D4\nk6kBXBca3A2IrTI8mlW1Q2tulfBvWyoELQlbF0m7WI+ceJ7EQFiAIjrNNm5NC4mu\nJSzw4c5/zYOZKi/l9i7c5jSSI2lKXQCZP7YXgO+qIl62TAhoa0lhlh9hu0nMCtdE\n3h6uceKhAgMBAAECggEABvAvOmAQ4MS7nDBRr5+eclmOr89ylEc6R5x1t5TdyMhf\nrmQSsm4JRk5IE7gbiXawe6EPlQnb7rfsDPyY9fQc13BpnULZoBdd8nSXs16cII1e\ntLzkGYiMepcjn+ZWFxVNQbbGtaFvDp4g4RQahO3mOC1mFB9x3mo60m90MBN3Z/U8\n1QhTpgsbAt+wcYZz8Jz9vkJgMrGoAA/9eIfCtvck4LGnpZpNycGXDSvLPcJy2Vzf\nkmRK3Daj4GoE3T+Kr1loaHxt2n/R0Ta0Qz1sZnFD4HzojNhIARGvJuX6AUt+gCd3\nnr9yMGI5JK51Hh5q3Ws3rt7DpMvPu1g5qqGpK3Ng/wKBgQDtdDgwITfCAHg7R6Fy\nIbYlHqLeBKUM8CKKkYcFjH8czPsynB5ljNcmGxHjUH0Xex0IvO5Sic+hmd/SRdiA\nctngGda7XJxN0zxuCEyPBvH/OtVgZpwz20RLdUOBAAi2wohb8xr7BA9n60xfujgu\nMq40eS29aEQa8cOsVs2I1LwIjwKBgQDSJC2qKPh1pkr6Cvirqx9i6RUK4gTRL4Ge\nF5xCJi2rqISoA5cBWqfmj7sBl2je+UjWK5ZwrRWt+jvJSeyq+iq1R3VJ+ASOWzVG\nx+rozmk3v6SkIUC6NyxCHibo1kBlfyWGwifriztfJyYgbZREA988S0mLfD3Jfh8J\n/NycF98ZzwKBgAHO17quFhGZFVFGO1l2Hj/sGstb97HAhlLNxtxo9HLQsLzy6VxW\nlTDKFfnIHBu4qUDux1XDjNwrIsQkGgDoXvZQ3AyzKNGC4TvpPkP8ho0t8n/4aAoR\nClUUwH3T9T0HACjLEhKFNmTRKtSzw0e+xQrLPWjqyVH3M0k1o/z9uazLAoGBAI0h\nzSV+FLh3Md3S5oXtDMxSPFaty4xueoAh3Ukz+PJT4JwypQU8zIz1tSPxe3ZdOATX\nC1erd2b8K5EZvABsuag8UNKX5v9w1EwwUl1+232ckUfGKYGnMmtJctpnoqJIDXz/\nAu6X+Q0D7wBSeARiEVieO8uZaqnbsZ70m3meMrFTAoGASCoZ2XMqPloktgQvWdEX\ngkp/lNw/ahIQbhU3QcvhBaLjhl8bkRGdBOnffPDBG2zj6vgaGW8HIVzUldbIibJX\nNFNyNO+XZyhK2WZJe8edhc/jNs4MmXLBDROEfzHjL2m1DtNN6io+p9b3t8RNe4PM\n12D/wZAN02u/0diqEfTgZVk=\n-----END PRIVATE KEY-----\n",
+    client_email: "test-driven@upbeat-airway-431110-u3.iam.gserviceaccount.com",
+    client_id: "101574432926255255913",
+    auth_uri: "https://accounts.google.com/o/oauth2/auth",
+    token_uri: "https://oauth2.googleapis.com/token",
+    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+    client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/test-driven%40upbeat-airway-431110-u3.iam.gserviceaccount.com",
+    universe_domain: "googleapis.com",
+  }
