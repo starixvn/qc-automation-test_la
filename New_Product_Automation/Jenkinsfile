@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    stages {
+        
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'git@gitlab.nexdev.net:corbin.hoang/playwright-automation.git', credentialsId: '24124a85-3230-4e4b-9d34-77f9b976f5bb'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Run Playwright Tests') {
+            steps {
+                sh 'npx playwright test'
+            }
+        }
+        stage('Publish Test Report') {
+            steps {
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'playwright-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Playwright Test Report'
+                ])
+            }
+        }
+    }
+}

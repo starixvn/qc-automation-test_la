@@ -1,0 +1,15 @@
+{
+  "cookies": [
+    {
+      "name": "__RequestVerificationToken_L1Y00",
+      "value": "ujMDidfQZzvn8q2qlxKDoCqQOHvsc5NwUXXpYusbYfX5RK35JFqt42l2p3dFgwt-8bIbw9IZMJNT5xEjBcKE5k52nNal99Ax-c0fvNhcIEs1",
+      "domain": "la.nexdev.net",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}
