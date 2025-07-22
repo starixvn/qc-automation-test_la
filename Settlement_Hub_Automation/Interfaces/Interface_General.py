@@ -13,7 +13,7 @@ InterfaceGeneral = {
     
     #Tab
     "TabLicenseeReconciliation": "//a[@class='la-tabs-nav-link' and contains(text(),'Licensee Reconciliation')]", # Licensee Reconciliation > Licensee Reconciliation
-    "TabBillingData": "//a[@class='la-tabs-nav-link' and contains(text(),'Billing Data')]", # Win Loss By Product > Billing Data
+    "TabBillingData": "//a[@class='la-tabs-nav-link' and text()='Billing Data']", # Win Loss By Product > Billing Data
 
     #Button
     "btnSubmit" : "//input[@value='Submit']", #Settlement Report

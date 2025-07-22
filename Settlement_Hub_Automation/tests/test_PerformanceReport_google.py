@@ -50,9 +50,9 @@ def setup_browser():
         yield page
         browser.close()
 
-@pytest.mark.parametrize("test_case", ["test_billing_report_case_11"])
+# @pytest.mark.parametrize("test_case", ["test_billing_report_case_1"])
 # @pytest.mark.parametrize("test_case", ["test_billing_report_case_6","test_billing_report_case_7","test_billing_report_case_8","test_billing_report_case_9","test_billing_report_case_10"])
-# @pytest.mark.parametrize("test_case", ["test_billing_report_case_1","test_billing_report_case_2","test_billing_report_case_3","test_billing_report_case_4","test_billing_report_case_5","test_billing_report_case_6","test_billing_report_case_7","test_billing_report_case_8","test_billing_report_case_9","test_billing_report_case_10" ,"test_billing_report_case_11"])
+@pytest.mark.parametrize("test_case", ["test_billing_report_case_1","test_billing_report_case_2","test_billing_report_case_3","test_billing_report_case_4","test_billing_report_case_5","test_billing_report_case_6","test_billing_report_case_7","test_billing_report_case_8","test_billing_report_case_9","test_billing_report_case_10" ,"test_billing_report_case_11"])
 def test_billing_report(setup_browser, test_case):
     """Chạy test cho từng test case với dữ liệu khác nhau"""
     page = setup_browser
