@@ -2,5 +2,6 @@
   "tests/test_performance_report.py::test_licensee_wl_report_case1": true,
   "tests/test_PerformanceReport.py::test_licensee_wl_report[test_licensee_wl_report_case1]": true,
   "tests/test_PerformanceReport.py::test_licensee_wl_report[test_billing_report_case1]": true,
-  "tests/test_PerformanceReport.py::test_licensee_wl_report[test_billing_report_case2]": true
+  "tests/test_PerformanceReport.py::test_licensee_wl_report[test_billing_report_case2]": true,
+  "tests/test_PerformanceReport_google.py::test_billing_report[test_billing_report_case_1]": true
 }

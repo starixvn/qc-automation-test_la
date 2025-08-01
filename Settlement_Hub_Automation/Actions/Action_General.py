@@ -32,10 +32,29 @@ class ActionGeneral:
         self.page.click(f'//div[@class="ddci__text"][contains(text(),"{licensee_name}")]')
         self.page.click("//div[@id='party-filter']")
   
-    def select_product(self, product_name: str):
+    def select_checkbox_product(self, product_name: str):
         self.page.click("//span[contains(text(),'All products')]")
         self.page.click("//div[contains(text(),'All')]")
         self.page.click(f'//div[@class="ddci__text"][contains(text(),"{product_name}")]')
+        self.page.click("//label[@class='laForm__label']")
+
+    def select_product(self, product_name: str):
+        # Wait for the select element to be visible
+        select_locator = self.page.locator("//select[@id='Product']")
+        select_locator.wait_for(state="visible")
+
+        # Try different selection approaches
+        try:
+            # First try by label
+            select_locator.select_option(label=product_name)
+        except:
+            try:
+                # If label fails, try by text
+                select_locator.select_option(text=product_name)
+            except:
+                # If both fail, try by value
+                select_locator.select_option(value=product_name)
+        
         self.page.click("//label[@class='laForm__label']")
 
     def submit_report(self):
