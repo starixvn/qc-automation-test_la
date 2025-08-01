@@ -6,12 +6,15 @@ from dataset.Data_login.credentials import USERNAME, PASSWORD
 from utils.db_utils import execute_sql_file
 from Actions.Action_General import ActionGeneral
 from Interfaces.Interface_PerformanceReport_LPID import InterfacePerformanceReportLPID
+from Interfaces.Interface_General import InterfaceGeneral
 # from Actions.Action_Login import ActionLogin
 from Actions.Action_PerformanceReport_LicenseeWL import ActionPerformanceReportLicenseeWL
 from Actions.Action_PerformanceReport_LPID import ActionPerformanceReportLPID
 from Actions.Action_Invoice_Reconciliation import ActionInvoiceReconciliation
+from Actions.Action_Invoice_Collection import ActionInvoiceCollection
 from Actions.Action_Invoice_Settlement import ActionInvoiceSettlement
 from Actions.Action_PerformanceReport_BillingData import ActionPerformanceReportBillingData
+from Actions.Action_VendorPayment_VendorPaymentDetails import ActionVendorPaymentDetail
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from gspread.exceptions import APIError
@@ -50,18 +53,20 @@ def setup_browser():
         yield page
         browser.close()
 
-# @pytest.mark.parametrize("test_case", ["test_billing_report_case_1"])
+@pytest.mark.parametrize("test_case", ["test_billing_report_case_1"])
 # @pytest.mark.parametrize("test_case", ["test_billing_report_case_6","test_billing_report_case_7","test_billing_report_case_8","test_billing_report_case_9","test_billing_report_case_10"])
-@pytest.mark.parametrize("test_case", ["test_billing_report_case_1","test_billing_report_case_2","test_billing_report_case_3","test_billing_report_case_4","test_billing_report_case_5","test_billing_report_case_6","test_billing_report_case_7","test_billing_report_case_8","test_billing_report_case_9","test_billing_report_case_10" ,"test_billing_report_case_11"])
+# @pytest.mark.parametrize("test_case", ["test_billing_report_case_1","test_billing_report_case_2","test_billing_report_case_3","test_billing_report_case_4","test_billing_report_case_5","test_billing_report_case_6","test_billing_report_case_7","test_billing_report_case_8","test_billing_report_case_9","test_billing_report_case_10" ,"test_billing_report_case_11"])
 def test_billing_report(setup_browser, test_case):
     """Chạy test cho từng test case với dữ liệu khác nhau"""
     page = setup_browser
     action_General = ActionGeneral(page)
     action_LicenseeWL = ActionPerformanceReportLicenseeWL(page)
     action_LPID = ActionPerformanceReportLPID(page)
+    action_InvoiceCollection = ActionInvoiceCollection(page)
     action_InvoiceReconciliation = ActionInvoiceReconciliation(page)
     action_InvoiceSettlement = ActionInvoiceSettlement(page)
     action_BillingData = ActionPerformanceReportBillingData(page)
+    action_VendorPaymentDetail = ActionVendorPaymentDetail(page)
     
     # 1. Thực thi SQL để tạo dữ liệu test
     sql_files = SQL_FILE_CASES[test_case]
@@ -81,7 +86,7 @@ def test_billing_report(setup_browser, test_case):
     
     # 4. Select Filter  
     action_General.select_licensee(expected_results["Licensee"])
-    action_General.select_product("Sportsbook")
+    action_General.select_checkbox_product(InterfaceGeneral["Product"])
     action_General.submit_report()
 
     # 5. Kiểm tra dữ liệu trả về từ LicenseeWL
@@ -102,7 +107,7 @@ def test_billing_report(setup_browser, test_case):
 
     # 7. Select Filter
     action_General.select_licensee(expected_results["Licensee"])
-    action_General.select_product("Sportsbook")
+    action_General.select_checkbox_product(InterfaceGeneral["Product"])
     action_General.submit_report()
 
     # 8. Kiểm tra dữ liệu trả về từ LPID
@@ -137,6 +142,48 @@ def test_billing_report(setup_browser, test_case):
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
     action_InvoiceReconciliation.check_report_data(expected_results, Reconciliation_report_data)
 
+    ### Collection Summary--------------------------------------------------------------------
+    # 11. Điều hướng đến Collection Summary
+    action_General.open_report("mainmenuInvoice","menulinkLicenseeReconciliation", "TabCollectionSummary")
+    action_General.select_licensee(expected_results["Licensee"])
+    action_General.submit_report()
+    
+    # 12. Kiểm tra dữ liệu trả về từ Collection Summary
+    Collection_report_data = action_InvoiceCollection.fetch_report_data()
+
+    # ✅ In dữ liệu thực tế để debug nếu cần
+    print(f"DEBUG - Collection Test Case: {test_case}, Report Data: {Collection_report_data}")
+
+    # ✅ Chụp ảnh màn hình để kiểm tra UI thực tế
+    page.screenshot(path=os.path.join(screenshot_dir, f"{test_case}_Collection_Summary.png"))
+
+    # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
+    action_InvoiceCollection.check_report_data(expected_results, Collection_report_data) 
+
+    ### Vendor Payment Detail-------------------------------------------------------------------------- 
+    # 1.Kiểm tra nếu Product không là Sportsbook thì bỏ qua bước này
+    if str(InterfaceGeneral["Product"]) != "Sportsbook": 
+
+        # 2. Điều hướng đến Vendor Payment Detail Report
+        action_General.open_report("mainmenuPerformanceReport","menulinkVendorPayment")
+
+        # 3. Select Filter
+        action_General.select_licensee(expected_results["Licensee"])
+        action_General.select_product(InterfaceGeneral["Product"])
+        action_General.submit_report()
+
+        # 4. Kiểm tra dữ liệu trả về từ Vendor Payment Detail
+        VendorPaymentDetail_report_data = action_VendorPaymentDetail.fetch_report_data()
+
+        # ✅ In dữ liệu thực tế để debug nếu cần
+        print(f"DEBUG - VendorPaymentDetail - Test Case: {test_case}, Report Data: {VendorPaymentDetail_report_data}")
+
+        # ✅ Chụp ảnh màn hình để kiểm tra UI thực tế
+        page.screenshot(path=os.path.join(screenshot_dir, f"{test_case}_VendorPaymentDetail.png"))
+
+        # ✅ Kiểm tra giá trị trả về với giá trị mong đợi cho report VendorPaymentDetail
+        action_VendorPaymentDetail.check_report_data(expected_results, VendorPaymentDetail_report_data)
+
     ### Billing Data Report--------------------------------------------------------------------
     # 9. Điều hướng đến Billing Data Report
     action_General.open_report("mainmenuPerformanceReport","menulinkWinLossByProduct", "TabBillingData")
@@ -144,7 +191,7 @@ def test_billing_report(setup_browser, test_case):
     action_BillingData.submit_report_on_frame()
         
     # 10. Kiểm tra dữ liệu trả về từ Billing Data
-    BillingData_report_data = action_BillingData.fetch_report_data()
+    BillingData_report_data = action_BillingData.fetch_report_data() 
 
     # ✅ In dữ liệu thực tế để debug nếu cần
     print(f"DEBUG - Billing Data Report Test Case: {test_case}, Report Data: {BillingData_report_data}")
@@ -159,6 +206,7 @@ def test_billing_report(setup_browser, test_case):
     # 9. Điều hướng đến Settlement Report
     action_General.open_report("mainmenuInvoice","menulinkSettlementReport")
     action_General.select_licensee_single(expected_results["Licensee"])
+    action_General.select_product(InterfaceGeneral["Product"])
     action_General.submit_report()
     
     # 10. Kiểm tra dữ liệu trả về từ Settlement Report
@@ -173,7 +221,6 @@ def test_billing_report(setup_browser, test_case):
     # ✅ Kiểm tra giá trị trả về với giá trị mong đợi
     action_InvoiceSettlement.check_report_data(expected_results, Settlement_report_data)
 
-    
 
     # End. Logout
     action_General.logout()
