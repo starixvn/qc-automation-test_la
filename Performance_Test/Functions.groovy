@@ -143,7 +143,7 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	       return "Settlement Report";
 	       break;
 		case "Playtech":
-	       return "Vendor Payment Details";
+	       return "Settlement Report";
 	       break;
 		case "Playtech Live":
 	       return "Vendor Payment Details";
@@ -152,6 +152,9 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	       return "Settlement Report";
 	       break;
 		case "Funky Games":
+	       return "Vendor Payment Details";
+	       break;
+		case "ODIN GAMING":
 	       return "Vendor Payment Details";
 	       break;
 		case "Microgaming Live":
@@ -307,7 +310,7 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       return "Settlement Report";
 	       break;
 		case "Playtech":
-	       return "Vendor Payment Details";
+	       return "Settlement Report";
 	       break;
 		case "Playtech Live":
 	       return "Vendor Payment Details";
@@ -316,6 +319,9 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       return "Settlement Report";
 	       break;
 		case "Funky Games":
+	       return "Vendor Payment Details";
+	       break;
+		case "ODIN GAMING":
 	       return "Vendor Payment Details";
 	       break;
 		case "Microgaming Live":

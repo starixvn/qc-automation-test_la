@@ -159,3 +159,7 @@
 
 1-Jul-2025
 - Integrate W Casino, ClotPlay, AI Gaming
+
+4-Sep-2025
+- Integrate ODIN GAMING
+- Integrate Playtech Contribution, Jackpot
