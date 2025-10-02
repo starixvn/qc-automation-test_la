@@ -146,7 +146,7 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 	       return "Settlement Report";
 	       break;
 		case "Playtech Live":
-	       return "Vendor Payment Details";
+	       return "Settlement Report";
 	       break;
 		case "ASKMESLOT":
 	       return "Settlement Report";
@@ -313,7 +313,7 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 	       return "Settlement Report";
 	       break;
 		case "Playtech Live":
-	       return "Vendor Payment Details";
+	       return "Settlement Report";
 	       break;
 		case "ASKMESLOT":
 	       return "Settlement Report";

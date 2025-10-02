@@ -163,3 +163,7 @@
 4-Sep-2025
 - Integrate ODIN GAMING
 - Integrate Playtech Contribution, Jackpot
+
+2-Oct-2025
+- Enhance Playtech Live: Change template from 1 to 16
+- Enhacne VS Promotion column 
