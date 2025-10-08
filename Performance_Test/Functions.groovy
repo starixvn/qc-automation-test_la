@@ -112,10 +112,16 @@ String getLAReportNameFromProductNameToCompareWithCreateInvoice(String str){
 		case "YeeBet":
 	       return "Settlement Report";
 	       break;
+		case "UU SLOTS":
+	       return "Settlement Report";
+	       break;
 		case "Live22":
 	       return "Settlement Report";
 	       break;
 		case "WE Live Casino":
+	       return "Settlement Report";
+	       break;
+		case "GPI Lottery":
 	       return "Settlement Report";
 	       break;
 		case "Nextspin":
@@ -279,10 +285,16 @@ String getLAReportNameFromProductNameToCompareWithLicenseePerformanceInDetails(S
 		case "YeeBet":
 	       return "Settlement Report";
 	       break;
+		case "UU SLOTS":
+	       return "Settlement Report";
+	       break;
 		case "Live22":
 	       return "Settlement Report";
 	       break;
 		case "WE Live Casino":
+	       return "Settlement Report";
+	       break;
+		case "GPI Lottery":
 	       return "Settlement Report";
 	       break;
 		case "Nextspin":

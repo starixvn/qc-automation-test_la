@@ -166,4 +166,7 @@
 
 2-Oct-2025
 - Enhance Playtech Live: Change template from 1 to 16
-- Enhacne VS Promotion column 
+- Enhance VS Promotion column 
+
+8-Oct-2025
+- Integrate GPI Lottery, UU SLOTS 
