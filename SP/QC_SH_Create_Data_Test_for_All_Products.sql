@@ -163,7 +163,7 @@ PTRNG
 		
 		
 		--if date2 = NULL --> fee date 2 =0
-		, @clearonly int = 0 
+		, @clearonly int = 1 
 		, @clearexistingdata int =1
 		, @SAGclearAllLicensee int =0 -- 0,1: -- Clear SAG data of all licensees in selected month
 		--SELECT * from bodb02.dbo.Exchange where Code='KRW'
@@ -264,7 +264,7 @@ DECLARE @turnover1 money=100,--*Rand(),
 	BEGIN
 		DELETE rpt_Bettingbyproduct where SiteID=@siteid and rptDate BETWEEN @firstdayofmonth and @lastdayofmonth and ProductID=@productid
 		DELETE rpt_Betting where SiteID=@siteid and rptDate BETWEEN @firstdayofmonth and @lastdayofmonth and Bettype in (SELECT BetType from bodb02.dbo.SportBettypeMatrix where ProductID=@productid0)
-
+		DELETE rpt_ThirdPartyWL_ExtraGMT where SiteId=@siteid and rptDate BETWEEN @firstdayofmonth and @lastdayofmonth and BetTypeId in (SELECT BetType from bodb02.dbo.SportBettypeMatrix where ProductID=@productid0)
 		IF @licenseename IN ('FDL','PIH','TEST','CN88')
 		BEGIN
 			DELETE rpt_Bettingbyproduct
@@ -298,6 +298,23 @@ DECLARE @turnover1 money=100,--*Rand(),
 				  FROM bodb02.dbo.SportBettypeMatrix 
 				  WHERE ProductID = @productid0
 			  )
+			
+			DELETE bodb_LicenseeReport.dbo.rpt_ThirdPartyWL_ExtraGMT
+				WHERE SiteID IN  (
+					SELECT LabelID
+					FROM bodb_licensee.dbo.Labels
+					WHERE LicenseeID = CASE 
+						WHEN @licenseename = 'FDL'  THEN 13
+						WHEN @licenseename = 'PIH'  THEN 18
+						WHEN @licenseename = 'TEST' THEN 259
+						WHEN @licenseename = 'CN88' THEN 419
+					END
+			)
+				  AND rptDate BETWEEN @firstdayofmonth AND @lastdayofmonth
+				  AND BetTypeId IN (SELECT BetType 
+									FROM bodb02.dbo.SportBettypeMatrix 
+									WHERE ProductID = @productid);
+
 		END
 	END
 	
@@ -308,9 +325,8 @@ DECLARE @turnover1 money=100,--*Rand(),
 			DELETE rpt_ThirdPartyWL_ExtraGMT where  rptDate BETWEEN @firstdayofmonth and @lastdayofmonth and BetTypeId BETWEEN 3001 AND 3099
 		END
 
-	IF (@clearonly = 1 AND @product NOT IN ('BA','MT','BB','CO','FW') 
-	and @productid not in (		/*bettransRnG*/ 24,32,34,36,48,56,62,73,75,78,79,84,85,87,91,95,99,100,103,105,108,109,110,115, 
-								/*bettransLC*/ 21,39,45,51,65,70,76,90,96,101,113) )-- exclude products in rpt_ThirdPartyWL_ExtraGMT, they are deleted below
+	IF (@clearonly = 1 AND @product NOT IN ('BA','MT','BB','CO','FW') )
+	
 	BEGIN
 		drop table #bettype1
 		RETURN
@@ -328,7 +344,7 @@ DECLARE @turnover1 money=100,--*Rand(),
 		end
 		
 --All products
-	IF (@product NOT IN ('BA','MT','BB','CO','VB'))
+	IF (@product NOT IN ('BA','MT','BB','CO','VB')  )
 	BEGIN
 		--Date1
 			--rpt_BettingByProduct
@@ -445,7 +461,7 @@ DECLARE @turnover1 money=100,--*Rand(),
 	--select @licenseefeeCurrency2date1, @exchangecurrency2, @licenseefeeCurrency2date1/@exchangecurrency2  --debug
 	
 --SB 
-	IF (@product ='SB')
+	IF (@product ='SB'   )
 	BEGIN
 		--> Insert ODDSPREAD bettype 999
 		if @OddsSpreadCurrency1date1<>0
@@ -609,7 +625,7 @@ DECLARE @turnover1 money=100,--*Rand(),
 
 
 --Macau Games: 2 range bettype: VB Games(4001 - 4050), Blueprint Games (4051-4055)
-	IF (@product ='VB')
+	IF (@product ='VB'  )
 	BEGIN
 		SELECT @bettype=(select top 1 BetType from bodb02.dbo.SportBettypeMatrix where ProductID=@productid0 AND bettype BETWEEN 4001 AND 4050  ORDER BY NEWID()) --Random bettype VB Games(4001 - 4050)
 		--Date1
